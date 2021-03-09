@@ -9,7 +9,7 @@ cd ~/.secrets
 stow -t $HOME files/
 ```
 
-Statefuls are all those directories that we would like to backup and that don't hold configurations, like media, browser cache, game files. For those we keep a list for a tool like `borg` or `duplicacy`.
+Statefuls (`~/.config/statefuls.txt`) are all those directories that we would like to backup and that don't hold configurations, like media, browser cache, game files. For those we keep a list for a tool like `borg` or `duplicacy`.
 
 `
 
@@ -26,3 +26,4 @@ I looked at `git-secret`, `git-remote-gcrypt` and `git-crypt`. I Chose `git-cryp
 All the dotfiles managers I looked at were too complex, requiring too many steps for deploying, and a I consider a templating system over engineering.
 A file with secret tokens inside most likely doesn't have interesting useful to keep public, and usually credentials have their own separate files.
 If I want to have different machine based configurations I use different branches. Programmatic devop-like config generation is not the goal of a dotfiles manager.
+The benefit of this setup is that it is easier (through a gui like `magit`) to have a view of the upstanding changes in the home directory, and interactively discard, or commit changes as you please.
