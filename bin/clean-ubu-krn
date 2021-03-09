@@ -1,0 +1,33 @@
+#!/usr/bin/sudo /usr/bin/zsh
+
+## remember sort is gnu sort
+## regex stuff at the bottom is to make the tail of the kernel pkg name optional
+v_reg='[0-9]+\.[0-9]+\.[0-9]+\-([0-9]+)?'
+current_kernel=$(uname -r 2>&1 | sed -r 's/([a-zA-Z])//g' | sed 's/-/.*/g' |
+	sed 's/x86_/amd/' |
+	sed 's/x86$/i686/')
+
+latest_kernel=$(dpkg -l | grep -E "linux-(headers|image)-[0-9.-]*" | sort -V -k3 | tail -3 | awk '{print $2}')
+
+## |linux-[^0-9\-]*
+ALL=$(dpkg -l | grep -E "linux-.*[0-9.-]+" | grep -Ev "$current_kernel|${latest_kernel#*[0-9]}" |
+	sort -V -k 3 | grep -Ev "\s linux-[^0-9]+\s") # don't consider virt pkgs
+MOD=$(echo "$ALL" | grep -E "\-modules\-[0-9]" | head -n -3)
+MOD_EXT=$(echo "$ALL" | grep -E "\-modules\-[a-Z]" | head -n -3)
+GEN=$(echo "$ALL" | grep -E "\-image\-$v_reg\-?generic" | head -n -2)
+LOW=$(echo "$ALL" | grep -E "\-image\-$v_reg\-?lowlatency" | head -n -2)
+XAN=$(echo "$ALL" | grep -E "\-image\-$v_reg\-?xanmod" | head -n -2)
+HEAD_XAN=$(echo "$ALL" | grep -E "\-headers.*xanmod" | head -n -2)
+HEAD_GEN=$(echo "$ALL" | grep -E "\-headers.*generic" | head -n -2)
+HEAD_LOW=$(echo "$ALL" | grep -E "\-headers.*lowlatency" | head -n -2)
+HEAD=$(echo "$ALL" | grep -E "\-headers\-$v_reg\s " | head -n -1)
+PKGS="$MOD$MOD_EXT$GEN$LOW$XAN$HEAD_XAN$HEAD_GEN$HEAD_LOW$HEAD"
+PKGS=$(echo $PKGS | awk '{print $2}')
+apt remove --purge -q $(echo $PKGS)
+
+## this preserves all the version of the current kernel flavor...
+## to be used with uname
+# sed -r 's/^[0-9.-]*//'
+
+## this is for removing only old installation
+## grep -v "$(apt-cache policy linux-headers-generic | grep -i installed | sed -r 's/[^0-9.]*//')"

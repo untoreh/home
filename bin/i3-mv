@@ -1,0 +1,36 @@
+#!/bin/sh
+
+current=`date +%s`
+verse=$1
+stu=20
+tapf=/tmp/.tap
+stepf=/tmp/.step
+verf=/tmp/.verse
+if [ ! -f $tapf ] ; then
+    echo $current > $tapf
+fi
+if [ ! -f $verf ] ; then
+    echo $verse > $verf
+    lverse=$verse
+else
+    lverse=`cat $verf`
+    echo $verse > $verf
+fi
+
+last=`cat $tapf`
+
+if [ ! -f $stepf ] ; then
+    echo $stu > $stepf
+    step=$stu
+else
+    cstep=`cat $stepf`
+    step=$(( cstep + $stu )) > $stepf
+fi
+if [ "$verse" = "$lverse" -a $(( current - last )) -lt 2 ] ; then
+    swaymsg move $verse $step
+    echo $step > $stepf
+else
+    swaymsg move $verse $stu
+    echo $stu > $stepf
+fi
+echo $current > $tapf

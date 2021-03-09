@@ -1,0 +1,4 @@
+#!/bin/bash
+source ~/.flannel
+CUR_IP=`curl -s http://checkip.amazonaws.com/`
+sudo $HOME/.bin/flanneld --public-ip=$CUR_IP --iface=$FLANNELD_IFACE --etcd-endpoints=$FLANNELD_ETCD_ENDPOINTS --ip-masq=true

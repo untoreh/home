@@ -1,0 +1,19 @@
+#!/bin/bash
+
+mkdir -p ~/.kodi/temp/subs
+cd ~/.kodi/temp/subs
+req=`curl -s -u kodi:kodi -H 'Content-Type: application/json' -H 'Accept: application/json' --data '{"jsonrpc": "2.0", "method": "Player.GetItem", "params": { "properties": ["title", "album", "artist", "season", "episode", "duration", "showtitle", "tvshowid", "thumbnail", "file", "fanart", "streamdetails"], "playerid": 1 }, "id": "VideoGetItem"}' 127.0.0.1:8088/jsonrpc`
+file_url=`echo $req | grep -oP "(?<=file\":\").*?(?=\"\,)"`
+file_name=`basename $file_url | sed 's~?.*~~'`
+if [[ -z "`echo $file_name | grep -oP "S[0-9]{1,}E[0-9]{1,}"`" ]] ; then
+	showtitle=`echo $req | grep -oP "(?<=showtitle\":\").*?(?=\"\,)"`
+	season=`echo $req | grep -oP "(?<=season\":).*?(?=\,)"`
+	[[ "${#season}" == "1" ]] && season="0$season"
+	episode=`echo $req | grep -oP "(?<=episode\":).*?(?=\,)"`
+	[[ "${#episode}" == "1" ]] && episode="0$episode"
+	file_name="$showtitle S${season}E${episode}"
+fi
+subliminal download -l en "$file_name"
+sub_name="`find \`pwd\` -newermt '-2 seconds' | tail -n +2 | head -1`"
+echo '{ "command": ["sub-add", "'"$sub_name"'", "select"] }'
+echo '{ "command": ["sub-add", "'"$sub_name"'", "select"] }' | socat - /tmp/mpvsocket

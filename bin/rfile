@@ -1,0 +1,11 @@
+#!/bin/bash
+source ~/.profile
+
+index="updatedb --add-prunepaths=\"/host$HOME /host/media $HOME/.cache/spacefm\" --require-visibility=0 -o /tmp/mlocate"
+dump="mlocate -d /tmp/mlocate /tmp /home /media/Stuff/stuff/Online/bag"
+
+eval $index
+
+file=$(eval $dump | rofi -threads 4 -dmenu -levenshtein-sort)
+mimeopen "${file}"
+

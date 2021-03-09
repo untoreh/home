@@ -1,0 +1,15 @@
+#!/bin/bash
+
+[ "$1" = "-k" ] && kodif="$(xwininfo -name "Kodi" -wm  | grep -i fullscreen)" && [ -z "$kodif" ] && exit
+
+pid=`pgrep -x compton`
+kill $pid &>/dev/null
+
+[ "$1" = "-k" -a -n "$kodif" ] && exit
+## tmp fix for latest mesa
+export allow_rgb10_configs=false
+
+exec /usr/bin/compton \
+      -CG \
+      --config ~/.config/compton.conf \
+      &>/dev/null &

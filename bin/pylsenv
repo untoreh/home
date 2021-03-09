@@ -1,0 +1,24 @@
+#!/bin/sh
+
+export VIRTUAL_ENV PYTHONPATH
+mspyls="$HOME/.emacs.d/.cache/lsp/mspyls/Microsoft.Python.LanguageServer"
+python3=$(/usr/bin/which python3)
+envdir=".venv"
+p3="exec $python3"
+if [ -z "$1" ]; then
+    envdir="$(realpath $PWD)"
+    if [ "$envdir" != "${envdir%env}" ]; then
+        VIRTUAL_ENV="${envdir}/../"
+    else
+        VIRTUAL_ENV="${envdir}/${envdir}/"
+    fi
+    VIRTUAL_ENV="$HOME/tmp/.freqtrade/${envdir}"
+    PYTHONPATH=$VIRTUAL_ENV
+    # $p3 "./${envdir}/bin/pyls"
+    exec $mspyls
+else
+    VIRTUAL_ENV="${1}/${envdir}"
+    PYTHONPATH=$VIRTUAL_ENV
+    # $p3 "${1}/${envdir}/bin/pyls"
+    exec $mspyls
+fi

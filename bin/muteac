@@ -1,0 +1,43 @@
+#!/bin/bash
+
+main() {
+    local action=toggle
+    while getopts :hu option; do
+        case "$option" in
+            h) usage 0 ;;
+            m) action=mute ;;
+            u) action=unmute ;;
+            ?) usage 1 "invalid option: -$OPTARG" ;;
+        esac
+    done
+    shift $((OPTIND - 1))
+
+    if [[ "$1" ]]; then
+        $action "$1"
+    else
+        usage 1 "specify an application name"
+    fi
+}
+
+usage() {
+    [[ "$2" ]] && echo "error: $2"
+    echo "usage: $0 [-h] [-u] appname"
+    echo "where: -u = ummute , -m = mute (default action is to toggle)"
+    exit $1
+}
+
+mute()   { adjust_muteness "$1" 1; }
+unmute() { adjust_muteness "$1" 0; }
+toggle() { adjust_muteness "$1" toggle; }
+
+adjust_muteness() {
+    clients=$(pactl list clients short | awk '/[0-9]+.*'$1'.*/{print $1}')
+    inputs=$(pactl list sink-inputs short)
+    for c in $clients; do
+	    for i in $(printf '%s' "$inputs" | awk '/[0-9]+\s[0-9]+\s'$c'/{print $1}'); do
+            pactl set-sink-input-mute $i $2 &
+        done
+    done
+}
+
+main "$@"

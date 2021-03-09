@@ -1,0 +1,6 @@
+#!/bin/sh
+
+#GDK_BACKEND=wayland MOZ_ENABLE_WAYLAND=1 exec /usr/bin/firefox $@
+GDK_BACKEND=x11 MOZ_ENABLE_WAYLAND=0 CLUTTER_BACKEND=x11 exec /usr/lib/firefox/firefox $@
+# exec /usr/lib/firefox/firefox $@
+

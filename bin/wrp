@@ -1,0 +1,74 @@
+#!/bin/bash
+set -e
+CUR=`pwd`
+container="ubu"
+usr="fra"
+launch="$1"
+shift
+if [ ! -z "$1" ];
+then
+args="$@"
+args=`printf '%q' "$args"`
+#passthrough=`echo "$args" | sed 's~\\\\ ~ ~'`
+passthrough=""
+HOSTPATH="$HOME/.tmp"
+REALPATH=$(readlink --canonicalize $HOSTPATH)
+FILESYS=$(df -P $REALPATH | tail -n 1 | awk '{print $6}')
+while read DEV MOUNT JUNK
+do [ $MOUNT = $FILESYS ] && break
+done </proc/mounts
+fi
+# Launch custom flags
+if [ "$launch" = "vcs" ]
+    then
+    launch="visual-studio-code -r"
+fi
+while [ "$1" != "" ]; do
+    if [ -a "$1" ]
+        then
+            REALPATH1=$(readlink --canonicalize "$1")
+	    if [ `sudo docker exec $container /bin/bash -c  "if [ -a '/host$REALPATH1' ]; then echo 1; fi"` ]
+	    then
+		e1=`echo "$1" | sed 's~\\\\ ~ ~'`
+                #passthrough=`echo " $passthrough" | sed "s~ $e1~ /host$REALPATH1~"`
+		passthrough+=`echo "/host$REALPATH1"`
+		shift
+		continue
+	    fi
+            FILESYS1=$(df -P "$REALPATH1" | tail -n 1 | awk '{print $6}')
+            while read DEV1 MOUNT1 JUNK1
+            do [ $MOUNT1 = $FILESYS1 ] && break
+            done </proc/mounts
+            if [ $DEV1 = $DEV ]
+                then # mount the filesystem with /host base, it should happen only once
+ 	   	sudo docker-mount $container $FILESYS1 /host$FILESYS1 &> /dev/null
+		e1=`echo "$1" | sed 's~\\\\ ~ ~'`
+                #passthrough=`echo " $passthrough" | sed "s~ $e1~ /host$REALPATH1~"`
+		passthrough+=`echo "/host$REALPATH1"`
+            else # mount the filesystem cleanly because does not exist
+                sudo docker-mount $container $FILESYS1 /host$FILESYS1 &> /dev/null
+		e1=`echo "$1" | sed 's~\\\\ ~ ~'`
+                #passthrough=`echo " $passthrough" | sed "s~ $e1~ /host$REALPATH1~"`
+		passthrough+=`echo "/host$REALPATH1"`
+            fi
+	else
+	passthrough+=" $1 "
+    fi
+    shift
+done
+passthrough=`echo $passthrough | sed 's~.( )~\\\\1~'`
+
+## permissions
+if [ "$(id -u)" == "0" ];
+then
+  rights=" gosu $usr sudo "
+else
+  rights=" gosu $usr "
+fi
+
+if [ -z "$passthrough" ] ; then
+  sudo docker exec $container $rights $launch
+else
+  sudo docker exec $container $rights $launch "$passthrough"
+fi
+

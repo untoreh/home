@@ -1,0 +1,8 @@
+#!/bin/sudo /bin/sh 
+
+mount --bind /var/lib/lxc/ubu/rootfs /var/lib/lxc/ubu/rootfs
+mount --rbind /run /var/lib/lxc/ubu/rootfs/run
+mount --rbind /sys /var/lib/lxc/ubu/rootfs/sys
+mount --rbind /proc /var/lib/lxc/ubu/rootfs/proc
+mount --rbind /dev /var/lib/lxc/ubu/rootfs/dev
+

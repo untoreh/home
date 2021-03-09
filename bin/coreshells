@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# urxvtc -title "core@coreos" -e /bin/bash -c "sleep 1 && exec /bin/bash -lic 'tmuxcore'"
+
+lilyterm -T "core@coreos" -e /bin/bash -c "sleep 1 && exec /bin/bash -lic 'tmuxcore'"
+
+#ds urxvtc -title "core@coreos1:/home/core" -e sh -c "zsh -lic 'ccore1'"
+#ds urxvtc -title "core@coreos2:/home/core" -e sh -c "zsh -lic 'ccore2'"
+#ds urxvtc -title "core@coreos3:/home/core" -e sh -c "zsh -lic 'ccore3'" 

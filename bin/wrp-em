@@ -1,0 +1,2 @@
+#!/bin/sh
+$HOME/.bin/wrp "gosu fra /bin/bash -c" "SHELL=/bin/bash" "emacs" "-nw" "$@"

@@ -1,0 +1,95 @@
+#!/bin/bash
+
+ubu_releases="$(curl -sL http://archive.ubuntu.com/ubuntu/dists/ | grep href | sed 's/<[^>]*>//g' | grep '[0-9]' | sort -r | sed 's/\/.*//g' | grep -v '-' | tr '\n' ' ' | sed 's/devel//' )"
+## get next version alphabetically
+current_ubu_release="$(lsb_release -c -s)"
+# next_ubu_release="$(curl -s https://launchpad.net/ubuntu/+series | sed /$current_ubu_release/q | grep "series-" | sed 's/.*"series-\(.*\)".*/\1/')"
+# ubu_releases="${ubu_releases//${next_ubu_release}}"
+# ubu_releases="${next_ubu_release} $(echo $ubu_releases | tr ' ' '\n' | sort -d | tr '\n' ' ')"
+ubu_releases="$(echo $ubu_releases | tr ' ' '\n' | sort -d | tr '\n' ' ')"
+## a little loop dance to gather the correct alpha ordering
+found_first=
+for r in $ubu_releases; do
+    if [ -z "$found_first" -a ${r:1} = ${current_ubu_release:1} ]; then
+        ordered_releases="${ordered_releases}${r} "
+        found_first=1
+    elif [ -n "${found_first}" ]; then
+        tail_releases="${r} ${tail_releases}"
+    else
+        head_releases="${r} ${head_releases}"
+    fi
+done
+for r in $head_releases; do
+    ordered_releases="${ordered_releases}${r} "
+done
+for r in $tail_releases; do
+    ordered_releases="${ordered_releases}${r} "
+done
+ubu_releases=$ordered_releases
+
+## delete save repos
+sudo rm -f /etc/sources.list.save
+find /etc/apt/sources.list.d/*.save 2>/dev/null | xargs -I {} sudo rm -f {}
+
+## update main repos
+# if [[ "$current_ubu_release" != "$next_ubu_release# " ]] ; then
+#     sudo sed -i 's/\(ubuntu.com.*\|canonical.com.*\)'$current_ubu_release'/\1'$next_ubu_release'/' /etc/apt/sources.list
+# fi
+
+latest() {
+    IFS=' '
+    for r in $ubu_releases ; do
+        if [[ -n "`echo "$dists" | grep $r`" ]] ; then
+            if timeout 3 curl -sL "$url/dists/$r" | grep -q Release; then
+                latest=$r
+                break
+            fi
+        fi
+    done
+}
+
+edit() {
+    ## replace url in repo file
+    sudo sed -i 's#deb\( \[.*\?\]\)\? '$url' \(.*\?-\)\?\(.*\?\) #deb\1 '$url' \2'$latest' #' $file
+
+    ## rename repo file
+    releases_regxp=$(echo "$ubu_releases" | sed -r 's/( ?)([a-z]*)( ?)/\2|/g' | sed 's/|$//')
+    release_in_file=$(grep -oE "$releases_regxp" < "$file" | tail -1)
+    if [[ "$release_in_file" && "$release_in_file" -ne "$latest" && -n "$latest" ]] ; then
+        sed 's/'$release_in_file'/'$latest'/' -i "$file"
+	:
+    fi
+}
+
+repo_sources(){
+    local IFS=' '
+    grep --exclude='*.distUpgrade' -nr "deb .*" ${@:-/etc/apt/sources.list /etc/apt/sources.list.d} | grep -Ev "ubuntu\.com|\.\/" | grep -E "$(echo $ubu_releases | sed 's~ ~|~g' | sed 's~|$~~')"
+}
+
+IFS=$'\n'
+if [ -n "$1" ]; then
+    file=$(find /etc/apt/sources* -path "*$1*" | tail -1)
+    # file=$(echo $s | sed 's~:.*~~')
+    url=$(sed 's~.*:deb ~~' < "$file" | grep -o "http[^ ]*" | tail -1)
+    dists="$(timeout 3 curl -sL "$url/dists")"
+    latest
+    [ -z "$latest" ] && { echo "Error fixing given apt repo source"; exit 1; }
+    edit
+    echo "fix $url with $latest in $(basename $file)"
+else
+for i in $(repo_sources); do
+    {
+        file=$(echo $i | sed 's~:.*~~')
+        url=$( echo $i | sed 's~.*:deb ~~' | grep -o "http[^ ]*" )
+        dists="$(timeout 3 curl -sL "$url/dists")"
+
+        latest
+        [ -z "$latest" ] && exit
+
+        edit
+        ## message
+        echo "fix $url with $latest in $(basename $file)"
+    } &
+done
+fi
+wait

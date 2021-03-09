@@ -1,0 +1,27 @@
+#!/bin/bash -li
+
+wps=("wp_reddit" "wp_imgur")
+wp_list_cache=/tmp/.cache/images_url && touch $wp_list_cache
+[ $(wc -l < $wp_list_cache) -gt 1000 ] && truncate $wp_list_cache
+wp_cache=/tmp/.cache/wp
+cmd_filter="grep -v -x -F -f $wp_list_cache"
+
+wp_reddit(){
+    wget -qO- http://www.reddit.com/r/wallpaper/new.json | jq -r '.data.children[].data.url' | ${cmd_filter} | shuf -n1
+}
+wp_imgur(){
+    local img=$(echo -n https://imgur.com)
+    img="${img}$(curl -s https://imgur.com/r/wallpapers | pup '.post a attr{href}' | ${cmd_filter} | shuf -n 1)"
+    curl -s "$img" | pup 'link[rel="image_src"] attr{href}'
+}
+
+wp(){
+    local r_idx=$((RANDOM%2))
+    eval "img_url=$(${wps[r_idx]})"
+    diff /tmp/.cache/images_url <(echo "$img_url") | grep -q '>'
+    echo $img_url >> /tmp/.cache/images_url
+    curl -s "$img_url" -o ${wp_cache}
+    swaymsg -s "$SWAYSOCK" "output * bg ${wp_cache} fill"
+}
+
+wp

@@ -1,0 +1,9 @@
+#!/bin/sh 
+cnt=ubu
+docker restart $cnt
+docker-mount $cnt / /host
+docker exec $cnt /bin/bash -c "mkdir -p /host/dev && mount -B /dev /host/dev"
+docker exec $cnt mount -B /dev/pts /host/dev/pts
+docker exec $cnt mount -B /proc /host/proc
+docker exec $cnt mount -B /sys /host/sys
+docker exec -u fra $cnt sudo xinit

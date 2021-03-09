@@ -1,0 +1,5 @@
+#!/bin/sh
+if ! [ -f ~/.local/bin/plantuml.jar ]; then
+	echo plantuml binary not found, download from "http://sourceforge.net/projects/plantuml/files/plantuml.jar/download"
+fi
+/usr/bin/env java -jar ~/.local/bin/plantuml.jar $*

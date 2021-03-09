@@ -1,0 +1,13 @@
+#!/bin/bash
+## shows the dates of the last week in a bar separated string
+startdate=`date --date="1 week ago" +"%Y-%m-%d"`
+enddate=`date +%Y-%m-%d`
+
+curr="$startdate"
+while true; do
+#    echo -n "$curr|"
+    [ "$curr" \< "$enddate" ] || break
+    curr=$( date +%Y-%m-%d --date "$curr +1 day" )
+    currs+="$curr|"
+done
+echo -n "$currs" | sed "s/|$//"

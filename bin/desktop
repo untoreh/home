@@ -1,0 +1,10 @@
+#!/bin/sudo /bin/bash
+
+cnt=ubu
+modprobe ip_tables
+modprobe ip6_tables
+lxc-start -n ubu 
+while [[ ! `sudo lxc-attach -n ubu -- ls /dev/tty7 2>/dev/null` ]] ; do
+    sleep 2
+done
+exec lxc-attach -n ubu -- gosu fra sudo xinit

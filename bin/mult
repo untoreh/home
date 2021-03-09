@@ -1,0 +1,5 @@
+#!/bin/sh
+# exec tilix -e tmux new-session
+# exec alacritty
+#KITTY_ENABLE_WAYLAND=2 GDK_BACKEND=wayland exec ~/.bin/kitty --dump-bytes=/tmp/kitty.log --debug-gl -1 --detach --hold tmux new-session -c "$HOME" $@
+KITTY_ENABLE_WAYLAND=2 GDK_BACKEND=wayland exec ~/.bin/kitty -1 --detach --hold "${@:-zsh -li}"

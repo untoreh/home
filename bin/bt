@@ -1,0 +1,6 @@
+#!/bin/sh -x
+
+modprobe btusb
+sc-restart bluetooth
+pactl load-module bluetooth-discovery
+pulseaudio -k

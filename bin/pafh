@@ -1,0 +1,47 @@
+#!/usr/bin/zsh
+
+cachedir="/tmp/.cache"
+cache=$cachedir/launcher_run
+cmdfifo="$cachedir/launcher_fifo"
+if [ -n "$1" ]; then
+    rm -f $cachedir/launcher_lock
+    echo "$*" >$cmdfifo
+    exit
+fi
+[ ! -d $cachedir ] && mkdir -p $cachedir
+[ ! -p $cmdfifo ] && mkfifo $cmdfifo
+
+## spawn the interactive shell tha will execute the command
+### eval for aliases
+### on some shells execing functions or aliases might not be possible
+# /usr/bin/zsh -ic 'launcher_cmd="$(<'${cmdfifo}')" &&
+# 	launcher_runc="${launcher_cmd/ *}" &&
+# 	functions $launcher_runc ||
+# 	alias $launcher_runcs && launcher_cmd="exec nohup $launcher_cmd &>/dev/null" &&
+# eval $launcher_cmd ' &>/dev/null &
+
+if [ ! -e "${cachedir}/launcher_lock" ]; then
+    touch $cachedir/launcher_lock
+    ## we load the profile because pafh is not loggedin/interactive
+    (. ~/.profile; read c <$cmdfifo; eval "${=c}") &>/dev/null &!
+fi
+dmr_path() { echo ${PATH//:/ } }
+[ -f ~/.aliases ] && dmr_aliases=~/.aliases
+[ -f ~/.functions ] && dmr_functions=~/.functions
+[ -f ~/.history ] && dmr_history=~/.history
+
+## maybe too much
+# || stest -fqr -n "$cache" "$history"
+IFS=:
+if [ ! -e $cache ] ||
+	stest -dqr -n $cache  $(dmr_path) ||
+       stest -fqr -n $cache $dmr_aliases ||
+       stest -fqr -n $cache $dmr_functions ; then
+    (
+        . ~/.profile
+        print -rl -- ${(k)aliases} ${(k)functions} ${(k)commands}
+        cat $dmr_history | sed -r 's/[^;]*;//'
+    ) | sort -u | sed -r '/^[^a-zA-Z0-9]+$/d' | tee $cache ## filter garbage with sed
+else
+    cat $cache
+fi

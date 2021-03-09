@@ -1,0 +1,35 @@
+#!/usr/bin/zsh
+
+jq_str="jq -sR @base64"
+# jq_str="jq -srR @json"
+
+if [ -z "$1" ]; then
+    contents=$(${=jq_str} < /dev/stdin)
+else
+    	if [ -f "$1" ]; then
+    		contents=$(${=jq_str} < ${1})
+		description=${2}
+	else
+    	contents=$(${=jq_str} < /dev/stdin)
+    	description=${1}
+    	fi
+fi
+
+function request(){
+    curl "https://api.paste.ee/v1/pastes" \
+         -s \
+         -X "POST" \
+         -H "Content-Type: application/json" \
+         -H "X-Auth-Token: usgnuIcXG391904ooWNprHmakI7ZMLbtFr0ePDjs2" \
+         -d '{"description":"'"$2"'","sections":[{"name":"'"${description:-1}"'","syntax":"autodetect","contents":'"$contents"'}],"expiration":"never"}'
+}
+
+response=$(request)
+
+success=$(echo "$response" | jq -r .success)
+
+if $success; then
+    echo "$response" | jq -r .link | sed 's/\/p\//\/d\//'
+else
+    echo "$response" | jq -r '.errors[.0] .message'
+fi

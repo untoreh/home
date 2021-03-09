@@ -1,0 +1,15 @@
+#!/usr/bin/zsh
+
+round_1 () {
+	{ for i in $(seq 1 10); do
+		time zsh -i -c exit
+	done } 2>&1  | awk '{print $7}' | datamash mean 1
+}
+
+round_2() {
+	{ for i in $(seq 1 10); do
+		round_1
+	done } 2>&1 | sed 's/s//' | datamash mean 1
+}
+
+round_2

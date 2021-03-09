@@ -1,0 +1,2 @@
+#!/bin/sh
+$HOME/.bin/wrp "sudo -u fra visual-studio-code" "$@"

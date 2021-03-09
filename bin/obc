@@ -1,0 +1,24 @@
+#!/bin/bash 
+## outbound connection of $1
+
+if [[ "$1" == "w" ]] ; then
+	if [[ -n "$2" ]] ; then
+		w=1
+	else
+		echo "a filter keyword is needed"
+		exit 1
+	fi
+else
+	if [[ -z "$1" ]] ; then
+		echo "a filter keyword is needed"
+		exit 1
+	fi
+fi
+
+if [ "$w" == 1 ] ; then
+	watch -t -n 1 "sudo ss -tp | grep \"$2\" 2>1 | awk '{print \$5}'"
+else
+	sudo ss -tp | grep "$1" 2>1 | awk '{print $5}'
+fi
+
+

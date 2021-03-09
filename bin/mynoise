@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ "$1" = "-h" ]; then
+    echo "radios: zen, ocean, rain, nature, space (rain)"
+    exit
+fi
+
+exec mpv http://"${1:-rain}".radio.mynoise.net

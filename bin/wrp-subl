@@ -1,0 +1,2 @@
+#!/bin/bash
+$HOME/.bin/wrp "gosu fra /bin/bash -c" "LANG=en_US.UTF-8" "subl3" "$@"

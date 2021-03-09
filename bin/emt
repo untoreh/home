@@ -1,0 +1,12 @@
+#!/bin/bash
+
+emacsclient -c -e \
+"(defun force-close (frame)
+  (setq kill-buffer-query-functions (delq 'process-kill-buffer-query-function kill-buffer-query-functions))
+  (set-buffer-modified-p nil)
+  (kill-this-buffer))" \
+"(add-to-list 'delete-frame-functions 'force-close)" \
+"(multi-term)" \
+"(remove 'force-close delete-frame-functions)" \
+"(hidden-mode-line-mode)" \
+"(set-fringe-mode 1)"

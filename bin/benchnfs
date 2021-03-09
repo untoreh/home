@@ -1,0 +1,14 @@
+#!/bin/zsh
+
+IP=192.168.255.1
+MOUNT=/mnt
+size=$1
+
+{
+for i in {1..5} ; do
+	sudo umount -f $MOUNT &>/dev/null
+	sudo mount -t nfs -o auto,noatime,nodiratime,nolock,bg,nfsvers=4,intr,tcp,actimeo=1800,rsize=$1,wsize=$1 $IP:/ $MOUNT
+	{ time ls $MOUNT >/dev/null } 2>&1 | grep -o "[0-9\.]* total" | grep -o "[0-9]*\.\?[0-9]*"
+	sudo umount -f $MOUNT &>/dev/null
+done
+} 2>&1

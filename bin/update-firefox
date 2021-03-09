@@ -1,0 +1,24 @@
+#!/bin/bash -x
+
+mkdir -p ~/.tmp && cd ~/.tmp
+mkdir -p firefox-tmp && cd firefox-tmp
+
+current=`curl -sL https://www.mozilla.org/en-US/firefox/developer/notes/ | grep "class=\"version\"" -A 1 | perl -pe 's/<.*?>|\s//g'`
+installed=`$HOME/.bin/firefox --version && $HOME/.bin/firefox --version | sed 's/[^0-9]* //' || echo 0`
+file=firefox.tar.gz
+
+echo $installed
+
+cM=$(echo "$current" | sed -r 's/([0-9].*)\..*/\1/')
+iM=$(echo "$installed" | sed -r 's/([0-9].*)\..*/\1/' || echo 0)
+
+if [ $cM -gt $iM ] ; then
+    wget https://download.mozilla.org/\?product\=firefox-devedition-latest-ssl\&os\=linux64\&lang\=en-US -O $file
+    tar -xf $file
+    sudo rm -rf /opt/firefox
+    sudo mv firefox /opt/
+    ln -sf /opt/firefox/firefox ~/.bin
+    rm $file
+    cd .. && rmdir firefox-tmp
+    chown fra:fra /opt/firefox -E
+fi

@@ -1,0 +1,3 @@
+#!/bin/sh
+
+exec node ~/.tmp/pyright/client/server/server.bundle.js $@

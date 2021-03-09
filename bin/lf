@@ -1,0 +1,2 @@
+#!/bin/sh
+ps aux | grep -i -v "grep" | grep -i -v "\/.bin\/lf" | grep -i "$@"

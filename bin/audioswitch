@@ -1,0 +1,125 @@
+#!/bin/bash
+## `pactl list sources short`
+## earplugs sound_card
+ep_sc=alsa_output.pci-0000_20_00.0.analog-stereo
+ep_in=alsa_input.pci-0000_20_00.0.analog-stereo
+## headphones sound_card
+hp_sc=alsa_output.usb-0a12_CSR_Audio_Adaptor-00.iec958-stereo
+## bt virtual sound_card
+bt_device="B0:F1:A3:00:A9:91" ## FIIL Diva
+# bt_device="41:42:54:DE:B2:48" ## DJ earphones
+bt_sc="bluez_sink.${bt_device//:/_}.a2dp_sink"
+[ -f /tmp/.audioswitch ] && read current_state < /tmp/.audioswitch
+
+update_clients(){
+    pactl list short sink-inputs|grep native|while read stream; do
+        streamId=$(echo $stream|awk '{print $1}')
+        echo "moving stream $streamId"
+        pactl move-sink-input "$streamId" "$1"
+        pactl set-default-sink "$1"
+    done
+}
+
+mute(){
+    amixer set Master mute
+}
+unmute(){
+    amixer set Master unmute
+}
+
+## sound normalization
+# $1 sink to normalize
+sound_norm(){
+    pactl unload-module module-ladspa-sink
+    pactl load-module module-ladspa-sink master=$1 sink_name=sn_sink plugin=sc1_1425.so label=sc1 control=3,401,-30,4,5,1
+}
+
+## noise suppression
+# $1 sink to suppress
+noise_sup(){
+    pactl unload-module module-echo-cancel
+    ## sink_source for filtering inputs...
+    pactl load-module module-echo-cancel sink_master=$1 source_name=ns_source sink_name=ns_sink aec_method=webrtc aec_args='"noise_suppression=true voice_detection=false" ' use_master_format=1
+}
+
+## equalizer adds some serious latency
+## $1 sink to equalize
+equal(){
+    pactl unload-module module-equalizer-sink
+    pactl load-module module-dbus-protocol 2>/dev/null
+    pactl load-module module-equalizer-sink use_volume_sharing=1 sink_master=$1 sink_name=eq_sink
+}
+
+ep(){
+    #skip_if_activated ${FUNCNAME[0]}
+    mute
+    update_clients 0 ## needed to avoid pulseaudio crashing when a module is unloaded while a client is using a sink depending on such module
+    if [ "$1" = "ns+sn" ]; then
+    	noise_sup $ep_sc ## noise_sup sets the ns_sink
+    	sound_norm ns_sink ## sound_norm sets the sn_sink
+	upd=ns_sink
+	else
+    	sound_norm $ep_sc ## sound_norm sets the sn_sink
+	upd=sn_sink
+    fi
+
+    update_clients $upd
+    unmute
+    echo ep > /tmp/.audioswitch
+}
+hp(){
+    #skip_if_activated ${FUNCNAME[0]}
+    mute
+    update_clients 0
+
+    ## make sure latency is set for the bluetooth device
+    # pactl set-port-latency-offset $hp_sc iec958-stereo-output 100000
+
+    noise_sup $hp_sc
+    sound_norm ns_sink
+
+    update_clients sn_sink
+    unmute
+    echo hp > /tmp/.audioswitch
+}
+is_bt_connected() {
+    pactl list sources short | grep -q $bt_sc
+}
+bt(){
+    #skip_if_activated ${FUNCNAME[0]}
+    mute
+    update_clients 0
+
+    ## make sure latency is set for the bluetooth device
+    # pactl set-port-latency-offset $hp_sc iec958-stereo-output 100000
+
+    if ! is_bt_connected; then
+        pactl unload-module module-bluetooth-discover
+        pactl load-module module-bluetooth-discover
+        bluetoothctl <<< "connect ${bt_device}"
+        tries=0
+        while ! is_bt_connected && [ $tries -lt 3 ]; do sleep 1; tries=$((tries+1)); done
+    fi
+    noise_sup $bt_sc
+    sound_norm ns_sink
+
+    update_clients sn_sink
+    unmute
+    echo bt > /tmp/.audioswitch
+}
+skip_if_activated() {
+    [ $current_state = "$1" ] && exit 1
+}
+
+case "$(basename ${0})" in
+    aep)
+	shift
+        ep $@
+        ;;
+    ahp)
+        hp
+        ;;
+    abt)
+        bt
+        ;;
+esac

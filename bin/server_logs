@@ -1,0 +1,39 @@
+#!/bin/sh
+
+target_hosts="$1"
+## http://dht.chylex.com/
+download_urls_list=/tmp/dht.txt
+[ ! -f /tmp/dht.txt ] && echo "please download the discord chat logs for attachments" && exit 1
+
+image_name=grafana_graphite
+tmpdir=~/.tmp
+container_repo=https://github.com/kamon-io/docker-grafana-graphite
+repo_name=docker-grafana-graphite
+container_path=~/.tmp/docker-grafana-graphite/
+
+if ! docker ps | grep -q grafana_graphite; then
+    if sudo netstat -tnlp | grep -qE "(:80|:81|:2003|:8125|:8126)\s"; then
+        echo -n "not all ports available: 80,81,2003,8125,8126"
+        exit
+    fi
+fi
+if [ -d "$container_path" ]; then
+   cd "$container_path"
+else
+    cd "$tmpdir"
+    git clone --depth 1 "$container_repo" "$repo_name"
+    cd "$repo_name"
+fi
+
+make up
+mkdir dls -p
+cd dls
+## dht specific
+echo "downloading host data files..."
+jq -r '.data | .[] | .[] | .a[].url | select(.|contains("'"$target_hosts"'"))' < "$download_urls_list" | wget -i-
+/bin/cat $(/bin/ls -w 1) | /bin/nc -N localhost 2003 ## graphite endpoint
+echo "create data source from graphite http://localhost:81"
+echo "create dashboard from importing netdata template code: 3938"
+sleep 3
+echo "opening browser to grafana..."
+xdg-open http://localhost:80

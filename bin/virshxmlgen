@@ -1,0 +1,35 @@
+#!/bin/zsh -x
+
+exec &>>/home/fra/.tmp/log ## debugging
+VEID=$1
+PRID=$2
+DOM=$3
+
+[ -z "$VEID" -o -z "$PRID" ] && exit
+
+xml=/tmp/.libvirt/${VEID}${PRID}.xml
+att=/tmp/.libvirt/${VEID}${PRID}.att
+mkdir -p /tmp/.libvirt
+## on first create the xml file for the device to be attached
+if [ -n "$(virsh dominfo $DOM | grep -E '^State.*running')" ] &&
+       [ ! -f "${xml}" ]; then
+    echo "<hostdev mode='subsystem' type='usb'>
+         <source>
+                 <vendor id='0x$VEID'/>
+                 <product id='0x$PRID'/>
+         </source>
+</hostdev>" > "${xml}"
+    # virsh attach-device $DOM ${xml}.0
+    # mv ${xml}{.0,.1}
+fi
+
+## attach if att file is not present or detach and remove att file
+if [ -f "${xml}" -a ! -f "${att}" ]; then
+        virsh attach-device $DOM "${xml}" --live &!
+        touch "${att}"
+else
+    if [ -f "${xml}" -a -f "${att}" ]; then
+        virsh detach-device $DOM "${xml}" --live &!
+        rm "${att}"
+    fi
+fi

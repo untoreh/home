@@ -1,0 +1,17 @@
+#!/bin/bash    
+
+SESSIONNAME="coreshells"
+tmux has-session -t $SESSIONNAME &> /dev/null
+
+if [ $? != 0 ] 
+ then
+    tmux new-session -s $SESSIONNAME -n "core" -d \; \
+    	set-option -t $SESSIONNAME destroy-unattached off \; \
+    	send-keys -t $SESSIONNAME ccore1 C-m sudo\ su C-m clear C-m \; \
+    	split-window -h -t $SESSIONNAME \; \
+    	send-keys -t $SESSIONNAME ccore2 C-m sudo\ su C-m clear C-m \; \
+    	split-window -t $SESSIONNAME \; \
+    	send-keys -t $SESSIONNAME ccore3 C-m sudo\ su C-m clear C-m
+fi
+
+exec tmux attach -t $SESSIONNAME

@@ -1,0 +1,3 @@
+#!/bin/sh
+shows_path="/run/user/$(id -u)/gvfs/smb-share:server=localhost,share=shows/"
+exec xdg-open "$shows_path"

@@ -1,0 +1,27 @@
+#!/bin/sh -x
+
+# pa_sc=alsa_output.pci-0000_20_00.0.analog-stereo
+# pa_sc=alsa_input.pci-0000_18_00.0.analog-stereo
+pa_sc=alsa_input.pci-0000_22_00.3.analog-stereo
+#pa_sc=sn_sink.monitor
+port=12347
+# pa_sk='/run/user/1000/gvfs/mtp:host=%5Busb%3A003%2C079%5D/Phone\ storage/socket'
+# pa_sk="/run/user/1000/gvfs/mtp:host=%5Busb%3A003%2C079%5D/SD\ card/sock"
+pa_sk=/tmp/.unix_pa_sps
+
+case "$1" in
+  start)
+    $0 stop
+    pactl load-module module-simple-protocol-tcp format=s16le channels=2 source=$pa_sc record=true port=$port
+    # pactl load-module module-rtp-send source=$pa_sc destination=192.168.42.129 port=46998
+    # pactl load-module module-simple-protocol-unix rate=48000 format=s16le channels=2 source=$pa_sc record=true socket="$pa_sk"
+    ;;
+  stop)
+    pactl unload-module `pactl list | grep "simple.*tcp" -B1 | grep M | sed 's/[^0-9]//g'`
+    pactl unload-module `pactl list | grep "simple.*unix" -B1 | grep M | sed 's/[^0-9]//g'`
+    pactl unload-module `pactl list | grep "rtp" -B1 | grep M | sed 's/[^0-9]//g'`
+    ;;
+  *)
+    echo "Usage: $0 start|stop" >&2
+    ;;
+esac

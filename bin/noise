@@ -1,0 +1,28 @@
+#!/bin/zsh
+
+# exec {mpvnoise}>&<(:)
+pidfile=/run/user/$(id -u)/noise.pid
+audiof=~/Downloads/BrownianNoise.flac
+socket=/tmp/.mpvnoise
+mpvcmd="--volume 1 --no-resume-playback --really-quiet $audiof --input-ipc-server=${socket}"
+
+setvol(){
+    ## force stdout flushing to achieve smoothness
+    printf '{ "command": ["set_property", "volume", "'"$i"'"] }\n' | stdbuf -oL socat - "$socket" &>/dev/null
+}
+
+if [ ! -e $pidfile ]; then
+	  mpv ${=mpvcmd} & echo $! > $pidfile
+    read -t 0.1
+    for i in {2..100}; do
+        setvol
+        read -t 0.01
+    done
+else
+    for i in {99..1}; do
+        setvol
+        read -t 0.01
+    done
+	  kill -9 $(cat $pidfile)
+	  rm -f $pidfile
+fi

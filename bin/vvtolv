@@ -1,0 +1,12 @@
+#!/bin/zsh
+
+if [[ -z "$1" ]] ; then
+   echo "check image name provided."
+   exit 1
+fi
+
+image=$1
+
+vagrant box add $image --provider=virtualbox && \
+vagrant mutate $image --input-provider virtualbox libvirt && \
+vagrant box remove $image --provider=virtualbox

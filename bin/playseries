@@ -1,0 +1,68 @@
+#!/bin/zsh -i
+[ -z "$*" ] && { echo specify and object to play; exit 1; }
+
+## PATHS CONFIG
+ls=exa
+MEDIA_PATH=/run/user/$UID/gvfs/
+SERVER_PATH=smb-share:server=localhost,share=shows/
+next_episode_host=localhost
+next_episode_port=8082
+
+## FILESYSTEM CHECKS
+mountpoint -q $MEDIA_PATH ||
+    { mkdir -p $MEDIA_PATH && djmount $MEDIA_PATH; } ||
+    { echo problems using $MEDIA_PATH as a media path; exit 1; }
+
+## GUESSIT CHECK
+type guessit >/dev/null ||
+    pip install --user guessit ||
+    { echo guessit package not available and there are problems installing it; exit 1; }
+
+
+if [ "$1" = ls ]; then
+    if [ "$2" = ep -a -n "$3" ]; then
+        folder=$(find $MEDIA_PATH/$SERVER_PATH/ -maxdepth 1 -ipath "*$3*" -type d)
+        exa -T "$folder"
+    else
+        exa -1 "$MEDIA_PATH/$SERVER_PATH"
+    fi
+elif [ -n "$2" ]; then
+    PLAY_PATH=$(find $MEDIA_PATH/$SERVER_PATH -maxdepth 1 -ipath "*$2*")
+    IFS=$'\n'
+    for v in $(find $MEDIA_PATH/$SERVER_PATH -ipath "*$1*" -exec file -N -i -- {} +| grep video | sed 's/: video\/.*//'); do
+        if grep -i -q "$2" <<<"$v"; then
+            mpv "$v"
+            exit
+        fi
+    done
+    mpv $PLAY_PATH
+    exit
+    :
+else
+    series="$*"
+    while [ -z "$episode" ]; do
+        echo "$series" | nc -q1 $next_episode_host $next_episode_port;
+        episode=$(nc -q1 -l $next_episode_port)
+    done
+    s_number=${episode/E*}
+    e_number=${episode/$s_number}
+    s_number=${s_number//[a-zA-Z]}
+    s_number=${s_number/0} ## leading zero
+    e_number=${e_number/[a-zA-Z]}
+    e_number=${e_number/0}
+    IFS=$'\n'
+    for v in $(find $MEDIA_PATH/$SERVER_PATH -ipath "*$series*" -exec file -N -i -- {} +| grep video | sed 's/: video\/.*//' | sort); do
+
+        match=$(guessit -j "$v" | jq -r '"\(.season) \(.episode)"')
+        if [ "$match" = "$s_number $e_number" ]; then
+            mpv "$v"
+            exit
+        fi
+    done
+    if [ -n "$episode_file" ]; then
+        echo $episode_file
+    else
+        echo "no episode available to play."
+        exit 1
+    fi
+fi

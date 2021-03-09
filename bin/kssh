@@ -1,0 +1,3 @@
+#!/bin/sh
+
+~/.bin/kitty "/bin/sh -c \"TERM=screen ssh $@\""

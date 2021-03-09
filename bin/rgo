@@ -1,0 +1,7 @@
+#!/bin/zsh
+
+go clean -i ${1}...
+rmdir $GOPATH/*/*/${1}
+
+
+

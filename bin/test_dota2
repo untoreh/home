@@ -1,0 +1,22 @@
+#!/bin/sh
+
+#DEMOFILE=/media/Games/Steam/steamapps/common/dota\ 2\ beta/game/dota/replays/benchvulkan2.dem
+
+#DEMOFILE="dota2-pts-1971360796.dem"
+DEMOFILE="OctPerf.dem"
+
+WIDTH=1920
+HEIGHT=1080
+
+# -vulkan or -gl
+API="-vulkan"
+
+# this should be the default install folder, change it if yours is different (only needed to renaming the benchmark file)
+DOTA2="/media/Games/Steam/steamapps/common/dota 2 beta/game"
+
+# rename any existing benchmark scores
+cd "$DOTA2"
+#mv -f "$DOTA2/dota/Source2Bench.csv" "$DOTA2/dota/Source2Bench.csv.1"
+
+# launch steam and dota2 with benchmark mode and the "benchvulkan2" demo file
+steam -applaunch 570 $API +timedemo $DEMOFILE +demo_quitafterplayback 1 +fps_max 0 -autoconfig_level 3 -h $HEIGHT -w $WIDTH -fullscreen -high

@@ -1,0 +1,15 @@
+#!/bin/bash -i
+
+if test -t 1; then
+  exec 1>/dev/null
+fi
+
+if test -t 2; then
+  exec 2>/dev/null
+fi
+export PATH
+PATH=.:$PATH ## if the background task is a local unprefixed script
+# eval "nohup $*" & disown
+eval "$* &!"
+read -t 0.01
+exit

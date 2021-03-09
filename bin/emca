@@ -1,0 +1,3 @@
+#!/bin/sh
+
+EMACS_SERVER_NAME=apps exec ~/.bin/emc

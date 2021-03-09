@@ -1,0 +1,7 @@
+#!/bin/zsh
+
+exec=~/Games/gog-galaxy/drive_c/Program\ Files\ \(x86\)/GOG\ Galaxy/Games/Gwent/Gwent.exe
+winev=~/.local/share/lutris/runners/wine/esync-staging-pba-nopulse-3.17-x86_64/bin/wine
+WINEPREFIX=~/Games/gog-galaxy
+
+$winev $exec

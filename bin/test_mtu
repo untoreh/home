@@ -1,0 +1,14 @@
+#!/bin/bash
+## find mtu
+
+IP="151.6.157.106"
+MTU=1452
+too_long=true
+
+while :; do
+    echo $MTU
+    too_long=$(ping -c1 -s${MTU} -M do $IP)
+    MTU=$((MTU+1))
+    [ -z "$too_long" ] && break
+    sleep 0.1
+done
