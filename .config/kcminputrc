@@ -1,0 +1,17 @@
+[$Version]
+update_info=delete_cursor_old_default_size.upd:DeleteCursorOldDefaultSize
+
+[Keyboard]
+KeyboardRepeating=0
+NumLock=2
+RepeatDelay=600
+RepeatRate=25
+
+[Libinput][7805][11711][ROCCAT ROCCAT Kone Pure Military Mouse]
+PointerAcceleration=0.000
+PointerAccelerationProfile=1
+
+[Mouse]
+XLbInptAccelProfileFlat=true
+cursorSize=48
+cursorTheme=Sweet-cursors

@@ -1,0 +1,11 @@
+/home/fra/.emacs/private/saves/circe/* {
+       daily
+       rotate 7
+       su fra fra
+       notifempty
+       createolddir
+       nocreate
+       nocopy
+       missingok
+       maxsize 16M
+}

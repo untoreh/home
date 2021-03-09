@@ -1,0 +1,11 @@
+[Unit]
+Description=Run P2P software
+# Wants=
+Conflicts=rescue.service rescue.target
+After=multi-user.target rescue.service rescue.target network.target mounts.service
+Requires=mounts.service
+
+AllowIsolate=yes
+
+[Install]
+WantedBy=user.target

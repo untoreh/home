@@ -1,0 +1,27 @@
+[General]
+FreeFloating=true
+history=emc,emacs,applications,konsole,firefox,kitty,shortcu,global them,qutebrowser,ffox,konsol,konso,term,syncthing,kwin window ru,stremio,code,vscode,discover,kwin,virt-,spect,screenshot,neochat,jellyfin-mpv-desktop,emc',fonts,neo,flatseal,kwallet,quaternion,system settings,fvim,torrent,spice,virt,widget style,breez,kwall,wall,window rules,kvantum,power,radeon-profi,global,logout,kon,fish,radeon,stree
+
+[PlasmaRunnerManager]
+LaunchCounts=1 services_applications:org.kde.spectacle.desktop,10 services_applications:smartcode-stremio.desktop,2 services_applications:kcm_keyboard.desktop,1 services_applications:org.kde.dolphin.desktop,6 services_applications:radeon-profile.desktop,4 services_applications:org.gnome.DiskUtility.desktop,1 services_applications:kcm_fonts.desktop,1 shell_fish,27 shell_ffox,1 services_applications:kcm_kdeconnect.desktop,1 windows_0_73410229,1 services_applications:breezestyleconfig.desktop,4 services_applications:fontinst.desktop,1 services_applications:atom.desktop,7 desktopsessions_1,1 services_applications:roccat-mouse-launcher.desktop,1 services_applications:gpick.desktop,47 services_applications:kcm_lookandfeel.desktop,1 services_applications:kcm_style.desktop,5 services_applications:org.kde.neochat.desktop,1 services_applications:fvim.desktop,30 services_applications:com.valvesoftware.Steam.desktop,1 shell_global the,1 services_applications:kcm_icons.desktop,56 shell_qutebrowser,2 services_applications:syncthing-ui.desktop,3 windows_0_25167177,806 shell_emc,2 services_applications:kcm_desktoptheme.desktop,7 services_applications:code.desktop,1 services_applications:kcm_sddm.desktop,4 services_applications:virt-manager.desktop,25 shell_jellyfin-mpv-desktop,1 services_applications:khotkeys.desktop,2 shell_smb4k,24 services_applications:org.kde.konsole.desktop,10 services_applications:com.obsproject.Studio.desktop,2 services_applications:org.remmina.Remmina.desktop,3 services_applications:standard_actions.desktop,2 services_applications:kwalletconfig5.desktop,1 services_applications:htop.desktop,2 services_applications:kwinscripts.desktop,9 shell_abt,3 services_applications:autostart.desktop,1 services_applications:powerdevilprofilesconfig.desktop,3 services_applications:tribler.desktop,5 services_applications:systemsettings.desktop,1 services_applications:org.kde.ksysguard.desktop,2 services_applications:kcm_kscreen.desktop,5 shell_kitty,5 services_applications:net.lutris.Lutris.desktop,1 windows_0_41943043,3 shell_obs,33 services_applications:emacs.desktop,2 services_applications:kwinoptions.desktop,3 services_applications:com.github.tchx84.Flatseal.desktop,13 services_applications:org.kde.discover.desktop,12 services_applications:Kitty-2.desktop,4 shell_quaternion,34 services_applications:org.kde.smb4k.desktop,1 services_applications:org.gnome.FontManager.desktop,3 services_applications:kcm_kwinrules.desktop,5 shell_global them,9 services_applications:kvantummanager.desktop,1 services_applications:kwinactions.desktop,1 services_applications:kcm_notifications.desktop,1 services_applications:org.gnome.FontViewer.desktop,7 services_applications:barrier.desktop,4 services_applications:kcm_cursortheme.desktop,3 services_applications:org.kde.kwalletmanager5.desktop,1 services_applications:nvim.desktop,40 services_applications:com.github.quaternion.desktop,12 services_applications:firefox.desktop,3 services_applications:com.github.xournalpp.xournalpp.desktop,1 services_applications:com.valvesoftware.Steam.desktop?action=Screenshots,8 services_applications:kcm_keys.desktop,2 services_applications:oxygenstyleconfig.desktop
+
+[Plugins]
+Kill RunnerEnabled=true
+PowerDevilEnabled=true
+baloosearchEnabled=true
+bookmarksEnabled=false
+browsertabsEnabled=false
+calculatorEnabled=true
+desktopsessionsEnabled=true
+krunner_appstreamEnabled=false
+kwinEnabled=true
+locationsEnabled=true
+org.kde.activitiesEnabled=true
+org.kde.windowedwidgetsEnabled=false
+placesEnabled=true
+plasma-desktopEnabled=true
+recentdocumentsEnabled=true
+servicesEnabled=true
+shellEnabled=true
+webshortcutsEnabled=false
+windowsEnabled=true

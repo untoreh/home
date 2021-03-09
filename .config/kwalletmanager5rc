@@ -1,0 +1,11 @@
+[MainWindow]
+DVI-D-0 Height 1080=568
+DVI-D-0 Width 1920=611
+DVI-D-0 XPosition=1042
+DVI-D-0 YPosition=141
+State=AAAA/wAAAAD9AAAAAAAAAmMAAAIdAAAABAAAAAQAAAAIAAAACPwAAAAA
+ToolBarsMovable=Disabled
+
+[WalletEditor]
+AlwaysShowContents=false
+SplitterSize=48,48

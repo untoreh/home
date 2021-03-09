@@ -1,0 +1,23 @@
+[KFileDialog Settings]
+listViewIconSize=0
+
+[KPropertiesDialog]
+DVI-D-0 Height 1080=456
+DVI-D-0 Width 1920=409
+
+[MainWindow]
+DVI-D-0 Height 1080=847
+DVI-D-0 Width 1920=1156
+DVI-D-0 XPosition=34
+DVI-D-0 YPosition=82
+DVI-D-1 Height 1080=909
+DVI-D-1 Width 1920=1500
+Height 1080=908
+MenuBar=Disabled
+State=AAAA/wAAAAD9AAAAAAAABIQAAANPAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAWAG0AYQBpAG4AVABvAG8AbABCAGEAcgAAAAAA/////wAAAAAAAAAA
+ToolBarsMovable=Disabled
+Width 1920=1500
+
+[Open-with settings]
+CompletionMode=1
+History=barr

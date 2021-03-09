@@ -1,0 +1,143 @@
+npm install -g vmd
+apti fzf find-fd
+#####
+
+ln -s ~/home/fra/.bin /root/
+copy /etc/default/keyboard for ctrl:swapcaps and altgr-intl layout
+dpkg-reconfigure console-setup
+copy apt sources, pinned packages (nut libusb1) apt/preferences.d
+copy etc/nut
+copy ~/.confid/{cron,libvirt,initramfs-tools} /etc/{...}
+copy /usr/share/systemd/tmp.mount /etc/systemd/system
+systemctl enable tmp.mount
+add apt keys
+
+for file in /etc/logrotate.d/* ; do
+    if grep -Eq "(^|[^#y])compress" "$file" ; then
+        sed -i -r "s/(^|[^#y])(compress)/\1#\2/" "$file"
+    fi
+done
+
+/etc/kernel-img.conf # do_symlinks = No
+
+
+gosu
+syncthing syncthing-gtk rsync ansible
+mpv  (pip install --user guessit trakt-scrobbler) (trakt-scrobbler libdbus-glib-1-dev pipenv)
+pip install jellyfin-mpv-shim[desktop] pystray; apt install python3-tk
+mpv-txt python3-tk
+linux-xanmod cpufrequtils memtester
+libxml2-dev python(2) python2-pip  python3 python3-pip python3.7 libcairo2-dev libgirepository1.0-dev libcurl4-nss-dev libtag1-dev
+php-cli php-codesnifferf 
+apt install libmariadb-dev && cpan RPC::EPC::Service DBI DBD::MariaDB (emacs edbi)
+npm -i intelephense bash-language-server vscode-html-languageserver-bin vscode-css-languageserver-bin
+go get github.com/mdempsky/unconvert (more go packages for go configuration layer)
+ golang.org/x/tools/cmd/gopls
+ github.com/nsf/gocode
+ github.com/rogpeppe/godef
+ golang.org/x/tools/cmd/guru
+ golang.org/x/tools/cmd/gorename
+ golang.org/x/tools/cmd/goimports
+ golang.org/x/tools/cmd/gopls
+ golangci-lint
+ github.com/go-delve/delve/cmd/dlv
+# racket
+apti racket
+# tools
+git-lfs
+visidata
+plantuml.jar
+ubuntu-standard
+i3 (sway, swayidle, grim slurp, i3status-rs/waybar) libnotify-bin i3blocks wmctrl wl-clipboard x11-apps(xcursorgen) dconf-editor kbd libappindicator-\*(tray) suckless-tools ydotool
+mesa-vulkan-drivers mesa-vulkan-drivers:i386 vulkan-utils llvm-8+ clinfo (steam) 
+libglfw3 libgles2-mesa (egl android)
+snap install anbox --devmode --beta
+x11-utils dbus-x11 xclip numlockx xdotool swh-plugins ofono # (pulseaudio sound norm)
+arandr virtscreen
+qutebrowser
+firefox 
+brave
+curl (pip install --user cfscrape)
+nautilus python-nautilus libglib2.0-bin gvfs-fuse (for filesystem access from nautilus, usergroup fuse)
+file-roller
+emacs-snapshot shellcheck direnv editorconfig
+mu4e isync (mail) mbsync maildir-utils-extra (pdf)
+kitty (debian sid repo possibly) fonts-emojione
+tmux tmate pv petname
+socat
+rofi (pip3 install rofi-tmux)
+qalc iotop gnuplot xq(from pip)
+adb fastboot x11vnc (android)
+pm-utils powertop radeontop lm-sensors thermald linux-tools-generic amd64-microcode
+steam steam-devices sc-controller (ppa, chmod 666 /dev/uinput)
+
+openssh-server openssh-client seahorse samba
+docker
+useradd $USER docker
+virt-manager libvirt-bin bridge-utils spice-client-gtk virtualbox-6.0 vagrant
+addgroup libvirtd
+useradd $USER kvm libvirt ovmf
+neovim
+xournalpp
+bc sassc inkscape optipng # (oomox)
+jq html2text parallel
+pandoc
+gtk2-engines-pixbuf gtk2-engines-murrine gnome-themes-standard qt5-style-plugins
+subversion git git-lfs
+python3-dev (pip install --user python-language-server[all] pyls-mypy pyls-isort pyls-black pylint flake8 pylint-venv)
+pip install Pillow streamlink pygments colorize howdoi thefuck
+npm install -g tern jsonlint js-beautify gulp-cli # (root)
+npm install autoprefixer browser-sync css-mqpacker cssnano gulp gulp-concat gulp-deporder gulp-imagemin gulp-newer gulp-postcss gulp-sass gulp-strip-debug gulp-uglify gulp-util postcss-assets gulp-sourcemaps gulp-cached gulp-cached-sass (gulp)
+npm i -g chromeless 
+zstd 7z
+openjdk-9-jre
+
+## code
+ycmd
+
+## net
+whois
+tor
+mosh
+gnutls-bin #(circe irc)
+net-tools
+traceroute
+
+## brew
+bfg
+
+## mining
+hwloc
+libhidapi-libusb0
+
+## building
+automake
+libtool
+libtool-bin
+pkg-config
+cmake
+ccache
+
+
+ruby-dev
+gem install --user travis gitlab
+
+## wine
+wget -nc https://dl.winehq.org/wine-builds/Release.key
+sudo apt-key add Release.key
+sudo apt-add-repository https://dl.winehq.org/wine-builds/ubuntu/
+sudo apt-get install --install-recommends winehq-staging
+lutris winbind
+
+## rocm
+dkms rock-dkms rocm-opencl-dev
+
+## dictionary
+apti sdcv (stardict)
+## put in STARDICT_DATA_DIR=~/.local/stardict
+http://download.huzheng.org/bigdict/stardict-Oxford_English_Dictionary_2nd_Ed._P2-2.4.2.tar.bz2
+# KDE
+kdenetwork-filesharing
+
+# not actually used
+github.com/shenwei356/rush 

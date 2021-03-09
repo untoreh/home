@@ -1,0 +1,10 @@
+[General]
+DVI-D-0 Height 1080=372
+DVI-D-0 Width 1920=661
+DVI-D-1 Height 1080=372
+DVI-D-1 Width 1920=661
+Height 1080=413
+Width 1920=681
+
+[SystemInformation]
+CompiledSources=false

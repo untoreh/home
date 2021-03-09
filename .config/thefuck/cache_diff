@@ -1,0 +1,10 @@
+2c2,3
+<     echo 'thefuck is not installed, you should "pip install thefuck" first'
+---
+>     source /etc/os-release
+>     [[ "$NAME" != "void" ]] && echo 'thefuck is not installed, you should "pip install thefuck" first'
+7c8,9
+< eval "$(thefuck --alias)"
+---
+> [[ ! -a thefuck.tmp ]] && thefuck --alias > thefuck.tmp
+> source thefuck.tmp

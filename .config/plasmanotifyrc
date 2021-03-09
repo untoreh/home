@@ -1,0 +1,13 @@
+[Applications][firefox]
+Seen=true
+
+[Applications][org.kde.neochat]
+Seen=true
+
+[DoNotDisturb]
+WhenScreensMirrored=false
+
+[Notifications]
+CriticalAlwaysOnTop=false
+CriticalInDndMode=false
+LowPriorityPopups=false

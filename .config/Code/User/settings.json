@@ -1,0 +1,91 @@
+    // Place your settings in this file to overwrite the default settings
+    {
+        "window.reopenFolders": "all",
+        "files.autoSave": "afterDelay",
+        "editor.fontFamily": "'Input Mono Compressed', 'Courier New', monospace, 'Droid Sans Fallback'",
+        "editor.fontSize": 15,
+        "editor.lineHeight": 16,
+        "editor.renderIndentGuides": 0,
+        "vscode_custom_css.imports": [
+            "file:///home/fra/.config/vsc/colors.css"
+        ],
+        "window.zoomLevel": 0,
+        "vim.useCtrlKeys": true,
+        "workbench.iconTheme": "vscode-icons",
+        "workbench.colorTheme": "Dracula",
+        "vim.statusBarColorControl": true,
+        // "vim.statusBarColors": {
+        //     "normal": "#50fa7b",
+        //     "insert": "#8be9fd",
+        //     "visual": "#ffb86c",
+        //     "visualline": "#f1fa8c",
+        //     "visualblock": "#f1fa8c",
+        //     "replace": "#ff5555"
+        // },
+        "vim.foldfix": true,
+        "vim.overrideCopy": true,
+        "vim.enableNeovim": true,
+        "vim.neovimPath": "/usr/bin/nvim",
+        "vim.insertModeKeyBindings": [{
+            "before": ["f", "d"],
+            "after": ["<Esc>"]
+        }],
+        "vim.easymotion": true,
+        "vim.incsearch": true,
+        "vim.useSystemClipboard": true,
+        "vim.hlsearch": true,
+        "vim.handleKeys": {
+            "<C-f>": false,
+            "<C-b>": false,
+            "<C-n>": true,
+            "<C-p>": true,
+            "<C-shift+2>": false
+        },
+        "vim.leader": "<space>",
+        "shellcheck.enable": true,
+        "shellcheck.run": "onType",
+        "shellcheck.executablePath": "/usr/bin/shellcheck",
+        "editor.rulers": [
+            80,
+            120
+        ],
+        "vim.disableAnnoyingGcMessage": true,
+        "[shellscript]": {
+            "editor.tabSize": 4
+        },
+        "go.formatOnSave": false,
+        "go.gopath": "/home/fra/.tmp/go",
+        "editor.cursorBlinking": "solid",
+        "vsicons.dontShowNewVersionMessage": true,
+        "git.enableSmartCommit": true,
+        "files.associations": {
+            "tidb": "shellscript",
+            "template": "json5",
+            "Supfile": "yaml",
+            "imageproxy": "shellscript"
+        },
+        "extensions.ignoreRecommendations": false,
+        "sqltools.telemetryUUID": "b09d9ec6-4830-4c09-851d-220f89ff0ae6",
+        "gitlens.advanced.messages": {
+            "suppressCommitHasNoPreviousCommitWarning": false,
+            "suppressCommitNotFoundWarning": false,
+            "suppressFileNotUnderSourceControlWarning": false,
+            "suppressGitVersionWarning": false,
+            "suppressLineUncommittedWarning": false,
+            "suppressNoRepositoryWarning": false,
+            "suppressUpdateNotice": false,
+            "suppressWelcomeNotice": true
+        },
+        "git.autofetch": true,
+        "workbench.colorCustomizations": {
+            "statusBar.background": "#005f5f",
+            "statusBar.noFolderBackground": "#005f5f",
+            "statusBar.debuggingBackground": "#005f5f"
+        },
+        "julia.enableTelemetry": true,
+        "terminal.integrated.commandsToSkipShell": [
+            "language-julia.interrupt"
+        ],
+        "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
+        "vscode-neovim.neovimInitVimPaths.linux": "~/.vimrc"
+    }

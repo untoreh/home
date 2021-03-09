@@ -1,0 +1,11 @@
+[Unit]
+Description=Windows 10 VM
+
+[Service]
+Type=oneshot
+ExecStart=/home/fra/kvm/win10.sh
+ExecStartPost=/home/fra/kvm/inputs.sh
+RemainAfterExit=yes
+
+[Install]
+Alias=win10.service

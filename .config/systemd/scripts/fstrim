@@ -1,0 +1,5 @@
+#!/bin/sh
+
+fstrim -av
+
+echo "Trimmed SSDs" > /var/log/fra.log

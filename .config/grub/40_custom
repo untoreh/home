@@ -1,0 +1,9 @@
+#!/bin/sh
+exec tail -n +3 $0
+# This file provides an easy way to add custom menu entries.  Simply type the
+# menu entries you want to add after this comment.  Be careful not to change
+# the 'exec tail' line above.
+menuentry 'Ubuntu' --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-simple-42160f86-8d54-4c95-9a40-23cb6a914f10' {
+        set root='hd0,gpt3'
+        configfile /var/lib/lxc/ubu/rootfs/boot/grub/grub.cfg
+}

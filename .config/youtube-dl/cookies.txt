@@ -1,0 +1,17 @@
+# Netscape HTTP Cookie File
+# http://curl.haxx.se/rfc/cookie_spec.html
+# This is a generated file!  Do not edit.
+
+.crunchyroll.com	TRUE	/	FALSE	1581766385	VILOS_ROLLOUT	9d5ed678fe57bcca610140957afab571_7
+.crunchyroll.com	TRUE	/	FALSE	1581766385	__cfduid	d5b36512d7bb73c200904bd041217299f1550230384
+.crunchyroll.com	TRUE	/	FALSE	1581766385	ajs_anonymous_id	%220b5397bf-4ff3-4407-9176-996a2a125a87%22
+.crunchyroll.com	TRUE	/	FALSE	1583060149	ajs_group_id	null
+.crunchyroll.com	TRUE	/	FALSE	1583060149	ajs_user_id	null
+.crunchyroll.com	TRUE	/	FALSE	1552733748	c_d	a%3D37%26g%3DO%26p%3D0
+.crunchyroll.com	TRUE	/	FALSE	1552733748	c_userid	65109323
+.crunchyroll.com	TRUE	/	FALSE	1552733748	c_userkey	2%3Adf1z8WWdvAufy5AsdtMe1%2FB42a0%3D
+.crunchyroll.com	TRUE	/	FALSE	1565782385	c_visitor	b615b5c7-c93e-44c5-a806-43e124f756e8
+.crunchyroll.com	TRUE	/	FALSE	1552132519	cf_clearance	78be52d373755179afbe0fb2c0b6cc858695f0b5-1551524119-604800-150
+.crunchyroll.com	TRUE	/	FALSE	0	sess_id	10qqmbgtpdaqyphdrxovf2dehh04t2m6
+.crunchyroll.com	TRUE	/	FALSE	0	session_id	f6ae02d33992d86740802f1122f9ffa8
+www.crunchyroll.com	FALSE	/	FALSE	1551567600	blockTrack	1

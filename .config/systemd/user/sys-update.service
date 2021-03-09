@@ -1,0 +1,9 @@
+[Unit]
+Description=Sys update
+
+[Service]
+Type=oneshot
+ExecStart=%h/.config/systemd/scripts/ubu-update
+
+[Install]
+WantedBy=user.target

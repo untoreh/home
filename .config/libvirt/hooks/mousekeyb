@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [[ $1 == "win10" ]] && [[ $2 == "start" ]] || [[ $2 == "stopped" ]]; then
+  if [[ $2 == "start" ]]; then
+	  nohup bash -c " virsh attach-device $1 /home/fra/kvm/roccat.xml
+     virsh attach-device $1 /home/fra/kvm/topre.xml " &>/dev/null &
+  else
+	  nohup bash -c " virsh detach-device $1 /home/fra/kvm/roccat.xml
+     virsh detach-device $1 /home/fra/kvm/topre.xml " &>/dev/null &
+  fi
+fi

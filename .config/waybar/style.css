@@ -1,0 +1,101 @@
+* {
+    border:        none;
+    border-radius: 0;
+    font-family: "Liberation Sans";
+    box-shadow:    none;
+    text-shadow:   none;
+    transition-duration: 0s;
+    font-size: 13px;
+    min-height: 0;
+}
+
+@define-color col_background rgba(40, 42, 54, 1);
+@define-color col_comment rgba(98, 114, 164, 1);
+@define-color col_sel  rgba(68, 71, 90, 1);
+@define-color col_red rgba(255, 85, 85, 1);
+@define-color col_foreground rgba(248, 248, 242, 1);
+@define-color col_purple rgba(189, 147, 249, 1);
+@define-color col_yellow rgba(241, 250, 140, 1);
+@define-color col_orange rgba(255, 184, 108, 1);
+@define-color col_green rgba(80, 250, 123, 1);
+
+window#waybar {
+    background-color: @col_background;
+    border-bottom: 1px solid @col_comment;
+    color:      @col_foreground;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+
+/* window#waybar.empty { */
+/*     background-color: transparent; */
+/* } */
+/* window#waybar.solo { */
+/*     background-color: #FFFFFF; */
+/* } */
+
+#workspaces {
+    margin: 0 2px;
+}
+
+#workspaces button {
+    padding:    0 2px;
+    color:      @col_purple;
+}
+
+#workspaces button.visible {
+    color:      @col_foreground;
+}
+
+#workspaces button.focused {
+    border-top: 1px solid @col_green;
+    border-bottom: 1px solid @col_green;
+}
+
+#workspaces button.urgent {
+    color:      @col_red;
+}
+
+#mode{
+    background: white;
+}
+#battery, #cpu, #memory, #network, #pulseaudio, #idle_inhibitor, #backlight, #custom-storage, #custom-spotify, #custom-weather, #custom-mail, #clock, #temperature, #custom-ups-charge, #custom-ups-load, #window {
+    /* margin:     0px 6px 0px 10px; */
+    margin: 0 1px;
+    padding: 0 8px;
+    min-width:  5px;
+    border-bottom: 1px solid transparent;
+    background-color: @col_sel;
+    background-size:1px 20%;
+    background-position:0 50%;
+    background-repeat:no-repeat;
+}
+
+#pulseaudio.muted {
+    color: @col_orange;
+}
+
+#battery.warning {
+   color:       @col_orange;
+}
+
+#battery.critical, #temperature.critical {
+    color:      @col_red;
+}
+
+#battery.charging {
+    color:      @col_foreground;
+}
+
+#custom-storage.warning {
+    color:      @col_yellow;
+}
+
+#custom-storage.critical {
+    color:      @col_red;
+}

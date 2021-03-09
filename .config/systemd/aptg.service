@@ -1,0 +1,11 @@
+[Unit]
+Description=update ubuntu
+
+[Service]
+Type=oneshot
+RemainAfterExit=no
+ExecStart=-/usr/bin/apt update -y -q
+ExecStart=-/usr/bin/apt-get full-upgrade -y -q
+
+[Install]
+WantedBy=multi-user.target

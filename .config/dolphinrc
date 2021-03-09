@@ -1,0 +1,55 @@
+[CompactMode]
+FontWeight=50
+
+[Desktop Entry]
+DefaultProfile=
+
+[DetailsMode]
+FontWeight=50
+
+[Favorite Profiles]
+Favorites=
+
+[General]
+Version=200
+ViewPropsTimestamp=2016,8,24,12,54,53
+
+[IconsMode]
+FontWeight=50
+IconSize=48
+
+[KPropertiesDialog]
+DVI-D-0 Height 1080=534
+DVI-D-0 Width 1920=467
+DVI-D-1 Height 1080=542
+DVI-D-1 Width 1920=435
+Height 1080=575
+Width 1920=441
+
+[MainWindow]
+DVI-D-0 Height 1080=876
+DVI-D-0 Width 1920=1288
+DVI-D-0 XPosition=377
+DVI-D-0 YPosition=93
+DVI-D-1 Height 1080=1242
+DVI-D-1 Width 1920=996
+Height 1080=1242
+MenuBar=Disabled
+State=AAAA/wAAAAD9AAAAAwAAAAAAAAEKAAADQvwCAAAAAvsAAAAWAGYAbwBsAGQAZQByAHMARABvAGMAawAAAAAA/////wAAAAIA////+wAAABQAcABsAGEAYwBlAHMARABvAGMAawEAAAAqAAADQgAAAE4A////AAAAAQAAAAAAAAAA/AIAAAAB+wAAABAAaQBuAGYAbwBEAG8AYwBrAAAAAAD/////AAAAAgD///8AAAADAAAFCAAAALb8AQAAAAH7AAAAGAB0AGUAcgBtAGkAbgBhAGwARABvAGMAawAAAAAAAAAFCAAAAIcA////AAAD+gAAA0IAAAAEAAAABAAAAAgAAAAI/AAAAAEAAAACAAAAAQAAABYAbQBhAGkAbgBUAG8AbwBsAEIAYQByAQAAAAD/////AAAAAAAAAAA=
+ToolBarsMovable=Disabled
+Width 1920=996
+
+[Open-with settings]
+CompletionMode=1
+History=kat,kate,dolp
+
+[PreviewSettings]
+Plugins=directorythumbnail,imagethumbnail,jpegthumbnail
+
+[SettingsDialog]
+Height 1080=446
+Width 1920=556
+
+[ViewPropertiesDialog]
+Height 1080=568
+Width 1920=379

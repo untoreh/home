@@ -1,0 +1,18 @@
+[Unit]
+Description=Swap with zram
+After=multi-user.target
+
+[Service]
+Environment=SIZE=31G
+Environment=PRIORITY=9
+Type=oneshot 
+RemainAfterExit=true
+ExecStartPre=/usr/bin/sudo modprobe zram
+ExecStartPre=/usr/bin/sudo zramctl --find --size $SIZE --algorithm zstd
+ExecStartPre=/usr/bin/sudo /sbin/mkswap /dev/zram0
+ExecStart=/usr/bin/sudo /sbin/swapon -p $PRIORITY /dev/zram0
+ExecStop=/usr/bin/sudo /sbin/swapoff /dev/zram0
+ExecStopPost=/usr/bin/sudo rmmod zram zswap
+
+[Install]
+WantedBy=multi-user.target

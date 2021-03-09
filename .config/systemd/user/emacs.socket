@@ -1,0 +1,5 @@
+[Socket]
+ListenStream=/tmp/emacs%U/server
+
+[Install]
+WantedBy=sockets.target

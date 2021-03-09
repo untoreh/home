@@ -1,0 +1,36 @@
+[Desktop Entry]
+DefaultProfile=Profile 1.profile
+
+[DownloadDialog Settings]
+DVI-D-0 Height 1080=454
+DVI-D-0 Width 1920=700
+
+[Favorite Profiles]
+Favorites=
+
+[KonsoleWindow]
+ShowMenuBarByDefault=false
+UseSingleInstance=true
+
+[MainWindow]
+DVI-D-0 Height 1080=668
+DVI-D-0 Width 1920=1114
+DVI-D-0 XPosition=0
+DVI-D-0 YPosition=107
+DVI-D-1 Height 1080=434
+DVI-D-1 Width 1920=792
+Height 1080=1080
+MenuBar=Disabled
+State=AAAA/wAAAAD9AAAAAAAAB4AAAAP8AAAABAAAAAQAAAAIAAAACPwAAAAA
+ToolBarsMovable=Disabled
+Width 1920=1920
+XWAYLAND0 Height 1080=421
+XWAYLAND0 Width 1920=818
+XWAYLAND0 XPosition=76
+XWAYLAND0 YPosition=322
+
+[Notification Messages]
+CloseAllTabs=true
+
+[TabBar]
+TabBarVisibility=AlwaysHideTabBar

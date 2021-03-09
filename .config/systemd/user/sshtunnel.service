@@ -1,0 +1,14 @@
+[Unit]
+Description=Remote ssh tunnel to access machine
+After=network.target
+
+[Service]
+PrivateTmp=true
+User=fra
+Group=fra
+Type=simple
+ExecStart=/usr/bin/ssh -N -R 220:127.0.0.1:22 vrmc1
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

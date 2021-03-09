@@ -1,0 +1,11 @@
+[Unit]
+Description=Set wallpaper from the internet
+PartOf=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/.bin/wp
+# Restart=always
+
+[Install]
+WantedBy=sway-session.target

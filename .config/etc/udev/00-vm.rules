@@ -1,0 +1,2 @@
+# Attach plugged usb device to running vm
+ACTION=="add", SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", RUN+="/home/fra/.bin/virshxmlgen %s{idVendor} %s{idProduct} win10"

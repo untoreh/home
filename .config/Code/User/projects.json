@@ -1,0 +1,12 @@
+[
+	{
+		"name": "trees",
+		"rootPath": "$home/.tmp/trees",
+		"paths": [],
+		"group": ""
+	},
+	{
+		"name": "Backtest.Jl",
+		"rootPath": "$home/.tmp/freqtrade/user_data/modules/Backtest.jl"
+	}
+]

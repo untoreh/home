@@ -1,0 +1,21 @@
+[Unit]
+Description=Emacs text editor
+Documentation=info:emacs man:emacs(1) https://gnu.org/software/emacs/
+
+[Service]
+Environment=EMACS_SOCKET=/run/user/%U/emacs/apps
+Environment=EMACS_SERVER_NAME=apps
+Environment=SSH_AUTH_SOCK=%t/keyring/ssh
+Environment=GPG_TTY=$GPG_TTY
+Environment=GDK_BACKEND=x11
+Environment=CLUTTER_BACKEND=x11
+# ExecStart=/usr/bin/fish -lic "GDK_BACKEND=x11 exec /usr/bin/emacs --resume-layouts --fg-daemon=apps"
+#Environment=GDK_BACKEND=x11
+ExecStart=/usr/bin/emacs -nw --fg-daemon=apps
+ExecStop=%h/.bin/kill-emacs.sh /run/user/%U/emacs/apps
+Restart=on-failure
+TimeoutStopSec=10
+Type=simple
+
+[Install]
+WantedBy=sway-session.target

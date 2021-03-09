@@ -1,0 +1,8 @@
+[Unit]
+Description=Firefox_Service
+After=network.target
+[Service]
+ExecStart=%h/.bin/ffox
+ExecStop=killall -9 firefox
+[Install]
+WantedBy=default.target

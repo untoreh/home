@@ -1,0 +1,18 @@
+[FileDialogSize]
+Height 1080=666
+Width 1920=992
+
+[KFileDialog Settings]
+Recent Files[$e]=file:$HOME/.config/systemd/scripts/kde-autostart.sh,file:$HOME/.config/systemd/scripts/kde-autostart.sh
+Recent URLs[$e]=file:$HOME/.config/systemd/scripts/,file:$HOME/
+listViewIconSize=0
+
+[KPropertiesDialog]
+Window-Maximized 1080x1920=true
+
+[Open-with settings]
+CompletionMode=1
+History=qua
+
+[PlasmaRunnerManager]
+LaunchCounts=

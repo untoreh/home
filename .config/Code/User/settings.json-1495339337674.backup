@@ -1,0 +1,13 @@
+// Place your settings in this file to overwrite the default settings
+{
+    "window.reopenFolders": "all",
+    "files.autoSave": "afterDelay",
+    "editor.fontFamily": "'Monoid', 'Courier New', monospace, 'Droid Sans Fallback'",
+    "editor.fontSize": 12,
+    "editor.lineHeight": 16,
+    "vscode_custom_css.imports": [
+        "file:///home/fra/.config/vsc/colors.css"
+    ],
+    "window.zoomLevel": 0,
+    "vim.useCtrlKeys": true
+}

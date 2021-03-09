@@ -1,0 +1,8 @@
+[Unit]
+Description=Run aptg.service every 24h
+
+[Timer]
+OnCalendar=*-*-* 03:00:00
+
+[Install]
+WantedBy=multi-user.target

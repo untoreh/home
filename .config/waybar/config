@@ -1,0 +1,130 @@
+{
+    "layer": "bottom",
+    "position": "top",
+    "height": 23,
+    "modules-left": ["tray", "custom/weather", "sway/workspaces", "sway/mode", "sway/window"],
+    "modules-center": [],
+    "modules-right": ["network", "memory", "custom/storage", "cpu", "temperature", "custom/ups-load", "custom/ups-charge",   "pulseaudio", "idle_inhibitor","clock"],
+    "sway/mode": {
+        "format": " {}",
+        "max-length": 50
+    },
+    "sway/workspaces": {
+        "format": "{name}",
+        "disable-scroll": true
+    },
+    "sway/window": {
+        "format": "{}",
+        "max-length": 80,
+        "tooltip": false,
+        "interval": 1
+    },
+    "clock": {
+        "format" : "{:%H:%M}",
+        "tooltip-format": "{:%Y-%m-%d | %H:%M}",
+        "tooltip": true
+    },
+    "temperature": {
+        "thermal-zone": 2,
+        "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
+        "critical-threshold": 80,
+        "format-critical": "{temperatureC}°C ",
+        "format": "{temperatureC}°C "
+    },
+    "cpu": {
+        "format": "{usage}% ",
+        "tooltip": false
+    },
+    "memory": {
+        "format": "{}% "
+    },
+    "network": {
+        "format": "{icon}",
+        "format-ethernet": " {bandwidthUpOctets}  {bandwidthDownOctets} {ifname}: {ipaddr}/{cidr} {icon}",
+        "format-alt": "{ipaddr}/{cidr} {icon}",
+        "format-alt-click": "click-right",
+        "format-icons": {
+            "wifi": [""],
+            "ethernet": [""],
+            "disconnected": ["⚠"]
+        },
+        "on-click": "kitty",
+        "tooltip": false
+    },
+    "pulseaudio": {
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon}{format_source}",
+        "format-muted": "{format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphones": "",
+            "handsfree": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol",
+        "on-click-right": "abt"
+    },
+    "custom/ups-charge": {
+        "format": "{}% {icon}",
+        "format-alt": "{alt}: {}",
+        "format-icons": ["", "", "", "", "",""],
+        "interval": 30,
+        "return-type": "json",
+        "exec": "~/.config/sway/blocks/battery",
+        "exec-if": "pgrep upsd"
+    },
+    "custom/ups-load": {
+        "format": "{}W ",
+        "interval": 15,
+        "return-type": "json",
+        "exec": "~/.config/sway/blocks/power",
+        "exec-if": "pgrep upsd"
+    },
+    "custom/storage": {
+        "format": "{} ",
+        "format-alt": "{percentage}% ",
+        "format-alt-click": "click-right",
+        "return-type": "json",
+        "interval": 60,
+        "exec": "~/.config/waybar/modules/storage.sh"
+    },
+    "custom/weather": {
+        "format": "{}",
+        "format-alt": "{alt}: {}",
+        "format-alt-click": "click-right",
+        "interval": 3600,
+        "return-type": "json",
+        "exec": "~/.config/waybar/modules/weather.sh 'cassano delle murge'",
+        "exec-if": "ping wttr.in -c1"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        },
+        "tooltip": false
+    },
+    "custom/mail": {
+        "format": "",
+        "format-alt": "{alt} ",
+        "format-alt-click": "click-right",
+        "interval": 60,
+        "return-type": "json",
+        "exec": "~/.config/waybar/modules/mail.py",
+        "tooltip": false
+    },
+    "custom/test": {
+        "exec": "echo asd",
+        "param": "blah",
+        "interval": 5
+    },
+    "tray": {
+        "icon-size": 18
+    }
+}

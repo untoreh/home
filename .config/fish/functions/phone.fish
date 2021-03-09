@@ -1,0 +1,6 @@
+alias adbapo "adb -s K15VY76290007528 shell "
+alias adbapop "adb -s K15VY76290007528 push "
+# alias adbule "adb -s AONEX shell "
+alias adbule "adb -s 0123456789ABCDEF shell"
+# alias adbliq "adb -s 0000950458052835 shell bash "
+alias adbliq "adb -s 0000950458052835 shell /data/sdext2/alpine/enter.sh"

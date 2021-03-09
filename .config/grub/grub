@@ -1,0 +1,7 @@
+# IO scheduler if SCSI else noop for SSD and cfq for HDD
+# scsi_mod.use_blk_mq=1
+
+# GRUB_CMDLINE_LINUX_DEFAULT="loglevel=4 video=1920x1080MR@120"
+sed 's/\(GRUB_CMDLINE_LINUX_DEFAULT.*\)"/\1 video=1920x1080MR@120"/g' /etc/default/grub
+
+update-grub

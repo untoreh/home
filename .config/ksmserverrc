@@ -1,0 +1,28 @@
+[$Version]
+update_info=ksmserver_update_loginMode_value.upd:ksmserver_update_loginMode_value_default_enum
+
+[General]
+loginMode=emptySession
+screenCount=1
+shutdownType=1
+
+[LegacySession: saved at previous logout]
+count=0
+
+[Session: saved at previous logout]
+clientId1=106672610000161286553700041886390000
+clientId2=106672610000161285219400017882610001
+clientId3=106672610000161285747800023715500010
+count=3
+program1=pulseaudio
+program2=emacs
+program3=firefox
+restartCommand1=
+restartCommand2=/nix/store/769vv2dfck144764izzvh6zmys5nshbd-emacs-gcc-20210130.0/bin/emacs,--smid=106672610000161285219400017882610001,--no-splash,--chdir=/home/fra,--chdir=/home/fra,--no-splash,--smid=106672610000161285219400017882610001,--smid=106672610000161285219400017882610001,--smid=106672610000161285219400017882610001,--smid=106672610000161285219400017882610001
+restartCommand3=/usr/lib/firefox/firefox,--sm-client-id,106672610000161285747800023715500010
+restartStyleHint1=0
+restartStyleHint2=0
+restartStyleHint3=0
+userId1=fra
+userId2=fra
+userId3=fra

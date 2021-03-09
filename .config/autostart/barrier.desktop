@@ -1,0 +1,10 @@
+[Desktop Entry]
+Categories=Utility;
+Comment=Keyboard and mouse sharing solution
+Exec=barrier
+Hidden=true
+Icon=barrier
+Keywords=keyboard;mouse;sharing;network;share;
+Name=Barrier
+Terminal=false
+Type=Application

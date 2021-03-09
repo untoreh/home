@@ -1,0 +1,16 @@
+#!/bin/zsh
+
+mydom=win10
+genxml=/home/fra/.bin/virshxmlgen
+
+DOM=$1
+
+if [[ $1 == $mydom ]] && [[ $2 == "start" ]] || [[ $2 == "stopped" ]]; then
+    if [[ $2 == "start" ]]; then
+        echo "# Attach plugged usb device to running vm
+SUBSYSTEM=="usb", RUN+=\"$genxml %s{idVendor} %s{idProduct} $DOM\"" > /etc/udev/rules.d/00-vm.rules
+    else
+        rm -f /etc/udev/rules.d/00-vm.rules
+    fi
+fi
+udevadm control --reload-rules

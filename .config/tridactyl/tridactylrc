@@ -1,0 +1,37 @@
+" open in orehunt container
+bind ;Fp composite hint -pipe a href | tabopen -c orehunt
+bind ;O composite get_current_url | tabopen -c orehunt ; tabclose -1
+autocontain .*github.com.*freqtrade.* orehunt
+autocontain .*github.com.*orehunt.* orehunt
+autocontain .*github.com.*trenzorrr.* treznor
+
+" default tab "
+set newtab about:blank
+
+" use default search
+unbind <C-f>
+
+bind / fillcmdline find
+bind ? fillcmdline find -?
+bind n findnext 1
+bind N findnext -1
+
+" smoothscroll
+set smoothscroll true
+
+" less scrolling
+bind j scrollline 5
+bind k scrollline -5
+
+" don't overlap status bar
+guiset_quiet hoverlink right
+
+" Only hint search results on Google and DDG
+bindurl www.google.com f hint -Jc .rc > .r > a
+bindurl www.google.com F hint -Jbc .rc>.r>a
+
+bindurl ^https://duckduckgo.com f hint -Jc [class=result__a]
+bindurl ^https://duckduckgo.com F hint -Jbc [class=result__a]
+
+" old reddit
+autocmd DocStart ^http(s?)://www.reddit.com js tri.excmds.urlmodify("-t", "www", "old")

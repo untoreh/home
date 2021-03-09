@@ -1,0 +1,599 @@
+[file:///var/home/fra/.Xresources]
+Bookmarks=
+Checksum=2433df6095fa549e610af1f7dd7fa81dacc9785a
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,7,11,14,21
+URL=file:///var/home/fra/.Xresources
+
+[file:///var/home/fra/.aws/config]
+Bookmarks=
+Checksum=a5220e02d149433af7eff343201f99c409209463
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,7,8,30,28
+URL=file:///var/home/fra/.aws/config
+
+[file:///var/home/fra/.aws/credentials]
+Bookmarks=
+Checksum=a64f6e3d817c7e00e97deb80bffa51fa7133b591
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,7,8,30,33
+URL=file:///var/home/fra/.aws/credentials
+
+[file:///var/home/fra/.cargo/env]
+Bookmarks=
+Checksum=a3603cce61ab449f17fbecb6f57e219da5db58b6
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,7,8,36,2
+URL=file:///var/home/fra/.cargo/env
+
+[file:///var/home/fra/.cluster/.aliases]
+Bookmarks=
+Checksum=47e7a609f80ed1abdc5cfcc3993cad554666abc0
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,7,8,25,8
+URL=file:///var/home/fra/.cluster/.aliases
+
+[file:///var/home/fra/.cluster/mail_aliases.org]
+Bookmarks=
+Checksum=c8798cfa5feba39499114c9d581e52e6a02e3ac6
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,7,8,25,15
+URL=file:///var/home/fra/.cluster/mail_aliases.org
+
+[file:///var/home/fra/.cluster/utils/reponame.js]
+Bookmarks=
+Checksum=08bc89d390d78e5e62ffab79a4d8863555fcd7cc
+Encoding=UTF-8
+Highlighting=JavaScript
+Highlighting Set By User=false
+Indentation Mode=cstyle
+Mode=JavaScript
+Mode Set By User=false
+Time=2021,3,7,8,24,50
+URL=file:///var/home/fra/.cluster/utils/reponame.js
+
+[file:///var/home/fra/.cluster/xaa]
+Bookmarks=
+Checksum=617ff2cf7c831b9bc991c5e13962a8ff4a0c99b4
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,7,8,25,26
+URL=file:///var/home/fra/.cluster/xaa
+
+[file:///var/home/fra/.conda/environments.txt]
+Bookmarks=
+Checksum=64b9f8ffb8983b003aae4b1ba2e6bb0d42fb4a94
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,7,8,40,30
+URL=file:///var/home/fra/.conda/environments.txt
+
+[file:///var/home/fra/.condarc]
+Bookmarks=
+Checksum=85484086f6b6582c07262894552fb97d7c5f8015
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,7,10,18,45
+URL=file:///var/home/fra/.condarc
+
+[file:///var/home/fra/.config/Debauchee/Barrier.conf]
+Bookmarks=
+Checksum=c8ee26acfc84280bd58f233a883fae8a47de2d74
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,7,15,51,6
+URL=file:///var/home/fra/.config/Debauchee/Barrier.conf
+
+[file:///var/home/fra/.config/ENCOM/Spectral.conf]
+Bookmarks=
+Checksum=87f550266cafac98c9b7583190dad36553795c40
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,7,15,52,29
+URL=file:///var/home/fra/.config/ENCOM/Spectral.conf
+
+[file:///var/home/fra/.config/GPy/user.cfg]
+Bookmarks=
+Checksum=841bf6088a58e51bfb66528aca670deccd6d17a3
+Encoding=UTF-8
+Highlighting=Nagios
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Nagios
+Mode Set By User=false
+Time=2021,3,7,16,27,7
+URL=file:///var/home/fra/.config/GPy/user.cfg
+
+[file:///var/home/fra/.config/TUDelft/Tribler.conf]
+Bookmarks=
+Checksum=7259ad41d2d8efb4d9f17bfca4b5c3584f2d1ac6
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,9,11,35,28
+URL=file:///var/home/fra/.config/TUDelft/Tribler.conf
+
+[file:///var/home/fra/.config/etc/adduser.conf]
+Bookmarks=
+Checksum=c8ad7ca2a7df7b04325c812d1c19b7f4375686c0
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,9,13,18,23
+URL=file:///var/home/fra/.config/etc/adduser.conf
+
+[file:///var/home/fra/.config/fvim/config.json]
+Bookmarks=
+Checksum=526ca5638e493b46f4b94d4d853d758276f23b7c
+Encoding=UTF-8
+Highlighting=JSON
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=JSON
+Mode Set By User=false
+Time=2021,3,7,15,31,51
+URL=file:///var/home/fra/.config/fvim/config.json
+
+[file:///var/home/fra/.config/nheko/nheko.conf]
+Bookmarks=
+Checksum=ae5031f9263436802bbbcb8de8cf5ea94324da3a
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,7,15,52,46
+URL=file:///var/home/fra/.config/nheko/nheko.conf
+
+[file:///var/home/fra/.config/ox/config.ron]
+Bookmarks=
+Checksum=fe04bef6965b794de3896b469e708fc0553c4daf
+Encoding=UTF-8
+Highlighting=C
+Highlighting Set By User=false
+Indentation Mode=cstyle
+Mode=C
+Mode Set By User=false
+Time=2021,3,7,15,35,3
+URL=file:///var/home/fra/.config/ox/config.ron
+
+[file:///var/home/fra/.config/remmina/remmina.pref]
+Bookmarks=
+Checksum=30f5039f04db1b0c3488efccf1288497e2bb8b4f
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,9,12,28,53
+URL=file:///var/home/fra/.config/remmina/remmina.pref
+
+[file:///var/home/fra/.config/scatter/Preferences]
+Bookmarks=
+Checksum=6d858c359cb39d11ef528ed8249d57f2be37440b
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,9,12,24,34
+URL=file:///var/home/fra/.config/scatter/Preferences
+
+[file:///var/home/fra/.config/scatter/scatter.json]
+Bookmarks=
+Checksum=5009e956303ca0e41c2c4b8707c289bb460dd04d
+Encoding=UTF-8
+Highlighting=JSON
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=JSON
+Mode Set By User=false
+Time=2021,3,9,12,24,49
+URL=file:///var/home/fra/.config/scatter/scatter.json
+
+[file:///var/home/fra/.config/tridactyl/tridactylrc]
+Bookmarks=
+Checksum=06761496cc3302cedfc7a12cb81e1092c0131d68
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,9,12,31,35
+URL=file:///var/home/fra/.config/tridactyl/tridactylrc
+
+[file:///var/home/fra/.config/wowlight/Preferences]
+Bookmarks=
+Checksum=bcef5b9136b04628868395aa6f5974fe5eb79655
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,9,11,8,48
+URL=file:///var/home/fra/.config/wowlight/Preferences
+
+[file:///var/home/fra/.cpan/CPAN/MyConfig.pm]
+Bookmarks=
+Checksum=d80f332f55f90b873f94ded5dcbff88fd499187b
+Encoding=UTF-8
+Highlighting=Perl
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Perl
+Mode Set By User=false
+Time=2021,3,7,8,40,56
+URL=file:///var/home/fra/.cpan/CPAN/MyConfig.pm
+
+[file:///var/home/fra/.deft/2020-05-11T1643.org]
+Bookmarks=
+Checksum=7d83cf5df37c1ba2b46132de65c56d5cdd5dc103
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,7,8,42,43
+URL=file:///var/home/fra/.deft/2020-05-11T1643.org
+
+[file:///var/home/fra/.deft/2020-08-16T1016.org]
+Bookmarks=
+Checksum=14e7fdab0b55147b95960b89c923d66ef0683229
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,7,8,42,38
+URL=file:///var/home/fra/.deft/2020-08-16T1016.org
+
+[file:///var/home/fra/.directory]
+Bookmarks=
+Checksum=3c3cdd2cb1260e2e927a45b1c10277e6bc141093
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,7,10,18,53
+URL=file:///var/home/fra/.directory
+
+[file:///var/home/fra/.lesshst]
+Bookmarks=
+Checksum=74e416f3d185b4d7f8a9e7c3cde520ed579ee71b
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,7,11,11,20
+URL=file:///var/home/fra/.lesshst
+
+[file:///var/home/fra/.local/share/applications/emacs.desktop]
+Bookmarks=
+Checksum=e5128525a28767c05a2d966e09c591210619e3bd
+Encoding=UTF-8
+Highlighting=.desktop
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=.desktop
+Mode Set By User=false
+Time=2021,3,9,4,59,29
+URL=file:///var/home/fra/.local/share/applications/emacs.desktop
+
+[file:///var/home/fra/.msmtprc]
+Bookmarks=
+Checksum=752c5755d3fe298aff6b71146a1e9998240283d5
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,7,10,40,34
+URL=file:///var/home/fra/.msmtprc
+
+[file:///var/home/fra/.netrc]
+Bookmarks=
+Checksum=2389fb704418386989955f46c6b79efff6a2c5a7
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,7,10,39,35
+URL=file:///var/home/fra/.netrc
+
+[file:///var/home/fra/.nix-channels]
+Bookmarks=
+Checksum=05ea4ed29529f3dcd17ccc2261b58ee5dda64b69
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,7,10,40,40
+URL=file:///var/home/fra/.nix-channels
+
+[file:///var/home/fra/.nmcli-history]
+Bookmarks=
+Checksum=a3514909e87ae0e3a6154159b44b228228b6949a
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,7,11,5,9
+URL=file:///var/home/fra/.nmcli-history
+
+[file:///var/home/fra/.npmrc]
+Bookmarks=
+Checksum=10437ca2d105f1a5086e712a8158b94a111e03f7
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,7,11,5,51
+URL=file:///var/home/fra/.npmrc
+
+[file:///var/home/fra/.pam_environment]
+Bookmarks=
+Checksum=3ba3ad7ea4841d9f9b302b747577539ecf383d71
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,7,11,8,28
+URL=file:///var/home/fra/.pam_environment
+
+[file:///var/home/fra/.qt/qtrc]
+Bookmarks=
+Checksum=265e11320419b4040977d233caacf637f4d181c3
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,7,11,40,41
+URL=file:///var/home/fra/.qt/qtrc
+
+[file:///var/home/fra/.sdcv_history]
+Bookmarks=
+Checksum=95218c097aa2898bf00aca44a2662c2af329a184
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,7,11,8,8
+URL=file:///var/home/fra/.sdcv_history
+
+[file:///var/home/fra/.tusk.json]
+Bookmarks=
+Checksum=f08b6940798cf2dfdb5d14addb9512c86e767aaf
+Encoding=UTF-8
+Highlighting=JSON
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=JSON
+Mode Set By User=false
+Time=2021,3,7,11,11,33
+URL=file:///var/home/fra/.tusk.json
+
+[file:///var/home/fra/.viminfo]
+Bookmarks=
+Checksum=880b7ca5d320189eb269bbd703816607499908e7
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,7,11,12,41
+URL=file:///var/home/fra/.viminfo
+
+[file:///var/home/fra/.vscode/argv.json]
+Bookmarks=
+Checksum=5e049b07b1ba28407eda566356992a06944f2be8
+Encoding=UTF-8
+Highlighting=JSON
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=JSON
+Mode Set By User=false
+Time=2021,3,7,11,39,55
+URL=file:///var/home/fra/.vscode/argv.json
+
+[file:///var/home/fra/.wakatime.cfg]
+Bookmarks=
+Checksum=ca48d6b747a63a52c8de9490c41baa249f899966
+Encoding=UTF-8
+Highlighting=Nagios
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Nagios
+Mode Set By User=false
+Time=2021,3,7,11,13,16
+URL=file:///var/home/fra/.wakatime.cfg
+
+[file:///var/home/fra/.wallets/coins.org]
+Bookmarks=
+Checksum=d3ccb2de8f0c124765891926a4c772b3db8a8a0b
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,7,8,45,21
+URL=file:///var/home/fra/.wallets/coins.org
+
+[file:///var/home/fra/.wcalc_history]
+Bookmarks=
+Checksum=0e957ae32b1a8572ea20e4f3c39797dfc4a52615
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,7,11,13,25
+URL=file:///var/home/fra/.wcalc_history
+
+[file:///var/home/fra/.wegorc]
+Bookmarks=
+Checksum=8938667a3f982ade17c574c7b40a4d55133c27d8
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,7,11,13,33
+URL=file:///var/home/fra/.wegorc
+
+[file:///var/home/fra/plasma-backups/03-01-21/kwalletmanager5rc]
+Bookmarks=
+Checksum=2c3881de2f095c1edf2b2ee020d3126295aa4c6e
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,7,7,46,54
+URL=file:///var/home/fra/plasma-backups/03-01-21/kwalletmanager5rc
+
+[file:///var/home/fra/plasma-backups/03-01-21/kwalletrc]
+Bookmarks=
+Checksum=3b181d4f85f2ec8753a1adb3b28c8d691353c9bd
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,7,7,47,1
+URL=file:///var/home/fra/plasma-backups/03-01-21/kwalletrc
+
+[file:///var/home/fra/plasma-backups/03-01-21/kwinrc]
+Bookmarks=
+Checksum=8bc2e0f708400066f651465b15a397839680a3a0
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,7,7,47,15
+URL=file:///var/home/fra/plasma-backups/03-01-21/kwinrc
+
+[file:///var/home/fra/scripts/browser/codenvy.json]
+Bookmarks=
+Checksum=0314e1607234711c5216eb17888d9efe931cd0c6
+Encoding=UTF-8
+Highlighting=JSON
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=JSON
+Mode Set By User=false
+Time=2021,3,7,7,42,35
+URL=file:///var/home/fra/scripts/browser/codenvy.json
+
+[smb://192.168.1.55/Downloads/shows/Invisible City (2021)/tvshow.nfo]
+Bookmarks=
+Checksum=b234aa0ba44b258b9b346f9bc6c2bda5e9c1435f
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,2,7,17,47,37
+URL=smb://192.168.1.55/Downloads/shows/Invisible City (2021)/tvshow.nfo
+
+[smb://192.168.1.55/Downloads/shows/The Watch (2021)/Season 01/The Watch (2021) - S01E06 - The Dark in the Dark.nfo]
+Bookmarks=
+Checksum=8f9a081c3fc5e18f25c16f5f2e2c0bfe645b7619
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,2,7,17,47,17
+URL=smb://192.168.1.55/Downloads/shows/The Watch (2021)/Season 01/The Watch (2021) - S01E06 - The Dark in the Dark.nfo
