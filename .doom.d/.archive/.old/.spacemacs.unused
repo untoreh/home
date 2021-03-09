@@ -1,0 +1,73 @@
+;; uset-init
+;; custom server port
+(setq server-use-tcp t
+      server-port    9999)
+
+;; tabbar
+(defun tabbar-filter ()
+  (setq tabbar-buffer-list-function
+        (lambda ()
+          (delq nil
+                (mapcar #'(lambda (b)
+                            (cond
+                             ;; Always include the current buffer.
+                             ((eq (current-buffer) b) b)
+                             ((buffer-file-name b) b)
+                             ((member (buffer-name b) tabbar-ruler-excluded-buffers) nil)
+                             ((string-match "*helm" (buffer-name b)) nil)
+                             ;; ((string= "*Messages*" (format "%s" (buffer-name b))))
+                             ((char-equal ?\  (aref (buffer-name b) 0)) nil)
+                             ;;((char-equal ?* (aref (buffer-name b) 0)) nil)
+                             ((buffer-live-p b) b)))
+                        (buffer-list)))))
+  )
+(defun load-tabs ()
+  ;; (set-fringe-style 0)
+  (require 'tab-group)
+  (setq tabbar-ruler-global-tabbar t)
+  (require 'tabbar-ruler)
+  ;; (tabbar-filter)
+  ;; enable tabbar groups
+  (tabbar-ruler-group-buffer-groups)
+  ;; keybindings
+  (bind-keys* ("<C-tab>" . tabbar-backward)
+              ("<C-iso-lefttab>" . tabbar-forward)
+              ("C-c C-h" . tabbar-backward-group)
+              ("C-c C-l" . tabbar-forward-group))
+  (remove-hook 'emacs-startup-hook 'load-tabs)
+  )
+(add-hook 'emacs-startup-hook 'load-tabs)
+
+;; user-config
+;; spaceline
+(use-package spaceline-all-the-icons
+  :after spaceline
+  :config (spaceline-all-the-icons-theme))
+(spaceline-all-the-icons--setup-anzu)            ;; Enable anzu searching
+(spaceline-all-the-icons--setup-package-updates) ;; Enable package update indicator
+(spaceline-all-the-icons--setup-git-ahead)       ;; Enable # of commits ahead of upstream in git
+(spaceline-all-the-icons--setup-paradox)         ;; Enable Paradox mode line
+(spaceline-all-the-icons--setup-neotree)         ;; Enable Neotree mode line
+(spaceline-toggle-projectile-root-off) ;; disable projectile slow searching
+(cl-loop for (color . face) in space-power-alist
+         do (set-face-attribute face nil :foreground "#373844" :background color))
+(setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
+(setq powerline-default-separator 'bar)
+(setq spaceline-minor-modes-separator " | ")
+(setq space-power-alist `(("#f1fa8c" . ,'spaceline-evil-emacs)
+                          ("#8be9fd" . ,'spaceline-evil-insert)
+                          ("#bd93f9" . ,'spaceline-evil-motion)
+                          ("#50fa7b" . ,'spaceline-evil-normal)
+                          ("#ff5555" . ,'spaceline-evil-replace)
+                          ("#ffb86c" . ,'spaceline-evil-visual)
+                          ))
+(spaceline-toggle-projectile-root-off) ;; disable projectile slow searching
+(spaceline-toggle-all-the-icons-projectile-off) ;; disable projectile slow searching
+(spaceline-toggle-all-the-icons-buffer-id-off) ;; disable projectile slow searching
+
+;; terminal stuff
+(unless (display-graphic-p)
+  (progn
+    (set-face-background 'hl-line "#333333")
+    (set-face-attribute 'region nil :foreground "#000000")
+    ))

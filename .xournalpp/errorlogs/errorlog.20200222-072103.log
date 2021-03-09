@@ -1,0 +1,50 @@
+Date: Sat Feb 22 07:21:03 2020
+Error: signal 11
+[bt]: (0) xournalpp(+0x18bdaa) [0x5620be742daa]
+[bt]: (1) /lib/x86_64-linux-gnu/libc.so.6(+0x46470) [0x7f84f4016470]
+[bt]: (2) xournalpp(_ZN20AbstractInputHandler5blockEb+0x4) [0x5620be6fead4]
+[bt]: (3) xournalpp(_ZN12InputContext13unblockDeviceENS_10DeviceTypeE+0x4b) [0x5620be6ff7cb]
+[bt]: (4) xournalpp(_ZN15HandRecognition11enableTouchEv+0x1b) [0x5620be6fedeb]
+[bt]: (5) xournalpp(_ZN15HandRecognitionD2Ev+0x35) [0x5620be6fee45]
+[bt]: (6) xournalpp(_ZN15HandRecognitionD0Ev+0xd) [0x5620be6fee5d]
+[bt]: (7) xournalpp(_ZN11XournalViewD1Ev+0xab) [0x5620be6e40db]
+[bt]: (8) xournalpp(_ZN11XournalViewD0Ev+0xd) [0x5620be6e412d]
+[bt]: (9) xournalpp(_ZN10MainWindowD2Ev+0x92) [0x5620be6d46e2]
+[bt]: (10) xournalpp(_ZN10MainWindowD0Ev+0xd) [0x5620be6d474d]
+[bt]: (11) xournalpp(_ZN11XournalMain3runEiPPc+0xb11) [0x5620be67a4f1]
+[bt]: (12) xournalpp(main+0x37) [0x5620be65bbf7]
+[bt]: (13) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf3) [0x7f84f3ff71e3]
+[bt]: (14) xournalpp(_start+0x2e) [0x5620be65c23e]
+
+
+Try to get a better stracktrace...
+[bt] #1 xournalpp(+0x18c204) [0x5620be743204]
+??:0
+[bt] #2 /lib/x86_64-linux-gnu/libc.so.6(+0x46470) [0x7f84f4016470]
+??:0
+[bt] #3 xournalpp(_ZN20AbstractInputHandler5blockEb+0x4) [0x5620be6fead4]
+??:0
+[bt] #4 xournalpp(_ZN12InputContext13unblockDeviceENS_10DeviceTypeE+0x4b) [0x5620be6ff7cb]
+??:0
+[bt] #5 xournalpp(_ZN15HandRecognition11enableTouchEv+0x1b) [0x5620be6fedeb]
+??:0
+[bt] #6 xournalpp(_ZN15HandRecognitionD2Ev+0x35) [0x5620be6fee45]
+??:0
+[bt] #7 xournalpp(_ZN15HandRecognitionD0Ev+0xd) [0x5620be6fee5d]
+??:0
+[bt] #8 xournalpp(_ZN11XournalViewD1Ev+0xab) [0x5620be6e40db]
+??:0
+[bt] #9 xournalpp(_ZN11XournalViewD0Ev+0xd) [0x5620be6e412d]
+??:0
+[bt] #10 xournalpp(_ZN10MainWindowD2Ev+0x92) [0x5620be6d46e2]
+??:0
+[bt] #11 xournalpp(_ZN10MainWindowD0Ev+0xd) [0x5620be6d474d]
+??:0
+[bt] #12 xournalpp(_ZN11XournalMain3runEiPPc+0xb11) [0x5620be67a4f1]
+??:0
+[bt] #13 xournalpp(main+0x37) [0x5620be65bbf7]
+??:0
+[bt] #14 /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf3) [0x7f84f3ff71e3]
+??:0
+[bt] #15 xournalpp(_start+0x2e) [0x5620be65c23e]
+??:0

@@ -1,0 +1,27 @@
+pane	18	0	:root@104.223.117.129	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+ssh root@104.223.117.129
+pane	22	0	:streamlink	1	:*	0	:/home/fra	1	zsh	:/usr/bin/python3 /home/fra/.bin/streamlink twitch.tv/lifecoach1981 best --player /usr/bin/mpv --hls-segment-threads=10
+-zsh
+-zsh
+pane	23	0	:root@104.223.117.129	1	:*	0	:/home/fra	1	zsh	:ssh root@104.223.117.129
+-zsh
+-zsh
+pane	31	0	:root@212.237.6.194	1	:*	0	:/home/fra	1	zsh	:ssh root@212.237.6.194
+-zsh
+-zsh
+pane	coreshells	0	:/home/fra	1	:*	0	:/home/fra	0	zsh	:-zsh
+-zsh
+sudo su
+pane	coreshells	0	:/home/fra	1	:*	1	:/home/fra	0	zsh	:-zsh
+-zsh
+sudo su
+pane	coreshells	0	:/home/fra	1	:*	2	:/home/fra	1	zsh	:-zsh
+-zsh
+sudo su
+window	18	0	1	:*	d98f,156x41,0,0,20
+window	22	0	1	:*	d993,156x41,0,0,24
+window	23	0	1	:*	d994,156x41,0,0,25
+window	31	0	1	:*	5993,156x41,0,0,33
+window	coreshells	0	1	:*	a686,156x41,0,0{78x41,0,0,0,77x41,79,0[77x20,79,0,1,77x20,79,21,2]}
+state	31	

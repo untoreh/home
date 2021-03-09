@@ -1,0 +1,47 @@
+pane	0	0	:./xmD	1	:*	0	:/home/fra/.tmp/xmrig/CC	1	./xmD	:-zsh
+-zsh
+-zsh
+./xmD -c config.json
+pane	34	0	:gost	1	:*	0	:/home/fra	1	gost	:-zsh
+-zsh
+-zsh
+gost -L tcp://:8080/:12322 -F sni+tls://dpl-untoreh.1d35.starter-us-east-1.openshiftapps.com:443
+pane	36	0	:gost	1	:*	0	:/home/fra	1	gost	:-zsh
+gost -L tcp://:12334/:22 -F ws://wazp-bassobassista933706.codeanyapp.com:8899
+-zsh
+-zsh
+pane	577	0	:ssh	1	:*	0	:/home/fra	1	ssh	:-zsh
+ssh root@127.0.0.1 -p 12333 -i /home/fra/.ssh/id_rsa
+-zsh
+-zsh
+pane	582	0	:ssh	1	:*	0	:/home/fra	1	ssh	:-zsh
+-zsh
+-zsh
+ssh root@127.0.0.1 -p 12333 -i /home/fra/.ssh/id_rsa
+pane	583	0	:ssh	1	:*	0	:/home/fra	1	ssh	:-zsh
+-zsh
+-zsh
+ssh root@127.0.0.1 -p 12333 -i /home/fra/.ssh/id_rsa
+pane	599	0	:zsh	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+-zsh
+pane	hetz	0	:gost	1	:*	0	:/home/fra	1	gost	:-zsh
+-zsh
+-zsh
+gost -L tcp://:12333/:12322 -F wss://baseserverapp.herokuapp.com:443
+pane	hetz	0	:gost	1	:*	1	:/home/fra	0	sleep	:-zsh
+-zsh
+-zsh
+sleep 447
+pane	hetz	0	:gost	1	:*	2	:/home/fra	0	zsh	:-zsh
+-zsh
+-zsh
+window	0	0	1	:*	b25d,80x24,0,0,0
+window	34	0	1	:*	5f66,42x27,0,0,36
+window	36	0	1	:*	5f68,42x27,0,0,38
+window	577	0	1	:*	6f5b,70x55,0,0,639
+window	582	0	1	:*	ef56,70x55,0,0,644
+window	583	0	1	:*	ef57,70x55,0,0,645
+window	599	0	1	:*	ece4,80x24,0,0,661
+window	hetz	0	1	:*	3f45,170x54,0,0{86x54,0,0,550,83x54,87,0[83x26,87,0,569,83x27,87,27,615]}
+state	577	

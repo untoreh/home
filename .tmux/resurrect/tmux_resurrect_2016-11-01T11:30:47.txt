@@ -1,0 +1,6 @@
+pane	0	0	:~	1	:*	0	:/home/fra	0	zsh	:-zsh
+-zsh
+pane	0	0	:~	1	:*	1	:/home/fra	1	zsh	:-zsh
+-zsh
+window	0	0	1	:*	8205,80x24,0,0{40x24,0,0,0,39x24,41,0,1}
+state	0	

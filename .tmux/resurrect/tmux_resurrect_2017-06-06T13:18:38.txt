@@ -1,0 +1,46 @@
+pane	1320	0	:root@104.223.117.129	1	:*	0	:/home/fra	1	ssh	:-zsh
+-zsh
+ssh root@104.223.117.129
+pane	1399	0	:root@104.223.117.129	1	:*	0	:/home/fra	1	ssh	:-zsh
+-zsh
+ssh root@104.223.117.129
+pane	1409	0	:root@212.237.6.194	1	:*	0	:/home/fra	1	ssh	:ssh root@212.237.6.194
+-zsh
+-zsh
+pane	1447	0	:vagrant	1	:*	0	:/home/fra/.tmp/virtuozzo	1	ssh	:-zsh
+-zsh
+ssh vagrant@192.168.121.186 -p 22 -o Compression=yes -o DSAAuthentication=yes -o LogLevel=FATAL -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/fra/.tmp/virtuozzo/.vagrant/machines/default/libvirt/private_key
+pane	1458	0	:vagrant	1	:*	0	:/home/fra/.tmp/virtuozzo	1	ssh	:-zsh
+-zsh
+ssh vagrant@192.168.121.186 -p 22 -o Compression=yes -o DSAAuthentication=yes -o LogLevel=FATAL -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/fra/.tmp/virtuozzo/.vagrant/machines/default/libvirt/private_key
+pane	1471	0	:vagrant	1	:*	0	:/home/fra/.tmp/locksmith	0	ssh	:-zsh
+-zsh
+ssh vagrant@192.168.121.189 -p 2468 -o Compression=yes -o DSAAuthentication=yes -o LogLevel=FATAL -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/fra/.tmp/locksmith/.vagrant/machines/lock1/libvirt/private_key
+pane	1471	0	:vagrant	1	:*	1	:/home/fra/.tmp/locksmith	1	ssh	:-zsh
+-zsh
+ssh vagrant@192.168.121.189 -p 2468 -o Compression=yes -o DSAAuthentication=yes -o LogLevel=FATAL -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/fra/.tmp/locksmith/.vagrant/machines/lock1/libvirt/private_key
+pane	1505	0	:root@212.237.6.194	1	:*	0	:/home/fra	1	ssh	:-zsh
+-zsh
+ssh root@212.237.6.194
+pane	1509	0	:streamlink	1	:*	0	:/home/fra	1	python3	:-zsh
+-zsh
+/usr/bin/python3 /home/fra/.bin/streamlink twitch.tv/epicenter_en1 best --player /usr/bin/mpv --hls-segment-threads=10
+pane	coreshells	0	:/home/fra	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+sudo su
+pane	coreshells	0	:/home/fra	1	:*	1	:/home/fra	0	zsh	:-zsh
+-zsh
+sudo su
+pane	coreshells	0	:/home/fra	1	:*	2	:/home/fra	0	zsh	:-zsh
+-zsh
+sudo su
+window	1320	0	1	:*	160e,182x40,0,0,1338
+window	1399	0	1	:*	560d,182x40,0,0,1418
+window	1409	0	1	:*	d8cd,182x36,0,0,1428
+window	1447	0	1	:*	d6b5,156x41,0,0,1466
+window	1458	0	1	:*	56b7,156x41,0,0,1477
+window	1471	0	1	:*	d92c,239x66,0,0[239x39,0,0,1490,239x26,0,40,1491]
+window	1505	0	1	:*	16b4,156x41,0,0,1526
+window	1509	0	1	:*	96ae,156x41,0,0,1530
+window	coreshells	0	1	:*	9ee5,143x45,0,0{71x45,0,0,0,71x45,72,0[71x22,72,0,1,71x22,72,23,2]}
+state	1458	

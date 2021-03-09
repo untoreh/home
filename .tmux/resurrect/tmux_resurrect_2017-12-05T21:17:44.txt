@@ -1,0 +1,20 @@
+pane	1	0	:./xmrig	1	:*	0	:/home/fra/.tmp/xmrig	1	./xmrig	:-zsh
+./xmrig -c config.json
+-zsh
+pane	2	0	:root@212.237.6.194	1	:*	0	:/home/fra	1	ssh	:-zsh
+-zsh
+ssh root@212.237.6.194
+pane	277	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	28	0	:root@104.223.54.212	1	:*	0	:/home/fra	1	ssh	:ssh root@104.223.54.212 -p 2468
+-zsh
+-zsh
+pane	4	0	:aznft	1	:*	0	:/home/fra	1	ssh	:-zsh
+-zsh
+ssh aznft
+window	1	0	1	:*	bc1e,70x55,0,0,1
+window	2	0	1	:*	bc1f,70x55,0,0,2
+window	277	0	1	:*	6cea,80x24,0,0,277
+window	28	0	1	:*	d967,80x24,0,0,28
+window	4	0	1	:*	bc21,70x55,0,0,4
+state	277	

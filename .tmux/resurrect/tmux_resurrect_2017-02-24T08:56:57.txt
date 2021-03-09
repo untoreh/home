@@ -1,0 +1,63 @@
+pane	129	0	:../nomad/nomad2	1	:*	0	:/home/fra/.tmp/files/nomad	0	sudo	:-zsh
+-zsh
+sudo vagrant ssh
+pane	129	0	:../nomad/nomad2	1	:*	1	:/home/fra/.tmp/files/nomad/nomad1	0	sudo	:-zsh
+-zsh
+sudo vagrant ssh
+pane	129	0	:../nomad/nomad2	1	:*	2	:/home/fra/.tmp/files/nomad/nomad2	1	zsh	:-zsh
+-zsh
+pane	249	0	:../nomad/nomad2	1	:*	0	:/home/fra/.tmp/files/nomad	1	sudo	:sudo vagrant ssh
+-zsh
+-zsh
+pane	249	0	:../nomad/nomad2	1	:*	1	:/home/fra/.tmp/files/nomad/nomad1	0	sudo	:sudo vagrant ssh
+-zsh
+-zsh
+pane	249	0	:../nomad/nomad2	1	:*	2	:/home/fra/.tmp/files/nomad/nomad2	0	zsh	:-zsh
+-zsh
+pane	289	0	:../vagrant-hdfs	1	:*	0	:/home/fra/.tmp/vagrant-hdfs (deleted)	1	zsh	:-zsh
+-zsh
+pane	300	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	301	0	:../vagrant-hdfs	1	:*	0	:/home/fra/.tmp/vagrant-hdfs	1	zsh	:-zsh
+-zsh
+pane	301	0	:../vagrant-hdfs	1	:*	1	:/home/fra/.tmp/vagrant-hdfs	0	zsh	:-zsh
+-zsh
+pane	301	0	:../vagrant-hdfs	1	:*	2	:/home/fra/.tmp/vagrant-hdfs	0	zsh	:-zsh
+-zsh
+pane	315	0	:../vagrant-hdfs	1	:*	0	:/home/fra/.tmp/vagrant-hdfs	1	zsh	:-zsh
+-zsh
+pane	321	0	:../vagrant-hdfs	1	:*	0	:/home/fra/.tmp/vagrant-hdfs	1	zsh	:-zsh
+-zsh
+pane	322	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	324	0	:../vagrant-hdfs	1	:*	0	:/home/fra/.tmp/vagrant-hdfs	1	zsh	:-zsh
+-zsh
+pane	335	0	:vagrant	1	:*	0	:/home/fra/.tmp/vagrant-hdfs	1	ssh	:ssh vagrant@192.168.121.5 -p 22 -o Compression=yes -o DSAAuthentication=yes -o LogLevel=FATAL -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/fra/.tmp/vagrant-hdfs/.vagrant/machines/hadoop-master/libvirt/private_key
+-zsh
+-zsh
+pane	335	0	:vagrant	1	:*	1	:/home/fra/.tmp/vagrant-hdfs	0	ssh	:-zsh
+-zsh
+ssh vagrant@192.168.121.130 -p 22 -o Compression=yes -o DSAAuthentication=yes -o LogLevel=FATAL -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/fra/.tmp/vagrant-hdfs/.vagrant/machines/hadoop-slave-1/libvirt/private_key
+pane	335	0	:vagrant	1	:*	2	:/home/fra/.tmp/vagrant-hdfs	0	ssh	:-zsh
+-zsh
+ssh vagrant@192.168.121.124 -p 22 -o Compression=yes -o DSAAuthentication=yes -o LogLevel=FATAL -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/fra/.tmp/vagrant-hdfs/.vagrant/machines/hadoop-slave-2/libvirt/private_key
+pane	coreshells	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	coreshells	0	:~	1	:*	1	:/home/fra	0	zsh	:-zsh
+-zsh
+mosh-client -# -a --server=/opt/bin/mosh-server --ssh=ssh -p 2468 core@104.238.222.216 chroot -- /host bash -l -i | 104.238.222.216 60001
+pane	coreshells	0	:~	1	:*	2	:/home/fra	0	zsh	:-zsh
+-zsh
+mosh-client -# -a --server=/opt/bin/mosh-server --ssh=ssh -p 2468 core@104.238.222.217 chroot -- /host bash -l -i | 104.238.222.217 60001
+window	129	0	1	:*	08f5,91x61,0,0[91x24,0,0,171,91x19,0,25,218,91x16,0,45,219]
+window	249	0	1	:*	1ff2,125x53,0,0[125x18,0,0,257,125x15,0,19,258,125x18,0,35,259]
+window	289	0	1	:*	72d5,160x38,0,0,299
+window	300	0	1	:*	b2c8,160x38,0,0,310
+window	301	0	1	:*	89b5,110x59,0,0[110x21,0,0,311,110x19,0,22,330,110x17,0,42,331]
+window	315	0	1	:*	32ce,160x38,0,0,325
+window	321	0	1	:*	b2cc,160x38,0,0,333
+window	322	0	1	:*	b2cd,160x38,0,0,334
+window	324	0	1	:*	b2cf,160x38,0,0,336
+window	335	0	1	:*	342e,161x55,0,0[161x18,0,0,347,161x18,0,19,349,161x17,0,38,350]
+window	coreshells	0	1	:*	4f7e,212x62,0,0{106x62,0,0,0,105x62,107,0[105x31,107,0,1,105x30,107,32,2]}
+state	335	

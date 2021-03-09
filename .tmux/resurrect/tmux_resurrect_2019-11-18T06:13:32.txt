@@ -1,0 +1,20 @@
+pane	101	0	:zsh	1	:*	0	:/root	1	zsh	:-zsh
+-zsh
+-zsh
+pane	102	0	:ssh	1	:*	0	:/var/home/fra/.cluster	0	ssh	:-zsh
+-zsh
+-zsh
+ssh vrmc1
+pane	102	0	:ssh	1	:*	1	:/var/home/fra/.cluster	1	ssh	:-zsh
+-zsh
+-zsh
+ssh vrmc6
+pane	amityd	0	:amityd	1	:*	0	:/var/home/fra/.tmp/wallets/xam	1	amityd	:
+pane	nervad	0	:nervad	1	:*	0	:/var/home/fra/.tmp/wallets/xnv	1	nervad	:
+pane	unprlld	0	:unprlld	1	:*	0	:/var/home/fra/.tmp/wallets/ull	1	unprlld	:
+window	101	0	1	:*	32e2,213x57,0,0,112
+window	102	0	1	:*	cca3,213x60,0,0{106x60,0,0,113,106x60,107,0,115}
+window	amityd	0	1	:*	5968,80x24,0,0,38
+window	nervad	0	1	:*	5965,80x24,0,0,35
+window	unprlld	0	1	:*	5966,80x24,0,0,36
+state	102	

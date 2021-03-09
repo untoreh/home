@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: triple quotes
+# key: #q
+# condition: t
+# --
+"""
+`%`$0
+"""

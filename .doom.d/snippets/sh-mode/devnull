@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# contributor: Fra Gia
+# name: dexport
+# key: exp-n
+# --
+    export -n $1(export -p) 2>/dev/null

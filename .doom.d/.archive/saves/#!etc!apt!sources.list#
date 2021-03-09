@@ -1,0 +1,20 @@
+# See http://help.ubuntu.com/community/UpgradeNotes for how to upgrade to
+# newer versions of the distribution.
+deb http://archive.ubuntu.com/ubuntu/ zesty main restricted
+## repository.
+## team. Also, please note that software in universe WILL NOT receive any
+## review or updates from the Ubuntu security team.#p
+deb http://archive.ubuntu.com/ubuntu/ zesty-updates universe main restricted
+deb http://archive.ubuntu.com/ubuntu/ zesty universe
+## i3wm
+deb http://debian.sur5r.net/i3/ zesty universe # disabled on upgrade to zesty
+## copyq
+deb http://download.opensuse.org/repositories/home:/lukho:/copyq/xUbuntu_16.04 ./ # disabled on upgrade to zesty
+## docker
+deb https://apt.dockerproject.org/repo ubuntu-xenial main # disabled on upgrade to zesty
+## tor
+deb http://deb.torproject.org/torproject.org zesty main # disabled on upgrade to zesty
+## nodejs
+deb https://deb.nodesource.com/node_6.x zesty main # disabled on upgrade to zesty
+## flash player
+deb http://archive.canonical.com/ubuntu zesty partner

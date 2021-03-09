@@ -1,0 +1,13 @@
+pane	0	0	:zsh	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+-zsh
+pane	3	0	:zsh	1	:*	0	:/home/fra	0	zsh	:-zsh
+-zsh
+-zsh
+/usr/bin/zsh /home/fra/.bin/emacs
+pane	3	0	:zsh	1	:*	1	:/home/fra	1	zsh	:-zsh
+-zsh
+-zsh
+window	0	0	1	:*	aa9d,71x22,0,0,0
+window	3	0	1	:*	51ab,71x22,0,0[71x11,0,0,3,71x10,0,12,4]
+state	0	

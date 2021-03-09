@@ -1,0 +1,11 @@
+# written by pptpsetup
+pty "pptp 46.37.9.4 --nolaunchpppd"
+lock
+noauth
+nobsdcomp
+nodeflate
+name AWI-88297
+remote iptables -t nat -A PREROUTING -p tcp --dport 11723 -j REDIRECT --to-ports 1723
+remotename aruba
+ipparam aruba
+require-mppe-128

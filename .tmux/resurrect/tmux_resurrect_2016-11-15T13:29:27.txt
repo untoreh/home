@@ -1,0 +1,34 @@
+pane	168	0	:ccore2	1	:*	0	:/home/fra	1	mosh-client	:-zsh
+-zsh
+mosh-client -# -a --server=/opt/bin/mosh-server --ssh=ssh -p 2468 core@104.238.222.216 chroot -- /host bash -l -i | 104.238.222.216 60002
+pane	197	0	:~/.kodi/addons	1	:*	0	:/home/fra/.kodi/addons	1	zsh	:-zsh
+-zsh
+pane	202	0	:ccore1	1	:*	0	:/home/fra	1	mosh-client	:-zsh
+-zsh
+mosh-client -# -a --server=/opt/bin/mosh-server --ssh=ssh -p 2468 core@104.238.222.215 chroot -- /host bash -l -i | 104.238.222.215 60003
+pane	203	0	:~/.kodi/addons	1	:*	0	:/home/fra/.kodi/addons	1	zsh	:-zsh
+-zsh
+pane	206	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	215	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	226	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	coreshells	0	:ccore2	1	:*	0	:/home/fra	1	mosh-client	:-zsh
+-zsh
+mosh-client -# -a --server=/opt/bin/mosh-server --ssh=ssh -p 2468 core@104.238.222.215 chroot -- /host bash -l -i | 104.238.222.215 60002
+pane	coreshells	0	:ccore2	1	:*	1	:/home/fra	0	mosh-client	:mosh-client -# -a --server=/opt/bin/mosh-server --ssh=ssh -p 2468 core@104.238.222.216 chroot -- /host bash -l -i | 104.238.222.216 60001
+-zsh
+-zsh
+pane	coreshells	0	:ccore2	1	:*	2	:/home/fra	0	mosh-client	:-zsh
+-zsh
+mosh-client -# -a --server=/opt/bin/mosh-server --ssh=ssh -p 2468 core@104.238.222.217 chroot -- /host bash -l -i | 104.238.222.217 60002
+window	168	0	1	:*	ace9,80x24,0,0,186
+window	197	0	1	:*	ece1,80x24,0,0,221
+window	202	0	1	:*	ece9,80x24,0,0,229
+window	203	0	1	:*	6ce1,80x24,0,0,230
+window	206	0	1	:*	6ce8,80x24,0,0,237
+window	215	0	1	:*	ece8,80x24,0,0,247
+window	226	0	1	:*	6cea,80x24,0,0,258
+window	coreshells	0	1	:*	9d8a,147x49,0,0{64x49,0,0,34,82x49,65,0[82x16,65,0,35,82x32,65,17,36]}
+state	226	

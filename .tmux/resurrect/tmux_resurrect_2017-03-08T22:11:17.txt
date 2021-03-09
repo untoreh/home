@@ -1,0 +1,44 @@
+pane	10	0	:vagrant	1	:*	0	:/home/fra/.tmp/files/nomad	0	ssh	:-zsh
+-zsh
+ssh vagrant@192.168.121.227 -p 22 -o Compression=yes -o DSAAuthentication=yes -o LogLevel=FATAL -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/fra/.vagrant.d/insecure_private_key
+pane	10	0	:vagrant	1	:*	1	:/home/fra/.tmp/files/nomad/nomad1	0	ssh	:-zsh
+-zsh
+ssh vagrant@192.168.121.31 -p 22 -o Compression=yes -o DSAAuthentication=yes -o LogLevel=FATAL -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/fra/.vagrant.d/insecure_private_key
+pane	10	0	:vagrant	1	:*	2	:/home/fra/.tmp/files/nomad/nomad2	1	ssh	:ssh vagrant@192.168.121.19 -p 22 -o Compression=yes -o DSAAuthentication=yes -o LogLevel=FATAL -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/fra/.vagrant.d/insecure_private_key
+-zsh
+-zsh
+pane	106	0	:vagrant	1	:*	0	:/home/fra/.tmp/files/nomad	0	ssh	:ssh vagrant@192.168.121.227 -p 22 -o Compression=yes -o DSAAuthentication=yes -o LogLevel=FATAL -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/fra/.vagrant.d/insecure_private_key
+-zsh
+-zsh
+pane	106	0	:vagrant	1	:*	1	:/home/fra/.tmp/files/nomad/nomad1	0	ssh	:-zsh
+-zsh
+ssh vagrant@192.168.121.31 -p 22 -o Compression=yes -o DSAAuthentication=yes -o LogLevel=FATAL -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/fra/.vagrant.d/insecure_private_key
+pane	106	0	:vagrant	1	:*	2	:/home/fra/.tmp/files/nomad/nomad2	1	ssh	:ssh vagrant@192.168.121.19 -p 22 -o Compression=yes -o DSAAuthentication=yes -o LogLevel=FATAL -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/fra/.vagrant.d/insecure_private_key
+-zsh
+-zsh
+pane	112	0	:vagrant	0	:-	0	:/home/fra/.tmp/files/nomad/nomad1	1	ssh	:-zsh
+-zsh
+ssh vagrant@192.168.121.31 -p 22 -o Compression=yes -o DSAAuthentication=yes -o LogLevel=FATAL -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/fra/.vagrant.d/insecure_private_key
+pane	112	1	:vagrant	1	:*	0	:/home/fra/.tmp/files/nomad/nomad1	1	ssh	:-zsh
+-zsh
+ssh vagrant@192.168.121.31 -p 22 -o Compression=yes -o DSAAuthentication=yes -o LogLevel=FATAL -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/fra/.vagrant.d/insecure_private_key
+pane	19	0	:vagrant	1	:*	0	:/home/fra/.tmp/files/nomad	1	ssh	:ssh vagrant@192.168.121.227 -p 22 -o Compression=yes -o DSAAuthentication=yes -o LogLevel=FATAL -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/fra/.vagrant.d/insecure_private_key
+-zsh
+-zsh
+pane	coreshells	0	:/	1	:*	0	:/	1	ssh	:ssh vagrant@192.168.121.19 -p 22 -o Compression=yes -o DSAAuthentication=yes -o LogLevel=FATAL -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/fra/.vagrant.d/insecure_private_key
+ssh core@104.238.222.215 -p 2468
+-zsh
+-zsh
+-zsh
+-zsh
+pane	coreshells	0	:/	1	:*	1	:/	0	zsh	:-zsh
+-zsh
+pane	coreshells	0	:/	1	:*	2	:/	0	zsh	:-zsh
+-zsh
+window	10	0	1	:*	1c41,109x49,0,0[109x15,0,0,12,109x16,0,16,21,109x16,0,33,22]
+window	106	0	1	:*	4f08,109x56,0,0[109x18,0,0,122,109x18,0,19,123,109x18,0,38,124]
+window	112	0	0	:-	2f4d,103x25,0,0,134
+window	112	1	1	:*	6f4a,103x25,0,0,231
+window	19	0	1	:*	de32,103x25,0,0,23
+window	coreshells	0	1	:*	4f7e,212x62,0,0{106x62,0,0,0,105x62,107,0[105x31,107,0,1,105x30,107,32,2]}
+state	10	

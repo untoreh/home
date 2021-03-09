@@ -1,0 +1,61 @@
+pane	1	0	:adb	1	:*	0	:/home/fra	1	adb	:-zsh
+-zsh
+-zsh
+adb -s AONEX shell
+pane	103	0	:root@127.0.0.1	1	:*	0	:/home/fra	1	ssh	:-zsh
+ssh root@127.0.0.1 -p 6000
+-zsh
+-zsh
+pane	12	0	:../utils/tcs-server.sh	1	:*	0	:/home/fra/.tmp/go/src/tcsplitter/out	1	sh	:-zsh
+/bin/sh -x ../utils/tcs-server.sh
+-zsh
+-zsh
+pane	13	0	:../utils/tcs-client.sh	1	:*	0	:/home/fra/.tmp/go/src/tcsplitter/out	1	sh	:-zsh
+/bin/sh ../utils/tcs-client.sh
+-zsh
+-zsh
+pane	2	0	:root@212.237.6.194	1	:*	0	:/home/fra	1	ssh	:-zsh
+-zsh
+-zsh
+ssh root@212.237.6.194
+pane	3	0	:root@212.237.6.194	1	:*	0	:/home/fra	1	ssh	:-zsh
+-zsh
+-zsh
+ssh root@212.237.6.194
+pane	5	0	:adb	1	:*	0	:/home/fra	1	adb	:-zsh
+-zsh
+-zsh
+adb -s AONEX shell
+pane	6	0	:adb	1	:*	0	:/home/fra	1	adb	:-zsh
+-zsh
+-zsh
+adb -s AONEX shell
+pane	7	0	:root@212.237.6.194	1	:*	0	:/home/fra	1	ssh	:-zsh
+-zsh
+-zsh
+ssh root@212.237.6.194
+pane	73	0	:dkr	1	:*	0	:/home/fra	1	sudo	:-zsh
+sudo docker exec -it 31726a74f921 sh
+-zsh
+-zsh
+pane	89	0	:adb	1	:*	0	:/home/fra	1	adb	:-zsh
+-zsh
+-zsh
+adb -s AONEX shell
+pane	90	0	:root@212.237.6.194	1	:*	0	:/home/fra	1	ssh	:-zsh
+-zsh
+-zsh
+ssh root@212.237.6.194
+window	1	0	1	:*	c61e,59x66,0,0,1
+window	103	0	1	:*	2de0,80x25,0,0,110
+window	12	0	1	:*	5b61,80x25,0,0,12
+window	13	0	1	:*	5b63,80x25,0,0,14
+window	2	0	1	:*	c29f,52x66,0,0,2
+window	3	0	1	:*	bae0,66x16,0,0,3
+window	5	0	1	:*	bae2,66x16,0,0,5
+window	6	0	1	:*	b023,59x32,0,0,6
+window	7	0	1	:*	b024,59x32,0,0,7
+window	73	0	1	:*	db62,80x25,0,0,80
+window	89	0	1	:*	5da9,66x16,0,0,96
+window	90	0	1	:*	5daa,66x16,0,0,97
+state	103	

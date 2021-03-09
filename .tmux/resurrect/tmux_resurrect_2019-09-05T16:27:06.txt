@@ -1,0 +1,10 @@
+pane	14	0	:zsh	1	:*	0	:/var/home/fra/.zplugin/plugins/zsh-users---zsh-autosuggestions	1	zsh	:-zsh
+-zsh
+pane	amityd	0	:amityd	1	:*	0	:/var/home/fra/.tmp/wallets/xam	1	amityd	:
+pane	nervad	0	:nervad	1	:*	0	:/var/home/fra/.tmp/wallets/xnv	1	nervad	:
+pane	unprlld	0	:unprlld	1	:*	0	:/var/home/fra/.tmp/wallets/ull	1	unprlld	:
+window	14	0	1	:*	5864,213x60,0,0,15
+window	amityd	0	1	:*	b260,80x24,0,0,3
+window	nervad	0	1	:*	b25d,80x24,0,0,0
+window	unprlld	0	1	:*	b25e,80x24,0,0,1
+state	14	

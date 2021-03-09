@@ -1,0 +1,601 @@
+#!/usr/bin/zsh
+#
+if [ -n "$ZSH_NAME" ]; then
+    [ -f ~/.wallets/functions.sh ] &&
+        . ~/.wallets/functions.sh
+    [ -f ~/.cluster/crt/.functions ] &&
+        . ~/.cluster/crt/.functions
+fi
+
+## currency
+usdeur(){
+    curl "eur.rate.sx/${1}usd"
+}
+
+eurusd(){
+    curl "usd.rate.sx/${1}eur"
+}
+
+btcusd(){
+    curl "usd.rate.sx/${1}btc"
+}
+
+satusd(){
+    local d=$(echo -n "$1" | wc -c)
+    local lead=$((8-d))
+    local btc="0.""$(printf %0${lead}d)${1}"
+    curl "usd.rate.sx/${btc}btc"
+}
+
+litusd(){
+    local d=$(echo -n "$1" | wc -c)
+    local lead=$((8-d))
+    local ltc="0.""$(printf %0${lead}d)${1}"
+    curl "usd.rate.sx/${ltc}ltc"
+}
+
+dogusd(){
+    curl "usd.rate.sx/${1}doge"
+}
+
+ratesx(){
+    curl "${3}.rate.sx/${1}${2}"
+}
+
+## logging
+alias dlogs="discord_logs"
+discord_logs(){ ## download all attachments containing given argument as string
+    jq -r '.data | .[] | .[] | .a[].url | select(.|contains("'"$1"'"))' < dht.txt | wget -i-
+}
+
+## copy to clipboard
+clc() {
+	# which clipcopy 1>/dev/null || exit 1
+  # if [ -n "$*" ]; then
+	#     clipcopy < $@
+  # else
+  #     clipcopy </dev/stdin
+  # fi
+    if [ -n "$*" ]; then
+        if [ -f "$1" ]; then
+            wl-copy < <(<"$1")
+        else
+            wl-copy <<< "$@"
+        fi
+    else
+        wl-copy </dev/stdin
+    fi
+}
+
+shmem(){
+    local header data
+    header='pid vsz rss name'
+    data=$(ps -eo pid,vsz,rss,comm | grep $$)
+    echo -e "${header}\n${data}" | column -t
+}
+## put processes to sleep
+nnight(){ ## put some processes to sleep
+    apps=${@:-firefox emacs emacs-snapshot code kodi kodi.bin elementum pulseaudio swaybar nervad amityd unprlld}
+    setopt shwordsplit
+    for app in $apps; do
+        for pid in $(pidof $app); do
+            kill -STOP $pid
+        done
+    done
+    unsetopt shwordsplit
+}
+## wakeup processes
+mmorni(){ ## wake up process from sleep
+    apps=${@:-firefox emacs emacs-snapshot code kodi kodi.bin elementum pulseaudio swaybar nervad amityd unprlld}
+    setopt shwordsplit
+    for app in $apps; do
+        for pid in $(pidof $app); do
+            kill -CONT $pid
+        done
+    done
+    unsetopt shwordsplit
+}
+alias tma=timeago
+timeago() { ## print date in time ago format
+    local SEC_PER_MINUTE=$((60))
+    local   SEC_PER_HOUR=$((60*60))
+    local    SEC_PER_DAY=$((60*60*24))
+    local  SEC_PER_MONTH=$((60*60*24*30))
+    local   SEC_PER_YEAR=$((60*60*24*365))
+
+    local last_unix="$(date --date="$1" +%s)"    # convert date to unix timestamp
+    local now_unix="$(date +'%s')"
+
+    local delta_s=$(( now_unix - last_unix ))
+
+    if (( delta_s <  SEC_PER_MINUTE * 2))
+    then
+        echo ""$((delta_s))" seconds ago"
+        return
+    elif (( delta_s <  SEC_PER_HOUR * 2))
+    then
+        echo ""$((delta_s / SEC_PER_MINUTE))" minutes ago"
+        return
+    elif (( delta_s <  SEC_PER_DAY * 2))
+    then
+        echo ""$((delta_s / SEC_PER_HOUR))" hours ago"
+        return
+    elif (( delta_s <  SEC_PER_MONTH * 2))
+    then
+        echo ""$((delta_s / SEC_PER_DAY))" days ago"
+        return
+    elif (( delta_s <  SEC_PER_YEAR * 2))
+    then
+        echo ""$((delta_s / SEC_PER_MONTH))" months ago"
+        return
+    else
+        echo ""$((delta_s / SEC_PER_YEAR))" years ago"
+        return
+    fi
+}
+
+alias htb=humantobytes
+humantobytes(){
+    numfmt --from=iec --to=none <<< "${*:u}" | clc
+}
+alias udate=unixdate
+unixdate(){
+    date -d@$1
+}
+
+scrcpy() {
+    ## zerotier remote support network
+    set -x
+    local flags
+    ADB_IP=${ADB_IP:-172.22.122.82} # a remote support ip
+    [ -n "$ADB_IP" ] && flags="-s $ADB_IP" && ping -c1 $ADB_IP
+    xhost + local:docker
+    sudo docker start scrcpy &>/dev/null ||
+        {    sudo docker rm scrcpy;
+             sudo docker run --name scrcpy -i -t --privileged \
+                  --net host \
+                  --pid host \
+                  --device /dev/bus/usb \
+                  -v /tmp/.X11-unix:/tmp/.X11-unix \
+                  -e DISPLAY=$DISPLAY pierlo1/scrcpy:amd sh -c "adb connect ${ADB_IP}; scrcpy -m 1920 $flags"
+        }
+    set +x
+}
+## data
+alias b2h="bin2hex"
+bin2hex() {
+    echo "obase=16;ibase=2;$1"|bc
+}
+function c() {
+    colorize_via_pygmentize $@ 2>/dev/null | less -R
+}
+pbsf() {
+    wget -o /dev/null -qO- "$1" | base64 -d | clc
+}
+psf() {
+    pastee "$1" | clc
+}
+upt(){
+    if [ -n "$1" ]; then
+        if [ -f "$1" ]; then
+            curl -s -F 'f:1=@-' ix.io < "$1" | wl-copy
+        else
+            curl -s -F 'f:1=@-' ix.io <<< "$@" | wl-copy
+        fi
+    else
+        read -t 0 l
+        if [ -n "$l" ]; then
+           curl -s -F 'f:1=@-' ix.io <<< "$l" | wl-copy
+        else
+            wl-paste | curl -s -F 'f:1=@-' ix.io | wl-copy
+        fi
+    fi
+}
+
+## net
+dl(){
+    [ -z "$1" ] && return 1
+    type x &>/dev/null || echo 'download helper "x" not found!'
+    local blob="$(basename $1)"
+    [ -z "$blob" ] && echo "wrong url" && return 1
+    wget -q --show-progress $1 -O $blob
+    if [ "$blob" != "${blob%\?*}" ]; then ## strip download params to hopefully get filename extension
+        mv "$blob" "${blob%\?*}"
+    fi
+    blob=${blob%\?*}
+    [ -z "$blob" ] && echo "wrong url" && return 1
+    local flist=$(x -r $blob)
+    [ -z "$flist" ] && return
+    local d=$(echo "$flist" | head -n 1)
+    d=${d//\/}
+    if [ -n "$d" -a -d "$d" ]; then
+        tmpdir=$(mktemp -d)
+        mv "$d/"* "$tmpdir"/
+        rmdir $d 2>/dev/null ||
+            {
+                mv "$d"/.* "$tmpdir"/ 2>/dev/null
+                rmdir "$d" 2>/dev/null
+            }
+        mv "$tmpdir"/* ./ 2>/dev/null
+        mv "$tmpdir"/.* ./ 2>/dev/null
+        rmdir "$tmpdir"
+    fi
+}
+whereip(){
+    whois $1 | rg -i "city|state|country|address" | sort -u
+}
+whoip(){
+    whois $1 | rg -i "orgname|orgid|netname|organization" | sort -u
+}
+ipv4todec(){
+    IFS=. read -r a b c d <<< "$1"
+    printf '%s%d\n' "$((a * 256 ** 3 + b * 256 ** 2 + c * 256 + d))"
+}
+
+## curl proxy
+alias tor_proxy_var="export socks_proxy=localhost:9050"
+alias tpv="tor_proxy_var"
+curl(){
+    [ -n "$socks_proxy" ] &&
+        /usr/bin/curl --proxy "socks5h://$socks_proxy" $@ ||
+            /usr/bin/curl $@
+}
+
+## switch tor to US node
+torfrom(){
+    sudo sed -r "s/^ExitNodes .*/ExitNodes {${1:l}}/" -i /etc/tor/torrc
+    sudo killall -HUP tor
+    torex &!
+}
+torus(){
+    NODES_STRING='{us},{ca},{tt},{ni},{lc},{kn},{vc},{pa},{mx},{jm},{ht},{hn},{gt},{gd},{sv},{do},{dm},{cu},{cr},{bz},{bb},{bs},{ag}'
+    sudo sed -r "s/^ExitNodes .*/ExitNodes $NODES_STRING/" -i /etc/tor/torrc
+    sudo killall -HUP tor
+    torex &!
+}
+## switch tor to EU node
+toreu(){
+    NODES_STRING='{fr},{de},{se},{es},{fi},{no},{gr},{mt},{mc},{an},{nl},{pl},{ro},{sm},{gb},{su},{ch},{ad},{be},{dk},{is},{ie},{lu},{pt},{it}'
+    sudo sed -r "s/^ExitNodes .*/ExitNodes $NODES_STRING/" -i /etc/tor/torrc
+    sudo killall -HUP tor
+    torex &!
+}
+
+## add current ip to excludelist /tmp/.tor_ex
+torex(){
+    if [ -n "$(find /tmp/.tor_ex -mtime +1 -print)" ]; then rm /tmp/.tor_ex; fi
+    [ -e /tmp/.tor_ex ] && current_list=$(</tmp/.tor_ex)
+    local cur_ip=$(curl -s --proxy socks5://localhost:9050 ipinfo.io/ip)
+    local current_list="${current_list//${cur_ip}}${cur_ip},"
+    echo ${current_list} > /tmp/.tor_ex
+    sudo sed "s/ExcludeExitNodes .*/ExcludeExitNodes ${current_list}/" -i /etc/tor/torrc
+}
+
+## ban/unban ip
+ban(){
+    sudo iptables -A INPUT -s "$1" -j DROP
+}
+unban(){
+    sudo iptables -D INPUT -s "$1" -j DROP
+}
+
+## misc
+spsw(){ ## samepass
+   echo ThePass123\! | clc
+}
+enit(){
+    eval "trans -s en \"$@\" -t it"
+}
+iten(){
+    eval "trans -s it \"$@\" -t en"
+}
+trim() {
+    local var="$*"
+
+    var="${var#"${var%%[![:space:]]*}"}"
+    # remove trailing whitespace characters
+    var="${var%"${var##*[![:space:]]}"}"
+    echo -n "$var"
+}
+wtr(){
+    curl https://en.wttr.in/"${1:-cassano delle murge}"
+}
+
+## fetch ip from ssh config
+alias ipssh="ip_from_ssh"
+alias possh="ip_from_ssh -p"
+ip_from_ssh(){
+    local part
+    [ "$1" = "-p" ] && part=Port && shift || part=HostName
+    local hostnames=$(sed -n -e '/'"$1"'/I,/'$part'/Ip' < ~/.ssh/config)
+    hostnames=$(sed '/^#.*$/d'<<< "${hostnames}")
+    local ips=$(sed -n 's/\s*'$part'\s*//Ip' <<<"$hostnames")
+    sort -u <<< "$ips"
+}
+alias ipsSsh="ips_from_ssh"
+ips_from_ssh(){
+    local part
+    [ "$1" = "-p" ] && part=Port && shift || part=HostName
+    local ips=$(sed -n -e '/'"$1"'/I,/Host\s/{/^#.*$/d;s/.*'"$part"'\s*//Ip}' < ~/.ssh/config)
+    sort -u <<< "$ips"
+}
+# ## builtins version
+# ip_from_ssh(){
+#     # set -x
+#     local fetch_hostname=
+#     setopt extendedglob
+
+#     while read l; do
+#         l=$(trim "${l}")
+#         q=$(trim "$1")
+#         if [ -n "$fetch_hostname" ]; then
+#             if [ "${l}" != "${l/(#i)hostname}" ]; then
+#                 echo -n "$l" | sed -r 's/.*hostname\s*([0-9\.]*)/\1/I' | tr -d '\n'
+#                 break
+#             fi
+#         elif [ "${l}" != "${l/$q}" ]; then ## xargs trims leading/trailng whitespace
+#             fetch_hostname=1
+#         fi
+#     done <~/.ssh/config
+# }
+
+## fetch the first hostname from ip (fragment)
+alias hossh="host_from_ssh"
+host_from_ssh(){
+    local first_host=$(sed -r '/\s*hostname.*'"$1"'[0-9\.\s]*$/Iq' < ~/.ssh/config)
+    local rev=$(tac <<< "$first_host")
+    sed -n -r '/^host /I{s/\s*host\s+//Ip;q;};' <<< "$rev" || echo "can only match ips :("
+}
+## fetch hostname from hostname (fragment)
+alias chssh="complete_hostname_from_ssh"
+complete_hostname_from_ssh(){
+    grep -Po '\s*Host\s*\K.*'"${1//[0-9]}"'.*'"${1//[a-zA-Z]}"'.*[^\s]*' ~/.ssh/config
+}
+
+## reverse phone lookup ita
+alias rti=rev_tel_it
+rev_tel_it() {
+    local data=$(curl -s 'https://www.paginebianche.it/ricerca-da-numero?qs='"$1")
+    results=$(echo "$data" | html2text | sed -r -n -e '/^[0-9]\./,+3p' | grep -v privacy)
+    echo "$results"
+}
+## router call log today
+alias tcalls=today_calls
+today_calls(){
+    local token=$(curl -s 'http://192.168.1.1' -b /tmp/.cache/router -c /tmp/.cache/router | pup 'meta[name=CSRFtoken] attr{content}')
+    local A=
+    curl 'http://192.168.1.1/authenticate' -b /tmp/.cache/router -c /tmp/.cache/router --data 'CSRFtoken=${token}&I=admin&A=${A}'
+
+curl -s 'http://192.168.1.1/modals/mmpbx-log-modal.lp' -b /tmp/.cache/router -c /tmp/.cache/router | html2text | grep $(date +%Y-%m-%d)
+}
+
+## encryption
+gprvk(){
+    openssl genpkey -algorithm RSA -out ${1:-private.key} -pkeyopt rsa_keygen_bits:2048
+}
+gpubk(){
+    openssl rsa -in $1 -pubout -out ${2:-$(basename ${1}.pub)}
+}
+encr(){
+    openssl aes-256-cbc -salt -a -e -in $1 -out  ${2:-${1}.enc}
+}
+
+decr(){
+    out="${2:-${1/.enc/}}"
+    [ "$out" != "${1}" ] || out="${1}.dec"
+    openssl aes-256-cbc -salt -a -d -in $1 -out "$out"
+    unset out
+}
+
+kencr(){
+    openssl rsautl -encrypt -pubin -inkey $1 -in $2 -out ${3:-${2}.enc}
+}
+
+kdecr(){
+    out="${3:-${2/.enc/}}"
+    [ "$out" != "${2}" ] || out="${2}.dec"
+    openssl rsautl -decrypt -inkey $1 -in $2 -out ${3:-${2/.enc/}}
+}
+
+## encrypt folder with tar+gpg asking for psw
+gpgdir() {
+    tar -cf- $1 | gpg -c -o "$1.gpg"
+}
+## encrypt file and delete unencripted
+gpgf() {
+    rm -f "${1}.gpg"
+    gpg -e -r $USER $1
+    rm $1
+}
+## unencrypt file
+gpgd() {
+    gpg -q -d --for-your-eyes-only --no-tty $1 > ${1/.gpg}
+}
+## unencrypt file, just cat
+gpgc() {
+    gpg -q -d --for-your-eyes-only --no-tty $1
+}
+
+## virt
+winup() {
+    sudo systemctl start libvirtd ; sudo systemctl start virtlogd.socket; sudo virsh start ${1:-WVM}
+}
+winres() {
+         sudo virsh resume ${1:-WVM}
+         xfreerdp /u:fra /p:walkduck /v:\`winip\`
+}
+
+wincon() {
+    spicy --host=localhost --port=5900 -f
+    # xfreerdp /u:fra \
+    #          /p:walkduck \
+    #          /v:\`winip\` \
+    #          +aero +fonts +window-drag +menu-anims \
+    #          /gdi:hw /gfx:AVC444 +gfx-progressive +clipboard \
+    #          /rfx /rfx-mode:video \
+    #          /nsc \
+    #          /bpp:32
+    # remmina --connect ~/.remmina/win10.remmina
+    # spicy --host=localhost --port=5900 -f
+}
+
+winip() {
+    arp | grep ether | grep virbr | head -1 | awk '{print $1}'
+}
+winsus() {
+    sudo virsh suspend ${1:-WVM}
+}
+winde() {
+    sudo virsh destroy ${1:-WVM}
+}
+winst() {
+    sudo virsh shutdown ${1:-WVM}
+}
+
+
+## remotes
+
+qgh_on() {
+	accept-line()
+	{
+		if [ "$BUFFER" != qgh_off ]; then
+			if [ -z "$(echo "$BUFFER" | grep -E "^~/.bin/qgh")" ]; then
+				BUFFER="~/.bin/qgh $BUFFER"
+				zle .accept-line
+			else
+				zle .accept-line
+			fi
+		else
+			accept-line(){
+			zle .accept-line
+		}
+		zle .reset-prompt
+		zle .kill-buffer
+	fi
+}
+zle -N accept-line
+}
+
+qgh_shootback() {
+	~/.bin/qgh 'Start-Process python -ArgumentList \"C:\local\Temp\git\shootback/slaver.py -m 212.237.6.194:10000 -t 127.0.0.1:12346\" -RedirectStandardOutput python.out -RedirectStandardError python.err'
+
+}
+qgh_ssh2() {
+	~/.bin/qgh 'chdir .\ssh2; Start-Process node -ArgumentList run.js.bak -RedirectStandardOutput node.out -RedirectStandardError node.err'
+
+}
+
+qgh_sshd() {
+	~/.bin/qgh 'powershell Start-Process C:\local\Temp\cygwin\sshd.bat'
+}
+
+## shuffling
+shuffle() {
+    local IFS=$'\n' tail=
+    while read l; do
+        if [ $((RANDOM%2)) = 1 ]; then
+            echo "$l"
+        else
+            tail="${tail}${l}\n"
+
+        fi
+    done < $1
+    printf "${tail}"
+}
+
+ushuffle() {
+    declare -a lines
+    local c=0
+    while read l; do
+        [ "$l" != '$\n' ] &&
+            {
+                lines[$c]=${l}
+                (( c++ ))
+            }
+    done < $1
+    randomize "${lines[@]}"
+}
+
+randomize()
+{
+    arguments=($@)
+    declare -a out
+    i="$#"
+    j="0"
+
+    while [[ $i -ge "0" ]] ; do
+        which=$(random_range "0" "$i")
+        out[j]="${arguments[$which]}"
+        arguments[$which]=${arguments[i]}
+        (( i-- ))
+        (( j++ ))
+    done
+    printf '%s\n' ${out[*]}
+}
+
+random_range()
+{
+    low=$1
+    range=$(($2 - $1))
+    if [[ range -ne 0 ]]; then
+        echo $(($low+$RANDOM % $range))
+    else
+        echo "$1"
+    fi
+}
+## ssh - mounts - remote mounts
+gos() {
+    if [ -z "$(pgrep zerotier-one)" ]; then
+       sudo systemctl start zerotier-one
+    fi
+    mosh --server=/usr/bin/mosh-server --ssh='ssh -p 12322 -i ~/.ssh/ext/settler_openssh' bassomails@10.244.36.179
+}
+chisel_launch(){
+    if [ -z "$(pgrep -f "$chisel_cmd")" ]; then
+        eval "$chisel_cmd"  &>/dev/null &
+        while ! netcat -z 127.0.0.1 $chisel_port; do
+            sleep 0.3
+        done
+    fi
+}
+
+chisel_kill(){
+    if [ -z "$?" ]; then
+        pkill -f "$chisel_cmd"
+        eval "$chisel_cmd" &>/dev/null &
+        while ! netcat -z 127.0.0.1 $chisel_port; do
+            sleep 0.3
+        done
+        ssh $chisel_user@127.0.0.1 -p $chisel_port
+    fi
+}
+cns() {
+    c9port=${c9port:-12333}
+    c9user=${c9user:-ubuntu}
+    chisel_cmd="chisel client https://test-untoreh.c9users.io/ ${c9port}:12322"
+    pkill -f "$chisel_cmd"
+    chisel_user=ubuntu
+    if [ -z "$(pgrep -f "$chisel_cmd")" ]; then
+        eval "$chisel_cmd" &>/dev/null &
+        while ! netcat -w1 127.0.0.1 ${c9port} | grep SSH &>/dev/null; do
+            sleep 0.3
+        done
+    fi
+    sshpass -p${c9pass:=root123} ssh ${c9user}@127.0.0.1 -p ${c9port}
+    # if [ -z "$?" ]; then
+    #     pkill -f "$chisel_cmd"
+    #     eval "$chisel_cmd" &>/dev/null &
+    #     while ! netcat -z 127.0.0.1 ${c9port}; do
+    #         sleep 0.3
+    #     done
+    #     ssh ${c9user}@127.0.0.1 -p ${c9port}
+    # fi
+}
+cas() {
+    chisel_user=cabox
+    chisel_port=12323
+    chisel_cmd="chisel client coa.zome.ga $chisel_port:22"
+    chisel_launch
+    ssh cabox@127.0.0.1 -p $chisel_port -i ~/.ssh/ext/coa
+    chisel_kill
+}

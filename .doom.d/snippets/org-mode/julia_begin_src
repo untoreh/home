@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: julia: #+begin_src
+# uuid: srcjulia
+# key: #ju
+# --
+#+begin_src julia
+`%`$0
+#+end_src

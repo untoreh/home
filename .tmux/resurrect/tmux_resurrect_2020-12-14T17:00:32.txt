@@ -1,0 +1,13 @@
+pane	bold-kitten	0	:sudo	1	:*	0	:/var/home/fra	1	sudo	:sudo -E --preserve-env=PATH env htop
+pane	equipped-grouper	0	:ssh	1	:*	0	:/var/home/fra	0	ssh	:/usr/bin/ssh vrmc2
+pane	equipped-grouper	0	:ssh	1	:*	1	:/var/home/fra	1	ssh	:/usr/bin/ssh vrmc2
+pane	equipped-grouper	0	:ssh	1	:*	2	:/var/home/fra	0	fish	:
+pane	freqtrade	0	:fish	1	:*	0	:/var/home/fra	1	fish	:docker start -a -i fqt
+pane	freqtrade	0	:fish	1	:*	1	:/var/home/fra	0	sudo	:sudo docker exec -it fqt /bin/bash -li
+pane	freqtrade	0	:fish	1	:*	2	:/var/home/fra	0	sudo	:sudo docker exec -it fqt /bin/bash -li
+pane	freqtrade	0	:fish	1	:*	3	:/var/home/fra	0	sudo	:sudo docker exec -it fqt /bin/bash -li
+pane	freqtrade	0	:fish	1	:*	4	:/var/home/fra	0	sudo	:sudo docker exec -it fqt /bin/bash -li
+window	bold-kitten	0	1	:*	5586,71x22,0,0,55
+window	equipped-grouper	0	1	:*	086d,71x22,0,0{35x22,0,0[35x11,0,0,135,35x10,0,12,137],35x22,36,0,136}
+window	freqtrade	0	1	:*	56f0,213x56,0,0[213x24,0,0,14,213x31,0,25{106x31,0,25[106x15,0,25,15,106x15,0,41,60],106x31,107,25[106x15,107,25,17,106x15,107,41,108]}]
+state	freqtrade	

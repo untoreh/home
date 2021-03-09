@@ -1,0 +1,87 @@
+! Cursor
+Xcursor.size: 48
+
+! Dracula Xresources palette
+*.foreground: #F8F8F2
+*.background: #282A36
+*.color0:     #000000
+*.color8:     #4D4D4D
+*.color1:     #FF5555
+*.color9:     #FF6E67
+*.color2:     #50FA7B
+*.color10:    #5AF78E
+*.color3:     #F1FA8C
+*.color11:    #F4F99D
+*.color4:     #BD93F9
+*.color12:    #CAA9FA
+*.color5:     #FF79C6
+*.color13:    #FF92D0
+*.color6:     #8BE9FD
+*.color14:    #9AEDFE
+*.color7:     #BFBFBF
+*.color15: #E6E6E6
+
+!! scrollbar
+URxvt.scrollBar: false
+URxvt.scrollBar_right: true
+URxvt.scrollstyle: plain
+URxvt*scrollBar_floating: true
+urxvt.thickness: 20
+
+!! scrollback
+URxvt.secondaryScreen: trUe
+URxvt.secondaryScroll: false
+URxvt.secondaryWheel: true
+
+URxvt.scrollTtyOutput: false
+URxvt.scrollTtyKeypress: true
+URxvt.scrollWithBuffer: true
+URxvt.saveLines: 3000
+urxvt.visualBell: false
+
+! font
+URxvt.font: xft:Monoid:size=12
+URxvt.letterSpace: 0
+xft.lcdfilter: lcddefault
+xft.hintstyle: hintfull
+xft.antialias: true
+xft.hinting: true
+xft.rgba: rgb
+URxvt.intensityStyles: false
+
+URxvt.preeditType:Root
+URxvt.cursorBlink: true
+URxvt.cursorUnderline: false
+
+! autocomplete
+URxvt.keysym.M-C-slash:   perl:aAtt:word-complete
+URxvt.keysym.M-question:  perl:aAtt:fuzzy-complete
+URxvt.keysym.M-quotedbl:  perl:aAtt:undo
+
+! click link
+URxvt*perl-ext-common: autocomplete-ALL-the-things,default,matcher,-option-popup,-selection-popup,-realine
+URxvt*matcher.button: true
+URxvt*urlLauncher: ~/.bin/ffox
+
+! clipboard tmux
+XTerm*disallowedWindowOps: 20,21,SetXprop
+
+! padding
+URxvt.internalBorder: 0
+
+! keys
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+URxvt.keysym.Control-Shift-Up:      \033[1;6A
+URxvt.keysym.Control-Shift-Down:    \033[1;6B
+URxvt.keysym.Control-Shift-Left:    \033[1;6D
+URxvt.keysym.Control-Shift-Right:   \033[1;6C
+URxvt.keysym.Shift-PageUp:          \033[5;2~
+URxvt.keysym.Shift-PageDown:        \033[6;2~
+
+
+Xcursor.size: 18
+
+Xcursor.theme: Bibata_Oil
+
+Xcursor.size: 48

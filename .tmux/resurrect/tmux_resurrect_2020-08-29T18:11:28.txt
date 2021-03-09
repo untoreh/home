@@ -1,0 +1,21 @@
+pane	amityd	0	:amityd	1	:*	0	:/var/home/fra/.tmp/wallets/xam	1	amityd	:
+pane	freqtrade	0	:fish	1	:*	0	:/root	1	fish	:docker start -a -i fqt
+pane	freqtrade	0	:fish	1	:*	1	:/var/home/fra/.tmp/freqtrade	0	sudo	:sudo docker exec -it fqt /bin/bash -li
+pane	freqtrade	0	:fish	1	:*	2	:/root	0	sudo	:sudo docker exec -it fqt /bin/bash -li
+pane	game-pipefish	0	:fish	1	:*	0	:/root	1	fish	:
+pane	helpful-fish	0	:fish	1	:*	0	:/root	1	fish	:
+pane	nervad	0	:nervad	1	:*	0	:/var/home/fra/.tmp/wallets/xnv	1	nervad	:
+pane	quiet-stingray	0	:fish	1	:*	0	:/root	1	fish	:
+pane	strong-whippet	0	:ping	1	:*	0	:/root	1	ping	:/bin/ping google.it
+sed -r s/.*time=((.*)ms)/\1/
+grep --color=auto --line-buffered time=
+pane	unprll	0	:unprlld	1	:*	0	:/var/home/fra/.tmp/wallets/ull	1	unprlld	:
+window	amityd	0	1	:*	5960,80x24,0,0,11
+window	freqtrade	0	1	:*	a251,213x57,0,0[213x28,0,0,3,213x28,0,29{106x28,0,29,4,106x28,107,29,5}]
+window	game-pipefish	0	1	:*	6af8,71x22,0,0,294
+window	helpful-fish	0	1	:*	6af9,71x22,0,0,295
+window	nervad	0	1	:*	b266,80x24,0,0,9
+window	quiet-stingray	0	1	:*	6af7,71x22,0,0,293
+window	strong-whippet	0	1	:*	6af4,71x22,0,0,290
+window	unprll	0	1	:*	595f,80x24,0,0,10
+state	helpful-fish	

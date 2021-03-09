@@ -1,0 +1,24 @@
+Package:  nut nut-server nut-client
+Pin: release o=Ubuntu
+Pin-Priority: 400
+
+Package: nut nut-server nut-client services='pd_server tikv_server tidb_server sleep'
+pd_server_args="--data-dir,,pd,,-client-urls,,http://$IPv4:2379"
+pd_server_res='unlimited'
+
+tikv_server_args="--pd,,$IPv4:2379,,--store,,tikv'
+tikv_server_res='unlimited'
+tikv_server_when_src='sleep'
+tikv_server_when_freq='once:exitSuccess'
+
+tidb_server_args="--store,,tikv,,--path,,$IPv4:2379"
+tidb_server_res='unlimited'
+tidb_server_port='4000'
+tidb_server_health_exec='nc $IPv4 4000'
+
+sleep_exec='/bin/sleep 5'
+
+watches='pd_server'
+watch_pd_server_inter='5'
+Pin: release o=LP-PPA-webapps-preview
+Pin-Priority: 500

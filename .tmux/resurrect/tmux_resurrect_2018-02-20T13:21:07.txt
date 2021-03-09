@@ -1,0 +1,61 @@
+pane	0	0	:./xmD	1	:*	0	:/home/fra/.tmp/xmrig/CC	1	./xmD	:-zsh
+-zsh
+-zsh
+./xmD -c config.json
+pane	34	0	:gost	1	:*	0	:/home/fra	1	gost	:-zsh
+-zsh
+-zsh
+gost -L tcp://:8080/:12322 -F sni+tls://dpl-untoreh.1d35.starter-us-east-1.openshiftapps.com:443
+pane	36	0	:gost	1	:*	0	:/home/fra	1	gost	:-zsh
+gost -L tcp://:12334/:22 -F ws://wazp-bassobassista933706.codeanyapp.com:8899
+-zsh
+-zsh
+pane	490	0	:sudo	1	:*	0	:/home/fra	1	sudo	:-zsh
+-zsh
+-zsh
+sudo docker exec -it deployer bash -l
+pane	504	0	:sudo	1	:*	0	:/home/fra	1	sudo	:-zsh
+-zsh
+-zsh
+sudo docker exec -it deployer bash -l
+pane	507	0	:sudo	1	:*	0	:/home/fra	1	sudo	:-zsh
+-zsh
+-zsh
+sudo docker exec -it deployer bash -l
+pane	510	0	:zsh	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+-zsh
+pane	531	0	:ssh	1	:*	0	:/home/fra	1	ssh	:-zsh
+-zsh
+-zsh
+ssh tcs
+pane	555	0	:zsh	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+-zsh
+pane	557	0	:ssh	1	:*	0	:/home/fra	1	ssh	:-zsh
+-zsh
+-zsh
+ssh root@127.0.0.1 -p 12333 -i /home/fra/.ssh/id_rsa
+pane	hetz	0	:zsh	1	:*	0	:/home/fra	0	gost	:-zsh
+-zsh
+-zsh
+gost -L tcp://:12333/:12322 -F wss://baseserverapp.herokuapp.com:443
+pane	hetz	0	:zsh	1	:*	1	:/home/fra	0	sleep	:-zsh
+-zsh
+-zsh
+sleep 252
+pane	hetz	0	:zsh	1	:*	2	:/home/fra	1	zsh	:-zsh
+-zsh
+-zsh
+window	0	0	1	:*	b25d,80x24,0,0,0
+window	34	0	1	:*	5f66,42x27,0,0,36
+window	36	0	1	:*	5f68,42x27,0,0,38
+window	490	0	1	:*	ad04,81x24,0,0,542
+window	504	0	1	:*	2ce9,80x24,0,0,556
+window	507	0	1	:*	2cec,80x24,0,0,559
+window	510	0	1	:*	ace5,80x24,0,0,562
+window	531	0	1	:*	2ce7,80x24,0,0,592
+window	555	0	1	:*	6ce8,80x24,0,0,617
+window	557	0	1	:*	6cea,80x24,0,0,619
+window	hetz	0	1	:*	3f45,170x54,0,0{86x54,0,0,550,83x54,87,0[83x26,87,0,569,83x27,87,27,615]}
+state	557	

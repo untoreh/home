@@ -1,0 +1,82 @@
+pane	0	0	:zsh	1	:*	0	:/home/fra/.tmp/xmrig/CC	1	zsh	:-zsh
+-zsh
+-zsh
+pane	1	0	:ssh	1	:*	0	:/home/fra	1	ssh	:-zsh
+ssh root@127.0.0.1 -p 12333 -i /home/fra/.ssh/id_rsa
+-zsh
+-zsh
+pane	3	0	:gost	1	:*	0	:/home/fra	0	gost	:-zsh
+gost -L tcp://:12333/:12322 -F wss://baseserverapp.herokuapp.com:443
+-zsh
+-zsh
+pane	3	0	:gost	1	:*	1	:/home/fra	1	gost	:-zsh
+-zsh
+-zsh
+gost -L tcp://:12336/:12322 -F wss://test-untoreh.c9users.io:443
+pane	3	0	:gost	1	:*	2	:/home/fra	0	zsh	:-zsh
+-zsh
+-zsh
+pane	331	0	:ssh	1	:*	0	:/home/fra	1	ssh	:-zsh
+-zsh
+-zsh
+ssh vrmchAged
+pane	368	0	:./monero-wallet-gui	1	:*	0	:/home/fra/.tmp/monero/monero-gui-v0.11.1.0	1	./monero-wallet-gui	:-zsh
+./monero-wallet-gui
+-zsh
+-zsh
+pane	389	0	:	1	:*	0	:/home/fra/.tmp/xmrig/CC	1	bash	:-zsh
+bash
+pane	4	0	:ssh	1	:*	0	:/home/fra	1	ssh	:-zsh
+ssh root@127.0.0.1 -p 12333 -i /home/fra/.ssh/id_rsa
+-zsh
+-zsh
+pane	411	0	:zsh	1	:*	0	:/home/fra/.tmp/scripts	1	zsh	:-zsh
+-zsh
+-zsh
+pane	435	0	:sudo	1	:*	0	:/home/fra	1	sudo	:-zsh
+-zsh
+-zsh
+sudo docker exec -it deployer bash -l
+pane	439	0	:gost	1	:*	0	:/home/fra	1	gost	:-zsh
+gost -L tcp://:8080/:12321 -F sni+tls://dyharp-dyharp.193b.starter-ca-central-1.openshiftapps.com:443
+-zsh
+-zsh
+pane	440	0	:ssh	1	:*	0	:/home/fra	1	ssh	:-zsh
+ssh root@127.0.0.1 -p 12321 -o ProxyCommand=nc -X connect -x 127.0.0.1:8080 %h %p -i /home/fra/.ssh/id_rsa
+-zsh
+-zsh
+pane	443	0	:sudo	1	:*	0	:/home/fra	1	sudo	:-zsh
+-zsh
+-zsh
+sudo docker exec -it deployer bash -l
+pane	450	0	:sudo	1	:*	0	:/home/fra	1	sudo	:-zsh
+-zsh
+-zsh
+sudo docker exec -it deployer bash -l
+pane	452	0	:zsh	1	:*	0	:/tmp	1	zsh	:-zsh
+-zsh
+-zsh
+pane	5	0	:ssh	1	:*	0	:/home/fra	1	ssh	:-zsh
+ssh root@127.0.0.1 -p 12333 -i /home/fra/.ssh/id_rsa
+-zsh
+-zsh
+pane	63	0	:zsh	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+-zsh
+window	0	0	1	:*	b25d,80x24,0,0,0
+window	1	0	1	:*	bc1e,70x55,0,0,1
+window	3	0	1	:*	55f9,212x54,0,0{106x54,0,0[106x27,0,0,4,106x26,0,28,149],105x54,107,0,98}
+window	331	0	1	:*	2f57,70x55,0,0,345
+window	368	0	1	:*	2f56,70x55,0,0,382
+window	389	0	1	:*	6ce3,80x24,0,0,403
+window	4	0	1	:*	bc22,70x55,0,0,5
+window	411	0	1	:*	6ce6,80x24,0,0,425
+window	435	0	1	:*	6ebb,77x25,0,0,449
+window	439	0	1	:*	ece5,80x24,0,0,453
+window	440	0	1	:*	ece6,80x24,0,0,454
+window	443	0	1	:*	ece9,80x24,0,0,457
+window	450	0	1	:*	6ce7,80x24,0,0,464
+window	452	0	1	:*	6d41,112x23,0,0,466
+window	5	0	1	:*	bc23,70x55,0,0,6
+window	63	0	1	:*	df25,212x54,0,0,64
+state	443	

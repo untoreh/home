@@ -1,0 +1,21 @@
+<?php
+require "/var/www/blogmal/wp-load.php";
+require_once "/usr/share/php/vendor/autoload.php";
+require_once "/var/www/blogmal/mda/plugins/transposh-translation-filter-for-wordpress/core/phptrans.php";
+header('Content-Type: text/plain');
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Handler\CurlMultiHandler;
+use GuzzleHttp\TransferStats;
+use Stichoza\GoogleTranslate\TranslateClient;
+
+
+use GuzzleHttp\Pool;
+use GuzzleHttp\Promise;
+//use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+
+//$req = $_SERVER['req'];
+
+

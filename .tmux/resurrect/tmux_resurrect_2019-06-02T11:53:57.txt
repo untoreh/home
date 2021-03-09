@@ -1,0 +1,44 @@
+pane	18	0	:sudo	1	:*	0	:/var/home/fra	1	sudo	:-zsh
+-zsh
+-zsh
+sudo docker exec -it blogmal /bin/sh -li
+pane	25	0	:zsh	1	:*	0	:/var/home/fra/.tmp/blogmal/tasks/extract/newspaper3k	1	zsh	:-zsh
+-zsh
+-zsh
+pane	26	0	:zsh	1	:*	0	:/var/home/fra/.tmp/blogmal/tasks/cleanup	1	zsh	:-zsh
+-zsh
+-zsh
+pane	31	0	:zsh	1	:*	0	:/var/home/fra/.tmp/blogmal/tasks/cleanup/cmd	1	zsh	:-zsh
+-zsh
+-zsh
+pane	31	0	:zsh	1	:*	1	:/var/home/fra/.tmp/blogmal/tasks/cleanup/cmd	0	zsh	:zsh -li
+zsh -li
+zsh -li
+pane	31	0	:zsh	1	:*	2	:/var/home/fra/.tmp/blogmal/tasks/cleanup/cmd	0	zsh	:-zsh
+-zsh
+-zsh
+pane	40	0	:zsh	1	:*	0	:/var/home/fra/.tmp/blogmal/tasks/cleanup	1	zsh	:-zsh
+-zsh
+-zsh
+pane	50	0	:sudo	1	:*	0	:/var/home/fra	1	sudo	:-zsh
+-zsh
+-zsh
+sudo docker exec -it mediabox-new bash
+pane	mining	0	:xmr	1	:*	0	:/var/home/fra/.tmp/xmrig	0	./xmrig	:-zsh
+-zsh
+-zsh
+./xmrig
+pane	mining	0	:xmr	1	:*	1	:/var/home/fra/.tmp/wallets/unprll	0	./unprlld	:-zsh
+./unprlld --data-dir=/home/fra/.tmp/wallets/unprll --start-mining=UNP1knxEev3SqRji39czqnT2vnXD9CrXnEEKfuKdeqRcXPnroeU1X37MBgXx7PJ7DoJed4efqjLy8R7RiXc2H5na9Qnq3AgtX6
+pane	mining	0	:xmr	1	:*	2	:/var/home/fra/.tmp/wallets/unprll	1	sudo	:-zsh
+-zsh
+-zsh
+sudo docker exec --privileged -it -e SHELL=/bin/zsh dpl /bin/zsh -li
+window	18	0	1	:*	d581,71x22,0,0,22
+window	25	0	1	:*	d588,71x22,0,0,29
+window	26	0	1	:*	5580,71x22,0,0,30
+window	31	0	1	:*	765b,71x22,0,0[71x11,0,0,36,71x10,0,12{35x10,0,12,40,35x10,36,12,52}]
+window	40	0	1	:*	d588,71x22,0,0,48
+window	50	0	1	:*	d583,71x22,0,0,62
+window	mining	0	1	:*	3f5e,213x58,0,0{106x58,0,0,43,106x58,107,0[106x29,107,0,44,106x28,107,30,49]}
+state	50	

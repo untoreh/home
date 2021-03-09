@@ -1,0 +1,20 @@
+pane	18	0	:zsh	1	:*	0	:/	1	zsh	:-zsh
+-zsh
+-zsh
+pane	5	0	:sudo	1	:*	0	:/	1	sudo	:-zsh
+-zsh
+-zsh
+sudo docker exec -it -w/freqtrade freqtrade /bin/bash -li
+pane	5	0	:sudo	1	:*	1	:/	0	sudo	:-zsh
+-zsh
+-zsh
+sudo docker exec -it -w/freqtrade freqtrade /bin/bash -li
+pane	amityd	0	:amityd	1	:*	0	:/var/home/fra/.tmp/wallets/xam	1	amityd	:
+pane	nervad	0	:nervad	1	:*	0	:/var/home/fra/.tmp/wallets/xnv	1	nervad	:
+pane	unprlld	0	:unprlld	1	:*	0	:/var/home/fra/.tmp/wallets/ull	1	unprlld	:
+window	18	0	1	:*	d57f,71x22,0,0,20
+window	5	0	1	:*	d55a,213x57,0,0[213x28,0,0,6,213x28,0,29,7]
+window	amityd	0	1	:*	5963,80x24,0,0,14
+window	nervad	0	1	:*	5961,80x24,0,0,12
+window	unprlld	0	1	:*	5962,80x24,0,0,13
+state	18	

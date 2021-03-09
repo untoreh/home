@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: json_src
+# key: jso
+# --
+#+begin_src json

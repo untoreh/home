@@ -1,0 +1,8 @@
+#!/bin/bash
+ds urxvtc -title "crrrrrrrrrrr -e exec /bin/bash -c "/bin/bash -lic 'tmuxcore'"
+r: target STRING not available
+"
+
+#ds urxvtc -title "core@coreos1:/home/core" -e sh -c "zsh -lic 'ccore1'"
+#ds urxvtc -title "core@coreos2:/home/core" -e sh -c "zsh -lic 'ccore2'"
+#ds urxvtc -title "core@coreos3:/home/core" -e sh -c "zsh -lic 'ccore3'" 

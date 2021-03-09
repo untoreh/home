@@ -1,0 +1,30 @@
+pane	amityd	0	:amityd	1	:*	0	:/var/home/fra/.tmp/wallets/xam	1	amityd	:
+pane	freqtrade	0	:sudo	1	:*	0	:/root	1	sudo	:sudo docker exec -it -w/freqtrade fqt /bin/bash -li
+-zsh
+-zsh
+-zsh
+pane	freqtrade	0	:sudo	1	:*	1	:/root	0	sudo	:-zsh
+-zsh
+-zsh
+sudo docker exec -it -w/freqtrade fqt /bin/bash -li
+pane	freqtrade	0	:sudo	1	:*	2	:/var/home/fra/.tmp/freqtrade	0	zsh	:-zsh
+-zsh
+-zsh
+pane	nerva	0	:zsh	1	:*	0	:/var/home/fra/.tmp/wallets/xnv	1	zsh	:-zsh
+-zsh
+-zsh
+pane	nerva	0	:zsh	1	:*	1	:/media/fra/volatile/chains/xnv	0	zsh	:-zsh
+-zsh
+-zsh
+pane	nervad	0	:nervad	1	:*	0	:/var/home/fra/.tmp/wallets/xnv	1	nervad	:
+pane	turtle	0	:zsh	1	:*	0	:/var/home/fra/.tmp/wallets/trtl	1	zsh	:-zsh
+-zsh
+-zsh
+pane	unprlld	0	:unprlld	1	:*	0	:/var/home/fra/.tmp/wallets/ull	1	unprlld	:
+window	amityd	0	1	:*	5961,80x24,0,0,12
+window	freqtrade	0	1	:*	07bd,213x57,0,0[213x26,0,0,47,213x30,0,27{106x30,0,27,49,106x30,107,27,66}]
+window	nerva	0	1	:*	a0b6,71x22,0,0[71x11,0,0,435,71x10,0,12,436]
+window	nervad	0	1	:*	6af2,71x22,0,0,440
+window	turtle	0	1	:*	6afa,71x22,0,0,429
+window	unprlld	0	1	:*	b265,80x24,0,0,8
+state	nervad	

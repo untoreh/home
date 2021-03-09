@@ -1,0 +1,36 @@
+pane	294	0	:root@212.237.6.194	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+ssh root@212.237.6.194
+pane	312	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	334	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	336	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	338	1	:root@212.237.6.194	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+ssh root@212.237.6.194
+pane	354	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	373	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+-zsh
+-zsh
+pane	374	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	380	0	:ubuntu@54.227.103.51	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+ssh ubuntu@54.227.103.51 -i /home/fra/.ssh/amazon_rsa
+pane	387	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+window	294	0	1	:*	6f00,110x25,0,0,294
+window	312	0	1	:*	ade2,80x25,0,0,312
+window	334	0	1	:*	acbd,173x22,0,0,334
+window	336	0	1	:*	ade7,80x25,0,0,336
+window	338	1	1	:*	ade9,80x25,0,0,338
+window	354	0	1	:*	ade6,80x25,0,0,354
+window	373	0	1	:*	ade6,80x25,0,0,373
+window	374	0	1	:*	ade7,80x25,0,0,374
+window	380	0	1	:*	2de4,80x25,0,0,380
+window	387	0	1	:*	2deb,80x25,0,0,387
+state	380	

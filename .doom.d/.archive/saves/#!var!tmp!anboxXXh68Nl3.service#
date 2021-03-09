@@ -1,0 +1,13 @@
+[Unit]
+Description=Anbox session manager
+
+[Service]
+Type=simple
+Evironment=
+ExecStart=/snap/bin/anbox session-manager --gles-driver=host --single-window
+Restart=always
+StartLimitIntervalSec=3
+StartLimitBurst=1
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,35 @@
+pane	1127	0	:dkr	1	:*	0	:/home/fra	1	sudo	:-zsh
+-zsh
+sudo docker exec -it wordpress_hhvm_1 bash
+pane	1174	0	:..form-impl/src	1	:*	0	:/home/fra/.tmp/intellij-community/platform/platform-impl/src	1	zsh	:-zsh
+-zsh
+pane	1258	0	:sshcore1	1	:*	0	:/home/fra	1	ssh	:-zsh
+-zsh
+ssh core@104.238.222.215 -p 2468
+pane	1265	0	:..ntent/plugins	1	:*	0	:/home/fra/.tmp/wordpress/var/www/wp/wp-content/plugins	1	zsh	:-zsh
+-zsh
+pane	1270	0	:/tmp/guzzle	1	:*	0	:/tmp/guzzle	1	zsh	:-zsh
+-zsh
+pane	366	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	937	0	:sshcore3	1	:*	0	:/home/fra	1	ssh	:-zsh
+-zsh
+ssh core@104.238.222.217 -p 2468
+pane	coreshells	0	:ccore1	1	:*	0	:/home/fra	1	mosh-client	:-zsh
+-zsh
+mosh-client -# -a --server=/opt/bin/mosh-server --ssh=ssh -p 2468 core@104.238.222.215 chroot -- /host bash -l -i | 104.238.222.215 60001
+pane	coreshells	0	:ccore1	1	:*	1	:/home/fra	0	mosh-client	:-zsh
+-zsh
+mosh-client -# -a --server=/opt/bin/mosh-server --ssh=ssh -p 2468 core@104.238.222.216 chroot -- /host bash -l -i | 104.238.222.216 60001
+pane	coreshells	0	:ccore1	1	:*	2	:/home/fra	0	mosh-client	:-zsh
+-zsh
+mosh-client -# -a --server=/opt/bin/mosh-server --ssh=ssh -p 2468 core@104.238.222.217 chroot -- /host bash -l -i | 104.238.222.217 60001
+window	1127	0	1	:*	d6ac,80x24,0,0,1298
+window	1174	0	1	:*	96a8,80x24,0,0,1346
+window	1258	0	1	:*	d6a5,80x24,0,0,1443
+window	1265	0	1	:*	56a4,80x24,0,0,1451
+window	1270	0	1	:*	56aa,80x24,0,0,1457
+window	366	0	1	:*	6ce3,80x24,0,0,422
+window	937	0	1	:*	d6a8,80x24,0,0,1047
+window	coreshells	0	1	:*	16a1,147x50,0,0{67x50,0,0,0,79x50,68,0[79x25,68,0,1,79x24,68,26,2]}
+state	1270	

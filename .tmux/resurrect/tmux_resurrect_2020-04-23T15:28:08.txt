@@ -1,0 +1,37 @@
+pane	amityd	0	:amityd	1	:*	0	:/var/home/fra/.tmp/wallets/xam	1	amityd	:
+pane	clever-hookworm	0	:fish	1	:*	0	:/root	1	fish	:
+pane	crisp-primate	0	:htop	1	:*	0	:/root	1	htop	:htop
+pane	evolving-hamster	0	:ping	1	:*	0	:/root	1	ping	:ping xnp1.service.cluster.consulate.ga
+pane	fitting-toucan	0	:ssh	1	:*	0	:/root	1	ssh	:/usr/bin/ssh vrmc6
+pane	just-dinosaur	0	:fish	1	:*	0	:/root	1	fish	:
+pane	lucky-bee	0	:fish	1	:*	0	:/root	1	fish	:
+pane	massive-moose	0	:zsh	1	:*	0	:/root	1	zsh	:zsh -li
+pane	master-zebra	0	:fish	1	:*	0	:/root	1	fish	:
+pane	nervad	0	:nervad	1	:*	0	:/var/home/fra/.tmp/wallets/xnv	1	nervad	:
+pane	polite-skylark	0	:ssh	1	:*	0	:/root	1	ssh	:/usr/bin/ssh vrmc2
+pane	sacred-halibut	0	:htop	1	:*	0	:/root	1	htop	:htop
+pane	square-buzzard	0	:zsh	1	:*	0	:/root	1	zsh	:zsh -li
+pane	sweeping-ghoul	0	:ping	1	:*	0	:/root	1	ping	:/bin/ping google.it
+sed -r s/.*time=((.*)ms)/\1/
+grep --color=auto --line-buffered time=
+pane	tidy-ladybug	0	:ssh	1	:*	0	:/root	1	ssh	:/usr/bin/ssh vrmc5
+pane	tough-mudfish	0	:fish	1	:*	0	:/root	1	fish	:
+pane	unprll	0	:unprlld	1	:*	0	:/var/home/fra/.tmp/wallets/ull	1	unprlld	:
+window	amityd	0	1	:*	ace2,80x24,0,0,160
+window	clever-hookworm	0	1	:*	32e4,213x57,0,0,171
+window	crisp-primate	0	1	:*	2af8,71x22,0,0,175
+window	evolving-hamster	0	1	:*	5585,71x22,0,0,92
+window	fitting-toucan	0	1	:*	2af3,71x22,0,0,170
+window	just-dinosaur	0	1	:*	2af6,71x22,0,0,173
+window	lucky-bee	0	1	:*	32eb,213x57,0,0,178
+window	massive-moose	0	1	:*	2af5,71x22,0,0,172
+window	master-zebra	0	1	:*	32ec,213x57,0,0,179
+window	nervad	0	1	:*	ace3,80x24,0,0,161
+window	polite-skylark	0	1	:*	aafb,71x22,0,0,169
+window	sacred-halibut	0	1	:*	2af7,71x22,0,0,174
+window	square-buzzard	0	1	:*	3411,105x58,0,0,176
+window	sweeping-ghoul	0	1	:*	aaf3,71x22,0,0,104
+window	tidy-ladybug	0	1	:*	aafa,71x22,0,0,168
+window	tough-mudfish	0	1	:*	2afa,71x22,0,0,177
+window	unprll	0	1	:*	ace4,80x24,0,0,162
+state	master-zebra	

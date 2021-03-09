@@ -1,0 +1,22 @@
+apt-get update
+  15    lxa apt-get full-upgrade -y -q
+    16    lxa apt-get autoclean
+      17    lxa apt-get clean
+        18    lxa apt-get autoremove -y
+          19    # ubuntu apps
+            20    lxa $sd /home/fra/.bin/update-firefox
+              21    # python
+                22    iu=`echo "install --user --upgrade"`
+                  23    lp=`echo "list --user --outdated --format=legacy"`
+                    24    grp=`echo "grep -zv 'python-apt|librtmp|distro-info'"`
+                      25    ct=`echo "cut -d' ' -f1 "`
+                        26    z="/dev/null"
+                          27    # 2
+                            28    lxa pip $iu pip
+                              29    lxa pip $lp | $grp | $ct 2>$z | xargs pip $iu
+                                30    lxa $sd pip $lp | $grp | $ct 2>$z | xargs $sd pip $iu
+                                  31    # 3
+                                    32    lxa pip3 $iu pip
+                                      33    lxa pip3 $lp | $grp | $ct 2>$z | xargs pip3 $iu
+                                        34    lxa $sd pip3 $lp | $grp | $ct 2>$z | xargs $sd pip3 $iu
+                                        

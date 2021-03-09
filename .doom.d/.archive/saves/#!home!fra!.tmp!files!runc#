@@ -1,0 +1,51 @@
+docker-containerd -l unix:///var/run/docker/libcontainerd/docker-containerd.sock --metrics-interval=0 --start-timeout 2m --state-dir /var/run/docker/libcontainerd/containerd --shim docker-containerd-shim --runtime /usr/local/bin/runc --runtime-args "--no-new-keyring" &
+
+dockerd --seccomp-profile=profile.json --iptables=false --containerd=///var/run/docker/libcontainerd/docker-containerd.sock &
+
+
+
+docker-containerd --debug -l unix:///var/run/docker/libcontainerd/docker-containerd.sock --start-timeout 2m --runtime=/usr/local/bin/docker-runc --shim docker-containerd-shim --runtime-args="no-new-keyring" &
+
+docker daemon -D -l debug --containerd=/var/run/docker/libcontainerd/docker-containerd.sock &
+
+docker run --rm -it --security-opt seccomp=unconfined --net=host --pid=host --privileged=true busybox /bin/sh
+
+runc run alp --no-new-keyring --bundle /mycontainer/
+
+/whoami/rootfs/whoamI
+
+docker run --rm nginx:alpine nginx -g "daemon off;" &
+
+## runc
+docker export $(docker create busybox) | tar -C rootfs -xvf -
+
+ostree --repo=/var/lib/apps/repo commit -b nginx --tree=dir=/nginx
+
+
+for i in {1..5}; do
+    runc run nginx${i} --no-new-keyring --bundle /nginx${i}
+done
+
+
+
+"CAP_AUDIT_WRITE",
+"CAP_CHOWN",
+"CAP_DAC_OVERRIDE",
+"CAP_FSETID",
+"CAP_FOWNER",
+"CAP_KILL",
+"CAP_MKNOD",
+"CAP_NET_RAW",
+"CAP_NET_BIND_SERVICE",
+"CAP_SETUID",
+"CAP_SETGID",
+"CAP_SETPCAP",
+"CAP_SETFCAP",
+"CAP_SYS_CHROOT",
+
+alpine-base sudo tzdata  \
+            mkinitfs xfsprogs  \
+            util-linux binutils coreutils blkid multipath-tools  \
+            ca-certificates wget ethtool iptables  \
+            ostree git  \
+            htop iftop bash sysstat tmux dropbear-ssh dropbear-scp

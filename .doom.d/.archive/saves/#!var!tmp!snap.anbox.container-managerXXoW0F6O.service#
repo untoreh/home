@@ -1,0 +1,23 @@
+[Unit]
+# Auto-generated, DO NOT EDIT
+Description=Service for snap application anbox.container-manager
+Requires=snap-anbox-15.mount
+Wants=network-online.target
+After=snap-anbox-15.mount network-online.target
+X-Snappy=yes
+
+[Service]
+ExecStart=/usr/bin/snap run anbox.container-manager --android
+SyslogIdentifier=anbox.container-manager
+Restart=on-failure
+WorkingDirectory=/var/snap/anbox/15
+ExecStop=/usr/bin/snap run --command=stop anbox.container-manager
+
+
+TimeoutStopSec=30
+Type=simple
+
+
+
+[Install]
+WantedBy=multi-user.target

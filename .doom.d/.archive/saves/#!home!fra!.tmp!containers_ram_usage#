@@ -1,0 +1,27 @@
+160.5M K
+105.1M U
+
+136.2M K
+78.8M U
+
+20 busybox container sleep = 50M with docker
+
+
+## rkt
+90.2M K
+32.9M U
+
+137.3M
+72.2M
+
+20 busybox containers sleep = 70M with rkt
+
+
+144.4M
+228.6M
+
+170.5M
+222.1M
+
+175.3M
+231.6M

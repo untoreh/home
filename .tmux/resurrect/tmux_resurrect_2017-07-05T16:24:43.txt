@@ -1,0 +1,8 @@
+pane	0	0	:root@198.23.201.227	1	:*	0	:/home/fra	1	ssh	:-zsh
+-zsh
+ssh root@198.23.201.227
+pane	2	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+window	0	0	1	:*	b65d,80x25,0,0,0
+window	2	0	1	:*	b65f,80x25,0,0,2
+state	2	

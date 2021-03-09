@@ -1,0 +1,32 @@
+pane	16	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	496	0	:root@192.168.100.216	1	:*	0	:/home/fra	1	ssh	:-zsh
+-zsh
+ssh root@192.168.100.216
+pane	503	0	:root@212.237.6.194	1	:*	0	:/home/fra	1	ssh	:-zsh
+-zsh
+ssh root@212.237.6.194
+pane	509	0	:vagrant	1	:*	0	:/home/fra/.tmp/locksmith	0	ssh	:-zsh
+-zsh
+ssh vagrant@192.168.121.189 -p 22 -o Compression=yes -o DSAAuthentication=yes -o LogLevel=FATAL -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/fra/.tmp/locksmith/.vagrant/machines/lock1/libvirt/private_key
+pane	509	0	:vagrant	1	:*	1	:/home/fra/.tmp/locksmith	0	ssh	:-zsh
+-zsh
+ssh vagrant@192.168.121.233 -p 22 -o Compression=yes -o DSAAuthentication=yes -o LogLevel=FATAL -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/fra/.tmp/locksmith/.vagrant/machines/lock2/libvirt/private_key
+pane	509	0	:vagrant	1	:*	2	:/home/fra/.tmp/locksmith	1	ssh	:-zsh
+-zsh
+ssh vagrant@192.168.121.71 -p 22 -o Compression=yes -o DSAAuthentication=yes -o LogLevel=FATAL -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/fra/.tmp/locksmith/.vagrant/machines/lock3/libvirt/private_key
+pane	coreshells	0	:/home/fra	1	:*	0	:/home/fra	0	zsh	:-zsh
+-zsh
+sudo su
+pane	coreshells	0	:/home/fra	1	:*	1	:/home/fra	0	zsh	:-zsh
+-zsh
+sudo su
+pane	coreshells	0	:/home/fra	1	:*	2	:/home/fra	1	zsh	:-zsh
+-zsh
+sudo su
+window	16	0	1	:*	5be7,211x43,0,0,18
+window	496	0	1	:*	ec14,128x40,0,0,498
+window	503	0	1	:*	ac0d,128x40,0,0,505
+window	509	0	1	:*	dd88,128x40,0,0[128x12,0,0,511,128x12,0,13,514,128x14,0,26,515]
+window	coreshells	0	1	:*	dc9d,239x66,0,0{119x66,0,0,0,119x66,120,0[119x33,120,0,1,119x32,120,34,2]}
+state	503	

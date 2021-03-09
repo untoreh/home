@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: prer
+# key: prer
+# --
+error_log(print_r($0, 1));

@@ -1,0 +1,99 @@
+;;;; Emacs Bookmark Format Version 1 ;;;; -*- coding: utf-8-emacs -*- 
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+;;;; Emacs Bookmark Format Version 1 ;;;; -*- coding: utf-8-emacs -*- 
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+;;;; Emacs Bookmark Format Version 1 ;;;; -*- coding: utf-8-emacs -*- 
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(#1=(#("ranger-c" 0 8
+(bmkp-full-record #1#))
+(buffer-name . "tools")
+(front-context-string . " -rwxrwxr-x 1 fr")
+(rear-context-string . "lable 81040084\n ")
+(front-context-region-string)
+(rear-context-region-string)
+(visits . 0)
+(time . #2=(23119 37950 86358 874000))
+(created . #2#)
+(position . 52)
+(filename . #3="/tmp/scripts/tools/")
+(dired-directory . #3#)
+(dired-marked)
+(dired-switches . "-alGh")
+(dired-subdirs)
+(dired-hidden-dirs)
+(handler . bmkp-jump-dired))
+#1=(#("ranger-j" 0 8
+(bmkp-full-record #1#))
+(buffer-name . "/")
+(front-context-string . "home\n  drwxr-xr-")
+(rear-context-string . "24 Jun 26  2017 ")
+(front-context-region-string)
+(rear-context-region-string)
+(visits . 0)
+(time . #2=(23117 53148 188266 692000))
+(created . #2#)
+(position . 589)
+(filename . #3="/")
+(dired-directory . #3#)
+(dired-marked "/home")
+(dired-switches . "-alGh")
+(dired-subdirs)
+(dired-hidden-dirs)
+(handler . bmkp-jump-dired))
+#1=(#("ranger-e" 0 8
+(bmkp-full-record #1#))
+(filename . "/")
+(front-context-string . "home\n  drwxr-xr-")
+(rear-context-string . " 6 Nov 30 20:03 ")
+(position . 265))
+#1=(#("ranger-p" 0 8
+(bmkp-full-record #1#))
+(filename . "~/")
+(front-context-string . ".wine -> /home/f")
+(rear-context-string . "17 Nov 19 16:26 ")
+(position . 414))
+#1=(#("blogmal" 0 7
+(bmkp-full-record #1#))
+(filename . "/ssh:core@104.238.222.215#2468:/data/cephfs/var/www/blogmal/")
+(front-context-string . "index.php\n  drwx")
+(rear-context-string . "17 Nov 16 11:52 ")
+(position . 1467))
+#1=(#("Helm-find-files: /ssh:core@104.238.222.217#2468:/srv/" 0 53
+(bmkp-full-record #1#))
+(filename . "/ssh:core@104.238.222.217#2468:/srv/")
+(presel . "/ssh:core@104.238.222.217#2468:/srv/pods")
+(handler . helm-ff-bookmark-jump))
+#1=(#("Helm-find-files: /ssh:core@104.238.222.215#2468:/srv/" 0 53
+(bmkp-full-record #1#))
+(filename . "/ssh:core@104.238.222.215#2468:/srv/")
+(presel . "/ssh:core@104.238.222.215#2468:/srv/pods")
+(handler . helm-ff-bookmark-jump))
+#1=(#("Helm-find-files: /media/Stuff/stuff/Online/bag/" 0 47
+(bmkp-full-record #1#))
+(filename . "/media/Stuff/stuff/Online/bag/")
+(presel . "/media/Stuff/stuff/Online/bag/.")
+(handler . helm-ff-bookmark-jump))
+#1=(#("plugins" 0 7
+(bmkp-full-record #1#))
+(filename . "/ssh:core@104.238.222.215#2468:/data/cephfs/var/www/blogmal/mda/plugins/")
+(front-context-string . "a-long-time-ago\n")
+(rear-context-string . " 7 Jun 12 16:32 ")
+(position . 300))
+#1=(#("mda" 0 3
+(bmkp-full-record #1#))
+(filename . "/ssh:core@104.238.222.215#2468:/data/cephfs/var/www/blogmal/mda/")
+(front-context-string . "plugins\n  drwxr-")
+(rear-context-string . "74 Oct 22 14:35 ")
+(position . 1150))
+#1=(#("Helm-find-files: /ssh:core@104.238.222.215#2468:/data/" 0 54
+(bmkp-full-record #1#))
+(filename . "/ssh:core@104.238.222.215#2468:/data/")
+(presel . "/ssh:core@104.238.222.215#2468:/srv/")
+(handler . helm-ff-bookmark-jump))
+)

@@ -1,0 +1,17 @@
+#!/bin/sh
+
+PLAT=linux64
+WLTPATH=/vol/data/wlt/mnr/
+
+wget -q https://downloads.getmonero.org/cli/$PLAT
+tar jxf $PLAT
+rm $PLAT
+
+mkdir -p $WLTPATH
+mv monero*/* $WLTPATH
+mv $WLTPATH/monerod $WLTPATH/node
+rm -rf monero*
+cd $WLTPATH || exit 1
+if which tmux; then
+    PATH=.:$PATH tmux new-session -d -s node node
+fi

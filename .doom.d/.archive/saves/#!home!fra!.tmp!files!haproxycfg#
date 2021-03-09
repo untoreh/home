@@ -1,0 +1,13 @@
+frontend http
+        bind 0.0.0.0:80
+        # acl is_front hdr_end(host) -i citus1-untoreh.herokuapp.com
+        acl db path_end -i /db
+        use_backend db if db
+        default_backend default
+backend db
+        server server1 127.0.0.1:5432
+backend default
+        errorfile 503 /etc/haproxy/errors/503.http
+
+
+EXTRAOPTS="-f /etc/haproxy/proxy.cfg"

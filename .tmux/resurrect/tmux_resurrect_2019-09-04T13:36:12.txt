@@ -1,0 +1,38 @@
+pane	22	0	:sudo	1	:*	0	:/	1	sudo	:-zsh
+sudo docker exec -it freqtrade /bin/bash -li
+-zsh
+-zsh
+pane	27	0	:ssh	1	:*	0	:/	1	ssh	:-zsh
+-zsh
+-zsh
+ssh vrmc3
+pane	30	0	:zsh	1	:*	0	:/	1	zsh	:-zsh
+-zsh
+-zsh
+pane	5	0	:qalc	1	:*	0	:/	1	qalc	:-zsh
+-zsh
+-zsh
+qalc
+pane	7	0	:qalc	1	:*	0	:/	1	qalc	:-zsh
+-zsh
+-zsh
+qalc
+pane	amityd	0	:amityd	1	:*	0	:/var/home/fra/.tmp/wallets/xam	1	amityd	:
+pane	freqtrade	0	:sudo	1	:*M	0	:/	0	sudo	:-zsh
+-zsh
+-zsh
+sudo docker exec -it freqtrade /bin/bash -li
+pane	freqtrade	0	:sudo	1	:*M	1	:/	1	sudo	:-zsh
+-zsh
+-zsh
+sudo docker exec -it freqtrade /bin/bash -li
+pane	unprlld	0	:unprlld	1	:*	0	:/var/home/fra/.tmp/wallets/ull	1	unprlld	:
+window	22	0	1	:*	d581,71x22,0,0,22
+window	27	0	1	:*	d587,71x22,0,0,28
+window	30	0	1	:*	5861,213x60,0,0,31
+window	5	0	1	:*	aaa2,71x22,0,0,5
+window	7	0	1	:*	aaa4,71x22,0,0,7
+window	amityd	0	1	:*	b25e,80x24,0,0,1
+window	freqtrade	0	1	:*M	a29e,213x57,0,0[213x28,0,0,13,213x28,0,29,24]
+window	unprlld	0	1	:*	b25d,80x24,0,0,0
+state	30	

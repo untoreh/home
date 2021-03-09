@@ -1,0 +1,38 @@
+pane	1	0	:sudo	1	:*	0	:/home/fra/.cluster	0	sudo	:-zsh
+sudo docker exec -it -e SHELL=/bin/zsh deployer /bin/zsh -li
+-zsh
+-zsh
+pane	1	0	:sudo	1	:*	1	:/home/fra/.cluster	1	sudo	:-zsh
+-zsh
+-zsh
+sudo docker exec -it -e SHELL=/bin/zsh deployer /bin/zsh -li
+pane	1	0	:sudo	1	:*	2	:/home/fra/.cluster	0	zsh	:-zsh
+-zsh
+-zsh
+pane	56	0	:zsh	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+-zsh
+pane	59	0	:ssh	1	:*	0	:/home/fra	1	ssh	:-zsh
+-zsh
+-zsh
+ssh vrmc2
+pane	60	0	:ssh	1	:*	0	:/home/fra	0	ssh	:-zsh
+-zsh
+-zsh
+ssh woot1
+pane	60	0	:ssh	1	:*	1	:/home/fra	1	ssh	:ssh vrmc2
+-zsh
+-zsh
+-zsh
+pane	mining	0	:xmr	1	:*	0	:/home/fra/.tmp/xmrig	0	./xmrig	:-zsh
+-zsh
+-zsh
+./xmrig -c config.msri.json
+pane	mining	0	:xmr	1	:*	1	:/home/fra/.tmp/xmrig	1	./xmrig	:-zsh
+./xmrig -c config.ipbc.json
+window	1	0	1	:*	b84f,212x54,0,0{96x54,0,0,1,115x54,97,0[115x27,97,0,2,115x26,97,28,12]}
+window	56	0	1	:*	d581,71x22,0,0,60
+window	59	0	1	:*	d585,71x22,0,0,64
+window	60	0	1	:*	f013,213x60,0,0{106x60,0,0,65,106x60,107,0,66}
+window	mining	0	1	:*	6976,213x58,0,0{106x58,0,0,38,106x58,107,0,39}
+state	60	

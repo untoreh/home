@@ -1,0 +1,837 @@
+pane	0	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	10	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	100	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	103	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	104	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+ssh root@212.237.6.194
+pane	105	0	:..mp/containers	1	:*	0	:/home/fra/.tmp/containers	1	zsh	:-zsh
+-zsh
+pane	106	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	107	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	108	0	:root@212.237.6.194	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+ssh root@212.237.6.194
+pane	109	0	:cns	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+netcat 127.0.0.1 12322
+pane	110	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	111	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	112	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	113	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	114	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	115	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	116	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	117	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	118	0	:rdt	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+sudo radeontop -c
+pane	119	0	:htop	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+htop
+pane	12	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	120	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	121	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	122	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	123	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	124	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	125	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	126	0	:~/.ssh/ext	1	:*	0	:/home/fra/.ssh/ext	1	zsh	:-zsh
+-zsh
+pane	127	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	128	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	129	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	13	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	130	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	131	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	132	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	133	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	134	0	:~/.ssh/ext	1	:*	0	:/home/fra/.ssh/ext	1	zsh	:-zsh
+-zsh
+pane	135	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	136	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	137	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	138	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	139	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	14	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	140	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	141	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	142	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	143	0	:rtn	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+ssh root@192.168.1.1
+pane	144	0	:root@212.237.6.194	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+ssh root@212.237.6.194
+pane	145	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	146	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	147	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	148	0	:root@212.237.6.194	1	:*M	0	:/home/fra	1	zsh	:ssh root@212.237.6.194
+-zsh
+-zsh
+pane	149	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	15	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	150	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	151	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	152	0	:rtn	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+ssh root@192.168.1.1
+pane	153	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	154	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	155	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	156	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	157	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	158	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	159	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	16	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	160	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	161	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	162	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	163	0	:rtn	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+ssh root@192.168.1.1
+pane	164	0	:rtn	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+ssh root@192.168.1.1
+pane	165	0	:rtn	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+ssh root@192.168.1.1
+pane	166	0	:rtn	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+ssh root@192.168.1.1
+pane	167	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	168	0	:~/.ssh/ext	1	:*	0	:/home/fra/.ssh/ext	1	zsh	:-zsh
+-zsh
+pane	169	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	17	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	170	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	171	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	172	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	173	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	174	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	175	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	176	0	:root@212.237.6.194	1	:*	0	:/home/fra/.tmp	1	zsh	:-zsh
+-zsh
+ssh root@212.237.6.194
+pane	177	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	178	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	179	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	18	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	180	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	181	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	182	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	183	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	184	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	185	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	186	0	:rtn	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+ssh root@192.168.1.1
+pane	187	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	188	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	189	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	19	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	190	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	191	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	192	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	193	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	194	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	195	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	196	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	197	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	198	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	199	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	2	0	:root@212.237.6.194	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+ssh root@212.237.6.194
+pane	20	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	200	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	201	0	:vim	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+nvim /run/user/1000/gvfs/ftp:host=ftp.gear.host/site/wwwroot/spawn.php
+pane	202	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	203	0	:~/Downloads	1	:*	0	:/home/fra/Downloads	1	zsh	:-zsh
+-zsh
+pane	205	0	:..loads/openssh	1	:*	0	:/home/fra/Downloads/openssh	1	zsh	:-zsh
+-zsh
+pane	206	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	207	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	208	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	21	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	210	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	211	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	212	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	213	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	214	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	215	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+-zsh
+pane	216	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	217	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	218	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	219	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	22	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	220	0	:aznft	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+ssh aznft
+pane	221	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	222	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	223	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	224	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	225	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	226	0	:root@212.237.6.194	1	:*	0	:/home/fra	1	zsh	:ssh root@212.237.6.194
+-zsh
+-zsh
+pane	227	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	228	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	229	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	23	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	230	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	231	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	232	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	233	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	234	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	235	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	236	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	237	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	24	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	241	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	243	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	244	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	245	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	246	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	247	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	248	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	249	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	25	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	251	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	252	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	253	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	254	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	255	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	256	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	257	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	258	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	259	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	26	0	:10.244.36.179	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+mosh-client -# 10.244.36.179 | 10.244.36.179 60001
+pane	260	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	261	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	262	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	263	0	:root@212.237.6.194	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+ssh root@212.237.6.194
+pane	264	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	265	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	266	0	:rtn	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+ssh root@192.168.1.1
+pane	267	0	:rtn	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+ssh root@192.168.1.1
+pane	268	0	:rtn	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+ssh root@192.168.1.1
+pane	269	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	27	0	:~/tmp/google	1	:*	0	:/home/fra/tmp/google	1	zsh	:-zsh
+-zsh
+pane	270	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	271	0	:root@212.237.6.194	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+ssh root@212.237.6.194
+pane	272	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	273	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+-zsh
+-zsh
+pane	274	0	:root@212.237.6.194	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+ssh root@212.237.6.194
+pane	28	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	29	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	3	0	:root@212.237.6.194	1	:*	0	:/home/fra	1	zsh	:ssh root@212.237.6.194
+-zsh
+-zsh
+pane	30	0	:..tmp/fixietest	1	:*	0	:/home/fra/.tmp/fixietest (deleted)	1	zsh	:-zsh
+-zsh
+pane	31	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	32	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	33	0	:rtn	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+ssh root@192.168.1.1
+pane	34	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	35	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	36	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	37	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	38	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	39	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	4	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	40	0	:bassomails@10.244.36.179	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+mosh-client -# bassomails@10.244.36.179 | 10.244.36.179 60002
+pane	41	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	42	0	:bassomails@10.244.36.179	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+mosh-client -# bassomails@10.244.36.179 | 10.244.36.179 60003
+pane	43	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	44	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	45	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	46	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	47	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	48	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	49	0	:~	1	:*	0	:/home/fra	1	zsh	:zsh
+zsh
+pane	5	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	50	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	51	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	52	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	53	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	54	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	55	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+-zsh
+pane	56	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	57	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	58	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	59	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	6	0	:root@212.237.6.194	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+ssh root@212.237.6.194
+pane	60	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	61	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	62	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	63	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	64	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	65	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	66	0	:..illora/chisel	1	:*	0	:/home/fra/.zplug/repos/jpillora/chisel	1	zsh	:zsh -li
+zsh -li
+pane	67	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	68	0	:bassomails@10.244.36.179	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+mosh-client -# bassomails@10.244.36.179 | 10.244.36.179 60001
+pane	69	0	:~/.tmp	1	:*	0	:/home/fra/.tmp	1	zsh	:-zsh
+-zsh
+pane	7	0	:..mp/containers	1	:*	0	:/home/fra/.tmp/containers	1	zsh	:-zsh
+-zsh
+pane	70	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	71	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	72	0	:root@212.237.6.194	1	:*	0	:/home/fra	1	zsh	:ssh root@212.237.6.194
+-zsh
+-zsh
+pane	73	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	74	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	75	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	76	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	77	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	78	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	79	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	8	0	:rtn	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+ssh root@192.168.1.1
+pane	80	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	81	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	82	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	83	0	:gos	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+mosh-client -# bassomails@10.244.36.179 | 10.244.36.179 60001
+pane	84	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	85	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	86	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	87	0	:root@212.237.6.194	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+ssh root@212.237.6.194
+pane	88	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	89	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	9	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	90	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	91	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	92	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	93	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	94	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+[zsh] <defunct>
+-zsh
+pane	95	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	96	0	:cns	1	:*	0	:/home/fra	1	zsh	:netcat 127.0.0.1 12322
+-zsh
+-zsh
+pane	97	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	98	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	99	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+window	0	0	1	:*	b65e,80x25,0,0,1
+window	10	0	1	:*	5b5f,80x25,0,0,10
+window	100	0	1	:*	2de1,80x25,0,0,111
+window	103	0	1	:*	2de6,80x25,0,0,116
+window	104	0	1	:*	3017,99x26,0,0,117
+window	105	0	1	:*	2de8,80x25,0,0,118
+window	106	0	1	:*	ade0,80x25,0,0,120
+window	107	0	1	:*	ade1,80x25,0,0,121
+window	108	0	1	:*	b10b,120x27,0,0,123
+window	109	0	1	:*	ade4,80x25,0,0,124
+window	110	0	1	:*	ade5,80x25,0,0,125
+window	111	0	1	:*	ae7e,133x24,0,0,126
+window	112	0	1	:*	adb7,96x24,0,0,127
+window	113	0	1	:*	ade9,80x25,0,0,129
+window	114	0	1	:*	2de1,80x25,0,0,130
+window	115	0	1	:*	2de2,80x25,0,0,131
+window	116	0	1	:*	2de3,80x25,0,0,132
+window	117	0	1	:*	2de4,80x25,0,0,133
+window	118	0	1	:*	2de5,80x25,0,0,134
+window	119	0	1	:*	2de6,80x25,0,0,135
+window	12	0	1	:*	5b61,80x25,0,0,12
+window	120	0	1	:*	2de7,80x25,0,0,136
+window	121	0	1	:*	2de8,80x25,0,0,137
+window	122	0	1	:*	2de9,80x25,0,0,138
+window	123	0	1	:*	2dea,80x25,0,0,139
+window	124	0	1	:*	ade1,80x25,0,0,140
+window	125	0	1	:*	ae12,99x24,0,0,141
+window	126	0	1	:*	ade3,80x25,0,0,142
+window	127	0	1	:*	ade4,80x25,0,0,143
+window	128	0	1	:*	ade5,80x25,0,0,144
+window	129	0	1	:*	ade6,80x25,0,0,145
+window	13	0	1	:*	5b62,80x25,0,0,13
+window	130	0	1	:*	ade7,80x25,0,0,146
+window	131	0	1	:*	ade8,80x25,0,0,147
+window	132	0	1	:*	ade9,80x25,0,0,148
+window	133	0	1	:*	adea,80x25,0,0,149
+window	134	0	1	:*	2de2,80x25,0,0,150
+window	135	0	1	:*	2de3,80x25,0,0,151
+window	136	0	1	:*	2f14,91x26,0,0,152
+window	137	0	1	:*	2de5,80x25,0,0,153
+window	138	0	1	:*	2de6,80x25,0,0,154
+window	139	0	1	:*	2de7,80x25,0,0,155
+window	14	0	1	:*	5b63,80x25,0,0,14
+window	140	0	1	:*	2de8,80x25,0,0,156
+window	141	0	1	:*	2de9,80x25,0,0,157
+window	142	0	1	:*	2dea,80x25,0,0,158
+window	143	0	1	:*	2deb,80x25,0,0,159
+window	144	0	1	:*	acca,103x32,0,0,160
+window	145	0	1	:*	ade3,80x25,0,0,161
+window	146	0	1	:*	ade4,80x25,0,0,162
+window	147	0	1	:*	ade5,80x25,0,0,163
+window	148	0	1	:*M	aece,149x33,0,0,164
+window	149	0	1	:*	ade7,80x25,0,0,165
+window	15	0	1	:*	5b64,80x25,0,0,15
+window	150	0	1	:*	ade8,80x25,0,0,166
+window	151	0	1	:*	ade9,80x25,0,0,167
+window	152	0	1	:*	adea,80x25,0,0,168
+window	153	0	1	:*	adeb,80x25,0,0,169
+window	154	0	1	:*	2de3,80x25,0,0,170
+window	155	0	1	:*	322c,106x18,0,0,171
+window	156	0	1	:*	2de5,80x25,0,0,172
+window	157	0	1	:*	2de6,80x25,0,0,173
+window	158	0	1	:*	2de7,80x25,0,0,174
+window	159	0	1	:*	2de8,80x25,0,0,175
+window	16	0	1	:*	5b65,80x25,0,0,16
+window	160	0	1	:*	2de9,80x25,0,0,176
+window	161	0	1	:*	ade4,80x25,0,0,181
+window	162	0	1	:*	ade5,80x25,0,0,182
+window	163	0	1	:*	ade6,80x25,0,0,183
+window	164	0	1	:*	ade7,80x25,0,0,184
+window	165	0	1	:*	ade8,80x25,0,0,185
+window	166	0	1	:*	ade9,80x25,0,0,186
+window	167	0	1	:*	ac72,127x31,0,0,187
+window	168	0	1	:*	adeb,80x25,0,0,188
+window	169	0	1	:*	adec,80x25,0,0,189
+window	17	0	1	:*	5b66,80x25,0,0,17
+window	170	0	1	:*	2de4,80x25,0,0,190
+window	171	0	1	:*	2de5,80x25,0,0,191
+window	172	0	1	:*	2de6,80x25,0,0,192
+window	173	0	1	:*	2de7,80x25,0,0,193
+window	174	0	1	:*	2de8,80x25,0,0,194
+window	175	0	1	:*	2de9,80x25,0,0,195
+window	176	0	1	:*	2cfa,90x24,0,0,196
+window	177	0	1	:*	2ded,80x25,0,0,199
+window	178	0	1	:*	eddf,80x25,0,0,200
+window	179	0	1	:*	ede0,80x25,0,0,201
+window	18	0	1	:*	5b67,80x25,0,0,18
+window	180	0	1	:*	ede1,80x25,0,0,202
+window	181	0	1	:*	ede2,80x25,0,0,203
+window	182	0	1	:*	ede3,80x25,0,0,204
+window	183	0	1	:*	ede4,80x25,0,0,205
+window	184	0	1	:*	ede5,80x25,0,0,206
+window	185	0	1	:*	ede6,80x25,0,0,207
+window	186	0	1	:*	ede7,80x25,0,0,208
+window	187	0	1	:*	ede8,80x25,0,0,209
+window	188	0	1	:*	6de0,80x25,0,0,210
+window	189	0	1	:*	6de1,80x25,0,0,211
+window	19	0	1	:*	5b68,80x25,0,0,19
+window	190	0	1	:*	6efa,118x24,0,0,212
+window	191	0	1	:*	6de3,80x25,0,0,213
+window	192	0	1	:*	6de4,80x25,0,0,214
+window	193	0	1	:*	6de5,80x25,0,0,215
+window	194	0	1	:*	6de6,80x25,0,0,216
+window	195	0	1	:*	6de7,80x25,0,0,217
+window	196	0	1	:*	6de8,80x25,0,0,218
+window	197	0	1	:*	6de9,80x25,0,0,219
+window	198	0	1	:*	ede0,80x25,0,0,220
+window	199	0	1	:*	ede1,80x25,0,0,221
+window	2	0	1	:*	b65f,80x25,0,0,2
+window	20	0	1	:*	db5f,80x25,0,0,20
+window	200	0	1	:*	ede2,80x25,0,0,222
+window	201	0	1	:*	ede3,80x25,0,0,223
+window	202	0	1	:*	ede4,80x25,0,0,224
+window	203	0	1	:*	ede5,80x25,0,0,225
+window	205	0	1	:*	ede7,80x25,0,0,227
+window	206	0	1	:*	ede8,80x25,0,0,228
+window	207	0	1	:*	ede9,80x25,0,0,229
+window	208	0	1	:*	6de1,80x25,0,0,230
+window	21	0	1	:*	db60,80x25,0,0,21
+window	210	0	1	:*	6de3,80x25,0,0,232
+window	211	0	1	:*	6de4,80x25,0,0,233
+window	212	0	1	:*	6de5,80x25,0,0,234
+window	213	0	1	:*	6de6,80x25,0,0,235
+window	214	0	1	:*	7017,99x26,0,0,236
+window	215	0	1	:*	6de8,80x25,0,0,237
+window	216	0	1	:*	6de9,80x25,0,0,238
+window	217	0	1	:*	6dea,80x25,0,0,239
+window	218	0	1	:*	ede1,80x25,0,0,240
+window	219	0	1	:*	ede2,80x25,0,0,241
+window	22	0	1	:*	db61,80x25,0,0,22
+window	220	0	1	:*	ede3,80x25,0,0,242
+window	221	0	1	:*	ede4,80x25,0,0,243
+window	222	0	1	:*	ede5,80x25,0,0,244
+window	223	0	1	:*	ede6,80x25,0,0,245
+window	224	0	1	:*	ede7,80x25,0,0,246
+window	225	0	1	:*	ede8,80x25,0,0,247
+window	226	0	1	:*	eb51,122x21,0,0,248
+window	227	0	1	:*	edea,80x25,0,0,249
+window	228	0	1	:*	6de2,80x25,0,0,250
+window	229	0	1	:*	6de3,80x25,0,0,251
+window	23	0	1	:*	db62,80x25,0,0,23
+window	230	0	1	:*	6de4,80x25,0,0,252
+window	231	0	1	:*	6de5,80x25,0,0,253
+window	232	0	1	:*	6de6,80x25,0,0,254
+window	233	0	1	:*	6de7,80x25,0,0,255
+window	234	0	1	:*	6de8,80x25,0,0,256
+window	235	0	1	:*	6de9,80x25,0,0,257
+window	236	0	1	:*	6dea,80x25,0,0,258
+window	237	0	1	:*	6deb,80x25,0,0,259
+window	24	0	1	:*	db63,80x25,0,0,24
+window	241	0	1	:*	ede5,80x25,0,0,263
+window	243	0	1	:*	ede7,80x25,0,0,265
+window	244	0	1	:*	ede8,80x25,0,0,266
+window	245	0	1	:*	ede9,80x25,0,0,267
+window	246	0	1	:*	edea,80x25,0,0,268
+window	247	0	1	:*	edeb,80x25,0,0,269
+window	248	0	1	:*	6de3,80x25,0,0,270
+window	249	0	1	:*	6de4,80x25,0,0,271
+window	25	0	1	:*	db64,80x25,0,0,25
+window	251	0	1	:*	6de6,80x25,0,0,273
+window	252	0	1	:*	6de7,80x25,0,0,274
+window	253	0	1	:*	6de8,80x25,0,0,275
+window	254	0	1	:*	6de9,80x25,0,0,276
+window	255	0	1	:*	6dea,80x25,0,0,277
+window	256	0	1	:*	6deb,80x25,0,0,278
+window	257	0	1	:*	6dec,80x25,0,0,279
+window	258	0	1	:*	ede3,80x25,0,0,280
+window	259	0	1	:*	ede4,80x25,0,0,281
+window	26	0	1	:*	db65,80x25,0,0,26
+window	260	0	1	:*	ede5,80x25,0,0,282
+window	261	0	1	:*	ede6,80x25,0,0,283
+window	262	0	1	:*	ede7,80x25,0,0,284
+window	263	0	1	:*	ede8,80x25,0,0,285
+window	264	0	1	:*	ede9,80x25,0,0,286
+window	265	0	1	:*	edea,80x25,0,0,287
+window	266	0	1	:*	edeb,80x25,0,0,288
+window	267	0	1	:*	edec,80x25,0,0,289
+window	268	0	1	:*	6de4,80x25,0,0,290
+window	269	0	1	:*	6de5,80x25,0,0,291
+window	27	0	1	:*	db66,80x25,0,0,27
+window	270	0	1	:*	6de6,80x25,0,0,292
+window	271	0	1	:*	6de7,80x25,0,0,293
+window	272	0	1	:*	6de8,80x25,0,0,294
+window	273	0	1	:*	6de9,80x25,0,0,295
+window	274	0	1	:*	6dea,80x25,0,0,296
+window	275	0	1	:*	6deb,80x25,0,0,297
+window	28	0	1	:*	db67,80x25,0,0,28
+window	29	0	1	:*	db68,80x25,0,0,29
+window	3	0	1	:*	b660,80x25,0,0,3
+window	30	0	1	:*	5b60,80x25,0,0,30
+window	31	0	1	:*	5b68,80x25,0,0,38
+window	32	0	1	:*	5b69,80x25,0,0,39
+window	33	0	1	:*	db60,80x25,0,0,40
+window	34	0	1	:*	db61,80x25,0,0,41
+window	35	0	1	:*	db62,80x25,0,0,42
+window	36	0	1	:*	db63,80x25,0,0,43
+window	37	0	1	:*	db64,80x25,0,0,44
+window	38	0	1	:*	db65,80x25,0,0,45
+window	39	0	1	:*	db66,80x25,0,0,46
+window	4	0	1	:*	b661,80x25,0,0,4
+window	40	0	1	:*	db67,80x25,0,0,47
+window	41	0	1	:*	db68,80x25,0,0,48
+window	42	0	1	:*	db69,80x25,0,0,49
+window	43	0	1	:*	5b61,80x25,0,0,50
+window	44	0	1	:*	5b62,80x25,0,0,51
+window	45	0	1	:*	5b63,80x25,0,0,52
+window	46	0	1	:*	5b64,80x25,0,0,53
+window	47	0	1	:*	5b65,80x25,0,0,54
+window	48	0	1	:*	5b66,80x25,0,0,55
+window	49	0	1	:*	5b67,80x25,0,0,56
+window	5	0	1	:*	b662,80x25,0,0,5
+window	50	0	1	:*	5b68,80x25,0,0,57
+window	51	0	1	:*	5b69,80x25,0,0,58
+window	52	0	1	:*	5b6a,80x25,0,0,59
+window	53	0	1	:*	db61,80x25,0,0,60
+window	54	0	1	:*	db62,80x25,0,0,61
+window	55	0	1	:*	db63,80x25,0,0,62
+window	56	0	1	:*	db64,80x25,0,0,63
+window	57	0	1	:*	db65,80x25,0,0,64
+window	58	0	1	:*	db66,80x25,0,0,65
+window	59	0	1	:*	db67,80x25,0,0,66
+window	6	0	1	:*	b663,80x25,0,0,6
+window	60	0	1	:*	db68,80x25,0,0,67
+window	61	0	1	:*	db69,80x25,0,0,68
+window	62	0	1	:*	db6a,80x25,0,0,69
+window	63	0	1	:*	5b62,80x25,0,0,70
+window	64	0	1	:*	5b63,80x25,0,0,71
+window	65	0	1	:*	5b64,80x25,0,0,72
+window	66	0	1	:*	5b65,80x25,0,0,73
+window	67	0	1	:*	5b66,80x25,0,0,74
+window	68	0	1	:*	5b67,80x25,0,0,75
+window	69	0	1	:*	5b68,80x25,0,0,76
+window	7	0	1	:*	b664,80x25,0,0,7
+window	70	0	1	:*	5b69,80x25,0,0,77
+window	71	0	1	:*	5b6a,80x25,0,0,78
+window	72	0	1	:*	56db,134x21,0,0,79
+window	73	0	1	:*	db63,80x25,0,0,81
+window	74	0	1	:*	db64,80x25,0,0,82
+window	75	0	1	:*	db65,80x25,0,0,83
+window	76	0	1	:*	db66,80x25,0,0,84
+window	77	0	1	:*	db67,80x25,0,0,85
+window	78	0	1	:*	db68,80x25,0,0,86
+window	79	0	1	:*	db69,80x25,0,0,87
+window	8	0	1	:*	b665,80x25,0,0,8
+window	80	0	1	:*	db6a,80x25,0,0,88
+window	81	0	1	:*	db6b,80x25,0,0,89
+window	82	0	1	:*	5b63,80x25,0,0,90
+window	83	0	1	:*	5b64,80x25,0,0,91
+window	84	0	1	:*	5b65,80x25,0,0,92
+window	85	0	1	:*	5b66,80x25,0,0,93
+window	86	0	1	:*	5b67,80x25,0,0,94
+window	87	0	1	:*	5b68,80x25,0,0,95
+window	88	0	1	:*	5b69,80x25,0,0,96
+window	89	0	1	:*	5b6a,80x25,0,0,97
+window	9	0	1	:*	b666,80x25,0,0,9
+window	90	0	1	:*	5b6b,80x25,0,0,98
+window	91	0	1	:*	5b6c,80x25,0,0,99
+window	92	0	1	:*	addf,80x25,0,0,100
+window	93	0	1	:*	ade0,80x25,0,0,101
+window	94	0	1	:*	ade1,80x25,0,0,102
+window	95	0	1	:*	ade2,80x25,0,0,103
+window	96	0	1	:*	ade3,80x25,0,0,104
+window	97	0	1	:*	ade7,80x25,0,0,108
+window	98	0	1	:*	ade8,80x25,0,0,109
+window	99	0	1	:*	2de0,80x25,0,0,110
+state	226	

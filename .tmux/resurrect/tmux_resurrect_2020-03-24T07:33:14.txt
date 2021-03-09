@@ -1,0 +1,36 @@
+pane	13	0	:nvim	1	:*	0	:/root	1	nvim	:-zsh
+-zsh
+-zsh
+nvim /home/fra/.config/tmux/freqtrade.conf
+pane	28	0	:zsh	1	:*	0	:/root	1	zsh	:-zsh
+-zsh
+-zsh
+pane	32	0	:zsh	1	:*	0	:/root	1	zsh	:-zsh
+-zsh
+-zsh
+pane	34	0	:zsh	1	:*	0	:/root	1	zsh	:-zsh
+-zsh
+-zsh
+pane	amityd	0	:amityd	1	:*	0	:/var/home/fra/.tmp/wallets/xam	1	amityd	:
+pane	freqtrade	0	:sudo	1	:*	0	:/root	0	sudo	:-zsh
+-zsh
+-zsh
+sudo docker exec -it -w/freqtrade fqt /bin/bash -li
+pane	freqtrade	0	:sudo	1	:*	1	:/root	1	sudo	:-zsh
+-zsh
+-zsh
+sudo docker exec -it -w/freqtrade fqt /bin/bash -li
+pane	freqtrade	0	:sudo	1	:*	2	:/root	0	zsh	:-zsh
+-zsh
+-zsh
+pane	nervad	0	:nervad	1	:*	0	:/var/home/fra/.tmp/wallets/xnv	1	nervad	:
+pane	unprlld	0	:unprlld	1	:*	0	:/var/home/fra/.tmp/wallets/ull	1	unprlld	:
+window	13	0	1	:*	5582,71x22,0,0,13
+window	28	0	1	:*	5580,71x22,0,0,30
+window	32	0	1	:*	5584,71x22,0,0,34
+window	34	0	1	:*	5586,71x22,0,0,36
+window	amityd	0	1	:*	b262,80x24,0,0,5
+window	freqtrade	0	1	:*	220e,213x58,0,0[213x29,0,0,23,213x28,0,30{106x28,0,30,21,106x28,107,30,24}]
+window	nervad	0	1	:*	5960,80x24,0,0,11
+window	unprlld	0	1	:*	b261,80x24,0,0,4
+state	34	

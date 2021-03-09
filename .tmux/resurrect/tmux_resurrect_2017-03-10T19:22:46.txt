@@ -1,0 +1,18 @@
+pane	307	0	:htop	1	:*	0	:/	1	htop	:-zsh
+-zsh
+htop
+pane	312	0	:/	1	:*	0	:/	1	zsh	:-zsh
+-zsh
+pane	coreshells	0	:sshcore1	1	:*	0	:/	0	ssh	:-zsh
+-zsh
+ssh core@104.238.222.215 -p 2468
+pane	coreshells	0	:sshcore1	1	:*	1	:/	0	ssh	:-zsh
+-zsh
+ssh core@104.238.222.216 -p 2468
+pane	coreshells	0	:sshcore1	1	:*	2	:/	1	ssh	:-zsh
+-zsh
+ssh core@104.238.222.217 -p 2468
+window	307	0	1	:*	2f4f,103x25,0,0,345
+window	312	0	1	:*	af4a,103x25,0,0,350
+window	coreshells	0	1	:*	4f7e,212x62,0,0{106x62,0,0,0,105x62,107,0[105x31,107,0,1,105x30,107,32,2]}
+state	312	

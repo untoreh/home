@@ -1,0 +1,58 @@
+pane	153	0	:ssh	1	:*	0	:/home/fra	1	ssh	:-zsh
+-zsh
+ssh root@srv.consulate.ga -p 2468 -i /home/fra/.cluster/id_rsa
+-zsh
+pane	153	0	:ssh	1	:*	1	:/home/fra	0	ssh	:ssh root@srv.consulate.ml -p 2468 -i /home/fra/.cluster/id_rsa
+-zsh
+-zsh
+-zsh
+pane	153	0	:ssh	1	:*	2	:/home/fra	0	ssh	:-zsh
+-zsh
+ssh -t -p2468 -i /home/fra/.cluster/id_rsa root@srv.consulate.cf
+-zsh
+pane	223	0	:sudo	1	:*	0	:/home/fra/.tmp/trees (deleted)	1	sudo	:-zsh
+-zsh
+-zsh
+sudo docker exec -it -e SHELL=/bin/zsh deployer /bin/zsh -li
+pane	268	0	:zsh	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+-zsh
+pane	310	0	:ssh	1	:*	0	:/home/fra	1	ssh	:-zsh
+-zsh
+-zsh
+ssh woot1
+pane	310	0	:ssh	1	:*	1	:/home/fra	0	ssh	:-zsh
+-zsh
+-zsh
+ssh woot1
+pane	321	0	:ssh	1	:*	0	:/home/fra	1	ssh	:-zsh
+ssh woot1
+-zsh
+-zsh
+pane	321	0	:ssh	1	:*	1	:/home/fra	0	ssh	:-zsh
+-zsh
+-zsh
+ssh woot1
+pane	334	0	:zsh	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+-zsh
+pane	asd	0	:zsh	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+-zsh
+pane	mining	0	:xmr	1	:*	0	:/home/fra/.tmp/xmrig	0	./xmrig	:-zsh
+-zsh
+-zsh
+./xmrig -c config.json.sleep
+pane	mining	0	:xmr	1	:*	1	:/home/fra/.tmp/xmrig	1	./xmrig	:-zsh
+-zsh
+-zsh
+./xmrig -c config.json.aeon.sleep
+window	153	0	1	:*	d138,212x54,0,0[212x27,0,0,198,212x26,0,28{106x26,0,28,163,105x26,107,28,207}]
+window	223	0	1	:*	6ce7,80x24,0,0,236
+window	268	0	1	:*	ece6,80x24,0,0,283
+window	310	0	1	:*	c5e5,80x24,0,0[80x12,0,0,327,80x11,0,13,339]
+window	321	0	1	:*	8cf0,212x55,0,0[212x28,0,0,338,212x26,0,29,358]
+window	334	0	1	:*	ace5,80x24,0,0,353
+window	asd	0	1	:*	2be3,80x23,0,0,360
+window	mining	0	1	:*	8152,212x55,0,0{106x55,0,0,284,105x55,107,0,285}
+state	321	

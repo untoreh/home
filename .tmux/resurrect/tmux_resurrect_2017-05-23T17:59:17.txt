@@ -1,0 +1,41 @@
+pane	10	0	:root@104.223.117.129	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+ssh root@104.223.117.129
+pane	191	0	:root@212.237.6.194	1	:*	0	:/home/fra	1	ssh	:-zsh
+-zsh
+ssh root@212.237.6.194
+pane	368	0	:~/.tmp/trees	1	:*	0	:/home/fra/.tmp/trees	1	zsh	:-zsh
+-zsh
+pane	372	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	382	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	39	0	:~	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+pane	6	0	:vagrant	1	:*	0	:/home/fra/.tmp/locksmith	0	zsh	:-zsh
+-zsh
+ssh vagrant@192.168.121.189 -p 2468 -o Compression=yes -o DSAAuthentication=yes -o LogLevel=FATAL -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/fra/.tmp/locksmith/.vagrant/machines/lock1/libvirt/private_key -p 2468
+pane	6	0	:vagrant	1	:*	1	:/home/fra/.tmp/locksmith	1	zsh	:-zsh
+-zsh
+ssh vagrant@192.168.121.233 -p 2468 -o Compression=yes -o DSAAuthentication=yes -o LogLevel=FATAL -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/fra/.tmp/locksmith/.vagrant/machines/lock2/libvirt/private_key -p 2468
+pane	6	0	:vagrant	1	:*	2	:/home/fra/.tmp/locksmith	0	zsh	:-zsh
+-zsh
+ssh vagrant@192.168.121.71 -p 2468 -o Compression=yes -o DSAAuthentication=yes -o LogLevel=FATAL -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/fra/.tmp/locksmith/.vagrant/machines/lock3/libvirt/private_key -p 2468
+pane	coreshells	0	:/home/fra	1	:*	0	:/home/fra	1	zsh	:-zsh
+-zsh
+sudo su
+pane	coreshells	0	:/home/fra	1	:*	1	:/home/fra	0	zsh	:-zsh
+-zsh
+sudo su
+pane	coreshells	0	:/home/fra	1	:*	2	:/home/fra	0	zsh	:-zsh
+-zsh
+sudo su
+window	10	0	1	:*	60d3,134x45,0,0,14
+window	191	0	1	:*	3094,143x45,0,0,198
+window	368	0	1	:*	308c,143x45,0,0,380
+window	372	0	1	:*	3090,143x45,0,0,384
+window	382	0	1	:*	b090,143x45,0,0,394
+window	39	0	1	:*	e5e3,219x47,0,0,43
+window	6	0	1	:*	bb88,143x45,0,0[143x15,0,0,8,143x14,0,16,9,143x14,0,31,10]
+window	coreshells	0	1	:*	8067,219x47,0,0{109x47,0,0,0,109x47,110,0[109x23,110,0,1,109x23,110,24,2]}
+state	6	10
