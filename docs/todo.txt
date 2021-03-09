@@ -1,0 +1,4 @@
+~/.config
+~/.local
+~/.cache
+~/.tmp
