@@ -50,3 +50,6 @@ dnsmasq
 pulse/*
 !pulse/**/*.conf
 systemd/.old
+nvim/plugged
+ibus/
+kdeconnect/
