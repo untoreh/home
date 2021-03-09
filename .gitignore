@@ -33,6 +33,7 @@ org/
 .jupyter/
 .TabNine/
 .mail/
+.doom.d/mail.el
 .mu/
 .mbsync*
 .mozilla
