@@ -1,6 +1,6 @@
 # A list of paths worth purging once in a while in ~/
-.ccache
-.cache/pip
-.mozilla/firefox/*/storage/
-.electron
-.stremio-server
+.ccache/*
+.cache/pip/*
+.mozilla/firefox/*/storage/*
+.electron/*
+.stremio-server/stremio-cache/*
