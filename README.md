@@ -13,17 +13,15 @@ Statefuls (`~/docs/statefuls.txt`) are all those directories that we would like 
 
 # Encryption
 
-I ended up wrapping `openssl` and using [git filters](https://git-scm.com/book/en/v2/Customizing-Git-Git-Attributes) like `git-crypt`. Set a `$PASSWORD` or a `~/.secrets/pass` file containing the password (gitignored).
+I ended up wrapping `openssl` and using [git filters](https://git-scm.com/book/en/v2/Customizing-Git-Git-Attributes) like `git-crypt`. Set a `$PASSWORD` or a `~/.secrets/pass` file containing the password (gitignored), and optionally the `$CIPHER` used for encryption, default `aes128`. How-to is in the [docs](docs/secrets/README.md)
 
-Some other encryption tools:
+Some other encryption tools (that I looked at and didn't choose):
 
 - `git-secret`: I didn't like the `show`/`reveal` enforcing and magit doesn't have an interface for it, it was too opaque.
 - `git-remote-gcrypt`: was transparent enough but slow since it pushes the whole blobbed repository encrypted.
 - `git-crypt`: encrypts the files singularly so doesn't take too much to push, it looks unmaintained.
 - `sops`: seems to be oriented more towards configuration encryption for cloud stuff, less so for simple config management.
 - `age`: or `rage` this is would be an handy alternative to `openssl` but openssl is already installed so no useless dependencies.
-
-How-to is in the [docs](docs/secrets/README.md)
 
 # Motivation
 

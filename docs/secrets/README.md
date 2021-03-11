@@ -13,6 +13,7 @@ mkdir ~/.secrets && cd ~/.secrets
 ```
 
 - Ensure you have access to the secrets repository, and password for decryption, (and possibly the deployment script sha256sum)
+- Ensure you have the [`git-ssl` wrapper](git-ssl.sh) in your `$PATH`
 
 ```bash
 [ -z "$REPO" ] && echo "Repository remote address \$REPO not set!"
@@ -20,7 +21,7 @@ mkdir ~/.secrets && cd ~/.secrets
 ```
 
 - Fetch and execute the deployment script `secrets-setup.sh`
-- If a `$REPO` is provided, the setup assumes a remote exists, and fetches that, otherwise execution stops after the encryption filters are setup
+- If `$REPO` is provided, the setup assumes a remote exists, and fetches that, otherwise execution stops after the encryption filters are setup
 
 ```bash
 SETUP_URL="https://unto.re/secrets-setup.sh"
@@ -44,7 +45,7 @@ stow -t ~/ files/
 
 Use `cleanup.sh` to check broken links for secrets that no longer exists and `cleanup.sh -r` to remove them. Files that are not symlinks are not removed.
 
-Use `decrypt.sh` to dump the tree under `files/` to `/tmp/.decrypt`. Decryption is attempted for all files looking like binary files (`grep -I`)
+Use `decrypt.sh` to dump the tree under `files/` (or `$TARGET_PATH`) to `/tmp/.decrypt`. Decryption is attempted for all files.
 
 # WARNING!
 
@@ -52,4 +53,4 @@ Take care that files in `~/.secrets` are **symlinked**, if you delete them from 
 
 # Quirks
 
-`git status` shows unstaged changes for empty files ..this is annoying..
+`git status` shows un-staged changes for empty files ..this is annoying..
