@@ -6,10 +6,10 @@ share/backups
 
 # generic
 .secrets/*
-!./.secrets/README.md
-!./.secrets/secrets-setup.sh
-!./.secrets/cleanup.sh
-!./.secrets/decrypt.sh
+!.secrets/README.md
+!.secrets/secrets-setup.sh
+!.secrets/cleanup.sh
+!.secrets/decrypt.sh
 .fonts/
 .icons/
 .themes/
