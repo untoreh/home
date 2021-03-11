@@ -23,6 +23,8 @@ Some other encryption tools:
 - `sops`: seems to be oriented more towards configuration encryption for cloud stuff, less so for simple config management.
 - `age`: or `rage` this is would be an handy alternative to `openssl` but openssl is already installed so no useless dependencies.
 
+How-to is in the [docs](docs/secrets/README.md)
+
 # Motivation
 
 All the dotfiles managers I looked at were too complex, requiring too many steps for deploying.
