@@ -1,0 +1,12 @@
+# KEYBOARD CONFIGURATION FILE
+
+# Consult the keyboard(5) manual page.
+
+XKBMODEL="pc105"
+XKBLAYOUT="us"
+XKBVARIANT="altgr-intl"
+# do not use this with kde
+# XKBOPTIONS="ctrl:swapcaps,compose:menu"
+XKBOPTIONS="compose:menu"
+
+BACKSPACE="guess"
