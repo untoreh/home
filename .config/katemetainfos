@@ -1,3 +1,7 @@
+[file:///tmp/subs/The Promised Neverland 2nd Season - 09.English.ass]
+Checksum=d1a3b0f49d7570da9bdd4a868ae0ceb61fbc244d
+Time=2021,3,13,17,50,51
+
 [file:///var/home/fra/.Xresources]
 Bookmarks=
 Checksum=2433df6095fa549e610af1f7dd7fa81dacc9785a
@@ -442,6 +446,18 @@ Mode Set By User=false
 Time=2021,3,7,11,8,8
 URL=file:///var/home/fra/.sdcv_history
 
+[file:///var/home/fra/.secrets/README.md]
+Bookmarks=
+Checksum=83e9beca1fa2064750585e73a44eaeb66d4c2cf6
+Encoding=UTF-8
+Highlighting=Markdown
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Markdown
+Mode Set By User=false
+Time=2021,3,11,7,18,21
+URL=file:///var/home/fra/.secrets/README.md
+
 [file:///var/home/fra/.tusk.json]
 Bookmarks=
 Checksum=f08b6940798cf2dfdb5d14addb9512c86e767aaf
@@ -573,27 +589,3 @@ Mode=JSON
 Mode Set By User=false
 Time=2021,3,7,7,42,35
 URL=file:///var/home/fra/scripts/browser/codenvy.json
-
-[smb://192.168.1.55/Downloads/shows/Invisible City (2021)/tvshow.nfo]
-Bookmarks=
-Checksum=b234aa0ba44b258b9b346f9bc6c2bda5e9c1435f
-Encoding=UTF-8
-Highlighting=None
-Highlighting Set By User=false
-Indentation Mode=normal
-Mode=Normal
-Mode Set By User=false
-Time=2021,2,7,17,47,37
-URL=smb://192.168.1.55/Downloads/shows/Invisible City (2021)/tvshow.nfo
-
-[smb://192.168.1.55/Downloads/shows/The Watch (2021)/Season 01/The Watch (2021) - S01E06 - The Dark in the Dark.nfo]
-Bookmarks=
-Checksum=8f9a081c3fc5e18f25c16f5f2e2c0bfe645b7619
-Encoding=UTF-8
-Highlighting=None
-Highlighting Set By User=false
-Indentation Mode=normal
-Mode=Normal
-Mode Set By User=false
-Time=2021,2,7,17,47,17
-URL=smb://192.168.1.55/Downloads/shows/The Watch (2021)/Season 01/The Watch (2021) - S01E06 - The Dark in the Dark.nfo

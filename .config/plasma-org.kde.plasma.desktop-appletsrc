@@ -10,7 +10,7 @@ RightButton;NoModifier=org.kde.contextmenu
 activityId=
 formfactor=2
 immutability=1
-lastScreen=-1
+lastScreen=0
 location=3
 plugin=org.kde.plasma.private.systemtray
 wallpaperplugin=org.kde.image
@@ -18,6 +18,9 @@ wallpaperplugin=org.kde.image
 [Containments][123][Applets][124]
 immutability=1
 plugin=org.kde.plasma.volume
+
+[Containments][123][Applets][124][Configuration]
+PreloadWeight=55
 
 [Containments][123][Applets][125]
 immutability=1
@@ -48,6 +51,9 @@ PreloadWeight=55
 [Containments][123][Applets][130]
 immutability=1
 plugin=org.kde.plasma.bluetooth
+
+[Containments][123][Applets][130][Configuration]
+PreloadWeight=55
 
 [Containments][123][Applets][131][Configuration]
 PreloadWeight=42
@@ -96,7 +102,7 @@ ToolBoxButtonY=36
 sortMode=-1
 
 [Containments][46][Wallpaper][org.kde.slideshow][General]
-Image=file:///usr/share/desktop-base/moonlight-theme/lockscreen/contents/images/1920x1080.svg
+Image=file:///usr/share/desktop-base/joy-inksplat-theme/wallpaper/contents/images/1920x1080.svg
 SlidePaths=/home/fra/.local/share/wallpapers,/usr/share/wallpapers
 SlideshowMode=4
 

@@ -8,7 +8,7 @@ switch-to-activity-8e569cf5-bc21-4b96-b0d4-50d12ccb4e20=none,none,Switch to acti
 
 [KDE Keyboard Layout Switcher]
 Switch keyboard layout to English (US)=none,none,Switch keyboard layout to English (US)
-Switch to Next Keyboard Layout=Ctrl+Alt+K,Ctrl+Alt+K,Switch to Next Keyboard Layout
+Switch to Next Keyboard Layout=none,Ctrl+Alt+K,Switch to Next Keyboard Layout
 _k_friendly_name=Keyboard Layout Switcher
 
 [firefox.desktop]
@@ -31,7 +31,7 @@ _k_friendly_name=KDE Daemon
 display=Display\tMeta+P,Display\tMeta+P,Switch Display
 
 [khotkeys]
-_k_friendly_name=System Settings
+_k_friendly_name=KDE Daemon
 {666b6b81-154d-4df7-be71-7d5cd877570f}=Meta+Shift+B,none,Firefox
 {78f90c9f-6711-4ac3-853e-ac147cb4614d}=Meta+D,none,Krunner
 {d03619b6-9b3c-48cc-9d9c-a2aadb485550}=Search,none,Search
