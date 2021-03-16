@@ -18,8 +18,10 @@
           (find-file tmp)))))
 
 ;; matrix
-;(use-package! matrix-client
-;  :commands matrix-client-connect)
+(use-package! matrix-client
+  :init
+
+ :commands matrix-client-connect)
 
 ;; dont format snippets (list is negated)
 (add-to-list '+format-on-save-enabled-modes 'snippet-mode 'append)

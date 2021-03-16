@@ -191,3 +191,7 @@
                  (font-lock-mode t)
                  (font-lock-ensure)
                  (font-lock-mode t)))
+;; magit doesn't ship this option
+(after! magit
+  (transient-append-suffix 'magit-merge "-A"
+    '("-A" "Allow unrelated histories" "--allow-unrelated-histories")))

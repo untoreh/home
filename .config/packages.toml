@@ -1,3 +1,4 @@
+apt remove unattended-upgrades
 npm install -g vmd
 apti fzf find-fd
 #####
