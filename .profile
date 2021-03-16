@@ -5,7 +5,7 @@ export k=~/.ssh/id_rsa pk=~/.ssh/id_rsa.pub
 # shell
 HISTSIZE='' HISTFILESIZE='' ## for bash compatibility
 # Path
-if [ -n "$FZF_LAUNCHER" ]; then
+if [ -v FZF_LAUNCHER ]; then
 	export FZF_DEFAULT_OPTS="--color=bw --height 1% --reverse --tiebreak=begin,length,index --print-query --exact"
 fi
 
@@ -30,7 +30,7 @@ OLD_PATH=$PATH
 PATH=$OLD_PATH
 unset OLD_PATH
 # Load functions
-[ -n "$ZSH_NAME" ] && . ~/.functions
+[ -v ZSH_NAME ] && . ~/.functions
 # dbus fix
 [ -e /tmp/dbus_address ] && . /tmp/dbus_address
 ## emacs the script in the local bin folder !!
@@ -41,12 +41,12 @@ if [ -n "$DISPLAY" ]; then
 fi
 export VISUAL="emacsclient -c -a /usr/bin/emacs" # $VISUAL opens in GUI with non-daemon
 # load VTERM utilities
-if [ -n "$ZSH_VERSION" ]; then
+if [ -v ZSH_VERSION ]; then
 	__shell=zsh
-elif [ -n "$BASH_VERSION" ]; then
+elif [ -v BASH_VERSION ]; then
 	__shell=bash
 fi
-if [ -n "$__shell" ]; then
+if [ -n "$__shell" -a -v EMACS_VTERM_PATH ]; then
 	__vterm_src=~/.emacs.d/.local/straight/repos/emacs-libvterm/etc/emacs-vterm-${__shell}.sh
 	[ -e $__vterm_src ] && . $__vterm_src
 fi
