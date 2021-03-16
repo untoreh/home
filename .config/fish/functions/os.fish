@@ -20,7 +20,7 @@ function aptg
     sudo zfs destroy rpool/ROOT/ubuntu@(date +%m-%d-%y)
     sudo zfs snapshot rpool/ROOT/ubuntu@(date +%m-%d-%y)
     set DEBIAN_FRONTEND noninteractive
-    $HOME/.bin/fix-apt-sources
+    $HOME/bin/fix-apt-sources
     sudo apt update
     sudo apt full-upgrade -y -q
     aptc; aptar

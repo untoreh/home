@@ -63,6 +63,7 @@ alias mynoise-play "mpv http://zen.radio.mynoise.net &!"
 alias mynoise-stop "pkill -f \"mpv http://zen.radio.mynoise.net\""
 
 # lang
+alias translate="trans"
 alias ts "translate"
 alias ei "translate -s en -t it "
 alias ie "translate -s it -t en "

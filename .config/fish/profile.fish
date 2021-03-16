@@ -27,7 +27,7 @@ else
     set juliabins "/opt/julia/bin"
     set nixbins "$HOME/.nix-profile/bin"
     set zshbins (zsh -lic "echo \$PATH")
-    echo "set PATH \"$HOME/.bin:$HOME/.local/bin:$nixbins:$juliabins:$gembins:/snap/bin::$HOME/.tmp/go/bin:$HOME/.cargo/bin:$gobins:$zshbins\"" >$path_fish
+    echo "set PATH \"$HOME/bin:$HOME/.local/bin:$nixbins:$juliabins:$gembins:/snap/bin::$HOME/.tmp/go/bin:$HOME/.cargo/bin:$gobins:$zshbins\"" >$path_fish
     source $path_fish
 end
 # browser
@@ -39,12 +39,12 @@ set -x BROWSER /usr/bin/firefox
 # Load aliases
 . ~/.config/fish/aliases.fish
 
-## emacs the script in the local .bin folder !!
+## emacs the script in the local bin folder !!
 set -x ALTERNATE_EDITOR "emacsclient"
 set -x ESHELL "/bin/sh"
 set -x EDITOR "emc" # $EDITOR should open in terminal
 if [ -n "$DISPLAY" ]
-    set -x EMACS_GUI 1 # for custom emacs command in ~/.bin that decides if emacs nox or gui
+    set -x EMACS_GUI 1 # for custom emacs command in ~/bin that decides if emacs nox or gui
 end
 # set -x EMACS "/usr/bin/emacs"
 set -x VISUAL "emacsclient -c -a /usr/bin/emacs" # $VISUAL opens in GUI with non-daemon
