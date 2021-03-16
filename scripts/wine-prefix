@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# winetricks --self-update
+# w3b
+
+wa=WINEARCH
+wp=WINEPREFIX
+
+while getopts ":i:a" opt ; do
+    case $opt in
+        i)
+            export $wa=win32 $wp=$HOME/.wine32
+            ;;
+        a)
+            export $wa=win64 export $wp=$HOME/.wine64
+            ;;
+        \?)
+            ;;
+    esac
+done
+
+wtall () {
+    echo $(winetricks list-all 2>/dev/null | grep $1 | awk '{print $1}' | grep $1)
+}
+
+s_vcrun=$(wtall vcrun)
+s_xml=$(wtall xml)
+s_d3d=$(wtall d3d)
+
+winetricks -q \
+           winhttp \
+           wininet \
+           hosts \
+           corefonts \
+           fontfix \
+           xact \
+           vcrun2015 \
+           d3dx9 \
+           winxp \
+           ie8 \
+           gdiplus \
+           riched20 \
+           riched30 \
+           pngfilt \
+           msls31 \
+           mfc40 \
+           wsh56vb \
+           wsh57 \
+           ogg \
+           ${s_xml} \
+           ${s_vcrun}
+
+# ${s_d3d} \

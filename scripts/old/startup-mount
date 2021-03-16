@@ -1,0 +1,16 @@
+#!/usr/bin/sudo /bin/bash
+
+mkdir -p /media/Stuff /media/Games
+
+while getopts ":u:" opt; do
+    case $opt in
+        u)
+            umount /media/Stuff
+            umount /media/Games
+            ;;
+        \?)
+            chmod g+rw /media/Stuff /media/Games
+            mount -o defaults,rw,compression,noatime,async,big_writes,uid=1000,gid=1000 /dev/sda2 /media/Stuff
+            mount -o defaults,rw,compression,noatime,async,big_writes,uid=1000,gid=1000 /dev/sda3 /media/Games
+    esac
+done

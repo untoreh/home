@@ -1,0 +1,47 @@
+#!/usr/bin/zsh -l
+
+# export XLIB_SKIP_ARGB_VISUALS=1
+export GDK_BACKEND=x11
+## prevent infinite loops
+[ "$SHLVL" -gt 4 ] && exit ## can't be used with rofi
+default_buffer=""
+
+current_ws(){
+    swaymsg -t get_workspaces |
+        jq -r '.[] | select(.focused==true).name'
+}
+samews() {
+	  [ $(current_ws) = 3 ]
+}
+[ "$2" = "(kill-emacs)" ] && { pkill -f emacs; exit; }
+
+if [ -z "$(pidof emacs)" -a -z "$(pidof emacs-snapshot)" ]; then
+    samews || swaymsg -q workspace 3
+    /usr/bin/emacsclient -c ${=@:-${default_buffer}}
+    #/usr/bin/emacs --resume-layouts ${=@}
+    # /usr/bin/emacs --resume-layouts ${=@} &>/dev/null & exit
+    swaymsg -q workspace back_and_forth
+    swaymsg -q '[con_mark="current"] focus'
+    # compton-trans -c 98
+else if [ -n "$EMACS_GUI" ]; then
+         ## don't need to focus the emacs window because it should be the only one on the workspace anyway
+         # exec 2>/dev/null
+         # exec 1>/dev/null
+         while [ ! -e /tmp/emacs$UID/server -a ! -e /run/user/$UID/emacs/server ]; do
+             sleep 1
+         done
+         swaymsg -q mark current
+	       samews || swaymsg -q workspace 3
+         echo "exeing"
+         jobs
+		     exec /usr/bin/emacsclient -c ${=@:-${default_buffer}}
+         # if samews; then
+		     #     echo $(current_ws)
+         #     exit
+         # fi
+      	 # swaymsg -q workspace back_and_forth
+	   	   # swaymsg -q '[con_mark="current"] focus'
+	   else
+    	   exec emacsclient -t ${=@}
+     fi
+fi

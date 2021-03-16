@@ -1,0 +1,43 @@
+#!/bin/zsh
+#
+## adapted from https://bbs.archlinux.org/viewtopic.php?id=173173
+rofi_wrap() {
+    # rofi -show combi -combi-modi "combi,window,ssh,fb:/tmp/rofi-file-browser.sh" -matching fuzzy -sort -no-levenshtein-sort -i 
+     rofi -matching fuzzy -sort -no-levenshtein-sort -i -dmenu -p "" $@
+}
+cachedir="/tmp/.cache"
+cmdfifo="/tmp/.cache/dmenu_run_fifo"
+[ ! -d $cachedir ] && mkdir -p $cachedir
+cache=$cachedir/dmenu_run
+[ ! -p $cmdfifo ] && mkfifo $cmdfifo
+## spawn the interactive shell tha will execute the command
+## eval for aliases
+## on some shells execing functions or aliases might not be possible
+/bin/zsh -ic 'dmenu_cmd="$(<'${cmdfifo}')" &&
+         dmenu_runc="${dmenu_cmd/ *}" &&
+         functions "${dmenu_runc}" &>/dev/null ||
+         alias "${dmenu_runcs}" &>/dev/null && dmenu_cmd="exec $dmenu_cmd"
+         eval "$dmenu_cmd" ' &
+
+[ -f ~/.aliases ] && dmr_aliases=~/.aliases
+[ -f ~/.functions ] && dmr_functions=~/.functions
+[ -f ~/.history ] && dmr_history=~/.history
+dmr_path() { echo ${PATH//:/ } }
+
+## maybe too much
+# || stest -fqr -n "$cache" "$history"
+cmd=$( (
+         IFS=:
+         if [ ! -e $cache ] || stest -dqr -n $cache  $(dmr_path) || stest -fqr -n $cache $dmr_aliases || stest -fqr -n $cache $dmr_functions ; then
+             (
+                 print -rl -- ${(k)aliases} ${(k)functions} ${(k)commands}
+                 cat $dmr_history | sed -r 's/[^;]*;//'
+             ) | sort -u | tee $cache | rofi_wrap "$*"
+         else
+              rofi_wrap "$*" < $cache
+         fi
+     ) )
+## printf for proper command quoting
+printf "%s" "$cmd" >$cmdfifo
+fg %1
+exit 0

@@ -5,11 +5,7 @@ share/backups
 3dp/
 
 # generic
-.secrets/*
-!.secrets/README.md
-!.secrets/secrets-setup.sh
-!.secrets/cleanup.sh
-!.secrets/decrypt.sh
+.secrets/
 .fonts/
 .icons/
 .themes/

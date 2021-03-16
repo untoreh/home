@@ -1,0 +1,3 @@
+<hub type='usb'>
+     <address type='usb' bus='1' port='1'/>
+</hub>

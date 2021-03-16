@@ -1,0 +1,53 @@
+dkr run -it \
+--net host \
+--privileged \
+--cap-add=ALL \
+-v /etc/localtime:/etc/localtime:ro \
+-v /home:/home \
+-e DISPLAY=unix$DISPLAY \
+-v /tmp/.X11-unix:/tmp/.X11-unix \
+--device /dev \
+-v /run:/run \
+-v /var/run:/var/run \
+-u root \
+--group-add audio \
+--group-add video \
+-w /home/fra \
+--name arch \
+arch:1.08 \
+runit-init
+
+
+
+dkr run -it \
+--net host \
+--privileged \
+--cap-add=ALL \
+-v /home:/home \
+-e DISPLAY=unix$DISPLAY \
+-v /tmp/.X11-unix:/tmp/.X11-unix \
+--device /dev \
+-v /dev/shm:/dev/shm \
+--group-add audio \
+--group-add video \
+-u root \
+-w /home/steam \
+--name steamos \
+steamos:latest \
+systemd
+
+dkr run -it \
+--net host \
+--privileged \
+--cap-add=ALL \
+-v /home:/home \
+-e DISPLAY=unix$DISPLAY \
+-v /tmp/.X11-unix:/tmp/.X11-unix \
+--device /dev \
+-v /dev/shm:/dev/shm
+--group-add audio \
+--group-add video \
+-w /home/fra \
+--name steamos \
+tianon/steam \
+systemd

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+[ -z "$1" -a ! -e "$1" ] && echo "provide a file path containing the blacklist." && exit 1
+
+base_string='same => n,GotoIf($["${CALLERID(num):0:11}" = "+"]?hangup)'
+base_string_len=${#base_string}
+edited_blacklist=
+while read num; do
+    blacklist_entry=$(echo "$base_string" | sed -r 's/\+/'"$num"'/')
+    blacklist_entry_len=${#blacklist_entry}
+    num_len=$((blacklist_entry_len-base_string_len))
+    blacklist_entry=$(echo "$blacklist_entry" | sed -r 's/:0:(11)/:0:'$num_len'/')
+    edited_blacklist+=$(echo "$blacklist_entry\n")
+done < "$1"
+echo -e "$edited_blacklist" > "$(dirname "$1")/$(basename "$1").edited"
+
+

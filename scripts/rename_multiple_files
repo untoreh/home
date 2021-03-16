@@ -1,0 +1,10 @@
+#!/bin/bash
+
+names=`find ./ -name "*(*"`
+newnames=`echo "$names" | sed 's~ (~(~'`
+
+c=0
+for i in *\(* ; do
+	((c+=1))
+	mv "$i" `echo "$newnames" | sed -n ${c}p`
+done

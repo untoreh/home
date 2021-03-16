@@ -1,0 +1,5 @@
+<graphics type='spice'>
+      <listen type='none'/>
+      <image compression='off'/>
+      <gl enable='no' rendernode='/dev/dri/by-path/pci-0000:20:00.0-render'/>
+    </graphics>

@@ -1,0 +1,62 @@
+#!/bin/bash
+
+## GET TICKRATE /1
+## ticks
+read stat < /proc/self/stat && c=0 && for i in $stat; do c=$((c+1)); [ $c = 23 ] && ticks=$i && break; done < /proc/self/stat
+
+## uptime current proc
+read pupt < /proc/uptime; uptime=${pupt/.*}
+
+echo $((ticks/uptime))
+
+## GET TICKRATE /2
+for i in {0..1}; do while read itr; do [ "${itr/LOC}" != "$itr" ] && printf "${itr/[[:digit:]] *}\n"; done < /proc/interrupts; sleep 1; done
+
+## AVG CPU USAGE OF PROCESS SINCE PROCESS START
+## total times
+get_stats(){
+    pid=${pid:-self}
+    read pupt < /proc/uptime;
+    read stat < /proc/${pid}/stat && c=0 && for i in $stat; do
+            case "$c" in
+                14)
+                    utime=$i
+                    ;;
+                15)
+                    stime=$i
+                    ;;
+                16)
+                    cutime=$i
+                    ;;
+                17)
+                    cstime=$i
+                    ;;
+                22)
+                    starttime=$i
+                    break
+                    ;;
+            esac
+            c=$((c+1));
+        done < /proc/self/stat
+    uptimet=${pupt/.}; uptime=${uptimet/ *}
+}
+
+total_time(){
+    total_time=$((utime+stime+cutime+cstime))
+    return $total_time
+}
+
+seconds() {
+    secs=$((uptime-(starttime/100)))
+    return $secs
+}
+
+usage() {
+    cpu_usage=$((100*((total_time/100)/secs)))
+}
+
+get_stats
+total_time
+seconds
+usage
+echo $cpu_usage

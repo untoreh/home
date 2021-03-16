@@ -1,0 +1,11 @@
+docker run -it \
+--net host \
+-v /tmp/.X11-unix:/tmp/.X11-unix \
+-e DISPLAY=unix$DISPLAY \
+-v $HOME/soft:/root/soft \
+-v $HOME/.config/:/root/.config \
+-v /tmp:/tmp \
+--device /dev/snd \
+-v /dev/shm:/dev/shm \
+--name vl \
+voidlinux/voidlinux

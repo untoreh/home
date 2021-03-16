@@ -1,0 +1,14 @@
+set pointsize 1
+set linetype 1 dashtype '.'
+set format x "%.0f"
+set format y "%.0f"
+# set yrange [0:]
+set xlabel "timestamp"
+set ylabel "difficulty"
+set style line 1 linecolor rgb "cyan" lw 1 pt 3
+set style line 2 linecolor rgb "orange" lw 1 pt 3
+set style line 3 linecolor rgb "green" lw 1 pt 3
+# plot "/tmp/blocks" ls 1 with lines title "blocks",
+# plot "/tmp/blocks_monero" ls 2 lt 2 with lines title "blocks_monero"
+# plot "/tmp/blocks_masari" ls 3 with lines title "blocks_masari"
+plot "/tmp/delta" ls 1 with lines title "blocks time",

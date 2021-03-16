@@ -1,0 +1,15 @@
+#!/bin/sh
+
+KCP_TARGET=127.0.0.1:12323
+#KCP_TARGET=178.255.155.138:1935
+KCP_TARGET=live-mil.twitch.tv:1935
+mode=fast3
+mtu="--mtu 1500"
+rcvwnd="--rcvwnd 1024"
+sndwnd="--sndwnd 1024"
+ds="--ds 1"
+ps="--ps 0"
+comp="--nocomp"
+dscp="--dscp 46"
+
+./kcp_server -t "$KCP_TARGET" -l ":6003" -mode $mode  $mtu  $rcvwnd $sndwnd $dscp $ds $ps $comp

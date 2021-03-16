@@ -1,0 +1,5 @@
+alias gsg="cd ~/.config/gist/files; gist get cat; cd -"
+## dollar signs are \escaped also backslashes are escaped and wrapped in quotes
+alias gsgs="printf \"%s\" < <(sed -e :a -e '/./,\$!d;/^\n*\$/{\$d;N;};/\n\$/ba' < <(sed -r 's/.*''\`\`\`''.*|\s*#.*//g' < <(cd ~/.config/gist/files; gist get cat; cd -)))"
+alias gsc="wl-copy < <(printf \"%s\" \"\$(cd ~/.config/gist/files; gist get cat; cd -)\")"
+alias gsgc="wl-copy < <(printf \"%s\" \"\$(gsgs)\")"

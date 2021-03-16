@@ -1,0 +1,13 @@
+dkr run -it \
+--net host \
+--privileged \
+--cap-add=ALL \
+-v /dev:/dev \
+-v /sys:/sys \
+-v /home:/home \
+-v /tmp/.X11-unix:/tmp/.X11-unix \
+--name arch \
+-u fra \
+-w /home/fra \
+arch \
+bash

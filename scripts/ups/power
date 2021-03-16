@@ -1,0 +1,13 @@
+#!/bin/bash
+
+upsdata="$( ([ -e /run/ctboot ] && ssh localhost upsc nutdev1 2>/dev/null) || upsc nutdev1 2>/dev/null)"
+ups_max_l=$(echo "$upsdata" | grep realpower\.nominal | grep -o "[0-9]*")
+ups_cur_l=$(echo "$upsdata" | grep "load" | grep -o "[0-9]*")
+if [ -z "$upsdata" ] ; then
+    echo 0W
+    exit
+fi
+ups_p=$((ups_max_l/100*ups_cur_l))
+
+#printf "<span foreground=\"#8be9fd\">&#xf0e7; </span> %sW" "$ups_p"
+printf "{\"text\":\"${ups_p}\"}";

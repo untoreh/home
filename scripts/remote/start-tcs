@@ -1,0 +1,45 @@
+#!/bin/sh -x
+
+pl=10000:1308
+#pl=11756 # (+16)
+#pl=8000
+#pl=500
+#conns=100
+conns=1
+proto=udp
+proto=tcp
+
+fport=8080
+lport=80
+
+forward="live-mil.twitch.tv:1935"
+#forward=178.255.155.138:1935
+#forward="Live-mil.Twitch.TV:80"
+forward=127.0.0.1:6003
+
+exec ./tcsplitter \
+	--dup fling \
+	--fec 0 \
+	--retries 0:1000 \
+	--tick 50 \
+	--tock 250 \
+	--buffer 250:0 \
+	--after 0 \
+	--protocol $proto \
+	--conns $conns \
+        --lassoes 0 \
+	--frags $pl \
+        --listen 212.237.6.194:6001 \
+	--forward $forward \
+        --lFling 212.237.6.194:$fport \
+	--rFling 0 \
+        --lSync 212.237.6.194:5998 \
+	--lLasso 0 \
+        --rLasso 0 \
+	--rFlingR 0 \
+	--lFlingR 0
+
+#--lFlingR 212.237.6.194:6989
+#        --lLasso 212.237.6.194:6899 \
+
+	--lLasso 212.237.6.194:$lport \

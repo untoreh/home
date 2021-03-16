@@ -1,0 +1,334 @@
+#; set +x
+module_path+=( "/home/fra/.zinit/bin/zmodules/Src" )
+zmodload zdharma/zplugin
+alias zplu="GIT_EDITOR=:; zinit update"
+source ~/.zinit/bin/zinit.zsh
+autoload -Uz _zinit
+((+_comps)) && _comps[zinit]=_zinit
+### End of Zplugin's installer chunk
+# zpl ice depth"1"
+
+## frameworks
+zpl ice wait'3' silent
+zpl light willghatch/zsh-hooks
+## colors
+zpl ice atclone"dircolors -b LS_COLORS > c.zsh" atpull'%atclone' pick"c.zsh"
+zpl light trapd00r/LS_COLORS
+zpl ice svn \
+	atclone"pip3 install --user pygments"
+zpl snippet OMZ::plugins/colorize
+zpl light Tarrasch/zsh-colors
+
+
+## omz lib
+zpl ice fait'0' silent
+zpl snippet OMZ::lib/compfix.zsh
+
+zpl ice wait'0' silent \
+    atinit"DISABLE_MAGIC_FUNCTIONS=true" \
+    atclone"sed -i 's/\(\s*\)\(zle.*bracketed-paste-magic\)/\1# \2/' misc.zsh" \
+    atpull'%atclone'
+zpl snippet OMZ::lib/misc.zsh
+
+## prompt
+## syntax highlighting (heavy)
+zpl ice silent lucid
+zinit light zdharma/fast-syntax-highlighting
+zpl ice atload'setopt pathdirs globcomplete'
+zpl snippet OMZ::lib/completion.zsh
+
+# zpl ice depth"1" \
+# 	      atinit"ZSH_THEME=spaceship" \
+# 	      pick"spaceship.zsh"
+# zpl light denysdovhan/spaceship-zsh-theme
+zpl snippet 'https://github.com/sindresorhus/pure/blob/master/{async.zsh,pure.zsh}'
+
+## suggestions/syntax
+zpl ice silent wait'0' atload'_zsh_autosuggest_start' \
+    	atinit"export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20 ZSH_AUTOSUGGEST_USE_ASYNC= "
+zpl light zsh-users/zsh-autosuggestions
+
+## system
+zpl snippet OMZ::plugins/systemd/systemd.plugin.zsh
+zpl ice as"command" from"gh-r" mv"*amd64* -> gosu"
+zpl light tianon/gosu
+zpl ice silent wait'0'
+zpl ice as"command" from"gh-r" mv"*amd64* -> browsh"
+zpl light browsh-org/browsh
+zpl ice as"command" from"gh-r" pick"*linux*amd64*" mv"*linux*amd64* -> rush"
+zpl light shenwei356/rush
+zpl ice as"command" pick "zfs-prune-snapshots"
+zpl light bahamas10/zfs-prune-snapshots
+
+## extract
+zpl ice svn
+zpl snippet OMZ::plugins/extract
+## thefuck
+zpl ice svn \
+  silent \
+  wait'1' \
+	if'[[ $FLOOR != void ]]' \
+	atclone'pip3 install --user thefuck
+    patch -f --forward thefuck.plugin.zsh ~/.config/thefuck/cache_diff
+    sed "s#thefuck.tmp#"$PWD"/thefuck.tmp#g" -i thefuck.plugin.zsh' \
+	atpull'patch thefuck.plugin.zsh ~/.config/thefuck/cache_diff
+    sed "s#thefuck.tmp#"$PWD"/thefuck.tmp#g" -i thefuck.plugin.zsh'
+zpl snippet OMZ::plugins/thefuck
+## pastebin tool
+
+## github requires github/hub and rubygems/github
+zpl ice svn silent wait'0'
+zpl snippet OMZ::plugins/github
+zpl ice from"gh-r" \
+	as"command" \
+	bpick"*linux*amd64*" \
+	pick"hub*/bin/hub"
+zpl load github/hub
+## gists tool
+zpl ice as"command" \
+    from"gh-r" \
+    atload'. ~/scripts/gist.src' \
+    bpick"*gist*linux*amd64*" \
+    pick"*/gist"
+zpl light b4b4r07/gist
+zpl ice as"command" \
+    from"gh-r" \
+    bpick"*pet*linux*amd64*.tar.gz" \
+    pick"*/pet*"
+zpl light knqyf263/pet
+
+zpl ice as"command" \
+    from"gh-r" \
+    bpick'*golangci*linux*amd64*.tar.gz' \
+    pick'*golangci*/golangci-lint'
+
+zpl light golangci/golangci-lint
+
+## shell-format
+zpl ice as"command" \
+	from"gh-r" \
+	mv"*linux*amd64* -> shfmt" \
+	bpick"*linux*amd64*"
+zpl light mvdan/sh
+zpl ice as"command" \
+    from"gh-r" \
+    bpick'*bin*' \
+    atclone'find shc-*/  -mindepth 1 -type d -not -path "*/amd64*" -exec rm -rf {} \; 2>/dev/null' \
+    pick'*/amd64/shc'
+zpl light neurobin/shc
+
+# themes
+# zpl snippet https://github.com/FortAwesome/Font-Awesome/trunk/use-on-desktop
+zpl ice svn pick'' \
+	atclone'ln -snfr ./*.ttf ~/.fonts/' \
+	atpull"%atclone"
+zpl snippet https://github.com/domtronn/all-the-icons.el/trunk/fonts
+
+# zpl snippet https://github.com/tmuxinator/tmuxinator/blob/master/completion/tmuxinator.zsh
+zpl ice as"command"
+zpl light tmux-plugins/tpm
+
+## fzf
+zpl ice \
+	depth"1" \
+	as"command" \
+	bpick"bin/*" \
+  pick"bin/fzf" \
+	atclone"./install --no-fish --no-update-rc --key-bindings --completion" \
+	atpull'%atclone' \
+	atinit"source ~/.fzf.zsh" \
+	atload"export FZF_DEFAULT_OPTS='--height 1% --reverse --color=bw'"
+zpl light junegunn/fzf
+zpl ice wait'0' silent atload"bindkey '^S' fuzzy-search-and-edit"
+zpl light seletskiy/zsh-fuzzy-search-and-edit
+
+## history (after fzf)
+zpl ice as"command" from"gh-r" mv"*amd64*.tar.gz -> resh"
+zpl light curusarn/resh
+fzf_hist(){
+    cat ~/.zsh_history| sed -r 's/: [0-9]+:[0-9];//' | fzf | print -z
+    print -z "$cmd"
+}
+zle -N fzf_hist
+bindkey '^R' fzf_hist
+
+## ripgrep
+zpl ice \
+    from"gh-r" \
+    as"command" \
+    atload'alias rgi="rg -i"' \
+    bpick"*$(uname -p)*linux*musl*" \
+    pick"*/rg"
+zpl light BurntSushi/ripgrep
+
+## autojump
+zpl ice as"command" \
+    from"gh-r" \
+    bpick"*$(uname -p)*linux*musl*"
+zpl light xen0n/autojump-rs
+zpl ice silent wait'0'
+        # atpull'[ -z "$(which autojump)" ] && echo "run: cargo install autojump (nightly)"'
+zpl snippet https://github.com/wting/autojump/blob/master/bin/autojump.zsh
+zpl ice silent wait'0'
+zpl snippet https://github.com/wting/autojump/blob/master/bin/_j
+## tag
+zpl ice as"command" \
+	from"gh-r" \
+	mv"*tag_linux_amd64* -> tag" \
+	atload'
+        export TAG_SEARCH_PROG=rg \
+                TAG_ALIAS_PREFIX=:
+        trg() { command tag "$@"; source ${TAG_ALIAS_FILE:-/tmp/tag_aliases} 2>/dev/null }
+        alias ag=tag'
+zpl light aykamko/tag
+## exa
+zpl ice as"command" \
+    from"gh-r" \
+    bpick"*linux*$(uname -p)*" \
+    mv"exa* -> exa" \
+    pick"exa" \
+    atload"alias ls="exa""
+zpl light ogham/exa
+## bookmarks
+zpl ice depth"1" \
+	as"command" \
+	atclone"chmod +x buku.py && ln -s buku.py buku" \
+	atpull"%atclone" \
+	atpull!"git reset --hard" \
+	bpick"buku"
+zpl light jarun/Buku
+
+
+
+zpl ice silent wait'0' \
+    atload'bindkey "^Xz" zce'
+zpl light hchbaw/zce.zsh
+
+zpl ice blockf
+zpl light zsh-users/zsh-completions
+zpl light ascii-soup/zsh-url-highlighter
+
+zpl ice silent wait'0'
+zpl light hlissner/zsh-autopair
+
+## commands
+zpl light MichaelAquilina/zsh-auto-notify
+zpl ice silent wait'1'
+zpl light oknowton/zsh-dwim
+
+zpl ice depth"1" \
+	as"command" \
+	pick"src/winetricks"
+zpl light winetricks/winetricks
+
+## net
+zpl ice as"command" \
+    from"gh-r" \
+    bpick"*bandwhich*64*linux*musl.tar.gz"
+zpl light  imsnif/bandwhich
+zpl ice as"command" \
+	from"gh-r" \
+	bpick"*.tar.gz"
+zpl light joyent/containerpilot
+zpl ice from"gh-r" \
+    as"command" \
+    bpick"*pup*linux*amd64*"
+zpl light ericchiang/pup
+
+## gost
+zpl ice from"gh-r" \
+    as"command" \
+    bpick"*linux*amd64*" \
+    pick"*gost*/gost"
+zpl light ginuerzh/gost
+
+## media
+zpl ice atclone' python3 -m pip install --user --upgrade -r requirements.txt 1>/dev/null;
+    sed -r "s/(ExecStart=).*\/python[0-9\.]*/\1\/usr\/bin\/python3/" -i mpv-trakt-sync.service;
+    sed -r "s/(WorkingDirectory=).*/\1${PWD//\//\\/}/" -i mpv-trakt-sync.service;
+    grep -q input-ipc-server ~/.config/mpv/mpv.conf || echo input-ipc-server=/tmp/mpv-socket >> ~/.config/mpv/mpv.conf;
+    cp mpv-trakt-sync.service ~/.config/systemd/user/;
+    cat <<< "$(jq ".monitored_directories += [ \"/run/user/1000/gvfs\" ]" < config.json)" > config.json
+    systemctl --user daemon-reload;
+    systemctl --user enable mpv-trakt-sync;
+    systemctl --user restart mpv-trakt-sync;' \
+    atpull'%atclone'
+zpl light StareInTheAir/mpv-trakt-sync-daemon
+zpl ice atclone'make install' \
+    atpull'%atclone' \
+    as'command'
+zpl light jgreco/mpv-txt
+
+## weather
+zpl ice depth"1" \
+    as"command" \
+    atclone'go build; ln -s wego ~/.bin/' \
+    atpull'%atclone'
+zpl light schachmat/wego
+
+## distro
+zpl ice depth"1" \
+	as"command" \
+	bpick"add-apt-ppa"
+zpl light PeterDaveHello/add-apt-ppa
+
+## cluster consul etc
+# zpl snippet https://releases.hashicorp.com/consul/1.1.0/consul_1.1.0_linux_amd64.zip
+zpl ice as'command' \
+    from'gh-r' \
+    bpick'*sup*linux64*' \
+    atclone'mv *sup*linux64* sup' \
+    atpull'%atclone'
+zpl light pressly/sup
+## backup
+zpl ice as'command' \
+    from'gh-r' \
+    bpick'*linux*x64*' \
+    atclone'mv dup* dup' \
+    atpull'%atclone'
+zpl light gilbertchen/duplicacy
+
+# ## docs
+# ## howdoi (quick snippets search lookup)
+zpl ice atload'howdoi() { $HOME/.bin/howdoi -c '\$@' | less -R }'
+zpl light "_local/howdoi"
+zpl ice as'command' \
+    atclone'npm install' \
+    atpull'%atclone' \
+    depth'1' \
+    pick'bin/how2'
+zpl light santinic/how2
+
+## translate
+zpl ice depth'1'
+zpl light soimort/translate-shell
+
+## borg (shared database of snippets)
+zpl ice as"command" from"gh-r" mv"*linux*amd64* -> borg"
+zpl light ok-borg/borg
+
+## rclone (cloud services)
+zpl ice as"program" \
+    from"github-rel" \
+    atclone'ln -sf $PWD/*rclone*linux*amd64/rclone.1 $ZPFX; *rclone*linux*amd64/rclone genautocomplete zsh $ZPLGM[COMPLETIONS_DIR]/_rclone' \
+    atpull'%atclone' \
+    bpick"*rclone*linux*amd64*zip" \
+    pick"*rclone*linux*amd64/rclone"
+zpl light rclone/rclone
+
+## vmd (markdown preview)
+zpl ice as'command' \
+    from'gh-r' \
+    bpick'*vmd*linux*64*' \
+    pick'*/vmd'
+zpl light yoshuawuyts/vmd
+
+zpl ice wait'1' atload'zpcompinit; zpcdreplay' lucid
+zpl light _local/init
+
+[ "$tracing" = 1 ] && set -x
+
+### End of Zinit's installer chunk
+
+[ -f ~/.resh/shellrc ] && source ~/.resh/shellrc # this line was added by RESH (Rich Enchanced Shell History)
+

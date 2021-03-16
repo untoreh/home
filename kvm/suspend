@@ -1,0 +1,8 @@
+#!/bin/zsh
+
+mydom=win10
+
+virsh dompmsuspend $mydom disk &&
+    { sleep 0.1
+      ~/kvm/vgatolinux.sh $mydom
+    }

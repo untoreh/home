@@ -1,0 +1,15 @@
+#!/bin/sh
+
+ADDR=212.237.6.194:6003
+SERV=212.237.6.194:12323
+
+./tunnel_linux_amd64 \
+	-type server \
+	-l $ADDR \
+	-r $SERV \
+	-method none \
+	-pass password \
+	-mtu 1200 \
+	-ds 20 \
+	-ps 10 \
+	-expires 300
