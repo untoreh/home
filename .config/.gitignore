@@ -53,3 +53,4 @@ systemd/.old
 nvim/plugged
 ibus/
 kdeconnect/
+jellyfin*
