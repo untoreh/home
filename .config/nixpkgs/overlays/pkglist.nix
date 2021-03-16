@@ -1,6 +1,7 @@
 self: super:
 
-{
+let
+in {
   userPackages = super.userPackages or { } // import ./packages.nix self super
     // super.lib.optionalAttrs (builtins.pathExists ./local.nix)
     (import ./local.nix self super) // {
