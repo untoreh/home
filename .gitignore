@@ -5,6 +5,7 @@ share/backups
 3dp/
 
 # generic
+.local/
 .secrets/
 .fonts/
 .icons/
