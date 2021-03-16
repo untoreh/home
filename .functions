@@ -265,8 +265,10 @@ toreu(){
 torex(){
     if [ -n "$(find /tmp/.tor_ex -mtime +1 -print)" ]; then rm /tmp/.tor_ex; fi
     [ -e /tmp/.tor_ex ] && current_list=$(</tmp/.tor_ex)
+    echo "fetching cur ip"
     local cur_ip=$(curl -s --proxy socks5://localhost:9050 ipinfo.io/ip)
     local current_list="${current_list//${cur_ip}}${cur_ip},"
+    echo "dumping current list"
     echo ${current_list} > /tmp/.tor_ex
     sudo sed "s/ExcludeExitNodes .*/ExcludeExitNodes ${current_list}/" -i /etc/tor/torrc
 }

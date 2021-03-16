@@ -1,27 +1,32 @@
 # A List of paths to snapshot without versioning in ~/
+.local
+Downloads
+share
+org
+.mail
+.mu
+Documents
+Pictures
+Calibre\ Library/
+Desktop
+3dp
+.icons
+.themes
+.var
+.steam
+.emacs.d
+.tmux
+.vscode
 .pyenv
 .ansible
 .rustup
 .cargo
-.mail
-.mu
-3dp
-Calibre\ Library/
-Pictures
-Documents
-Desktop
-Downloads
-share
-.icons
-.themes
 .fonts
 .mozilla
-.emacs.d
 .vim
 .wine
 .wine32
 .xournalpp
-org
 .lokinet
 .gem
 .gnome
@@ -31,10 +36,6 @@ org
 .clojure*
 .chez*
 .TabNine
-.tmux
 .Tribler
-.var
-.vscode
-.steam
 .stardict
 .vagrant.d
