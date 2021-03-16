@@ -11,7 +11,7 @@ sd=`echo "sudo -H -i -u fra"`
 
 if [ -z "$1" ]; then
 # packages
-~/.bin/fix-apt-sources
+~/bin/fix-apt-sources
 sudo apt-get update
 sudo apt-get full-upgrade -y -q
 if [ $? != 0 ]; then

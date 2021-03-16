@@ -6,9 +6,9 @@ Requires=mediabox.service
 
 [Service]
 Type=oneshot
-ExecStartPre=%h/.bin/wait-samba.sh
-ExecStart=%h/.bin/mount-samba.sh localhost streams shows Downloads
-# ExecStop=%h/.bin/mount-samba.sh -u localhost streams shows Downloads
+ExecStartPre=%h/bin/wait-samba.sh
+ExecStart=%h/bin/mount-samba.sh localhost streams shows Downloads
+# ExecStop=%h/bin/mount-samba.sh -u localhost streams shows Downloads
 
 [Install]
 WantedBy=sway-session.target

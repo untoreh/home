@@ -4,6 +4,6 @@ PartOf=graphical-session.target
 
 [Service]
 Type=simple
-ExecStart=%h/.bin/audioswitch bt
+ExecStart=%h/bin/audioswitch bt
 [Install]
 WantedBy=sway-session.target

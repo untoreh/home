@@ -10,6 +10,6 @@ Environment=L=LABEL=volatile
 Environment=mount_path=/media/fra/volatile
 
 ExecStartPre=/bin/bash -c "wait-mount.sh $name || { mkdir -p $mount_path; sudo mount $mount_path; }"
-ExecStart=%h/.bin/wait-mount.sh $name
+ExecStart=%h/bin/wait-mount.sh $name
 [Install]
 WantedBy=multi-user.target

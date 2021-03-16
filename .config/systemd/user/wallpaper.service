@@ -4,7 +4,7 @@ PartOf=graphical-session.target
 
 [Service]
 Type=oneshot
-ExecStart=%h/.bin/wp
+ExecStart=%h/bin/wp
 # Restart=always
 
 [Install]

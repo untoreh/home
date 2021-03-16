@@ -12,7 +12,7 @@ Environment=CLUTTER_BACKEND=x11
 # ExecStart=/usr/bin/fish -lic "GDK_BACKEND=x11 exec /usr/bin/emacs --resume-layouts --fg-daemon=apps"
 #Environment=GDK_BACKEND=x11
 ExecStart=/usr/bin/emacs -nw --fg-daemon=apps
-ExecStop=%h/.bin/kill-emacs.sh /run/user/%U/emacs/apps
+ExecStop=%h/bin/kill-emacs.sh /run/user/%U/emacs/apps
 Restart=on-failure
 TimeoutStopSec=10
 Type=simple
