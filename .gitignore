@@ -5,6 +5,7 @@ share/backups
 3dp/
 
 # generic
+dev/
 .local/
 .secrets/
 .fonts/

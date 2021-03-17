@@ -1,0 +1,4 @@
+[Service]
+Type=oneshot
+Environment=TARGET=mbx:/volatile/backup/borg
+ExecStart=%h/scripts/borgbackup.sh

@@ -1,6 +1,7 @@
 # A List of paths to snapshot without versioning in ~/
 .local
 Downloads
+dev
 share
 org
 .mail

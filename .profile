@@ -1,5 +1,5 @@
 # TERM
-[ -z "$TMUX" ] && export TERM=xterm-256color || export TERM=tmux-256color
+[ ! -v TMUX ] && export TERM=xterm-256color || export TERM=tmux-256color
 ## secrets
 export k=~/.ssh/id_rsa pk=~/.ssh/id_rsa.pub
 # shell
