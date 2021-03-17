@@ -12,11 +12,10 @@ BORG_OPTS="--stats --one-file-system --compression auto,zstd,10 --checkpoint-int
 # instead of hanging.
 export BORG_RELOCATED_REPO_ACCESS_IS_OK=no
 export BORG_UNKNOWN_UNENCRYPTED_REPO_ACCESS_IS_OK=no
-
 # wait and lock for apt
-APT_PID=$(pgrep -x apt)
-kill -0 $APT_PID && timeout 3600 tail --pid=$APT_PID -f /dev/null
-pgrep -x apt && {
+APT_PID="$(pgrep -x apt || echo)"
+[ -n "$APT_PID" ] && kill -0 $APT_PID && timeout 3600 tail --pid=$APT_PID -f /dev/null
+[ -n "$(pgrep -x apt)" ] && {
 	"Can't backup if apt is running, giving up."
 	exit 60
 }
