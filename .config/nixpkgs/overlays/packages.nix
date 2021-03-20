@@ -4,6 +4,13 @@ let
   # nixl package
   nixgl = import (builtins.fetchTarball
     "https://github.com/guibou/nixGL/archive/master.tar.gz") { };
+  nixexprs = builtins.fetchTarball {
+    url = "https://nixos.org/channels/nixos-unstable/nixexprs.tar.xz";
+  };
+  unstable = import nixexprs {
+    inherit (self) config;
+    overlays = [ ]; # no overlays inside overlay (infinite recursion)
+  };
 in {
   inherit (super)
     browsh kitty git-hub pet tmux fzf fd bat ripgrep zoxide exa bandwhich wego
@@ -21,9 +28,9 @@ in {
   # gpu, waiting for nixpkgs integration
   # nixGLDefault
   inherit (nixgl) nixGLDefault;
+  inherit (unstable) mpv youtube-dl;
   # backup
   # borg;
   # python
   inherit (super.python38Packages) howdoi;
-  # inherit (super.nixgl) nixGlIntel;
 }
