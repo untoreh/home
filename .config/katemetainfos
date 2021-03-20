@@ -458,6 +458,606 @@ Mode Set By User=false
 Time=2021,3,11,7,18,21
 URL=file:///var/home/fra/.secrets/README.md
 
+[file:///var/home/fra/.tmp/backup-zfs.sh]
+Bookmarks=
+Checksum=d755a28448976ae94761aefade1458c2b14f791e
+Encoding=UTF-8
+Highlighting=Bash
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Bash
+Mode Set By User=false
+Time=2021,3,17,20,15,39
+URL=file:///var/home/fra/.tmp/backup-zfs.sh
+
+[file:///var/home/fra/.tmp/colab]
+Bookmarks=
+Checksum=8fcd29b4fd515767f2c06ee49befca81756cd312
+Encoding=UTF-8
+Highlighting=Bash
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Bash
+Mode Set By User=false
+Time=2021,3,17,20,15,17
+URL=file:///var/home/fra/.tmp/colab
+
+[file:///var/home/fra/.tmp/config/secrets.jl]
+Bookmarks=
+Checksum=6f3e787600a2a645d5e3ef839496b202ab0687af
+Encoding=UTF-8
+Highlighting=Julia
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Julia
+Mode Set By User=false
+Time=2021,3,17,20,19,11
+URL=file:///var/home/fra/.tmp/config/secrets.jl
+
+[file:///var/home/fra/.tmp/containers_ram_usage]
+Bookmarks=
+Checksum=1e5f34f42d8e39c48d7dca1930e3d719418c9f88
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,17,20,13,44
+URL=file:///var/home/fra/.tmp/containers_ram_usage
+
+[file:///var/home/fra/.tmp/files/amazonactivation]
+Bookmarks=
+Checksum=2fe2496479cb745ec643548284caa2f073aea164
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,20,6,56,29
+URL=file:///var/home/fra/.tmp/files/amazonactivation
+
+[file:///var/home/fra/.tmp/files/amazonfreetier]
+Bookmarks=
+Checksum=ac6eae5a420b3d268cffdcde4b4cd119b17eee9e
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,19,13,16,52
+URL=file:///var/home/fra/.tmp/files/amazonfreetier
+
+[file:///var/home/fra/.tmp/files/amazonrefund]
+Bookmarks=
+Checksum=cb15b1d2cb77b6faeb2fb6831951dbe54b3fe7a8
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,18,20,40,37
+URL=file:///var/home/fra/.tmp/files/amazonrefund
+
+[file:///var/home/fra/.tmp/files/benchmarks]
+Bookmarks=
+Checksum=dc2a5cab082373588046a9555ee67333b7ed6479
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,19,13,41,38
+URL=file:///var/home/fra/.tmp/files/benchmarks
+
+[file:///var/home/fra/.tmp/files/build_ndppd]
+Bookmarks=
+Checksum=870332e2586e18af119a3936642062681894cb22
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,20,6,56,22
+URL=file:///var/home/fra/.tmp/files/build_ndppd
+
+[file:///var/home/fra/.tmp/files/cloudbackups]
+Bookmarks=
+Checksum=29cd5a1d0f6e828ae2b7917cc1db5cb512925a23
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,20,7,1,21
+URL=file:///var/home/fra/.tmp/files/cloudbackups
+
+[file:///var/home/fra/.tmp/files/devboards]
+Bookmarks=
+Checksum=136b17444cb6bc6a9c6ea463e1f13cf1e74de5bb
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,20,6,57,23
+URL=file:///var/home/fra/.tmp/files/devboards
+
+[file:///var/home/fra/.tmp/files/devices.sh]
+Bookmarks=
+Checksum=2848ab00785acfddcd95834d813789c7509a431b
+Encoding=UTF-8
+Highlighting=Bash
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Bash
+Mode Set By User=false
+Time=2021,3,19,13,12,14
+URL=file:///var/home/fra/.tmp/files/devices.sh
+
+[file:///var/home/fra/.tmp/files/dual_net]
+Bookmarks=
+Checksum=3d6e7c0e112ec99606f93ccf25d76dab71ce65d3
+Encoding=UTF-8
+Highlighting=Bash
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Bash
+Mode Set By User=false
+Time=2021,3,20,5,25,50
+URL=file:///var/home/fra/.tmp/files/dual_net
+
+[file:///var/home/fra/.tmp/files/dynamic_libs_ram_usage]
+Bookmarks=
+Checksum=b27665bbf1b3c188f0952af37dfa3d9e29331f33
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,20,6,55,58
+URL=file:///var/home/fra/.tmp/files/dynamic_libs_ram_usage
+
+[file:///var/home/fra/.tmp/files/editsup]
+Bookmarks=
+Checksum=b36d2a6b18b36f66f1178b69ab1a8bebf7ad9824
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,20,6,56,5
+URL=file:///var/home/fra/.tmp/files/editsup
+
+[file:///var/home/fra/.tmp/files/elixirmumbo]
+Bookmarks=
+Checksum=d66b85a681c2b3eb83fc795b8fa18888ea4928b2
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,20,6,56,38
+URL=file:///var/home/fra/.tmp/files/elixirmumbo
+
+[file:///var/home/fra/.tmp/files/fs/orangefs]
+Bookmarks=
+Checksum=8811c6d8185359008189e9a66e838478e0bb56b0
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,18,20,32,53
+URL=file:///var/home/fra/.tmp/files/fs/orangefs
+
+[file:///var/home/fra/.tmp/files/fuck]
+Bookmarks=
+Checksum=accb94da5d8b7d029c9d9f08282f35db4f41fce6
+Encoding=UTF-8
+Highlighting=Python
+Highlighting Set By User=false
+Indentation Mode=python
+Mode=Python
+Mode Set By User=false
+Time=2021,3,19,5,11,30
+URL=file:///var/home/fra/.tmp/files/fuck
+
+[file:///var/home/fra/.tmp/files/gigs]
+Bookmarks=
+Checksum=cef3e3fa5dbda59d171c3fe69b4a908ca3576b56
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,19,13,38,29
+URL=file:///var/home/fra/.tmp/files/gigs
+
+[file:///var/home/fra/.tmp/files/hosting]
+Bookmarks=
+Checksum=63bf824bc0f8d2000637d8c43a2565cca18293dc
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,19,13,35,15
+URL=file:///var/home/fra/.tmp/files/hosting
+
+[file:///var/home/fra/.tmp/files/indicators_sp.toml]
+Bookmarks=
+Checksum=533ba01a246eebef379959e9f14cbc043f70da7b
+Encoding=UTF-8
+Highlighting=TOML
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=TOML
+Mode Set By User=false
+Time=2021,3,19,13,35,7
+URL=file:///var/home/fra/.tmp/files/indicators_sp.toml
+
+[file:///var/home/fra/.tmp/files/jch]
+Bookmarks=
+Checksum=ea15e0aaaeba6975968f3c37bbfe50ceca30a291
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,19,5,11,18
+URL=file:///var/home/fra/.tmp/files/jch
+
+[file:///var/home/fra/.tmp/files/kvm_flash]
+Bookmarks=
+Checksum=fa4a1e15ea0c35437b3e80f5a1baac9f228d7d20
+Encoding=UTF-8
+Highlighting=Bash
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Bash
+Mode Set By User=false
+Time=2021,3,19,13,39,15
+URL=file:///var/home/fra/.tmp/files/kvm_flash
+
+[file:///var/home/fra/.tmp/files/langs]
+Bookmarks=
+Checksum=39335f7534a030db0091039b978d0f3bb725be00
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,19,13,29,41
+URL=file:///var/home/fra/.tmp/files/langs
+
+[file:///var/home/fra/.tmp/files/lin2number]
+Bookmarks=
+Checksum=b30e598de7777e8ddee500c79732f014648d5bbd
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,19,13,9,2
+URL=file:///var/home/fra/.tmp/files/lin2number
+
+[file:///var/home/fra/.tmp/files/local.php]
+Bookmarks=
+Checksum=4c8e3dbc09319213ff71e0f814089fcb48a7a16e
+Encoding=UTF-8
+Highlighting=PHP (HTML)
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=PHP (HTML)
+Mode Set By User=false
+Time=2021,3,19,5,12,19
+URL=file:///var/home/fra/.tmp/files/local.php
+
+[file:///var/home/fra/.tmp/files/medianginx]
+Bookmarks=
+Checksum=0ac1b1dca087c72e8aeb35e9b903dba0aa03227d
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,20,6,57,3
+URL=file:///var/home/fra/.tmp/files/medianginx
+
+[file:///var/home/fra/.tmp/files/miners.md]
+Bookmarks=
+Checksum=cf007bd4a3c3422297877cb122aa67c8c5e4e7df
+Encoding=UTF-8
+Highlighting=Markdown
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Markdown
+Mode Set By User=false
+Time=2021,3,20,6,59,16
+URL=file:///var/home/fra/.tmp/files/miners.md
+
+[file:///var/home/fra/.tmp/files/minerstpl]
+Bookmarks=
+Checksum=5a65a9bea2bf2e8c51ab05749cc9daf3b535e86d
+Encoding=UTF-8
+Highlighting=Bash
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Bash
+Mode Set By User=false
+Time=2021,3,18,20,40,12
+URL=file:///var/home/fra/.tmp/files/minerstpl
+
+[file:///var/home/fra/.tmp/files/n3k.py]
+Bookmarks=
+Checksum=abe9d0ecba3ea084ad444e4b0992d2c98d96cd45
+Encoding=UTF-8
+Highlighting=Python
+Highlighting Set By User=false
+Indentation Mode=python
+Mode=Python
+Mode Set By User=false
+Time=2021,3,19,5,11,53
+URL=file:///var/home/fra/.tmp/files/n3k.py
+
+[file:///var/home/fra/.tmp/files/nerva_peers]
+Bookmarks=
+Checksum=7750dd2183292fbc01f65d11c4888392fd4d790f
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,18,20,38,17
+URL=file:///var/home/fra/.tmp/files/nerva_peers
+
+[file:///var/home/fra/.tmp/files/nerva_regions]
+Bookmarks=
+Checksum=2b13832c2309d7c4eac0a5cbf43c217e3526c508
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,18,20,38,21
+URL=file:///var/home/fra/.tmp/files/nerva_regions
+
+[file:///var/home/fra/.tmp/files/notify.sh]
+Bookmarks=
+Checksum=04ba5e12a4cfedee1df6bb583e8dc2bfbf924723
+Encoding=UTF-8
+Highlighting=Bash
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Bash
+Mode Set By User=false
+Time=2021,3,19,13,38,47
+URL=file:///var/home/fra/.tmp/files/notify.sh
+
+[file:///var/home/fra/.tmp/files/onion_trackers]
+Bookmarks=
+Checksum=ebd5b1b8c7a795bc858e25683b81dfbb8ef7aa27
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,18,20,38,31
+URL=file:///var/home/fra/.tmp/files/onion_trackers
+
+[file:///var/home/fra/.tmp/files/ostree]
+Bookmarks=
+Checksum=4e6b449ec7a6557047367bbafa31fab42788deea
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,19,13,8,54
+URL=file:///var/home/fra/.tmp/files/ostree
+
+[file:///var/home/fra/.tmp/files/powershell_helpers]
+Bookmarks=
+Checksum=0702c4d3bb6df7a339d76708864cc4075bb9670f
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,20,5,27,42
+URL=file:///var/home/fra/.tmp/files/powershell_helpers
+
+[file:///var/home/fra/.tmp/files/profiles]
+Bookmarks=
+Checksum=ba5f69b905886a8f81606869572662888b7a7370
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,19,13,39,6
+URL=file:///var/home/fra/.tmp/files/profiles
+
+[file:///var/home/fra/.tmp/files/runc]
+Bookmarks=
+Checksum=78300e1c09f598722679f3c677b1b3b6e85c57f3
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,19,13,16,31
+URL=file:///var/home/fra/.tmp/files/runc
+
+[file:///var/home/fra/.tmp/files/ssh_to_windows_nano.md]
+Bookmarks=
+Checksum=3ae7d9274ab451f21a99283e5f7d0e760c9027c2
+Encoding=UTF-8
+Highlighting=Markdown
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Markdown
+Mode Set By User=false
+Time=2021,3,20,5,28,57
+URL=file:///var/home/fra/.tmp/files/ssh_to_windows_nano.md
+
+[file:///var/home/fra/.tmp/files/supply.sh]
+Bookmarks=
+Checksum=ab48cea651dd0a1c15bc92a3a46a830bbe1afd98
+Encoding=UTF-8
+Highlighting=Bash
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Bash
+Mode Set By User=false
+Time=2021,3,19,13,40,25
+URL=file:///var/home/fra/.tmp/files/supply.sh
+
+[file:///var/home/fra/.tmp/files/supplypbp.sh]
+Bookmarks=
+Checksum=091286e7967ea92e2567607129be5c011d34b56b
+Encoding=UTF-8
+Highlighting=Bash
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Bash
+Mode Set By User=false
+Time=2021,3,19,13,40,35
+URL=file:///var/home/fra/.tmp/files/supplypbp.sh
+
+[file:///var/home/fra/.tmp/files/tmp.css]
+Bookmarks=
+Checksum=e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
+Encoding=UTF-8
+Highlighting=CSS
+Highlighting Set By User=false
+Indentation Mode=cstyle
+Mode=CSS
+Mode Set By User=false
+Time=2021,3,19,5,11,38
+URL=file:///var/home/fra/.tmp/files/tmp.css
+
+[file:///var/home/fra/.tmp/files/todo.org]
+Bookmarks=
+Checksum=5fbe1fe5faff9b6a7311817a652c1156d58368fc
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,19,13,34,57
+URL=file:///var/home/fra/.tmp/files/todo.org
+
+[file:///var/home/fra/.tmp/files/trinst]
+Bookmarks=
+Checksum=74c79014d74d4ca6cfc694286d3e13b00fcb2303
+Encoding=UTF-8
+Highlighting=Bash
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Bash
+Mode Set By User=false
+Time=2021,3,19,13,16,41
+URL=file:///var/home/fra/.tmp/files/trinst
+
+[file:///var/home/fra/.tmp/files/virmach_blackfriday]
+Bookmarks=
+Checksum=904a8df5b5c5dd09d7f0e52241d3e56fa6775161
+Encoding=UTF-8
+Highlighting=Bash
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Bash
+Mode Set By User=false
+Time=2021,3,19,13,39,41
+URL=file:///var/home/fra/.tmp/files/virmach_blackfriday
+
+[file:///var/home/fra/.tmp/files/windpec]
+Bookmarks=
+Checksum=5ab3221df279319ca18c592436f40195c20e96a5
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,18,20,40,27
+URL=file:///var/home/fra/.tmp/files/windpec
+
+[file:///var/home/fra/.tmp/nodejs_frameworks]
+Bookmarks=
+Checksum=6a251c12aa7ef53a6c00aa65ca92551259912338
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,17,20,13,28
+URL=file:///var/home/fra/.tmp/nodejs_frameworks
+
+[file:///var/home/fra/.tmp/public/welcome.html]
+Bookmarks=
+Checksum=d6fac3743bb5a3ba681eb06e378919e572a3e23a
+Encoding=UTF-8
+Highlighting=HTML
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=HTML
+Mode Set By User=false
+Time=2021,3,17,20,19,36
+URL=file:///var/home/fra/.tmp/public/welcome.html
+
+[file:///var/home/fra/.tmp/selllist.org]
+Bookmarks=
+Checksum=0a2dc6d0cb3a729486ca3961b4bd90cebce1cc17
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,17,20,14,10
+URL=file:///var/home/fra/.tmp/selllist.org
+
+[file:///var/home/fra/.tmp/shoplist.org]
+Bookmarks=
+Checksum=69ae786080e913c837e2e0f3cb26a5d9cb0a0a10
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,17,20,14,57
+URL=file:///var/home/fra/.tmp/shoplist.org
+
 [file:///var/home/fra/.tusk.json]
 Bookmarks=
 Checksum=f08b6940798cf2dfdb5d14addb9512c86e767aaf
@@ -542,6 +1142,30 @@ Mode Set By User=false
 Time=2021,3,7,11,13,33
 URL=file:///var/home/fra/.wegorc
 
+[file:///var/home/fra/docs/cloud-backups.txt]
+Bookmarks=
+Checksum=29cd5a1d0f6e828ae2b7917cc1db5cb512925a23
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,20,7,2,33
+URL=file:///var/home/fra/docs/cloud-backups.txt
+
+[file:///var/home/fra/docs/misc/devboards_list.txt]
+Bookmarks=
+Checksum=2ab7d827ca8b76d8fb7e8d718f9dc0d5ad6e5006
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,20,6,58,8
+URL=file:///var/home/fra/docs/misc/devboards_list.txt
+
 [file:///var/home/fra/plasma-backups/03-01-21/kwalletmanager5rc]
 Bookmarks=
 Checksum=2c3881de2f095c1edf2b2ee020d3126295aa4c6e
@@ -589,3 +1213,27 @@ Mode=JSON
 Mode Set By User=false
 Time=2021,3,7,7,42,35
 URL=file:///var/home/fra/scripts/browser/codenvy.json
+
+[file:///var/home/fra/tmp/shoplist.org]
+Bookmarks=
+Checksum=69ae786080e913c837e2e0f3cb26a5d9cb0a0a10
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,20,6,48,54
+URL=file:///var/home/fra/tmp/shoplist.org
+
+[file:///var/home/fra/tmp/xmrig/kcp.json]
+Bookmarks=
+Checksum=2713137b12a93f5729f2d419fb6a0ba572793937
+Encoding=UTF-8
+Highlighting=JSON
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=JSON
+Mode Set By User=false
+Time=2021,3,20,5,48,16
+URL=file:///var/home/fra/tmp/xmrig/kcp.json

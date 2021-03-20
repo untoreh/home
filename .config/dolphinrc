@@ -19,8 +19,8 @@ FontWeight=50
 IconSize=48
 
 [KPropertiesDialog]
-DVI-D-0 Height 1080=534
-DVI-D-0 Width 1920=467
+DVI-D-0 Height 1080=478
+DVI-D-0 Width 1920=390
 DVI-D-1 Height 1080=542
 DVI-D-1 Width 1920=435
 Height 1080=575
@@ -29,8 +29,8 @@ Width 1920=441
 [MainWindow]
 DVI-D-0 Height 1080=1016
 DVI-D-0 Width 1920=1542
-DVI-D-0 XPosition=0
-DVI-D-0 YPosition=64
+DVI-D-0 XPosition=525
+DVI-D-0 YPosition=90
 DVI-D-1 Height 1080=1242
 DVI-D-1 Width 1920=996
 Height 1080=1242
