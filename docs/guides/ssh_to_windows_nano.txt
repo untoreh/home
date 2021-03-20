@@ -1,0 +1,75 @@
+## GUIDE SETUP windows server nano
+- only from a windows machine
+- start/enable wrm (windows remote management service) 
+- execute a powershell remote session
+- download powershellcore and openssh (both on gh) using invoke-webrequest
+- install openssh 
+- authorized_keys is located in C:\Users\Administrator\.ssh\authorized_keys
+- enable pubkeyauth in sshd_config which is located in C:\ProgramData\ssh\sshd_config
+- change default shell from regedit
+- restart sshd
+- from linux login using ssh Administrator@$REMOTE_IP -i ~/.ssh/id...
+- if fails login w/o pseudotty (ssh -T ...)
+
+## misc
+---
+Expand-Archive -Path C:\powershell.zip -DestinationPath "C:\PowerShellCore"
+
+Enter-PSSession -HostName $HOST_IP -UserName ~\Administrator
+
+"C:\Program Files\OpenSSH\sshd_config"
+
+powershell 'C:\Program Files\OpenSSH\FixUserFilePermissions.ps1'
+
+$authorizedKeyPath = "C:\Users\Administrator\.ssh\authorized_keys"
+$acl = Get-Acl $authorizedKeyPath
+
+## default shell
+---
+
+$envPath = "HKLM:System\CurrentControlSet\Control\Session Manager\Environment"
+$registryPath = "HKLM:SOFTWARE\OpenSSH"
+$Name = "DefaultShell"
+$value = "C:\PowerShellCore\pwsh.exe"
+New-ItemProperty -Path $registryPath -Name $name -Value $value
+Get-ItemProperty -Path Registry::$registryPath$name
+Get-ItemProperty -Path $registryPath$name
+test-path $registryPath
+$currentpath=(get-itemproperty -Path $envPath -Name $name).$name
+## or just local
+$currentpath=$env:Path
+$newpath=$currentpath+"C:\Program Files\OpenSSH"
+set-itemproperty -Path $envPath -Name $name -Value $newpath
+
+## cygwin
+---
+
+mkdir C:\cygwin
+mkdir C:\cygwin\packages
+Invoke-WebRequest https://cygwin.com/setup-x86_64.exe -OutFile c:\cygwin\setup.exe
+C:\cygwin\setup.exe --site http://cygwin.mirror.constant.com --no-shortcuts --no-desktop --quiet-mode --root "C:\cygwin" --arch x86 --local-package-dir "C:\cygwin\packages" --verbose --prune-install --packages openssh,git,rsync,nano
+
+## awslp
+---
+
+$env:AWS_ACCESS_KEY_ID="$AWS_KEY"
+$env:AWS_SECRET_ACCESS_KEY="$AWS_SECRET"
+awslp.exe run -r eu-central-1 -l chacha20:123@:8090 --ssh-port 22 --ssh-user Administrator
+Get-Process | Where-Object {$_.Path -like "*awslp*"} | Stop-Process -Force
+
+## sssh
+---
+
+Get-Process | Where-Object {$_.Path -like "*ssh*"} | Stop-Process -Force
+(get-acl C:\Users\Administrator\.ssh\authorized_keys).owner
+cat C:\Users\Administrator\.ssh\authorized_keys
+icacls C:\Users\Administrator\.ssh\authorized_keys
+cp ".ssh/sshd_config" "C:/Program files/openssh/sshd_config_default"
+cp ".ssh/sshd_config" "C:/Program files/openssh/sshd_config"
+cp "C:\Users\Administrator\.ssh\sshd_config" "C:/ProgramData/ssh/sshd_config"
+restart-computer
+
+$filepath="C:\powershellcore\awslp.exe"
+$ar = New-Object System.Security.AccessControl.FileSystemAccessRule("Administrator", "Read", "Allow")
+$acl.SetAccessRule($ar)
+Set-Acl $filepath $acl

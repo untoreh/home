@@ -1,0 +1,9 @@
+[Unit]
+Description=borg backup daily at 2 a.m.
+
+[Timer]
+OnCalendar=*-*-* 2:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target

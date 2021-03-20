@@ -1,0 +1,8 @@
+raspberry
+banana
+odroid
+beagleboard
+orange
+arduino
+nanopi
+pine

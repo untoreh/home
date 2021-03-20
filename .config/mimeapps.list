@@ -3,6 +3,8 @@ application/epub+zip=calibre-gui.desktop;calibre-ebook-viewer.desktop;
 application/javascript=wrp-vcs-usercreated-1.desktop;
 application/octet-stream=tribler.desktop;SciTE.desktop;emacs.desktop;emacs-snapshot.desktop;org.gnome.Nautilus.desktop;userapp-Firefox-Developer-Edition-ENK2WY.desktop;
 application/pdf=com.github.xournalpp.xournalpp.desktop;calibre-gui.desktop;display-im6.q16.desktop;calibre-ebook-viewer.desktop;org.pwmt.zathura-pdf-poppler.desktop;xournal.desktop;org.kde.karbon.desktop;inkscape.desktop;okularApplication_pdf.desktop;xpdf.desktop;mupdf.desktop;
+application/rss+xml=org.kde.kwrite.desktop;
+application/x-compressed-tar=org.kde.ark.desktop;tribler.desktop;emacs.desktop;
 application/x-extension-htm=userapp-Firefox-E7W6F0.desktop;firefox.desktop;userapp-Firefox-QLFPY0.desktop;
 application/x-extension-html=userapp-Firefox-E7W6F0.desktop;firefox.desktop;userapp-Firefox-QLFPY0.desktop;
 application/x-extension-shtml=userapp-Firefox-E7W6F0.desktop;firefox.desktop;userapp-Firefox-QLFPY0.desktop;
@@ -40,11 +42,11 @@ x-scheme-handler/chrome=userapp-Firefox-E7W6F0.desktop;firefox.desktop;userapp-F
 x-scheme-handler/ftp=userapp-Firefox-E7W6F0.desktop;firefox.desktop;userapp-Firefox-QLFPY0.desktop;
 x-scheme-handler/http=userapp-Firefox-E7W6F0.desktop;firefox.desktop;userapp-Firefox-QLFPY0.desktop;
 x-scheme-handler/https=userapp-Firefox-E7W6F0.desktop;firefox.desktop;userapp-Firefox-QLFPY0.desktop;
-application/rss+xml=org.kde.kwrite.desktop;
 
 [Default Applications]
 application/javascript=wrp-vcs-usercreated-1.desktop;
 application/pdf=mupdf.desktop
+application/x-compressed-tar=org.kde.ark.desktop;
 application/x-extension-htm=userapp-Firefox-E7W6F0.desktop
 application/x-extension-html=userapp-Firefox-E7W6F0.desktop
 application/x-extension-shtml=userapp-Firefox-E7W6F0.desktop

@@ -52,7 +52,7 @@ if [ -n "$__shell" -a -v EMACS_VTERM_PATH ]; then
 fi
 
 ## golang
-export GOPATH=$HOME/.tmp/go:$HOME/.tmp/deployer/go
+export GOPATH=$HOME/dev/go:$HOME/dev/deployer/go
 ## nodejs
 export NODE_PATH=$NODE_PATH:$HOME/node_modules:/usr/local/lib/node_modules
 

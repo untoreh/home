@@ -1,0 +1,29 @@
+#!/bin/bash
+
+apt install openssh-server vim-tiny python3-venv
+workdir=/content/cloud
+mkdir -p $workdir
+mount --bind /content/drive/My\ Drive $workdir
+mkdir -p /run/sshd
+mkdir -m 700 -p ~/.ssh/
+
+/usr/sbin/sshd
+echo 'Host * 
+    StrictHostKeyChecking no' > ~/.ssh/config
+
+apt install openssh-server vim-tiny
+cp "${workdir}/colab/colab_*" ~/.ssh/
+chmod 700 ~/.ssh/colab_rsa
+mv ~/.ssh/colab_rsa.pub ~/.ssh/authorized_keys
+chmod 644 ~/.ssh/authorized_keys
+
+echo "PS1='\W:\$ '
+PATH=~/miniconda/bin:\$PATH
+cd "$workdir"/freqtrade" >> ~/.bashrc
+
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda
+bash miniconda -b -p ~/miniconda
+PATH=~/miniconda/bin:$PATH
+conda init bash
+# bash -c "conda install -c rapidsai -c nvidia -c numba -c conda-forge \
+    # cudf=0.10 python=3.6 cudatoolkit=10.1"
