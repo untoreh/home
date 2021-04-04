@@ -148,7 +148,10 @@
 (if (featurep! :lang julia)
     (map! (:prefix ("SPC l j" . "julia")
            :desc "start julia repl"
-           :nv "r" #'julia-repl)))
+           :nv "r" #'julia-repl
+           :nv "f" #'julia-franklin
+           :nv "." #'julia-repl-cd
+           )))
 
 ;; unbind redundant bindings
 (if (featurep! :editor evil)

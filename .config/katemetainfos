@@ -1237,3 +1237,15 @@ Mode=JSON
 Mode Set By User=false
 Time=2021,3,20,5,48,16
 URL=file:///var/home/fra/tmp/xmrig/kcp.json
+
+[smb://192.168.1.55/Downloads/shows/One Piece/Season 21/season.nfo]
+Bookmarks=
+Checksum=c4bd645a8f4f8d63f7359b8f0f5a2521db8cd2c0
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2021,3,28,12,55,25
+URL=smb://192.168.1.55/Downloads/shows/One Piece/Season 21/season.nfo

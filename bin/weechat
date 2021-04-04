@@ -1,3 +1,0 @@
-#!/bin/bash
-
-urxvtc -title WeeChat -e /usr/bin/weechat

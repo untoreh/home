@@ -1,8 +1,11 @@
 [Unit]
 Description=Firefox_Service
-After=network.target
+BindsTo=graphical-session.target
+
 [Service]
+ExecStartPre=/bin/sleep 5
 ExecStart=%h/bin/ffox
 ExecStop=killall -9 firefox
-[Install]
-WantedBy=default.target
+
+#[Install]
+#WantedBy=graphical-session.target

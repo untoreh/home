@@ -68,6 +68,7 @@ blurEnabled=false
 contrastEnabled=false
 desktopchangeosdEnabled=false
 grid-tilingEnabled=false
+krohnkiteEnabled=true
 kwin-script-tilingEnabled=false
 kwin4_effect_dialogparentEnabled=false
 kwin4_effect_fadingpopupsEnabled=false
@@ -88,6 +89,15 @@ windowgeometryEnabled=false
 
 [Script-grid-tiling]
 gap=4
+
+[Script-krohnkite]
+enableFloatingLayout=true
+keepFloatAbove=false
+screenGapBottom=4
+screenGapLeft=4
+screenGapRight=4
+screenGapTop=4
+tileLayoutGap=2
 
 [TabBox]
 DesktopLayout=org.kde.breeze.desktop
@@ -119,7 +129,5 @@ TitlebarDoubleClickCommand=Maximize
 WindowSnapZone=10
 
 [org.kde.kdecoration2]
-BorderSize=None
-BorderSizeAuto=false
 library=org.kde.kwin.aurorae
 theme=__aurorae__svg__Dracula

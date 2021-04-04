@@ -1,10 +1,13 @@
 ;;; ../../../var/home/fra/.doom.d/text.el -*- lexical-binding: t; -*-
-;; #TODO: consider emacs-anywhere
+;; TODO: consider emacs-anywhere
 (set-company-backend!
   '(text-mode
     markdown-mode
     gfm-mode)
   '(:seperate
-    company-ispell
     company-files
     company-yasnippet))
+;; use gfm-mode for markdown by default
+(setq auto-mode-alist
+      (delete '("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'" . markdown-mode)
+              auto-mode-alist))

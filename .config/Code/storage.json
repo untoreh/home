@@ -428,13 +428,14 @@
     },
     "windowsState": {
         "lastActiveWindow": {
-            "backupPath": "/home/fra/.config/Code/Backups/1615134597312",
+            "folder": "file:///home/fra/dev/blog",
+            "backupPath": "/home/fra/.config/Code/Backups/cbd04d0ad5a96c4423fcd3d3a4f30e20",
             "uiState": {
-                "mode": 0,
-                "x": 0,
-                "y": 64,
-                "width": 1276,
-                "height": 709
+                "mode": 1,
+                "x": 1059,
+                "y": 68,
+                "width": 852,
+                "height": 1004
             }
         },
         "openedWindows": []
@@ -442,24 +443,33 @@
     "theme": "vs-dark",
     "openedPathsList": {
         "workspaces3": [
+            "file:///home/fra/dev/blog",
+            "file:///home/fra",
+            "file:///home/fra/dev",
             "file:///home/fra/.tmp/blog",
             "file:///home/fra/.tmp/freqtrade/user_data/modules/Backtest.jl",
             "vscode-remote://attached-container%2B7b22636f6e7461696e65724e616d65223a222f667174227d/freqtrade/user_data/modules/Backtest.jl",
             "file:///home/fra/.tmp/scripts"
         ],
         "files2": [
+            "file:///home/fra/.config/nvim/init.vim",
+            "file:///home/fra/dev/blog/untoreh/stuff/chronichles_of_a_cryptonote_dropper.md",
+            "file:///home/fra/dev/freqtrade/user_data/notebooks/julia.org",
             "file:///home/fra/.config/trakt-scrobbler/config.yaml",
             "file:///home/fra/.ngrok2/ngrok.yml",
             "file:///home/fra/.cluster/xmp/config.yml"
         ],
         "workspaceLabels": [
             null,
+            null,
+            null,
+            null,
             "/home/fra/.tmp/freqtrade/user_data/modules/Backtest.jl",
             "/freqtrade/user_data/modules/Backtest.jl [Container freqtrade (/fqt)]",
             null
         ]
     },
-    "pickerWorkingDir": "/home/fra/.tmp",
+    "pickerWorkingDir": "/home/fra/dev/blog/untoreh/stuff",
     "menuBarHidden": true,
     "telemetry.machineId": "b4385f0936d5c17d23873b5387cd30edb62c01e28e0da9418a42a86ce2e5d152",
     "themeBackground": "#282a36",
@@ -491,16 +501,51 @@
                         "label": "Open Wor&&kspace..."
                     },
                     {
-                        "id": "submenuitem.24",
+                        "id": "submenuitem.25",
                         "label": "Open &&Recent",
                         "submenu": {
                             "items": [
                                 {
                                     "id": "workbench.action.reopenClosedEditor",
-                                    "label": "&&Reopen Closed Editor"
+                                    "label": "&&Reopen Closed Editor",
+                                    "enabled": false
                                 },
                                 {
                                     "id": "vscode.menubar.separator"
+                                },
+                                {
+                                    "id": "openRecentFolder",
+                                    "uri": {
+                                        "$mid": 1,
+                                        "fsPath": "/home/fra/dev/blog",
+                                        "external": "file:///home/fra/dev/blog",
+                                        "path": "/home/fra/dev/blog",
+                                        "scheme": "file"
+                                    },
+                                    "enabled": true,
+                                    "label": "~/dev/blog"
+                                },
+                                {
+                                    "id": "openRecentFolder",
+                                    "uri": {
+                                        "$mid": 1,
+                                        "external": "file:///home/fra",
+                                        "path": "/home/fra",
+                                        "scheme": "file"
+                                    },
+                                    "enabled": true,
+                                    "label": "/home/fra"
+                                },
+                                {
+                                    "id": "openRecentFolder",
+                                    "uri": {
+                                        "$mid": 1,
+                                        "external": "file:///home/fra/dev",
+                                        "path": "/home/fra/dev",
+                                        "scheme": "file"
+                                    },
+                                    "enabled": true,
+                                    "label": "~/dev"
                                 },
                                 {
                                     "id": "openRecentFolder",
@@ -548,6 +593,39 @@
                                 },
                                 {
                                     "id": "vscode.menubar.separator"
+                                },
+                                {
+                                    "id": "openRecentFile",
+                                    "uri": {
+                                        "$mid": 1,
+                                        "external": "file:///home/fra/.config/nvim/init.vim",
+                                        "path": "/home/fra/.config/nvim/init.vim",
+                                        "scheme": "file"
+                                    },
+                                    "enabled": true,
+                                    "label": "~/.config/nvim/init.vim"
+                                },
+                                {
+                                    "id": "openRecentFile",
+                                    "uri": {
+                                        "$mid": 1,
+                                        "external": "file:///home/fra/dev/blog/untoreh/stuff/chronichles_of_a_cryptonote_dropper.md",
+                                        "path": "/home/fra/dev/blog/untoreh/stuff/chronichles_of_a_cryptonote_dropper.md",
+                                        "scheme": "file"
+                                    },
+                                    "enabled": true,
+                                    "label": "~/dev/blog/untoreh/stuff/chronichles_of_a_cryptonote_dropper.md"
+                                },
+                                {
+                                    "id": "openRecentFile",
+                                    "uri": {
+                                        "$mid": 1,
+                                        "external": "file:///home/fra/dev/freqtrade/user_data/notebooks/julia.org",
+                                        "path": "/home/fra/dev/freqtrade/user_data/notebooks/julia.org",
+                                        "scheme": "file"
+                                    },
+                                    "enabled": true,
+                                    "label": "~/dev/freqtrade/user_data/notebooks/julia.org"
                                 },
                                 {
                                     "id": "openRecentFile",
@@ -615,13 +693,11 @@
                     },
                     {
                         "id": "workbench.action.files.save",
-                        "label": "&&Save",
-                        "enabled": false
+                        "label": "&&Save"
                     },
                     {
                         "id": "workbench.action.files.saveAs",
-                        "label": "Save &&As...",
-                        "enabled": false
+                        "label": "Save &&As..."
                     },
                     {
                         "id": "saveAll",
@@ -637,7 +713,7 @@
                         "checked": true
                     },
                     {
-                        "id": "submenuitem.23",
+                        "id": "submenuitem.24",
                         "label": "&&Preferences",
                         "submenu": {
                             "items": [
@@ -701,18 +777,15 @@
                     },
                     {
                         "id": "workbench.action.files.revert",
-                        "label": "Re&&vert File",
-                        "enabled": false
+                        "label": "Re&&vert File"
                     },
                     {
                         "id": "workbench.action.closeActiveEditor",
-                        "label": "&&Close Editor",
-                        "enabled": false
+                        "label": "&&Close Editor"
                     },
                     {
                         "id": "workbench.action.closeFolder",
-                        "label": "Close &&Folder",
-                        "enabled": false
+                        "label": "Close &&Folder"
                     },
                     {
                         "id": "workbench.action.closeWindow",
@@ -757,13 +830,11 @@
                     },
                     {
                         "id": "actions.find",
-                        "label": "&&Find",
-                        "enabled": false
+                        "label": "&&Find"
                     },
                     {
                         "id": "editor.action.startFindReplaceAction",
-                        "label": "&&Replace",
-                        "enabled": false
+                        "label": "&&Replace"
                     },
                     {
                         "id": "vscode.menubar.separator"
@@ -884,7 +955,7 @@
                         "id": "vscode.menubar.separator"
                     },
                     {
-                        "id": "submenuitem.15",
+                        "id": "submenuitem.16",
                         "label": "&&Appearance",
                         "submenu": {
                             "items": [
@@ -910,7 +981,8 @@
                                 },
                                 {
                                     "id": "workbench.action.toggleSidebarVisibility",
-                                    "label": "Show &&Side Bar"
+                                    "label": "Show &&Side Bar",
+                                    "checked": true
                                 },
                                 {
                                     "id": "workbench.action.toggleStatusbarVisibility",
@@ -965,7 +1037,7 @@
                         }
                     },
                     {
-                        "id": "submenuitem.21",
+                        "id": "submenuitem.22",
                         "label": "Editor &&Layout",
                         "submenu": {
                             "items": [
@@ -1057,6 +1129,10 @@
                         "id": "vscode.menubar.separator"
                     },
                     {
+                        "id": "workbench.actions.view.problems",
+                        "label": "&&Problems"
+                    },
+                    {
                         "id": "workbench.action.output.toggleOutput",
                         "label": "&&Output"
                     },
@@ -1067,10 +1143,6 @@
                     {
                         "id": "workbench.action.terminal.toggleTerminal",
                         "label": "&&Terminal"
-                    },
-                    {
-                        "id": "workbench.actions.view.problems",
-                        "label": "&&Problems"
                     },
                     {
                         "id": "vscode.menubar.separator"
@@ -1104,8 +1176,7 @@
                 "items": [
                     {
                         "id": "workbench.action.navigateBack",
-                        "label": "&&Back",
-                        "enabled": false
+                        "label": "&&Back"
                     },
                     {
                         "id": "workbench.action.navigateForward",
@@ -1114,14 +1185,13 @@
                     },
                     {
                         "id": "workbench.action.navigateToLastEditLocation",
-                        "label": "&&Last Edit Location",
-                        "enabled": false
+                        "label": "&&Last Edit Location"
                     },
                     {
                         "id": "vscode.menubar.separator"
                     },
                     {
-                        "id": "submenuitem.26",
+                        "id": "submenuitem.27",
                         "label": "Switch &&Editor",
                         "submenu": {
                             "items": [
@@ -1170,7 +1240,7 @@
                         }
                     },
                     {
-                        "id": "submenuitem.27",
+                        "id": "submenuitem.28",
                         "label": "Switch &&Group",
                         "submenu": {
                             "items": [
@@ -1377,7 +1447,7 @@
                         "label": "Toggle &&Breakpoint"
                     },
                     {
-                        "id": "submenuitem.22",
+                        "id": "submenuitem.23",
                         "label": "&&New Breakpoint",
                         "submenu": {
                             "items": [
@@ -1490,6 +1560,10 @@
                     {
                         "id": "workbench.action.showWelcomePage",
                         "label": "&&Welcome"
+                    },
+                    {
+                        "id": "workbench.action.showGettingStarted",
+                        "label": "Getting Started"
                     },
                     {
                         "id": "workbench.action.showInteractivePlayground",
@@ -1769,10 +1843,6 @@
                 "label": "Ctrl+Shift+E",
                 "userSettingsLabel": "ctrl+shift+e"
             },
-            "workbench.view.search": {
-                "label": "Ctrl+Shift+F",
-                "userSettingsLabel": "ctrl+shift+f"
-            },
             "workbench.view.scm": {
                 "label": "Ctrl+Shift+G G",
                 "isNative": false,
@@ -1781,6 +1851,10 @@
             "workbench.view.debug": {
                 "label": "Ctrl+Shift+D",
                 "userSettingsLabel": "ctrl+shift+d"
+            },
+            "workbench.actions.view.problems": {
+                "label": "Ctrl+Shift+M",
+                "userSettingsLabel": "ctrl+shift+m"
             },
             "workbench.action.output.toggleOutput": {
                 "label": "Ctrl+K Ctrl+H",
@@ -1794,10 +1868,6 @@
             "workbench.action.terminal.toggleTerminal": {
                 "label": "Ctrl+`",
                 "userSettingsLabel": "ctrl+`"
-            },
-            "workbench.actions.view.problems": {
-                "label": "Ctrl+Shift+M",
-                "userSettingsLabel": "ctrl+shift+m"
             },
             "editor.action.toggleWordWrap": {
                 "label": "Alt+Z",

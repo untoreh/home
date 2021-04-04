@@ -117,8 +117,9 @@
   (package! company-quickhelp)
   (package! company-quickhelp-terminal))
 (package! matrix-client
-  (:repo "alphapapa/matrix-client.el"
-   :files (:defaults "logo.png" "matrix-client-standalone.el.sh")
+  :recipe (:host nil
+   :repo "https://github.com/alphapapa/matrix-client.el"
+   :files ("*.el" "logo.png" "matrix-client-standalone.el.sh")
    :post-build ((require 'f)
                 (let* ((script-name "/matrix-client-standalone.el.sh")
                        (script-path (concat (f-dirname (locate-library "matrix-client")) script-name))
@@ -126,7 +127,4 @@
                        (link-path (concat bindir "matrix")))
                   (make-directory bindir t)
                   (delete-file link-path nil)
-                  (make-symbolic-link script-path link-path t)))
-   ))
-                                        ;(package! pdf-tools
-                                        ;	  :disable t)
+                  (make-symbolic-link script-path link-path t)))))

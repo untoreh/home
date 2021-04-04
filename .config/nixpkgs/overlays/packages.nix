@@ -24,7 +24,7 @@ in {
     go-pup nixfmt golangci-lint shfmt
 
     # emacs
-    emacsGcc mu emacs-all-the-icons-fonts;
+    emacsPgtkGcc mu emacs-all-the-icons-fonts;
   # gpu, waiting for nixpkgs integration
   # nixGLDefault
   inherit (nixgl) nixGLDefault;

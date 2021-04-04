@@ -1,0 +1,25 @@
+# GIMP action-history
+
+(history-item "edit-clear" 5)
+(history-item "tools-by-color-select" 1)
+(history-item "dialogs-about" 0)
+(history-item "tools-fuzzy-select" 0)
+(history-item "layers-duplicate" 0)
+(history-item "file-export-as" 1)
+(history-item "file-open-as-layers" 0)
+(history-item "image-new" 0)
+(history-item "dialogs-preferences" 0)
+(history-item "image-configure-grid" 0)
+(history-item "tools-pencil" 0)
+(history-item "file-save-as" 0)
+(history-item "tools-foreground-select" 0)
+(history-item "brushes-edit" 0)
+(history-item "brushes-new" 0)
+(history-item "layers-mask-add" 0)
+(history-item "layers-mask-delete" 0)
+(history-item "select-all" 0)
+(history-item "layers-alpha-add" 0)
+(history-item "layers-delete" 0)
+(history-item "file-quit" 1)
+
+# end of action-history

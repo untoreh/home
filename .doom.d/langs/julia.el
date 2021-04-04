@@ -16,7 +16,7 @@
         lsp-julia-package-dir nil)
   :config
   ;; override doom module preset
-  (setq lsp-julia-default-environment "~/.julia/environments/v1.5"))
+  (setq lsp-julia-default-environment "~/.julia/environments/v1.6"))
 
 (use-package! julia-repl
   :commands julia-repl
@@ -31,9 +31,8 @@
   ;; make sure to load ob-julia before, to override funcs
   (require 'ob-julia)
   (setq-default julia-repl--buffers-list nil
-        julia-repl--session-hist (list)
-        julia-repl--call-stack nil
-        julia-repl--call-count 0)
+                julia-repl--call-stack nil
+                julia-repl--call-count 0)
   ;; vterm support for julia repl
   ;; (defun julia-repl--vterm-prompt ()
   ;;   (julia-repl--send-string
@@ -68,16 +67,16 @@
 
   (require 'aio)
   (aio-defun org-babel-julia--send-string (str)
-    ;; this function must be called within the terminal buffer context
-    ;; because aio doesn't support buffer context switching
-    (if (not vterm--term)
-        (error "Not in a vterm buffer when executing julia src block"))
-    (while (eq 0 (current-column))
-      (progn
-        (message "waiting for repl prompt...")
-        (vterm-reset-cursor-point)
-        (aio-await (aio-sleep 0.25))))
-    (julia-repl--send-string str))
+             ;; this function must be called within the terminal buffer context
+             ;; because aio doesn't support buffer context switching
+             (if (not vterm--term)
+                 (error "Not in a vterm buffer when executing julia src block"))
+             (while (eq 0 (current-column))
+               (progn
+                 (message "waiting for repl prompt...")
+                 (vterm-reset-cursor-point)
+                 (aio-await (aio-sleep 0.25))))
+             (julia-repl--send-string str))
 
   (defun org-babel-julia--execute-src-block (body params)
     (interactive)
@@ -154,10 +153,25 @@
                   (t (error
                       "Inferior name suffix should be an integer or a symbol")))))
 
-      (concat julia-repl-inferior-buffer-name-base middle last))))
+      (concat julia-repl-inferior-buffer-name-base middle last)))
+  (cl-defun julia-repl-cd (&optional directory)
+    "Change directory to the specified directory or the current buffer one (if applicable)."
+    (interactive)
+    (if-let ((directory (if (not directory)
+                            (file-name-directory (buffer-file-name))
+                          directory)))
+        (progn
+	  (julia-repl--send-string
+           (concat
+            "cd(\""
+            (julia-repl--path-rewrite directory julia-repl-path-rewrite-rules)
+            "\")"))
+	  (with-current-buffer (julia-repl-inferior-buffer) (cd directory)))
+      (warn "buffer not associated with a file"))))
 
 (after! julia-mode
 
+  (setq-default julia-repl--session-hist (a-list))
   (define-minor-mode julia-repl-vterm-mode
     " mode for julia repl vterm buffers "
     nil)
@@ -170,9 +184,9 @@
          (julia-repl-vterm-mode)))
    ;; reset org babel session history
    #'(lambda ()
-       (setf (cdr (assoc (symbol-name julia-repl-inferior-buffer-name-suffix)
-                         julia-repl--session-hist))
-             nil)))
+       (let ((suffix (symbol-name julia-repl-inferior-buffer-name-suffix)))
+         (if (not (alist-get suffix julia-repl--session-hist))
+             (setf (alist-get suffix julia-repl--session-hist nil) nil)))))
 
   (defun julia-toggle-repl-and-insert ()
     (interactive)
@@ -270,3 +284,28 @@
 ;;;;
 (set-company-backend! 'julia-mode
   '(:separate company-capf company-yasnippet company-dabbrev-code company-files))
+
+
+
+(defun julia-repl-live-buffer ()
+  (let* ((executable-key (julia-repl--get-executable-key))
+         (suffix julia-repl-inferior-buffer-name-suffix)
+         (terminal-backend julia-repl--terminal-backend)
+         (name (julia-repl--inferior-buffer-name executable-key suffix))
+         (live-buffer (julia-repl--locate-live-buffer terminal-backend name)))
+    live-buffer))
+
+;; franklin
+(defun julia-franklin ()
+  (interactive)
+  "Start the franklin live server in the current default-dir"
+  ;; (if (not (julia-repl-live-buffer))
+  ;;     (message "repl is not live"))
+  (if (julia-repl-inferior-buffer)
+      (progn
+        (julia-repl-cd (projectile-project-root))
+        (julia-repl--send-string
+         "using Franklin; frank_task = @task serve(); schedule(frank_task)"))))
+
+;; julia projects file
+(appendq! projectile-project-root-files '("Project.toml" "JuliaProject.toml"))

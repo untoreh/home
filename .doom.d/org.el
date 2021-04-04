@@ -7,16 +7,24 @@
   ;; why would I need to indent src blocks?
   (setq-default org-edit-src-content-indentation 0))
 
-(use-package! poly-org
-  :after-call poly-org-mode
+(use-package! polymode
+  :after-call polymode-minor-mode
   :config
   ;; we DONT want poly-org on every org buffer
-  (delete '("\\.org\\'" . poly-org-mode) auto-mode-alist)
+  (setq auto-mode-alist (delete '("\\.org\\'" . poly-org-mode) auto-mode-alist))
   ;; enable poly org mode if "#+PROPERTY: poly:" is true
   (defun org-add-poly-mode-ensure-hook ()
     (if (member (cdr (assoc "poly:" org-keyword-properties)) '("yes" t))
         (poly-org-mode t)))
-  (add-hook 'org-mode-hook #'org-add-poly-mode-ensure-hook)
+  (add-hook 'org-mode-hook #'org-add-poly-mode-ensure-hook))
+(use-package! poly-markdown
+  :after-call poly-markdown-mode
+  :config
+  ;; we DONT want poly-markdown on every org buffer
+  (setq auto-mode-alist (delete '("\\.md\\'" . poly-markdown-mode) auto-mode-alist)))
+(use-package! poly-org
+  :after-call poly-org-mode
+  :config
   ;; FIXME: force font-lock when inside a src block with poly mode
   (add-hook 'polymode-after-switch-buffer-hook
             (lambda (&rest _)
@@ -49,18 +57,6 @@
   (advice-add #'set-window-prev-buffers :filter-args #'poly-avoid-indirect-buffer-history)
   (advice-add #'set-window-next-buffers :filter-args #'poly-avoid-indirect-buffer-history)
 
-  ;; noop org fontification since managed by poly-org mode..
-  (setq-default
-   org-src-fontify-wrapper
-   (symbol-function
-    #'org-src-font-lock-fontify-block))
-  (make-variable-buffer-local 'org-src-fontify-wrapper)
-  (add-hook! poly-org-mode
-    (lambda ()
-      (setq org-src-fontify-wrapper (lambda (&rest args)))))
-  (fset #'org-src-font-lock-fontify-block
-        (lambda (&rest args)
-          (apply #'org-src-fontify-wrapper args)))
   ;; relay org buffer properties to polymode buffers
   (defun poly-org-buffer-properties (_ this-buf)
     (with-current-buffer (pm-base-buffer)

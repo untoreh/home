@@ -9,9 +9,8 @@
         "vscode_custom_css.imports": [
             "file:///home/fra/.config/vsc/colors.css"
         ],
-        "window.zoomLevel": 0,
         "vim.useCtrlKeys": true,
-        "workbench.iconTheme": "vscode-icons",
+        "workbench.iconTheme": "sweet-vscode-icons",
         "workbench.colorTheme": "Dracula",
         "vim.statusBarColorControl": true,
         // "vim.statusBarColors": {
@@ -87,5 +86,19 @@
             "language-julia.interrupt"
         ],
         "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
-        "vscode-neovim.neovimInitVimPaths.linux": "~/.vimrc"
+        "vscode-neovim.neovimInitVimPaths.linux": "~/.vim/init.vim",
+        "search.followSymlinks": false,
+        "telemetry.enableTelemetry": false,
+        "telemetry.enableCrashReporter": false,
+        "markdown.extension.print.theme": "dark",
+        "markdown.extension.syntax.plainTheme": true,
+        "hediet-power-tools.markdownCodeBlockLanguageService.enabled": true,
+        "files.exclude": {
+            "**/.git": true,
+            "**/.svn": true,
+            "**/.hg": true,
+            "**/CVS": true,
+            "**/.DS_Store": true,
+            ".tmp-projections/": true
+        }
     }

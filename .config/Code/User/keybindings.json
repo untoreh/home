@@ -24,5 +24,10 @@
     {
         "key": "ctrl+alt+`",
         "command": "workbench.action.togglePanel"
+    },
+    {
+        "command": "vscode-neovim.escape",
+        "key": "f d",
+        "when": "neovim.mode == insert && editorTextFocus",
     }
 ]
