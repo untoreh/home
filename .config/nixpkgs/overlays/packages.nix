@@ -13,18 +13,23 @@ let
   };
 in {
   inherit (super)
-    browsh kitty git-hub pet tmux fzf fd bat ripgrep zoxide exa bandwhich wego
+    fish eternal-terminal browsh kitty git-hub pet tmux fzf fd bat ripgrep zoxide exa bandwhich wego
     duplicacy borgbackup translate-shell rclone consul haproxy
     # sway
     mako
     # theme
     # input-fonts
+    # docs
+    man less thefuck
 
     # langs
     go-pup nixfmt golangci-lint shfmt
 
+    # runtimes
+    python3
+
     # emacs
-    emacsPgtkGcc mu emacs-all-the-icons-fonts;
+    emacsPgtkGcc mu isync gnupg pinentry emacs-all-the-icons-fonts neovim;
   # gpu, waiting for nixpkgs integration
   # nixGLDefault
   inherit (nixgl) nixGLDefault;
@@ -32,5 +37,5 @@ in {
   # backup
   # borg;
   # python
-  inherit (super.python38Packages) howdoi;
+  # inherit (super.python38Packages) howdoi;
 }

@@ -1,5 +1,5 @@
 source ~/.config/fish/profile.fish
-source ~/.config/fish/ssh-agent.fish
+# source ~/.config/fish/ssh-agent.fish
 
 source ~/.config/fish/functions/git.fish
 source ~/.config/fish/functions/go.fish
@@ -18,4 +18,4 @@ source ~/.config/fish/trades.fish
 source ~/.config/fish/functions/tag.fish
 source ~/.config/fish/functions/zoxide.fish
 
-thefuck --alias | source
+# thefuck --alias | source

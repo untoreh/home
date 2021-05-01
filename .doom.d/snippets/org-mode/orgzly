@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: orgzly
+# uuid: orgzly
+# key: oz
+# --
+* TODO `%`$0
+:PROPERTIES:
+:END:

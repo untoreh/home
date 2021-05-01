@@ -18,3 +18,5 @@ PS1='[\u@\h \W]\$ '
 [[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh # this line was added by RESH (Rich Enchanced Shell History)
 
 
+# export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
+# export GDK_SCALE=1

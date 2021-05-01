@@ -9,12 +9,12 @@ if [ -v FZF_LAUNCHER ]; then
 	export FZF_DEFAULT_OPTS="--color=bw --height 1% --reverse --tiebreak=begin,length,index --print-query --exact"
 fi
 
-cached_path=/tmp/.cache/path_posix
+cached_dir=/tmp/.cache
+cached_path=$cached_dir/path_posix
 if [ -e $cached_path ]; then
 	export $(<$cached_path 2>/dev/null) 1>/dev/null
 else
-	touch $cached_path # touch to avoid recursion
-      	mkdir -p $(dirname $cached_path);
+	mkdir -p $cached_dir && touch $cached_path # touch to avoid recursion
       	ruby_bin=$(echo -n $HOME/.gem/ruby/\*/bin | tr ' ' ':');
       	go_bin=$(echo -n /usr/lib/go-\*/bin | tr ' ' ':');
       	julia_bin=/opt/julia/bin;
@@ -92,3 +92,5 @@ export PATH="/usr/lib/ccache:$PATH"
 # NIX
 if [ -e /home/fra/.nix-profile/etc/profile.d/nix.sh ]; then . /home/fra/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
+export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
+export GDK_SCALE=1

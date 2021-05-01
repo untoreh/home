@@ -25,9 +25,15 @@ set MOZ_USE_OMTC 1 ## for firefox off main thread compositing
 
 # clipboard
 if [ -n "$DISPLAY" ]
-    function clc
-        xclip -i -selection clipboard
-    end
+	if [ -n "$WSLENV" ]
+		function clc
+			clip.exe
+		end
+	else
+    	function clc
+        	xclip -i -selection clipboard
+    	end
+    	end
 else
     alias clc wl-copy
 end

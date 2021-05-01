@@ -308,4 +308,5 @@
          "using Franklin; frank_task = @task serve(); schedule(frank_task)"))))
 
 ;; julia projects file
-(appendq! projectile-project-root-files '("Project.toml" "JuliaProject.toml"))
+(after! projectile
+  (appendq! projectile-project-root-files '("Project.toml" "JuliaProject.toml")))

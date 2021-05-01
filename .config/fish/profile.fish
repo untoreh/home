@@ -10,6 +10,8 @@ if test (string replace -r 'fish$' "" $SHELL) != $SHELL
 else
     set -e is_fish
 end
+# avoid printing escape codes with man
+set -x PAGER 'less -R'
 
 # fzf
 if [ -z "$FZF_LAUNCHER" ]
@@ -22,12 +24,13 @@ if [ -e $path_fish ]
     source $path_fish
 else
     mkdir -p (dirname $path_fish)
-    set gobins (echo -n /usr/lib/go-*/bin | tr ' ' ':')
-    set gembins (echo -n $HOME/.gem/ruby/*/bin | tr ' ' ':')
+    which go && set gobins (echo -n /usr/lib/go-*/bin | tr ' ' ':')
+    which ruby && set gembins (echo -n $HOME/.gem/ruby/*/bin | tr ' ' ':')
     set juliabins "/opt/julia/bin"
     set nixbins "$HOME/.nix-profile/bin"
-    set zshbins (zsh -lic "echo \$PATH")
-    echo "set PATH \"$HOME/bin:$HOME/.local/bin:$nixbins:$juliabins:$gembins:/snap/bin::$HOME/.tmp/go/bin:$HOME/.cargo/bin:$gobins:$zshbins\"" >$path_fish
+    set bashbins (bash -lic "echo \$PATH")
+    echo "set PATH \"$HOME/bin:$HOME/.local/bin:$nixbins:$juliabins:$gembins:/snap/bin::$HOME/.tmp/go/bin:$HOME/.cargo/bin:$gobins:$bashbins\"" >$path_fish
+    echo "set -x LOCALE_ARCHIVE" (nix-build --no-out-link '<nixpkgs>' -A glibcLocales)"/lib/locale/locale-archive" >>$path_fish
     source $path_fish
 end
 # browser
@@ -107,3 +110,4 @@ set -x CXX "ccache g++"
 set -x PATH "/usr/lib/ccache:$PATH"
 # NIX
 set -x NIX_PATH "$HOME/.nix-defexpr/channels:$NIX_PATH"
+
