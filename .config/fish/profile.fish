@@ -24,17 +24,16 @@ if [ -e $path_fish ]
     source $path_fish
 else
     mkdir -p (dirname $path_fish)
-    which go && set gobins (echo -n /usr/lib/go-*/bin | tr ' ' ':')
-    which ruby && set gembins (echo -n $HOME/.gem/ruby/*/bin | tr ' ' ':')
+    which go 2>/dev/null && set gobins (echo -n /usr/lib/go-*/bin | tr ' ' ':')
+    which ruby 2>/dev/null && set gembins (echo -n $HOME/.gem/ruby/*/bin | tr ' ' ':')
     set juliabins "/opt/julia/bin"
     set nixbins "$HOME/.nix-profile/bin"
     set bashbins (bash -lic "echo \$PATH")
     echo "set PATH \"$HOME/bin:$HOME/.local/bin:$nixbins:$juliabins:$gembins:/snap/bin::$HOME/.tmp/go/bin:$HOME/.cargo/bin:$gobins:$bashbins\"" >$path_fish
-    echo "set -x LOCALE_ARCHIVE" (nix-build --no-out-link '<nixpkgs>' -A glibcLocales)"/lib/locale/locale-archive" >>$path_fish
     source $path_fish
 end
 # browser
-set -x BROWSER /usr/bin/firefox
+set -q BROWSER || set --export BROWSER (which firefox)
 # kodi
 # set -x CRASHLOG_DIR /tmp/kodi
 # must replicate /etc/environment with fish syntax
@@ -43,6 +42,7 @@ set -x BROWSER /usr/bin/firefox
 . ~/.config/fish/aliases.fish
 
 ## emacs the script in the local bin folder !!
+export EMACS_COMMIT
 set -x ALTERNATE_EDITOR "emacsclient"
 set -x ESHELL "/bin/sh"
 set -x EDITOR "emc" # $EDITOR should open in terminal
@@ -110,4 +110,8 @@ set -x CXX "ccache g++"
 set -x PATH "/usr/lib/ccache:$PATH"
 # NIX
 set -x NIX_PATH "$HOME/.nix-defexpr/channels:$NIX_PATH"
+if ! set -q LOCALE_ARCHIVE
+	set -x LOCALE_ARCHIVE (nix-build --no-out-link '<nixpkgs>' -A glibcLocales)"/lib/locale/locale-archive"
+	echo "set -x LOCALE_ARCHIVE \"$LOCALE_ARCHIVE\"" >> $path_fish
+end
 

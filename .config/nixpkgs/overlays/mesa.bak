@@ -1,0 +1,7 @@
+self: super:
+{
+   mesa = super.mesa.override {
+     galliumDrivers = ["d3d12" "swrast"];
+   };
+}
+

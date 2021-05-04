@@ -1,0 +1,7 @@
+#!/bin/bash -l
+
+if which nixGL >/dev/null && [ ! -e /tmp/.nixgl ]; then
+	ENV=$(nixGL env)
+       	echo "$ENV" | grep -E 'LIBGL_DRIVERS_PATH=' >> /tmp/.nixgl
+       	echo "$ENV" | grep -E 'LD_LIBRARY_PATH=' >> /tmp/.nixgl
+fi

@@ -1,7 +1,8 @@
 #!/bin/sh
 
-kitty_wrap=nixGL
-kitty_path=~/.nix-profile/bin/kitty
+# kitty_wrap=nixGL
+# kitty_path=~/.nix-profile/bin/kitty
+kitty_path=/usr/bin/kitty
 
 TERM=tmux-256color \
     KITTY_ENABLE_WAYLAND=1 \

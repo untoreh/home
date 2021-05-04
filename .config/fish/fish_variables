@@ -1,1 +1,56 @@
-../../.secrets/files/.config/fish/fish_variables
+# This file contains fish universal variable definitions.
+# VERSION: 3.0
+SETUVAR EMACS_COMMIT:891b3651fa86fa3928bf0c0b537c57f624941fc9
+SETUVAR --export FZF_DEFAULT_OPTS:\x2d\x2dcolor\x3dbw\x20\x2d\x2dheight\x201\x25\x20\x2d\x2dreverse\x20\x2d\x2dtiebreak\x3dbegin\x2clength\x2cindex
+SETUVAR FZF_DISABLE_KEYBINDINGS:0
+SETUVAR FZF_LEGACY_KEYBINDINGS:1
+SETUVAR FZF_PREVIEW_DIR_CMD:ls
+SETUVAR FZF_PREVIEW_FILE_CMD:head\x20\x2dn\x2010
+SETUVAR FZF_TMUX_HEIGHT:40\x25
+SETUVAR LOCAL_ARCHIVE:\x1d
+SETUVAR --path PATH:\x7e/\x2enix\x2dprofile/bin\x1e/usr/lib/ccache\x1e/home/fra/\x2ecargo/bin\x1e/home/fra/bin\x1e/home/fra/\x2elocal/bin\x1e/home/fra/\x2enix\x2dprofile/bin\x1e/opt/julia/bin\x1e\x2e\x1e/snap/bin\x1e\x2e\x1e/home/fra/\x2etmp/go/bin\x1e/home/fra/\x2ecargo/bin\x1e\x2e\x1e\x2e\x1e/bin\x1e/sbin\x1e/usr/bin\x1e/usr/sbin/
+SETUVAR THEFUCK_DEF:function\x20fuck\x20\x2dd\x20\x22Correct\x20your\x20previous\x20console\x20command\x22\x1e\x20\x20set\x20\x2dl\x20fucked_up_command\x20\x24history\x5b1\x5d\x1e\x20\x20env\x20TF_SHELL\x3dfish\x20TF_ALIAS\x3dfuck\x20PYTHONIOENCODING\x3dutf\x2d8\x20thefuck\x20\x24fucked_up_command\x20THEFUCK_ARGUMENT_PLACEHOLDER\x20\x24argv\x20\x7c\x20read\x20\x2dl\x20unfucked_command\x1e\x20\x20if\x20\x5b\x20\x22\x24unfucked_command\x22\x20\x21\x3d\x20\x22\x22\x20\x5d\x1e\x20\x20\x20\x20eval\x20\x24unfucked_command\x1e\x20\x20\x20\x20builtin\x20history\x20delete\x20\x2d\x2dexact\x20\x2d\x2dcase\x2dsensitive\x20\x2d\x2d\x20\x24fucked_up_command\x1e\x20\x20\x20\x20builtin\x20history\x20merge\x20\x5e\x20/dev/null\x1e\x20\x20end\x1eend
+SETUVAR __fish_init_1_50_0:\x1d
+SETUVAR __fish_init_2_39_8:\x1d
+SETUVAR __fish_init_2_3_0:\x1d
+SETUVAR __fish_init_3_x:\x1d
+SETUVAR __fish_initialized:3100
+SETUVAR _fish_abbr_za:zoxide\x20add
+SETUVAR _fish_abbr_zq:zoxide\x20query
+SETUVAR _fish_abbr_zqi:zoxide\x20query\x20\x2di
+SETUVAR _fish_abbr_zr:zoxide\x20remove
+SETUVAR _fisher_jethrokuan_2F_fzf_files:/home/fra/\x2econfig/fish/functions/__fzf_cd\x2efish\x1e/home/fra/\x2econfig/fish/functions/__fzf_complete\x2efish\x1e/home/fra/\x2econfig/fish/functions/__fzf_complete_preview\x2efish\x1e/home/fra/\x2econfig/fish/functions/__fzf_find_file\x2efish\x1e/home/fra/\x2econfig/fish/functions/__fzf_get_dir\x2efish\x1e/home/fra/\x2econfig/fish/functions/__fzf_open\x2efish\x1e/home/fra/\x2econfig/fish/functions/__fzf_parse_commandline\x2efish\x1e/home/fra/\x2econfig/fish/functions/__fzf_reverse_isearch\x2efish\x1e/home/fra/\x2econfig/fish/functions/__fzfcmd\x2efish\x1e/home/fra/\x2econfig/fish/conf\x2ed/fzf\x2efish
+SETUVAR _fisher_jorgebucaran_2F_fisher_files:/home/fra/\x2econfig/fish/functions/fisher\x2efish\x1e/home/fra/\x2econfig/fish/completions/fisher\x2efish
+SETUVAR _fisher_oh_2D_my_2D_fish_2F_plugin_2D_extract_files:/home/fra/\x2econfig/fish/functions/extract\x2efish
+SETUVAR _fisher_plugins:jorgebucaran/fisher\x1ejethrokuan/fzf\x1ewawa19933/fish\x2dsystemd\x1eoh\x2dmy\x2dfish/plugin\x2dextract
+SETUVAR _fisher_wawa19933_2F_fish_2D_systemd_files:/home/fra/\x2econfig/fish/functions/systemctl\x2efish\x1e/home/fra/\x2econfig/fish/conf\x2ed/systemd\x2dabbr\x2efish
+SETUVAR fish_color_autosuggestion:555\x1eyellow
+SETUVAR fish_color_cancel:\x2dr
+SETUVAR fish_color_command:005fd7\x1epurple
+SETUVAR fish_color_comment:red
+SETUVAR fish_color_cwd:green
+SETUVAR fish_color_cwd_root:red
+SETUVAR fish_color_end:green
+SETUVAR fish_color_error:red\x1e\x2d\x2dbold
+SETUVAR fish_color_escape:cyan
+SETUVAR fish_color_history_current:cyan
+SETUVAR fish_color_host:normal
+SETUVAR fish_color_host_remote:yellow
+SETUVAR fish_color_match:cyan
+SETUVAR fish_color_normal:normal
+SETUVAR fish_color_operator:cyan
+SETUVAR fish_color_param:00afff\x1ecyan
+SETUVAR fish_color_quote:brown
+SETUVAR fish_color_redirection:normal
+SETUVAR fish_color_search_match:\x2d\x2dbackground\x3dpurple
+SETUVAR fish_color_selection:\x2d\x2dbackground\x3dpurple
+SETUVAR fish_color_status:red
+SETUVAR fish_color_user:green
+SETUVAR fish_color_valid_path:\x2d\x2dunderline
+SETUVAR fish_greeting:\x1d
+SETUVAR fish_history:fish
+SETUVAR fish_key_bindings:fish_default_key_bindings
+SETUVAR fish_pager_color_completion:normal
+SETUVAR fish_pager_color_description:555\x1eyellow
+SETUVAR fish_pager_color_prefix:cyan
+SETUVAR fish_pager_color_progress:cyan

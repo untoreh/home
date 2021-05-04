@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source $HOME/.profile
+source ~/.profile
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
@@ -11,11 +11,9 @@ PS1='[\u@\h \W]\$ '
 
 
 # added by travis gem
-[ -f /home/fra/.travis/travis.sh ] && source /home/fra/.travis/travis.sh
+[ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 
 [ -f ~/.fzf.bash ] && . ~/.fzf.bash
-
-[[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh # this line was added by RESH (Rich Enchanced Shell History)
 
 
 # export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0

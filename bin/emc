@@ -1,5 +1,5 @@
 #!/bin/sh
-UID=${UID:-$(id -u)}
+[ -z "$UID" ] && UID=$(id -u)
 name=${EMACS_SERVER_NAME:-server}
 s_tmp=/tmp/emacs$UID/${name}
 s_run=/run/user/$UID/emacs/${name}

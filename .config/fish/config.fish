@@ -1,5 +1,7 @@
 source ~/.config/fish/profile.fish
-# source ~/.config/fish/ssh-agent.fish
+if ! set -q WSLENV
+	source ~/.config/fish/ssh-agent.fish
+end
 
 source ~/.config/fish/functions/git.fish
 source ~/.config/fish/functions/go.fish
@@ -17,5 +19,8 @@ source ~/.config/fish/trades.fish
 
 source ~/.config/fish/functions/tag.fish
 source ~/.config/fish/functions/zoxide.fish
+source ~/.config/fish/thefuck.fish
 
-# thefuck --alias | source
+# theme
+set fish_greeting # disable fish motd
+starship init fish | source

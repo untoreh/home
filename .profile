@@ -92,5 +92,3 @@ export PATH="/usr/lib/ccache:$PATH"
 # NIX
 if [ -e /home/fra/.nix-profile/etc/profile.d/nix.sh ]; then . /home/fra/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
-export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
-export GDK_SCALE=1

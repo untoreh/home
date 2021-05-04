@@ -1,0 +1,3 @@
+#!/bin/sh
+
+[ -n "$WSLENV" ] && exec mpv.exe $@ || exec mpv $@

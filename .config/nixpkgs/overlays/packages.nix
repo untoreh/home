@@ -13,10 +13,11 @@ let
   };
 in {
   inherit (super)
-    fish eternal-terminal browsh kitty git-hub pet tmux fzf fd bat ripgrep zoxide exa bandwhich wego
+    fish starship eternal-terminal browsh git-hub pet tmux fzf fd bat ripgrep zoxide exa bandwhich wego
     duplicacy borgbackup translate-shell rclone consul haproxy
+    # kitty wait for d3d12
     # sway
-    mako
+    mako wl-clipboard
     # theme
     # input-fonts
     # docs
@@ -29,11 +30,13 @@ in {
     python3
 
     # emacs
-    emacsPgtkGcc mu isync gnupg pinentry emacs-all-the-icons-fonts neovim;
+    # emacsPgtkGcc  # wait for mesa-d3d12
+    mu isync gnupg pinentry emacs-all-the-icons-fonts neovim;
   # gpu, waiting for nixpkgs integration
   # nixGLDefault
   inherit (nixgl) nixGLDefault;
-  inherit (unstable) mpv youtube-dl;
+  # wait for mesa-d3d12
+  # inherit (unstable) mpv youtube-dl;
   # backup
   # borg;
   # python
