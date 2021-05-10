@@ -4,7 +4,7 @@
 set -x k ~/.ssh/id_rsa
 set -x pk ~/.ssh/id_rsa.pub
 # shell
-set -x KITTY_PATH ~/.zinit/plugins/kovidgoyal---kitty/bin/kitty
+set -x KITTY_PATH ~/.nix-profile/bin/kitty
 if test (string replace -r 'fish$' "" $SHELL) != $SHELL
     set is_fish "1"
 else

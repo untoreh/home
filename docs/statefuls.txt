@@ -1,6 +1,7 @@
 # A List of paths to snapshot without versioning in ~/
 tmp
 .local
+-.local/share/Steam
 Downloads
 dev
 share
@@ -15,7 +16,7 @@ Desktop
 .icons
 .themes
 .var
-.steam
+# .steam
 .emacs.d
 .tmux
 .vscode

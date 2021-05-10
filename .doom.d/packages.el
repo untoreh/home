@@ -82,12 +82,12 @@
       (if (featurep! :lang julia +snail)
           (package! julia-snail))
       ;; a featureful ob implementation for julia
-      (if (featurep! :lang julia +ob)
-          (package! ob-julia :shadow 'ob-julia
-            :recipe (:host nil
-                     :repo "https://git.nixo.xyz/nixo/ob-julia.git"
-                     :files ("*.jl" "*.el")))
-        )))
+      ;(if (featurep! :lang julia +ob)
+      ;    (package! ob-julia :shadow 'ob-julia
+      ;      :recipe (:host nil
+      ;               :repo "https://git.nixo.xyz/nixo/ob-julia.git"
+      ;               :files ("*.jl" "*.el"))))
+      ))
 ;; shell
 (package! fish-mode)
 

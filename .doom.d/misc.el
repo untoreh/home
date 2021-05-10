@@ -28,6 +28,7 @@
 (add-to-list '+format-on-save-enabled-modes 'org-msg-edit-mode 'append)
 (add-to-list '+format-on-save-enabled-modes 'gitignore-mode 'append)
 (add-to-list '+format-on-save-enabled-modes 'lisp-data-mode 'append)
+(add-to-list '+format-on-save-enabled-modes 'conf-space-mod 'append)
 
 ;; never enable indent guides by default
 (remove-hook! (prog-mode text-mode conf-mode) highlight-indent-guides-mode)
@@ -43,7 +44,7 @@
 (setq projectile-project-search-path '("~/dev"))
 
 ;; wayland clipboard support
-(if (equal (pgtk-backend-display-class) "GdkWaylandDisplay")
+(if (and (display-graphic-p) (equal (pgtk-backend-display-class) "GdkWaylandDisplay"))
     (progn
       (setq wl-copy-process nil)
       (defun wl-copy (text)

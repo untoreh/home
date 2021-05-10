@@ -1,0 +1,15 @@
+[Unit]
+Description=Mediabox
+
+[Service]
+Type=oneshot
+Environment=TARGET=/volatile/backup/borg-mediabox
+Environment=BACKUP_PATH=/media/fra/volatile/shows
+Environment=BORG_OPTS="--stats --one-file-system --compression auto,zstd,10 --checkpoint-interval 86400"
+ExecStart=/bin/sh -c '%h/.nix-profile/bin/borg create $BORG_OPTS \
+        "$TARGET::$(date --iso-8601)-$(hostname)-mediabox" \
+        $BACKUP_PATH'
+TimeoutStopSec=10
+
+[Install]
+WantedBy=default.target

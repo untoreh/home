@@ -1,7 +1,9 @@
 # TERM
 [ ! -v TMUX ] && export TERM=xterm-256color || export TERM=tmux-256color
-## secrets
+# secrets
 export k=~/.ssh/id_rsa pk=~/.ssh/id_rsa.pub
+# gpg
+# [ ! -v GPG_TTY ] && set -x GPG_TTY $(tty)
 # shell
 HISTSIZE='' HISTFILESIZE='' ## for bash compatibility
 # Path

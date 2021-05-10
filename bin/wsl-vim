@@ -1,0 +1,5 @@
+#!/bin/sh -l
+
+p=$(eval "wslpath $1")
+shift
+exec nvim "$p" "$@"

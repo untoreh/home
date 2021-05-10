@@ -13,15 +13,17 @@ let
   };
 in {
   inherit (super)
-    fish starship eternal-terminal browsh git-hub pet tmux fzf fd bat ripgrep zoxide exa bandwhich wego
-    duplicacy borgbackup translate-shell rclone consul haproxy
+    starship eternal-terminal browsh git-hub pet tmux fzf fd bat ripgrep
+    zoxide exa bandwhich wego duplicacy borgbackup translate-shell rclone consul
+    haproxy
     # kitty wait for d3d12
     # sway
     mako wl-clipboard
     # theme
     # input-fonts
-    # docs
-    man less thefuck
+    # docs, don't use fish from nix because of locales 
+    man less thefuck glibcLocales
+    
 
     # langs
     go-pup nixfmt golangci-lint shfmt
@@ -37,6 +39,7 @@ in {
   inherit (nixgl) nixGLDefault;
   # wait for mesa-d3d12
   # inherit (unstable) mpv youtube-dl;
+  inherit (unstable) youtube-dl;
   # backup
   # borg;
   # python

@@ -1,0 +1,9 @@
+[Unit]
+Description=Backup mediabox
+
+[Timer]
+OnBootSec=15min
+OnUnitActiveSec=1D
+
+[Install]
+WantedBy=timers.target

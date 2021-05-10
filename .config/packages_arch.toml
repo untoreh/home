@@ -1,0 +1,16 @@
+base-devel
+ccache
+lm_sensors
+vulkan-icd-loader
+aura-bin
+emacs-gcc-wayland-devel-bin
+mesa-d3d12
+libgccjit
+mpv
+kitty
+wget
+unzip
+imagemagick
+inetutils
+julia
+net-tools
