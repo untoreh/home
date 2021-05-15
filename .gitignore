@@ -109,3 +109,5 @@ remmina/
 !*.julia/config
 !*.julia/environments
 \#*
+/.landscape/
+/.nx

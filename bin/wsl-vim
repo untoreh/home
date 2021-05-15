@@ -1,5 +1,19 @@
-#!/bin/sh -l
+#!/bin/sh
 
-p=$(eval "wslpath $1")
-shift
-exec nvim "$p" "$@"
+nvim=~/.nix-profile/bin/nvim
+
+## only support opening one file
+if [ -n "$@" ]; then
+	if [ "${1:0:1}" = \" ]; then
+		eval "p=\$(wslpath $1)"
+	else 
+		p=$(wslpath "$1")
+	fi
+	if [ -e "$p" ]; then
+		exec $nvim "$p"
+	else
+		eval "exec $nvim $@"
+	fi
+else
+	exec $nvim
+fi

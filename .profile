@@ -3,7 +3,7 @@
 # secrets
 export k=~/.ssh/id_rsa pk=~/.ssh/id_rsa.pub
 # gpg
-# [ ! -v GPG_TTY ] && set -x GPG_TTY $(tty)
+[ ! -v GPG_TTY ] && GPG_TTY=$(tty)
 # shell
 HISTSIZE='' HISTFILESIZE='' ## for bash compatibility
 # Path
@@ -17,11 +17,11 @@ if [ -e $cached_path ]; then
 	export $(<$cached_path 2>/dev/null) 1>/dev/null
 else
 	mkdir -p $cached_dir && touch $cached_path # touch to avoid recursion
-      	ruby_bin=$(echo -n $HOME/.gem/ruby/\*/bin | tr ' ' ':');
-      	go_bin=$(echo -n /usr/lib/go-\*/bin | tr ' ' ':');
-      	julia_bin=/opt/julia/bin;
-      	defs="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
-      	echo "PATH=$HOME/bin:$HOME/.local/bin::$julia_bin:$ruby_bin:$go_bin:$HOME/.tmp/go/bin:$HOME/.cargo/bin:$defs" > $cached_path;
+	ruby_bin=$(echo -n $HOME/.gem/ruby/\*/bin | tr ' ' ':')
+	go_bin=$(echo -n /usr/lib/go-\*/bin | tr ' ' ':')
+	julia_bin=/opt/julia/bin
+	defs="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
+	echo "PATH=$HOME/bin:$HOME/.local/bin::$julia_bin:$ruby_bin:$go_bin:$HOME/.tmp/go/bin:$HOME/.cargo/bin:$defs" >$cached_path
 	. $cached_path
 fi
 # browser
@@ -38,7 +38,7 @@ unset OLD_PATH
 ## emacs the script in the local bin folder !!
 export ALTERNATE_EDITOR="emacsclient"
 export EDITOR="emc" # $EDITOR should open in terminal
-if [ -n "$DISPLAY" ]; then
+if [ -v DISPLAY ]; then
 	export EMACS_GUI=1 # for custom emacs command in ~/bin that decides if emacs nox or gui
 fi
 export VISUAL="emacsclient -c -a /usr/bin/emacs" # $VISUAL opens in GUI with non-daemon

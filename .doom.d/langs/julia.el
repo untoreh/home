@@ -173,8 +173,7 @@
 
   (setq-default julia-repl--session-hist (a-list))
   (define-minor-mode julia-repl-vterm-mode
-    " mode for julia repl vterm buffers "
-    nil)
+    " mode for julia repl vterm buffers ")
 
   (add-hook!
    'julia-repl-hook
