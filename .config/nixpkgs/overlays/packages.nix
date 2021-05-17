@@ -14,7 +14,8 @@ let
 in {
   inherit (super)
     starship eternal-terminal browsh git-hub pet tmux fzf fd bat ripgrep
-    zoxide exa bandwhich wego duplicacy borgbackup translate-shell rclone consul
+    zoxide exa bandwhich wego duplicacy borgbackup translate-shell rclone consul 
+    weechat
     haproxy
     # kitty wait for d3d12
     # sway
@@ -34,6 +35,7 @@ in {
     # emacs
     # emacsPgtkGcc  # wait for mesa-d3d12
     mu isync gnupg pinentry emacs-all-the-icons-fonts neovim;
+  inherit (self.weechatScripts) weechat-matrix;
   # gpu, waiting for nixpkgs integration
   # nixGLDefault
   inherit (nixgl) nixGLDefault;
@@ -43,5 +45,5 @@ in {
   # backup
   # borg;
   # python
-  # inherit (super.python38Packages) howdoi;
+  inherit (super.python38Packages) supervisor grip;
 }

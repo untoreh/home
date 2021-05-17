@@ -116,15 +116,22 @@
 (when (package! company)
   (package! company-quickhelp)
   (package! company-quickhelp-terminal))
-(package! matrix-client
-  :recipe (:host nil
-   :repo "https://github.com/alphapapa/matrix-client.el"
-   :files ("*.el" "logo.png" "matrix-client-standalone.el.sh")
-   :post-build ((require 'f)
-                (let* ((script-name "/matrix-client-standalone.el.sh")
-                       (script-path (concat (f-dirname (locate-library "matrix-client")) script-name))
-                       (bindir (concat user-emacs-directory "/.local/bin"))
-                       (link-path (concat bindir "matrix")))
-                  (make-directory bindir t)
-                  (delete-file link-path nil)
-                  (make-symbolic-link script-path link-path t)))))
+;; chat
+(package! weechat :recipe (:host nil
+                           :repo "https://github.com/untoreh/weechat.el"))
+;; auto hot key mode
+;; (package! ahk-mode :recipe (:host nil
+;;                             :repo "https://github.com/untoreh/ahk-mode"))
+(package! ahk-mode)
+;; (package! matrix-client
+;;   :recipe (:host nil
+;;    :repo "https://github.com/alphapapa/matrix-client.el"
+;;    :files ("*.el" "logo.png" "matrix-client-standalone.el.sh")
+;;    :post-build ((require 'f)
+;;                 (let* ((script-name "/matrix-client-standalone.el.sh")
+;;                        (script-path (concat (f-dirname (locate-library "matrix-client")) script-name))
+;;                        (bindir (concat user-emacs-directory "/.local/bin"))
+;;                        (link-path (concat bindir "matrix")))
+;;                   (make-directory bindir t)
+;;                   (delete-file link-path nil)
+;;                   (make-symbolic-link script-path link-path t)))))
