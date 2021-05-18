@@ -3,7 +3,7 @@
 # secrets
 export k=~/.ssh/id_rsa pk=~/.ssh/id_rsa.pub
 # gpg
-[ ! -v GPG_TTY ] && GPG_TTY=$(tty)
+[ ! -v GPG_TTY ] && { GPG_TTY=$(tty) || true; } # ignore non interactive for errors
 # shell
 HISTSIZE='' HISTFILESIZE='' ## for bash compatibility
 # Path

@@ -10,6 +10,8 @@ alias se "sudo -E --preserve-env=PATH env"
 alias vim "nvim "
 alias pf "wl-paste"
 alias zj "zellij"
+alias supd "supervisord -c ~/.config/supervisor.conf"
+alias supc "supervisorctl -c ~/.config/supervisor.conf"
 
 # volatile
 set rocm_tag rocm/pytorch:rocm3.8_ubuntu18.04_py3.6_pytorch

@@ -13,18 +13,16 @@ let
   };
 in {
   inherit (super)
-    starship eternal-terminal browsh git-hub pet tmux fzf fd bat ripgrep
-    zoxide exa bandwhich wego duplicacy borgbackup translate-shell rclone consul 
-    weechat
-    haproxy
+    starship eternal-terminal browsh git-hub pet tmux fzf fd bat ripgrep zoxide
+    exa bandwhich wego duplicacy borgbackup translate-shell rclone consul
+    weechat haproxy
     # kitty wait for d3d12
     # sway
     mako wl-clipboard
     # theme
     # input-fonts
     # docs, don't use fish from nix because of locales 
-    man less thefuck glibcLocales
-    
+    man less thefuck glibcLocales tini
 
     # langs
     go-pup nixfmt golangci-lint shfmt
