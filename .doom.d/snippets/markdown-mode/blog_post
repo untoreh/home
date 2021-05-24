@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: blog post
+# key: blog_post
+# condition: t
+# --
++++
+date = "`(let ((calendar-date-display-form '(month "/" day "/" year)))
+            (calendar-date-string (calendar-current-date)))`"
+title = "${1:`(string-replace "-" " " (file-name-sans-extension (buffer-name)))`}"
+tags = ["${2:tag}"]
+rss_description = "${3:description}"
++++
+
+${0:content}

@@ -17,19 +17,6 @@
           (kill-buffer (buffer-base-buffer (current-buffer)))
           (find-file tmp)))))
 
-;; matrix
-(use-package! matrix-client
-  :init
-  :commands matrix-client-connect)
-
-;; dont format snippets (list is negated)
-(add-to-list '+format-on-save-enabled-modes 'snippet-mode 'append)
-(add-to-list '+format-on-save-enabled-modes 'web-mode 'append)
-(add-to-list '+format-on-save-enabled-modes 'org-msg-edit-mode 'append)
-(add-to-list '+format-on-save-enabled-modes 'gitignore-mode 'append)
-(add-to-list '+format-on-save-enabled-modes 'lisp-data-mode 'append)
-(add-to-list '+format-on-save-enabled-modes 'conf-space-mod 'append)
-
 ;; never enable indent guides by default
 (remove-hook! (prog-mode text-mode conf-mode) highlight-indent-guides-mode)
 
@@ -44,7 +31,10 @@
 (setq projectile-project-search-path '("~/dev"))
 
 ;; wayland clipboard support
-(if (and (display-graphic-p) (equal (pgtk-backend-display-class) "GdkWaylandDisplay"))
+;; this makes sense only if we check on each frame creation
+;; (if (and (display-graphic-p) (equal (pgtk-backend-display-class) "GdkWaylandDisplay"))
+;; just check for env vars and run once per server start
+(if (and (getenv "WSLENV") (getenv "WAYLAND_DISPLAY"))
     (progn
       (setq wl-copy-process nil)
       (defun wl-copy (text)

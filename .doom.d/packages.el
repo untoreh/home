@@ -77,6 +77,7 @@
           (package! julia-formatter
             :recipe (:host nil
                      :repo "https://codeberg.org/FelipeLema/julia-formatter.el"
+                     ;; :repo "https://github.com/ki-chi/julia-formatter"
                      :files ("*.el" "*.jl" "*.toml"))))
       ;; snail provides repl/completions and other stuff
       (if (featurep! :lang julia +snail)
@@ -123,6 +124,7 @@
 ;; (package! ahk-mode :recipe (:host nil
 ;;                             :repo "https://github.com/untoreh/ahk-mode"))
 (package! ahk-mode)
+
 ;; (package! matrix-client
 ;;   :recipe (:host nil
 ;;    :repo "https://github.com/alphapapa/matrix-client.el"

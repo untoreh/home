@@ -22,7 +22,7 @@ in {
     # theme
     # input-fonts
     # docs, don't use fish from nix because of locales 
-    man less thefuck glibcLocales tini
+    man less thefuck glibcLocales tini libqalculate
 
     # langs
     go-pup nixfmt golangci-lint shfmt

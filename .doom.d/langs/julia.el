@@ -274,7 +274,7 @@
       ;; failure
       '(t response)))
   (set-formatter!
-    'julia-formatter
+    'jl-julia-formatter
     #'julia-formatter-format-string
     :modes '(julia-mode))
   ;; override lsp formatting
@@ -298,8 +298,8 @@
 (defun julia-franklin ()
   (interactive)
   "Start the franklin live server in the current default-dir"
-  ;; (if (not (julia-repl-live-buffer))
-  ;;     (message "repl is not live"))
+  (if (not (fboundp #'julia-repl-inferior-buffer))
+      (julia-repl))
   (if (julia-repl-inferior-buffer)
       (progn
         (julia-repl-cd (projectile-project-root))
@@ -309,3 +309,5 @@
 ;; julia projects file
 (after! projectile
   (appendq! projectile-project-root-files '("Project.toml" "JuliaProject.toml")))
+
+(set-file-template! ".*/blog/posts/.+\\.md$" :trigger "blog_post" :project t)

@@ -10,6 +10,13 @@
 ;; ivy
 (setq-default ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
 
+;; common
+(map! :leader
+      :desc "find file at point"
+      :prefix "f"
+      :n "."
+      #'find-file-at-point)
+
 ;; parrot
 (map!
  :mode parrot-mode
