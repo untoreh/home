@@ -22,7 +22,7 @@ in {
     # theme
     # input-fonts
     # docs, don't use fish from nix because of locales 
-    man less thefuck glibcLocales tini libqalculate
+    man less thefuck glibcLocales tini libqalculate dhcp
 
     # langs
     go-pup nixfmt golangci-lint shfmt
@@ -43,5 +43,5 @@ in {
   # backup
   # borg;
   # python
-  inherit (super.python38Packages) supervisor grip;
+  inherit (super.python38Packages) supervisor grip ansible;
 }
