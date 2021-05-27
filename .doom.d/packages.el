@@ -101,8 +101,8 @@
 ;; graphics
 (package! sweet-theme)
 (package! parrot)
-(package! nyan-mode)
 (package! info-colors)
+;; (package! nyan-mode)
 
 ;; org
 (package! valign)
