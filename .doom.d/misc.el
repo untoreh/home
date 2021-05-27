@@ -51,4 +51,7 @@
       (native-compile 'wl-copy)
       (native-compile 'wl-paste)
       (setq interprogram-cut-function 'wl-copy)
-      (setq interprogram-paste-function 'wl-paste)))
+      (setq interprogram-paste-function 'wl-paste))
+  ;; use wslview as program (TODO: check wslu utils is installed in wsl doom PR)
+  (setq browse-url-generic-program (cond ((executable-find "wslview"))
+                                         ((executable-find "firefox")))))

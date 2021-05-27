@@ -6,7 +6,7 @@ set -x pk ~/.ssh/id_rsa.pub
 # shell
 set -x KITTY_PATH ~/.nix-profile/bin/kitty
 if test (string replace -r 'fish$' "" $SHELL) != $SHELL
-    set is_fish "1"
+    set is_fish 1
 else
     set -e is_fish
 end
@@ -26,14 +26,20 @@ else
     mkdir -p (dirname $path_fish)
     which go 2>/dev/null && set gobins (echo -n /usr/lib/go-*/bin | tr ' ' ':')
     which ruby 2>/dev/null && set gembins (echo -n $HOME/.gem/ruby/*/bin | tr ' ' ':')
-    set juliabins "/opt/julia/bin"
+    set juliabins /opt/julia/bin
     set nixbins "$HOME/.nix-profile/bin"
     set bashbins (bash -lic "echo \$PATH")
     echo "set PATH \"$HOME/bin:$HOME/.local/bin:$nixbins:$juliabins:$gembins:/snap/bin::$HOME/.tmp/go/bin:$HOME/.cargo/bin:$gobins:$bashbins\"" >$path_fish
     source $path_fish
 end
 # browser
-set -q BROWSER || set --export BROWSER (which firefox)
+if ! set -q BROWSER
+    if set -q WSLENV
+        set --export BROWSER (which wslview)
+    else
+        set --export BROWSER (which firefox)
+    end
+end
 # kodi
 # set -x CRASHLOG_DIR /tmp/kodi
 # must replicate /etc/environment with fish syntax
@@ -43,9 +49,9 @@ set -q BROWSER || set --export BROWSER (which firefox)
 
 ## emacs the script in the local bin folder !!
 export EMACS_COMMIT
-set -x ALTERNATE_EDITOR "emacsclient"
-set -x ESHELL "/bin/sh"
-set -x EDITOR "emc" # $EDITOR should open in terminal
+set -x ALTERNATE_EDITOR emacsclient
+set -x ESHELL /bin/sh
+set -x EDITOR emc # $EDITOR should open in terminal
 if [ -n "$DISPLAY" ]
     set -x EMACS_GUI 1 # for custom emacs command in ~/bin that decides if emacs nox or gui
 end
@@ -102,7 +108,7 @@ set PATH "$HOME/.cargo/bin:$PATH"
 set STARDICT_DATA_DIR "$HOME/.local/stardict"
 
 ## speedup dkms
-set -x CONCURRENCY_LEVEL '14'
+set -x CONCURRENCY_LEVEL 14
 # ccache
 set -x CCACHE_DIR ~/.ccache
 set -x CC "ccache gcc"
@@ -111,7 +117,6 @@ set -x PATH "/usr/lib/ccache:$PATH"
 # NIX
 set -x NIX_PATH "$HOME/.nix-defexpr/channels:$NIX_PATH"
 if ! set -q LOCALE_ARCHIVE
-	set -x LOCALE_ARCHIVE (nix-build --no-out-link '<nixpkgs>' -A glibcLocales)"/lib/locale/locale-archive"
-	echo "set -x LOCALE_ARCHIVE \"$LOCALE_ARCHIVE\"" >> $path_fish
+    set -x LOCALE_ARCHIVE (nix-build --no-out-link '<nixpkgs>' -A glibcLocales)"/lib/locale/locale-archive"
+    echo "set -x LOCALE_ARCHIVE \"$LOCALE_ARCHIVE\"" >>$path_fish
 end
-

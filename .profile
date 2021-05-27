@@ -25,7 +25,13 @@ else
 	. $cached_path
 fi
 # browser
-export BROWSER=/usr/bin/firefox
+if [ ! -v BROWSER ]; then
+	if [ -v WSLENV ]; then
+		export BROWSER=$(which wslview)
+	else
+		export BROWSER=$(which firefox)
+	fi
+fi
 # Load env, prevent PATH override
 OLD_PATH=$PATH
 . /etc/environment
