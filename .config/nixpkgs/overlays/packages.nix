@@ -13,16 +13,18 @@ let
   };
 in {
   inherit (super)
-    starship eternal-terminal browsh git-hub pet tmux fzf fd bat ripgrep zoxide
-    exa bandwhich wego duplicacy borgbackup translate-shell rclone consul
-    weechat haproxy
-    # kitty wait for d3d12
-    # sway
+    # shell
+    starship eternal-terminal browsh git-hub pet tmux fzf fd bat ripgrep zoxide exa 
+    # utils
+    wego translate-shell weechat
+    # files and backups
+    duplicacy borgbackup rclone syncthing
+    # desktop
     mako wl-clipboard
     # theme
     # input-fonts
-    # docs, don't use fish from nix because of locales 
-    man less thefuck glibcLocales tini libqalculate dhcp
+    # system (don't use fish from nix because of locales)
+    man less thefuck glibcLocales tini libqalculate dhcp bandwhich consul haproxy
 
     # langs
     go-pup nixfmt golangci-lint shfmt
@@ -33,6 +35,7 @@ in {
     # emacs
     # emacsPgtkGcc  # wait for mesa-d3d12
     mu isync gnupg pinentry emacs-all-the-icons-fonts neovim;
+  # dependencies
   inherit (self.weechatScripts) weechat-matrix;
   # gpu, waiting for nixpkgs integration
   # nixGLDefault
@@ -40,8 +43,6 @@ in {
   # wait for mesa-d3d12
   # inherit (unstable) mpv youtube-dl;
   inherit (unstable) youtube-dl;
-  # backup
-  # borg;
   # python
   inherit (super.python38Packages) supervisor grip ansible;
 }
