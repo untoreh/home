@@ -41,5 +41,9 @@ This leaves us we a pretty short list of services to write supervisor configs fo
 - emacs
 - firefox (maybe since it is run under windows..)
 - borgbackup (this requires WSL paths support)
+- dhclient (because we give our linux VM a dedicated LAN IP)
+- syncthing
+- sshd
+
 
 So...only three for now...
