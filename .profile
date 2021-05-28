@@ -54,7 +54,7 @@ if [ -v ZSH_VERSION ]; then
 elif [ -v BASH_VERSION ]; then
 	__shell=bash
 fi
-if [ -n "$__shell" -a -v EMACS_VTERM_PATH ]; then
+if [ -v PS1 -a -n "$__shell" -a -v EMACS_VTERM_PATH ]; then
 	__vterm_src=~/.emacs.d/.local/straight/repos/emacs-libvterm/etc/emacs-vterm-${__shell}.sh
 	[ -e $__vterm_src ] && . $__vterm_src
 fi
