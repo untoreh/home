@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
+
 set -euo pipefail
+
+# Prevent windows from sleep
+[ -v WSLENV ] && caffeine.exe -appon
 
 . ~/.profile
 [ ! -v TARGET ] && {
@@ -17,7 +21,7 @@ BORG_OPTS="--stats --one-file-system --compression auto,zstd,10 --checkpoint-int
 
 # No one can answer if Borg asks these questions, it is better to just fail quickly
 # instead of hanging.
-export BORG_RELOCATED_REPO_ACCESS_IS_OK=no
+export BORG_RELOCATED_REPO_ACCESS_IS_OK=yes
 export BORG_UNKNOWN_UNENCRYPTED_REPO_ACCESS_IS_OK=no
 if which apt &>/dev/null; then
 	# wait and lock for apt
@@ -36,6 +40,8 @@ fi
 borg --version
 
 echo "Starting backup for $DATE"
+# stateful paths are relative to $HOME
+cd ~/
 IFS=$'\n'
 STATEFULS=$(<~/docs/statefuls.txt)
 STATEFUL_PATHS=$(echo "$STATEFULS" | grep -Ev '^(#|-)' | tr '\n' ' ')
@@ -52,7 +58,10 @@ borg create $BORG_OPTS \
 echo "Completed backup for $DATE"
 
 # unlock APT
-se rm /var/lib/dpkg/lock
+which apt && { se rm /var/lib/dpkg/lock; }
 
 # Just to be completely paranoid
 sync
+
+# Allow windows to sleep
+[ -v WSLENV ] && caffeine.exe -appoff
