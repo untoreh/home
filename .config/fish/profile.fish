@@ -20,18 +20,18 @@ end
 
 # Path
 set path_fish /tmp/.cache/path_fish
+set path_common /tmp/.cache/path_common
 if [ -e $path_fish ]
     source $path_fish
 else
-    mkdir -p (dirname $path_fish)
-    which go 2>/dev/null && set gobins (echo -n /usr/lib/go-*/bin | tr ' ' ':')
-    which ruby 2>/dev/null && set gembins (echo -n $HOME/.gem/ruby/*/bin | tr ' ' ':')
-    set juliabins /opt/julia/bin
-    set nixbins "$HOME/.nix-profile/bin"
-    set bashbins (bash -lic "echo \$PATH")
-    echo "set PATH \"$HOME/bin:$HOME/.local/bin:$nixbins:$juliabins:$gembins:/snap/bin::$HOME/dev/go/bin:$HOME/.cargo/bin:$gobins:$bashbins\"" >$path_fish
+    if [ ! -e $path_common ]
+        ~/bin/dump_path.sh
+    end
+    # echo "set PATH \""(bash -lc "echo \$PATH")"\"" >$path_fish
+    echo "set PATH "(string sub -s 6 (read < $path_common)) >$path_fish
     source $path_fish
 end
+
 # browser
 if ! set -q BROWSER
     if set -q WSLENV
@@ -77,7 +77,7 @@ if [ -n "$EMACS_VTERM_PATH" ]
 end
 
 # ## golang
-set -x GOPATH "$HOME/.tmp/go:$HOME/.tmp/deployer/go"
+set -x GOPATH "$HOME/dev/go:$HOME/tmp/deployer/go"
 # ## nodejs
 set -x NODE_PATH "$NODE_PATH:$HOME/node_modules:/usr/local/lib/node_modules"
 
@@ -97,12 +97,10 @@ set GVFS /run/user/$UID/gvfs
 
 # set PERL5LIB=$PERL5LIB:~/.cpan/build
 # set PERL5LIB=$PERL5LIB:~/perl5/lib/perl5/x86_64-linux-gnu-thread-multi/
-set PERL5LIB "/home/fra/perl5/lib/perl5:$PERL5LIB"
-set PERL_LOCAL_LIB_ROOT "/home/fra/perl5:$PERL_LOCAL_LIB_ROOT"
-set PERL_MB_OPT "--install_base \"/home/fra/perl5\""
-set PERL_MM_OPT "INSTALL_BASE=/home/fra/perl5$PERL_MB_OPT"
-
-set PATH "$HOME/.cargo/bin:$PATH"
+set PERL5LIB "$HOME/perl5/lib/perl5:$PERL5LIB"
+set PERL_LOCAL_LIB_ROOT "$HOME/perl5:$PERL_LOCAL_LIB_ROOT"
+set PERL_MB_OPT "--install_base \"$HOME/perl5\""
+set PERL_MM_OPT "INSTALL_BASE=$HOME/perl5$PERL_MB_OPT"
 
 ## stardict
 set STARDICT_DATA_DIR "$HOME/.local/stardict"
@@ -113,7 +111,6 @@ set -x CONCURRENCY_LEVEL 14
 set -x CCACHE_DIR ~/.ccache
 set -x CC "ccache gcc"
 set -x CXX "ccache g++"
-set -x PATH "/usr/lib/ccache:$PATH"
 # NIX
 set -x NIX_PATH "$HOME/.nix-defexpr/channels:$NIX_PATH"
 if ! set -q LOCALE_ARCHIVE

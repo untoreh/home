@@ -12,18 +12,11 @@ if [ -v FZF_LAUNCHER ]; then
 fi
 
 cached_dir=/tmp/.cache
-cached_path=$cached_dir/path_posix
-if [ -e $cached_path ]; then
-	export $(<$cached_path 2>/dev/null) 1>/dev/null
-else
-	mkdir -p $cached_dir && touch $cached_path # touch to avoid recursion
-	ruby_bin=$(echo -n $HOME/.gem/ruby/\*/bin | tr ' ' ':')
-	go_bin=$(echo -n /usr/lib/go-\*/bin | tr ' ' ':')
-	julia_bin=/opt/julia/bin
-	defs="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
-	echo "PATH=$HOME/bin:$HOME/.local/bin::$julia_bin:$ruby_bin:$go_bin:$HOME/dev/go/bin:$HOME/.cargo/bin:$defs" >$cached_path
-	. $cached_path
+cached_path=$cached_dir/path_common
+if [ ! -e $cached_path ]; then
+	~/bin/dump_path.sh
 fi
+. $cached_path
 # browser
 if [ ! -v BROWSER ]; then
 	if [ -v WSLENV ]; then
@@ -79,12 +72,12 @@ export GVFS=/run/user/${UID:-$(id -u)}/gvfs
 
 # export PERL5LIB=$PERL5LIB:~/.cpan/build
 # export PERL5LIB=$PERL5LIB:~/perl5/lib/perl5/x86_64-linux-gnu-thread-multi/
-PERL5LIB="/home/fra/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
+PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
 export PERL5LIB
-PERL_LOCAL_LIB_ROOT="/home/fra/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
+PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
 export PERL_LOCAL_LIB_ROOT
-export PERL_MB_OPT='--install_base "~/perl5"'
-PERL_MM_OPT="INSTALL_BASE=/home/fra/perl5"
+export PERL_MB_OPT='--install_base "$HOME/perl5"'
+PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"
 export PERL_MM_OPT
 
 ## stardict
@@ -95,8 +88,7 @@ export CONCURRENCY_LEVEL='14'
 export CCACHE_DIR=~/.ccache
 export CC="ccache gcc"
 export CXX="ccache g++"
-export PATH="/usr/lib/ccache:$PATH"
 
 # NIX
-if [ -e /home/fra/.nix-profile/etc/profile.d/nix.sh ]; then . /home/fra/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then . ~/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
