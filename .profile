@@ -21,7 +21,7 @@ else
 	go_bin=$(echo -n /usr/lib/go-\*/bin | tr ' ' ':')
 	julia_bin=/opt/julia/bin
 	defs="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
-	echo "PATH=$HOME/bin:$HOME/.local/bin::$julia_bin:$ruby_bin:$go_bin:$HOME/.tmp/go/bin:$HOME/.cargo/bin:$defs" >$cached_path
+	echo "PATH=$HOME/bin:$HOME/.local/bin::$julia_bin:$ruby_bin:$go_bin:$HOME/dev/go/bin:$HOME/.cargo/bin:$defs" >$cached_path
 	. $cached_path
 fi
 # browser

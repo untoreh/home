@@ -29,7 +29,7 @@ else
     set juliabins /opt/julia/bin
     set nixbins "$HOME/.nix-profile/bin"
     set bashbins (bash -lic "echo \$PATH")
-    echo "set PATH \"$HOME/bin:$HOME/.local/bin:$nixbins:$juliabins:$gembins:/snap/bin::$HOME/.tmp/go/bin:$HOME/.cargo/bin:$gobins:$bashbins\"" >$path_fish
+    echo "set PATH \"$HOME/bin:$HOME/.local/bin:$nixbins:$juliabins:$gembins:/snap/bin::$HOME/dev/go/bin:$HOME/.cargo/bin:$gobins:$bashbins\"" >$path_fish
     source $path_fish
 end
 # browser
