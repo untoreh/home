@@ -47,3 +47,7 @@ This leaves us we a pretty short list of services to write supervisor configs fo
 
 
 So...only three for now...
+
+
+## Networking
+To allow seamless access to services listening on IPv4 from within WSL without tunneling, change the Hyper-V virtual switch for WSL to be external (the actual hardware, e.g. RealTek), and shared with the HOST machine.
