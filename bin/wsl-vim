@@ -1,10 +1,17 @@
 #!/bin/sh
 
 nvim=~/.nix-profile/bin/nvim
-
 ## only support opening one file
 if [ -n "$@" ]; then
-	if [ "${1:0:1}" = \" ]; then
+	if [ "${1/\\wsl.localhost}" != "$1" ]; then
+		eval "p=$(wslpath \"${1/\\wsl.localhost\\$WSL_DISTRO_NAME}\")"
+		if [ "$p" != "$1" ]; then
+			exec $nvim "$p"
+		else
+			echo "Can't access files from another distro :("
+			exit 1
+		fi
+	elif [ "${1:0:1}" = \" ]; then
 		eval "p=\$(wslpath $1)"
 	else 
 		p=$(wslpath "$1")
