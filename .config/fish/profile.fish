@@ -113,7 +113,7 @@ set -x CC "ccache gcc"
 set -x CXX "ccache g++"
 # NIX
 set -x NIX_PATH "$HOME/.nix-defexpr/channels:$NIX_PATH"
-if ! set -q LOCALE_ARCHIVE
+if ! set -q LOCALE_ARCHIVE && ip route | grep "^default.*dev eth0"
     set -x LOCALE_ARCHIVE (nix-build --no-out-link '<nixpkgs>' -A glibcLocales)"/lib/locale/locale-archive"
     echo "set -x LOCALE_ARCHIVE \"$LOCALE_ARCHIVE\"" >>$path_fish
 end
