@@ -27,7 +27,7 @@ in {
     man less thefuck glibcLocales tini libqalculate dhcp bandwhich consul haproxy
 
     # langs
-    go-pup nixfmt golangci-lint shfmt
+    go-pup nixfmt golangci-lint shfmt libtidy
 
     # runtimes
     python3
