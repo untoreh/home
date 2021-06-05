@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: ld+json
+# key: ldj
+# condition: t
+# --
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org/",
+    "@type": "$1",
+    "url": "$2",
+    "$0"
+}
+</script>
