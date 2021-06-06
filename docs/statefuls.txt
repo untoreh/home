@@ -42,3 +42,6 @@ Desktop
 .Tribler
 .stardict
 .vagrant.d
+# windows 
+win
+-win/Downloads
