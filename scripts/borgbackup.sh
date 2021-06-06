@@ -49,7 +49,7 @@ EXCLUDED_PATHS=$(echo "$STATEFULS" | grep '^-' | tr '\n' ' ' | sed 's/^-//')
 [ -n "$EXCLUDED_PATHS" ] && EXCLUDE='-e "$EXCLUDED_PATHS"'
 IFS=" "
 
-set -x
+# set -x
 borg create $BORG_OPTS \
 	$EXCLUDE \
 	"$TARGET::$DATE-stateful" \
@@ -60,8 +60,12 @@ echo "Completed backup for $DATE"
 # unlock APT
 which apt && { se rm /var/lib/dpkg/lock; }
 
+# prune backups
+borg prune -v --list --keep-daily=7 --keep-weekly=4 $TARGET
+
 # Just to be completely paranoid
 sync
 
 # Allow windows to sleep
 [ -v WSLENV ] && caffeine.exe -appoff
+
