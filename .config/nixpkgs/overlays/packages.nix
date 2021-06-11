@@ -24,7 +24,7 @@ in {
     # theme
     # input-fonts
     # system (don't use fish from nix because of locales)
-    man less thefuck glibcLocales tini libqalculate dhcp bandwhich consul haproxy
+    man less thefuck glibcLocales tini libqalculate dhcp bandwhich consul haproxy rsync sshpass
 
     # langs
     go-pup nixfmt golangci-lint shfmt libtidy
