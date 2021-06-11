@@ -14,5 +14,5 @@ elif [ -e $s_wslg ]; then
 else
     msg="Couldn't start emacs client because no server was found"
     echo $msg
-    notify-send $msg
+    [ -v WSLENV ] && notify-send.exe $msg || notify-send $msg
 fi
