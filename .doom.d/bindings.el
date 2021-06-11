@@ -147,7 +147,9 @@
        :desc "doc for expression"
        :nv "d" #'julia-repl-doc
        :desc "edit expression"
-       :nv "v" #'julia-repl-edit)
+       :nv "v" #'julia-repl-edit
+       :desc "toggle julia repl mode"
+       :nv "t" #'julia-repl-mode)
       :mode julia-repl-vterm-mode
       (:desc "go to previous window"
        :nv "SPC w TAB" #'julia-toggle-repl-back))

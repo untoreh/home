@@ -15,13 +15,15 @@
 
 ;; modeline
 (use-package! nyan-mode
+  :if (boundp 'nyan-mode)
   :after doom-modeline
   :init
-  (setq
-   nyan-mode t
-   nyan-animate-nyancat nil
-   nyan-wavy-trail nil
-   nyan-minimum-window-width 1024)
+  (progn
+    (setq
+     nyan-animate-nyancat nil
+     nyan-wavy-trail nil
+     nyan-minimum-window-width 1024)
+    (nyan-mode))
   :after-call
   doom-modeline-mode)
 (use-package! parrot

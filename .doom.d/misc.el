@@ -53,7 +53,8 @@
       (setq interprogram-cut-function 'wl-copy)
       (setq interprogram-paste-function 'wl-paste)
       ;; use custom temporary directory with WSL since there are permission problems with /tmp
-      (setq temporary-file-directory "/run/upper")
+      ;; NOTE: ensure trailing slash /
+      (setq temporary-file-directory "/run/upper/")
       ))
 ;; use wslview as program (TODO: check wslu utils is installed in wsl doom PR)
 (setq browse-url-generic-program (cond ((executable-find "wslview"))

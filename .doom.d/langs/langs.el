@@ -32,3 +32,4 @@
 (add-to-list '+format-on-save-enabled-modes 'lisp-data-mode 'append)
 (add-to-list '+format-on-save-enabled-modes 'conf-space-mod 'append)
 (add-to-list '+format-on-save-enabled-modes 'gfm-mode 'append)
+(add-to-list '+format-on-save-enabled-modes 'shell-mode 'append)
