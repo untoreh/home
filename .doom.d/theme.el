@@ -43,21 +43,22 @@
 
 ;; https://github.com/hlissner/doom-emacs/issues/2967
 (after! doom-modeline
-  ;; (custom-set-faces!
-  ;;   '(mode-line :family "Input Mono Condensed" :height 1.0)
-  ;;   '(mode-line-inactive :family "Input Mono Condensed" :height 1.0))
-  (add-hook! 'doom-modeline-mode-hook
-    (let ((char-table char-width-table))
-      (while (setq char-table (char-table-parent char-table)))
-      (dolist (pair doom-modeline-rhs-icons-alist)
-        (let ((width 2)  ; <-- tweak this
-              (chars (cdr pair))
-              (table (make-char-table nil)))
-          (dolist (char chars)
-            (set-char-table-range table char width))
-          (optimize-char-table table)
-          (set-char-table-parent table char-table)
-          (setq char-width-table table)))))
+  (custom-set-faces!
+    '(mode-line :family "Input Mono Condensed" :height 0.99)
+    '(mode-line-inactive :family "Input Mono Condensed" :height 0.99))
+  ;; (add-hook! 'doom-modeline-mode-hook
+  ;;   (let ((char-table char-width-table))
+  ;;     (while (setq char-table (char-table-parent char-table)))
+  ;;     (dolist (pair doom-modeline-rhs-icons-alist)
+  ;;       (let ((width 2)  ; <-- tweak this
+  ;;             (chars (cdr pair))
+  ;;             (table (make-char-table nil)))
+  ;;         (dolist (char chars)
+  ;;           (set-char-table-range table char width))
+  ;;         (optimize-char-table table)
+  ;;         (set-char-table-parent table char-table)
+  ;;         (setq char-width-table table))))
+  ;;   )
   ;; (doom-modeline-def-modeline 'main
   ;;     '(bar matches buffer-info remote-host buffer-position parrot selection-info)
   ;;     '(misc-info minor-modes checker input-method buffer-encoding major-mode process vcs "  "))

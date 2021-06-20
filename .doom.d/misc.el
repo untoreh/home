@@ -59,3 +59,5 @@
 ;; use wslview as program (TODO: check wslu utils is installed in wsl doom PR)
 (setq browse-url-generic-program (cond ((executable-find "wslview"))
                                        ((executable-find "firefox"))))
+(use-package! weechat
+  :commands weechat-connect)

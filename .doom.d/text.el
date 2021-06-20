@@ -8,6 +8,12 @@
     company-files
     company-yasnippet))
 ;; use gfm-mode for markdown by default
-(setq auto-mode-alist
-      (delete '("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'" . markdown-mode)
-              auto-mode-alist))
+(after! markdown-mode
+  (setcdr
+   (assoc
+    "\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'"
+    auto-mode-alist)
+   'gfm-mode))
+;; (setq auto-mode-alist
+;;       (delete '("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'" . markdown-mode)
+;;               auto-mode-alist))

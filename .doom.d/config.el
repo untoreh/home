@@ -4,8 +4,10 @@
 (load! "misc")
 (load! "bindings")
 (load! "theme")
+(load! "text")
 (load! "org")
 (load! "mail")
 (load! "completion")
 (load! "langs/langs")
+
 (message "Configuration Loaded Succesfully!")
