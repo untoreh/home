@@ -44,7 +44,7 @@
      :desc "Fold results" :n "z" #'org-babel-hide-result-toggle
      :desc "Restart kernels" :n "k"
      #'(λ! () (interactive)
-           (jupyter-org-with-src-block-client (jupyter-repl-restart-kernel)))
+          (jupyter-org-with-src-block-client (jupyter-repl-restart-kernel)))
      :map org-src-mode-map
      :localleader
      :desc "Exit edit" :n "'" #'org-edit-src-exit))
@@ -144,6 +144,8 @@
        :nv "m" #'julia-repl-list-methods
        :desc "list fields"
        :nv "f" #'julia-repl-list-fields
+       :desc "exec function at point"
+       :nv "l" #'julia-repl-send-function
        :desc "doc for expression"
        :nv "d" #'julia-repl-doc
        :desc "edit expression"
@@ -203,6 +205,18 @@
                  (font-lock-mode t)
                  (font-lock-ensure)
                  (font-lock-mode t)))
+
+;; wechat
+(map! :desc "Start weechat"
+      :leader
+      :n "o c"
+      (lambda ()
+        (interactive )
+        (when (not (weechat-connected-p))
+          (weechat-connect "localhost" 9000 nil 'plain t))
+        (weechat-switch-buffer
+         (first (list (weechat--read-channel-name (not current-prefix-arg)))))))
+
 ;; magit doesn't ship this option
 (after! magit
   (transient-append-suffix 'magit-merge "-A"

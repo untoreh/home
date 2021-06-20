@@ -173,7 +173,8 @@
 
   (setq-default julia-repl--session-hist (a-list))
   (define-minor-mode julia-repl-vterm-mode
-    " mode for julia repl vterm buffers ")
+    " mode for julia repl vterm buffers "
+    :interactive nil)
 
   (add-hook!
    'julia-repl-hook
@@ -212,6 +213,15 @@
     (julia-repl--send-string
      (concat "fieldnames(typeof("
              (s-join "." (julia-repl--symbols-at-point)) "))")))
+
+  (defun julia-repl-send-function ()
+    " Send function at point to repl "
+    (interactive)
+    (save-excursion
+      (julia-repl--send-string
+       (buffer-substring-no-properties
+        (progn (julia-beginning-of-defun) (point))
+        (progn (julia-end-of-defun) (point))))))
 
   (if (featurep! :tools lookup +docsets)
       (set-docsets! 'julia-mode "Julia")))
@@ -284,7 +294,7 @@
 (set-company-backend! 'julia-mode
   '(:separate company-capf company-yasnippet company-dabbrev-code company-files))
 
-
+(add-hook 'julia-mode-hook #'lsp)
 
 (defun julia-repl-live-buffer ()
   (let* ((executable-key (julia-repl--get-executable-key))
