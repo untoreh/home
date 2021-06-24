@@ -1,0 +1,17 @@
+{
+  "add books dialog dir": "/home/fra/Downloads",
+  "database location dialog": "/home/fra/Documents/books",
+  "s_r_search_mode": 0,
+  "sort_history": [
+    [
+      "timestamp",
+      false
+    ],
+    [
+      "timestamp",
+      false
+    ]
+  ],
+  "welcome_wizard_device": "smartphone",
+  "welcome_wizard_was_run": true
+}

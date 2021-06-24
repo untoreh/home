@@ -1,0 +1,5 @@
+#+TITLE: Ebooks
+
+- Should have a "KUAL" entry in the library
+- If it is broken, reinstall the "hotfix" version of the "coplate" pkg (_known to date_)
+- use "KUAL" to launch koreader app
