@@ -17,6 +17,7 @@ if [ ! -e $cached_path ]; then
 	~/bin/dump_path.sh
 fi
 . $cached_path
+
 # browser
 if [ ! -v BROWSER ]; then
 	if [ -v WSLENV ]; then
