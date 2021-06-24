@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 set -euo pipefail
+trap "caffeine.exe -appoff" EXIT SIGKILL SIGTERM
 
 # Prevent windows from sleep
 [ -v WSLENV ] && caffeine.exe -appon
