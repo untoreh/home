@@ -22,6 +22,7 @@ in {
     # desktop
     mako wl-clipboard
     # theme
+    noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-emoji-blob-bin noto-fonts-extra
     # input-fonts
     # system (don't use fish from nix because of locales)
     man less thefuck glibcLocales tini libqalculate dhcp bandwhich consul haproxy rsync sshpass pandoc
