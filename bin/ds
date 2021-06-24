@@ -1,4 +1,4 @@
-#!/bin/bash -i
+#!/bin/bash -li
 
 if test -t 1; then
   exec 1>/dev/null

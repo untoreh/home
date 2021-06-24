@@ -61,7 +61,7 @@ URxvt.keysym.M-quotedbl:  perl:aAtt:undo
 ! click link
 URxvt*perl-ext-common: autocomplete-ALL-the-things,default,matcher,-option-popup,-selection-popup,-realine
 URxvt*matcher.button: true
-URxvt*urlLauncher: ~/.bin/ffox
+URxvt*urlLauncher: ~/bin/firefox
 
 ! clipboard tmux
 XTerm*disallowedWindowOps: 20,21,SetXprop
@@ -82,6 +82,6 @@ URxvt.keysym.Shift-PageDown:        \033[6;2~
 
 Xcursor.size: 18
 
-Xcursor.theme: Bibata_Oil
+Xcursor.theme: Sweet-cursors
 
 Xcursor.size: 48
