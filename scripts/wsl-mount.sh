@@ -38,3 +38,6 @@ done
 sudo mount --bind /mnt/home/nix /nix
 sudo chmod 777 /tmp && touch /tmp/.mounted
 ln -srf /mnt/c/Users/$USER ~/win
+
+# allow ping
+[ -e /bin/ping ] && sudo setcap cap_net_raw+p /bin/ping
