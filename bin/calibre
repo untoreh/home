@@ -1,2 +1,3 @@
-#!/bin/sh -l
-QT_QPA_PLATFORM="wayland" exec nixGL calibre $@
+#!/bin/sh -li
+
+nohup ~/bin/calibre-wrapped &>/dev/null &

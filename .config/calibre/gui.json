@@ -1,4 +1,5 @@
 {
+  "advanced search dialog current tab": 0,
   "basic_metadata_widget_splitter_state": {
     "__class__": "bytearray",
     "__value__": "AAAA/wAAAAEAAAADAAAA6gAAAU4AAAEZAf////8BAAAAAQA="
@@ -135,6 +136,10 @@
     ]
   ],
   "default_author_link": null,
+  "duplicates-question-dialog-geometry": {
+    "__class__": "bytearray",
+    "__value__": "AdnQywADAAAAAAKfAAAA9gAABKwAAAKSAAACogAAARQAAASpAAACjwAAAAAAAAAAB4AAAAKiAAABFAAABKkAAAKP"
+  },
   "font": [
     "Noto Sans",
     10,
@@ -143,8 +148,16 @@
   ],
   "font_stretch": 0,
   "grid view visible": false,
+  "jobs view column layout3": {
+    "__class__": "bytearray",
+    "__value__": "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAfQAAAAFAQEBAAAAAAAAAAAAAAAAAGT/////AAAAhAAAAAAAAAAFAAAAZAAAAAEAAAAAAAAAZAAAAAEAAAAAAAAAZAAAAAEAAAAAAAAAZAAAAAEAAAAAAAAAZAAAAAEAAAAAAAAD6AAAAAAA"
+  },
+  "jobs_dialog_geometry": {
+    "__class__": "bytearray",
+    "__value__": "AdnQywADAAAAAAPgAAABTQAABl4AAAOLAAAD4wAAAWsAAAZbAAADiAAAAAAAAAAAB4AAAAPjAAABawAABlsAAAOI"
+  },
   "library_usage_stats": {
-    "/home/fra/Documents/books": 15
+    "/home/fra/Documents/books": 28
   },
   "metadata_single_gui_geom": {
     "__class__": "bytearray",
@@ -152,11 +165,15 @@
   },
   "metasingle_window_geometry3": {
     "__class__": "bytearray",
-    "__value__": "AdnQywADAAAAAAAJ////4gAAB0gAAAQIAAAADAAAAAAAAAdFAAAEBQAAAAAAAAAAB4AAAAAMAAAAAAAAB0UAAAQF"
+    "__value__": "AdnQywADAAAAAAAJ////9gAAB0gAAAQcAAAADAAAABQAAAdFAAAEGQAAAAAAAAAAB4AAAAAMAAAAFAAAB0UAAAQZ"
   },
   "preferences dialog geometry": {
     "__class__": "bytearray",
-    "__value__": "AdnQywADAAAAAAB0////7AAABBsAAALcAAAAdwAAAAoAAAQYAAAC2QAAAAAAAAAAB4AAAAB3AAAACgAABBgAAALZ"
+    "__value__": "AdnQywADAAAAAAHpAAAAdwAABZAAAANnAAAB7AAAAJUAAAWNAAADZAAAAAAAAAAAB4AAAAHsAAAAlQAABY0AAANk"
+  },
+  "previous_sort_order_BooksView": {
+    "last_modified": true,
+    "timestamp": false
   },
   "quick_start_guide_added": true,
   "quickview visible": false,
@@ -172,6 +189,7 @@
     "¤ ¤ ¤"
   ],
   "search bar visible": true,
+  "server3_warning_done": true,
   "show_emblems": false,
   "tag browser search box visible": false,
   "tag_browser_splitter_horizontal_state": [

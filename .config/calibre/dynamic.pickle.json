@@ -1,8 +1,12 @@
 {
-  "add books dialog dir": "/home/fra/Downloads",
+  "add books dialog dir": "/mnt/c/Users/fra/Downloads",
   "database location dialog": "/home/fra/Documents/books",
   "s_r_search_mode": 0,
   "sort_history": [
+    [
+      "last_modified",
+      true
+    ],
     [
       "timestamp",
       false

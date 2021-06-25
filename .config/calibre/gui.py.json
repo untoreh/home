@@ -46,10 +46,17 @@
   ],
   "jobs_search_history": [],
   "lrf_viewer_search_history": [],
-  "main_search_history": [],
+  "main_search_history": [
+    "serious",
+    "crypto",
+    "fract",
+    "asd",
+    "bootstr",
+    "agri"
+  ],
   "main_window_geometry": {
     "__class__": "bytearray",
-    "__value__": "AdnQywADAAAAAAFiAAAAfgAABfYAAAOCAAABZQAAAJwAAAXzAAADfwAAAAAAAAAAB4AAAAFlAAAAnAAABfMAAAN/"
+    "__value__": "AdnQywADAAAAAAFiAAAAfgAACOEAAASXAAABZQAAAJwAAAXzAAADfwAAAAACAAAAB4AAAAFlAAAAnAAACN4AAASU"
   },
   "match_tags_type": "any",
   "new_version_notification": true,
