@@ -6,6 +6,7 @@
 (palette "Color History")
 (brush-size 1)
 (brush-spacing 0.01)
+(brush-hardness 0.5)
 (brush-force 1)
 
 # end of gimp-heal-tool options
