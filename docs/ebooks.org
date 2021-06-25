@@ -3,3 +3,10 @@
 - Should have a "KUAL" entry in the library
 - If it is broken, reinstall the "hotfix" version of the "coplate" pkg (_known to date_)
 - use "KUAL" to launch koreader app
+
+* How to share books
+Books can be shared (between devices) using one of these methods:
+- zsync from koreader, for single books, need to have access to both devices at the same time
+- syncthing for directories
+- send to device from calibre wireless connection (if calibre actually manages to recognize the connected device..)
+- calibre content server (access from client device, browsing is fairly limited)
