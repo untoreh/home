@@ -308,13 +308,17 @@
 (defun julia-franklin ()
   (interactive)
   "Start the franklin live server in the current default-dir"
-  (if (not (fboundp #'julia-repl-inferior-buffer))
-      (julia-repl))
-  (if (julia-repl-inferior-buffer)
-      (progn
-        (julia-repl-cd (projectile-project-root))
-        (julia-repl--send-string
-         "using Franklin; frank_task = @task serve(); schedule(frank_task)"))))
+  (let ((local-dir (if load-file-name
+                       (file-name-directory load-file-name)
+                     (f-dirname (cdr (find-function-library #'julia-franklin))))))
+    (if (not (fboundp #'julia-repl-inferior-buffer))
+        (julia-repl))
+    (if (julia-repl-inferior-buffer)
+        (progn
+          (julia-repl-cd (projectile-project-root))
+          (julia-repl--send-string
+           (f-read-text
+            (concat (file-name-as-directory local-dir) "franklin.jl")))))))
 
 ;; julia projects file
 (after! projectile
