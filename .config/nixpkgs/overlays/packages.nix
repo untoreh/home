@@ -14,7 +14,7 @@ let
 in {
   inherit (super)
     # shell
-    starship eternal-terminal browsh git-hub pet tmux fzf fd bat ripgrep zoxide exa 
+    starship eternal-terminal browsh zsh git-hub git-lfs pet tmux fzf fd bat ripgrep zoxide exa 
     # utils
     wego translate-shell weechat
     # files and backups
@@ -25,7 +25,7 @@ in {
     noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-emoji-blob-bin noto-fonts-extra
     # input-fonts
     # system (don't use fish from nix because of locales)
-    man less thefuck glibcLocales tini libqalculate dhcp bandwhich consul haproxy rsync sshpass pandoc
+    man less thefuck glibcLocales tini libqalculate dhcp bandwhich consul haproxy rsync sshpass pandoc zip
 
     # langs
     go-pup nixfmt golangci-lint shfmt libtidy
