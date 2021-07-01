@@ -52,6 +52,8 @@ So...only three for now...
 ## Networking
 To allow seamless access to services listening on IPv4 from within WSL without tunneling, change the Hyper-V virtual switch for WSL to be external (the actual hardware, e.g. RealTek), and shared with the HOST machine.
 
+# Not WSL related
+
 ## Export/Import env variables
 
 ```
@@ -61,6 +63,7 @@ SET >> allvariables.txt
 for /F %A in (allvariables.txt) do SET %A
 ```
 
+
 ## Hibernation
 
 ``` sh
@@ -68,3 +71,6 @@ powercfg /h /type full
 ```
 
 `
+
+## Bluetooth
+I experienced bluetooth stuttering between play/resume media. The only way that I was able to fix this was by installing the CSR bluetooth harmony stack, which can be googled, usually shipped with a cd for bluetooth dongles. This stack replaces entirely all the bluetooth services that comes with Windows, seems more featureful.
