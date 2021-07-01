@@ -316,6 +316,7 @@
     (if (julia-repl-inferior-buffer)
         (progn
           (julia-repl-cd (projectile-project-root))
+          (julia-repl-activate-parent nil)
           (julia-repl--send-string
            (f-read-text
             (concat (file-name-as-directory local-dir) "franklin.jl")))))))

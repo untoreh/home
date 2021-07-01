@@ -10,4 +10,4 @@ using Franklin;
 const fr = Franklin;
 using Franklin: convert_md, convert_html, pagevar, path, globvar;
 
-frank_task = @task serve(); schedule(frank_task)
+frank_task = @task serve(prerender=true); schedule(frank_task)
