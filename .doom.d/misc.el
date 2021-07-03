@@ -40,18 +40,21 @@
       (defun wl-copy (text)
         (setq wl-copy-process (make-process :name "wl-copy"
                                             :buffer nil
-                                            :command '("wl-copy" "-f" "-n")
+                                            ;; :command '("wl-copy" "-f" "-n")
+                                            :command '("clip.exe")
                                             :connection-type 'pipe))
         (process-send-string wl-copy-process text)
         (process-send-eof wl-copy-process))
       (defun wl-paste ()
         (if (and wl-copy-process (process-live-p wl-copy-process))
             nil ; should return nil if we're the current paste owner
-          (shell-command-to-string "wl-paste -n | tr -d '\r'")))
-      (native-compile 'wl-copy)
-      (native-compile 'wl-paste)
-      (setq interprogram-cut-function 'wl-copy)
-      (setq interprogram-paste-function 'wl-paste)
+          ;; (shell-command-to-string "wl-paste -n | tr -d '\r'")
+          (shell-command-to-string "pbpaste.exe | tr -d '\r'")
+          ))
+      ;; (native-compile #'wl-copy)
+      ;; (native-compile #'wl-paste)
+      (setq interprogram-cut-function #'wl-copy)
+      (setq interprogram-paste-function #'wl-paste)
       ;; use custom temporary directory with WSL since there are permission problems with /tmp
       ;; NOTE: ensure trailing slash /
       (setq temporary-file-directory "/run/upper/")

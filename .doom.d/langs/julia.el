@@ -319,7 +319,9 @@
           (julia-repl-activate-parent nil)
           (julia-repl--send-string
            (f-read-text
-            (concat (file-name-as-directory local-dir) "franklin.jl")))))))
+            (concat (file-name-as-directory local-dir) "franklin.jl")))
+          ))
+    ))
 
 ;; julia projects file
 (after! projectile
