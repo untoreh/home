@@ -17,7 +17,7 @@ in {
     starship eternal-terminal browsh zsh git-hub git-lfs pet tmux fzf fd bat
     ripgrep zoxide exa
     # utils
-    wego translate-shell weechat krita
+    wego translate-shell weechat krita calibre
     # files and backups
     duplicacy borgbackup rclone syncthing
     # desktop
