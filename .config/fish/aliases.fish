@@ -13,6 +13,11 @@ alias zj "zellij"
 alias supd "supervisord -c ~/.config/supervisor.conf"
 alias supc "supervisorctl -c ~/.config/supervisor.conf"
 
+## langs
+#julia
+alias julia-sys-orig "sudo ln -srf /usr/lib/julia/sys.so{.orig,}"
+alias julia-sys-ls "sudo ln -srf /usr/lib/julia/sys.so{.ls,}"
+
 # volatile
 set rocm_tag rocm/pytorch:rocm3.8_ubuntu18.04_py3.6_pytorch
 alias dpl "dkr exec --privileged -it -e SHELL=/bin/zsh dpl /bin/zsh -li"
