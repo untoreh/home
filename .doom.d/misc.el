@@ -51,8 +51,8 @@
           ;; (shell-command-to-string "wl-paste -n | tr -d '\r'")
           (shell-command-to-string "pbpaste.exe | tr -d '\r'")
           ))
-      ;; (native-compile #'wl-copy)
-      ;; (native-compile #'wl-paste)
+      (native-compile #'wl-copy)
+      (native-compile #'wl-paste)
       (setq interprogram-cut-function #'wl-copy)
       (setq interprogram-paste-function #'wl-paste)
       ;; use custom temporary directory with WSL since there are permission problems with /tmp

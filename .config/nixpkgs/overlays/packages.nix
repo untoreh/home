@@ -31,7 +31,7 @@ in {
     haproxy rsync sshpass pandoc zip
 
     # langs
-    go-pup nixfmt golangci-lint shfmt libtidy nodejs
+    go-pup nixfmt golangci-lint shfmt libtidy nodejs shellcheck
 
     # runtimes
     python3
