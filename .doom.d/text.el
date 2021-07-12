@@ -17,3 +17,7 @@
 ;; (setq auto-mode-alist
 ;;       (delete '("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'" . markdown-mode)
 ;;               auto-mode-alist))
+
+;; enable vimish-fold for persistent folds
+(when (featurep! :editor fold)
+  (vimish-fold-global-mode 1))
