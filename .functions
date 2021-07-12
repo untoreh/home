@@ -244,7 +244,9 @@ curl(){
 
 ## switch tor to US node
 torfrom(){
-    sudo sed -r "s/^ExitNodes .*/ExitNodes {${1:l}}/" -i $TOR_RC
+    sudo sed -r "/((Strict)|(Exit))Nodes/d" -i $TOR_RC
+    local ExitNodes="StrictNodes 1\nExitNodes {${1:l}} \n"
+    echo "${RC}\n${ExitNodes}" > $TOR_RC
     sudo killall -HUP tor
     torex &>/dev/null &!
 }
