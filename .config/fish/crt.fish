@@ -1,37 +1,46 @@
-alias xdt "zsh -lc x_dashboard_tunnel"
-alias ghi "zsh -lc ghi"
-alias ghu "zsh -lc ghu"
-alias ghr "zsh -lc ghr"
-alias ghbs "zsh -lc ghbs"
-alias bbbs "zsh -lc bbbs"
-alias bbdel "zsh -lc bbdel"
-alias ghdel "zsh -lc ghdel"
-alias repodir "zsh -lc repodir"
-alias repobs "zsh -lc repobs"
-alias repodist "zsh -lc repodist"
-alias cpmtx "zsh -lc cpmtx"
-alias gcreds "zsh -lc gcreds"
-alias gcap "zsh -lc gcap"
-alias inar "zsh -lc inar"
-alias whor "zsh -lc whor"
-alias gcup "zsh -lc gcup"
-alias lre "zsh -lc lre"
-alias ggcm "commit-msg"
-alias rpdel "zsh -lc rpdel"
-alias glkey "zsh -lc glkey"
-alias ggurl "zsh -lc ggurl"
-alias gldel "zsh -lc gldel"
+function zshlic
+    zsh -lic ". ~/.cluster/crt/functions; $argv"
+end
+set -x REPO_USER
+set -x REPO_EMAIL
+set -x REPO_TOKEN
+set -x REPO_EP
+alias xdt "zshlic x_dashboard_tunnel"
+alias ghi "zshlic ghi"
+alias ghu "zshlic ghu"
+alias ghr "zshlic ghr"
+alias ghbs "zshlic ghbs"
+alias bbbs "zshlic bbbs"
+alias bbdel "zshlic bbdel"
+alias ghdel "zshlic ghdel"
+alias repodir "zshlic repodir"
+alias repobs "zshlic repobs"
+alias repodist "zshlic repodist"
+alias cpmtx "zshlic cpmtx"
+alias gcreds "zshlic gcreds"
+alias gcap "zshlic gcap"
+alias inar "zshlic inar"
+alias whor "zshlic whor"
+alias gcup "zshlic gcup"
+alias lre "zshlic lre"
+alias ggcm commit-msg
+alias rpdel "zshlic rpdel"
+alias glkey "zshlic glkey"
+alias ggurl "zshlic ggurl"
+alias gldel "zshlic gldel"
+alias ghemail "zshlic ghemail"
+alias ghtest "zshlic ghtest"
 
 function bbwh
-    zsh -lc "bbwh '$argv[1]'"
+    zshlic "bbwh '$argv[1]'"
 end
 
 function glwh
-    zsh -lc "glwh '$argv[1]'"
+    zshlic "glwh '$argv[1]'"
 end
 
 function ghwh
-    zsh -lc "ghwh '$argv[1]'"
+    zshlic "ghwh '$argv[1]'"
 end
 
 function deobfs
@@ -39,11 +48,11 @@ function deobfs
 end
 
 function da
-    zsh -lc "da '$argv[1]'"
+    zshlic "da '$argv[1]'"
 end
 
 function fac
-    zsh -lc "fac '$argv[1]'"
+    zshlic "fac '$argv[1]'"
 end
 
 for v in REPO_USER REPO_EMAIL REPO_TOKEN REPO_EP
@@ -77,6 +86,6 @@ function sync_pl
     while ! scp /tmp/stuff/payload.gif vrmc5:/opt/pld/
         :
     end
-    sudo docker exec --privileged -it -e SHELL=/bin/zsh dpl /bin/zsh -lic \
+    sudo docker exec --privileged -it -e SHELL=/bin/zsh dpl /bin/zshlic \
         "flarectl zone purge --zone=unto.re --files='http://pld.unto.re/payload.gif,https://pld.unto.re/payload.gif'"
 end

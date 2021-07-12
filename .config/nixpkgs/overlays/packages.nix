@@ -5,7 +5,7 @@ let
   nixgl = import (builtins.fetchTarball
     "https://github.com/guibou/nixGL/archive/master.tar.gz") { };
   nixexprs = builtins.fetchTarball {
-    url = "https://nixos.org/channels/nixos-unstable/nixexprs.tar.xz";
+    url = "https://nixos.org/channels/nixpkgs-unstable/nixexprs.tar.xz";
   };
   unstable = import nixexprs {
     inherit (self) config;
@@ -28,17 +28,16 @@ in {
     # input-fonts
     # system (don't use fish from nix because of locales)
     man less thefuck glibcLocales tini libqalculate dhcp bandwhich consul
-    haproxy rsync sshpass pandoc zip
+    haproxy rsync sshpass pandoc zip docker xclip cachix
 
     # langs
-    go-pup nixfmt golangci-lint shfmt libtidy nodejs shellcheck
+    go-pup nixfmt golangci-lint shfmt libtidy nodejs shellcheck jq
 
     # runtimes
     python3
 
-    # emacs
-    # emacsPgtk  # wait for mesa-d3d12
-    mu isync gnupg pinentry emacs-all-the-icons-fonts neovim;
+    # emacsPgtkGcc  # wait for mesa-d3d12
+    mu isync gnupg pinentry emacs-all-the-icons-fonts;
   # dependencies
   inherit (self.weechatScripts) weechat-matrix;
   # gpu, waiting for nixpkgs integration

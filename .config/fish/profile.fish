@@ -118,3 +118,6 @@ if ! set -q LOCALE_ARCHIVE &&
     set -gx LOCALE_ARCHIVE (nix-build --no-out-link '<nixpkgs>' -A glibcLocales)"/lib/locale/locale-archive"
     echo "set -x LOCALE_ARCHIVE \"$LOCALE_ARCHIVE\"" >>$path_fish
 end
+# GUIX
+# set -x GUIX_PROFILE "$HOME/.guix-profile"
+

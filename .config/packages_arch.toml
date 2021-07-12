@@ -1,9 +1,13 @@
+tor
+nss
 base-devel
+nc
 ccache
 lm_sensors
 vulkan-icd-loader
 aura-bin
 emacs-gcc-wayland-devel-bin
+neovim
 mesa-d3d12
 libgccjit
 mpv
@@ -18,5 +22,6 @@ prettier
 
 ## pip3
 mako PyYAML
+
 
 
