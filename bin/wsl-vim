@@ -1,6 +1,8 @@
 #!/bin/sh
 
 nvim=~/.nix-profile/bin/nvim
+[ ! -e $nvim ] && nvim=/usr/bin/nvim
+[ ! -e $nvim ] && nvim=nvim
 ## only support opening one file
 if [ -n "$@" ]; then
 	if [ "${1/\\wsl.localhost}" != "$1" ]; then

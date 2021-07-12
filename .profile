@@ -83,8 +83,9 @@ export PERL_MM_OPT
 
 ## stardict
 export STARDICT_DATA_DIR=~/.local/stardict
-## speedup dkms
-export CONCURRENCY_LEVEL='14'
+## speedup builds
+export CONCURRENCY_LEVEL='14' # dkms
+export MAKEFLAGS='-j 14' # make
 # ccache
 export CCACHE_DIR=~/.ccache
 export CC="ccache gcc"
@@ -93,3 +94,6 @@ export CXX="ccache g++"
 # NIX
 if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then . ~/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
+# GUIX
+GUIX_PROFILE=~/.guix-profile
+. ${GUIX_PROFILE}/etc/profile
