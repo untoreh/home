@@ -10,12 +10,22 @@ if [ -z "$PASSWORD" ]; then
 fi
 [ -z "$CIPHER" ] && CIPHER=aes128
 
+function decrypt(){
+	if [ -t 0 ]; then
+		openssl $CIPHER -d -iter 10000 -kfile <(echo $PASSWORD) -in /dev/stdin -out -
+	fi
+}
+
 case "$1" in
 "smudge")
-	openssl $CIPHER -d -iter 10000 -kfile <(echo $PASSWORD) -in /dev/stdin -out -
+	decrypt
 	;;
 "diff")
-	cat "$2"
+	if [ -n "$2" ]; then
+		cat "$2"
+	else
+		decrypt
+	fi
 	;;
 "clean")
 	openssl $CIPHER -iter 10000 -kfile <(echo $PASSWORD) -in /dev/stdin -out -
