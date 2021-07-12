@@ -232,6 +232,7 @@ ipv4todec(){
     printf '%s%d\n' "$((a * 256 ** 3 + b * 256 ** 2 + c * 256 + d))"
 }
 
+[ -f ~/.config/torrc ] &&  TOR_RC=~/.config/torrc || TOR_RC=/etc/tor/torrc
 ## curl proxy
 alias tor_proxy_var="export socks_proxy=localhost:9050"
 alias tpv="tor_proxy_var"
@@ -243,22 +244,36 @@ curl(){
 
 ## switch tor to US node
 torfrom(){
-    sudo sed -r "s/^ExitNodes .*/ExitNodes {${1:l}}/" -i /etc/tor/torrc
+    sudo sed -r "s/^ExitNodes .*/ExitNodes {${1:l}}/" -i $TOR_RC
     sudo killall -HUP tor
-    torex &!
+    torex &>/dev/null &!
 }
 torus(){
-    NODES_STRING='{us},{ca},{tt},{ni},{lc},{kn},{vc},{pa},{mx},{jm},{ht},{hn},{gt},{gd},{sv},{do},{dm},{cu},{cr},{bz},{bb},{bs},{ag}'
-    sudo sed -r "s/^ExitNodes .*/ExitNodes $NODES_STRING/" -i /etc/tor/torrc
+    NODES_LIST='us,ca,tt,ni,lc,kn,vc,pa,mx,jm,ht,hn,gt,gd,sv,do,dm,cu,cr,bz,bb,bs,ag'
+    tor_strict_exit $NODES_LIST
     sudo killall -HUP tor
-    torex &!
+    torex &>/dev/null &! 
+}
+tor_strict_exit(){
+    NODES_LIST=$1
+    local ExitNodes="StrictNodes 1\n"
+    local NODES=
+    local PREVIFS=$IFS
+    IFS=,
+    for node in ${=NODES_LIST}; do
+        ExitNodes="${ExitNodes}ExitNodes {$node} \n"
+    done
+    sudo sed -r "/((Strict)|(Exit))Nodes/d" -i $TOR_RC
+    local RC=$(<$TOR_RC)
+    echo "${RC}\n${ExitNodes}" > $TOR_RC
+    sudo killall -HUP tor
+    torex &>/dev/null &!
+    IFS=$PREVIFS
 }
 ## switch tor to EU node
 toreu(){
-    NODES_STRING='{fr},{de},{se},{es},{fi},{no},{gr},{mt},{mc},{an},{nl},{pl},{ro},{sm},{gb},{su},{ch},{ad},{be},{dk},{is},{ie},{lu},{pt},{it}'
-    sudo sed -r "s/^ExitNodes .*/ExitNodes $NODES_STRING/" -i /etc/tor/torrc
-    sudo killall -HUP tor
-    torex &!
+    local NODES_STRING='fr,de,se,es,fi,no,gr,mt,mc,nl,pl,ro,sm,gb,ch,ad,be,dk,is,ie,lu,pt,it'
+    tor_strict_exit $NODES_STRING
 }
 
 ## add current ip to excludelist /tmp/.tor_ex
@@ -270,7 +285,7 @@ torex(){
     local current_list="${current_list//${cur_ip}}${cur_ip},"
     echo "dumping current list"
     echo ${current_list} > /tmp/.tor_ex
-    sudo sed "s/ExcludeExitNodes .*/ExcludeExitNodes ${current_list}/" -i /etc/tor/torrc
+    sudo sed "s/ExcludeExitNodes .*/ExcludeExitNodes ${current_list}/" -i $TOR_RC
 }
 
 ## ban/unban ip

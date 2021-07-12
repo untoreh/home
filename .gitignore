@@ -70,6 +70,8 @@ remmina/
 .stremio-server/
 .steam/
 .vscode/*
+.vscode-server/*
+!.vscode-server/argv.json
 !.vscode/argv.json
 .wine/
 .wine32/
@@ -113,3 +115,4 @@ remmina/
 /.nx
 /.dbus/
 .grip/
+.mume/
