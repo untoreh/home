@@ -1,3 +1,4 @@
-#!/bin/zsh -l
+#!/usr/bin/env zsh
 
+. ~/.profile
 torfrom $@

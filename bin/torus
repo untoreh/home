@@ -1,3 +1,4 @@
-#!/bin/zsh -li
-
+#!/usr/bin/env zsh
+#
+. ~/.profile
 torus
