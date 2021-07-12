@@ -41,3 +41,6 @@ ln -srf /mnt/c/Users/$USER ~/win
 
 # allow ping
 [ -e /bin/ping ] && sudo setcap cap_net_raw+p /bin/ping
+
+# setup IP
+ip addr add 192.168.99.2/24 broadcast 192.168.99.255 dev eth0 label eth0:1;

@@ -74,3 +74,11 @@ powercfg /h /type full
 
 ## Bluetooth
 I experienced bluetooth stuttering between play/resume media. The only way that I was able to fix this was by installing the CSR bluetooth harmony stack, which can be googled, usually shipped with a cd for bluetooth dongles. This stack replaces entirely all the bluetooth services that comes with Windows, seems more featureful.
+
+## Clear Windows Store Cache
+
+``` sh
+WSRESET
+```
+
+`
