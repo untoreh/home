@@ -10,5 +10,9 @@ bin/doom sync -ecp
 
 # unset WAYLAND_DISPLAY GDK_BACKEND CLUTTER_BACKEND
 export EMACS=$(which emacs)
+export XDG_DATA_DIRS="$HOME/.local/share:$HOME/.themes:$HOME/.icons"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CONFIG_DIRS="$HOME/.local/share:$HOME/.themes:$HOME/.fonts:$HOME.icons"
 exec bin/doom run --fg-daemon=server
 # exec emacs --fg-daemon=server
