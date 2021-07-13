@@ -36,7 +36,7 @@ in {
     # runtimes
     python3
 
-    # emacsPgtkGcc  # wait for mesa-d3d12
+    emacsGcc  # wait for mesa-d3d12
     mu isync gnupg pinentry emacs-all-the-icons-fonts;
   # dependencies
   inherit (self.weechatScripts) weechat-matrix;
