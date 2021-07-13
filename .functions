@@ -232,7 +232,7 @@ ipv4todec(){
     printf '%s%d\n' "$((a * 256 ** 3 + b * 256 ** 2 + c * 256 + d))"
 }
 
-[ -f ~/.config/torrc ] &&  TOR_RC=~/.config/torrc || TOR_RC=/etc/tor/torrc
+[ -f ~/.config/torrc ] &&  TOR_RC=$(realpath ~/.config/torrc) || TOR_RC=/etc/tor/torrc
 ## curl proxy
 alias tor_proxy_var="export socks_proxy=localhost:9050"
 alias tpv="tor_proxy_var"
@@ -248,28 +248,29 @@ torfrom(){
     local ExitNodes="StrictNodes 1\nExitNodes {${1:l}} \n"
     echo "${RC}\n${ExitNodes}" > $TOR_RC
     sudo killall -HUP tor
-    torex &>/dev/null &!
+    torex &!
 }
 torus(){
     NODES_LIST='us,ca,tt,ni,lc,kn,vc,pa,mx,jm,ht,hn,gt,gd,sv,do,dm,cu,cr,bz,bb,bs,ag'
     tor_strict_exit $NODES_LIST
     sudo killall -HUP tor
-    torex &>/dev/null &! 
+    torex &! 
 }
 tor_strict_exit(){
     NODES_LIST=$1
-    local ExitNodes="StrictNodes 1\n"
+    local ExitNodes="StrictNodes 1\nExitNodes "
     local NODES=
     local PREVIFS=$IFS
     IFS=,
     for node in ${=NODES_LIST}; do
-        ExitNodes="${ExitNodes}ExitNodes {$node} \n"
+        ExitNodes="${ExitNodes}{$node},"
     done
-    sudo sed -r "/((Strict)|(Exit))Nodes/d" -i $TOR_RC
+    ExitNodes="${ExitNodes}"
+    sudo sed -r "/^\s*((Strict)|(Exit))Nodes.*/d" -i $TOR_RC
     local RC=$(<$TOR_RC)
     echo "${RC}\n${ExitNodes}" > $TOR_RC
     sudo killall -HUP tor
-    torex &>/dev/null &!
+    torex &!
     IFS=$PREVIFS
 }
 ## switch tor to EU node
@@ -282,10 +283,10 @@ toreu(){
 torex(){
     if [ -n "$(find /tmp/.tor_ex -mtime +1 -print)" ]; then rm /tmp/.tor_ex; fi
     [ -e /tmp/.tor_ex ] && current_list=$(</tmp/.tor_ex)
-    echo "fetching cur ip"
+    # echo "fetching cur ip"
     local cur_ip=$(curl -s --proxy socks5://localhost:9050 ipinfo.io/ip)
     local current_list="${current_list//${cur_ip}}${cur_ip},"
-    echo "dumping current list"
+    # echo "dumping current list"
     echo ${current_list} > /tmp/.tor_ex
     sudo sed "s/ExcludeExitNodes .*/ExcludeExitNodes ${current_list}/" -i $TOR_RC
 }
