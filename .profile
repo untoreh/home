@@ -95,5 +95,5 @@ export CXX="ccache g++"
 if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then . ~/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
 # GUIX
-GUIX_PROFILE=~/.guix-profile
-. ${GUIX_PROFILE}/etc/profile
+#GUIX_PROFILE=~/.guix-profile
+#. ${GUIX_PROFILE}/etc/profile

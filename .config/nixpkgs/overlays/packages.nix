@@ -17,7 +17,7 @@ in {
     starship eternal-terminal browsh zsh git-hub git-lfs pet tmux fzf fd bat
     ripgrep zoxide exa
     # utils
-    wego translate-shell weechat krita calibre
+    wego translate-shell weechat krita calibre koreader
     # files and backups
     duplicacy borgbackup rclone syncthing
     # desktop
@@ -28,7 +28,7 @@ in {
     # input-fonts
     # system (don't use fish from nix because of locales)
     man less thefuck glibcLocales tini libqalculate dhcp bandwhich consul
-    haproxy rsync sshpass pandoc zip docker xclip cachix
+    haproxy rsync sshpass pandoc zip docker xclip cachix squid
 
     # langs
     go-pup nixfmt golangci-lint shfmt libtidy nodejs shellcheck jq
@@ -36,7 +36,7 @@ in {
     # runtimes
     python3
 
-    emacsGcc  # wait for mesa-d3d12
+    emacsPgtkGcc  # wait for mesa-d3d12
     mu isync gnupg pinentry emacs-all-the-icons-fonts;
   # dependencies
   inherit (self.weechatScripts) weechat-matrix;
