@@ -177,5 +177,5 @@
        ;;literate
        (default +bindings +smartparens))
 (when (fboundp 'native-compile-async)
-  (setq comp-deferred-compilation t
-        comp-deferred-compilation-black-list '("/mu4e.*\\.el$")))
+  (setq native-comp-deferred-compilation t
+        native-comp-deferred-compilation-black-list '("/mu4e.*\\.el$")))
