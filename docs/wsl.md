@@ -50,9 +50,10 @@ So...only three for now...
 
 ## emacs
 ### libvterm
+Don't use system libvterm
 ```sh
 cd ~/.emacs.d/.local/straight/build*/vterm/build
-cmake -DUSE_SYSTEM_LIBVTERM=yes ..
+cmake -DUSE_SYSTEM_LIBVTERM=no ..
 make
 ```
 
