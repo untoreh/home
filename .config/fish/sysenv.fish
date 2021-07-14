@@ -5,12 +5,12 @@
 #
 
 ## system
-set FLOOR "ubu"
+set FLOOR ubu
 set SCREEN DVI-D-2
 if set -q WSLENV
-	set XDG_RUNTIME_DIR /mnt/wslg/runtime-dir
+    set XDG_RUNTIME_DIR /mnt/wslg/runtime-dir
 else
-	set XDG_RUNTIME_DIR /run/user/1000
+    set XDG_RUNTIME_DIR /run/user/1000
 end
 set -q GDK_BACKEND || set GDK_BACKEND wayland
 # set __GL_THREADED_OPTIMIZATIONS 1
@@ -21,24 +21,21 @@ set -q GDK_BACKEND || set GDK_BACKEND wayland
 
 ## theming
 set -q GTK@_RC_FILES || set GTK2_RC_FILES "$HOME/.gtkrc-2.0"
-set q QT_QPA_PLATFORMTHEME || set QT_QPA_PLATFORMTHEME "qt5ct"
+set -q QT_QPA_PLATFORMTHEME || set QT_QPA_PLATFORMTHEME qt5ct
 
 ## firefox
 set SLIMERJSLAUNCHER /usr/bin/firefox
 set MOZ_USE_OMTC 1 ## for firefox off main thread compositing
 
 # clipboard
-if [ -n "$DISPLAY" ]
-	if [ -n "$WSLENV" ]
-		function clc
-			clip.exe
-		end
-	else
-    	function clc
-        	xclip -i -selection clipboard
-    	end
-    	end
-else
-    alias clc wl-copy
+function clc
+    if [ -n "$DISPLAY" ]
+        if [ -n "$WSLENV" ]
+            clip.exe
+        else
+            xclip -i -selection clipboard
+        end
+    else
+        wl-copy
+    end
 end
-

@@ -50,20 +50,15 @@ discord_logs(){ ## download all attachments containing given argument as string
 
 ## copy to clipboard
 clc() {
-	# which clipcopy 1>/dev/null || exit 1
-  # if [ -n "$*" ]; then
-	#     clipcopy < $@
-  # else
-  #     clipcopy </dev/stdin
-  # fi
+    [ -v WSL_DISTRO_NAME ] && cp=clip.exe || cp=wl-copy
     if [ -n "$*" ]; then
         if [ -f "$1" ]; then
-            wl-copy < <(<"$1")
+            $cp < <(<"$1")
         else
-            wl-copy <<< "$@"
+            $cp <<< "$@"
         fi
     else
-        wl-copy </dev/stdin
+        $cp </dev/stdin
     fi
 }
 
@@ -265,7 +260,7 @@ tor_strict_exit(){
     for node in ${=NODES_LIST}; do
         ExitNodes="${ExitNodes}{$node},"
     done
-    ExitNodes="${ExitNodes}"
+    ExitNodes="${ExitNodes:0:-1} StrictNodes 1\n"
     sudo sed -r "/^\s*((Strict)|(Exit))Nodes.*/d" -i $TOR_RC
     local RC=$(<$TOR_RC)
     echo "${RC}\n${ExitNodes}" > $TOR_RC

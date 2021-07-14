@@ -34,7 +34,7 @@
 ;; this makes sense only if we check on each frame creation
 ;; (if (and (display-graphic-p) (equal (pgtk-backend-display-class) "GdkWaylandDisplay"))
 ;; just check for env vars and run once per server start
-(if (and (getenv "WSLENV") (getenv "WAYLAND_DISPLAY"))
+(if (and nil (getenv "WSLENV") (getenv "WAYLAND_DISPLAY"))
     (progn
       (setq wl-copy-process nil)
       (defun wl-copy (text)
@@ -64,3 +64,10 @@
                                        ((executable-find "firefox"))))
 (use-package! weechat
   :commands weechat-connect)
+
+;; use xclip mode with WSL and X11
+(if (and (getenv "WSLENV") (getenv "DISPLAY") (equal (getenv "GDK_BACKEND") "x11"))
+    (xclip-mode t))
+
+;; not prompt for vterm compilation
+(setq vterm-always-compile-module t)

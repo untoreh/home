@@ -28,7 +28,7 @@ in {
     # input-fonts
     # system (don't use fish from nix because of locales)
     man less thefuck glibcLocales tini libqalculate dhcp bandwhich consul
-    haproxy rsync sshpass pandoc zip docker xclip cachix squid
+    haproxy rsync sshpass pandoc zip docker xclip cachix
 
     # langs
     go-pup nixfmt golangci-lint shfmt libtidy nodejs shellcheck jq
@@ -36,7 +36,7 @@ in {
     # runtimes
     python3
 
-    emacsPgtkGcc  # wait for mesa-d3d12
+    emacsGcc # wait for mesa-d3d12
     mu isync gnupg pinentry emacs-all-the-icons-fonts;
   # dependencies
   inherit (self.weechatScripts) weechat-matrix;

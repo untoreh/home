@@ -1,5 +1,6 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
+SETUVAR CLUTTER_BACKEND:wayland
 SETUVAR EMACS_COMMIT:adda7c0c6947d5746bde2c984d806253e2f8ac00
 SETUVAR --export FZF_DEFAULT_OPTS:\x2d\x2dcolor\x3dbw\x20\x2d\x2dheight\x201\x25\x20\x2d\x2dreverse\x20\x2d\x2dtiebreak\x3dbegin\x2clength\x2cindex
 SETUVAR FZF_DISABLE_KEYBINDINGS:0
@@ -7,6 +8,7 @@ SETUVAR FZF_LEGACY_KEYBINDINGS:1
 SETUVAR FZF_PREVIEW_DIR_CMD:ls
 SETUVAR FZF_PREVIEW_FILE_CMD:head\x20\x2dn\x2010
 SETUVAR FZF_TMUX_HEIGHT:40\x25
+SETUVAR GDK_BACKEND:wayland
 SETUVAR --export LOCALE_ARCHIVE:/nix/store/7dz31dq4n1r0wqq3r28r7975cql68n8w\x2dglibc\x2dlocales\x2d2\x2e32\x2d40/lib/locale/locale\x2darchive
 SETUVAR LOCAL_ARCHIVE:\x1d
 SETUVAR --path PATH:\x7e/\x2enix\x2dprofile/bin\x1e/usr/lib/ccache\x1e/home/fra/\x2ecargo/bin\x1e/home/fra/bin\x1e/home/fra/\x2elocal/bin\x1e/home/fra/\x2enix\x2dprofile/bin\x1e/opt/julia/bin\x1e\x2e\x1e/snap/bin\x1e\x2e\x1e/home/fra/\x2etmp/go/bin\x1e/home/fra/\x2ecargo/bin\x1e\x2e\x1e\x2e\x1e/bin\x1e/sbin\x1e/usr/bin\x1e/usr/sbin/
