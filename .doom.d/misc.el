@@ -17,6 +17,9 @@
           (kill-buffer (buffer-base-buffer (current-buffer)))
           (find-file tmp)))))
 
+;; ranger doesn't show hidden files by default
+(setq ranger-show-hidden t)
+
 ;; never enable indent guides by default
 (remove-hook! (prog-mode text-mode conf-mode) highlight-indent-guides-mode)
 
