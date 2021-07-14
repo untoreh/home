@@ -12,12 +12,14 @@ mesa-d3d12
 libgccjit
 mpv
 wget
+gost
 unzip
 imagemagick
 inetutils
 julia
 net-tools
 dos2unix
+btrfs-progs
 prettier
 
 ## pip3
