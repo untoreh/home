@@ -31,7 +31,7 @@ in {
     haproxy rsync sshpass pandoc zip docker xclip cachix
 
     # langs
-    go-pup nixfmt golangci-lint shfmt libtidy nodejs shellcheck jq enchant2 ispell
+    go-pup nixfmt golangci-lint shfmt libtidy nodejs shellcheck jq enchant2 ispell languagetool
 
     # runtimes
     python3
