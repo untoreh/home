@@ -1,0 +1,18 @@
+#!/bin/sh
+
+WINDOWS_PATH_FILE=/tmp/.cache/path_windows
+
+if [ ! -f $WINDOWS_PATH_FILE ]; then
+	pwsh=/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe
+	ORIGINAL_PATH=$($pwsh -Command "\$env:path -split ';'")
+	WINDOWS_PATH=
+	for p in $ORIGINAL_PATH; do
+		WINDOWS_PATH="${WINDOWS_PATH}:$(wslpath $p)"
+	done
+	WINDOWS_PATH=$(echo "$WINDOWS_PATH" | tr -d '\r')
+	echo "$WINDOWS_PATH" > $WINDOWS_PATH_FILE
+else
+	WINDOWS_PATH=$(<$WINDOWS_PATH_FILE)
+fi
+
+PATH=$WINDOWS_PATH "${1%.exe}.exe"
