@@ -44,7 +44,7 @@
         (setq wl-copy-process (make-process :name "wl-copy"
                                             :buffer nil
                                             ;; :command '("wl-copy" "-f" "-n")
-                                            :command '("clip.exe")
+                                            :command '("wex" "clip.exe")
                                             :connection-type 'pipe))
         (process-send-string wl-copy-process text)
         (process-send-eof wl-copy-process))
@@ -52,7 +52,7 @@
         (if (and wl-copy-process (process-live-p wl-copy-process))
             nil ; should return nil if we're the current paste owner
           ;; (shell-command-to-string "wl-paste -n | tr -d '\r'")
-          (shell-command-to-string "pbpaste.exe | tr -d '\r'")
+          (shell-command-to-string "wex pbpaste.exe | tr -d '\r'")
           ))
       (native-compile #'wl-copy)
       (native-compile #'wl-paste)
