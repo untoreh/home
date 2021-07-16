@@ -38,6 +38,8 @@ in {
 
     emacsGcc # wait for mesa-d3d12
     mu isync gnupg pinentry emacs-all-the-icons-fonts;
+  # dictionary
+  inherit (self.aspellDicts) en;
   # dependencies
   inherit (self.weechatScripts) weechat-matrix;
   # gpu, waiting for nixpkgs integration
@@ -45,7 +47,7 @@ in {
   inherit (nixgl) nixGLDefault;
   # wait for mesa-d3d12
   # inherit (unstable) mpv youtube-dl;
-  inherit (unstable) youtube-dl;
+  inherit (unstable) youtube-dl nu;
   # python
   inherit (super.python38Packages) supervisor grip ansible;
 }
