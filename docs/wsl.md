@@ -61,7 +61,7 @@ make
 To allow seamless access to services listening on IPv4 from within WSL without tunneling, change the Hyper-V virtual switch for WSL to be external (the actual hardware, e.g. RealTek), and shared with the HOST machine.
 
 ## WSL Path slows down shell completion
-This seems a problem shared among all linux shells, having the windows path appended makes autocomplete really slow, so we configure wsl not to append the windows path. Use the wrapper `~/bin/wex` to call windows executables from wsl instead (with the benefit that we can omit `.exe` since we are parsing anyway), i.e. `wex powershell`.
+This seems a problem shared among all linux shells, having the windows path appended makes autocomplete really slow, so we configure wsl not to append the windows path. Use the wrapper `~/bin/wex` to call windows executables from wsl instead, i.e. `wex powershell.exe`.
 
 ## /etc/wsl.conf
 
