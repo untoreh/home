@@ -28,7 +28,8 @@ else
         ~/bin/dump_path.sh
     end
     # echo "set PATH \""(bash -lc "echo \$PATH")"\"" >$path_fish
-    echo "set PATH "(string sub -s 6 (read < $path_common)) >$path_fish
+    string replace -r '^\s*([^=]*)=' 'set $1 ' (read -z < $path_common) >$path_fish
+    # echo "set PATH "(string sub -s 6 (read < $path_common)) >$path_fish
     source $path_fish
 end
 
@@ -113,11 +114,10 @@ set -x CC "ccache gcc"
 set -x CXX "ccache g++"
 # NIX
 set -x NIX_PATH "$HOME/.nix-defexpr/channels:$NIX_PATH"
-if ! set -q LOCALE_ARCHIVE && 
-	ip route | grep -q "^default.*dev eth0"
+if ! set -q LOCALE_ARCHIVE &&
+        ip route | grep -q "^default.*dev eth0"
     set -gx LOCALE_ARCHIVE (nix-build --no-out-link '<nixpkgs>' -A glibcLocales)"/lib/locale/locale-archive"
     echo "set -x LOCALE_ARCHIVE \"$LOCALE_ARCHIVE\"" >>$path_fish
 end
 # GUIX
 # set -x GUIX_PROFILE "$HOME/.guix-profile"
-

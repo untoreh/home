@@ -14,5 +14,10 @@ ccache="/usr/lib/ccache"
 windows=$(echo $PATH | sed 's/.*\/usr\/lib\/wsl/\/usr\/lib\/wsl/')
 nixbin=~/.nix-profile/bin
 NEWPATH="PATH=\"$HOME/bin:$HOME/.local/bin:$nixbin:$julia_bin:$ruby_bin:$go_bin:$HOME/dev/go/bin:$HOME/.cargo/bin:$ccache:$defs:$windows\""
+
 echo "$NEWPATH" >$cached_path
+
 # echo -e "PATH set to: \n $NEWPATH"
+PYTHONPATH=$(find -L ~/.nix-profile -path "*/python*/site-packages" -type d | tr '\n' ':')${PYTHONPATH:-""}
+NEW_PYTHONPATH="PYTHONPATH=\"$PYTHONPATH\""
+echo "$NEW_PYTHONPATH" >>$cached_path

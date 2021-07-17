@@ -34,7 +34,7 @@ in {
     go-pup nixfmt golangci-lint shfmt libtidy nodejs shellcheck jq enchant2 ispell languagetool
 
     # runtimes
-    python3
+    python39
 
     emacsGcc # wait for mesa-d3d12
     mu isync gnupg pinentry emacs-all-the-icons-fonts;
@@ -47,7 +47,7 @@ in {
   inherit (nixgl) nixGLDefault;
   # wait for mesa-d3d12
   # inherit (unstable) mpv youtube-dl;
-  inherit (unstable) youtube-dl nu;
+  inherit (unstable) youtube-dl nushell;
   # python
-  inherit (super.python38Packages) supervisor grip ansible;
+  inherit (super.python39Packages) supervisor grip ansible pip black pandas;
 }
