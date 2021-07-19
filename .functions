@@ -50,15 +50,15 @@ discord_logs(){ ## download all attachments containing given argument as string
 
 ## copy to clipboard
 clc() {
-    [ -v WSL_DISTRO_NAME ] && cp=clip.exe || cp=wl-copy
+    [ -v WSL_DISTRO_NAME ] && cp="wex clip.exe" || cp=wl-copy
     if [ -n "$*" ]; then
         if [ -f "$1" ]; then
-            $cp < <(<"$1")
+            ${=cp} < <(<"$1")
         else
-            $cp <<< "$@"
+            ${=cp} <<< "$@"
         fi
     else
-        $cp </dev/stdin
+        ${=cp} </dev/stdin
     fi
 }
 

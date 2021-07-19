@@ -57,6 +57,8 @@ fi
 export GOPATH=$HOME/dev/go:$HOME/dev/deployer/go
 ## nodejs
 export NODE_PATH=$NODE_PATH:$HOME/node_modules:/usr/local/lib/node_modules
+## python
+export PYTHONPATH
 
 ## cluster
 # export CONSUL_HTTP_ADDR=
