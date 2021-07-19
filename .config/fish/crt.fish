@@ -30,6 +30,7 @@ alias ggurl "zshlic ggurl"
 alias gldel "zshlic gldel"
 alias ghemail "zshlic ghemail"
 alias ghtest "zshlic ghtest"
+alias diffban "zshlic diffban"
 
 function bbwh
     zshlic "bbwh '$argv[1]'"
