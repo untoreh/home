@@ -14,7 +14,7 @@ let
 in {
   inherit (super)
   # shell
-    starship eternal-terminal browsh zsh git-hub git-lfs pet tmux fzf fd bat
+    eternal-terminal browsh zsh git-hub git-lfs pet tmux fzf fd bat
     ripgrep zoxide exa
     # utils
     wego translate-shell weechat krita calibre koreader
@@ -34,7 +34,7 @@ in {
     go-pup nixfmt golangci-lint shfmt libtidy nodejs shellcheck jq enchant2 ispell languagetool
 
     # runtimes
-    python39
+    # python3
 
     emacsGcc # wait for mesa-d3d12
     mu isync gnupg pinentry emacs-all-the-icons-fonts;
@@ -47,7 +47,10 @@ in {
   inherit (nixgl) nixGLDefault;
   # wait for mesa-d3d12
   # inherit (unstable) mpv youtube-dl;
-  inherit (unstable) youtube-dl nushell;
+  inherit (unstable) youtube-dl nushell starship;
   # python
-  inherit (super.python39Packages) supervisor grip ansible pip black pandas;
+  inherit (super.python38Packages) supervisor grip ansible pip black ;
+  # pandas isort setuptools timeago cython
+  # deps for thefuck
+  # colorama decorator psutil pyte;
 }

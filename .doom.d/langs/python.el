@@ -26,3 +26,6 @@
   ;; make isort compatible with black
   (setq-default py-isort-options '("--profile" "black"))
   (add-to-list '+format-on-save-enabled-modes 'python-mode t))
+
+;; use jupyter repl as default python repl
+(setf (alist-get 'python-mode +eval-repls) '(+python/open-jupyter-repl :persist t))

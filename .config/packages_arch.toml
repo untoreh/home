@@ -23,6 +23,7 @@ btrfs-progs
 prettier
 
 ## pip3
+python
 mako PyYAML
 
 
