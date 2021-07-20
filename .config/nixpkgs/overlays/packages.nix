@@ -24,7 +24,7 @@ in {
     mako wl-clipboard
     # theme
     noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-emoji-blob-bin
-    noto-fonts-extra
+    noto-fonts-extra sweet
     # input-fonts
     # system (don't use fish from nix because of locales)
     man less thefuck glibcLocales tini libqalculate dhcp bandwhich consul
@@ -36,7 +36,7 @@ in {
     # runtimes
     # python3
 
-    emacsGcc # wait for mesa-d3d12
+    emacsPgtkGcc # wait for mesa-d3d12
     mu isync gnupg pinentry emacs-all-the-icons-fonts;
   # dictionary
   inherit (self.aspellDicts) en;

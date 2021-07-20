@@ -9,7 +9,9 @@ name=${EMACS_SERVER_NAME:-server}
 s_tmp=/tmp/emacs$UID/${name}
 s_run=/run/user/$UID/emacs/${name}
 s_wslg=/mnt/wslg/runtime-dir/emacs/${name}
-unset WAYLAND_DISPLAY; export GDK_BACKEND=x11 CLUTTER_BACKEND=x11
+export XDG_DATA_DIRS="$HOME/.nix-profile/share:$HOME/.local/share"
+# unset WAYLAND_DISPLAY; export GDK_BACKEND=x11 CLUTTER_BACKEND=x11
+export GDK_BACKEND=wayland CLUTTER_BACKEND=wayland
 if [ -e $s_run ]; then
     exec $ec -s $s_run -cn $@
 elif [ -e $s_tmp ]; then

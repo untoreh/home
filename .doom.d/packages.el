@@ -91,6 +91,7 @@
       ))
 ;; shell
 (package! fish-mode)
+(package! powershell)
 
 ;; jupyter
 (package! jupyter)
