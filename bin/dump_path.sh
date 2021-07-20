@@ -22,6 +22,6 @@ PYTHONPATH=$(find -L ~/.nix-profile -path "*/python*/site-packages" -type d | tr
 NEW_PYTHONPATH="PYTHONPATH=\"$PYTHONPATH\"; export PYTHONPATH; "
 echo "$NEW_PYTHONPATH" >>$cached_path
 
-LD_LIBRARY_PATH=$(${nixbin}/nix eval --raw nixpkgs.stdenv.cc.cc.lib)/lib:${LD_LIBRARY_PATH:-""}
-NEW_LD_LIBRARY_PATH="LD_LIBRARY_PATH=\"$LD_LIBRARY_PATH\""
-echo "$NEW_LD_LIBRARY_PATH" >$cached_dir/path_std
+# LD_LIBRARY_PATH=$(${nixbin}/nix eval --raw nixpkgs.stdenv.cc.cc.lib)/lib:${LD_LIBRARY_PATH:-""}
+# NEW_LD_LIBRARY_PATH="LD_LIBRARY_PATH=\"$LD_LIBRARY_PATH\""
+# echo "$NEW_LD_LIBRARY_PATH" >$cached_dir/path_std

@@ -1,7 +1,7 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
 SETUVAR CLUTTER_BACKEND:wayland
-SETUVAR EMACS_COMMIT:adda7c0c6947d5746bde2c984d806253e2f8ac00
+SETUVAR EMACS_COMMIT:d86e69bab8ad2db968060c012566a27b1022f6d6
 SETUVAR --export FZF_DEFAULT_OPTS:\x2d\x2dcolor\x3dbw\x20\x2d\x2dheight\x201\x25\x20\x2d\x2dreverse\x20\x2d\x2dtiebreak\x3dbegin\x2clength\x2cindex
 SETUVAR FZF_DISABLE_KEYBINDINGS:0
 SETUVAR FZF_LEGACY_KEYBINDINGS:1

@@ -216,6 +216,7 @@ dl(){
         rmdir "$tmpdir"
     fi
 }
+
 whereip(){
     whois $1 | rg -i "city|state|country|address" | sort -u
 }
@@ -228,6 +229,7 @@ ipv4todec(){
 }
 
 [ -f ~/.config/torrc ] &&  TOR_RC=$(realpath ~/.config/torrc) || TOR_RC=/etc/tor/torrc
+
 ## curl proxy
 alias tor_proxy_var="export socks_proxy=localhost:9050"
 alias tpv="tor_proxy_var"
@@ -245,9 +247,10 @@ torfrom(){
     sudo killall -HUP tor
     torex &!
 }
+
+NODES_LIST_US='us,ca,tt,ni,lc,kn,vc,pa,mx,jm,ht,hn,gt,gd,sv,do,dm,cu,cr,bz,bb,bs,ag'
 torus(){
-    NODES_LIST='us,ca,tt,ni,lc,kn,vc,pa,mx,jm,ht,hn,gt,gd,sv,do,dm,cu,cr,bz,bb,bs,ag'
-    tor_strict_exit $NODES_LIST
+    tor_strict_exit $NODES_LIST_US
     sudo killall -HUP tor
     torex &! 
 }
@@ -269,9 +272,14 @@ tor_strict_exit(){
     IFS=$PREVIFS
 }
 ## switch tor to EU node
+NODES_LIST_EU='fr,de,se,es,fi,no,gr,mt,mc,nl,pl,ro,sm,gb,ch,ad,be,dk,is,ie,lu,pt,it'
 toreu(){
-    local NODES_STRING='fr,de,se,es,fi,no,gr,mt,mc,nl,pl,ro,sm,gb,ch,ad,be,dk,is,ie,lu,pt,it'
-    tor_strict_exit $NODES_STRING
+    tor_strict_exit $NODES_LIST_EU
+}
+
+torrand() {
+    COUNTRY=$(echo $NODES_LIST_EU$NODES_LIST_US | tr ',' '\n'| shuf | head -1)
+    tor_strict_exit $COUNTRY
 }
 
 ## add current ip to excludelist /tmp/.tor_ex
