@@ -1,11 +1,28 @@
 :imap fd <Esc>
 :let mapleader=","
+
 " Integrate with whichkey for spacemacs-style space key
 nnoremap <space> :call VSCodeNotify('whichkey.show')<CR>
 xmap gc  <Plug>VSCodeCommentary
 nmap gc  <Plug>VSCodeCommentary
 omap gc  <Plug>VSCodeCommentary
-nmap gcc <Plug>VSCodeCommentaryLine
+"nmap gcc <Plug>VSCodeCommentaryLine
+
+xmap <M-;>  <Plug>VSCodeCommentary
+nmap <M-;>  <Plug>VSCodeCommentary
+omap <M-;>  <Plug>VSCodeCommentary
+" nmap gcc <Plug>VSCodeCommentaryLine
+
+
+
+map <silent> w <Plug>CamelCaseMotion_w
+map <silent> b <Plug>CamelCaseMotion_b
+map <silent> e <Plug>CamelCaseMotion_e
+map <silent> ge <Plug>CamelCaseMotion_ge
+sunmap w
+sunmap b
+sunmap e
+sunmap ge
  
 call plug#begin('~/.vim/plugged')
 
@@ -18,6 +35,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdcommenter'
 Plug 'easymotion/vim-easymotion'
+Plug 'bkad/CamelCaseMotion'
 
 " ui
 Plug 'rbong/vim-crystalline'
