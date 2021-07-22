@@ -2,7 +2,7 @@
 :let mapleader=","
 
 " Integrate with whichkey for spacemacs-style space key
-nnoremap <space> :call VSCodeNotify('whichkey.show')<CR>
+nnoremap <space> :call VSCodeNotify('vspacecode.space')<CR>
 xmap gc  <Plug>VSCodeCommentary
 nmap gc  <Plug>VSCodeCommentary
 omap gc  <Plug>VSCodeCommentary
