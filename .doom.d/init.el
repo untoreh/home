@@ -17,8 +17,8 @@
 (doom! :input
        ;;
        :completion
-       (company +childframe)           ; the ultimate code completion backend
-       (ivy +fuzzy +prescient +icons)               ; a search engine for love and life
+       (company +tng)           ; the ultimate code completion backend
+       (ivy +fuzzy +prescient +icons +childframe)               ; a search engine for love and life
 
        :ui
        ;;deft              ; notational velocity for Emacs

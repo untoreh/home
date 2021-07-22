@@ -39,6 +39,15 @@
   :after-call Info-mode
   :hook '(Info-selection-hook . info-colors-fontify-node))
 
+;; posframe
+(use-package! which-key-posframe
+    :config
+    (which-key-posframe-mode))
+(use-package! hydra-posframe
+  :config 
+  (hydra-posframe-mode))
+
+;; buffer size in the modeline
 (size-indication-mode t)
 
 ;; https://github.com/hlissner/doom-emacs/issues/2967

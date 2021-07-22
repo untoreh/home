@@ -118,6 +118,10 @@
 (when (package! company)
   (package! company-quickhelp)
   (package! company-quickhelp-terminal))
+;; which-key-posframe is VERY slow
+;; (package! which-key-posframe)
+(package! hydra-posframe :recipe ( :host nil
+                                   :repo "https://github.com/Ladicle/hydra-posframe"))
 ;; chat
 (package! weechat :recipe (:host nil
                            :repo "https://github.com/untoreh/weechat.el"))

@@ -19,7 +19,7 @@
 
 ;; parrot
 (map!
- :mode parrot-mode
+ :after parrot
  :n "[r" #'parrot-rotate-prev-word-at-point
  :n "]r" #'parrot-rotate-next-word-at-point)
 
