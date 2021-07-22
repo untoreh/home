@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 set -euo pipefail
-trap "caffeine.exe -appoff" EXIT SIGKILL SIGTERM
+trap "wex caffeine.exe -appoff" EXIT SIGKILL SIGTERM
 
 # Prevent windows from sleep
-[ -v WSLENV ] && caffeine.exe -appon
+[ -v WSLENV ] && wex caffeine.exe -appon
 
 . ~/.profile
 [ ! -v TARGET ] && {
@@ -68,5 +68,5 @@ borg prune -v --list --keep-daily=7 --keep-weekly=4 $TARGET
 sync
 
 # Allow windows to sleep
-[ -v WSLENV ] && caffeine.exe -appoff
+[ -v WSLENV ] && wex caffeine.exe -appoff
 
