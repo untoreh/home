@@ -24,7 +24,7 @@ in {
     mako wl-clipboard
     # theme
     noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-emoji-blob-bin
-    noto-fonts-extra sweet
+    noto-fonts-extra sweet 
     # input-fonts
     # system (don't use fish from nix because of locales)
     man less thefuck glibcLocales tini libqalculate dhcp bandwhich consul
@@ -38,6 +38,8 @@ in {
 
     emacsPgtkGcc # wait for mesa-d3d12
     mu isync gnupg pinentry emacs-all-the-icons-fonts;
+  # sweet theme dep
+  inherit (gnome3) adwaita-icon-theme;
   # dictionary
   inherit (self.aspellDicts) en;
   # dependencies
