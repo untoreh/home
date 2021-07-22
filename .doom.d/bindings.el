@@ -206,6 +206,41 @@
                  (font-lock-ensure)
                  (font-lock-mode t)))
 
+;; smartparens toggle motion beginning and end of current bracket enclosing;
+;; we don't want to move within quotes so delete them from smartparens pairs
+;; and add them back after motion
+(setq sp-no-motion-list '(wrap insert autoskip navigate escape))
+(defun sp-add-quotes nil
+  (sp-pair "\"" "\"")
+  (sp-pair "\\\"" "\\\"")
+  (sp-pair "'" "'"))
+(defun sp-rem-quotes nil
+  (sp-pair "\"" "\"" :actions sp-no-motion-list)
+  (sp-pair "\\\"" "\\\"" :actions sp-no-motion-list)
+  (sp-pair "'" "'" :actions sp-no-motion-list))
+
+(defvar-local my/back-and-forth-paren-state nil "tracks the toggle state of back and forth paren")
+(defun my/move-to-current-parent-toggle nil
+  (interactive)
+  (unwind-protect
+      (if my/back-and-forth-paren-state
+          (progn
+            (sp-rem-quotes)
+            (sp-beginning-of-sexp)
+            (sp-add-quotes)
+            (setq my/back-and-forth-paren-state nil))
+        (progn
+          (sp-rem-quotes)
+          (sp-end-of-sexp)
+          (evil-backward-char)
+          (sp-add-quotes)
+          (setq my/back-and-forth-paren-state t)))
+    (sp-add-quotes)))
+
+(map! :n "g \\" nil)
+(map! :desc "Back and forth between current paren enclosing"
+      :n "g \\" #'my/move-to-current-parent-toggle)
+
 ;; wechat
 (map! :desc "Start weechat"
       :leader
