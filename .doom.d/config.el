@@ -14,7 +14,11 @@
 
 (let* ((session-name "main")
        (session-file (concat (file-name-as-directory (doom-session-file))
-           session-name)))
+                             session-name)))
   (message "restoring %s session" session-name)
-  (file-readable-p session-file)
-  (doom-load-session session-file))
+  (if (file-readable-p session-file)
+      (doom-load-session session-file))
+  ;; enable saving session
+  (setq doom-main-session-timer
+        (run-at-time (current-time) 300
+                     (lambda () (doom/save-session session-name)))))
