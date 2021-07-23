@@ -40,9 +40,9 @@
   :hook '(Info-selection-hook . info-colors-fontify-node))
 
 ;; posframe
-(use-package! which-key-posframe
-    :config
-    (which-key-posframe-mode))
+;(use-package! which-key-posframe
+    ;:config
+    ;(which-key-posframe-mode))
 (use-package! hydra-posframe
   :config 
   (hydra-posframe-mode))

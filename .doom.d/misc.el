@@ -37,31 +37,32 @@
 ;; this makes sense only if we check on each frame creation
 ;; (if (and (display-graphic-p) (equal (pgtk-backend-display-class) "GdkWaylandDisplay"))
 ;; just check for env vars and run once per server start
-(if (and (getenv "WSLENV") (getenv "WAYLAND_DISPLAY"))
-    (progn
-      (setq wl-copy-process nil)
-      (defun wl-copy (text)
-        (setq wl-copy-process (make-process :name "wl-copy"
-                                            :buffer nil
-                                            ;; :command '("wl-copy" "-f" "-n")
-                                            :command '("wex" "clip.exe")
-                                            :connection-type 'pipe))
-        (process-send-string wl-copy-process text)
-        (process-send-eof wl-copy-process))
-      (defun wl-paste ()
-        (if (and wl-copy-process (process-live-p wl-copy-process))
-            nil ; should return nil if we're the current paste owner
-          ;; (shell-command-to-string "wl-paste -n | tr -d '\r'")
-          (shell-command-to-string "wex pbpaste.exe | tr -d '\r'")
-          ))
-      (native-compile #'wl-copy)
-      (native-compile #'wl-paste)
-      (setq interprogram-cut-function #'wl-copy)
-      (setq interprogram-paste-function #'wl-paste)
+(if (getenv "WSLENV")
+    (if (and t (getenv "WAYLAND_DISPLAY"))
+        (progn
+          (setq wl-copy-process nil)
+          (defun wl-copy (text)
+            (setq wl-copy-process (make-process :name "wl-copy"
+                                                :buffer nil
+                                                :command '("wl-copy" "-f" "-n")
+                                                ;; :command '("wex" "clip.exe")
+                                                :connection-type 'pipe))
+            (process-send-string wl-copy-process text)
+            (process-send-eof wl-copy-process))
+          (defun wl-paste ()
+            (if (and wl-copy-process (process-live-p wl-copy-process))
+                nil ; should return nil if we're the current paste owner
+              (shell-command-to-string "wl-paste -n | tr -d '\r'")
+              ;; (shell-command-to-string "wex pbpaste.exe | tr -d '\r'")
+              ))
+          (native-compile #'wl-copy)
+          (native-compile #'wl-paste)
+          (setq interprogram-cut-function #'wl-copy)
+          (setq interprogram-paste-function #'wl-paste))
       ;; use custom temporary directory with WSL since there are permission problems with /tmp
       ;; NOTE: ensure trailing slash /
-      (setq temporary-file-directory "/run/upper/")
-      ))
+      (setq temporary-file-directory "/run/upper/")))
+
 ;; use wslview as program (TODO: check wslu utils is installed in wsl doom PR)
 (setq browse-url-generic-program (cond ((executable-find "wslview"))
                                        ((executable-find "firefox"))))
