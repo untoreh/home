@@ -39,7 +39,7 @@ in {
     emacsPgtkGcc # wait for mesa-d3d12
     mu isync gnupg pinentry emacs-all-the-icons-fonts;
   # sweet theme dep
-  inherit (gnome3) adwaita-icon-theme;
+  inherit (self.gnome3) adwaita-icon-theme;
   # dictionary
   inherit (self.aspellDicts) en;
   # dependencies
