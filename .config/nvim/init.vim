@@ -13,17 +13,13 @@ nmap <M-;>  <Plug>VSCodeCommentary
 omap <M-;>  <Plug>VSCodeCommentary
 " nmap gcc <Plug>VSCodeCommentaryLine
 
+let g:wordmotion_nomap = 1
+nmap w          <Plug>WordMotion_w
+nmap b          <Plug>WordMotion_b
+nmap gE         <Plug>WordMotion_gE
+omap aW         <Plug>WordMotion_aW
+cmap <C-R><C-W> <Plug>WordMotion_<C-R><C-W>
 
-
-map <silent> w <Plug>CamelCaseMotion_w
-map <silent> b <Plug>CamelCaseMotion_b
-map <silent> e <Plug>CamelCaseMotion_e
-map <silent> ge <Plug>CamelCaseMotion_ge
-sunmap w
-sunmap b
-sunmap e
-sunmap ge
- 
 call plug#begin('~/.vim/plugged')
 
 Plug 'neomake/neomake'
@@ -35,7 +31,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdcommenter'
 Plug 'easymotion/vim-easymotion'
-Plug 'bkad/CamelCaseMotion'
+Plug 'chaoren/vim-wordmotion'
 
 " ui
 Plug 'rbong/vim-crystalline'
