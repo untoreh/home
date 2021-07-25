@@ -1,17 +1,27 @@
 :imap fd <Esc>
 :let mapleader=","
 
+
 " Integrate with whichkey for spacemacs-style space key
 nnoremap <space> :call VSCodeNotify('vspacecode.space')<CR>
 xmap gc  <Plug>VSCodeCommentary
+
 nmap gc  <Plug>VSCodeCommentary
 omap gc  <Plug>VSCodeCommentary
-"nmap gcc <Plug>VSCodeCommentaryLine
+nmap gcc <Plug>VSCodeCommentaryLine
 
-xmap <M-;>  <Plug>VSCodeCommentary
-nmap <M-;>  <Plug>VSCodeCommentary
-omap <M-;>  <Plug>VSCodeCommentary
-" nmap gcc <Plug>VSCodeCommentaryLine
+
+if exists('g:vscode')
+	xmap <M-;>  <Plug>VSCodeCommentary
+	nmap <M-;>  <Plug>VSCodeCommentary
+	omap <M-;>  <Plug>VSCodeCommentary
+	" wait for vscode-neovim extension v > 0.0.82
+ 	autocmd CursorMoved * :call VSCodeNotifyVisual('editor.action.selectFromAnchorToCursor', 1)
+else
+	xmap <M-;>  <Plug>NERDCommenterToggle
+	nmap <M-;>  <Plug>NERDCommenterToggle
+	omap <M-;>  <Plug>NERDCommenterToggle
+endif
 
 let g:wordmotion_nomap = 1
 nmap w          <Plug>WordMotion_w
@@ -23,7 +33,6 @@ cmap <C-R><C-W> <Plug>WordMotion_<C-R><C-W>
 call plug#begin('~/.vim/plugged')
 
 Plug 'neomake/neomake'
-
 
 " editing
 Plug 'scrooloose/nerdtree'
