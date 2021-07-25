@@ -44,17 +44,20 @@
           (defun wl-copy (text)
             (setq wl-copy-process (make-process :name "wl-copy"
                                                 :buffer nil
-                                                :command '("wl-copy" "-f" "-n")
-                                                ;; :command '("wex" "clip.exe")
+                                                ;; :command '("wl-copy" "-f" "-n")
+                                                :command '("wex" "clip.exe")
                                                 :connection-type 'pipe))
             (process-send-string wl-copy-process text)
             (process-send-eof wl-copy-process))
           (defun wl-paste ()
-            (if (and wl-copy-process (process-live-p wl-copy-process))
-                nil ; should return nil if we're the current paste owner
-              (shell-command-to-string "wl-paste -n | tr -d '\r'")
-              ;; (shell-command-to-string "wex pbpaste.exe | tr -d '\r'")
-              ))
+            ;; (if (and wl-copy-process (process-live-p wl-copy-process))
+                ; should return nil if we're the current paste owner
+              (with-temp-buffer
+                (call-process "~/bin/wex" nil t nil "pbpaste.exe")
+                (replace-regexp-in-string "\r$" ""
+                  (buffer-substring-no-properties (point-min) (point-max))))
+              ;; )
+          )
           (native-compile #'wl-copy)
           (native-compile #'wl-paste)
           (setq interprogram-cut-function #'wl-copy)
@@ -76,3 +79,11 @@
 
 ;; not prompt for vterm compilation
 (setq vterm-always-compile-module t)
+
+;; save magit buffers
+(after! persp-mode
+  (persp-def-buffer-save/load
+   :mode 'magit-status-mode :tag-symbol 'def-magit-status-buffer
+   :save-vars '(major-mode default-directory)
+   :after-load-function (lambda (b &rest _)
+                          (with-current-buffer b (magit-refresh)))))
