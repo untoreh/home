@@ -129,6 +129,7 @@
 ;; (package! ahk-mode :recipe (:host nil
 ;;                             :repo "https://github.com/untoreh/ahk-mode"))
 (package! ahk-mode)
+(package! vimrc-mode)
 
 ;; (package! matrix-client
 ;;   :recipe (:host nil
