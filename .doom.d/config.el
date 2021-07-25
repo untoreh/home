@@ -12,13 +12,15 @@
 
 (message "Configuration Loaded Succesfully!")
 
-(let* ((session-name "main")
-       (session-file (concat (file-name-as-directory (doom-session-file))
-                             session-name)))
-  (message "restoring %s session" session-name)
-  (if (file-readable-p session-file)
-      (doom-load-session session-file))
-  ;; enable saving session
-  (setq doom-main-session-timer
-        (run-at-time (current-time) 300
-                     (lambda () (doom/save-session session-name)))))
+(defun my/restore-main-session nil
+  (let* ((session-name "main")
+         (session-file (concat (f-dirname (doom-session-file))
+			       "/" session-name)))
+    (message "restoring %s session" session-name)
+    (if (file-readable-p session-file)
+        (doom-load-session session-file))
+    enable saving session
+    (setq doom-main-session-timer
+	  (run-at-time (current-time) 300
+		       (lambda () (doom/save-session session-file))))))
+(add-hook 'emacs-startup-hook #'my/restore-main-session)
