@@ -5,15 +5,15 @@
 
 (use-package! lsp-julia
   :if (and (featurep! :lang julia +lsp)
-           (not (featurep! :tools lsp +eglot)))
+	   (not (featurep! :tools lsp +eglot)))
   ;; must be set before lsp-mode is loaded
   :init
   (setq lsp-julia-response 360
-        lsp-julia-timeout 360
-        lsp-response-timeout 360
-        lsp-enable-folding t
-        lsp-folding-range-limit 100
-        lsp-julia-package-dir nil)
+	lsp-julia-timeout 360
+	lsp-response-timeout 360
+	lsp-enable-folding t
+	lsp-folding-range-limit 100
+	lsp-julia-package-dir nil)
   :config
   ;; override doom module preset
   (setq lsp-julia-default-environment "~/.julia/environments/v1.6"))
@@ -169,7 +169,7 @@
 	  (with-current-buffer (julia-repl-inferior-buffer) (cd directory)))
       (warn "buffer not associated with a file"))))
 
-(after! julia-mode
+(after! (julia-mode a)
 
   (setq-default julia-repl--session-hist (a-list))
   (define-minor-mode julia-repl-vterm-mode
