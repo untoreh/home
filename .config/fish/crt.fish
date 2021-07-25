@@ -76,6 +76,7 @@ function src_repo_usr
     set REPO_USER (git config user.name)
     set REPO_EP (git config remote.origin.url | sed -r 's~.*://.*:.*@([^/]*)/.*~\1~')
     set REPO_TOKEN (git config remote.origin.url | sed -r 's~.*://.*:(.*)@.*~\1~')
+    set REPO_EMAIL (cat ~/.gitconfig | grep "$REPO_USER.*$REPO_EP" | sed -r 's/.*REPO_EMAIL=([^ ]*) +.*/\1/')
 end
 
 function sync_pl
