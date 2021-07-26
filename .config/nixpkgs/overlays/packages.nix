@@ -51,7 +51,7 @@ in {
   # inherit (unstable) mpv youtube-dl;
   inherit (unstable) youtube-dl nushell starship;
   # python
-  inherit (super.python38Packages) supervisor grip ansible pip black ;
+  inherit (super.python38Packages) supervisor grip ansible pip black flake8;
   # pandas isort setuptools timeago cython
   # deps for thefuck
   # colorama decorator psutil pyte;

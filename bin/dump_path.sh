@@ -16,11 +16,14 @@ nixbin=~/.nix-profile/bin
 NEWPATH="PATH=\"$HOME/bin:$HOME/.local/bin:$nixbin:$julia_bin:$ruby_bin:$go_bin:$HOME/dev/go/bin:$HOME/.cargo/bin:$ccache:$defs:$windows\""
 
 echo "$NEWPATH" >$cached_path
+eval "$NEWPATH"
 
 # echo -e "PATH set to: \n $NEWPATH"
-PYTHONPATH=$(find -L ~/.nix-profile -path "*/python*/site-packages" -type d | tr '\n' ':')${PYTHONPATH:-""}
-NEW_PYTHONPATH="PYTHONPATH=\"$PYTHONPATH\"; export PYTHONPATH; "
-echo "$NEW_PYTHONPATH" >>$cached_path
+PYTHON_V=$(python -c 'import sys; print(str(sys.version_info[0])+"."+str(sys.version_info[1]))')
+#PYTHONPATH=$(find -L ~/.local/lib -path "*/python*/site-packages" -type d | tr '\n' ':')$(find -L ~/.nix-profile -path "*/python*/site-packages" -type d | tr '\n' ':')${PYTHONPATH:-""}
+PYTHONPATH="$HOME/.local/lib/python${PYTHON_V}/site-packages:$HOME/.nix-profile/lib/python${PYTHON_V}/site-packages:"${PYTHONPATH:-""}
+NEW_PYTHONPATH="PYTHONPATH=\"$PYTHONPATH\" \n PYTHON_V=\"$PYTHON_V\" \n"
+echo -e "$NEW_PYTHONPATH" >>$cached_path
 
 # LD_LIBRARY_PATH=$(${nixbin}/nix eval --raw nixpkgs.stdenv.cc.cc.lib)/lib:${LD_LIBRARY_PATH:-""}
 # NEW_LD_LIBRARY_PATH="LD_LIBRARY_PATH=\"$LD_LIBRARY_PATH\""
