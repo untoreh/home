@@ -14,13 +14,14 @@
   :after company)
 
 (after! company
-  (if (featurep! :editor snippets)
-      (setq-hook! company-mode-hook
-        company-backends
-        `(,(first company-backends)
-          :with
-          company-yasnippet
-          company-files))))
+  ;; (if (featurep! :editor snippets)
+  ;;     (setq-hook! company-mode-hook
+  ;;       company-backends
+  ;;       `(,(first company-backends)
+  ;;         :with
+  ;;         company-yasnippet
+  ;;         company-files)))
+  )
 (map! "M-/" #'hippie-expand)
 
 ;; NOTE: tabnine uses north of 500M for its server

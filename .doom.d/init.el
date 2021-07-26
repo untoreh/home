@@ -17,7 +17,9 @@
 (doom! :input
        ;;
        :completion
-       (company +tng)           ; the ultimate code completion backend
+       ;; don't use tng since we prefer TAB+SPC and ENTER for inserting completions
+       ;; and don't use childframes because are slow
+       company           ; the ultimate code completion backend
        (ivy +fuzzy +prescient +icons +childframe)               ; a search engine for love and life
 
        :ui
@@ -35,12 +37,12 @@
        modeline          ; snazzy, Atom-inspired modeline, plus API
        nav-flash         ; blink cursor line after big motions
        ophints           ; highlight the region an operation acts on
-       (popup +defaults)   ; tame sudden yet inevitable temporary windows
-       treemacs          ; a project drawer, like neotree but cooler
+       (popup +all)   ; tame sudden yet inevitable temporary windows
+       (treemacs +lsp)          ; a project drawer, like neotree but cooler
        unicode           ; extended unicode support for various languages
        vc-gutter         ; vcs diff in the fringe
        vi-tilde-fringe   ; fringe tildes to mark beyond EOB
-       (window-select +switch-window)     ; visually switch windows
+       (window-select +switch-window +numbers)     ; visually switch windows
        workspaces        ; tab emulation, persistence & separate workspaces
        zen               ; distraction-free coding or writing
 
@@ -56,7 +58,7 @@
        ;;objed             ; text object editing for the innocent
        ;;parinfer          ; turn lisp into python, sort of
        snippets          ; my elves. They type so I don't have to
-       (word-wrap)         ; soft wrapping with language-aware indent
+       word-wrap         ; soft wrapping with language-aware indent
 
        :emacs
        (dired +ranger +icons)             ; making dired pretty [functional]
