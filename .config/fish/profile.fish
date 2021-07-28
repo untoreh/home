@@ -104,7 +104,7 @@ set PERL_MB_OPT "--install_base \"$HOME/perl5\""
 set PERL_MM_OPT "INSTALL_BASE=$HOME/perl5$PERL_MB_OPT"
 
 ## python
-set -x PYTHONPATH PYTHON_V
+export PYTHONPATH PYTHON_V
 
 ## stardict
 set STARDICT_DATA_DIR "$HOME/.local/stardict"
