@@ -11,7 +11,7 @@
   (dap-debug-last))
 
 (after! lsp-mode
-  (setq-default
+  (setq
    lsp-auto-configure t
    lsp-auto-guess-root t
    ;; doc frames with mouse hover
@@ -37,4 +37,5 @@
    lsp-completion-show-kind t
    ;; lsp-diagnostics-provider
    ;; lsp-completion-provider
-   ))
+   )
+  (lsp-treemacs-sync-mode 1))

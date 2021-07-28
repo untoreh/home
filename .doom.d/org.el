@@ -19,6 +19,9 @@
   :init
   ;; we DONT want poly-markdown on every org buffer
   (setq auto-mode-alist (delete '("\\.md\\'" . poly-markdown-mode) auto-mode-alist))
+  :config
+  ;; we DONT want poly-markdown on every org buffer
+  (setq auto-mode-alist (delete '("\\.md\\'" . poly-markdown-mode) auto-mode-alist))
   :after-call poly-markdown-mode)
 (use-package! poly-org
   :init
@@ -26,6 +29,8 @@
   (setq auto-mode-alist (delete '("\\.org\\'" . poly-org-mode) auto-mode-alist))
   :after-call poly-org-mode
   :config
+  ;; we DONT want poly-org on every org buffer
+  (setq auto-mode-alist (delete '("\\.org\\'" . poly-org-mode) auto-mode-alist))
   ;; FIXME: force font-lock when inside a src block with poly mode
   (add-hook 'polymode-after-switch-buffer-hook
             (lambda (&rest _)

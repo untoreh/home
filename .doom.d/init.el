@@ -20,7 +20,7 @@
        ;; don't use tng since we prefer TAB+SPC and ENTER for inserting completions
        ;; and don't use childframes because are slow
        company           ; the ultimate code completion backend
-       (ivy +fuzzy +prescient +icons +childframe)               ; a search engine for love and life
+       (ivy +prescient +icons +childframe)               ; a search engine for love and life
 
        :ui
        ;;deft              ; notational velocity for Emacs
@@ -37,7 +37,7 @@
        modeline          ; snazzy, Atom-inspired modeline, plus API
        nav-flash         ; blink cursor line after big motions
        ophints           ; highlight the region an operation acts on
-       (popup +all)   ; tame sudden yet inevitable temporary windows
+       (popup +defaults +all)   ; tame sudden yet inevitable temporary windows
        (treemacs +lsp)          ; a project drawer, like neotree but cooler
        unicode           ; extended unicode support for various languages
        vc-gutter         ; vcs diff in the fringe

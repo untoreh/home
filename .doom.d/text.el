@@ -1,17 +1,15 @@
 ;;; ../../../var/home/fra/.doom.d/text.el -*- lexical-binding: t; -*-
 ;; TODO: consider emacs-anywhere
-;; use gfm-mode for markdown by default
-;; (after! markdown-mode
-;;   (setcdr
-;;    (assoc
-;;     "\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'"
-;;     auto-mode-alist)
-;;    'gfm-mode))
-;; (setq auto-mode-alist
-;;       (delete '("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'" . markdown-mode)
-;;               auto-mode-alist))
-
+;;
 ;; enable vimish-fold for persistent folds
 (when (featurep! :editor fold)
-  (after! vimish-fold
+  (use-package! vimish-fold
+    :config
     (vimish-fold-global-mode 1)))
+
+;; maybe only use indent guides for prog-mode?
+;; never enable indent guides by default
+;; (remove-hook! (prog-mode text-mode conf-mode) highlight-indent-guides-mode)
+;; (when (featurep! :ui indent-guides)
+;;   (add-hook 'prog-mode-hook
+;;             (lambda () (highlight-indent-guides-mode 1))))

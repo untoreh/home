@@ -117,7 +117,8 @@
 ;; ;; completion
 (when (package! company)
   (package! company-quickhelp)
-  (package! company-quickhelp-terminal))
+  (package! company-quickhelp-terminal)
+  (package! company-fuzzy))
 ;; which-key-posframe is VERY slow
 ;; (package! which-key-posframe)
 (package! hydra-posframe :recipe ( :host nil

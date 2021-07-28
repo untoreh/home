@@ -20,6 +20,7 @@
                             (error-message-string e))
             (signal (car e) (cadr e)))))))
 
+(load! "lisp")
 (if (featurep! :lang shell)
     (load! "shell"))
 (if (featurep! :lang python)

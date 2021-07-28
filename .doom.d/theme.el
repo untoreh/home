@@ -50,6 +50,14 @@
 ;; buffer size in the modeline
 (size-indication-mode t)
 
+(use-package! valign
+  :init
+  (if (boundp #'valign-remove-advice)
+      (valign-remove-advice))
+  :hook ((org-mode-hook markdown-mode-hook) . valign-mode))
+(use-package! company-fuzzy
+  :config
+  (global-company-fuzzy-mode 1))
 ;; https://github.com/hlissner/doom-emacs/issues/2967
 (after! doom-modeline
   (custom-set-faces!

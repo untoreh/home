@@ -304,24 +304,35 @@
          (live-buffer (julia-repl--locate-live-buffer terminal-backend name)))
     live-buffer))
 
+(defun julia-repl-switch (&optional skip)
+  " Enables julia repl, and activates the current project "
+    (if (not (fboundp #'julia-repl-inferior-buffer))
+        (julia-repl))
+    ;; we query for the buffer before skip because we
+    ;; want to switch buffer anyway
+    (if (and (julia-repl-inferior-buffer) (not skip))
+        (progn
+          (julia-repl-cd (projectile-project-root))
+          (julia-repl-activate-parent nil)
+          t)
+      nil))
+
 ;; franklin
 (defun julia-franklin ()
   (interactive)
   "Start the franklin live server in the current default-dir"
-  (let ((local-dir (if load-file-name
-                       (file-name-directory load-file-name)
-                     (f-dirname (cdr (find-function-library #'julia-franklin))))))
-    (if (not (fboundp #'julia-repl-inferior-buffer))
-        (julia-repl))
-    (if (julia-repl-inferior-buffer)
-        (progn
-          (julia-repl-cd (projectile-project-root))
-          (julia-repl-activate-parent nil)
-          (julia-repl--send-string
-           (f-read-text
-            (concat (file-name-as-directory local-dir) "franklin.jl")))
-          ))
-    ))
+  (if (julia-repl-switch)
+      (julia-repl--send-string
+       (f-read-text
+        (concat
+         (file-name-as-directory
+          (my/script-dir #'julia-franklin)) "franklin.jl")))))
+
+(defun julia-franklin-stop ()
+  (interactive)
+  (if (julia-repl-switch)
+      (julia-repl--send-string
+       "Base.throwto(frank_task, InterruptException)")))
 
 ;; julia projects file
 (after! projectile

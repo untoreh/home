@@ -17,6 +17,13 @@
       :n "."
       #'find-file-at-point)
 
+;; inserting inside a vterm should reset cursor position
+(map! :mode vterm-mode
+      :n "i" (lambda ()
+               (interactive)
+               (vterm-reset-cursor-point)
+               (evil-collection-vterm-insert)))
+
 ;; parrot
 (map!
  :after parrot
@@ -161,6 +168,7 @@
            :desc "start julia repl"
            :nv "r" #'julia-repl
            :nv "f" #'julia-franklin
+           :nv "k" #'julia-franklin-stop
            :nv "." #'julia-repl-cd
            )))
 
