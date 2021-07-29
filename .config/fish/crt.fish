@@ -16,6 +16,7 @@ alias ghdel "zshlic ghdel"
 alias repodir "zshlic repodir"
 alias repobs "zshlic repobs"
 alias repodist "zshlic repodist"
+alias repourl "zshlic bareurl"
 alias cpmtx "zshlic cpmtx"
 alias gcreds "zshlic gcreds"
 alias gcap "zshlic gcap"
@@ -74,8 +75,14 @@ end
 function src_repo_usr
     set REPO_NAME (basename (realpath "$PWD"))
     set REPO_USER (git config user.name)
-    set REPO_EP (git config remote.origin.url | sed -r 's~.*://.*:.*@([^/]*)/.*~\1~')
+    set REPO_EP (git config remote.origin.url | sed -r 's~((https?)|git)((://)|\@)?(.*?:.*?@)?([^/:]*).*/.*~\6~')
     set REPO_TOKEN (git config remote.origin.url | sed -r 's~.*://.*:(.*)@.*~\1~')
+    # remote url has no token, fetch from config
+    if echo $REPO_TOKEN | grep git -q
+        set -l vars (cat ~/.gitconfig | grep ".*$REPO_USER.*$REPO_EP.*" | sed 's/^#\s*//')
+        set -l suf '([^ ]+) ?.*/\1/'
+        set REPO_TOKEN (echo $vars | sed -r "s/.*REPO_TOKEN=$suf")
+    end
     set REPO_EMAIL (cat ~/.gitconfig | grep "$REPO_USER.*$REPO_EP" | sed -r 's/.*REPO_EMAIL=([^ ]*) +.*/\1/')
 end
 
