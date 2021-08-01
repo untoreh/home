@@ -10,7 +10,9 @@
   (kill-matching-buffers "Launch Debug" nil t)
   (dap-debug-last))
 
-(after! lsp-mode
+(use-package! lsp-mode
+  :if (featurep! :tools lsp)
+  :init
   (setq
    lsp-auto-configure t
    lsp-auto-guess-root t
@@ -38,4 +40,6 @@
    ;; lsp-diagnostics-provider
    ;; lsp-completion-provider
    )
-  (lsp-treemacs-sync-mode 1))
+  :config
+  (lsp-treemacs-sync-mode 1)
+  )

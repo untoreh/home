@@ -21,14 +21,16 @@ in {
     # files and backups
     duplicacy borgbackup rclone syncthing
     # desktop
-    mako wl-clipboard
+    mako
+    # reduntant
+    # xclip wl-clipboard
     # theme
     noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-emoji-blob-bin
     noto-fonts-extra sweet 
     # input-fonts
     # system (don't use fish from nix because of locales)
     man less thefuck glibcLocales tini libqalculate dhcp bandwhich consul
-    haproxy rsync sshpass pandoc zip docker xclip cachix
+    haproxy rsync sshpass pandoc zip docker cachix
 
     # langs
     go-pup nixfmt golangci-lint shfmt libtidy nodejs shellcheck jq enchant2 ispell languagetool

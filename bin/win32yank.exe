@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# for neovim clipboard detection
+wex win32yank.exe $@
