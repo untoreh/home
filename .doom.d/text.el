@@ -13,3 +13,6 @@
 ;; (when (featurep! :ui indent-guides)
 ;;   (add-hook 'prog-mode-hook
 ;;             (lambda () (highlight-indent-guides-mode 1))))
+
+(when (featurep! :editor word-wrap)
+  (+global-word-wrap-mode 1))

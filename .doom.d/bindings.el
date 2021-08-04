@@ -8,7 +8,16 @@
 ;; ( "mdp" #'dap-ui-inspect-thing-at-point)
 
 ;; ivy
-(setq-default ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
+;; (setq-default ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
+
+;; magit
+(if (featurep! :tools magit)
+    (map! :desc "amend commit"
+          :after (:tools magit)
+          :leader
+          :prefix "g"
+          :n "a"
+          (cmd! (magit-commit-amend))))
 
 ;; common
 (map! :leader
@@ -19,10 +28,9 @@
 
 ;; inserting inside a vterm should reset cursor position
 (map! :mode vterm-mode
-      :n "i" (lambda ()
-               (interactive)
-               (vterm-reset-cursor-point)
-               (evil-collection-vterm-insert)))
+      :n "i" (cmd!
+              (vterm-reset-cursor-point)
+              (evil-collection-vterm-insert)))
 
 ;; parrot
 (map!
@@ -125,14 +133,14 @@
        :prefix ("io" . "org")
        :mode org-mode
        :desc "src block name"
-       :n "n" #'(lambda (&rest args) (interactive)
-                  (if (org-in-src-block-p)
-                      (progn
-                        (org-babel-goto-src-block-head)
-                        (previous-line)
-                        (newline)))
-                  (insert "#+NAME: ")
-                  (evil-insert nil))
+       :n "n" (cmd!
+               (if (org-in-src-block-p)
+                   (progn
+                     (org-babel-goto-src-block-head)
+                     (previous-line)
+                     (newline)))
+               (insert "#+NAME: ")
+               (evil-insert nil))
        :desc "src block header arg"
        :n "i" #'org-babel-insert-header-arg))
 
@@ -166,7 +174,7 @@
 (if (featurep! :lang julia)
     (map! (:prefix ("SPC l j" . "julia")
            :desc "start julia repl"
-           :nv "r" #'julia-repl
+           :nv "r" (cmd! (julia-repl-switch))
            :nv "f" #'julia-franklin
            :nv "k" #'julia-franklin-stop
            :nv "." #'julia-repl-cd
@@ -181,14 +189,6 @@
             (:map 'evil-motion-state-map
              "C-w" nil
              "C-h" nil))))
-
-;; misc
-;; insert triple quotes
-;; (map!
-;;  :when (featurep! :editor evil)
-;;  :leader
-;;  :desc "triple quotes"
-;;  "q" (lambda () (evil-insert "\"\"\"\"\"\"")))
 
 ;; still want to escape from terminals
 (after! evil-escape
@@ -209,10 +209,10 @@
 (map! :mode org-mode
       :leader
       :desc "font lock ensure on"
-      :n "t t" (lambda () (interactive)
-                 (font-lock-mode t)
-                 (font-lock-ensure)
-                 (font-lock-mode t)))
+      :n "t t" (cmd!
+                (font-lock-mode t)
+                (font-lock-ensure)
+                (font-lock-mode t)))
 
 ;; smartparens toggle motion beginning and end of current bracket enclosing;
 ;; we don't want to move within quotes so delete them from smartparens pairs
@@ -227,23 +227,18 @@
   (sp-pair "\\\"" "\\\"" :actions sp-no-motion-list)
   (sp-pair "'" "'" :actions sp-no-motion-list))
 
-(defvar-local my/back-and-forth-paren-state nil "tracks the toggle state of back and forth paren")
 (defun my/move-to-current-parent-toggle nil
   (interactive)
-  (unwind-protect
-      (if my/back-and-forth-paren-state
-          (progn
-            (sp-rem-quotes)
-            (sp-beginning-of-sexp)
-            (sp-add-quotes)
-            (setq my/back-and-forth-paren-state nil))
-        (progn
-          (sp-rem-quotes)
-          (sp-end-of-sexp)
-          (evil-backward-char)
-          (sp-add-quotes)
-          (setq my/back-and-forth-paren-state t)))
-    (sp-add-quotes)))
+  (sp-rem-quotes)
+  (let* ((inhibit-redisplay t)
+         (p (point))
+         (bgn (save-excursion
+                (sp-beginning-of-sexp)
+                (equal p (point)))))
+    (if bgn
+        (sp-end-of-sexp)
+      (sp-beginning-of-sexp)))
+  (sp-add-quotes))
 
 (map! :n "g \\" nil)
 (map! :desc "Back and forth between current paren enclosing"
@@ -253,12 +248,11 @@
 (map! :desc "Start weechat"
       :leader
       :n "o c"
-      (lambda ()
-        (interactive )
-        (when (not (weechat-connected-p))
-          (weechat-connect "localhost" 9000 nil 'plain t))
-        (weechat-switch-buffer
-         (first (list (weechat--read-channel-name (not current-prefix-arg)))))))
+      (cmd!
+       (when (not (weechat-connected-p))
+         (weechat-connect "localhost" 9000 nil 'plain t))
+       (weechat-switch-buffer
+        (first (list (weechat--read-channel-name (not current-prefix-arg)))))))
 
 ;; magit doesn't ship this option
 (after! magit
