@@ -4,20 +4,13 @@ let
   # nixl package
   nixgl = import (builtins.fetchTarball
     "https://github.com/guibou/nixGL/archive/master.tar.gz") { };
-  nixexprs = builtins.fetchTarball {
-    url = "https://nixos.org/channels/nixpkgs-unstable/nixexprs.tar.xz";
-  };
-  unstable = import nixexprs {
-    inherit (self) config;
-    overlays = [ ]; # no overlays inside overlay (infinite recursion)
-  };
 in {
   inherit (super)
   # shell
     eternal-terminal browsh zsh git-hub git-lfs pet tmux fzf fd bat
-    ripgrep zoxide exa
+    ripgrep zoxide exa nushell starship direnv
     # utils
-    wego translate-shell weechat krita calibre koreader
+    wego translate-shell weechat krita calibre koreader youtube-dl
     # files and backups
     duplicacy borgbackup rclone syncthing
     # desktop
@@ -25,8 +18,9 @@ in {
     # reduntant
     # xclip wl-clipboard
     # theme
-    noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-emoji-blob-bin
-    noto-fonts-extra sweet 
+    noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-emoji-blob-bin font-awesome
+    noto-fonts-extra sweet emojione fantasque-sans-mono julia-mono fira fira-code fira-code-symbols hack-font ia-writer-duospace
+    powerline-fonts material-design-icons barlow
     # input-fonts
     # system (don't use fish from nix because of locales)
     man less thefuck glibcLocales tini libqalculate dhcp bandwhich consul
@@ -40,18 +34,19 @@ in {
 
     emacsPgtkGcc # wait for mesa-d3d12
     mu isync gnupg pinentry emacs-all-the-icons-fonts;
+  # more fonts
+  inherit (self.vimPlugins) vim-devicons;
+  # emacs with cachix support
   # sweet theme dep
   inherit (self.gnome3) adwaita-icon-theme;
   # dictionary
-  inherit (self.aspellDicts) en;
+  inherit (self.aspellDicts) en it;
   # dependencies
   inherit (self.weechatScripts) weechat-matrix;
   # gpu, waiting for nixpkgs integration
   # nixGLDefault
   inherit (nixgl) nixGLDefault;
   # wait for mesa-d3d12
-  # inherit (unstable) mpv youtube-dl;
-  inherit (unstable) youtube-dl nushell starship;
   # python
   inherit (super.python38Packages) supervisor grip ansible pip black flake8;
   # pandas isort setuptools timeago cython

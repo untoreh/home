@@ -2,7 +2,8 @@
 if [ -v GUIX_PROFILE -a -e ~/.guix-profile/bin/emacsclient ]; then
 	ec=~/.guix-profile/bin/emacsclient
 else
-	ec=~/.nix-profile/bin/emacsclient
+	ec="nixGL $HOME/.nix-profile/bin/emacsclient"
+	#ec="/usr/bin/emacsclient"
 fi
 [ -z "$UID" ] && UID=$(id -u)
 name=${EMACS_SERVER_NAME:-server}

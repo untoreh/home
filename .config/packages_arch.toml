@@ -4,6 +4,7 @@ base-devel
 nc
 ccache
 lm_sensors
+android-tools
 vulkan-icd-loader
 aura-bin
 emacs-gcc-wayland-devel-bin
@@ -27,4 +28,14 @@ python
 mako PyYAML
 
 
-
+# theme
+# sddm-theme-sweet
+# color-scheme-sweet
+# sweet-wallpapers
+# plasma-theme-sweet
+kvantum-theme-sweet-git
+candy-icons-git
+xcursor-sweet
+sweet-folders-icons-git
+sweet-theme-git
+sweet-kde-git

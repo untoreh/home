@@ -39,6 +39,7 @@ fi
 
 # Log Borg version
 borg --version
+borg break-lock $TARGET
 
 echo "Starting backup for $DATE"
 # stateful paths are relative to $HOME
