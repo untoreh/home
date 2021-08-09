@@ -29,3 +29,6 @@
 ;; (use-package! company-fuzzy
 ;;   :config
 ;;   (global-company-fuzzy-mode 1))
+
+(setq-default history-length 1000)
+(setq-default prescient-history-length 1000)

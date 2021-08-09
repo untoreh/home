@@ -1,6 +1,17 @@
 ;;; ../../../var/home/fra/.doom.d/bindings.el -*- lexical-binding: t; -*-
 ;;;
 (setq-default evil-escape-key-sequence "fd")
+
+
+;; which key configs
+(setq which-key-allow-multiple-replacements t)
+(after! which-key
+  (pushnew!
+   which-key-replacement-alist
+   '(("" . "\\`+?evil[-:]?\\(?:a-\\)?\\(.*\\)") . (nil . "◂\\1"))
+   '(("\\`g s" . "\\`evilem--?motion-\\(.*\\)") . (nil . "◃\\1"))
+   ))
+
 ;; dap
 ;; ( "jm" #'dumb-jump-go-prompt)
 ;; ( "mdi" #'dap-step-in)

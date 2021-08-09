@@ -10,6 +10,7 @@
 (load! "mail")
 (load! "completion")
 (load! "langs/langs")
+(load! "projects")
 
 (message "Configuration Loaded Succesfully!")
 
