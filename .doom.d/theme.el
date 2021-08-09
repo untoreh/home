@@ -4,12 +4,11 @@
 ;; (setq doom-font (font-spec :family "Input Mono Compressed" :size 15 :weight 'normal)
 ;; 	doom-variable-pitch-font (font-spec :family "Input Sans Condensed" :size 12))
 (setq
-  doom-font (font-spec :family "Hack" :size 14 :weight 'normal)
-      doom-big-font (font-spec :family "Hack" :size 24 :weight 'bold)
-     ;doom-variable-pitch-font (font-spec :family "Barlow Semi Condensed" :size 12)
-      ;doom-serif-font (font-spec :family "Fantasque Sans Mono" :size 16)
-      doom-unicode-font (font-spec :family "JuliaMono")
-      )
+ doom-font (font-spec :family "Hack" :size 14 :weight 'normal)
+ doom-big-font (font-spec :family "iA Writer Duospace" :size 24 :weight 'bold)
+ doom-variable-pitch-font (font-spec :family "Barlow Semi Condensed" :size 16 :weight 'normal)
+ doom-serif-font (font-spec :family "Fantasque Sans Mono" :size 16)
+ doom-unicode-font (font-spec :family "JuliaMono"))
 
 (setq-default line-spacing 1)
 
