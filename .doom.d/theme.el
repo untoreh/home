@@ -6,7 +6,7 @@
 (setq
  doom-font (font-spec :family "Hack" :size 14 :weight 'normal)
  doom-big-font (font-spec :family "iA Writer Duospace" :size 24 :weight 'bold)
- doom-variable-pitch-font (font-spec :family "Barlow Semi Condensed" :size 16 :weight 'normal)
+ doom-variable-pitch-font (font-spec :family "Barlow" :size 16)
  doom-serif-font (font-spec :family "Fantasque Sans Mono" :size 16)
  doom-unicode-font (font-spec :family "JuliaMono"))
 
