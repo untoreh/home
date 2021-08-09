@@ -15,4 +15,5 @@
 ;;             (lambda () (highlight-indent-guides-mode 1))))
 
 (when (featurep! :editor word-wrap)
-  (+global-word-wrap-mode 1))
+  (add-transient-hook! 'text-mode-hook
+    (lambda () (+global-word-wrap-mode 1))))

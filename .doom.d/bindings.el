@@ -72,6 +72,9 @@
  :n "g l" nil
  :n "g L" nil)
 
+;; evil bindings in the minibuffer
+;; (setq evil-collection-setup-minibuffer t)
+
 ;; org
 (after! evil-org
   (defun org-babel-exec-next-block ()
@@ -94,7 +97,7 @@
             (org-babel-execute-src-block))))
       (goto-char p)
       (set-marker p nil)))
-  (require 'ivy-hydra)
+  (when (featurep! :completion ivy) (require 'ivy-hydra))
   (defhydra hydra/org-babel (:hint nil :color amaranth)
     "
 [_<return>_]: exec block
@@ -178,6 +181,7 @@
            :nv "f" #'julia-franklin
            :nv "k" #'julia-franklin-stop
            :nv "." #'julia-repl-cd
+           :nv "d" #'julia-repl-toggle-debug
            )))
 
 ;; unbind redundant bindings

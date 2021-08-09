@@ -20,24 +20,25 @@
        ;; don't use tng since we prefer TAB+SPC and ENTER for inserting completions
        ;; and don't use childframes because are slow
        company           ; the ultimate code completion backend
-       (ivy +prescient +icons +childframe)               ; a search engine for love and life
+       vertico
+       ;; (ivy +prescient +icons +childframe)               ; a search engine for love and life
 
        :ui
        ;;deft              ; notational velocity for Emacs
        doom              ; what makes DOOM look the way it does
        doom-dashboard    ; a nifty splash screen for Emacs
        doom-quit         ; DOOM quit-message prompts when you quit Emacs
-       ;;fill-column       ; a `fill-column' indicator
+       (emoji +unicode +github)  ; 🙂
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        hydra
-
        indent-guides     ; highlighted indent columns
-       ;; (ligatures +extra)         ; ligatures and symbols to make your code pretty again
-
-       modeline          ; snazzy, Atom-inspired modeline, plus API
+       (ligatures +extra +fira)         ; ligatures and symbols to make your code pretty again
+       ;; minimap
+       (modeline +light)          ; snazzy, Atom-inspired modeline, plus API
        nav-flash         ; blink cursor line after big motions
        ophints           ; highlight the region an operation acts on
        (popup +defaults +all)   ; tame sudden yet inevitable temporary windows
+       ;; tabs
        (treemacs +lsp)          ; a project drawer, like neotree but cooler
        unicode           ; extended unicode support for various languages
        vc-gutter         ; vcs diff in the fringe
@@ -50,10 +51,10 @@
        (evil +everywhere); come to the dark side, we have cookies
        file-templates    ; auto-snippets for empty files
        fold              ; (nigh) universal code folding
-       (format +onsave)  ; automated prettiness
+       format  ; automated prettiness
        ;;god               ; run Emacs commands without modifier keys
        ;; lispy             ; vim for lisp, for people who don't like vim
-       ;; multiple-cursors
+       multiple-cursors
                                         ; editing in many places at once
        ;;objed             ; text object editing for the innocent
        ;;parinfer          ; turn lisp into python, sort of
@@ -63,7 +64,7 @@
        :emacs
        (dired +ranger +icons)             ; making dired pretty [functional]
        electric          ; smarter, keyword-based electric-indent
-       ;;ibuffer         ; interactive buffer management
+       ibuffer         ; interactive buffer management
        (undo +tree)              ; persistent, smarter undo for your inevitable mistakes
        vc                ; version-control and Emacs, sitting in a tree
 
@@ -74,8 +75,8 @@
        vterm             ; the best terminal emulation in Emacs
 
        :checkers
-       syntax              ; tasing you for every semicolon you forget
-       (spell +enchant)             ; tasing you for misspelling mispelling
+       (syntax +childframe)              ; tasing you for every semicolon you forget
+       (spell +enchant +everywhere)             ; tasing you for misspelling mispelling
        grammar           ; tasing grammar mistake every you make
 
        :tools
@@ -87,7 +88,7 @@
        ;; ein               ; tame jupyter notebooks with emacs
        (eval +overlay)     ; run code, run (also, repls)
        ;; BROKEN gist              ; interacting with github gists
-       (lookup +dictionary +offline +docsets)              ; navigate your code and its documentation
+       (lookup +dictionary +docsets)              ; navigate your code and its documentation
        (lsp +peek)
        magit             ; a git porcelain for Emacs
        ;;make              ; run make tasks from Emacs
@@ -141,7 +142,7 @@
        ;;nim               ; python + lisp at the speed of c
        nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
-       (org +dragndrop +pandoc +poly)               ; organize your plain life in plain text
+       (org +dragndrop +pandoc +poly +pretty)               ; organize your plain life in plain text
        php               ; perl's insecure younger brother
        plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
@@ -165,7 +166,7 @@
 
        :email
        ;; don't use +gmail since it overrides mu4e del hotkeys
-       mu4e
+       (mu4e +org)
        ;;notmuch
        ;;(wanderlust +gmail)
 
@@ -179,5 +180,8 @@
        ;;literate
        (default +bindings +smartparens))
 (when (fboundp 'native-compile-async)
-  (setq native-comp-deferred-compilation t
-        native-comp-deferred-compilation-black-list '("/mu4e.*\\.el$")))
+  (setq
+   comp-async-report-warnings-errors nil
+   native-comp-deferred-compilation t
+   native-comp-deferred-compilation-black-list '("/mu4e.*\\.el$")
+   ))

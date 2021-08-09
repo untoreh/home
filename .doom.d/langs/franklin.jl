@@ -1,3 +1,4 @@
+using Revise
 using Conda
 
 # These must be set before initializing Franklin
@@ -9,6 +10,5 @@ ENV["PYTHONPATH"] = "$(Conda.LIBDIR)/python$(py_v)"
 using Franklin;
 const fr = Franklin;
 using Franklin: convert_md, convert_html, pagevar, path, globvar;
-using Revise
 
 frank_task = @task serve(prerender=true); schedule(frank_task)

@@ -4,7 +4,9 @@
 cd ~/.emacs.d
 
 # export EMACS=$(which emacs)
-export EMACS=~/.nix-profile/bin/emacs
+# export EMACS=~/.nix-profile/bin/emacs
+# export EMACS=/usr/bin/emacs
+export EMACS="nixGL emacs"
 
 # bin/doom clean
 bin/doom env
@@ -13,7 +15,7 @@ bin/doom sync -ecp
 # sed -r '/(WAYLAND_DISPLAY)|(GDK_BACKEND)|(CLUTTER_BACKEND)/d' -i .local/env
 
 # unset WAYLAND_DISPLAY GDK_BACKEND CLUTTER_BACKEND
-export XDG_DATA_DIRS="$HOME/.nix-profile/share:$HOME/.local/share"
+#export XDG_DATA_DIRS="$HOME/.nix-profile/share:$HOME/.local/share"
 #export XDG_DATA_HOME="$HOME/.local/share"
 #export XDG_CONFIG_HOME="$HOME/.config"
 #export XDG_CONFIG_DIRS="$HOME/.local/share:$HOME/.themes:$HOME/.fonts:$HOME.icons"

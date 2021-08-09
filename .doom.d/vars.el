@@ -34,7 +34,15 @@
 
 ;; langs
 (setq use-jupyter nil)
-(global-subword-mode 1)
+;; how to move around words
+(after! smartparens
+  (global-subword-mode t)
+  (setq-default sp-use-subword t
+                sp-highlight-pair-overlay t
+                sp-highlight-wrap-overlay t
+                sp-highlight-wrap-tag-overlay t
+                ))
+
 (setq yas-triggers-in-field t)
 (setq org-plantuml-jar-path "~/.local/bin/plantuml.jar")
 

@@ -10,13 +10,13 @@
   :init
   (setq lsp-julia-response 360
 	lsp-julia-timeout 360
-	lsp-response-timeout 360
-	lsp-enable-folding t
-	lsp-folding-range-limit 100
 	lsp-julia-package-dir nil)
   :config
   ;; override doom module preset
-  (setq lsp-julia-default-environment "~/.julia/environments/v1.6"))
+  (setq lsp-julia-default-environment
+        (concat "~/.julia/environments/v"
+                (shell-command-to-string "julia --version | grep -oE '[0-9]\.[0-9]'"))))
+
 
 (use-package! julia-repl
   :commands julia-repl
@@ -291,8 +291,8 @@
   (setq-hook! 'julia-mode-hook +format-with-lsp nil))
 
 ;;;;
-(set-company-backend! 'julia-mode
-  '(:separate company-capf company-yasnippet company-dabbrev-code company-files))
+;; (set-company-backend! 'julia-mode
+;;   '(:separate company-capf company-yasnippet company-dabbrev-code company-files))
 
 (add-hook 'julia-mode-hook #'lsp)
 
@@ -304,24 +304,35 @@
          (live-buffer (julia-repl--locate-live-buffer terminal-backend name)))
     live-buffer))
 
-(defun julia-repl-switch (&optional skip)
+(defvar julia-repl-enable-revise t "whether to use Revise automatically when repl starts")
+
+(defun julia-repl-switch (&optional no-activate cd)
   " Enables julia repl, and activates the current project "
-    (if (not (fboundp #'julia-repl-inferior-buffer))
-        (julia-repl))
-    ;; we query for the buffer before skip because we
-    ;; want to switch buffer anyway
-    (if (and (julia-repl-inferior-buffer) (not skip))
+  (if (not (fboundp #'julia-repl-inferior-buffer))
+      (require 'julia-repl))
+  ;; we query for the buffer before checking for skip because we
+  ;; want to switch buffer anyway
+  (let ((startup (not (julia-repl-live-buffer))))
+    (if (julia-repl-inferior-buffer)
         (progn
-          (julia-repl-cd (projectile-project-root))
-          (julia-repl-activate-parent nil)
+          (if (and startup (not no-activate))
+              (progn
+                (julia-repl-cd (projectile-project-root))
+                (julia-repl-activate-parent nil)
+                (when julia-repl-enable-revise
+                  (julia-repl--send-string "using Revise")))
+            (progn
+              (when cd
+                (julia-repl-cd (projectile-project-root)))
+              (julia-repl)))
           t)
-      nil))
+      nil)))
 
 ;; franklin
 (defun julia-franklin ()
   (interactive)
   "Start the franklin live server in the current default-dir"
-  (if (julia-repl-switch)
+  (if (julia-repl-switch nil t)
       (julia-repl--send-string
        (f-read-text
         (concat
@@ -330,9 +341,19 @@
 
 (defun julia-franklin-stop ()
   (interactive)
-  (if (julia-repl-switch)
+  (if (julia-repl-switch nil t)
       (julia-repl--send-string
        "Base.throwto(frank_task, InterruptException)")))
+
+(defun julia-repl-toggle-debug ()
+  (interactive)
+  (if (julia-repl-switch nil t)
+      (julia-repl--send-string "if in(\"JULIA_DEBUG\", keys(ENV))
+delete!(ENV, \"JULIA_DEBUG\")
+else
+ENV[\"JULIA_DEBUG\"] = \"all\"
+end;
+")))
 
 ;; julia projects file
 (after! projectile

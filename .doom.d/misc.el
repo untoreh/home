@@ -56,13 +56,18 @@
                   (buffer-substring-no-properties (point-min) (point-max))))
               ;; )
           )
-          (native-compile #'wl-copy)
-          (native-compile #'wl-paste)
+          ;(native-compile #'wl-copy)
+          ;(native-compile #'wl-paste)
           (setq interprogram-cut-function #'wl-copy)
           (setq interprogram-paste-function #'wl-paste))
       ;; use custom temporary directory with WSL since there are permission problems with /tmp
       ;; NOTE: ensure trailing slash /
-      (setq temporary-file-directory "/run/upper/")))
+      (setq temporary-file-directory "/run/upper/")
+      ;; WSL, windows grabs M-SPC so we rebind it to F13 (from windows side)
+      ;; and use that as alt leader key
+      (setq doom-leader-alt-key "<F13>"
+            doom-localleader-alt-key "<F13> m")
+      ))
 
 ;; use wslview as program (TODO: check wslu utils is installed in wsl doom PR)
 (setq browse-url-generic-program (cond ((executable-find "wslview"))
@@ -79,7 +84,9 @@
 (setq vterm-always-compile-module t)
 
 ;; save magit buffers
-(after! persp-mode
+(after! (persp-mode magit)
+  :if (and nil (featurep! :ui workspaces))
+  :config
   (persp-def-buffer-save/load
    :mode 'magit-status-mode :tag-symbol 'def-magit-status-buffer
    :save-vars '(major-mode default-directory)

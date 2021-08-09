@@ -15,14 +15,7 @@
   (setq-default
    company-idle-delay 0.006
    company-echo-delay 0
-   company-dabbrev-other-buffers t)
-  ;; (set-company-backend!
-  ;;   '(text-mode
-  ;;     markdown-mode
-  ;;     gfm-mode)
-  ;;   'company-files
-  ;;     )
-  )
+   company-dabbrev-other-buffers t))
 
 (map! "M-/" #'hippie-expand)
 
@@ -31,3 +24,8 @@
 ;;   :after company
 ;;   :config
 ;;   (cl-pushnew 'company-tabnine (default-value 'company-backends)))
+
+;; Doesn't seem to work OOB
+;; (use-package! company-fuzzy
+;;   :config
+;;   (global-company-fuzzy-mode 1))

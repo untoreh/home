@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: triple quotes
-# key: #q
+# key: '""'
 # condition: t
 # --
 """

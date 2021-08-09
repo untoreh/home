@@ -3,8 +3,14 @@
 ;; Input is SLOW with ligatures enabled!
 ;; (setq doom-font (font-spec :family "Input Mono Compressed" :size 15 :weight 'normal)
 ;; 	doom-variable-pitch-font (font-spec :family "Input Sans Condensed" :size 12))
-(setq doom-font (font-spec :family "Hack" :size 14 :weight 'normal)
-      doom-variable-pitch-font (font-spec :family "Input Sans Condensed" :size 12))
+(setq
+  doom-font (font-spec :family "Hack" :size 14 :weight 'normal)
+      doom-big-font (font-spec :family "Hack" :size 24 :weight 'bold)
+     ;doom-variable-pitch-font (font-spec :family "Barlow Semi Condensed" :size 12)
+      ;doom-serif-font (font-spec :family "Fantasque Sans Mono" :size 16)
+      doom-unicode-font (font-spec :family "JuliaMono")
+      )
+
 (setq-default line-spacing 1)
 
 (load! "ligatures")
@@ -13,23 +19,21 @@
       doom-dracula-brighter-modeline t
       doom-dracula-colorful-headers t)
 
-;; modeline
-(use-package! nyan-mode
-  :if (boundp 'nyan-mode)
-  :after doom-modeline
-  :init
-  (progn
-    (setq
-     nyan-animate-nyancat nil
-     nyan-wavy-trail nil
-     nyan-minimum-window-width 1024)
-    (nyan-mode))
-  :after-call
-  doom-modeline-mode)
-(use-package! parrot
-  :after-call doom-modeline-mode
-  :config
-  (parrot-mode nil))
+;; nyan and parrot only in the "doom" modeline
+(when (not (featurep! :ui modeline +light))
+  (use-package! nyan-mode
+    :if (boundp 'nyan-mode)
+    :init
+    (progn
+      (setq
+       nyan-animate-nyancat nil
+       nyan-wavy-trail nil
+       nyan-minimum-window-width 1024)
+      (nyan-mode)))
+  (use-package! parrot
+    :if (boundp 'parrot-mode)
+    :config
+    (parrot-mode)))
 
 (setq-default
  window-combination-resize t
@@ -55,9 +59,12 @@
   (if (boundp #'valign-remove-advice)
       (valign-remove-advice))
   :hook ((org-mode-hook markdown-mode-hook) . valign-mode))
-(use-package! company-fuzzy
-  :config
-  (global-company-fuzzy-mode 1))
+
+(when (and (featurep! :ui treemacs)
+           (featurep! :tools magit))
+  (setq +treemacs-git-mode 'deferred))
+
+;;
 ;; https://github.com/hlissner/doom-emacs/issues/2967
 (after! doom-modeline
   (custom-set-faces!
