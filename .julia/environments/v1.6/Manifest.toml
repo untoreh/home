@@ -372,11 +372,23 @@ git-tree-sha1 = "53bb909d1151e57e2484c3d1b53e19552b887fb2"
 uuid = "42e2da0e-8278-4e71-bc24-59509adca0fe"
 version = "1.0.2"
 
+[[Gumbo]]
+deps = ["AbstractTrees", "Gumbo_jll", "Libdl"]
+git-tree-sha1 = "e711d08d896018037d6ff0ad4ebe675ca67119d4"
+uuid = "708ec375-b3d6-5a57-a7ce-8257bf98657a"
+version = "0.8.0"
+
+[[Gumbo_jll]]
+deps = ["Libdl", "Pkg"]
+git-tree-sha1 = "86111f5523d7c42da0edd85ef7999c663881ac1e"
+uuid = "528830af-5a63-567c-a44a-034ed33b8444"
+version = "0.10.1+1"
+
 [[HTTP]]
 deps = ["Base64", "Dates", "IniFile", "Logging", "MbedTLS", "NetworkOptions", "Sockets", "URIs"]
-git-tree-sha1 = "c6a1fff2fd4b1da29d3dccaffb1e1001244d844e"
+git-tree-sha1 = "44e3b40da000eab4ccb1aecdc4801c040026aeb5"
 uuid = "cd3eb016-35fb-5094-929b-558a96fad6f3"
-version = "0.9.12"
+version = "0.9.13"
 
 [[IOCapture]]
 deps = ["Logging", "Random"]
@@ -868,6 +880,14 @@ git-tree-sha1 = "4036a3bd08ac7e968e27c203d45f5fff15020621"
 uuid = "ae029012-a4dd-5104-9daa-d747884805df"
 version = "1.1.3"
 
+[[ResumableFunctions]]
+deps = ["MacroTools"]
+git-tree-sha1 = "a618fdcd4a550f5a353a8b1edac88ad93908a04a"
+repo-rev = "master"
+repo-url = "https://github.com/BenLauwens/ResumableFunctions.jl.git"
+uuid = "c5292f4c-5179-55e1-98c5-05642aab7184"
+version = "0.6.0"
+
 [[Revise]]
 deps = ["CodeTracking", "Distributed", "FileWatching", "JuliaInterpreter", "LibGit2", "LoweredCodeUtils", "OrderedCollections", "Pkg", "REPL", "Requires", "UUIDs", "Unicode"]
 git-tree-sha1 = "410bbe13d9a7816e862ed72ac119bda7fb988c08"
@@ -1038,6 +1058,12 @@ deps = ["Adapt", "ArgCheck", "BangBang", "Baselet", "CompositionsBase", "DefineS
 git-tree-sha1 = "34f27ac221cb53317ab6df196f9ed145077231ff"
 uuid = "28d57a85-8fef-5791-bfe6-a80928e7c999"
 version = "0.4.65"
+
+[[Translator]]
+deps = ["Conda", "EzXML", "FilePathsBase", "Gumbo", "HTTP", "JSON", "PyCall", "ResumableFunctions", "Revise"]
+path = "/home/fra/dev/Translator.jl"
+uuid = "7b12ad4c-248e-49d0-9ce0-1140dfa8bd03"
+version = "0.1.0"
 
 [[URIParser]]
 deps = ["Unicode"]
