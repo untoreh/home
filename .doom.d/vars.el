@@ -29,9 +29,6 @@
 
 (setq-default display-line-numbers-type t)
 
-;; vterm
-(setq vterm--prompt-tracking-enabled-p t)
-
 ;; langs
 (setq use-jupyter nil)
 ;; how to move around words
@@ -46,8 +43,10 @@
 (setq yas-triggers-in-field t)
 (setq org-plantuml-jar-path "~/.local/bin/plantuml.jar")
 
-
-
+;; (setq gc-cons-percentage 1
+;;       gc-cons-threshold 335544320)
+;; (setq gc-cons-percentage 99
+;;       gc-cons-threshold 1073741824)
 
 
 
