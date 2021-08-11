@@ -56,8 +56,8 @@
                   (buffer-substring-no-properties (point-min) (point-max))))
               ;; )
           )
-          ;(native-compile #'wl-copy)
-          ;(native-compile #'wl-paste)
+          (native-compile #'wl-copy)
+          (native-compile #'wl-paste)
           (setq interprogram-cut-function #'wl-copy)
           (setq interprogram-paste-function #'wl-paste))
       ;; use custom temporary directory with WSL since there are permission problems with /tmp
@@ -84,11 +84,13 @@
 (setq vterm-always-compile-module t)
 
 ;; save magit buffers
-(after! (persp-mode magit)
-  :if (and nil (featurep! :ui workspaces))
-  :config
-  (persp-def-buffer-save/load
-   :mode 'magit-status-mode :tag-symbol 'def-magit-status-buffer
-   :save-vars '(major-mode default-directory)
-   :after-load-function (lambda (b &rest _)
-                          (with-current-buffer b (magit-refresh)))))
+;; this doesn't work because problems with lexical scope
+;; https://github.com/hlissner/doom-emacs/issues/3558
+;; (after! (persp-mode magit)
+;;   :if (and nil (featurep! :ui workspaces))
+;;   :config
+;;   (persp-def-buffer-save/load
+;;    :mode 'magit-status-mode :tag-symbol 'def-magit-status-buffer
+;;    :save-vars '(major-mode default-directory)
+;;    :after-load-function (lambda (b &rest _)
+;;                           (with-current-buffer b (magit-refresh)))))
