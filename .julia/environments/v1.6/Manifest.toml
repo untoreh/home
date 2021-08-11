@@ -84,6 +84,12 @@ git-tree-sha1 = "8ad457cfeb0bca98732c97958ef81000a543e73e"
 uuid = "da1fd8a2-8d9e-5ec2-8556-3022fb5608a2"
 version = "1.0.5"
 
+[[CodecZstd]]
+deps = ["TranscodingStreams", "Zstd_jll"]
+git-tree-sha1 = "d19cd9ae79ef31774151637492291d75194fc5fa"
+uuid = "6b39b394-51ab-5f42-8807-6242bab2b4c2"
+version = "0.7.0"
+
 [[ColorSchemes]]
 deps = ["ColorTypes", "Colors", "FixedPointNumbers", "Random", "StaticArrays"]
 git-tree-sha1 = "c8fd01e4b736013bc61b704871d20503b33ea402"
@@ -1053,6 +1059,12 @@ git-tree-sha1 = "37018506dc445ad7db288442fbb846105f26c43f"
 uuid = "0796e94c-ce3b-5d07-9a54-7f471281c624"
 version = "0.5.17"
 
+[[TranscodingStreams]]
+deps = ["Random", "Test"]
+git-tree-sha1 = "216b95ea110b5972db65aa90f88d8d89dcb8851c"
+uuid = "3bb67fe8-82b1-5028-8e26-92a6c54297fa"
+version = "0.9.6"
+
 [[Transducers]]
 deps = ["Adapt", "ArgCheck", "BangBang", "Baselet", "CompositionsBase", "DefineSingletons", "Distributed", "InitialValues", "Logging", "Markdown", "MicroCollections", "Requires", "Setfield", "SplittablesBase", "Tables"]
 git-tree-sha1 = "34f27ac221cb53317ab6df196f9ed145077231ff"
@@ -1060,7 +1072,7 @@ uuid = "28d57a85-8fef-5791-bfe6-a80928e7c999"
 version = "0.4.65"
 
 [[Translator]]
-deps = ["Conda", "EzXML", "FilePathsBase", "Gumbo", "HTTP", "JSON", "PyCall", "ResumableFunctions", "Revise"]
+deps = ["AbstractTrees", "CodecZstd", "Conda", "DataStructures", "EzXML", "FilePathsBase", "Gumbo", "HTTP", "JSON", "MacroTools", "PyCall", "ResumableFunctions", "Revise", "Serialization", "TranscodingStreams"]
 path = "/home/fra/dev/Translator.jl"
 uuid = "7b12ad4c-248e-49d0-9ce0-1140dfa8bd03"
 version = "0.1.0"
