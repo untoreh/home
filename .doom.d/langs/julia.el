@@ -142,7 +142,7 @@
   (cl-defun julia-repl--inferior-buffer-name
       (&optional (executable-key (julia-repl--get-executable-key))
                  (suffix julia-repl-inferior-buffer-name-suffix))
-    (let* ((middle (if (eq executable-key (julia-repl--default-executable-key))
+    (let* ((middle (if (equal executable-key (julia-repl--default-executable-key))
                        ""
                      (format "-%s" executable-key)))
 
@@ -328,32 +328,41 @@
           t)
       nil)))
 
-;; franklin
+
+(defun julia-repl-cmd (str)
+  "Send a string to julia repl switching to its buffer, if it exists."
+  (when (julia-repl-switch nil t)
+      (julia-repl--send-string str)))
+
 (defun julia-franklin ()
   (interactive)
   "Start the franklin live server in the current default-dir"
-  (if (julia-repl-switch nil t)
-      (julia-repl--send-string
-       (f-read-text
-        (concat
-         (file-name-as-directory
-          (my/script-dir #'julia-franklin)) "franklin.jl")))))
+  (julia-repl-cmd
+   (f-read-text
+    (concat
+     (file-name-as-directory
+      (my/script-dir #'julia-franklin)) "franklin.jl"))))
+
 
 (defun julia-franklin-stop ()
   (interactive)
-  (if (julia-repl-switch nil t)
-      (julia-repl--send-string
-       "Base.throwto(frank_task, InterruptException)")))
+  (julia-repl-cmd "Base.throwto(frank_task, InterruptException)"))
 
 (defun julia-repl-toggle-debug ()
   (interactive)
-  (if (julia-repl-switch nil t)
-      (julia-repl--send-string "if in(\"JULIA_DEBUG\", keys(ENV))
+  (julia-repl-cmd "if in(\"JULIA_DEBUG\", keys(ENV))
 delete!(ENV, \"JULIA_DEBUG\")
 else
 ENV[\"JULIA_DEBUG\"] = \"all\"
-end;
-")))
+end;"))
+
+(defun julia-repl-revise ()
+  (interactive)
+  (let ((thing (thing-at-point 'symbol t)))
+    (julia-repl-cmd
+     (format
+      "(isdefined(Main, :%s) && isa(%s, Module)) ? revise(%s) : revise()"
+      thing thing thing))))
 
 ;; julia projects file
 (after! projectile
