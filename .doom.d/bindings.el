@@ -4,13 +4,13 @@
 
 
 ;; which key configs
-(setq which-key-allow-multiple-replacements t)
-(after! which-key
-  (pushnew!
-   which-key-replacement-alist
-   '(("" . "\\`+?evil[-:]?\\(?:a-\\)?\\(.*\\)") . (nil . "◂\\1"))
-   '(("\\`g s" . "\\`evilem--?motion-\\(.*\\)") . (nil . "◃\\1"))
-   ))
+;; (setq which-key-allow-multiple-replacements t)
+;; (after! which-key
+;;   (pushnew!
+;;    which-key-replacement-alist
+;;    '(("" . "\\`+?evil[-:]?\\(?:a-\\)?\\(.*\\)") . (nil . "◂\\1"))
+;;    '(("\\`g s" . "\\`evilem--?motion-\\(.*\\)") . (nil . "◃\\1"))
+;;    ))
 
 ;; dap
 ;; ( "jm" #'dumb-jump-go-prompt)
@@ -186,14 +186,22 @@
        :nv "SPC w TAB" #'julia-toggle-repl-back))
 
 (if (featurep! :lang julia)
-    (map! (:prefix ("SPC l j" . "julia")
+    (map! :after julia-repl
+          (:prefix ("SPC l j" . "julia")
            :desc "start julia repl"
            :nv "r" (cmd! (julia-repl-switch))
            :nv "f" #'julia-franklin
            :nv "k" #'julia-franklin-stop
            :nv "." #'julia-repl-cd
            :nv "d" #'julia-repl-toggle-debug
-           )))
+           :nv "v" #'julia-repl-revise
+           )
+          (:map 'julia-repl-mode-map
+           "C-c C-p" nil
+           "C-c C-v" nil
+           "C-c ." #'julia-repl-cd
+           :desc nil
+           "C-c C-." #'julia-repl-cd)))
 
 ;; unbind redundant bindings
 (if (featurep! :editor evil)
