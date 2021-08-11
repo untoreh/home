@@ -33,6 +33,14 @@ alias ghemail "zshlic ghemail"
 alias ghtest "zshlic ghtest"
 alias diffban "zshlic diffban"
 
+function crt-check
+    cd ~/.cluster/playbook; anp playbook.yml -t crt-check -l crt; cd -
+end
+
+function ansc
+    cd ~/.cluster/playbook; anp playbook.yml -t ping -l crt; cd -
+end
+
 function bbwh
     zshlic "bbwh '$argv[1]'"
 end
