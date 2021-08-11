@@ -147,4 +147,6 @@
 ;;                   (make-symbolic-link script-path link-path t)))))
 
 ;; VLF
-;; (package! vlf :recipe (:host github :repo "m00natic/vlfi" :files ("*.el") :disable t)
+(package! vlf
+  :recipe (:host github :repo "m00natic/vlfi" :files ("*.el"))
+  :disable t)

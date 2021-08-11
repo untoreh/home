@@ -22,5 +22,5 @@
 (after! evil
   (setq evil-kill-on-visual-paste nil))
 
-(use-package! vlf-setup
-  :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
+;; (use-package! vlf-setup
+;;   :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
