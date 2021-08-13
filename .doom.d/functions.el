@@ -9,7 +9,7 @@
 
 (defmacro comp-defun (name args &rest body)
   `(progn
-     (defun ,name ,args ,@body)
+     (cl-defun ,name ,args ,@body)
      (native-compile #',name)))
 
 (comp-defun evil-duplicate-line ()
@@ -26,3 +26,33 @@
   (with-current-buffer (or buffer (current-buffer))
     (let (kill-buffer-hook kill-buffer-query-functions)
       (kill-buffer))))
+
+(comp-defun my/collapse-dotted-list (l)
+  " Turns a dots filled list into a plain list at the topmost level. "
+  (let ((out '()))
+    (while (consp l)
+      (setq out (nconc out `(,(pop l)))))
+    (nconc out `(,l))))
+
+;; (comp-defun my/collapse-dotted-list (l &optional (cc '()))
+;;   " Turns a dots filled list into a plain list at the topmost level. "
+;;   (if (consp (cdr l))
+;;       (apply #'my/collapse-dotted-list
+;;              (list (cdr l) (nconc cc `(,(car l)))))
+;;     (nconc cc `(,(car l)) `(,(cdr l)))))
+
+(comp-defun
+ my/lists-longer-than (n)
+ " List top level list items longer than N . Doesn't do any recursion or unwrapping except
+for dotted pair lists. "
+ (let ((c 0)
+       (l (append obarray '()))
+       (long '()))
+   (dolist (o l)
+     (when (and (not (numberp o)) (boundp o))
+       (let ((val (symbol-value o)))
+         (when (and (listp val)
+                    (> (length (my/collapse-dotted-list val)) n))
+           (nconc long '(o))
+           (cl-incf c)))))
+   (list c long)))
