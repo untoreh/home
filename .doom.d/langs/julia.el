@@ -369,3 +369,4 @@ end;"))
   (appendq! projectile-project-root-files '("Project.toml" "JuliaProject.toml")))
 
 (set-file-template! ".*/blog/posts/.+\\.md$" :trigger "blog_post" :project t)
+(set-docsets! 'julia-repl-vterm-mode :add "Julia")
