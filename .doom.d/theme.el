@@ -52,6 +52,8 @@
 
 ;; buffer size in the modeline
 (size-indication-mode t)
+;; use tooltips
+(tooltip-mode t)
 
 (use-package! valign
   :init

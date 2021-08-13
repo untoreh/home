@@ -121,7 +121,7 @@
 (package! emacs-refactor :recipe ( :host nil
                                    :repo "https://github.com/Wilfred/emacs-refactor"))
 ;; which-key-posframe is VERY slow
-;; (package! which-key-posframe)
+(package! which-key-posframe)
 (package! hydra-posframe :recipe ( :host nil
                                    :repo "https://github.com/Ladicle/hydra-posframe"))
 ;; chat

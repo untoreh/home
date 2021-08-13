@@ -12,8 +12,8 @@
 
 (use-package! lsp-mode
   :if (featurep! :tools lsp)
-  :init
-  (setq-default
+  :config
+  (setq
    lsp-auto-configure t
    lsp-auto-guess-root t
    ;; doc frames with mouse hover
@@ -42,8 +42,5 @@
    ;; text
    lsp-response-timeout 360
    lsp-enable-folding t
-   lsp-folding-range-limit 100
-   )
-  :config
-  (lsp-treemacs-sync-mode 1)
-  )
+   lsp-folding-range-limit 100)
+  (lsp-treemacs-sync-mode 1))

@@ -12,7 +12,7 @@
   :init
   :config
   (use-package! company-files)
-  (setq-default
+  (setq
    company-idle-delay 0.006
    company-echo-delay 0
    company-dabbrev-other-buffers t))
