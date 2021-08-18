@@ -28,6 +28,7 @@ in {
 
     # langs
     go-pup nixfmt golangci-lint shfmt libtidy nodejs shellcheck jq enchant2 ispell languagetool
+    chrpath
 
     # runtimes
     # python3
