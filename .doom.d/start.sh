@@ -8,6 +8,9 @@ cd ~/.emacs.d
 # export EMACS=/usr/bin/emacs
 export EMACS="nixGL emacs"
 
+# clean eln files
+# find /run/upper/*.eln | xargs rm
+
 # bin/doom clean
 bin/doom env
 bin/doom sync -ecp
@@ -19,6 +22,7 @@ bin/doom sync -ecp
 export XDG_DATA_DIRS="$HOME/.nix-profile/share:$HOME/.local/share:/usr/share"
 export GDK_BACKEND=wayland CLUTTER_BACKEND=wayland
 
-exec bin/doom run --fg-daemon=server
+exec bin/doom run
+#exec bin/doom run --fg-daemon=server
 #exec bin/doom run
 # exec emacs --fg-daemon=server

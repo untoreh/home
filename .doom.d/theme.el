@@ -54,6 +54,10 @@
 (size-indication-mode t)
 ;; use tooltips
 (tooltip-mode t)
+(setq
+ ;; don't use gtk tooltips because of no face attrs
+ x-gtk-use-system-tooltips nil
+ )
 
 (use-package! valign
   :init

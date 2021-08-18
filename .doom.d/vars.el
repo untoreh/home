@@ -18,14 +18,33 @@
  evil-ex-visual-char-range t
  truncate-string-ellipsis "…")
 
-(setq-default which-key-idle-delay 0.33)
+(after! which-key
+  (setq which-key-idle-delay 0.33
+        which-key-idle-secondary-delay 0))
+
+(after! gcmh
+  (setq gcmh-auto-idle-delay-factor 50
+        gcmh-idle-delay 'auto)
+  ;; (comp-defun my/gcmh-long-delay ()
+  ;;             (setq gcmh-idle-delay 60))
+  ;; (comp-defun my/gcmh-short-delay ()
+  ;;             (setq gcmh-idle-delay 0.5))
+  ;; (comp-defun
+  ;;  my/gcmh-focus-delay ()
+  ;;  (if (catch 'focus
+  ;;        (mapc (lambda (frame)
+  ;;                (when (frame-focus-state frame)
+  ;;                  (throw 'focus t)))
+  ;;              (frame-list))
+  ;;        nil)
+  ;;      (my/gcmh-long-delay)
+  ;;    (my/gcmh-short-delay)))
+  ;; ;; focus is broken in wslg https://github.com/microsoft/wslg/issues/44
+  ;; (add-function :before after-focus-change-function #'my/gcmh-focus-delay)
+  )
 
 (setq-default docker-tramp-use-names t)
 
-(setq-default
- projectile-enable-caching t
- projectile-git-submodule-command
- "git submodule --quiet foreach 'echo $path' 2>/dev/null | tr '\\n' '\\0'")
 
 (setq-default display-line-numbers-type t)
 

@@ -241,16 +241,16 @@
 ;; we don't want to move within quotes so delete them from smartparens pairs
 ;; and add them back after motion
 (setq sp-no-motion-list '(wrap insert autoskip navigate escape))
-(defun sp-add-quotes nil
+(comp-defun sp-add-quotes nil
   (sp-pair "\"" "\"")
   (sp-pair "\\\"" "\\\"")
   (sp-pair "'" "'"))
-(defun sp-rem-quotes nil
+(comp-defun sp-rem-quotes nil
   (sp-pair "\"" "\"" :actions sp-no-motion-list)
   (sp-pair "\\\"" "\\\"" :actions sp-no-motion-list)
   (sp-pair "'" "'" :actions sp-no-motion-list))
 
-(defun my/move-to-current-parent-toggle nil
+(comp-defun my/move-to-current-parent-toggle nil
   (interactive)
   (sp-rem-quotes)
   (let* ((inhibit-redisplay t)
@@ -263,7 +263,6 @@
       (sp-beginning-of-sexp)))
   (sp-add-quotes))
 
-(map! :n "g \\" nil)
 (map! :desc "Back and forth between current paren enclosing"
       :n "g \\" #'my/move-to-current-parent-toggle)
 
