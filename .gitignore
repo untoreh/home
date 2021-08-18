@@ -118,3 +118,5 @@ remmina/
 .mume/
 .android/
 /.venv/
+/.ipfs/*
+!/.ipfs/config
