@@ -90,8 +90,10 @@ export CONCURRENCY_LEVEL='14' # dkms
 export MAKEFLAGS='-j 14' # make
 # ccache
 export CCACHE_DIR=~/.ccache
-export CC="ccache gcc"
-export CXX="ccache g++"
+if [ -v USE_CCACHE ]; then
+	export CC="ccache gcc"
+	export CXX="ccache g++"
+fi
 
 # NIX
 if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then . ~/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

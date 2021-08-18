@@ -113,8 +113,10 @@ set STARDICT_DATA_DIR "$HOME/.local/stardict"
 set -x CONCURRENCY_LEVEL 14
 # ccache
 set -x CCACHE_DIR ~/.ccache
-set -x CC "ccache gcc"
-set -x CXX "ccache g++"
+if set -q USE_CCACHE
+	set -x CC "ccache gcc"
+	set -x CXX "ccache g++"
+end
 # NIX
 set -x NIX_PATH "$HOME/.nix-defexpr/channels:$NIX_PATH"
 if ! set -q LOCALE_ARCHIVE &&
