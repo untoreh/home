@@ -11,4 +11,5 @@ end
         @warn "error while importing OhMyREPL" e
     end
 end
+loadpy() = include("$(ENV["HOME"])/.julia/config/python.jl")
 
