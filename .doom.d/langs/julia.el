@@ -348,6 +348,22 @@
   (interactive)
   (julia-repl-cmd "Base.throwto(frank_task, InterruptException)"))
 
+(after! f
+  (cl-defun julia-franklin-sync-blog (&optional (src "/tmp/__site")
+                                                &optional (trg "~/dev/blog/__site.bak"))
+    " Creates a symblink in target directory to src directory name if doesn't exist and syncs
+the SRC folder to the TRG folder"
+    (interactive)
+    (let ((src-sym (concat (f-dirname trg) (f-base src))))
+      (if (not (and (file-symlink-p src-sym)
+                    (equal (file-truename src-sym) src)))
+          (if (file-exists-p src-sym)
+              (throw 'file-exists (format "%s exists and is not a symlink" src-sym))
+            (make-symbolic-link src src-sym)))
+    (let ((rsync (make-process :name "sync-blog"
+                  :buffer nil
+                  :command `("rsync" "-a" ,src ,trg))))))))
+
 (defun julia-repl-toggle-debug ()
   (interactive)
   (julia-repl-cmd "if in(\"JULIA_DEBUG\", keys(ENV))

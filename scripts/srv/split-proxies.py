@@ -7,7 +7,14 @@ from pathlib import Path
 proxies = Path(f"{os.environ['HOME']}") / "tmp" / "proxies" / "proxies.json"
 
 with open(proxies, "r") as f:
-    prx = json.load(f)
+    try:
+        prx = json.load(f)
+    except:
+        # fix json
+        f.seek(0)
+        txt = f.read()
+        txt = str.join("", [txt.rpartition(",")[0], "]"])
+        prx = json.loads(txt)
 
 selected = []
 

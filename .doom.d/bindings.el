@@ -195,6 +195,7 @@
            :nv "." #'julia-repl-cd
            :nv "d" #'julia-repl-toggle-debug
            :nv "v" #'julia-repl-revise
+           :nv "y" #'julia-franklin-sync-blog
            )
           (:map 'julia-repl-mode-map
            "C-c C-p" nil
