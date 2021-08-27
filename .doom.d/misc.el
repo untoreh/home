@@ -27,8 +27,6 @@
   (global-spell-fu-mode -1)
   ;; default is 0.25
   (setq spell-fu-idle-delay 1.0))
-
-
 ;; wayland clipboard support
 ;; this makes sense only if we check on each frame creation
 ;; (if (and (display-graphic-p) (equal (pgtk-backend-display-class) "GdkWaylandDisplay"))
@@ -91,3 +89,12 @@
 ;;    :save-vars '(major-mode default-directory)
 ;;    :after-load-function (lambda (b &rest _)
 ;;                           (with-current-buffer b (magit-refresh)))))
+
+;; gargbace collector mode
+(use-package! gcbal
+  :config
+  (native-compile-async (locate-library "gcbal") t t)
+  (setq
+   gcbal-target-gctime 0.2
+   gcbal-target-auto t)
+  (gcbal-mode))

@@ -53,6 +53,7 @@
 
 ;; misc
 (package! mu4e-alert)
+(package! gcmh :disable t)
 (package! aio)
 
 ;; langs
@@ -118,6 +119,7 @@
 (when (package! company)
   ;; (package! company-fuzzy)
   )
+;; (package! corfu)
 (package! emacs-refactor :recipe ( :host nil
                                    :repo "https://github.com/Wilfred/emacs-refactor"))
 ;; which-key-posframe is VERY slow
