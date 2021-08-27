@@ -2,13 +2,15 @@
 
 ;; projectile
 (setq projectile-ignored-projects
-      '("~/" "/tmp" "~/tmp" "~/.local" "~/.cache" ".npm" "~/.emacs.d/.local/straight/repos/")
+      '("/tmp" "~/tmp" "~/.local" "~/.cache" ".npm" "~/.emacs.d/.local/straight/repos/")
       projectile-project-search-path '("~/dev")
       projectile-enable-caching t
       projectile-git-submodule-command
       "git submodule --quiet foreach 'echo $path' 2>/dev/null | tr '\\n' '\\0'"
       )
 (pushnew! projectile-globally-ignored-directories "~/win" ".venv" ".env" ".ipfs")
+;; allow project based vars
+(put 'projectile-generic-command 'safe-local-variable #'stringp)
 
 (defun projectile-ignored-project-function (filepath)
   "Return t if FILEPATH is within any of `projectile-ignored-projects'"
@@ -18,6 +20,7 @@
   (concat (f-dirname (doom-session-file))
 	  "/" session-name))
 
+;; TODO: this should be handled better by the workspace module
 (defun my/delete-numbered-workspaces ()
   (mapc (lambda (name)
           (when (string-match-p "#[0-9]" name)
@@ -25,8 +28,10 @@
         (+workspace-list-names)))
 
 (defvar doom-session-timer (timer-create) "timer for saving doom sessions")
+(defvar my/last-saved-session-time (current-time))
 
 (defun my/toggle-session-timer (&optional session-name disable)
+  (interactive)
   (let* ((session-name (or session-name "main"))
          (create-lockfiles t)
          (session-file (my/session-file session-name)))
@@ -38,8 +43,13 @@
           (when (file-locked-p session-file)
             (when (boundp 'doom-session-timer) (cancel-timer doom-session-timer))
             (setq doom-session-timer
-                  (run-at-time (current-time) 300
-		               (lambda () (doom/save-session session-file))))))
+                  (run-with-idle-timer 5 t
+		               (lambda () (let ((inhibit-message t))
+                                       (when (and (> (float-time (time-since
+                                                                  my/last-saved-session-time))
+                                                     300)
+                                                  (doom/save-session session-file))
+                                         (setq my/last-saved-session-time (current-time)))))))))
       (progn
         (when (boundp 'doom-session-timer)
           (cancel-timer doom-session-timer)
