@@ -343,10 +343,9 @@
      (file-name-as-directory
       (my/script-dir #'julia-franklin)) "franklin.jl"))))
 
-
 (defun julia-franklin-stop ()
   (interactive)
-  (julia-repl-cmd "Base.throwto(frank_task, InterruptException)"))
+  (julia-repl-cmd "Base.throwto(frank_task, InterruptException())"))
 
 (after! f
   (cl-defun julia-franklin-sync-blog (&optional (src "/tmp/__site")
@@ -354,15 +353,23 @@
     " Creates a symblink in target directory to src directory name if doesn't exist and syncs
 the SRC folder to the TRG folder"
     (interactive)
-    (let ((src-sym (concat (f-dirname trg) (f-base src))))
+    (let ((src-sym (concat (file-name-directory trg) (f-base src))))
+      (when (not (file-directory-p src))
+        (if (not (file-exists-p src))
+            (make-process :name "sync-blog-tmp"
+                          :buffer nil
+                          :command `("rsync" "-a" ,(file-name-as-directory trg)
+                                     ,(file-name-as-directory src)))
+          (throw 'src-no-exists (format "%s directory exists but it's not a directory"))))
       (if (not (and (file-symlink-p src-sym)
                     (equal (file-truename src-sym) src)))
           (if (file-exists-p src-sym)
-              (throw 'file-exists (format "%s exists and is not a symlink" src-sym))
+              (throw 'sym-exists (format "%s exists and is not a symlink" src-sym))
             (make-symbolic-link src src-sym)))
-    (let ((rsync (make-process :name "sync-blog"
-                  :buffer nil
-                  :command `("rsync" "-a" ,src ,trg))))))))
+      ;; sync from tmp to disk
+      (make-process :name "sync-blog-disk"
+                    :buffer nil
+                    :command `("rsync" "-a" ,src ,trg)))))
 
 (defun julia-repl-toggle-debug ()
   (interactive)
