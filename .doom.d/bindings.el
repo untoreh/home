@@ -18,9 +18,6 @@
 ;; ( "mdo" #'dap-step-out)
 ;; ( "mdp" #'dap-ui-inspect-thing-at-point)
 
-;; ivy
-;; (setq-default ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
-
 ;; magit
 (if (featurep! :tools magit)
     (map! :desc "amend commit"
@@ -204,7 +201,7 @@
            :desc nil
            "C-c C-." #'julia-repl-cd)))
 
-;; unbind redundant bindings
+;; evil rebindings
 (if (featurep! :editor evil)
     (progn
       (map! (:map 'global
