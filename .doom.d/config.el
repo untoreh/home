@@ -11,5 +11,7 @@
 (load! "completion")
 (load! "langs/langs")
 (load! "projects")
+;; (load! "debug")
+
 
 (message "Configuration Loaded Succesfully!")
