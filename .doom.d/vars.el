@@ -1,11 +1,13 @@
 ;;; ../../../var/home/fra/.doom.d/vars.el -*- lexical-binding: t; -*-
 (after! f
-(add-load-path!
- (concat
-  (f-dirname
-   (expand-file-name
-    (executable-find "mu")))
-  "/../share/emacs/site-lisp/mu4e")))
+  (add-load-path!
+   (concat
+    (f-dirname
+     (expand-file-name
+      (executable-find "mu")))
+    "/../share/emacs/site-lisp/mu4e")
+   "vendor/"))
+
 (setq
  user-full-name "untoreh"
  user-mail-address "contact@unto.re")
