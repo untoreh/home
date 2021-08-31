@@ -1,0 +1,7 @@
+#!/bin/sh
+
+. ~/.profile
+export XDG_DATA_DIRS="$HOME/.nix-profile/share:$HOME/.local/share:/usr/share"
+export GDK_BACKEND=wayland CLUTTER_BACKEND=wayland
+
+exec $@
