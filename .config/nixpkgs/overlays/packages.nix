@@ -3,7 +3,7 @@ self: super:
 let
   # nixl package
   nixgl = import (builtins.fetchTarball
-    "https://github.com/guibou/nixGL/archive/master.tar.gz") { };
+    "https://github.com/guibou/nixGL/archive/main.tar.gz") { };
 in {
   inherit (super)
   # shell
@@ -14,7 +14,7 @@ in {
     # files and backups
     duplicacy borgbackup rclone syncthing
     # desktop
-    mako
+    mako scrot
     # reduntant
     # xclip wl-clipboard
     # theme
@@ -33,7 +33,7 @@ in {
     # runtimes
     # python3
 
-    emacsPgtkGcc # wait for mesa-d3d12
+    # emacsPgtkGcc # wait for mesa-d3d12
     mu isync gnupg pinentry emacs-all-the-icons-fonts;
   # more fonts
   inherit (self.vimPlugins) vim-devicons;
@@ -46,7 +46,7 @@ in {
   inherit (self.weechatScripts) weechat-matrix;
   # gpu, waiting for nixpkgs integration
   # nixGLDefault
-  inherit (nixgl) nixGLDefault;
+  inherit (nixgl.auto) nixGLDefault;
   # wait for mesa-d3d12
   # python
   inherit (super.python38Packages) supervisor grip ansible pip black flake8;
