@@ -63,3 +63,5 @@ qalculate/qalc.history
 qalculate/
 inkscape/shell.history
 Electron/
+enchant/*.dic
+enchant/*.exc
