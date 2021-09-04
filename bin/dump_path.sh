@@ -25,6 +25,9 @@ PYTHONPATH="$HOME/.local/lib/python${PYTHON_V}/site-packages:$HOME/.nix-profile/
 NEW_PYTHONPATH="PYTHONPATH=\"$PYTHONPATH\" \n PYTHON_V=\"$PYTHON_V\" \n"
 echo -e "$NEW_PYTHONPATH" >>$cached_path
 
+# on WSL set the TMPDIR env var to /run/upper
+[ -v WSLENV ] && echo "TMPDIR=/run/upper" >>$cached_path
+
 # LD_LIBRARY_PATH=$(${nixbin}/nix eval --raw nixpkgs.stdenv.cc.cc.lib)/lib:${LD_LIBRARY_PATH:-""}
 # NEW_LD_LIBRARY_PATH="LD_LIBRARY_PATH=\"$LD_LIBRARY_PATH\""
 # echo "$NEW_LD_LIBRARY_PATH" >$cached_dir/path_std
