@@ -16,7 +16,8 @@
 
 (when (featurep! :editor word-wrap)
   (add-transient-hook! 'text-mode-hook
-    (lambda () (+global-word-wrap-mode 1))))
+    (lambda () (+global-word-wrap-mode 1)))
+  )
 
 ;; evil
 (after! evil
@@ -25,6 +26,18 @@
 ;; (use-package! vlf-setup
 ;;   :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
 
-(use-package! smartparens
-  :config
-  (show-smartparens-global-mode t))
+;; smartparens config
+;; (after! smartparens
+;;   (global-subword-mode 1)
+;;   (show-smartparens-global-mode 1)
+;;   (setq-default sp-use-subword t
+;;                 sp-highlight-pair-overlay t
+;;                 sp-highlight-wrap-overlay t
+;;                 sp-highlight-wrap-tag-overlay t))
+
+(remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
+(add-hook! 'doom-first-buffer-hook 'electric-pair-mode 'show-paren-mode)
+
+;; string inflection
+;; https://github.com/akicho8/string-inflection
+;;
