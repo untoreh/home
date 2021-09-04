@@ -20,8 +20,8 @@ sudo mount -a
 
 sudo mkdir -p /mnt/home/.work /mnt/home/.lower /mnt/home/$USER
 
-# mount tmp with overlay
-sudo mount -t overlay overlay -o lowerdir=/tmp,upperdir=/run/upper,workdir=/run/work /tmp
+# mount tmp with overlay, use `exec' because some things expect a temporary directory to be executable...
+sudo mount -t overlay overlay -o exec,lowerdir=/tmp,upperdir=/run/upper,workdir=/run/work /tmp
 # mount home with overlay
 sudo mount -t overlay overlay -o lowerdir=/mnt/home/.lower,upperdir=/mnt/home/$USER,workdir=/mnt/home/.work ~/
 tries=0
