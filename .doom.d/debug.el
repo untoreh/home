@@ -1,5 +1,8 @@
 ;;; ../../../var/home/fra/.doom.d/debug.el -*- lexical-binding: t; -*-
 
+(use-package! etrace
+  :after elp)
+
 (defmacro my/with-advice (adlist &rest body)
   "Execute BODY with temporary advice in ADLIST.
 
@@ -101,3 +104,7 @@ for dotted pair lists. "
   (let* ((gc (garbage-collect))
          (unused (mapcar (lambda (x) (* (or (nth 1 x) 0) (or (nth 3 x) 0))) gc)))
     (file-size-human-readable (reduce (lambda (x y) (+ x y)) unused) 'si)))
+
+(defun my/backtrace-nth-func (n)
+  " If n is 0, it should return the function name symbol. "
+  (cadr (nth (+ 3 n) (backtrace-frames))))
