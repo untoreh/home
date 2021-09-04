@@ -11,7 +11,8 @@ When `gcbal-target-gctime' is too low and `gcbal-target-auto' is t.")
 (defvar gcbal-ring-size 5)
 (defvar gcbal--adjusted-target-gctime gcbal-target-gctime)
 (defvar gcbal-verbose nil)
-(defvar gcbal--last-offset 0.)
+(defvar gcbal--offsets-ring (make-ring 20)
+  "Tracks how well gcbal performed")
 (defvar gcbal--base-gctime 0.)
 
 ;; TODO: this value should be inferred by sampling the base GC time at different emacs
@@ -92,11 +93,14 @@ because %fs falls below the current minimum time of %fs"
       (when gcbal-target-auto
         (cl-incf gcbal--adjusted-target-gctime min-gctime)))
     (ring-insert gcbal--thresholds-ring  threshold)
-    (setq gcbal--last-offset last-offset
-          gc-cons-threshold (gcbal--ma-ring))
+    (setq gc-cons-threshold (gcbal--ma-ring))
     (when gcbal-verbose
-      (message "gcbal: min %f, trg: %f, last: %f, cns: %f, rat: %f"
-               min-gctime target-offset last-offset consed (/ target-offset last-offset)))))
+      (ring-insert gcbal--offsets-ring last-offset)
+      (message "gcbal: min %f, trg: %f, last: %f, cns: %f, rat: %f, accu: %f"
+               min-gctime target-offset last-offset
+               consed (/ target-offset last-offset)
+               (/ (-sum gcbal--offsets-ring)
+                  (ring-size gcbal--offsets-ring))))))
 
 (cl-defun gcbal--calc-base-gctime (&optional (times 10))
   (garbage-collect)
@@ -115,6 +119,7 @@ because %fs falls below the current minimum time of %fs"
 
 (defun gcbal--adjust-system-constant (&optional reset)
   " TODO: needs macros "
+  (require 'pcache)
   (let ((repo (pcache-repository 'gcbal)))
     (setq
      gcbal--base-gctime
