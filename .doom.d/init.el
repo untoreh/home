@@ -28,16 +28,16 @@
        doom              ; what makes DOOM look the way it does
        doom-dashboard    ; a nifty splash screen for Emacs
        doom-quit         ; DOOM quit-message prompts when you quit Emacs
-       (emoji +unicode +github)  ; 🙂
+       (emoji +ascii +unicode +github)  ; 🙂
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        hydra
        indent-guides     ; highlighted indent columns
-       (ligatures +extra +fira)         ; ligatures and symbols to make your code pretty again
+       ;(ligatures +extra +fira)         ; ligatures and symbols to make your code pretty again
        ;; minimap
        (modeline +light)          ; snazzy, Atom-inspired modeline, plus API
        nav-flash         ; blink cursor line after big motions
        ophints           ; highlight the region an operation acts on
-       ;; (popup +defaults +all)   ; tame sudden yet inevitable temporary windows
+       (popup +defaults +all)   ; tame sudden yet inevitable temporary windows
        ;; tabs
        (treemacs +lsp)          ; a project drawer, like neotree but cooler
        unicode           ; extended unicode support for various languages
@@ -93,7 +93,7 @@
        magit             ; a git porcelain for Emacs
        ;;make              ; run make tasks from Emacs
        ;;pass              ; password manager for nerds
-       ;; pdf               ; pdf enhancements
+       pdf               ; pdf enhancements
        ;;prodigy           ; FIXME managing external services & code builders
        rgb               ; creating color strings
        ;;taskrunner        ; taskrunner for all your projects
@@ -142,11 +142,11 @@
        ;;nim               ; python + lisp at the speed of c
        nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
-       (org +dragndrop +pandoc +poly +pretty)               ; organize your plain life in plain text
+       (org +dragndrop +pandoc +poly +pretty +gnuplot +noter)               ; organize your plain life in plain text
        php               ; perl's insecure younger brother
        plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
-       (python +lsp +pyright +pyimport +py-isort +conda)            ; beautiful is better than ugly
+       (python +lsp +pyright +pyimport +py-isort +conda )            ; beautiful is better than ugly
        ;;qt                ; the 'cutest' gui framework ever
        racket            ; a DSL for DSLs
        raku              ; the artist formerly known as perl6
@@ -172,6 +172,7 @@
 
        :app
        ;;calendar
+       everywhere
        ;;irc               ; how neckbeards socialize
        ;;(rss +org)        ; emacs as an RSS reader
        ;;twitter           ; twitter client https://twitter.com/vnought
@@ -179,9 +180,9 @@
        :config
        ;;literate
        (default +bindings +smartparens))
+
 (when (fboundp 'native-compile-async)
   (setq
    comp-async-report-warnings-errors nil
    native-comp-deferred-compilation t
-   native-comp-deferred-compilation-black-list '("/mu4e.*\\.el$")
-   ))
+   native-comp-deferred-compilation-black-list '("/mu4e.*\\.el$")))
