@@ -11,6 +11,7 @@
 (load! "completion")
 (load! "langs/langs")
 (load! "projects")
+;; (load! "maths.el")
 ;; (load! "debug")
 
 

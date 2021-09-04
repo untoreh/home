@@ -116,14 +116,15 @@
                                   :files ("*.el")))
 
 ;; ;; completion
-(when (package! company)
-  ;; (package! company-fuzzy)
-  )
+(when (featurep! :completion company)
+  (when (featurep! :completion company +tooltips)
+    (package! company-quickhelp)))
+
 ;; (package! corfu)
 (package! emacs-refactor :recipe ( :host nil
                                    :repo "https://github.com/Wilfred/emacs-refactor"))
 ;; which-key-posframe is VERY slow
-(package! which-key-posframe)
+;; (package! which-key-posframe)
 (package! hydra-posframe :recipe ( :host nil
                                    :repo "https://github.com/Ladicle/hydra-posframe"))
 ;; chat
@@ -135,6 +136,7 @@
 (package! ahk-mode)
 (package! vimrc-mode)
 
+;; we use weechat instead
 ;; (package! matrix-client
 ;;   :recipe (:host nil
 ;;    :repo "https://github.com/alphapapa/matrix-client.el"
@@ -148,7 +150,25 @@
 ;;                   (delete-file link-path nil)
 ;;                   (make-symbolic-link script-path link-path t)))))
 
+(package! gif-screencast)
+(package! mini-frame)
 ;; VLF
 (package! vlf
   :recipe (:host github :repo "m00natic/vlfi" :files ("*.el"))
   :disable t)
+
+(package! rotate)
+(when (featurep! :email mu4e)
+  (package! mu4e-views))
+
+;; TODO: managing services with prodigy is nice especially on WSL
+;; but I would prefer if the `init' would be a separate emacs instance with only
+;; prodigy (and its deps) installed to which a client instance would connect to
+;; interact with processes
+;; (package! prodigy)
+
+;; adds colors to info docs buffers :pin "47ee73cc19b1049eef32c9f3e264ea7ef2aaf8a5"
+(package! info-colors)
+
+;; shows keychords in the modeline :pin "04ba7519f34421c235bac458f0192c130f732f12"
+(package! keycast)

@@ -79,4 +79,4 @@
       (lambda (file) (my/toggle-session-timer (f-base file) t)))
       ))
 
-;(add-hook 'doom-after-init-modules-hook #'my/restore-session)
+(add-hook 'emacs-startup-hook #'my/restore-session)
