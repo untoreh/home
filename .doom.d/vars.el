@@ -1,16 +1,26 @@
 ;;; ../../../var/home/fra/.doom.d/vars.el -*- lexical-binding: t; -*-
-(after! f
-  (add-load-path!
-   (concat
-    (f-dirname
-     (expand-file-name
-      (executable-find "mu")))
-    "/../share/emacs/site-lisp/mu4e")
-   "vendor/"))
+(add-load-path!
+ (concat
+  (file-name-directory
+   (expand-file-name
+    (executable-find "mu")))
+  "/../share/emacs/site-lisp/mu4e")
+ "vendor/")
+
+;; FIXME: `add-load-path!' doesn't accept lists...
+(let ((default-directory (concat doom-private-dir "vendor/")))
+  (normal-top-level-add-subdirs-to-load-path))
 
 (setq
  user-full-name "untoreh"
- user-mail-address "contact@unto.re")
+ user-mail-address "contact@unto.re"
+ auth-sources '("~/.authinfo.gpg")
+ auth-source-cache-expiry nil
+ password-cache-expiry nil)
+
+;; use battery mode when unplugged
+(unless (string-match-p "^Power N/A" (battery))
+  (display-battery-mode 1))
 
 (setq org-directory "~/org/")
 
@@ -18,7 +28,10 @@
  undo-limit 160000
  evil-want-fine-undo t
  evil-ex-visual-char-range t
- truncate-string-ellipsis "…")
+ truncate-string-ellipsis "…"
+ evil-split-window-below t
+ evil-vsplit-window-right t
+ scroll-margin 2)
 
 (after! which-key
   (setq which-key-idle-delay 0.33
@@ -52,14 +65,6 @@
 
 ;; langs
 (setq use-jupyter nil)
-;; how to move around words
-(after! smartparens
-  (global-subword-mode t)
-  (setq-default sp-use-subword t
-                sp-highlight-pair-overlay t
-                sp-highlight-wrap-overlay t
-                sp-highlight-wrap-tag-overlay t
-                ))
 
 (setq yas-triggers-in-field t)
 (setq org-plantuml-jar-path "~/.local/bin/plantuml.jar")
@@ -70,6 +75,8 @@
 ;;       gc-cons-threshold 1073741824)
 
 
+;; keep our folds close
+(setq vimish-fold-dir (concat doom-private-dir "vimish-fold"))
 
 
 ;; *****************************************************************************
@@ -81,14 +88,15 @@
  auto-save-timeout 16)
 (setq-default
  backup-directory-alist
- `((cons "." . "~/.doom.d/saves")
-   (cons tramp-file-name-regexp . "~/.doom.d/saves/tramp"))
+ `(("." . ,(concat doom-private-dir "saves/"))
+   (tramp-file-name-regexp . ,(concat doom-private-dir "saves/tramp/")))
  tramp-backup-directory-alist backup-directory-alist
  backup-by-copying t                    ; don't copy symlinks
  delete-old-versions t
  kept-new-versions 7
  kept-old-versions 3
  version-control t)
+
 
 ;; tramp
 ;; (setq-default

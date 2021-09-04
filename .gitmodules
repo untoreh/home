@@ -1,0 +1,3 @@
+[submodule "company-try-hard"]
+	path = .doom.d/vendor/company-try-hard
+	url = https://github.com/Wilfred/company-try-hard/

@@ -20,7 +20,8 @@ end
 function wtr
     set -q argv[1]
     or set argv[1] "cassano delle murge"
-    curl "https://en.wttr.in/$argv[1]"
+    set -l params (echo $argv[1] | sed 's/ /%20/g')
+    curl "https://en.wttr.in/$params"
 end
 
 function enit
