@@ -36,13 +36,19 @@
   (pushnew! auto-mode-alist `(,md-key . gfm-mode)))
 
 
+(setq markdown-header-scaling t
+      markdown-header-scaling-values
+      '(1.25 1.15 1.08 1.00 0.90 0.75))
+
 ;; dont format snippets (list is negated)
-(add-to-list '+format-on-save-enabled-modes 'snippet-mode 'append)
-(add-to-list '+format-on-save-enabled-modes 'web-mode 'append)
-(add-to-list '+format-on-save-enabled-modes 'org-msg-edit-mode 'append)
-(add-to-list '+format-on-save-enabled-modes 'gitignore-mode 'append)
-(add-to-list '+format-on-save-enabled-modes 'lisp-data-mode 'append)
-(add-to-list '+format-on-save-enabled-modes 'conf-space-mod 'append)
-(add-to-list '+format-on-save-enabled-modes 'gfm-mode 'append)
-(add-to-list '+format-on-save-enabled-modes 'shell-mode 'append)
-(add-to-list '+format-on-save-enabled-modes 'python-mode 'append)
+(when (featurep! :editor format +onsave)
+  (dolist ((mode '(snippet-mode
+                   web-mode
+                   org-msg-edit-mode
+                   gitignore-mode
+                   lisp-data-mode
+                   conf-space-mode
+                   gfm-mode
+                   shell-mode
+                   python-mode)))
+    (add-to-list '+format-on-save-enabled-modes mode 'append)))
