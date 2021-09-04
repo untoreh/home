@@ -78,7 +78,6 @@
 ;; keep our folds close
 (setq vimish-fold-dir (concat doom-private-dir "vimish-fold"))
 
-
 ;; *****************************************************************************
 
 ;; backups
