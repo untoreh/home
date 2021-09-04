@@ -12,6 +12,7 @@
 
 (setq-default line-spacing 1)
 
+(load! "missing-fonts")
 (load! "ligatures")
 
 (setq doom-theme 'doom-dracula
@@ -92,3 +93,66 @@
   ;;     '(bar matches buffer-info remote-host buffer-position parrot selection-info)
   ;;     '(misc-info minor-modes checker input-method buffer-encoding major-mode process vcs "  "))
   )
+
+;; miniframe
+(use-package! mini-frame
+  :config
+  (setq
+   mini-frame-detach-on-hide nil
+   mini-frame-show-parameters
+        '((bottom . 10)
+          (width . 0.7)
+          (left . 0.5)))
+  (mini-frame-mode t))
+
+;; frame title
+(setq frame-title-format
+      '(""
+        (:eval
+         (if (s-contains-p (file-truename org-directory) (or buffer-file-name ""))
+             (replace-regexp-in-string
+              ".*/[0-9]*-?" "≋ "
+              (subst-char-in-string ?_ ?  buffer-file-name))
+           "%b"))
+        (:eval
+         (let ((project-name (projectile-project-name)))
+           (unless (string= "-" project-name)
+             (format (if (buffer-modified-p)  " ● %s" " ○ %s") project-name))))))
+
+;; doc colors
+(use-package! info-colors
+  :commands (info-colors-fontify-node))
+(add-hook 'Info-selection-hook 'info-colors-fontify-node)
+
+;; NOTE: theme magic is not useful if on windows, also not really a fun of "absolute" customization,
+;; every app should choose the colorscheme that it finds works best with their ui, trying to make
+;; everything "fit together" is 1. a lost cause, 2. counter-productive. What is important is to make themes
+;; "play" nice with each other, adjusting gammas and transparencies. If everything uses just once theme it gets dull.
+
+(use-package! keycast
+  :commands keycast-mode
+  :config
+  (define-minor-mode keycast-mode
+    "Show current command and its key binding in the mode line."
+    :global t
+    (if keycast-mode
+        (progn
+          (add-hook 'pre-command-hook 'keycast--update t)
+          (add-to-list 'global-mode-string '("" mode-line-keycast " ")))
+      (remove-hook 'pre-command-hook 'keycast--update)
+      (setq global-mode-string (remove '("" mode-line-keycast " ") global-mode-string))))
+  (custom-set-faces!
+    '(keycast-command :inherit doom-modeline-debug
+                      :height 0.9)
+    '(keycast-key :inherit custom-modified
+                  :height 1.1
+                  :weight bold)))
+
+;; NOTE: gif-screencast needs support for WSL, as a windows-side binary
+;; has to be used for screen recording
+(use-package! gif-screencast
+  :commands gif-screencast-mode
+  :config
+  (map! :mode gif-screencast-mode
+      :desc "start recording"
+      "<f9>" #'gif-screencast-start-or-stop))
