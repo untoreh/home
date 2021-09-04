@@ -27,3 +27,50 @@
     (let (kill-buffer-hook kill-buffer-query-functions)
       (kill-buffer))))
 
+(defun my/float-to-floor-precision (num prec)
+  " TODO: is this type stable? "
+  (string-to-number
+   (format (concat "%." (number-to-string prec) "f")
+           num)))
+
+;; (cl-defun my/first-common-prefix (candidates &optional (min-length 2))
+;;   (let ((common (try-completion "" candidates)))
+;;     (if (not (eq "" common))
+;;         common
+;;       (my/first-common-prefix (butlast candidates) min-length))))
+
+(cl-defun my/first-common-prefix (candidates)
+  (let ((can candidates)
+        (match ""))
+  (dotimes (_ (- (length candidates) 1))
+    (setq match (try-completion "" can))
+    (when (not (eq match ""))
+      (cl-return match))
+    (set can (butlast can)))
+  (if (not (eq "" match))
+      match
+    nil)))
+
+(defun my/company-update-first-common (&rest _)
+  (setq company-common (my/first-common-prefix company-candidates)))
+
+(defun my/ensure-symlink (trg name)
+  (let ((trg (file-truename trg))
+        (name (file-truename name)))
+  (cond
+    ((not (file-exists-p name))
+     (progn
+       (and (file-symlink-p name) (delete-file name))
+       (make-directory (file-name-directory name) t)
+       (make-symbolic-link trg name)))
+    ((and (file-symlink-p name)
+          (not (equal (file-truename trg)
+                      (file-truename name))))
+     (progn
+       (delete-file name)
+       (make-symbolic-link trg name)))
+    ((and (file-exists-p name)
+          (not (file-symlink-p name))) (error "%s is not a symlink" src))
+    )))
+
+(provide 'functions)
