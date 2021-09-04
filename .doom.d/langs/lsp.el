@@ -40,7 +40,5 @@
    ;; lsp-diagnostics-provider
    ;; lsp-completion-provider
    ;; text
-   lsp-response-timeout 360
-   lsp-enable-folding t
-   lsp-folding-range-limit 100)
+   )
   (lsp-treemacs-sync-mode 1))

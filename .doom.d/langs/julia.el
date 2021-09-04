@@ -3,6 +3,12 @@
 (setq-hook! 'julia-mode-hook
   lsp-auto-guess-root nil)
 
+(after! julia-mode
+  (add-hook! 'julia-mode-hook
+    (setq-local lsp-enable-folding t
+                lsp-folding-range-limit 100
+                lsp-response-timeout 300)))
+
 (use-package! lsp-julia
   :if (and (featurep! :lang julia +lsp)
 	   (not (featurep! :tools lsp +eglot)))
@@ -16,7 +22,6 @@
   (setq lsp-julia-default-environment
         (concat "~/.julia/environments/v"
                 (shell-command-to-string "julia --version | grep -oE '[0-9]\.[0-9]'"))))
-
 
 (use-package! julia-repl
   :commands julia-repl
@@ -349,27 +354,31 @@
 
 (after! f
   (cl-defun julia-franklin-sync-blog (&optional (src "/tmp/__site")
-                                                &optional (trg "~/dev/blog/__site.bak"))
+                                                &optional (trg (concat
+                                                                (getenv "HOME")
+                                                                "/dev/blog/__site.bak")))
     " Creates a symblink in target directory to src directory name if doesn't exist and syncs
 the SRC folder to the TRG folder"
     (interactive)
     (let ((src-sym (concat (file-name-directory trg) (f-base src))))
-      (when (not (file-directory-p src))
-        (if (not (file-exists-p src))
-            (make-process :name "sync-blog-tmp"
-                          :buffer nil
-                          :command `("rsync" "-a" ,(file-name-as-directory trg)
-                                     ,(file-name-as-directory src)))
-          (throw 'src-no-exists (format "%s directory exists but it's not a directory"))))
+      (if (or (not (file-directory-p src))
+              (directory-empty-p src))
+          (start-process "sync-blog-tmp" "*rsync*" "rsync"
+                         "-a" (file-name-as-directory trg)
+                         (file-name-as-directory src))
+        (when (not (file-directory-p src))
+          (error "%s exists but it's not a directory" src)))
       (if (not (and (file-symlink-p src-sym)
                     (equal (file-truename src-sym) src)))
           (if (file-exists-p src-sym)
-              (throw 'sym-exists (format "%s exists and is not a symlink" src-sym))
+              (error "%s exists and is not a symlink" src-sym)
             (make-symbolic-link src src-sym)))
       ;; sync from tmp to disk
-      (make-process :name "sync-blog-disk"
-                    :buffer nil
-                    :command `("rsync" "-a" ,src ,trg)))))
+      (if (file-directory-p trg)
+          (start-process "sync-blog-disk" "*rsync*"
+                         "rsync" "-a" (file-name-as-directory src)
+                         (file-name-as-directory trg))
+        (error "%s is not a valid target directory, wrong project?" trg)))))
 
 (defun julia-repl-toggle-debug ()
   (interactive)
