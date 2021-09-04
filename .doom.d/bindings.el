@@ -4,6 +4,11 @@
 
 
 ;; which key configs
+;; TODO: this doesn't look ideal:
+;; - whichkey should cache entries such that replacements are only applied
+;;   when a keymap is updated
+;; - a package should collect all the replacements and standardize the
+;;   ("long-name" => icon) pair
 ;; (setq which-key-allow-multiple-replacements t)
 ;; (after! which-key
 ;;   (pushnew!
@@ -11,6 +16,9 @@
 ;;    '(("" . "\\`+?evil[-:]?\\(?:a-\\)?\\(.*\\)") . (nil . "◂\\1"))
 ;;    '(("\\`g s" . "\\`evilem--?motion-\\(.*\\)") . (nil . "◃\\1"))
 ;;    ))
+;; TODO: a couple nice improvements for which-key
+;; - colorized entries based on the package/library they belong to
+;; - replace "prefix" entries with some form of previews
 
 ;; dap
 ;; ( "jm" #'dumb-jump-go-prompt)
@@ -19,13 +27,17 @@
 ;; ( "mdp" #'dap-ui-inspect-thing-at-point)
 
 ;; magit
-(if (featurep! :tools magit)
-    (map! :desc "amend commit"
-          :after (:tools magit)
-          :leader
-          :prefix "g"
-          :n "a"
-          (cmd! (magit-commit-amend))))
+(when (featurep! :tools magit)
+  (map! :desc "amend commit"
+        :after (:tools magit)
+        :leader
+        :prefix "g"
+        :n "a"
+        (cmd! (magit-commit-amend)))
+  ;; magit doesn't ship this option
+  (after! magit
+    (transient-append-suffix 'magit-merge "-A"
+      '("-A" "Allow unrelated histories" "--allow-unrelated-histories"))))
 
 ;; common
 (map! :leader
@@ -36,15 +48,16 @@
 
 ;; inserting inside a vterm should reset cursor position
 (map! :mode vterm-mode
-      :n "i" (cmd!
+      :n "o" (cmd!
               (vterm-reset-cursor-point)
               (evil-collection-vterm-insert)))
 
 ;; parrot
-(map!
- :after parrot
- :n "[r" #'parrot-rotate-prev-word-at-point
- :n "]r" #'parrot-rotate-next-word-at-point)
+(after! parrot-mode
+  (map!
+   :after parrot
+   :n "[r" #'parrot-rotate-prev-word-at-point
+   :n "]r" #'parrot-rotate-next-word-at-point))
 
 ;; jupyter
 (if (featurep! :lang org +jupyter)
@@ -104,40 +117,23 @@
               (throw 'done t))
             (org-babel-execute-src-block))))
       (goto-char p)
-      (set-marker p nil)))
-  (when (featurep! :completion ivy) (require 'ivy-hydra))
-  (defhydra hydra/org-babel (:hint nil :color amaranth)
-    "
-[_<return>_]: exec block
-[_n_]: next block       [_C-n_]: exec next        [_._]: exec to point
-[_p_]: previous block   [_C-p_]: exec previous    [_b_]: exec buffer
-[_<tab>_]: (un)fold     [_x_]: kill block         [_c_]: clone
-[_s_]: split            [_m_]: merge              [_q_]: quit
-"
-    ("<return>" org-babel-execute-src-block)
-    ("n" org-babel-next-src-block)
-    ("P" org-babel-next-src-block)
-    ("p" org-babel-previous-src-block)
-    ("N" org-babel-previous-src-block)
-    ("x" jupyter-org-kill-block-and-results)
-    ("C-n" org-babel-exec-next-block)
-    ("C-p" org-babel-exec-previous-block)
-
-    ("s" jupyter-org-split-src-block)
-    ("m" jupyter-org-merge-blocks)
-    ("c" jupyter-org-clone-block)
-
-    ("." org-babel-exec-to-point :color teal)
-    ("b" org-babel-execute-buffer :color teal)
-    ("<tab>" org-cycle :color yellow)
-    ("q" nil)
-    ("C-g" nil)))
+      (set-marker p nil))))
 
 (map! :after evil-org
       :map evil-org-mode-map
       :leader
       :desc "tangle" :n "ct" #'org-babel-tangle
       :desc "hydra org babel" :n "," #'hydra/org-babel/body)
+
+;; HYDRA
+(after! hydra (load! "hydra"))
+
+(map! :after hydra
+      :leader
+      :desc "hydra windows"
+      :n "w ," #'+hydra/window-nav/body
+      :n "q ," #'hydra-macro/body
+      )
 
 (map! :after org
       (:leader
@@ -155,7 +151,7 @@
        :desc "src block header arg"
        :n "i" #'org-babel-insert-header-arg))
 
-;; julia
+;; JULIA
 (map! :after julia-mode :mode julia-mode
       (:prefix ("SPC r" . "Julia REPL")
        :desc "focus and insert"
@@ -218,51 +214,46 @@
 (map! :leader
       :desc "Re-open the current file"
       :n "bR" #'save-close-reopen-file)
-(map! :after hydra
-      :leader
-      :desc "hydra windows"
-      :n "w ," #'+hydra/window-nav/body)
 
-(map! :mode gif-screencast-mode
-      :desc "start recording"
-      "<f9>" #'gif-screencast-start-or-stop)
+
 
 (map! :mode org-mode
       :leader
       :desc "font lock ensure on"
       :n "t t" (cmd!
-                (font-lock-mode t)
+                (font-lock-mode 1)
                 (font-lock-ensure)
-                (font-lock-mode t)))
+                (font-lock-mode 1)))
 
 ;; smartparens toggle motion beginning and end of current bracket enclosing;
 ;; we don't want to move within quotes so delete them from smartparens pairs
 ;; and add them back after motion
-(setq sp-no-motion-list '(wrap insert autoskip navigate escape))
-(comp-defun sp-add-quotes nil
-  (sp-pair "\"" "\"")
-  (sp-pair "\\\"" "\\\"")
-  (sp-pair "'" "'"))
-(comp-defun sp-rem-quotes nil
-  (sp-pair "\"" "\"" :actions sp-no-motion-list)
-  (sp-pair "\\\"" "\\\"" :actions sp-no-motion-list)
-  (sp-pair "'" "'" :actions sp-no-motion-list))
+(when (bound-and-true-p smartparens-global-mode)
+  (setq sp-no-motion-list '(wrap insert autoskip navigate escape))
+  (comp-defun sp-add-quotes nil
+              (sp-pair "\"" "\"")
+              (sp-pair "\\\"" "\\\"")
+              (sp-pair "'" "'"))
+  (comp-defun sp-rem-quotes nil
+              (sp-pair "\"" "\"" :actions sp-no-motion-list)
+              (sp-pair "\\\"" "\\\"" :actions sp-no-motion-list)
+              (sp-pair "'" "'" :actions sp-no-motion-list))
 
-(comp-defun my/move-to-current-parent-toggle nil
-  (interactive)
-  (sp-rem-quotes)
-  (let* ((inhibit-redisplay t)
-         (p (point))
-         (bgn (save-excursion
-                (sp-beginning-of-sexp)
-                (equal p (point)))))
-    (if bgn
-        (sp-end-of-sexp)
-      (sp-beginning-of-sexp)))
-  (sp-add-quotes))
+  (comp-defun my/move-to-current-parent-toggle nil
+              (interactive)
+              (sp-rem-quotes)
+              (let* ((inhibit-redisplay t)
+                     (p (point))
+                     (bgn (save-excursion
+                            (sp-beginning-of-sexp)
+                            (equal p (point)))))
+                (if bgn
+                    (sp-end-of-sexp)
+                  (sp-beginning-of-sexp)))
+              (sp-add-quotes))
 
-(map! :desc "Back and forth between current paren enclosing"
-      :n "g \\" #'my/move-to-current-parent-toggle)
+  (map! :desc "Back and forth between current paren enclosing"
+        :n "g \\" #'my/move-to-current-parent-toggle))
 
 ;; wechat
 (map! :desc "Start weechat"
@@ -274,7 +265,3 @@
        (weechat-switch-buffer
         (first (list (weechat--read-channel-name (not current-prefix-arg)))))))
 
-;; magit doesn't ship this option
-(after! magit
-  (transient-append-suffix 'magit-merge "-A"
-    '("-A" "Allow unrelated histories" "--allow-unrelated-histories")))
