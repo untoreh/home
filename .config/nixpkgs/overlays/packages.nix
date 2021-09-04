@@ -27,7 +27,7 @@ in {
     haproxy rsync sshpass pandoc zip docker cachix
 
     # langs
-    go-pup nixfmt golangci-lint shfmt libtidy nodejs shellcheck jq enchant2 ispell languagetool
+    go-pup nixfmt golangci-lint shfmt libtidy nodejs shellcheck jq enchant2 ispell aspell languagetool
     chrpath
 
     # runtimes
@@ -41,7 +41,7 @@ in {
   # sweet theme dep
   inherit (self.gnome3) adwaita-icon-theme;
   # dictionary
-  inherit (self.aspellDicts) en it;
+  inherit (self.aspellDicts) en en-computers en-science it;
   # dependencies
   inherit (self.weechatScripts) weechat-matrix;
   # gpu, waiting for nixpkgs integration
