@@ -1,4 +1,13 @@
 ;;; projects.el -*- lexical-binding: t; -*-
+;;;
+;; remove winner-ring from doom persp-mode because it doesn't seem to be working
+;; TODO: check workspaces module for persp-mode -> eyebrowse update
+(add-hook
+ 'doom-after-init-modules-hook
+ (lambda ()
+   (delete '(winner-ring . t) window-persistent-parameters)
+   (remove-hook 'persp-before-deactivate-functions #'+workspaces-save-winner-data-h)
+   (remove-hook 'persp-activated-functions #'+workspaces-load-winner-data-h)))
 
 ;; projectile
 (setq projectile-ignored-projects
@@ -8,7 +17,7 @@
       projectile-git-submodule-command
       "git submodule --quiet foreach 'echo $path' 2>/dev/null | tr '\\n' '\\0'"
       )
-(pushnew! projectile-globally-ignored-directories "~/win" ".venv" ".env" ".ipfs")
+(pushnew! projectile-globally-ignored-directories "~/win" ".venv" ".env" ".ipfs" ".archive" ".old")
 ;; allow project based vars
 (put 'projectile-generic-command 'safe-local-variable #'stringp)
 
@@ -67,6 +76,7 @@
     (my/toggle-session-timer session-name)
     ;; ensure we disable possible previous session timers before loading a new session
     (add-transient-hook! #'doom/load-session
-      (lambda (file) (my/toggle-session-timer (f-base file) t)))))
+      (lambda (file) (my/toggle-session-timer (f-base file) t)))
+      ))
 
-(add-hook 'emacs-startup-hook #'my/restore-session)
+;(add-hook 'doom-after-init-modules-hook #'my/restore-session)
