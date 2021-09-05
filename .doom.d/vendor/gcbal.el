@@ -59,48 +59,49 @@ When `gcbal-target-gctime' is too low and `gcbal-target-auto' is t.")
   " TODO: this is most likely the biggest bottle-neck "
   (alist-get 'rss (process-attributes (emacs-pid))))
 
-(defun gcbal--ma-ring ()
+(defun gcbal--ma-ring (ring)
   (let ((c 0)
         (s 0)
-        (size (ring-size gcbal--thresholds-ring)))
+        (size (ring-size ring)))
     (while (< c size)
-      (setq s (+ s (ring-ref gcbal--thresholds-ring c)))
+      (setq s (+ s (ring-ref ring c)))
       (cl-incf c))
     (/ s size)))
 
-(defun gcbal--log-start ()
-  (setq gcbal--gc-start (current-time)))
-
 (defun gcbal--adjust-threshold ()
-  (let* ((time (current-time)) ;; this needs to be first
-         (consed (-sum (gcbal--diff-cons-table)))
+  (let* ((consed (-sum (gcbal--diff-cons-table)))
          (min-gctime (* gcbal--unit-gctime
                         (gcbal--emacs-memory-usage)))
          (target-offset (- gcbal--adjusted-target-gctime min-gctime))
          (below-base (< target-offset 0.))
-         (last-offset (max 0. (- (float-time (time-since gcbal--gc-start))
-                                 min-gctime
-                                 ;; remove let time from gc time calc
-                                 (float-time (time-since time)))))
+         (last-gctime (- gc-elapsed gcbal--elapsed))
+         (last-offset (max 0. (- last-gctime min-gctime)))
          (threshold (if (and (not (equal 0. last-offset))
                              (not below-base))
                         (truncate (/ (* target-offset consed) last-offset))
-                      gc-cons-threshold)))
+                      ;; If we can't tune gc because outside min and max,
+                      ;; double the threshold, because in either case it is
+                      ;; going to increase
+                      (* 2 gc-cons-threshold))))
     (when below-base
       (message "target time for GC cannot be reached
 because %fs falls below the current minimum time of %fs"
                gcbal-target-gctime min-gctime)
       (when gcbal-target-auto
         (cl-incf gcbal--adjusted-target-gctime min-gctime)))
+
     (ring-insert gcbal--thresholds-ring  threshold)
-    (setq gc-cons-threshold (gcbal--ma-ring))
+    (setq gc-cons-threshold (gcbal--ma-ring gcbal--thresholds-ring)
+          gcbal--elapsed gc-elapsed)
+
     (when gcbal-verbose
       (ring-insert gcbal--offsets-ring last-offset)
       (message "gcbal: min %f, trg: %f, last: %f, cns: %f, rat: %f, accu: %f"
                min-gctime target-offset last-offset
                consed (/ target-offset last-offset)
-               (/ (-sum gcbal--offsets-ring)
-                  (ring-size gcbal--offsets-ring))))))
+               (gcbal--ma-ring gcbal--offsets-ring)
+               )
+      )))
 
 (cl-defun gcbal--calc-base-gctime (&optional (times 10))
   (garbage-collect)
@@ -113,6 +114,7 @@ because %fs falls below the current minimum time of %fs"
     (setq
      gcbal--unit-gctime (* gcbal--system-constant gcbal--base-gctime)
      gcbal--adjusted-target-gctime gcbal-target-gctime
+     gcbal--elapsed gc-elapsed
      gc-cons-threshold threshold)
     (dotimes (i gcbal-ring-size)
       (ring-insert gcbal--thresholds-ring threshold))))
@@ -140,6 +142,8 @@ because %fs falls below the current minimum time of %fs"
     (pcache-put repo 'gcbal--system-constant gcbal--system-constant)
     (pcache-put repo 'gcbal--base-gctime gcbal--base-gctime)))
 
+(defvar gcbal--gcfun (symbol-function #'garbage-collect))
+
 ;;;###autoload
 (define-minor-mode gcbal-mode
   "Minor mode to tweak Garbage Collection strategy."
@@ -149,15 +153,15 @@ because %fs falls below the current minimum time of %fs"
       (progn
         (when (boundp #'gcmh-mode)
           (gcmh-mode -1))
-        (advice-mapc
-         (lambda (f p) (throw 'advice-error
-                         "can't enable gcbal-mode because `'garbage-collect is advised"))
-         #'garbage-collect)
+
         (gcbal--reset-threshold)
         (gcbal--reset-consed-table)
-        (advice-add #'garbage-collect :before #'gcbal--log-start)
-        (advice-add #'garbage-collect :after #'gcbal--adjust-threshold))
-    (advice-remove #'garbage-collect #'gcbal--log-start)
-    (advice-remove #'garbage-collect #'gcbal--adjust-threshold)))
+
+        (fset #'garbage-collect (lambda))
+        (add-hook 'post-gc-hook #'gcbal--adjust-threshold)
+        ;; (fset #'garbage-collect #'gcbal--garbage-collect)
+        )
+    (fset #'garbage-collect gcbal--gcfun)
+    (remove-hook 'post-gc-hook #'gcbal--adjust-threshold)))
 
 (provide 'gcbal)
