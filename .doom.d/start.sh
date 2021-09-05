@@ -3,6 +3,10 @@
 . ~/.profile
 cd ~/.emacs.d
 
+# this is a quirk with projectile failing to load if a project folder
+# doesn't exist
+mkdir /tmp/__site
+
 # export EMACS=$(which emacs)
 # export EMACS=~/.nix-profile/bin/emacs
 export EMACS=/usr/bin/emacs
