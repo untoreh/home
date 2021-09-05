@@ -21,6 +21,7 @@
             (signal (car e) (cadr e)))))))
 
 (load! "lisp")
+(load! "spell")
 (if (featurep! :lang shell)
     (load! "shell"))
 (if (featurep! :lang python)
@@ -41,6 +42,7 @@
       '(1.25 1.15 1.08 1.00 0.90 0.75))
 
 ;; dont format snippets (list is negated)
+;; FIXME: this produces a eager macro expansion error on startup
 (when (featurep! :editor format +onsave)
   (dolist ((mode '(snippet-mode
                    web-mode

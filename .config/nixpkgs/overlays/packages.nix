@@ -7,14 +7,14 @@ let
 in {
   inherit (super)
   # shell
-    eternal-terminal browsh zsh git-hub git-lfs pet tmux fzf fd bat
+    eternal-terminal browsh zsh git-hub git-lfs delta pet tmux fzf fd bat
     ripgrep zoxide exa nushell starship direnv
     # utils
     wego translate-shell weechat krita calibre koreader youtube-dl
     # files and backups
     duplicacy borgbackup rclone syncthing
     # desktop
-    mako scrot
+    mako scrot pywal
     # reduntant
     # xclip wl-clipboard
     # theme
@@ -27,7 +27,7 @@ in {
     haproxy rsync sshpass pandoc zip docker cachix
 
     # langs
-    go-pup nixfmt golangci-lint shfmt libtidy nodejs shellcheck jq enchant2 ispell aspell languagetool
+    go-pup nixfmt golangci-lint shfmt libtidy nodejs shellcheck jq enchant2 ispell languagetool
     chrpath
 
     # runtimes

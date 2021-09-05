@@ -1,0 +1,3 @@
+#!/bin/sh
+
+exec /usr/bin/aspell --local-data-dir ~/.nix-profile/lib/aspell $@

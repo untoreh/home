@@ -8,6 +8,7 @@ android-tools
 vulkan-icd-loader
 aura-bin
 emacs-gcc-wayland-devel-bin
+aspell
 neovim
 mesa-d3d12
 libgccjit
