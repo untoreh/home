@@ -6,36 +6,36 @@
         (print (concat (symbol-name mode) "-mode"))
          (set-ligatures! (concat mode "-mode")
            ;; Functional
-           :lambda        "lambda keyword"
-           :def           "function keyword"
+           :lambda        "lambda"
+           :def           "function"
            :composition   "composition"
-           :map           "map/dictionary keyword"
+           :map           "map/dictionary"
            ;; Types
-           :null          "null type"
-           :true          "true keyword"
-           :false         "false keyword"
-           :int           "int keyword"
-           :float         "float keyword"
-           :str           "string keyword"
-           :bool          "boolean keywork"
-           :list          "list keyword"
+           :null          "null"
+           :true          "true"
+           :false         "false"
+           :int           "int"
+           :float         "float"
+           :str           "string"
+           :bool          "boolean"
+           :list          "list"
            ;; Flow
-           :not           "not operator"
-           :in            "in operator"
-           :not-in        "not in operator"
-           :and           "and keyword"
-           :or            "or keyword"
-           :for           "for keyword"
-           :some          "some keyword"
+           :not           "not"
+           :in            "in"
+           :not-in        "not in"
+           :and           "and"
+           :or            "or"
+           :for           "for"
+           :some          "some"
            :return        "return"
-           :yield         "yeild"
+           :yield         "yield"
            ;; Other
-           :union         "Union keyword"
-           :intersect     "Intersect keyword"
-           :diff          "diff keyword"
-           :tuple         "Tuple Keyword "
-           :pipe          "Pipe Keyword" ;; FIXME: find a non-private char
-           :dot           "Dot operator")) modes))
+           :union         "Union"
+           :intersect     "Intersect"
+           :diff          "diff"
+           :tuple         "Tuple"
+           :pipe          "Pipe" ;; FIXME: find a non-private char
+           :dot           "Dot")) modes))
 
 (after! ligatures
   (ligatures--to-modes enabled-langs))
