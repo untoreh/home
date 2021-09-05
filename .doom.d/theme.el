@@ -3,14 +3,7 @@
 ;; Input is SLOW with ligatures enabled!
 ;; (setq doom-font (font-spec :family "Input Mono Compressed" :size 15 :weight 'normal)
 ;; 	doom-variable-pitch-font (font-spec :family "Input Sans Condensed" :size 12))
-(setq
- doom-font (font-spec :family "Hack" :size 14 :weight 'normal)
- doom-big-font (font-spec :family "iA Writer Duospace" :size 24 :weight 'bold)
- doom-variable-pitch-font (font-spec :family "Barlow" :size 16)
- doom-serif-font (font-spec :family "Fantasque Sans Mono" :size 16)
- doom-unicode-font (font-spec :family "JuliaMono"))
 
-(setq-default line-spacing 1)
 
 (load! "missing-fonts")
 (load! "ligatures")
@@ -18,6 +11,15 @@
 (setq doom-theme 'doom-dracula
       doom-dracula-brighter-modeline t
       doom-dracula-colorful-headers t)
+
+(setq
+ doom-font (font-spec :family "Hack" :size 14 :weight 'normal)
+ doom-big-font (font-spec :family "iA Writer Duospace" :size 24 :weight 'bold)
+ doom-variable-pitch-font (font-spec :family "Barlow" :size 16)
+ doom-unicode-font (font-spec :family "JuliaMono" :size 16)
+ doom-serif-font (font-spec :family "Fantasque Sans Mono" :size 16))
+
+(setq-default line-spacing 1)
 
 ;; nyan and parrot only in the "doom" modeline
 (when (not (featurep! :ui modeline +light))
@@ -72,7 +74,7 @@
 
 ;;
 ;; https://github.com/hlissner/doom-emacs/issues/2967
-(after! doom-modeline
+(after! doom-dracula-theme
   (custom-set-faces!
     '(mode-line :family "Input Mono Condensed" :height 0.99)
     '(mode-line-inactive :family "Input Mono Condensed" :height 0.99))

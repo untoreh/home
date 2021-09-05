@@ -10,16 +10,17 @@
    (remove-hook 'persp-activated-functions #'+workspaces-load-winner-data-h)))
 
 ;; projectile
-(setq projectile-ignored-projects
-      '("/tmp" "~/tmp" "~/.local" "~/.cache" ".npm" "~/.emacs.d/.local/straight/repos/")
-      projectile-project-search-path '("~/dev")
-      projectile-enable-caching t
-      projectile-git-submodule-command
-      "git submodule --quiet foreach 'echo $path' 2>/dev/null | tr '\\n' '\\0'"
-      )
-(pushnew! projectile-globally-ignored-directories "~/win" ".venv" ".env" ".ipfs" ".archive" ".old")
-;; allow project based vars
-(put 'projectile-generic-command 'safe-local-variable #'stringp)
+(after! projectile
+  (setq projectile-ignored-projects
+        '("/tmp" "~/tmp" "~/.local" "~/.cache" ".npm" "~/.emacs.d/.local/straight/repos/")
+        projectile-project-search-path '("~/dev")
+        projectile-enable-caching t
+        projectile-git-submodule-command
+        "git submodule --quiet foreach 'echo $path' 2>/dev/null | tr '\\n' '\\0'"
+        )
+  (pushnew! projectile-globally-ignored-directories "~/win" ".venv" ".env" ".ipfs" ".archive" ".old")
+  ;; allow project based vars
+  (put 'projectile-generic-command 'safe-local-variable #'stringp))
 
 (defun projectile-ignored-project-function (filepath)
   "Return t if FILEPATH is within any of `projectile-ignored-projects'"
@@ -79,4 +80,4 @@
       (lambda (file) (my/toggle-session-timer (f-base file) t)))
       ))
 
-(add-hook 'emacs-startup-hook #'my/restore-session)
+;(add-hook 'emacs-startup-hook #'my/restore-session)

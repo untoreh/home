@@ -32,7 +32,7 @@
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        hydra
        indent-guides     ; highlighted indent columns
-       ;(ligatures +extra +fira)         ; ligatures and symbols to make your code pretty again
+       (ligatures +extra +fira)         ; ligatures and symbols to make your code pretty again
        ;; minimap
        (modeline +light)          ; snazzy, Atom-inspired modeline, plus API
        nav-flash         ; blink cursor line after big motions
@@ -40,7 +40,7 @@
        (popup +defaults +all)   ; tame sudden yet inevitable temporary windows
        ;; tabs
        (treemacs +lsp)          ; a project drawer, like neotree but cooler
-       unicode           ; extended unicode support for various languages
+       ; unicode           ; NOTE: we use "Julia Mono" this module overrides doom-unicode-font
        vc-gutter         ; vcs diff in the fringe
        vi-tilde-fringe   ; fringe tildes to mark beyond EOB
        (window-select +switch-window +numbers)     ; visually switch windows
@@ -76,7 +76,7 @@
 
        :checkers
        (syntax +childframe)              ; tasing you for every semicolon you forget
-       (spell +enchant +everywhere)             ; tasing you for misspelling mispelling
+       (spell +flyspell +aspell +everywhere)             ; tasing you for misspelling mispelling
        grammar           ; tasing grammar mistake every you make
 
        :tools
