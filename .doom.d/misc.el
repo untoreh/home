@@ -88,14 +88,21 @@
 ;;    :after-load-function (lambda (b &rest _)
 ;;                           (with-current-buffer b (magit-refresh)))))
 
+(map! :mode emacs-lisp-mode
+      :localleader
+      :desc "compile and load buffer"
+      "e B" #'emacs-lisp-native-compile-and-load)
+
 ;; gargbace collector mode
 (use-package! gcbal
   :init
   (defun gcmh-mode (&rest args))
   (defun gcmh-set-high-threshold (&rest args))
   :config
-  (native-compile-async (locate-library "gcbal") t t)
+  (when (not (subrp (symbol-function #'gcbal-mode)))
+    (native-compile-async (locate-library "gcbal") t t))
   (setq
+   gcbal-verbose t
    gcbal-target-gctime 0.2
    gcbal-target-auto t)
   (gcbal-mode))

@@ -142,28 +142,28 @@
   (ignore-errors (apply orig-fn args)))
 
 ;; Theming, all from tecosaur
-  (add-hook 'org-mode-hook #'+org-pretty-mode)
-  (custom-set-faces!
-    '(outline-1 :weight extra-bold :height 1.25)
-    '(outline-2 :weight bold :height 1.15)
-    '(outline-3 :weight bold :height 1.12)
-    '(outline-4 :weight semi-bold :height 1.09)
-    '(outline-5 :weight semi-bold :height 1.06)
-    '(outline-6 :weight semi-bold :height 1.03)
-    '(outline-8 :weight semi-bold)
-    '(outline-9 :weight semi-bold))
-  (custom-set-faces!
-    '(org-document-title :height 1.2))
+(add-hook 'org-mode-hook #'+org-pretty-mode)
+(custom-set-faces!
+  '(outline-1 :weight extra-bold :height 1.25)
+  '(outline-2 :weight bold :height 1.15)
+  '(outline-3 :weight bold :height 1.12)
+  '(outline-4 :weight semi-bold :height 1.09)
+  '(outline-5 :weight semi-bold :height 1.06)
+  '(outline-6 :weight semi-bold :height 1.03)
+  '(outline-8 :weight semi-bold)
+  '(outline-9 :weight semi-bold))
+(custom-set-faces!
+  '(org-document-title :height 1.2))
 
-  (setq org-fontify-quote-and-verse-blocks t)
+(setq org-fontify-quote-and-verse-blocks t)
 
-  ;; TODO: try this in other places that feel slow
-  (defun locally-defer-font-lock ()
-    "Set jit-lock defer and stealth, when buffer is over a certain size."
-    (when (> (buffer-size) 50000)
-      (setq-local jit-lock-defer-time 0.05
-                  jit-lock-stealth-time 1)))
-  (add-hook 'org-mode-hook #'locally-defer-font-lock)
+;; TODO: try this in other places that feel slow
+(defun locally-defer-font-lock ()
+  "Set jit-lock defer and stealth, when buffer is over a certain size."
+  (when (> (buffer-size) 50000)
+    (setq-local jit-lock-defer-time 0.05
+                jit-lock-stealth-time 1)))
+(add-hook 'org-mode-hook #'locally-defer-font-lock)
 
 (after! org-superstar
   (setq org-superstar-headline-bullets-list '("◉" "○" "✸" "✿" "✤" "✜" "◆" "▶")
@@ -221,46 +221,46 @@
             :priority_d   ,(propertize "⬇" 'face 'all-the-icons-green)
             :priority_e   ,(propertize "❓" 'face 'all-the-icons-blue)))
 (set-ligatures! 'org-mode
-                :merge t
-                :checkbox      "[ ]"
-                :pending       "[-]"
-                :checkedbox    "[X]"
-                :list_property "::"
-                :em_dash       "---"
-                :ellipsis      "..."
-                :arrow_right   "->"
-                :arrow_left    "<-"
-                :title         "#+title:"
-                :subtitle      "#+subtitle:"
-                :author        "#+author:"
-                :date          "#+date:"
-                :property      "#+property:"
-                :options       "#+options:"
-                :startup       "#+startup:"
-                :macro         "#+macro:"
-                :html_head     "#+html_head:"
-                :html          "#+html:"
-                :latex_class   "#+latex_class:"
-                :latex_header  "#+latex_header:"
-                :beamer_header "#+beamer_header:"
-                :latex         "#+latex:"
-                :attr_latex    "#+attr_latex:"
-                :attr_html     "#+attr_html:"
-                :attr_org      "#+attr_org:"
-                :begin_quote   "#+begin_quote"
-                :end_quote     "#+end_quote"
-                :caption       "#+caption:"
-                :header        "#+header:"
-                :begin_export  "#+begin_export"
-                :end_export    "#+end_export"
-                :results       "#+RESULTS:"
-                :property      ":PROPERTIES:"
-                :end           ":END:"
-                :priority_a    "[#A]"
-                :priority_b    "[#B]"
-                :priority_c    "[#C]"
-                :priority_d    "[#D]"
-                :priority_e    "[#E]")
+  :merge t
+  :checkbox      "[ ]"
+  :pending       "[-]"
+  :checkedbox    "[X]"
+  :list_property "::"
+  :em_dash       "---"
+  :ellipsis      "..."
+  :arrow_right   "->"
+  :arrow_left    "<-"
+  :title         "#+title:"
+  :subtitle      "#+subtitle:"
+  :author        "#+author:"
+  :date          "#+date:"
+  :property      "#+property:"
+  :options       "#+options:"
+  :startup       "#+startup:"
+  :macro         "#+macro:"
+  :html_head     "#+html_head:"
+  :html          "#+html:"
+  :latex_class   "#+latex_class:"
+  :latex_header  "#+latex_header:"
+  :beamer_header "#+beamer_header:"
+  :latex         "#+latex:"
+  :attr_latex    "#+attr_latex:"
+  :attr_html     "#+attr_html:"
+  :attr_org      "#+attr_org:"
+  :begin_quote   "#+begin_quote"
+  :end_quote     "#+end_quote"
+  :caption       "#+caption:"
+  :header        "#+header:"
+  :begin_export  "#+begin_export"
+  :end_export    "#+end_export"
+  :results       "#+RESULTS:"
+  :property      ":PROPERTIES:"
+  :end           ":END:"
+  :priority_a    "[#A]"
+  :priority_b    "[#B]"
+  :priority_c    "[#C]"
+  :priority_d    "[#D]"
+  :priority_e    "[#E]")
 (plist-put +ligatures-extra-symbols :name "⁍")
 
 

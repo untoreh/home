@@ -33,6 +33,7 @@
    (format (concat "%." (number-to-string prec) "f")
            num)))
 
+;; recursive version of my/first-common-prefix
 ;; (cl-defun my/first-common-prefix (candidates &optional (min-length 2))
 ;;   (let ((common (try-completion "" candidates)))
 ;;     (if (not (eq "" common))
@@ -42,7 +43,7 @@
 (cl-defun my/first-common-prefix (candidates)
   (let ((can candidates)
         (match ""))
-  (dotimes (_ (- (length candidates) 1))
+  (cl-dotimes (_ (- (length candidates) 1))
     (setq match (try-completion "" can))
     (when (not (eq match ""))
       (cl-return match))
@@ -55,7 +56,8 @@
   (setq company-common (my/first-common-prefix company-candidates)))
 
 (defun my/ensure-symlink (trg name)
-  (let ((trg (file-truename trg))
+  (let ((orig name)
+        (trg (file-truename trg))
         (name (file-truename name)))
   (cond
     ((not (file-exists-p name))
@@ -70,7 +72,10 @@
        (delete-file name)
        (make-symbolic-link trg name)))
     ((and (file-exists-p name)
-          (not (file-symlink-p name))) (error "%s is not a symlink" src))
+          (not (file-symlink-p orig))) (error "%s is not a symlink" orig))
     )))
+
+(defun my/concat-path (&rest parts)
+  (-reduce (lambda (a b) (expand-file-name b a)) parts))
 
 (provide 'functions)
