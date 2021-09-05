@@ -16,13 +16,17 @@
             (setq-default abbrev-mode t)
             (setq abbrev-file-name (expand-file-name "abbrev.el" doom-private-dir))))
 
+
+(defun +company/dabbrev-backend (command &optional arg &rest ignored)
+  (if (derived-mode-p 'prog-mode)
+      (company-dabbrev-code command arg ignored)
+    (company-dabbrev command arg ignored)))
+
 ;; add dabbrev to languages backends
 (set-company-backend! 'prog-mode
   '(:separate company-capf
     company-yasnippet
-    (if (derived-mode-p 'prog-mode)
-       #'company-dabbrev-code
-     #'company-dabbrev)
+    +company/dabbrev-backend
     ))
 
 (map! :after company
@@ -57,6 +61,8 @@
   ;; and without absolute matching (doesn't have to be shared among ALL candidates)
   (advice-add 'company-update-candidates :after
               #'my/company-update-first-common)
+  ;; (advice-remove 'company-update-candidates
+  ;;             #'my/company-update-first-common)
   (setq
    company-async-redisplay-delay 0.01
    company-idle-delay 0.1
@@ -75,7 +81,6 @@
             'company-pseudo-tooltip-frontend
             'company-preview-common-frontend
             ))
-
 
 
 ;; NOTE: not used because we decided to preview the _common_ part of candidates
