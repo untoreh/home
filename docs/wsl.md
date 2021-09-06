@@ -76,6 +76,8 @@ mountFsTab=true
 appendWindowsPath = False
 ```
 
+## WSL doesn't work because virtualization is not enabled
+On AMD platforms the options to enable in the BIOS are `SVM` and `NX mode`.
 
 # Not WSL related
 
