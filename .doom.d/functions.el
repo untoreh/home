@@ -33,6 +33,15 @@
    (format (concat "%." (number-to-string prec) "f")
            num)))
 
+(defmacro with-no-gc (body)
+  " Evaluate BODY ensuring no garbage collection occurs "
+  `(let ((gcfun (symbol-function #'garbage-collect))
+         (gc-cons-threshold most-positive-fixnum))
+     (fset #'garbage-collect (lambda))
+     (unwind-protect
+         ,body
+       (fset #'garbage-collect gcfun))))
+
 ;; recursive version of my/first-common-prefix
 ;; (cl-defun my/first-common-prefix (candidates &optional (min-length 2))
 ;;   (let ((common (try-completion "" candidates)))
@@ -41,16 +50,16 @@
 ;;       (my/first-common-prefix (butlast candidates) min-length))))
 
 (cl-defun my/first-common-prefix (candidates)
-  (let ((can candidates)
-        (match ""))
-  (cl-dotimes (_ (- (length candidates) 1))
-    (setq match (try-completion "" can))
-    (when (not (eq match ""))
-      (cl-return match))
-    (set can (butlast can)))
-  (if (not (eq "" match))
-      match
-    nil)))
+  (let* ((can (seq-into candidates 'vector))
+         (n (length can))
+         (match ""))
+    (cl-dotimes (i (- n 1))
+      (setf match (try-completion "" (seq-into (seq-subseq can i (+ i 2)) 'list)))
+      (when (not (eq match ""))
+        (cl-return match)))
+    (if (not (eq "" match))
+        match
+      nil)))
 
 (defun my/company-update-first-common (&rest _)
   (setq company-common (my/first-common-prefix company-candidates)))

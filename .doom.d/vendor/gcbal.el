@@ -116,7 +116,7 @@ because %fs falls below the current minimum time of %fs"
      gcbal--adjusted-target-gctime gcbal-target-gctime
      gcbal--elapsed gc-elapsed
      gc-cons-threshold threshold)
-    (dotimes (i gcbal-ring-size)
+    (dotimes (_ gcbal-ring-size)
       (ring-insert gcbal--thresholds-ring threshold))))
 
 (defun gcbal--adjust-system-constant (&optional reset)
@@ -143,6 +143,21 @@ because %fs falls below the current minimum time of %fs"
     (pcache-put repo 'gcbal--base-gctime gcbal--base-gctime)))
 
 (defvar gcbal--gcfun (symbol-function #'garbage-collect))
+;; (let ((gc-data (garbage-collect)))
+;;     (mapc (lambda (s) (let ((s (cddr s)))
+;;                      (dotimes (i (length s)) (setf (nth i s) 0)))) gc-data)
+;;     (lambda () (cdr gc-data)))
+(defconst gcbal--stub
+  (lambda () '((conses 16 0 0)
+          (symbols 48 0 0)
+          (strings 32 0 0)
+          (string-bytes 1 0)
+          (vectors 16 0)
+          (vector-slots 8 0 0)
+          (floats 8 0 0)
+          (intervals 56 0 0)
+          (buffers 0 0))))
+
 
 ;;;###autoload
 (define-minor-mode gcbal-mode
@@ -157,11 +172,12 @@ because %fs falls below the current minimum time of %fs"
         (gcbal--reset-threshold)
         (gcbal--reset-consed-table)
 
-        (fset #'garbage-collect (lambda))
+        (fset #'garbage-collect gcbal--stub)
         (add-hook 'post-gc-hook #'gcbal--adjust-threshold)
         ;; (fset #'garbage-collect #'gcbal--garbage-collect)
         )
     (fset #'garbage-collect gcbal--gcfun)
-    (remove-hook 'post-gc-hook #'gcbal--adjust-threshold)))
+    (remove-hook 'post-gc-hook #'gcbal--adjust-threshold)
+    (setq gc-cons-threshold 800000)))
 
 (provide 'gcbal)
