@@ -87,4 +87,12 @@
 (defun my/concat-path (&rest parts)
   (-reduce (lambda (a b) (expand-file-name b a)) parts))
 
+(after! find-func
+  (let ((filepath (cdr (find-function-library #'my/script-dir))))
+    (native-compile-async filepath t nil)))
+
 (provide 'functions)
+(require'functions)
+
+;;; functions.el ends here
+;;;
