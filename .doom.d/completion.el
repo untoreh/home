@@ -24,8 +24,10 @@
 
 ;; add dabbrev to languages backends
 (set-company-backend! 'prog-mode
-  '(:separate company-capf
+  '(:separate
+    company-keywords
     company-yasnippet
+    company-capf
     +company/dabbrev-backend
     ))
 
@@ -45,11 +47,6 @@
       ;; this apparently is how to map `C-S-<tab>' (or `C-<backtab>')
       :i "C-<iso-lefttab>" #'tab-to-tab-stop)
 
-(use-package! functions
-  :after company
-  :config
-  (native-compile-async
-   (locate-library "functions")) t t)
 
 ;; TODO: lookup ggtags.el
 (use-package! company

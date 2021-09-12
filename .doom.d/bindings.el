@@ -211,11 +211,10 @@
 (after! evil-escape
   (setq evil-escape-excluded-major-modes
         (delete 'vterm-mode evil-escape-excluded-major-modes )))
+
 (map! :leader
       :desc "Re-open the current file"
       :n "bR" #'save-close-reopen-file)
-
-
 
 (map! :mode org-mode
       :leader
