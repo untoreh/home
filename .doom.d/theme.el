@@ -158,3 +158,9 @@
   (map! :mode gif-screencast-mode
       :desc "start recording"
       "<f9>" #'gif-screencast-start-or-stop))
+
+(use-package! emojify
+  :if (featurep! :ui emoji)
+  :init
+  ;; don't emojify strings
+  (setq emojify-program-contexts '(comments)))
