@@ -175,3 +175,6 @@
 
 ;; pacache needed by gcbal
 (package! pcache)
+
+;; ebooks
+(package! calibredb)

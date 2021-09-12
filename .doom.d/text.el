@@ -41,3 +41,10 @@
 ;; string inflection
 ;; https://github.com/akicho8/string-inflection
 ;;
+
+(use-package! calibredb
+  :commands calibredb
+  :config
+  (setq calibredb-root-dir "~/Documents/books"
+        calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir)
+        calibredb-library-alist '(("~/Documents/books"))))
