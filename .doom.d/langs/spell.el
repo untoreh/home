@@ -26,10 +26,9 @@
  (expand-file-name ".ispell_personal" doom-private-dir))
 
 ;; prefer ripgrep over grep for ispell lookup
-(let ((rg (executable-find "rg")))
-  (when rg
-    (setq ispell-grep-command rg
-          ispell-grep-options "-i")))
+(when-let ((rg (executable-find "rg")))
+  (setq ispell-grep-command rg
+        ispell-grep-options "-i"))
 
 
 (after! company-ispell
