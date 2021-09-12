@@ -11,7 +11,8 @@
   (dap-debug-last))
 
 (use-package! lsp-mode
-  :if (featurep! :tools lsp)
+  :if (and (featurep! :tools lsp)
+           (not (featurep! :tools lsp +eglot)))
   :config
   (setq
    lsp-auto-configure t
