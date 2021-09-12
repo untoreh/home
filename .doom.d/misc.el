@@ -74,7 +74,9 @@
 
 ;; not prompt for vterm compilation
 (when (featurep! :term vterm)
-  (setq vterm-always-compile-module t))
+  (setq vterm-always-compile-module t
+        ;; make vterm buffer updates a little faster
+        vterm-timer-delay 0.033))
 
 ;; save magit buffers
 ;; this doesn't work because problems with lexical scope
@@ -93,8 +95,10 @@
       :desc "compile and load buffer"
       "e B" #'emacs-lisp-native-compile-and-load)
 
-;; gargbace collector mode
+;; garbage collector mode
 (use-package! gcbal
+  ;; enable it after undo-tree because undo-tree overrides `post-gc-hook'?
+  :after undo-tree
   :init
   (defun gcmh-mode (&rest args))
   (defun gcmh-set-high-threshold (&rest args))
@@ -102,7 +106,7 @@
   (when (not (subrp (symbol-function #'gcbal-mode)))
     (native-compile-async (locate-library "gcbal") t t))
   (setq
-   gcbal-verbose t
+   gcbal-verbose nil
    gcbal-target-gctime 0.2
    gcbal-target-auto t)
-  (gcbal-mode))
+  (gcbal-mode 1))
