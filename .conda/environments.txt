@@ -1,1 +1,2 @@
 /home/fra/.julia/conda/3
+/home/fra/.julia/conda/3/envs/main
