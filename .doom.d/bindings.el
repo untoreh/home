@@ -2,6 +2,10 @@
 ;;;
 (setq-default evil-escape-key-sequence "fd")
 
+;; convenience
+(map! :leader
+      "h y" #'describe-keymap)
+
 
 ;; which key configs
 ;; TODO: this doesn't look ideal:
@@ -257,7 +261,7 @@
 ;; wechat
 (map! :desc "Start weechat"
       :leader
-      :n "o c"
+      :nv "o c"
       (cmd!
        (when (not (weechat-connected-p))
          (weechat-connect "localhost" 9000 nil 'plain t))

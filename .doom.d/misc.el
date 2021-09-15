@@ -106,7 +106,7 @@
   (when (not (subrp (symbol-function #'gcbal-mode)))
     (native-compile-async (locate-library "gcbal") t t))
   (setq
-   gcbal-verbose nil
+   gcbal-verbose t
    gcbal-target-gctime 0.2
    gcbal-target-auto t)
   (gcbal-mode 1))
