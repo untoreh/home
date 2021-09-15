@@ -24,7 +24,7 @@ in {
     # input-fonts
     # system (don't use fish from nix because of locales)
     man less thefuck glibcLocales tini libqalculate dhcp bandwhich consul
-    haproxy rsync sshpass pandoc zip docker cachix
+    haproxy rsync sshpass pandoc zip docker cachix msmtp
 
     # langs
     go-pup nixfmt golangci-lint shfmt libtidy nodejs shellcheck jq enchant2 ispell languagetool
@@ -45,8 +45,9 @@ in {
   # dependencies
   inherit (self.weechatScripts) weechat-matrix;
   # gpu, waiting for nixpkgs integration
-  # nixGLDefault
-  inherit (nixgl.auto) nixGLDefault;
+  # nixGLDefault, disabled because of "unsupported-package" issue
+  # inherit (nixgl.auto) nixGLDefault;
+  inherit (nixgl) nixVulkanIntel;
   # wait for mesa-d3d12
   # python
   inherit (super.python38Packages) supervisor grip ansible pip black flake8;
