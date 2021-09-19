@@ -111,7 +111,6 @@
   (let ((calibredb-root-dir calibredb-opds-root-url))
     (apply func (list cands field input))))
 
-(advice-remove #'calibredb-set-metadata-process #'calibredb-set-metadata-process-server)
 ;; calibredb
 (map! :desc "calibredb" :leader "o l" #'calibredb)
 
@@ -119,6 +118,7 @@
       ;; :ne "C" #'calibredb-set-custom-at-point
       :ne "M-r" (cmd! (calibredb-toggle-tag-at-point "read"))
       :ne "M-e" (cmd! (calibredb-toggle-tag-at-point "active"))
+      :ne "M-w" (cmd! (calibredb-toggle-tag-at-point (completing-read "Tag: " (calibredb-all-tag))))
       :ne "C-r" (cmd! (calibredb-filter-toggle-tag "read"))
       :ne "C-e" (cmd! (calibredb-filter-toggle-tag "active")))
 
@@ -262,3 +262,7 @@
 ;;           candidates))
 ;;   candidates)
 
+
+
+(provide 'calibredb-config)
+;; calibredb-config ends here
