@@ -47,6 +47,11 @@
   "jobs_search_history": [],
   "lrf_viewer_search_history": [],
   "main_search_history": [
+    "rigo",
+    "Math",
+    "tags:read",
+    "tags:true",
+    "Disc",
     "serious",
     "crypto",
     "fract",
@@ -56,7 +61,7 @@
   ],
   "main_window_geometry": {
     "__class__": "bytearray",
-    "__value__": "AdnQywADAAAAAAFiAAAAfgAACOEAAASXAAABZQAAAJwAAAXzAAADfwAAAAACAAAAB4AAAAFlAAAAnAAACN4AAASU"
+    "__value__": "AdnQywADAAAAAAFNAAAAgQAABicAAAPFAAABZQAAAJwAAAXzAAADfwAAAAACAAAAB4AAAAFzAAAAvAAABgEAAAOf"
   },
   "match_tags_type": "any",
   "new_version_notification": true,

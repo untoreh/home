@@ -3,7 +3,7 @@ self: super:
 let
   # nixl package
   nixgl = import (builtins.fetchTarball
-    "https://github.com/guibou/nixGL/archive/main.tar.gz") { };
+    "https://github.com/guibou/nixGL/archive/22f96c15988d51f97110e3e79dbbee02f2a47273.tar.gz") { };
 in {
   inherit (super)
   # shell
@@ -46,8 +46,8 @@ in {
   inherit (self.weechatScripts) weechat-matrix;
   # gpu, waiting for nixpkgs integration
   # nixGLDefault, disabled because of "unsupported-package" issue
-  # inherit (nixgl.auto) nixGLDefault;
-  inherit (nixgl) nixVulkanIntel;
+  inherit (nixgl.auto) nixGLDefault;
+  # inherit (nixgl) nixVulkanIntel;
   # wait for mesa-d3d12
   # python
   inherit (super.python38Packages) supervisor grip ansible pip black flake8;

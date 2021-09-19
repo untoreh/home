@@ -2,11 +2,24 @@
 
 (require 'calibredb)
 (require 's)
+(require 'request)
 
 (defun calibredb-args (&key quotes &rest args)
   (apply #'format `(,(s-repeat (length args) (if quotes "'%s' " "%s "))
                     ,@args)))
 
+(defun calibredb-check-server ()
+  (and (bound-and-true-p calibredb-server-host)
+       (bound-and-true-p calibredb-server-port)
+       (processp (ignore-errors (open-network-stream "" nil calibredb-server-host calibredb-server-port)))
+       (concat "http://" calibredb-server-host ":" calibredb-server-port)))
+
+;; CALIBREDB SUPPORT FOR CUSTOM COLUMNS
+(defun calibredb-candidate-key (key &optional candidate)
+  (calibredb-getattr
+   (or candidate
+       (first (calibredb-find-candidate-at-point)))
+   :id))
 
 (defun calibredb-add-column (label name datatype)
   (calibredb-command
@@ -31,11 +44,6 @@
                                          (throw 'match x))) cols)))
       (calibredb-add-column "read_status" "Read Status" "bool"))))
 
-(defun calibredb-check-server ()
-  (and (bound-and-true-p calibredb-server-host)
-       (bound-and-true-p calibredb-server-port)
-       (processp (ignore-errors (open-network-stream "" nil calibredb-server-host calibredb-server-port)))
-       (concat "http://" calibredb-server-host ":" calibredb-server-port)))
 
 (defun calibredb-set-custom (column id value)
   (calibredb-command
@@ -43,21 +51,18 @@
    :command "set_custom"
    :input (calibredb-args :key nil column id value)))
 
-(defun calibredb-candidate-key (key &optional candidate)
-  (car (alist-get key
-                  (caar (or candidate
-                            (calibredb-find-candidate-at-point))))))
-
-(defun calibredb-set-read (&optional candidate)
-  (calibredb-set-custom "read_status"
-                        (calibredb-candidate-key :id)
-                        "true"))
+(defun calibredb-set-read-column (&optional candidate)
+  (calibredb-set-custom
+   "read_status"
+   (calibredb-candidate-key :id candidate)
+   "true"))
 
 (defun calibredb-set-custom-at-point (col val)
   (interactive "sColumn: \nsValue: ")
-  (calibredb-set-custom col
-                        (calibredb-candidate-key :id)
-                        val))
+  (calibredb-set-custom
+   col
+   (calibredb-candidate-key :id candidate)
+   val))
 
 (cl-defun calibredb-set-read-at-point (&optional (status t))
   (interactive)
@@ -69,13 +74,53 @@
              (calibredb-candidate-key :book-name)
              status)))
 
+(cl-defun calibredb-toggle-tag-at-point (tag)
+  (interactive)
+  (let* ((cands (or (calibredb-find-marked-candidates) (calibredb-find-candidate-at-point))))
+    (dolist (cand cands)
+      (let* ((tags (calibredb-getattr cand :tag))
+             (tag-list (split-string tags ",")))
+        (setq tag-list
+              (if (member tag tag-list)
+                  (delete tag tag-list)
+                (push tag tag-list)))
+        ;; (calibredb-set-metadata-process
+        ;;  (list cand)
+        ;;  "tags"
+        ;;  (string-join tag-list ","))
+        (calibredb-set-metadata--tags-server (calibredb-getattr cand :id) tag-list)
+        (calibredb-search-refresh-or-resume)
+        ))))
+
+(defvar calibredb-read-filter-p nil)
+(defun calibredb-filter-toggle-tag (tag)
+  "Filter results by tag."
+  (interactive)
+  (if calibredb-read-filter-p
+      (progn
+        (calibredb-search-clear-filter)
+        (setq-local calibredb-read-filter-p nil))
+    (letf! ((defun completing-read (&rest args) tag))
+      (calibredb-filter-by-tag)
+      (setq-local calibredb-read-filter-p t))))
+
+;; can't access metadata db while server is running so set the
+;; server url as library-path when updating metadata
+(defadvice! calibredb-set-metadata-process-server (func cands field input)
+  :around #'calibredb-set-metadata-process
+  (let ((calibredb-root-dir calibredb-opds-root-url))
+    (apply func (list cands field input))))
+
+(advice-remove #'calibredb-set-metadata-process #'calibredb-set-metadata-process-server)
 ;; calibredb
-(map! :desc "calibredb" :leader :nv "o l" #'calibredb)
+(map! :desc "calibredb" :leader "o l" #'calibredb)
 
 (map! :map calibredb-search-mode-map
-      :ne "C" #'calibredb-set-custom-at-point
-      :ne "r" (cmd! (calibredb-set-read-at-point))
-      :ne "R" (cmd! (calibredb-set-read-at-point nil)))
+      ;; :ne "C" #'calibredb-set-custom-at-point
+      :ne "M-r" (cmd! (calibredb-toggle-tag-at-point "read"))
+      :ne "M-e" (cmd! (calibredb-toggle-tag-at-point "active"))
+      :ne "C-r" (cmd! (calibredb-filter-toggle-tag "read"))
+      :ne "C-e" (cmd! (calibredb-filter-toggle-tag "active")))
 
 (map! :map calibredb-show-mode-map
       ;; standard
@@ -140,7 +185,6 @@
       :ne "M-T" #'calibredb-set-metadata--title
       :ne "M-c" #'calibredb-set-metadata--comments)
 
-
 ;; config
 (use-package! calibredb
   :commands calibredb
@@ -149,5 +193,72 @@
         calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir)
         calibredb-server-host "http://localhost"
         calibredb-server-port "8099"
-        calibredb-library-alist '(("~/Documents/books")))
+        calibredb-library-alist '(("http://localhost:8099"))
+        calibredb-opds-root-url "http://localhost:8099")
   (calibredb-add-read-column))
+
+(use-package! arxiv-mode)
+(map! :mode arxiv-mode
+      :localleader
+      :ne "n" #'arxiv-read-new
+      :ne "r" #'arxiv-read-recent
+      :ne "a" #'arxiv-read-author)
+
+(use-package! pdf-tools
+  :commands pdf-view-mode
+  :config
+  (pdf-tools-install))
+
+
+;; calibredb server usage
+(defun calibredb-server-url (&optional path)
+  (if calibredb-server-host
+      (concat calibredb-server-host ":" calibredb-server-port (or path ""))
+    ;; start a calibre-server managed by emacs and set url..
+    ;; ...
+    ))
+
+;; ;; send request to update metadata
+(defun calibredb-set-metadata--tags-server (id tags)
+  (request
+    (calibredb-server-url (concat "/cdb/set-fields/" id "/books"))
+    :type "POST"
+    :headers '(("Content-Type" . "application/json"))
+    :data (json-encode `(("changes" . (("tags" . ,tags)))))
+    ;; :complete (lambda (&rest args)
+    ;;             (prin1 (plist-get args :data)))
+    ))
+
+;; CALIBREDB CONTENT SERVER SUPPORT
+;; ;; fetch library data
+;; (request
+;;   (calibredb-server-url "/interface-data/books-init")
+;;   :params '(("library_id" . calibredb-library-id)
+;;             ("sort" . (concat (symbol-name calibredb-sort-by) "."
+;;                               (symbol-name calibredb-order))))
+;;   :parser 'json-read
+;;   :complete (lambda (&rest args)
+;;               (setq-local calibredb-data (plist-get args :data))))
+
+;; ;; parse the books candidates
+;; (let ((candidates '()))
+;;   (dolist (book (alist-get 'metadata calibredb-data))
+;;     (push (let* ((book-id (car book))
+;;                  (book-data (cdr book)))
+;;             `((:id ,book-id)
+;;               (:author-sort ,(alist-get 'author_sort book-data))
+;;               (:book-dir nil)
+;;               (:book-name ,(alist-get 'sort book-data))
+;;               (:book-format ,(downcase (seq-elt (alist-get 'formats book-data) 0)))
+;;               (:book-pubdate ,(alist-get 'pubdate book-data))
+;;               (:book-title ,(alist-get 'title book-data))
+;;               (:file-path nil)
+;;               (:tag ,(string-join (alist-get 'tags book-data) ","))
+;;               (:size ,(alist-get 'size book-data))
+;;               (:comment ,(alist-get 'comments book-data))
+;;               (:ids ,(alist-get 'identifiers book-data))
+;;               (:series ,(alist-get 'series_index book-data))
+;;               (:lang_code ,(seq-elt (alist-get 'languages book-data) 0))))
+;;           candidates))
+;;   candidates)
+

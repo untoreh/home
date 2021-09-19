@@ -3,5 +3,5 @@
 if pgrep -f calibre-server; then
 	supc stop calibre-server
 fi
-QT_QPA_PLATFORM="wayland" exec nixGL calibre $argv
+QT_QPA_PLATFORM="xcb" CALIBRE_USE_SYSTEM_THEME=1 exec nixGL ~/.nix-profile/bin/calibre --detach $argv
 supc start calibre-server

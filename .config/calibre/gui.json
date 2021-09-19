@@ -156,8 +156,17 @@
     "__class__": "bytearray",
     "__value__": "AdnQywADAAAAAAPgAAABTQAABl4AAAOLAAAD4wAAAWsAAAZbAAADiAAAAAAAAAAAB4AAAAPjAAABawAABlsAAAOI"
   },
+  "library-annotations-browser-geometry": {
+    "__class__": "bytearray",
+    "__value__": "AdnQywADAAAAAANOAAABMQAABucAAAO+AAADTgAAATEAAAbnAAADvgAAAAAAAAAAB4AAAANOAAABMQAABucAAAO+"
+  },
+  "library-annotations-browser-splitter-state": {
+    "__class__": "bytearray",
+    "__value__": "AAAA/wAAAAEAAAACAAABwgAAAcIA/////wEAAAABAA=="
+  },
   "library_usage_stats": {
-    "/home/fra/Documents/books": 29
+    "/home/fra/Documents/books": 35,
+    "/mnt/c/Users/fra/http:/localhost:8099": 6
   },
   "metadata_single_gui_geom": {
     "__class__": "bytearray",
@@ -165,11 +174,11 @@
   },
   "metasingle_window_geometry3": {
     "__class__": "bytearray",
-    "__value__": "AdnQywADAAAAAAAJ////9gAAB0gAAAQcAAAADAAAABQAAAdFAAAEGQAAAAAAAAAAB4AAAAAMAAAAFAAAB0UAAAQZ"
+    "__value__": "AdnQywADAAAAAAAMAAAAFAAAB0UAAAQZAAAADAAAABQAAAdFAAAEGQAAAAAAAAAAB4AAAAAMAAAAFAAAB0UAAAQZ"
   },
   "preferences dialog geometry": {
     "__class__": "bytearray",
-    "__value__": "AdnQywADAAAAAAHpAAAAdwAABZAAAANnAAAB7AAAAJUAAAWNAAADZAAAAAAAAAAAB4AAAAHsAAAAlQAABY0AAANk"
+    "__value__": "AdnQywADAAAAAAHvAAAAnAAABZAAAANrAAAB7wAAAJwAAAWQAAADawAAAAAAAAAAB4AAAAHvAAAAnAAABZAAAANr"
   },
   "previous_sort_order_BooksView": {
     "last_modified": true,
@@ -190,6 +199,7 @@
   ],
   "search bar visible": true,
   "server3_warning_done": true,
+  "show_annots_from_selected_books_only": false,
   "show_emblems": false,
   "tag browser search box visible": false,
   "tag_browser_splitter_horizontal_state": [
