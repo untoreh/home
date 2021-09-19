@@ -68,9 +68,23 @@
 ;; use wslview as program (TODO: check wslu utils is installed in wsl doom PR)
 (setq browse-url-generic-program (cond ((executable-find "wslview"))
                                        ((executable-find "firefox"))))
+;; weechat
 (use-package! weechat
   :commands (weechat-connected-p
-             weechat-connect))
+             weechat-connect)
+  :config
+  (setq weechat-completing-read-function
+        #'completing-read))
+(map! :desc "Start weechat"
+      :leader
+      :nev "o c"
+      (cmd!
+       (when (not (weechat-connected-p))
+         (weechat-connect "localhost" 9000 nil 'plain t)
+         (weechat-auto-monitor))
+       (weechat-switch-buffer
+        ;; NOTE: universal arg to list also un-monitored buffers ("SPC u SPC o c")
+        (first (list (weechat--read-channel-name (not current-prefix-arg)))))))
 
 ;; not prompt for vterm compilation
 (when (featurep! :term vterm)
@@ -106,7 +120,8 @@
   (when (not (subrp (symbol-function #'gcbal-mode)))
     (native-compile-async (locate-library "gcbal") t t))
   (setq
-   gcbal-verbose t
+   gcbal-verbose nil
    gcbal-target-gctime 0.2
    gcbal-target-auto t)
-  (gcbal-mode 1))
+  (add-transient-hook! 'doom-first-buffer-hook
+    (lambda () (gcbal-mode 1))))
