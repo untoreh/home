@@ -177,4 +177,6 @@
 (package! pcache)
 
 ;; ebooks
-(package! calibredb)
+(package! restclient)
+(package! calibredb :recipe (:host github :repo "chenyanming/calibredb.el" :branch "opds"))
+(package! arxiv-mode :recipe (:host github :repo "fizban007/arxiv-mode"))

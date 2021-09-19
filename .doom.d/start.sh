@@ -15,7 +15,7 @@ export EMACS=/usr/bin/emacs
 # bin/doom clean
 if [ -z "$1" ]; then
 	bin/doom env
-	bin/doom sync -ecp
+	bin/doom sync -ep
 	export XDG_DATA_DIRS="$HOME/.nix-profile/share:$HOME/.local/share:/usr/share"
 fi
 

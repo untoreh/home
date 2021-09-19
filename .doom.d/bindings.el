@@ -159,40 +159,40 @@
 (map! :after julia-mode :mode julia-mode
       (:prefix ("SPC r" . "Julia REPL")
        :desc "focus and insert"
-       :nv "i" #'julia-toggle-repl-and-insert
+       :nev "i" #'julia-toggle-repl-and-insert
        :desc "exec region"
-       :nv "e" #'julia-repl-send-region-or-line
+       :nev "e" #'julia-repl-send-region-or-line
        :desc "exec wrapped region"
-       :nv "w" #'julia-repl-send-block-string
+       :nev "w" #'julia-repl-send-block-string
        :desc "exec src block"
-       :nv "r" #'julia-repl-reset-and-execute-src-block
+       :nev "r" #'julia-repl-reset-and-execute-src-block
        :desc "list methods"
-       :nv "m" #'julia-repl-list-methods
+       :nev "m" #'julia-repl-list-methods
        :desc "list fields"
-       :nv "f" #'julia-repl-list-fields
+       :nev "f" #'julia-repl-list-fields
        :desc "exec function at point"
-       :nv "l" #'julia-repl-send-function
+       :nev "l" #'julia-repl-send-function
        :desc "doc for expression"
-       :nv "d" #'julia-repl-doc
+       :nev "d" #'julia-repl-doc
        :desc "edit expression"
-       :nv "v" #'julia-repl-edit
+       :nev "v" #'julia-repl-edit
        :desc "toggle julia repl mode"
-       :nv "t" #'julia-repl-mode)
+       :nev "t" #'julia-repl-mode)
       :mode julia-repl-vterm-mode
       (:desc "go to previous window"
-       :nv "SPC w TAB" #'julia-toggle-repl-back))
+       :nev "SPC w TAB" #'julia-toggle-repl-back))
 
 (if (featurep! :lang julia)
     (map! :after julia-repl
           (:prefix ("SPC l j" . "julia")
            :desc "start julia repl"
-           :nv "r" (cmd! (julia-repl-switch))
-           :nv "f" #'julia-franklin
-           :nv "k" #'julia-franklin-stop
-           :nv "." #'julia-repl-cd
-           :nv "d" #'julia-repl-toggle-debug
-           :nv "v" #'julia-repl-revise
-           :nv "y" #'julia-franklin-sync-blog
+           :nev "r" (cmd! (julia-repl-switch))
+           :nev "f" #'julia-franklin
+           :nev "k" #'julia-franklin-stop
+           :nev "." #'julia-repl-cd
+           :nev "d" #'julia-repl-toggle-debug
+           :nev "v" #'julia-repl-revise
+           :nev "y" #'julia-franklin-sync-blog
            )
           (:map 'julia-repl-mode-map
            "C-c C-p" nil
@@ -258,13 +258,14 @@
   (map! :desc "Back and forth between current paren enclosing"
         :n "g \\" #'my/move-to-current-parent-toggle))
 
-;; wechat
+;; weechat
 (map! :desc "Start weechat"
       :leader
-      :nv "o c"
+      :nev "o c"
       (cmd!
        (when (not (weechat-connected-p))
-         (weechat-connect "localhost" 9000 nil 'plain t))
+         (weechat-connect "localhost" 9000 nil 'plain t)
+         (weechat-auto-monitor))
        (weechat-switch-buffer
         (first (list (weechat--read-channel-name (not current-prefix-arg)))))))
 

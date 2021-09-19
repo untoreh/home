@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -l
 set -e
 
 supc stop emacs
@@ -25,10 +25,10 @@ rm -f .local/cache/pcache/unicode-fonts
 bin/doom compile
 
 # fix vterm
-rm -rf ~/.emacs.d/.local/straight/build*/vterm/build
-mkdir ~/.emacs.d/.local/straight/build*/vterm/build
-cd ~/.emacs.d/.local/straight/build*/vterm/build
-cmake -DUSE_SYSTEM_LIBVTERM=no ..
-make
+#rm -rf ~/.emacs.d/.local/straight/build*/vterm/build
+#mkdir ~/.emacs.d/.local/straight/build*/vterm/build
+#cd ~/.emacs.d/.local/straight/build*/vterm/build
+#cmake -DUSE_SYSTEM_LIBVTERM=no ..
+#make
 
 supc start emacs
