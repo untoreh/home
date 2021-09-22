@@ -26,7 +26,7 @@
   "installation_uuid": "992e8ce6-3253-4bc5-9740-fb9bfc2e2078",
   "isbndb_com_key": "",
   "language": "en",
-  "library_path": "/mnt/c/Users/fra/http:/localhost:8099",
+  "library_path": "/home/fra/Documents/books",
   "limit_search_columns": false,
   "limit_search_columns_to": [
     "title",

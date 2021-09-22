@@ -165,8 +165,8 @@
     "__value__": "AAAA/wAAAAEAAAACAAABwgAAAcIA/////wEAAAABAA=="
   },
   "library_usage_stats": {
-    "/home/fra/Documents/books": 35,
-    "/mnt/c/Users/fra/http:/localhost:8099": 6
+    "/home/fra/Documents/books": 37,
+    "/mnt/c/Users/fra/http:/localhost:8099": 8
   },
   "metadata_single_gui_geom": {
     "__class__": "bytearray",
@@ -178,7 +178,7 @@
   },
   "preferences dialog geometry": {
     "__class__": "bytearray",
-    "__value__": "AdnQywADAAAAAAHvAAAAnAAABZAAAANrAAAB7wAAAJwAAAWQAAADawAAAAAAAAAAB4AAAAHvAAAAnAAABZAAAANr"
+    "__value__": "AdnQywADAAAAAAHJAAAAbAAABbYAAAOcAAAB7wAAAKcAAAWQAAADdgAAAAAAAAAAB4AAAAHvAAAApwAABZAAAAN2"
   },
   "previous_sort_order_BooksView": {
     "last_modified": true,

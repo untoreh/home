@@ -1,8 +1,17 @@
 {
+  "Select Device Folder": "/home/fra/Documents/books",
   "add books dialog dir": "/mnt/c/Users/fra/Downloads",
   "database location dialog": "/home/fra/Documents/books",
   "s_r_search_mode": 0,
   "sort_history": [
+    [
+      "last_modified",
+      true
+    ],
+    [
+      "timestamp",
+      false
+    ],
     [
       "timestamp",
       false
