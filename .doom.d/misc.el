@@ -123,5 +123,4 @@
    gcbal-verbose nil
    gcbal-target-gctime 0.2
    gcbal-target-auto t)
-  (add-transient-hook! 'doom-first-buffer-hook
-    (lambda () (gcbal-mode 1))))
+  (add-transient-hook! 'doom-first-buffer-hook (gcbal-mode 1)))
