@@ -92,24 +92,51 @@
         (calibredb-search-refresh-or-resume)
         ))))
 
-(defvar calibredb-read-filter-p nil)
+(defvar calibredb-toggle-filter-alist '())
+(make-variable-buffer-local 'calibredb-toggle-filter-alist)
+
 (defun calibredb-filter-toggle-tag (tag)
   "Filter results by tag."
   (interactive)
-  (if calibredb-read-filter-p
-      (progn
-        (calibredb-search-clear-filter)
-        (setq-local calibredb-read-filter-p nil))
-    (letf! ((defun completing-read (&rest args) tag))
-      (calibredb-filter-by-tag)
-      (setq-local calibredb-read-filter-p t))))
+  (let ((s-contains?-func (symbol-function #'s-contains?))
+        (toggle (alist-get tag calibredb-toggle-filter-alist)))
+    (letf! ((defun inv-func (res) (if toggle (not res) res)))
+      (letf! ((defun completing-read (&rest args) tag)
+              (defun s-contains? (needle s &optional ignore)
+                (inv-func (funcall s-contains?-func needle s ignore))))
+        (calibredb-filter-by-tag)
+        (setf (alist-get tag calibredb-toggle-filter-alist)
+              (not toggle))))))
+
+
+;; calibredb-add seems to fail if ivy-mode is bound but counsel is not
+(defadvice! my/calibredb-add (arg) :override #'calibredb-add
+  (let ((file (read-file-name "Add a file to Calibre: " calibredb-download-dir)))
+    (calibredb-counsel-add-file-action arg file))
+  (if (equal major-mode 'calibredb-search-mode)
+      (calibredb-search-refresh-or-resume)))
+(advice-remove #'my/calibredb-add #'calibredb-add)
+(defadvice! calibredb-add-book (func arg) :around #'calibredb-add
+  (read-file-name "Add a file to Calibre: " calibredb-download-dir)
+  (funcall func (list arg)))
 
 ;; can't access metadata db while server is running so set the
 ;; server url as library-path when updating metadata
+(defadvice! my/calibredb-root-url () :override #'calibredb-root-dir-quote
+  calibredb-opds-root-url)
+(defadvice! my/calibredb-root-dir (func cands keyword &rest args)
+  :around #'calibredb-toggle-metadata-process
+  (let ((calibredb-root-dir calibredb-opds-root-url))
+    (funcall func (list cands keyword))))
 (defadvice! calibredb-set-metadata-process-server (func cands field input)
   :around #'calibredb-set-metadata-process
   (let ((calibredb-root-dir calibredb-opds-root-url))
     (apply func (list cands field input))))
+
+;; (defadvice! calibredb-candidates-wrapper (func) :around #'calibredb-candidates
+;;   (cond
+;;    ((not (equal "" calibredb-root-dir)) (apply func))
+;;    (calibredb-opds-root-url (calibredb-candidates-opds calibredb-opds-root-url))))
 
 ;; calibredb
 (map! :desc "calibredb" :leader "o l" #'calibredb)
@@ -189,12 +216,16 @@
 (use-package! calibredb
   :commands calibredb
   :config
-  (setq calibredb-root-dir "~/Documents/books"
-        calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir)
-        calibredb-server-host "http://localhost"
-        calibredb-server-port "8099"
-        calibredb-library-alist '(("http://localhost:8099"))
-        calibredb-opds-root-url "http://localhost:8099")
+  (setq
+   calibredb-root-dir "~/Documents/books/"
+   calibredb-download-dir "~/Documents/books/toadd/"
+   calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir)
+   calibredb-server-host "http://localhost"
+   calibredb-server-port "8099"
+   calibredb-library-alist '(("http://localhost:8099/"))
+   calibredb-opds-root-url "http://localhost:8099/"
+   calibredb-opds-download-dir (expand-file-name
+                                temporary-file-directory "calibredb"))
   (calibredb-add-read-column))
 
 (use-package! arxiv-mode)
@@ -208,6 +239,10 @@
   :commands pdf-view-mode
   :config
   (pdf-tools-install))
+
+(use-package! nov
+  :config
+  (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
 
 
 ;; calibredb server usage
