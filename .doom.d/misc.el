@@ -111,8 +111,7 @@
 
 ;; garbage collector mode
 (use-package! gcbal
-  ;; enable it after undo-tree because undo-tree overrides `post-gc-hook'?
-  :after undo-tree
+  :hook 'doom-after-init-modules-hook
   :init
   (defun gcmh-mode (&rest args))
   (defun gcmh-set-high-threshold (&rest args))
@@ -123,4 +122,6 @@
    gcbal-verbose nil
    gcbal-target-gctime 0.2
    gcbal-target-auto t)
-  (add-transient-hook! 'doom-first-buffer-hook (gcbal-mode 1)))
+  (gcbal-mode 1)
+  ;; re-enable it after undo-tree because undo-tree overrides `post-gc-hook'?
+  (add-transient-hook! #'undo-tree-undo (gcbal-mode -1) (gcbal-mode 1)))

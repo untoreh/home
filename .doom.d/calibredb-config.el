@@ -8,6 +8,16 @@
   (apply #'format `(,(s-repeat (length args) (if quotes "'%s' " "%s "))
                     ,@args)))
 
+;; calibredb server usage
+(defun calibredb-server-url (&optional path)
+  (concat (or calibredb-server-url
+              (setq calibredb-server-url
+                    (if calibredb-server-host
+                        (concat calibredb-server-host ":" calibredb-server-port)
+                      ;; start a calibre-server managed by emacs and set url..
+                      ;; ...
+                      ))) path))
+
 (defun calibredb-check-server ()
   (and (bound-and-true-p calibredb-server-host)
        (bound-and-true-p calibredb-server-port)
@@ -28,7 +38,7 @@
    :input (calibredb-args label name datatype)))
 
 (defun calibredb-arg-library (&optional use-local)
-  (format "--library-path %s"
+  (format "--library-path '%s'"
           (if-let (url (and (null use-local)
                             (calibredb-check-server)))
               url
@@ -92,6 +102,23 @@
         (calibredb-search-refresh-or-resume)
         ))))
 
+;; (defadvice! calibredb-override-set-tag (&optional candidates) #'calibredb-set-metadata--tags
+;;   (interactive)
+;;   (let ((cands (or candidates
+;;                   (calibredb-find-candidate-at-point)
+;;                   (calibredb-find-marked-candidates))))
+;;     (calibredb-set-metadata--tags-server (calibredb-getattr (first cand) :id)
+;;                                          (read-string (if (> num 0)
+;;                                    (concat "Set " field " for " (number-to-string num) " items: ")
+;;                                  (concat prompt id " " title ": ") ) init))
+    ;; )
+;; (cond ((equal major-mode 'calibredb-show-mode)
+;;              (calibredb-show-refresh))
+;;             ((eq major-mode 'calibredb-search-mode)
+;;              (calibredb-search-refresh-or-resume))
+;;             (t nil))
+;;   )
+
 (defvar calibredb-toggle-filter-alist '())
 (make-variable-buffer-local 'calibredb-toggle-filter-alist)
 
@@ -108,6 +135,63 @@
         (setf (alist-get tag calibredb-toggle-filter-alist)
               (not toggle))))))
 
+(defun calibredb-arxiv-id-p (id)
+  (string-match-p "^[0-9]+\\.[0-9]+\\(\\.[a-z0-9]+\\)?" id))
+
+(defun calibredb-bibtex-field (k data)
+  " Get a field from a bibtex entry alist and strip curly braces. "
+  (if-let ((val (cdr (assoc k data))))
+      (progn
+        (substring val 1 -1))
+    ""))
+
+(defun calibredb-arxiv-metadata (id)
+  (let ((entry (with-temp-buffer
+                 (insert (arxiv-get-bibtex-entry-via-arxiv-api id))
+                 (goto-char (point-min))
+                 (bibtex-parse-entry))))
+    (list (cons "Arxiv"
+                (remove-if (lambda (x) (string= "" (cdr x)) )
+                           `(("Title" . ,(calibredb-bibtex-field "title" entry))
+                             ("Authors" . ,(calibredb-bibtex-field "author" entry))
+                             ("Publisher" . ,(calibredb-bibtex-field "journal" entry))
+                             ("Tags" . ,(calibredb-bibtex-field "primaryClass" entry))
+                             ("Comments".  ,(calibredb-bibtex-field "abstract" entry))
+                             ("Identifiers" . ,(let ((p (calibredb-bibtex-field "eprint" entry)))
+                                                 (if (not (string= "" p))
+                                                     (concat "arxiv:" p)
+                                                   (concat "arxiv:" id))))))))))
+
+(add-transient-hook! #'arxiv-get-bibtex-entry-via-arxiv-api
+  (require 'org-ref-arxiv))
+
+;; (advice-remove 'calibredb-set-content-server #'calibredb-fetch-and-set-metadata-by-author-and-title)
+(defadvice! calibredb-set-content-server (func arg)
+  :around #'calibredb-fetch-and-set-metadata-by-author-and-title
+  (require 'org-ref-arxiv)
+  ;; override mapc to avoid using `calibredb-command' to set metadata
+  (let* ((cand (car (calibredb-find-candidate-at-point)))
+        (id (calibredb-getattr cand :id))
+        (title (calibredb-getattr cand :book-title)))
+    (cond
+     ((calibredb-arxiv-id-p title)
+      (let ((metadata (cdar (calibredb-arxiv-metadata title))))
+        (cond (metadata
+               (progn
+                 (calibredb-set-metadata--server id metadata)
+                 (let ((window (get-buffer-window "*calibredb-search*")))
+                   (if window
+                       (select-window window)
+                     (switch-to-buffer-other-window "*calibredb-search*")))
+                 (calibredb-search-refresh-or-resume)
+                 (if calibredb-show-results (calibredb-show-results metadata t))
+                 (message (format "Metadata updated: ID - %s, Title - %s" id title))))
+              (t (print "No metadata retrieved from sources")))
+        ))
+     (t (funcall func arg)))))
+
+(defadvice! calibredb-select-metadata-noivy (results) :override #'calibredb-select-metadata-source
+  (cdr (assoc (completing-read "Select metadata source : " results) results)))
 
 ;; calibredb-add seems to fail if ivy-mode is bound but counsel is not
 (defadvice! my/calibredb-add (arg) :override #'calibredb-add
@@ -115,28 +199,57 @@
     (calibredb-counsel-add-file-action arg file))
   (if (equal major-mode 'calibredb-search-mode)
       (calibredb-search-refresh-or-resume)))
-(advice-remove #'my/calibredb-add #'calibredb-add)
+
 (defadvice! calibredb-add-book (func arg) :around #'calibredb-add
   (read-file-name "Add a file to Calibre: " calibredb-download-dir)
-  (funcall func (list arg)))
+  (funcall func arg))
 
 ;; can't access metadata db while server is running so set the
 ;; server url as library-path when updating metadata
-(defadvice! my/calibredb-root-url () :override #'calibredb-root-dir-quote
-  calibredb-opds-root-url)
-(defadvice! my/calibredb-root-dir (func cands keyword &rest args)
-  :around #'calibredb-toggle-metadata-process
-  (let ((calibredb-root-dir calibredb-opds-root-url))
-    (funcall func (list cands keyword))))
-(defadvice! calibredb-set-metadata-process-server (func cands field input)
-  :around #'calibredb-set-metadata-process
-  (let ((calibredb-root-dir calibredb-opds-root-url))
-    (apply func (list cands field input))))
+;; (defadvice! my/calibredb-root-url () :override #'calibredb-root-dir-quote
+;;   (calibredb-server-url))
 
-;; (defadvice! calibredb-candidates-wrapper (func) :around #'calibredb-candidates
-;;   (cond
-;;    ((not (equal "" calibredb-root-dir)) (apply func))
-;;    (calibredb-opds-root-url (calibredb-candidates-opds calibredb-opds-root-url))))
+;; (defadvice! my/calibredb-root-dir (func cands keyword &rest args) :around #'calibredb-toggle-metadata-process
+;;   (let ((calibredb-root-dir (calibredb-server-url)))
+;;     (funcall func cands keyword)))
+;; (defadvice! calibredb-set-metadata-process-server (func cands field input) :around #'calibredb-set-metadata-process
+;;   (let ((calibredb-root-dir (calibredb-server-url)))
+;;     (funcall func cands field input)))
+(cl-defun calibredb-func-server (func &key command option input id library action)
+  (funcall func
+           :command command
+           :option option
+           :input input
+           :id id
+           :library (format "--with-library \"%s\"" (calibredb-server-url))
+           :action action))
+
+(advice-add #'calibredb-command :around #'calibredb-func-server)
+(advice-add #'calibredb-process :around #'calibredb-func-server)
+;; (defadvice! calibredb-command-server-library (func &rest &key command option input id library action)
+;;   :around #'calibredb-command
+;;   (funcall func command option input id (calibredb-server-url) action))
+;; (defadvice! calibredb-process-server-library (func &rest &key command option input id library action)
+;;   :around #'calibredb-process
+;;   (funcall func command option input id (calibredb-server-url) action))
+;;
+
+(defun calibredb-pdftitle (&optional candidate)
+  (unless (executable-find "pdftitle")
+    (error "pdftitle not found in path"))
+  (let* ((cand (first (or candidate (calibredb-find-candidate-at-point))))
+         (title (calibredb-getattr cand :book-title))
+         (file (file-truename (calibredb-getattr cand :file-path)))
+         (result (shell-command-to-string
+                  (format "pdftitle -p \"%s\"" (shell-quote-argument file))))
+         (fail (string-match-p "Exception\\|Traceback" result)))
+    (if fail
+        (error result)
+      (let ((new-title (string-replace "\n" "" result)))
+        (if (yes-or-no-p (format "Replace book title (%s) with: %s ?" title new-title))
+            (progn (calibredb-set-metadata--server
+                    (calibredb-getattr cand :id) `(("title" . ,new-title)))
+                   (calibredb-search-refresh-or-resume)))))))
 
 ;; calibredb
 (map! :desc "calibredb" :leader "o l" #'calibredb)
@@ -147,7 +260,8 @@
       :ne "M-e" (cmd! (calibredb-toggle-tag-at-point "active"))
       :ne "M-w" (cmd! (calibredb-toggle-tag-at-point (completing-read "Tag: " (calibredb-all-tag))))
       :ne "C-r" (cmd! (calibredb-filter-toggle-tag "read"))
-      :ne "C-e" (cmd! (calibredb-filter-toggle-tag "active")))
+      :ne "C-e" (cmd! (calibredb-filter-toggle-tag "active"))
+      :ne "C-p" (cmd! (prin1 (calibredb-pdftitle))))
 
 (map! :map calibredb-show-mode-map
       ;; standard
@@ -222,12 +336,14 @@
    calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir)
    calibredb-server-host "http://localhost"
    calibredb-server-port "8099"
+   calibredb-server-url nil
    calibredb-library-alist '(("http://localhost:8099/"))
-   calibredb-opds-root-url "http://localhost:8099/"
    calibredb-opds-download-dir (expand-file-name
                                 temporary-file-directory "calibredb"))
   (calibredb-add-read-column))
 
+
+;; additional packages
 (use-package! arxiv-mode)
 (map! :mode arxiv-mode
       :localleader
@@ -244,25 +360,21 @@
   :config
   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
 
-
-;; calibredb server usage
-(defun calibredb-server-url (&optional path)
-  (if calibredb-server-host
-      (concat calibredb-server-host ":" calibredb-server-port (or path ""))
-    ;; start a calibre-server managed by emacs and set url..
-    ;; ...
-    ))
+(defun calibredb-set-metadata--server (id data &optional sync)
+  (let ((changes (mapcar (lambda (x) (cons (downcase (car x)) (cdr x))) data)))
+    (request
+      (calibredb-server-url (concat "/cdb/set-fields/" id "/books"))
+      :type "POST"
+      :headers '(("Content-Type" . "application/json"))
+      :data (json-encode `(("changes" . ,changes)))
+      :sync sync
+      ;; :complete (lambda (&rest args)
+      ;;             (prin1 (plist-get args :data)))
+      )))
 
 ;; ;; send request to update metadata
 (defun calibredb-set-metadata--tags-server (id tags)
-  (request
-    (calibredb-server-url (concat "/cdb/set-fields/" id "/books"))
-    :type "POST"
-    :headers '(("Content-Type" . "application/json"))
-    :data (json-encode `(("changes" . (("tags" . ,tags)))))
-    ;; :complete (lambda (&rest args)
-    ;;             (prin1 (plist-get args :data)))
-    ))
+  (calibredb-set-metadata--server id `(("tags" . ,tags))))
 
 ;; CALIBREDB CONTENT SERVER SUPPORT
 ;; ;; fetch library data
