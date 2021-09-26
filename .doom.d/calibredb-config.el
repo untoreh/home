@@ -194,45 +194,37 @@
   (cdr (assoc (completing-read "Select metadata source : " results) results)))
 
 ;; calibredb-add seems to fail if ivy-mode is bound but counsel is not
-(defadvice! my/calibredb-add (arg) :override #'calibredb-add
-  (let ((file (read-file-name "Add a file to Calibre: " calibredb-download-dir)))
-    (calibredb-counsel-add-file-action arg file))
-  (if (equal major-mode 'calibredb-search-mode)
-      (calibredb-search-refresh-or-resume)))
+;; (defadvice! my/calibredb-add (arg) :override #'calibredb-add
+;;   (let ((file (read-file-name "Add a file to Calibre: " calibredb-download-dir)))
+;;     (calibredb-counsel-add-file-action arg file))
+;;   (if (equal major-mode 'calibredb-search-mode)
+;;       (calibredb-search-refresh-or-resume)))
 
 (defadvice! calibredb-add-book (func arg) :around #'calibredb-add
   (read-file-name "Add a file to Calibre: " calibredb-download-dir)
   (funcall func arg))
 
-;; can't access metadata db while server is running so set the
-;; server url as library-path when updating metadata
-;; (defadvice! my/calibredb-root-url () :override #'calibredb-root-dir-quote
-;;   (calibredb-server-url))
-
-;; (defadvice! my/calibredb-root-dir (func cands keyword &rest args) :around #'calibredb-toggle-metadata-process
-;;   (let ((calibredb-root-dir (calibredb-server-url)))
-;;     (funcall func cands keyword)))
-;; (defadvice! calibredb-set-metadata-process-server (func cands field input) :around #'calibredb-set-metadata-process
-;;   (let ((calibredb-root-dir (calibredb-server-url)))
-;;     (funcall func cands field input)))
 (cl-defun calibredb-func-server (func &key command option input id library action)
-  (funcall func
-           :command command
-           :option option
-           :input input
-           :id id
-           :library (format "--with-library \"%s\"" (calibredb-server-url))
-           :action action))
+  (pcase command
+    ("set_metadata" (let* ((input-list (split-string input ":"))
+                           (field (nth 0 input-list))
+                           (val (string-trim (nth 1 input-list) "\"" "\"")))
+                      (calibredb-set-metadata--server id `((,field . ,val)))
+                      (cond ((equal major-mode 'calibredb-show-mode)
+                             (calibredb-show-refresh))
+                            ((eq major-mode 'calibredb-search-mode)
+                             (calibredb-search-refresh-or-resume))
+                            (t nil))))
+    (t (funcall func
+                :command command
+                :option option
+                :input input
+                :id id
+                :library (format "--with-library \"%s\"" (calibredb-server-url))
+                :action action))))
 
 (advice-add #'calibredb-command :around #'calibredb-func-server)
 (advice-add #'calibredb-process :around #'calibredb-func-server)
-;; (defadvice! calibredb-command-server-library (func &rest &key command option input id library action)
-;;   :around #'calibredb-command
-;;   (funcall func command option input id (calibredb-server-url) action))
-;; (defadvice! calibredb-process-server-library (func &rest &key command option input id library action)
-;;   :around #'calibredb-process
-;;   (funcall func command option input id (calibredb-server-url) action))
-;;
 
 (defun calibredb-pdftitle (&optional candidate)
   (unless (executable-find "pdftitle")
@@ -241,7 +233,9 @@
          (title (calibredb-getattr cand :book-title))
          (file (file-truename (calibredb-getattr cand :file-path)))
          (result (shell-command-to-string
-                  (format "pdftitle -p \"%s\"" (shell-quote-argument file))))
+                  (format "pdftitle -p \"%s\" --replace-missing-char \"%s\" "
+                          (shell-quote-argument file)
+                          (shell-quote-argument " "))))
          (fail (string-match-p "Exception\\|Traceback" result)))
     (if fail
         (error result)

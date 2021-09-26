@@ -10,9 +10,9 @@ in {
     eternal-terminal browsh zsh git-hub git-lfs delta pet tmux fzf fd bat
     ripgrep zoxide exa nushell starship direnv
     # utils
-    wego translate-shell weechat krita calibre koreader youtube-dl
+    wego translate-shell weechat krita calibre koreader youtube-dl djvulibre unoconv
     # files and backups
-    duplicacy borgbackup rclone syncthing
+    duplicacy borgbackup rclone syncthing inotify-tools
     # desktop
     mako scrot pywal
     # reduntant
