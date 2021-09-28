@@ -194,20 +194,24 @@
   (cdr (assoc (completing-read "Select metadata source : " results) results)))
 
 ;; calibredb-add seems to fail if ivy-mode is bound but counsel is not
-;; (defadvice! my/calibredb-add (arg) :override #'calibredb-add
-;;   (let ((file (read-file-name "Add a file to Calibre: " calibredb-download-dir)))
-;;     (calibredb-counsel-add-file-action arg file))
-;;   (if (equal major-mode 'calibredb-search-mode)
-;;       (calibredb-search-refresh-or-resume)))
+(defadvice! my/calibredb-add (arg) :override #'calibredb-add
+  (let ((file (read-file-name "Add a file to Calibre: " calibredb-download-dir)))
+    (calibredb-counsel-add-file-action arg file))
+  (if (equal major-mode 'calibredb-search-mode)
+      (calibredb-search-refresh-or-resume)))
 
-(defadvice! calibredb-add-book (func arg) :around #'calibredb-add
-  (read-file-name "Add a file to Calibre: " calibredb-download-dir)
-  (funcall func arg))
+;; (defadvice! calibredb-add-book (func arg) :around #'calibredb-add
+;;   (read-file-name "Add a file to Calibre: " calibredb-download-dir)
+;;   (funcall func arg))
 
 (cl-defun calibredb-func-server (func &key command option input id library action)
+  (message "command: %s, options: %s" command option)
   (pcase command
-    ("set_metadata" (let* ((input-list (split-string input ":"))
-                           (field (nth 0 input-list))
+    ("set_metadata" (let* ((input-list (split-string (or input option) ":"))
+                           (field (let ((argfield (split-string (nth 0 input-list) " ")))
+                                    (if (equal 1 (length argfield))
+                                        argfield
+                                      (nth 1 argfield))))
                            (val (string-trim (nth 1 input-list) "\"" "\"")))
                       (calibredb-set-metadata--server id `((,field . ,val)))
                       (cond ((equal major-mode 'calibredb-show-mode)
