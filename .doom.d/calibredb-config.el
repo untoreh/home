@@ -205,12 +205,11 @@
 ;;   (funcall func arg))
 
 (cl-defun calibredb-func-server (func &key command option input id library action)
-  (message "command: %s, options: %s" command option)
   (pcase command
     ("set_metadata" (let* ((input-list (split-string (or input option) ":"))
                            (field (let ((argfield (split-string (nth 0 input-list) " ")))
                                     (if (equal 1 (length argfield))
-                                        argfield
+                                        (nth 0 argfield)
                                       (nth 1 argfield))))
                            (val (string-trim (nth 1 input-list) "\"" "\"")))
                       (calibredb-set-metadata--server id `((,field . ,val)))
