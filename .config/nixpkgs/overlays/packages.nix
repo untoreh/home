@@ -34,7 +34,7 @@ in {
     # python3
 
     # emacsPgtkGcc # wait for mesa-d3d12
-    mu isync gnupg pinentry emacs-all-the-icons-fonts;
+    mu isync goimapnotify gnupg pinentry emacs-all-the-icons-fonts;
   # more fonts
   inherit (self.vimPlugins) vim-devicons;
   # emacs with cachix support

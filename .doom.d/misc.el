@@ -111,7 +111,7 @@
 
 ;; garbage collector mode
 (use-package! gcbal
-  :hook 'doom-after-init-modules-hook
+  ;; :after-call doom-after-init-modules-hook
   :init
   (defun gcmh-mode (&rest args))
   (defun gcmh-set-high-threshold (&rest args))
