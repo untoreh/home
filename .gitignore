@@ -120,3 +120,4 @@ remmina/
 /.venv/
 /.ipfs/*
 !/.ipfs/config
+/.msmtp.log
