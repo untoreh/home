@@ -26,6 +26,73 @@
   "Return t if FILEPATH is within any of `projectile-ignored-projects'"
   (or (mapcar (lambda (p) (s-starts-with-p p filepath)) projectile-ignored-projects)))
 
+;; magit
+(after! magit
+  (defvar magit-large-repo-num-files 1000 "Repositories that exceed this variable are considered large.")
+  (defvar magit-large-repo-p nil "t if current repo is a large repo.")
+  (defvar magit-large-repo-set-p nil "t if current repo has been checked for largeness.")
+
+  ;; allow local variables
+  (let ((safe-var-list '(enable-local-eval
+                         magit-large-repo-p
+                         magit-large-repo-set-p
+                         magit-commit-show-diff
+                         magit-refresh-buffers)))
+    (mapc (lambda (sym)
+            (put sym 'safe-local-variable (lambda (&rest args) t)))
+          safe-var-list))
+  (let ((safe-eval-list '(mapc magit-disable-section-inserter)))
+    (mapc (lambda (sym) (put sym 'safe-local-eval-function (lambda (&rest args) t)))
+          safe-eval-list))
+  ;; allow local eval
+  (put 'enable-local-eval 'risky-local-variable nil)
+
+  (defun magit-toggle-large-repo ()
+    " Toggle the large repo flag for the current repository "
+    (interactive)
+    (setf magit-large-repo-p
+          (not (bound-and-true-p magit-large-repo-p)))
+    (message "%s large repo for repository at %s"
+             (if magit-large-repo-p "Enabled" "Disabled") default-directory))
+
+  (map! :mode magit-status-mode
+        "C-l" #'magit-toggle-large-repo)
+
+  (defun magit-auto-detect-large-repo ()
+    (if (and (not magit-large-repo-set-p)
+             (derived-mode-p 'magit-mode))
+        (let ((numfiles (string-to-number
+                         (shell-command-to-string "fd . | wc -l"))))
+          (save-excursion
+            (when (> numfiles magit-large-repo-num-files)
+              (mapc (lambda (args) (apply 'add-dir-local-variable args))
+                    '((nil enable-local-eval t)
+                      (nil magit-refresh-buffers nil)
+                      (nil magit-large-repo-p t)
+                      (nil magit-commit-show-diff nil)
+                      ;; this doesn't seem to work so we just use advices
+                      ;; (magit-status-mode eval
+                      ;;                    (mapc
+                      ;;                     'magit-disable-section-inserter
+                      ;;                     '('magit-insert-staged-changes
+                      ;;                       'magit-insert-unstaged-changes)))
+                      )))
+            (add-dir-local-variable nil 'magit-large-repo-set-p t)
+            (doom/save-and-kill-buffer)))))
+
+  (add-hook 'magit-pre-refresh-hook #'magit-auto-detect-large-repo)
+  (defadvice! magit-skip-diff-large-repo (func) :around #'magit-commit-diff
+    (message "is it large? %s" magit-large-repo-p)
+    (unless magit-large-repo-p
+      (funcall func)))
+  (defadvice! magit-skip-unstaged-large-repo (func)
+    :around '(magit-insert-unstaged-changes magit-insert-staged-changes)
+    (unless magit-large-repo-p
+      (funcall func)))
+)
+
+(put 'projectile-generic-command 'safe-local-variable #'stringp)
+
 (defun my/session-file (session-name)
   (concat (f-dirname (doom-session-file))
 	  "/" session-name))

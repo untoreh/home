@@ -193,6 +193,7 @@
            :nev "d" #'julia-repl-toggle-debug
            :nev "v" #'julia-repl-revise
            :nev "y" #'julia-franklin-sync-blog
+           :nev "u" #'julia-franklin-publish
            )
           (:map 'julia-repl-mode-map
            "C-c C-p" nil
