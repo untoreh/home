@@ -380,6 +380,10 @@ the SRC folder to the TRG folder"
                          (file-name-as-directory trg))
         (error "%s is not a valid target directory, wrong project?" trg)))))
 
+(defun julia-franklin-publish ()
+  (interactive)
+  (julia-repl-cmd "pubup()"))
+
 (defun julia-repl-toggle-debug ()
   (interactive)
   (julia-repl-cmd "if in(\"JULIA_DEBUG\", keys(ENV))
