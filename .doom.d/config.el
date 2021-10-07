@@ -11,8 +11,10 @@
 (load! "completion")
 (load! "langs/langs")
 (load! "projects")
+(after! magit
+  (load! "git"))
 ;; (load! "maths.el")
 ;; (load! "debug")
 
 
-(message "Configuration Loaded Succesfully!")
+(message "Configuration Loaded Successfully!")
