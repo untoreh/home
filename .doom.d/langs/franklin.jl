@@ -16,10 +16,4 @@ if isdefined(Main, :frank_task)
 end
 include("utils.jl")
 
-function pubup(;opt=true, search=true, trans=true)
-	opt && fr.optimize(prerender=true; minify=true)
-    search && lunr()
-    trans && translate_website()
-end
-
 frank_task = @task serve(prerender=true); schedule(frank_task)

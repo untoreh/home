@@ -350,7 +350,7 @@
 
 (defun julia-franklin-stop ()
   (interactive)
-  (julia-repl-cmd "Base.throwto(frank_task, InterruptException())"))
+  (julia-repl-cmd "try Base.throwto(frank_task, InterruptException()) catch end \n"))
 
 (after! f
   (cl-defun julia-franklin-sync-blog (&optional (src "/tmp/__site")
@@ -383,6 +383,11 @@ the SRC folder to the TRG folder"
 (defun julia-franklin-publish ()
   (interactive)
   (julia-repl-cmd "pubup()"))
+
+(defun julia-franklin-serve()
+  (interactive)
+  (julia-franklin-stop)
+  (julia-repl-cmd "frank_task = @task serve(is_final_pass=true); schedule(frank_task)"))
 
 (defun julia-repl-toggle-debug ()
   (interactive)

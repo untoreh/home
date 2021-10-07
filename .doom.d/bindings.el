@@ -194,6 +194,7 @@
            :nev "v" #'julia-repl-revise
            :nev "y" #'julia-franklin-sync-blog
            :nev "u" #'julia-franklin-publish
+           :nev "s" #'julia-franklin-serve
            )
           (:map 'julia-repl-mode-map
            "C-c C-p" nil
