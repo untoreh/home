@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: exported functions of a module
+# uuid: expfuncs
+# key: expfuncs
+# condition: (eq major-mode 'julia-mode)
+# --
+
+for sym in names(@__MODULE__; all=true)
+    if startswith(string(sym), "$0")
+        @eval export $sym
+    end
+end

@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: pubup
+# key: pubup
+# condition: (eq major-mode 'julia-mode)
+# --
+
+function pubup(;opt=true, search=true, trans=true)
+	$1opt && fr.optimize(prerender=true; minify=true)
+    $2search && lunr()
+    $3trans && begin
+        translate_website()
+        sitemap_add_translations()
+    end
+end
+$0
