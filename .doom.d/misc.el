@@ -124,4 +124,8 @@
    gcbal-target-auto t)
   (gcbal-mode 1)
   ;; re-enable it after undo-tree because undo-tree overrides `post-gc-hook'?
-  (add-transient-hook! #'undo-tree-undo (gcbal-mode -1) (gcbal-mode 1)))
+  ;; (add-transient-hook! #'undo-tree-undo (gcbal-mode -1) (gcbal-mode 1))
+  (defadvice! restore-gcbal () :after #'doom-load-session
+    ;; session restore changes vars, should do something from projectile
+    (when gcbal-mode
+        (progn (gcbal-mode -1) (gcbal-mode 1)))))
