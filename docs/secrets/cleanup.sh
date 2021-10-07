@@ -4,6 +4,7 @@ set -eo pipefail
 if [ "$1" = "-h" ]; then
 	echo "-r" remove missing link from $HOME
 	echo "-c" deletes '*Cache*' files in $(realpath files/)
+	echo "-e" deletes empty files and checks them out from supplied revision \$2 or master
 	echo "-h" help
 	exit
 fi
@@ -19,6 +20,14 @@ REPO_DIR=$(basename "$REPO_PATH")
 if [ "$REPO_DIR" != ".secrets" ]; then
 	echo $WRONG_REPO_MSG
 	exit 1
+fi
+
+if [ "$1" = "-e" ]; then
+	rev="$2"
+	[ -z "$rev" ] && { "echo need a revision"; exit 1; }
+	cd ~/.secrets
+	find files/ -type f -empty | xargs -I {} bash -c "rm -f {}; git checkout $rev {}"
+	exit
 fi
 
 if [ "$1" = "-r" ]; then

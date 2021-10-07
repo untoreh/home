@@ -48,3 +48,13 @@ else
 	git fetch --depth=1 origin $GIT_BRANCH
 	git checkout $GIT_BRANCH
 fi
+
+if [ -e rebaselock.pre-rebase.sh ]; then
+	echo "Adding git pre-rebase locking hook.."
+	ln -srf rebaselock.pre-rebase.sh ~/.secrets/.git/hooks/pre-rebase
+	git config branch.master.rebaselock 1
+else
+	echo "Warning: pre-rebase locking hook not found!"
+fi
+
+echo "DONE."

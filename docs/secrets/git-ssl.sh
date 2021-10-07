@@ -11,9 +11,7 @@ fi
 [ -z "$CIPHER" ] && CIPHER=aes128
 
 function decrypt(){
-	if [ -t 0 ]; then
-		openssl $CIPHER -d -iter 10000 -kfile <(echo $PASSWORD) -in /dev/stdin -out -
-	fi
+	openssl $CIPHER -d -iter 10000 -kfile <(echo $PASSWORD) -in /dev/stdin -out -
 }
 
 case "$1" in
