@@ -115,6 +115,13 @@
   :init
   (defun gcmh-mode (&rest args))
   (defun gcmh-set-high-threshold (&rest args))
+  ;; re-enable it after undo-tree because undo-tree overrides `post-gc-hook'?
+  ;; (add-transient-hook! #'undo-tree-undo (gcbal-mode -1) (gcbal-mode 1))
+  (defadvice! restore-gcbal () :after #'doom-load-session
+    ;; session restore changes vars, should do something from projectile
+    (when gcbal-mode
+        (gcbal-mode -1)
+        (gcbal-mode 1)))
   :config
   (when (not (subrp (symbol-function #'gcbal-mode)))
     (native-compile-async (locate-library "gcbal") t t))
@@ -122,10 +129,4 @@
    gcbal-verbose nil
    gcbal-target-gctime 0.2
    gcbal-target-auto t)
-  (gcbal-mode 1)
-  ;; re-enable it after undo-tree because undo-tree overrides `post-gc-hook'?
-  ;; (add-transient-hook! #'undo-tree-undo (gcbal-mode -1) (gcbal-mode 1))
-  (defadvice! restore-gcbal () :after #'doom-load-session
-    ;; session restore changes vars, should do something from projectile
-    (when gcbal-mode
-        (progn (gcbal-mode -1) (gcbal-mode 1)))))
+  (gcbal-mode 1))
