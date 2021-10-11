@@ -34,7 +34,6 @@
 (map! :after company
       (:map company-active-map
        ;; NOTE: C-<tab> is used by `auto-yasnippet'
-       "C-SPC" #'company-try-hard
        "<tab>" #'company-complete-common
        "<backtab>" #'undo-tree-undo
        "C-s" #'company-search-candidates
@@ -53,7 +52,6 @@
   :if (featurep! :completion company)
   :config
   (setq orderless-component-separator "[ &+-]")
-  (use-package! company-try-hard)
   ;; make the common part work independently from the prefix
   ;; and without absolute matching (doesn't have to be shared among ALL candidates)
   (advice-add 'company-update-candidates :after
