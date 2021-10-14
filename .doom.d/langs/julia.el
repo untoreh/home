@@ -346,11 +346,36 @@
    (f-read-text
     (concat
      (file-name-as-directory
-      (my/script-dir #'julia-franklin)) "franklin.jl"))))
+      (my/script-dir #'julia-franklin)) "franklin.jl")))
+  (vterm-send-return))
+
+(require 'aio)
+(aio-defun julia-franklin-maybe-stop ()
+  (catch 'stop
+    (julia-repl-switch t nil)
+    (while t
+      (when (progn
+              (goto-char  (point-max))
+              (while (looking-at  "^$")
+                (previous-line)
+                (beginning-of-line))
+              (looking-at ".*Use Pkg.activate() to go back"))
+        (vterm-send-C-c)
+        (throw 'stop t))
+      (when (progn
+              (goto-char  (point-max))
+              (while (looking-at  "^$")
+                (previous-line)
+                (beginning-of-line))
+              (looking-at (concat julia-prompt-regexp "$")))
+        (throw 'stop t))
+      (aio-await (aio-sleep 0.2))
+      )))
 
 (defun julia-franklin-stop ()
   (interactive)
-  (julia-repl-cmd "try Base.throwto(frank_task, InterruptException()) catch end \n"))
+  (julia-repl-cmd "try Base.throwto(frank_task, InterruptException()) catch end")
+  (julia-franklin-maybe-stop))
 
 (after! f
   (cl-defun julia-franklin-sync-blog (&optional (src "/tmp/__site")
@@ -382,12 +407,14 @@ the SRC folder to the TRG folder"
 
 (defun julia-franklin-publish ()
   (interactive)
+  (julia-franklin-stop)
   (julia-repl-cmd "pubup()"))
 
 (defun julia-franklin-serve()
   (interactive)
   (julia-franklin-stop)
-  (julia-repl-cmd "frank_task = @task serve(is_final_pass=true); schedule(frank_task)"))
+  (julia-repl-cmd "frank_task = @task serve(is_final_pass=true); schedule(frank_task)")
+  (vterm-send-return))
 
 (defun julia-repl-toggle-debug ()
   (interactive)
