@@ -112,6 +112,12 @@ git-tree-sha1 = "e2f47f6d8337369411569fd45ae5753ca10394c6"
 uuid = "83423d85-b0ee-5818-9007-b63ccbeb887a"
 version = "1.16.0+6"
 
+[[Cascadia]]
+deps = ["AbstractTrees", "Gumbo"]
+git-tree-sha1 = "95629728197821d21a41778d0e0a49bc2d58ab9b"
+uuid = "54eefc05-d75b-58de-a785-1a3403f0919f"
+version = "1.0.1"
+
 [[CatIndices]]
 deps = ["CustomUnitRanges", "OffsetArrays"]
 git-tree-sha1 = "a0f80a09780eed9b1d106a1bf62041c2efc995bc"

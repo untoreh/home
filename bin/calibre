@@ -1,7 +1,7 @@
 #!/usr/bin/bash -l
 
-#if pgrep -f calibre-server; then
-#	supc stop calibre-server
-#fi
+if pgrep -f calibre-server 2>/dev/null; then
+	supc stop calibre-server
+	echo calibre server stopped
+fi
 QT_QPA_PLATFORM="xcb" CALIBRE_USE_SYSTEM_THEME=1 exec nixGL ~/.nix-profile/bin/calibre --detach $argv
-#supc start calibre-server
