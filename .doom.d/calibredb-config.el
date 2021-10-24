@@ -126,11 +126,14 @@
   "Filter results by tag."
   (interactive)
   (let ((s-contains?-func (symbol-function #'s-contains?))
-        (toggle (alist-get tag calibredb-toggle-filter-alist)))
+        (toggle (alist-get tag calibredb-toggle-filter-alist))
+        (calibredb-virtual-library-default-name calibredb-virtual-library-name))
     (letf! ((defun inv-func (res) (if toggle (not res) res)))
       (letf! ((defun completing-read (&rest args) tag)
               (defun s-contains? (needle s &optional ignore)
-                (inv-func (funcall s-contains?-func needle s ignore))))
+                (and
+                 (funcall s-contains?-func calibredb-virtual-library-default-name s ignore)
+                 (inv-func (funcall s-contains?-func needle s ignore)))))
         (calibredb-filter-by-tag)
         (setf (alist-get tag calibredb-toggle-filter-alist)
               (not toggle))))))
@@ -258,6 +261,7 @@
       :ne "M-w" (cmd! (calibredb-toggle-tag-at-point (completing-read "Tag: " (calibredb-all-tag))))
       :ne "C-r" (cmd! (calibredb-filter-toggle-tag "read"))
       :ne "C-e" (cmd! (calibredb-filter-toggle-tag "active"))
+      :ne "C-w" (cmd! (calibredb-filter-toggle-tag (completing-read "Tag: " (calibredb-all-tag))))
       :ne "C-p" (cmd! (prin1 (calibredb-pdftitle))))
 
 (map! :map calibredb-show-mode-map
@@ -336,7 +340,9 @@
    calibredb-server-url nil
    calibredb-library-alist '(("http://localhost:8099/"))
    calibredb-opds-download-dir (expand-file-name
-                                temporary-file-directory "calibredb"))
+                                temporary-file-directory "calibredb")
+   calibredb-virtual-library-alist '(("finance" . "finance")
+                                     ("charting" . "finance charts")))
   (calibredb-add-read-column))
 
 
