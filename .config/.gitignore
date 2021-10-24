@@ -66,3 +66,4 @@ Electron/
 enchant/*.dic
 enchant/*.exc
 calibre/history.plist
+/.config/calibre/conversion/*.py

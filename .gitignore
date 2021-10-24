@@ -36,6 +36,7 @@ org/
 .TabNine/
 .mail/
 .doom.d/mail.el
+.doom.d/vimish-fold
 .mu/
 .mbsync*
 .mozilla
@@ -121,3 +122,5 @@ remmina/
 /.ipfs/*
 !/.ipfs/config
 /.msmtp.log
+.dotnet/
+.nuget/
