@@ -163,4 +163,6 @@
   :if (featurep! :ui emoji)
   :init
   ;; don't emojify strings
-  (setq emojify-program-contexts '(comments)))
+  (setq emojify-program-contexts '(comments)
+        ;; don't emojify ascii
+        emojify-emoji-styles '(github unicode)))
