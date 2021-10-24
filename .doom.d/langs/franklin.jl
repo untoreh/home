@@ -11,9 +11,6 @@ using Franklin;
 const fr = Franklin;
 using Franklin: convert_md, convert_html, pagevar, path, globvar;
 
-if isdefined(Main, :frank_task)
-    Base.throwto(frank_task, InterruptException())
-end
 include("utils.jl")
 
 frank_task = @task serve(prerender=true); schedule(frank_task)

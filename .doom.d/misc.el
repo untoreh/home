@@ -111,17 +111,11 @@
 
 ;; garbage collector mode
 (use-package! gcbal
-  ;; :after-call doom-after-init-modules-hook
+  ;; apply after undo-tree-mode since it ovverrides `post-gc-hook'
+  :after-call undo-tree-mode
   :init
   (defun gcmh-mode (&rest args))
   (defun gcmh-set-high-threshold (&rest args))
-  ;; re-enable it after undo-tree because undo-tree overrides `post-gc-hook'?
-  ;; (add-transient-hook! #'undo-tree-undo (gcbal-mode -1) (gcbal-mode 1))
-  (defadvice! restore-gcbal () :after #'doom-load-session
-    ;; session restore changes vars, should do something from projectile
-    (when gcbal-mode
-        (gcbal-mode -1)
-        (gcbal-mode 1)))
   :config
   (when (not (subrp (symbol-function #'gcbal-mode)))
     (native-compile-async (locate-library "gcbal") t t))
