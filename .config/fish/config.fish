@@ -3,7 +3,7 @@ if ! set -q WSLENV
     source ~/.config/fish/ssh-agent.fish
 end
 
-if ! [ -e /tmp/supervisor.sock ]
+if ! [ -e /tmp/supervisor.sock ] && which supervisord &>/dev/null
     supervisord -c ~/.config/supervisor.conf
 end
 
