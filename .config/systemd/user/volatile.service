@@ -1,0 +1,10 @@
+[Unit]
+Description=Mount the volatile mount
+PartOf=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=%h/.config/systemd/scripts/check_mount.sh
+
+[Install]
+WantedBy=multi-user.target
