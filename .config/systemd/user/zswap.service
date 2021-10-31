@@ -14,7 +14,7 @@ ExecStartPre=/usr/bin/sudo modprobe zswap
 ExecStartPre=/bin/bash -c "echo z3fold | $PARAMS/zpool"
 ExecStartPre=/bin/bash -c "echo zstd | $PARAMS/compressor"
 ExecStartPre=/bin/bash -c "echo 95 | $PARAMS/max_pool_percent"
-ExecStartPre=/bin/bash -c "echo 97 | $PARAMS/accept_threshold_percent"
+ExecStartPre=-/bin/bash -c "echo 97 | $PARAMS/accept_threshold_percent"
 ExecStartPre=/bin/bash -c "echo 3 | /usr/bin/sudo tee /proc/sys/vm/drop_caches"
 #ExecStartPre=/bin/bash -c "SWAP_DEV=`findfs UUID=$SWAP_UUID`; /usr/bin/sudo /usr/sbin/swapon $SWAP_DEV"
 ExecStartPre=/bin/bash -c "/usr/bin/sudo /usr/sbin/swapon $SWAP_DEVICE"
