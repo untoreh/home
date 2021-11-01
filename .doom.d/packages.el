@@ -135,6 +135,7 @@
 ;;                             :repo "https://github.com/untoreh/ahk-mode"))
 (package! ahk-mode)
 (package! vimrc-mode)
+(package! systemd)
 
 ;; we use weechat instead
 ;; (package! matrix-client
@@ -173,7 +174,7 @@
 ;; shows keychords in the modeline :pin "04ba7519f34421c235bac458f0192c130f732f12"
 (package! keycast)
 
-;; pacache needed by gcbal
+;; pcache needed by gcbal
 (package! pcache)
 
 ;; ebooks
