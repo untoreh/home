@@ -1,20 +1,43 @@
 local wezterm = require 'wezterm';
 local launch_menu = {}
-local default_prog = {}
+local default_prog = nil
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
-  table.insert(launch_menu, {
+	table.insert(launch_menu, {
                  label = "PowerShell",
                  args = {"powershell.exe", "-NoLogo"},
-  })
-  table.insert(default_prog,  {"wsl.exe", "-d", "Arch", "-e", "bash", "-c",
-               "{ [ -f /tmp/.mounted ] || /etc/wsl-mount.sh; } && SHELL=fish exec fish -li"})
+	})
+  default_prog = {"wsl.exe", "-d", "Arch", "-e", "bash", "-c",
+                  "{ [ -f /tmp/.mounted ] || /etc/wsl-mount.sh; } && SHELL=fish exec fish -li"}
 else
-  table.insert(default_prog, {"fish", "-li"})
+  default_prog = {"fish", "-li"}
 end
 
 return {
-	audible_bell = "Disabled",	
+	unix_domains = {
+    {
+      name = "local",
+    },
+    {
+      name = "ux_remote"
+  }},
+	ssh_domains = {
+    {
+      name = "remote",
+      remote_address = "mbx:22",
+      username = "fra",
+    },
+    {
+      name = "mbx",
+      remote_address = "mbx:22",
+      username = "fra",
+	}},
+	tls_servers = {
+		{bind_address = "0.0.0.0:2233"}
+	},
+	audible_bell = "Disabled",
+  -- don't linger terminated process unconditionally
+	exit_behavior = "Close",
   window_decorations = "TITLE",
   font = wezterm.font("Hack"),
   color_scheme = "Dracula",
@@ -22,6 +45,7 @@ return {
   enable_scroll_bar = true,
   launch_menu = launch_menu,
   default_prog = default_prog,
+  default_prog = {"fish", "-li"},
   keys = {
     {key="|", mods="CTRL|SHIFT", action=wezterm.action{SplitHorizontal={domain="CurrentPaneDomain"}}},
     {key="\\", mods="CTRL|ALT", action=wezterm.action{SplitHorizontal={domain="CurrentPaneDomain"}}},
