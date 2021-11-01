@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+AWAKE_EXE="/mnt/c/Program Files/PowerToys/modules/Awake/PowerToys.Awake.exe"
+
+function start(){
+	stop
+sleep infinity &
+pid=$(jobs -p | head -n1 )
+disown $pid
+echo $pid > /tmp/.awake
+"$AWAKE_EXE" --pid $pid & disown
+echo awake at $pid
+}
+
+function stop(){
+	kill $(cat /tmp/.awake) &>/dev/null
+}
+
+$1

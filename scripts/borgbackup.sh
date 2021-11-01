@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 
+set -x
 set -euo pipefail
-trap "wex caffeine.exe -appoff" EXIT SIGKILL SIGTERM
-
-# Prevent windows from sleep
-[ -v WSLENV ] && wex caffeine.exe -appon
+#trap "wex caffeine.exe -appoff" EXIT SIGKILL SIGTERM
+trap "awake stop" EXIT SIGKILL SIGTERM
 
 . ~/.profile
 [ ! -v TARGET ] && {
@@ -13,6 +12,10 @@ trap "wex caffeine.exe -appoff" EXIT SIGKILL SIGTERM
 }
 
 [ -v SLEEP_BEFORE_BACKUP ] && sleep $SLEEP_BEFORE_BACKUP
+
+# Prevent windows from sleep
+[ -v WSLENV ] && wex caffeine.exe -appon
+[ -v WSLENV ] && awake start
 
 # Archive name schema
 DATE=$(date --iso-8601)-$(hostname)
@@ -69,5 +72,6 @@ borg prune -v --list --keep-daily=7 --keep-weekly=4 $TARGET
 sync
 
 # Allow windows to sleep
-[ -v WSLENV ] && wex caffeine.exe -appoff
+#[ -v WSLENV ] && wex caffeine.exe -appoff
+[ -v WSLENV ] && awake stop
 

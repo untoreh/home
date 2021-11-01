@@ -16,11 +16,9 @@ end
 return {
 	unix_domains = {
     {
-      name = "local",
+      name = "init",
     },
-    {
-      name = "ux_remote"
-  }},
+    },
 	ssh_domains = {
     {
       name = "remote",

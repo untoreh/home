@@ -1,6 +1,7 @@
 [Unit]
-Description=Mount the volatile mount
+Description=Keep devices mounted
 PartOf=multi-user.target
+Before=mediabox.service p2p.target
 
 [Service]
 Type=simple
