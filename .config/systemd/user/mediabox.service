@@ -1,0 +1,15 @@
+[Unit]
+Description=Start the mediabox docker pod
+StartLimitBurst=3
+StartLimitIntervalSec=33
+
+[Service]
+Type=simple
+Environment=MOUNT_PATH=%h/mnt/data/mediabox
+Environment=MBX_PATH=%h/mediabox
+ExecStartPre=/usr/bin/rm $MBX_PATH
+ExecStartPre=/usr/bin/ln -srf $MOUNT_PATH $MBX_PATH
+ExecStart=%h/mediabox/start.sh
+
+[Install]
+WantedBy=multi-user.target

@@ -65,7 +65,7 @@ services:
       - PGID=1000
       - TRANSMISSION_WEB_HOME=/combustion-release/ #optional
     volumes:
-      - ./transmission-config/config:/config
+      - ./transmission-config:/config
       - ./data:/data
       # - <path to watch folder>:/watch
     restart: unless-stopped
@@ -81,3 +81,13 @@ services:
     volumes:
       - ./medusa:/config
       - ./data:/data
+  cleaner:
+    extends:
+      service: mediabox
+    image: alpine
+    container_name: cleaner
+    command:
+     - "/cleaner/start.sh"
+    restart: unless-stopped
+    volumes:
+     - ./media_cleaner:/cleaner
