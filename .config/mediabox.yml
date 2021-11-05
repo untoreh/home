@@ -91,3 +91,11 @@ services:
     restart: unless-stopped
     volumes:
      - ./media_cleaner:/cleaner
+  simkl-medusa-sync:
+    extends:
+      service: mediabox
+    image: untoreh/simkl-medusa-sync
+    container_name: simkl-medusa-sync
+    restart: unless-stopped
+    volumes:
+     - ./simkl_medusa_sync:/config
