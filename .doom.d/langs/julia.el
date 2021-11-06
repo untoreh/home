@@ -436,5 +436,57 @@ end;"))
 (after! projectile
   (appendq! projectile-project-root-files '("Project.toml" "JuliaProject.toml")))
 
+;;; add tag completion to blog posts
+(after! company
+  (defconst
+    company-blog-tags
+    (with-temp-buffer
+      (insert-file-contents
+       (my/concat-path doom-private-dir
+                       "langs"
+                       "blog_tags.txt"))
+      (split-string (buffer-string)))
+    "The list of tags for the blog tags backend.")
+  (defun company-blog-tags-backend (command &optional arg &rest ignored)
+    "Completes based on a list of tags defined in `company-blog-tags'."
+    (interactive (list 'interactive))
+    (cl-case command
+      (interactive (company-begin-backend 'company-sample-backend))
+      (prefix (and (derived-mode-p 'markdown-mode)
+                   (company-grab-symbol)))
+      (candidates (if (not (or (null arg) (eq "" (substring-no-properties arg))))
+                      (cl-remove-if-not
+                       (lambda (c) (string-prefix-p arg c))
+                       company-blog-tags)
+                    company-blog-tags))))
+
+  (defvar company-blog-tags-prev-backends company-abckends "Stores previous company backends in buffer.")
+  (defvar company-blog-tags-prev-prefix-length company-minimum-prefix-length "Stores previous company min prefix length in buffer.")
+  (define-minor-mode company-blog-tags-mode
+    "Minor mode for company blog tags backend."
+    :lighter "blog-tags"
+    :global nil
+    (if company-blog-tags-mode
+        (progn
+          (setq-local company-blog-tags-prev-backends company-backends)
+          (setq company-blog-tags-prev-prefix-length company-minimum-prefix-length)
+          (setq-local company-minimum-prefix-length 0)
+          (setq-local company-backends '(company-blog-tags-backend))
+          )
+      (setq-local company-minimum-prefix-length company-blog-tags-prev-prefix-length
+                  company-backends company-blog-tags-prev-backends)
+      ))
+
+  ;; (add-hook 'gfm-mode-hook (lambda ()
+  ;;                            (and (string-match ".*/dev/blog/.*" (buffer-file-name))
+  ;;                                 (company-blog-tags-mode))))
+
+  (map! :mode gfm-mode
+        :localleader
+        :desc "Toggle completion of blog tags."
+        :nv "t" (cmd! (company-blog-tags-mode (if company-blog-tags-mode -1 1)))
+        )
+  )
+
 (set-file-template! ".*/blog/posts/.+\\.md$" :trigger "blog_post" :project t)
 (set-docsets! 'julia-repl-vterm-mode :add "Julia")
