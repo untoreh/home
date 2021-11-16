@@ -84,7 +84,7 @@
          (weechat-auto-monitor))
        (weechat-switch-buffer
         ;; NOTE: universal arg to list also un-monitored buffers ("SPC u SPC o c")
-        (first (list (weechat--read-channel-name (not current-prefix-arg)))))))
+        (cl-first (list (weechat--read-channel-name (not current-prefix-arg)))))))
 
 ;; not prompt for vterm compilation
 (when (featurep! :term vterm)

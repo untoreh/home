@@ -269,5 +269,4 @@
          (weechat-connect "localhost" 9000 nil 'plain t)
          (weechat-auto-monitor))
        (weechat-switch-buffer
-        (first (list (weechat--read-channel-name (not current-prefix-arg)))))))
-
+        (cl-first (list (weechat--read-channel-name (not current-prefix-arg)))))))

@@ -28,7 +28,7 @@
 (defun calibredb-candidate-key (key &optional candidate)
   (calibredb-getattr
    (or candidate
-       (first (calibredb-find-candidate-at-point)))
+       (cl-first (calibredb-find-candidate-at-point)))
    :id))
 
 (defun calibredb-add-column (label name datatype)
@@ -107,7 +107,7 @@
 ;;   (let ((cands (or candidates
 ;;                   (calibredb-find-candidate-at-point)
 ;;                   (calibredb-find-marked-candidates))))
-;;     (calibredb-set-metadata--tags-server (calibredb-getattr (first cand) :id)
+;;     (calibredb-set-metadata--tags-server (calibredb-getattr (cl-first cand) :id)
 ;;                                          (read-string (if (> num 0)
 ;;                                    (concat "Set " field " for " (number-to-string num) " items: ")
 ;;                                  (concat prompt id " " title ": ") ) init))
@@ -235,7 +235,7 @@
 (defun calibredb-pdftitle (&optional candidate)
   (unless (executable-find "pdftitle")
     (error "pdftitle not found in path"))
-  (let* ((cand (first (or candidate (calibredb-find-candidate-at-point))))
+  (let* ((cand (cl-first (or candidate (calibredb-find-candidate-at-point))))
          (title (calibredb-getattr cand :book-title))
          (file (file-truename (calibredb-getattr cand :file-path)))
          (result (shell-command-to-string

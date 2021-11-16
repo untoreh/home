@@ -5,8 +5,10 @@
  ;; If there is more than one, they won't work right.
  '(mini-frame-show-parameters '((bottom . 10) (width . 0.7) (left . 0.5)))
  '(package-selected-packages
-   '(csharp-mode company-prescient company-box company-posframe mu4e-views xwidgets-reuse gif-screencast mini-frame bazel memory-usage powershell python-x))
- '(safe-local-variable-values '((git-commit-major-mode . git-commit-elisp-text-mode))))
+   '(systemd csharp-mode company-prescient company-box company-posframe mu4e-views xwidgets-reuse gif-screencast mini-frame bazel memory-usage powershell python-x))
+ '(safe-local-variable-values
+   '((ranger-show-hidden . t)
+     (git-commit-major-mode . git-commit-elisp-text-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

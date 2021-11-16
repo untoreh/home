@@ -156,7 +156,7 @@ for dotted pair lists. "
 
 (cl-defun my/gc-bench(fn &optional (times 3))
   (garbage-collect)
-  (first (last (benchmark-call
+  (cl-first (last (benchmark-call
    (lambda () (funcall fn)
      (garbage-collect)
      ) times))))
