@@ -4,6 +4,10 @@ let
   # nixl package
   nixgl = import (builtins.fetchTarball
     "https://github.com/guibou/nixGL/archive/22f96c15988d51f97110e3e79dbbee02f2a47273.tar.gz") { };
+  unstable = import <nixpkgs-unstable> {
+    inherit (self) config;
+    overlays = [ ]; # no overlays inside overlay (infinite recursion)
+  };
 in {
   inherit (super)
   # shell
@@ -28,13 +32,15 @@ in {
 
     # langs
     go-pup nixfmt golangci-lint shfmt libtidy nodejs shellcheck jq enchant2 ispell languagetool
-    chrpath
+    chrpath rustup rust-analyzer
 
     # runtimes
     # python3
 
     # emacsPgtkGcc # wait for mesa-d3d12
     mu isync goimapnotify gnupg pinentry emacs-all-the-icons-fonts;
+  # latest langs
+  #inherit (unstable) nim;
   # more fonts
   inherit (self.vimPlugins) vim-devicons;
   # emacs with cachix support
