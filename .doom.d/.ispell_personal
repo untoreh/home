@@ -1,4 +1,4 @@
-personal_ws-1.1 en 29 
+personal_ws-1.1 en 30 
 Flexget
 Recurses
 WSL
@@ -19,6 +19,7 @@ fu
 gc
 gcbal
 gccemacs
+homoiconicity
 jackett
 jellyfin
 programmatically
