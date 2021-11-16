@@ -22,7 +22,7 @@ alias julia-sys-ls "sudo ln -srf /usr/lib/julia/sys.so{.ls,}"
 set rocm_tag rocm/pytorch:rocm3.8_ubuntu18.04_py3.6_pytorch
 alias dpl "dkr exec --privileged -it -e SHELL=/bin/zsh dpl /bin/zsh -li"
 alias blg "dkr exec -it blogmal /bin/sh -li"
-alias mbx "dkr exec -it mediabox /bin/bash -li"
+alias mbx "ssh mbx -t fish -li"
 alias fqt "tmux source ~/.config/tmux/freqtrade.conf &>/dev/null; tmux swi -t freqtrade"
 alias fqt_rocm_create "cd ~/.tmp/freqtrade ; sudo docker run --name fqt-rocm -it --device=/dev/kfd --device=/dev/dri --cap-add=ALL --privileged --security-opt seccomp=unconfined \
     --group-add video -v ~/.tmp/freqtrade:/freqtrade -w /freqtrade --net=host --entrypoint /bin/bash $rocm_tag \

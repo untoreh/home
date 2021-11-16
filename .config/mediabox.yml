@@ -69,6 +69,18 @@ services:
       - ./data:/data
       # - <path to watch folder>:/watch
     restart: unless-stopped
+  transmission-cleaner:
+    extends:
+      service: mediabox
+    image: linuxserver/transmission
+    container_name: transmission-cleaner
+    volumes:
+      - ./transmission-config:/config
+    entrypoint:
+      - "/usr/bin/env"
+      - "bash"
+    command:
+      - "/config/cleaner.sh"
   medusa:
     extends:
       service: mediabox
