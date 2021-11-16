@@ -1,0 +1,9 @@
+[workspace]
+
+members = [
+    "./irust_vim",
+    "./irust_prompt",
+    "./irust_emacs",
+    "./irust_compile_animation",
+]
+

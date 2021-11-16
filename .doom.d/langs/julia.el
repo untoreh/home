@@ -88,7 +88,7 @@
     (cl-incf julia-repl--call-count)
     (let ((deps (split-string (or (alist-get :deps params) ""))))
       (if (eq 1 (length deps))
-          (org-babel-julia--goto-block-and-exec (first deps))
+          (org-babel-julia--goto-block-and-exec (cl-first deps))
         (map 'list #'org-babel-julia--goto-block-and-exec deps)))
 
     ;; set state to block headers
@@ -460,7 +460,7 @@ end;"))
                        company-blog-tags)
                     company-blog-tags))))
 
-  (defvar company-blog-tags-prev-backends company-abckends "Stores previous company backends in buffer.")
+  (defvar company-blog-tags-prev-backends company-backends "Stores previous company backends in buffer.")
   (defvar company-blog-tags-prev-prefix-length company-minimum-prefix-length "Stores previous company min prefix length in buffer.")
   (define-minor-mode company-blog-tags-mode
     "Minor mode for company blog tags backend."

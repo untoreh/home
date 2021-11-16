@@ -12,7 +12,7 @@
 
 (use-package! lsp-mode
   :if (and (featurep! :tools lsp)
-           (not (featurep! :tools lsp +eglot)))
+	   (not (featurep! :tools lsp +eglot)))
   :config
   (setq
    lsp-auto-configure t
@@ -42,4 +42,6 @@
    ;; lsp-completion-provider
    ;; text
    )
-  (lsp-treemacs-sync-mode 1))
+  (when (featurep! :ui treemacs +lsp)
+	  (lsp-treemacs-sync-mode 1))
+  )

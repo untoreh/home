@@ -1,0 +1,73 @@
+#V2
+ps
+()
+;
+end
+\\
+ps
+let asd = "asd "
+let asd = "asd" ;
+asd
+"hsow"
+:opt 0
+:sccache
+:sccache 1
+:sccache
+:sccache 1
+:sccache true
+:sccache false
+:help
+:time_passes
+println!("asD");
+println!("asD")
+:time_passes
+println!("asD");
+println!("asD")
+let asd = { 0, 1 , 3}
+let asd = { 0, 1 , 3};
+let asd = [ 0, 1 , 3 ];
+[0 ,1 ,2]
+[0 ,1 ,2];
+[0 ,1 ,2]
+collection! [0 ,1 ,2]
+use std::collections;
+collection! [0 ,1 ,2]
+pwd
+:help
+:dep .
+:dep ~/dev/blogmal
+:dep $HOME/dev/blogmal
+use std::env;
+env::vars_os()
+let ok = env::vars_os()
+let ok = env::vars_os();
+ok
+ok[1]
+let ok = env::VarsOs
+ok
+collect(ok)
+collect!(ok)
+use std:collections:collect
+use std:collections:collect;
+use std::collections;
+:add .
+:deep .
+:dep .,
+:dep .
+:dep blogmal
+:dep /home/fra/dev/blogmal
+:dep /home/fra/dev/blogmal/
+:dep /home/fra/dev/blogmal
+:dep "/home/fra/dev/blogmal"
+:dep "/home/fra/dev/blogmal/Crago.toml"
+:dep
+:dep std::env
+:dep std
+:dep rocket
+use warp::Filter;\nuse futures::executor::block_on;\nuse pyo3::prelude::*;\nuse pyo3::types::IntoPyDict;\n
+:dep pyo3
+use pyo3::prelude::*;\nuse pyo3::types::IntoPyDict;\n
+[()].into_py(py)
+Python::with_gil(|py| {\nprintln!(py);\n});
+[()].into_py_dict(py);
+let gil = Python::acquire_gil();\n    let py = gil.python();
