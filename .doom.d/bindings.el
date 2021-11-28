@@ -45,10 +45,14 @@
 
 ;; common
 (map! :leader
-      :desc "find file at point"
+      (:desc "Find file at point."
       :prefix "f"
       :n "."
-      #'find-file-at-point)
+      #'find-file-at-point
+      :desc "Toggle iedit mode."
+      :prefix "t"
+      :nv "e"
+      #'iedit-mode))
 
 ;; inserting inside a vterm should reset cursor position
 (map! :mode vterm-mode
