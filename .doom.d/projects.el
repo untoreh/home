@@ -12,13 +12,13 @@
 ;; projectile
 (after! projectile
   (setq projectile-ignored-projects
-        '("/tmp" "~/tmp" "~/.local" "~/.cache" ".npm" "~/.emacs.d/.local/straight/repos/")
+        '("/tmp" "~/tmp" "~/.local" "~/.cache" ".npm" "~/.emacs.d/.local/straight/repos/" "$HOME")
         projectile-project-search-path '("~/dev")
         projectile-enable-caching t
         projectile-git-submodule-command
         "git submodule --quiet foreach 'echo $path' 2>/dev/null | tr '\\n' '\\0'"
         )
-  (pushnew! projectile-globally-ignored-directories "~/win" ".venv" ".env" ".ipfs" ".archive" ".old")
+  (pushnew! projectile-globally-ignored-directories "~/win" ".venv" ".env" ".ipfs" ".archive" ".old" "src")
   ;; allow project based vars
   (put 'projectile-generic-command 'safe-local-variable #'stringp))
 
