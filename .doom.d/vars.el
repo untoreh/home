@@ -19,8 +19,10 @@
  password-cache-expiry nil)
 
 ;; use battery mode when unplugged
-(unless (string-match-p "^Power N/A" (battery))
-  (display-battery-mode 1))
+(let ((battery-info (battery)))
+  (when (and (stringp battery-info)
+             (string-match-p "^Power N/A" (battery)))
+    (display-battery-mode 1)))
 
 (setq org-directory "~/org/")
 
