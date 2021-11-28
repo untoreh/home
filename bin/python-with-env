@@ -1,0 +1,11 @@
+#!/bin/sh
+
+. ~/.profile
+
+if [ -e .venv ]; then
+    . .venv/bin/activate
+elif [ -e .env ]; then
+ . .env/bin/activate
+ fi
+
+exec python "$@"

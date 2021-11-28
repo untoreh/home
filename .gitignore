@@ -126,3 +126,4 @@ remmina/
 .nuget/
 /.nimble/
 /.choosenim/
+/nltk_data/

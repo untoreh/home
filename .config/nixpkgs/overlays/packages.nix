@@ -32,7 +32,7 @@ in {
 
     # langs
     go-pup nixfmt golangci-lint shfmt libtidy nodejs shellcheck jq enchant2 ispell languagetool
-    chrpath rustup rust-analyzer
+    chrpath rustup rust-analyzer pipenv
 
     # runtimes
     # python3
