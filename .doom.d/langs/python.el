@@ -26,6 +26,12 @@
   ;; make isort compatible with black
   (setq-default py-isort-options '("--profile" "black"))
   (add-to-list '+format-on-save-enabled-modes 'python-mode t)
+
+  (setq
+   ;; FIXME complains about the python interpreter not supporting completion...
+   python-shell-completion-native-enable nil)
   ;; use jupyter repl as default python repl
   (setf (alist-get 'python-mode +eval-repls)
         '(+python/open-jupyter-repl :persist t)))
+
+;; NOTE: pyvenv-activate needs the path the virtual env directory (usually .venv or .env)
