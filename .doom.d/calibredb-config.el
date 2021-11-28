@@ -45,10 +45,10 @@
             (calibredb-root-dir-quote))))
 
 (defun calibredb-add-read-column ()
-  (let* ((columns (calibredb-command
+  (if-let* ((columns (calibredb-command
                    :command "custom_columns"
                    :library (calibredb-arg-library 'local)))
-         (cols (split-string columns "\n")))
+         (cols (if (stringp columns) (split-string columns "\n") nil)))
     (unless (stringp (catch 'match
                        (mapc (lambda (x) (and (string-prefix-p "read_status" x)
                                          (throw 'match x))) cols)))
