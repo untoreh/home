@@ -86,6 +86,7 @@ services:
       service: mediabox
     image: pymedusa/medusa:latest
     container_name: medusa
+    user: "$UID:$GID"
     network_mode: host
     restart: unless-stopped
     ports:
@@ -93,11 +94,11 @@ services:
     volumes:
       - ./medusa:/config
       - ./data:/data
-  cleaner:
+  jellyfin-cleaner:
     extends:
       service: mediabox
-    image: alpine
-    container_name: cleaner
+    image: untoreh/jellyfin-media-cleaner:latest
+    container_name: jellyfin-cleaner
     command:
      - "/cleaner/start.sh"
     restart: unless-stopped
