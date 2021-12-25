@@ -1953,12 +1953,6 @@ git-tree-sha1 = "1a63e6eea76b291378ff9f95801f8b6d96213208"
 uuid = "b8865327-cd53-5732-bb35-84acbb429228"
 version = "1.3.0"
 
-[[Utils]]
-deps = ["IterTools", "ResumableFunctions", "StatsBase"]
-path = "/home/fra/.julia/dev/Utils"
-uuid = "e59c4ed7-b63a-4e1a-a62a-4916a7bda565"
-version = "0.1.0"
-
 [[VectorizationBase]]
 deps = ["ArrayInterface", "Hwloc", "IfElse", "Libdl", "LinearAlgebra"]
 git-tree-sha1 = "9f27ddc74f04319574749bb0a5b3f231a5e7db16"
