@@ -33,6 +33,7 @@ Desktop
 .lokinet
 .gem
 .gnome
+.julia
 .java
 .npm
 .racket
