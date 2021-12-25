@@ -2,7 +2,8 @@
 ;;
 
 (defun my/script-dir (&optional obj)
-  " Returns the path of the function OBJ or the path where my/script-dir is defined "
+  " Returns the path of the function OBJ or the path where
+`my/script-dir' is defined."
   (if (and load-file-name (null obj))
       (file-name-directory load-file-name)
     (f-dirname (cdr (find-function-library (or obj #'my/script-dir))))))
@@ -87,9 +88,10 @@
 (defun my/concat-path (&rest parts)
   (-reduce (lambda (a b) (expand-file-name b a)) parts))
 
-(after! find-func
-  (let ((filepath (cdr (find-function-library #'my/script-dir))))
-    (native-compile-async filepath t nil)))
+;; FIXME: functions.el file not found error given by `native-compile-async'... `native-compile' works fine...
+;(after! find-func
+  ;(let ((filepath (cdr (find-function-library #'my/script-dir))))
+    ;(native-compile-async filepath t nil)))
 
 (provide 'functions)
 (require'functions)
