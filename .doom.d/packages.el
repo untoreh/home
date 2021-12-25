@@ -53,7 +53,7 @@
 
 ;; misc
 (package! mu4e-alert)
-(package! gcmh :disable t)
+;(package! gcmh :disable t)
 (package! aio)
 
 ;; langs
@@ -182,3 +182,9 @@
 (package! calibredb :recipe (:host github :repo "chenyanming/calibredb.el" :branch "opds"))
 (package! arxiv-mode :recipe (:host github :repo "fizban007/arxiv-mode"))
 (package! nov)
+
+;; FIXME: vterm workaround
+(package! vterm :recipe
+  (:host github
+   :repo "blahgeek/emacs-libvterm"
+   :branch "fix-visibility"))

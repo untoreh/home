@@ -110,17 +110,17 @@
       "e B" #'emacs-lisp-native-compile-and-load)
 
 ;; garbage collector mode
-(use-package! gcbal
-  ;; apply after undo-tree-mode since it ovverrides `post-gc-hook'
-  :after-call undo-tree-mode
-  :init
-  (defun gcmh-mode (&rest args))
-  (defun gcmh-set-high-threshold (&rest args))
-  :config
-  (when (not (subrp (symbol-function #'gcbal-mode)))
-    (native-compile-async (locate-library "gcbal") t t))
-  (setq
-   gcbal-verbose nil
-   gcbal-target-gctime 0.2
-   gcbal-target-auto t)
-  (gcbal-mode 1))
+;; (use-package! gcbal
+;;   ;; apply after undo-tree-mode since it ovverrides `post-gc-hook'
+;;   :after-call undo-tree-mode
+;;   :init
+;;   (defun gcmh-mode (&rest args))
+;;   (defun gcmh-set-high-threshold (&rest args))
+;;   :config
+;;   (when (not (subrp (symbol-function #'gcbal-mode)))
+;;     (native-compile-async (locate-library "gcbal") t t))
+;;   (setq
+;;    gcbal-verbose nil
+;;    gcbal-target-gctime 0.2
+;;    gcbal-target-auto t)
+;;   (gcbal-mode 1))
