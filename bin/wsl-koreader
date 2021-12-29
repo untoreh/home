@@ -1,15 +1,16 @@
 #!/bin/sh
 
-nvim=~/.nix-profile/bin/nvim
-[ ! -e $nvim ] && nvim=/usr/bin/nvim
-[ ! -e $nvim ] && nvim=nvim
+cmd=~/.nix-profile/bin/koreader
+[ ! -e $cmd ] && cmd=koreader
+
+
 ## only support opening one file
 if [ -n "$@" ]; then
 	if [ "${1/\\wsl.localhost}" != "$1" ]; then
 		eval "p=$(wslpath -u "${1/\\wsl.localhost\\$WSL_DISTRO_NAME}")"
 		p=$(printf '%q' "$p")
 		if [ "$p" != "$1" ]; then
-			eval "exec $nvim $p"
+			eval "exec $cmd $p"
 		else
 			echo "Can't access files from another distro :("
 			exit 1
@@ -20,10 +21,10 @@ if [ -n "$@" ]; then
 		p=$(wslpath "$1")
 	fi
 	if [ -e "$p" ]; then
-		exec $nvim "$p"
+		exec $cmd "$p"
 	else
-		eval "exec $nvim $@"
+		eval "exec $cmd $@"
 	fi
 else
-	exec $nvim
+	exec $cmd
 fi
