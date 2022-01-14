@@ -1,14 +1,15 @@
-#!/bin/sh
+#!/bin/bash
 #
 # https://wiki.archlinux.org/title/mirrors#Sorting_mirrors
 #
-COUNTRY=Italy
+COUNTRY=${COUNTRY:-Italy}
 
-sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+sudo cp /etc/pacman.d/mirrorlist.pacnew /etc/pacman.d/mirrorlist.backup
 
-awk '/^## '"$COUNTRY"'$/{f=1; next}f==0{next}/^$/{exit}{print substr($0, 1);}' /etc/pacman.d/mirrorlist.backup |
-    sudo tee /etc/pacman.d/mirrorlist
+awk '/^## '"$COUNTRY"'$/{f=1; next}f==0{next}/^$/{exit}{print substr($0, 1);}' /etc/pacman.d/mirrorlist.backup | sudo tee /etc/pacman.d/mirrorlist
 
-sudo sed -i 's/^#Server/Server/' /etc/pacman.d/mirrorlist
+sudo sed 's/^#Server/Server/' -i /etc/pacman.d/mirrorlist
 
-sudo rankmirrors -n 6 /etc/pacman.d/mirrorlist | sudo tee /etc/pacman.d/mirrorlist
+sudo rankmirrors -n 6 /etc/pacman.d/mirrorlist | sudo tee /etc/pacman.d/mirrorlist.fast
+
+sudo mv /etc/pacman.d/mirrorlist.fast /etc/pacman.d/mirrorlist
