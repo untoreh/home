@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: show
+# key: @s
+# condition: t
+# --
+@show @__LINE__

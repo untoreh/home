@@ -1,0 +1,11 @@
+[deps]
+ArrayFire = "b19378d9-d87a-599a-927f-45f220a2c452"
+Conda = "8f4d0f93-b110-5947-807f-2305c1781a2d"
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+Indicators = "70c4c096-89a6-5ec6-8236-da8aa3bd86fd"
+LanguageServer = "2b0e0bc5-e4fd-59b4-8912-456d1b03d8d7"
+OhMyREPL = "5fb14364-9ced-5910-84b2-373655c76a03"
+Pkg = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
+PyCall = "438e738f-606a-5dbb-bf0a-cddfbfd45ab0"
+SymbolServer = "cf896787-08d5-524d-9de7-132aaa0cb996"
+TransferEntropy = "ea221983-52f3-5440-99c7-13ea201cd633"
