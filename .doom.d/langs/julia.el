@@ -5,6 +5,7 @@
 
 (after! julia-mode
   (add-hook! 'julia-mode-hook
+    (setenv "JULIA_NUM_THREADS" (number-to-string (num-processors)))
     (setq-local lsp-enable-folding t
                 lsp-folding-range-limit 100
                 lsp-response-timeout 300)))
@@ -325,7 +326,11 @@
                 (julia-repl-cd (projectile-project-root))
                 (julia-repl-activate-parent nil)
                 (when julia-repl-enable-revise
-                  (julia-repl--send-string "using Revise")))
+                  (julia-repl--send-string
+                   (concat "include(\""
+                           (file-name-as-directory
+                            (my/script-dir #'julia-franklin)) "revise.jl\""
+                           ))))
             (progn
               (when cd
                 (julia-repl-cd (projectile-project-root)))
