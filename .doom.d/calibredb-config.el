@@ -199,7 +199,9 @@
 ;; calibredb-add seems to fail if ivy-mode is bound but counsel is not
 (defadvice! my/calibredb-add (arg) :override #'calibredb-add
   (let ((file (read-file-name "Add a file to Calibre: " calibredb-download-dir)))
-    (calibredb-counsel-add-file-action arg file))
+    (calibredb-counsel-add-file-action arg file)
+    (delete-directory (my/concat-path calibredb-download-dir
+                              (file-name-base file) ".sdr") t))
   (if (equal major-mode 'calibredb-search-mode)
       (calibredb-search-refresh-or-resume)))
 
