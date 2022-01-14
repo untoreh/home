@@ -2,15 +2,16 @@
 
 cmd=~/.nix-profile/bin/koreader
 [ ! -e $cmd ] && cmd=koreader
+cmd="nohup $cmd"
 
 
 ## only support opening one file
-if [ -n "$@" ]; then
+if [ "$@" != "" ]; then
 	if [ "${1/\\wsl.localhost}" != "$1" ]; then
 		eval "p=$(wslpath -u "${1/\\wsl.localhost\\$WSL_DISTRO_NAME}")"
 		p=$(printf '%q' "$p")
 		if [ "$p" != "$1" ]; then
-			eval "exec $cmd $p"
+			eval "nohup $cmd $p &>/dev/null &"
 		else
 			echo "Can't access files from another distro :("
 			exit 1
@@ -21,10 +22,13 @@ if [ -n "$@" ]; then
 		p=$(wslpath "$1")
 	fi
 	if [ -e "$p" ]; then
-		exec $cmd "$p"
+		$cmd "$p" &>/dev/null &
 	else
-		eval "exec $cmd $@"
+		eval "$cmd $@" &>/dev/null &
 	fi
 else
-	exec $cmd
+	$cmd &>/dev/null &
 fi
+
+read -t 0.01
+exit 0
