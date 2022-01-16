@@ -311,6 +311,7 @@
     live-buffer))
 
 (defvar julia-repl-enable-revise t "whether to use Revise automatically when repl starts")
+(defvar julia-repl-enable-snoop nil "whether to use SnoopCompile automatically when repl starts")
 
 (defun julia-repl-switch (&optional no-activate cd)
   " Enables julia repl, and activates the current project "
@@ -325,12 +326,14 @@
               (progn
                 (julia-repl-cd (projectile-project-root))
                 (julia-repl-activate-parent nil)
-                (when julia-repl-enable-revise
-                  (julia-repl--send-string
-                   (concat "include(\""
-                           (file-name-as-directory
-                            (my/script-dir #'julia-franklin)) "revise.jl\""
-                           ))))
+                (let ((include-begin (concat "include(\""
+                                             (file-name-as-directory
+                                              (my/script-dir #'julia-franklin)))))
+                  (when julia-repl-enable-revise
+                    (julia-repl--send-string
+                     (concat include-begin "revise.jl\"")))
+                  (when julia-repl-enable-snoop
+                    (julia-repl--send-string (concat include-begin "snoop.jl\"")))))
             (progn
               (when cd
                 (julia-repl-cd (projectile-project-root)))
