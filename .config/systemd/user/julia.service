@@ -1,0 +1,11 @@
+[Unit]
+Description=Julia daemon for scripts.
+StartLimitBurst=3
+StartLimitIntervalSec=33
+
+[Service]
+Type=simple
+ExecStart=/opt/julia/bin/julia --startup-file=no %h/.config/systemd/scripts/julia-daemon.jl
+
+[Install]
+WantedBy=multi-user.target
