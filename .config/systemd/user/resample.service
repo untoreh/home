@@ -4,8 +4,8 @@ Requires=ohlcv.service
 
 [Service]
 Type=oneshot
-EnvironmentFile=%h/.config/crypto/resample.env
-ExecStart=%h/bin/jle %h/scripts/crypto/btcli.jl resample -t=${TIMEFRAME} -e=${EXCHANGES} -q=${QC}
+EnvironmentFile=%h/.config/systemd/user/resample.env
+ExecStart=%h/bin/jle %h/scripts/crypto/btcli.jl resample -f=${FROM_TIMEFRAME} -t=${TO_TIMEFRAME} -e=${EXCHANGES} -q=${QC}
 
 [Install]
 WantedBy=multi-user.target

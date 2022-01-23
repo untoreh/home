@@ -5,7 +5,8 @@ StartLimitIntervalSec=33
 
 [Service]
 Type=simple
-ExecStart=/opt/julia/bin/julia --startup-file=no %h/.config/systemd/scripts/julia-daemon.jl
+Environment=WORKERS=4
+ExecStart=/opt/julia/bin/julia -p ${WORKERS} --startup-file=no %h/.config/systemd/scripts/julia-daemon.jl
 
 [Install]
 WantedBy=multi-user.target
