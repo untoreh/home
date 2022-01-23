@@ -1,3 +1,14 @@
 #!/bin/sh -x
 
-exec ~/.nix-profile/bin/julia --startup-file=no -e "using DaemonMode; runargs()" $@
+script_or_e=$1
+
+if [ "$script_or_e" = "-e" ]; then
+	shift
+	runwhat='runexpr(string(""" '"$@"' """))'
+	args=""
+else
+	runwhat="runargs()"
+	args="$@"
+fi
+
+exec /opt/julia/bin/julia --startup-file=no -e "using DaemonMode; $runwhat" $args
