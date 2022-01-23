@@ -4,8 +4,11 @@ Requires=ohlcv.service
 
 [Service]
 Type=oneshot
+Environment=LOCAL_CACHE_DIR=%h/.cache/Backtest.jl/data/
+Environment=REMOTE_CACHE_DIR=home:%h/.cache/Backtest.jl/data/
 EnvironmentFile=%h/.config/systemd/user/resample.env
 ExecStart=%h/bin/jle %h/scripts/crypto/btcli.jl resample -f=${FROM_TIMEFRAME} -t=${TO_TIMEFRAME} -e=${EXCHANGES} -q=${QC}
+ExecStartPost=/usr/bin/rsync -r ${LOCAL_CACHE_DIR}  ${REMOTE_CACHE_DIR}
 
 [Install]
 WantedBy=multi-user.target
