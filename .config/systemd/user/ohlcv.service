@@ -1,0 +1,11 @@
+[Unit]
+Description=Fetch OHLCV DATA
+Requires=julia.service
+
+[Service]
+Type=oneshot
+EnvironmentFile=%h/.config/systemd/user/ohlcv.env
+ExecStart=%h/bin/jle %h/scripts/crypto/btcli.jl fetch -t=${TIMEFRAME} -e=${EXCHANGE} -q=${QC}
+
+[Install]
+WantedBy=multi-user.target

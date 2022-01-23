@@ -1,0 +1,14 @@
+[Unit]
+Description=Resample OHLCV data to 1d
+Requires=ohlcv.service
+
+[Service]
+Type=oneshot
+Environment=EXCHANGES=kucoin
+Environment=TIMEFRAME=1h
+Environment=QC=USDT
+EnvironmentFile=%h/.config/crypto/resample.env
+ExecStart=%h/bin/jle %h/scripts/crypto/btcli.jl resample -t=${TIMEFRAME} -e=${EXCHANGE} -q=${QC}
+
+[Install]
+WantedBy=multi-user.target
