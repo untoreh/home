@@ -79,6 +79,13 @@ appendWindowsPath = False
 ## WSL doesn't work because virtualization is not enabled
 On AMD platforms the options to enable in the BIOS are `SVM` and `NX mode`.
 
+## Mount /home and sshd
+If can't ssh into home directory, check permissions of `/home/$USER`
+
+``` sh
+sudo chmod 755 $HOME
+```
+
 # Not WSL related
 
 ## Export/Import env variables
