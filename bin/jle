@@ -1,4 +1,4 @@
-#!/bin/sh -x
+#!/bin/sh
 
 script_or_e=$1
 
@@ -11,4 +11,8 @@ else
 	args="$@"
 fi
 
-exec /opt/julia/bin/julia --startup-file=no -e "using DaemonMode; $runwhat" $args
+if [ "$WORKERS" ]; then
+	workers="-p $WORKERS"
+fi
+
+exec /opt/julia/bin/julia $workers --startup-file=no -e "using DaemonMode; $runwhat" $args
