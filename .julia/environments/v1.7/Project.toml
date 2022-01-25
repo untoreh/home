@@ -1,6 +1,7 @@
 [deps]
 ArrayFire = "b19378d9-d87a-599a-927f-45f220a2c452"
 Conda = "8f4d0f93-b110-5947-807f-2305c1781a2d"
+Coverage = "a2441757-f6aa-5fb2-8edb-039e3f45d037"
 DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 Indicators = "70c4c096-89a6-5ec6-8236-da8aa3bd86fd"
 LanguageServer = "2b0e0bc5-e4fd-59b4-8912-456d1b03d8d7"
