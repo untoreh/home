@@ -42,10 +42,4 @@
            :desc nil
            "C-c C-." #'nim-repl-cd)))
 
-(defun julia-repl-toggle-debug ()
-  (interactive)
-  (julia-repl-cmd "if in(\"JULIA_DEBUG\", keys(ENV))
-delete!(ENV, \"JULIA_DEBUG\")
-else
-ENV[\"JULIA_DEBUG\"] = \"all\"
-end;"))
+(defun nim-repl-toggle-debug () (error "Not implemented."))
