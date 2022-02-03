@@ -43,16 +43,18 @@
     (transient-append-suffix 'magit-merge "-A"
       '("-A" "Allow unrelated histories" "--allow-unrelated-histories"))))
 
-;; common
 (map! :leader
       (:desc "Find file at point."
       :prefix "f"
       :n "."
-      #'find-file-at-point
+      #'find-file-other-window
       :desc "Toggle iedit mode."
       :prefix "t"
       :nv "e"
-      #'iedit-mode))
+      #'iedit-mode
+      ;; doom kill buffer doesn't seem to kill dead processes buffers
+      :prefix "b" "k"
+      #'my/force-kill-buffer))
 
 ;; inserting inside a vterm should reset cursor position
 (map! :mode vterm-mode
