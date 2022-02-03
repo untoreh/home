@@ -13,12 +13,13 @@ end
 end
 loadpy() = include("$(ENV["HOME"])/.julia/config/python.jl")
 
-function debug!()
+function debug!(del=0)
     if in("JULIA_DEBUG", keys(ENV))
         delete!(ENV, "JULIA_DEBUG")
     else
         ENV["JULIA_DEBUG"] = "all"
     end
+    deletehistory!(del)
 end
 
 @doc "Remove the last `n` commands from the julia repl history file."
@@ -26,7 +27,7 @@ function deletehistory!(n = 1)
     @eval using REPL
     for _ in 1:n pop!(Base.active_repl.mistate.current_mode.hist.history) end
     open(REPL.find_hist_file(), "r+") do s
-        pos = position(seekend(s))
+        init_pos = pos = position(seekend(s))
         while n > 0
             seek(s, pos-8)
             c = read(s, 8)
@@ -38,8 +39,10 @@ function deletehistory!(n = 1)
             end
             pos -= 1
         end
-        seek(s, 0)
-        truncate(s, pos-8)
+        if pos !== init_pos
+            seek(s, 0)
+            truncate(s, pos-8)
+        end
     end
     nothing
 end

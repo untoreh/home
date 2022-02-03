@@ -424,13 +424,11 @@ the SRC folder to the TRG folder"
   (julia-repl-cmd "frank_task = @task serve(is_final_pass=true); schedule(frank_task)")
   (vterm-send-return))
 
+;; The `debug!' should be defined in ~/.julia/config/startup.jl
 (defun julia-repl-toggle-debug ()
   (interactive)
-  (julia-repl-cmd "if in(\"JULIA_DEBUG\", keys(ENV))
-delete!(ENV, \"JULIA_DEBUG\")
-else
-ENV[\"JULIA_DEBUG\"] = \"all\"
-end;"))
+  ;; remove 2 lines from repl history
+  (julia-repl-cmd "debug!(2)"))
 
 (defun julia-repl-revise ()
   (interactive)
