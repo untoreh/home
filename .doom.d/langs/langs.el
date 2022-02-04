@@ -54,3 +54,20 @@
                    shell-mode
                    python-mode)))
     (add-to-list '+format-on-save-enabled-modes mode 'append)))
+
+
+(defun my/repl-vterm-bufferp (&rest args)
+  "Check if the current buffer is a repl vterm buffer of any language in `enabled-langs'."
+  (catch 'enabled
+    (mapc (lambda (l)
+            (let ((mode (intern (concat
+                                 (symbol-name l)
+                                 "-repl-vterm-mode"))))
+              (when (and (boundp mode)
+                         (symbol-value mode))
+                (throw 'enabled t))))
+          enabled-langs)
+    nil))
+
+;; disable emojify mode on vterm buffers of languages
+(pushnew! emojify-inhibit-in-buffer-functions 'my/repl-vterm-bufferp)
