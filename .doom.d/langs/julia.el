@@ -141,9 +141,8 @@
   (fset #'org-babel-edit-prep:julia (lambda (&rest args)))
   (fset #'org-babel-julia-initiate-session (lambda (&rest args))))
 
-
 ;; override julia repl fun to accept org babel :session
-(after! julia-repl
+(after! (julia-repl ob)
   (fset 'julia-repl--inferior-buffer-name 'nil)
   (cl-defun julia-repl--inferior-buffer-name
       (&optional (executable-key (julia-repl--get-executable-key))
@@ -160,6 +159,26 @@
                       "Inferior name suffix should be an integer or a symbol")))))
 
       (concat julia-repl-inferior-buffer-name-base middle last)))
+  (add-hook!
+   'julia-repl-hook
+   ;; for keybindings between blocks and repls
+   #'(lambda ()
+       (with-current-buffer (julia-repl-inferior-buffer)
+         (julia-repl-vterm-mode)))
+   ;; reset org babel session history
+   #'(lambda ()
+       (let ((suffix (symbol-name julia-repl-inferior-buffer-name-suffix)))
+         (if (not (alist-get suffix julia-repl--session-hist))
+             (setf (alist-get suffix julia-repl--session-hist nil) nil))))))
+
+;; functions to send code to repl
+(after! julia-mode
+  (require 'a)
+  (setq-default julia-repl--session-hist (a-list))
+  (define-minor-mode julia-repl-vterm-mode
+    " mode for julia repl vterm buffers "
+    :interactive nil)
+
   (cl-defun julia-repl-cd (&optional directory)
     "Change directory to the specified directory or the current buffer one (if applicable)."
     (interactive)
@@ -173,26 +192,8 @@
             (julia-repl--path-rewrite directory julia-repl-path-rewrite-rules)
             "\")"))
 	  (with-current-buffer (julia-repl-inferior-buffer) (cd directory)))
-      (warn "buffer not associated with a file"))))
+      (warn "buffer not associated with a file")))
 
-(after! (julia-mode a)
-
-  (setq-default julia-repl--session-hist (a-list))
-  (define-minor-mode julia-repl-vterm-mode
-    " mode for julia repl vterm buffers "
-    :interactive nil)
-
-  (add-hook!
-   'julia-repl-hook
-   ;; for keybindings between blocks and repls
-   #'(lambda ()
-       (with-current-buffer (julia-repl-inferior-buffer)
-         (julia-repl-vterm-mode)))
-   ;; reset org babel session history
-   #'(lambda ()
-       (let ((suffix (symbol-name julia-repl-inferior-buffer-name-suffix)))
-         (if (not (alist-get suffix julia-repl--session-hist))
-             (setf (alist-get suffix julia-repl--session-hist nil) nil)))))
 
   (defun julia-toggle-repl-and-insert ()
     (interactive)
