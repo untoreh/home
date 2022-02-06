@@ -47,7 +47,7 @@
       (:desc "Find file at point."
       :prefix "f"
       :n "."
-      #'find-file-other-window
+      #'find-file-at-point
       :desc "Toggle iedit mode."
       :prefix "t"
       :nv "e"
@@ -276,3 +276,7 @@
          (weechat-auto-monitor))
        (weechat-switch-buffer
         (cl-first (list (weechat--read-channel-name (not current-prefix-arg)))))))
+
+;; `S-TAB' is bound to `back-to-indentation' but in vterm it is not needed
+(map! :mode vterm-mode
+      "S-TAB" nil)

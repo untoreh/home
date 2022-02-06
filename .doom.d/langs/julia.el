@@ -172,7 +172,7 @@
              (setf (alist-get suffix julia-repl--session-hist nil) nil))))))
 
 ;; functions to send code to repl
-(after! julia-mode
+(after! (julia-mode julia-repl)
   (require 'a)
   (setq-default julia-repl--session-hist (a-list))
   (define-minor-mode julia-repl-vterm-mode

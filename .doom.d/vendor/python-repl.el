@@ -672,7 +672,7 @@ this with a prefix argument ARG."
         (setq file nil)))
     (python-repl--send-string
      (if file
-         (concat "include(\""
+         (concat "execfile(\""
                  (python-repl--path-rewrite file python-repl-path-rewrite-rules)
                  "\");")
        (buffer-substring-no-properties (point-min) (point-max))))))
@@ -745,7 +745,7 @@ name), separated by dots, as a list."
   (interactive)
   (python-repl--send-string (concat "methods(" (s-join "." (python-repl--symbols-at-point)) ")")))
 
-(defun python-repl-cd ()
+(defun python-repl-cd (&optional directory)
   "Change directory to the directory of the current buffer (if applicable)."
   (interactive)
   (if-let ((directory (file-name-directory (buffer-file-name))))
@@ -756,6 +756,19 @@ name), separated by dots, as a list."
 	(with-current-buffer (python-repl-inferior-buffer) (cd directory)))
     (warn "buffer not associated with a file")))
 
+(setq pyvenv-default-virtual-env-name ".venv")
+
+(defun python-repl-current-project-dir ()
+  (catch 'projdir
+    (mapc (lambda (file)
+            (if-let (projfile
+                     (locate-dominating-file (buffer-file-name) file))
+                (throw 'projdir
+                       (file-name-directory (file-truename projfile)))))
+          `(".projectile"
+            "requirements.txt"
+            ,(cl-first (pyvenv-virtualenv-list))))))
+
 (defun python-repl-activate-parent (arg)
   "Look for a project file in the parent directories, if found, activate the project.
 
@@ -764,19 +777,15 @@ When called with a prefix argument, activate the home project."
   (if arg
       (progn
         (message "activating home project")
-        (python-repl--send-string "import Pkg; Pkg.activate()"))
-    (cl-flet ((find-projectfile (filename)
-                                (locate-dominating-file (buffer-file-name) filename)))
-      (if-let ((projectfile (or (find-projectfile ".projectile")
-                             (find-projectfile "requirements.txt")
-                             (find-projectfile ".venv")
-                             (find-projectfile ".env"))))
-          (progn
-            (message "activating %s" projectfile)
-            (python-repl--send-string
-             (concat "import os; os.chdir(\""
-                     (expand-file-name (file-name-directory projectfile)) "\")")))
-        (message "could not find project file")))))
+        (pyvenv-activate arg))
+    (if-let* ((venv-dir (cl-first (pyvenv-virtualenv-list)))
+              (projdir (python-repl-current-project-dir)))
+        (progn
+          (pyvenv-activate (concat projdir venv-dir))
+          (python-repl--send-string
+           (concat "import os; import importlib; os.chdir(\"" projdir "\")"))
+          (message "activating %s" projdir))
+      (message "could not find project file"))))
 
 (defun python-repl-set-python-editor (editor)
   "Set the PYTHON_EDITOR environment variable."
@@ -787,6 +796,55 @@ When called with a prefix argument, activate the home project."
   "Use emacsclient as the PYTHON_EDITOR."
   (interactive)
   (python-repl--send-string "ENV[\"PYTHON_EDITOR\"] = \"emacsclient\";"))
+
+(defun python-repl-live-buffer ()
+  (let* ((executable-key (python-repl--get-executable-key))
+         (suffix python-repl-inferior-buffer-name-suffix)
+         (terminal-backend python-repl--terminal-backend)
+         (name (python-repl--inferior-buffer-name executable-key suffix))
+         (live-buffer (python-repl--locate-live-buffer terminal-backend name)))
+    live-buffer))
+
+(defun python-repl-switch (&optional no-activate cd)
+  " Enables python repl, and activates the current project "
+  (if (not (fboundp #'python-repl-inferior-buffer))
+      (require 'python-repl))
+  ;; we query for the buffer before checking for skip because we
+  ;; want to switch buffer anyway
+  (let ((startup (not (python-repl-live-buffer))))
+    (if (python-repl-inferior-buffer)
+        (progn
+          (if (and startup (not no-activate))
+              (progn
+                (python-repl-cd (projectile-project-root))
+                (python-repl-activate-parent nil)
+                (let ((include-begin (concat "include(\""
+                                             (file-name-as-directory
+                                              (my/script-dir #'python-franklin)))))
+                  (when python-repl-enable-revise
+                    (python-repl--send-string
+                     (concat include-begin "revise.jl\"")))
+                  (when python-repl-enable-snoop
+                    (python-repl--send-string (concat include-begin "snoop.jl\"")))))
+            (progn
+              (when cd
+                (python-repl-cd (projectile-project-root)))
+              (python-repl)))
+          t)
+      nil)))
+
+(defun python-repl-toggle-debug ()
+  (interactive)
+  " Toggle the debug python logging level (10) from the default (30).
+
+The function is defined in ipython startup file found with `get_ipython().profile_dir.startup_dir'
+Default is '~/.ipython/profile_default/startup/..."
+  (python-repl-cmd "toggle_debug();"))
+
+(defun python-repl-cmd (str)
+  "Send a string to python repl switching to its buffer, if it exists."
+  (when (python-repl-switch nil t)
+      (python-repl--send-string str)))
 
 ;;;###autoload
 (define-minor-mode python-repl-mode
