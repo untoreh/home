@@ -18,7 +18,7 @@
         projectile-git-submodule-command
         "git submodule --quiet foreach 'echo $path' 2>/dev/null | tr '\\n' '\\0'"
         )
-  (pushnew! projectile-globally-ignored-directories "~/win" ".venv" ".env" ".ipfs" ".archive" ".old")
+  (pushnew! projectile-globally-ignored-directories "~/win" ".venv" ".env" ".ipfs" ".archive" ".old" "node_modules")
   ;; allow project based vars
   (put 'projectile-generic-command 'safe-local-variable #'stringp))
 

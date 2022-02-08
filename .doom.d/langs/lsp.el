@@ -1,7 +1,8 @@
 ;;; ../../../var/home/fra/.doom.d/langs/lsp.el -*- lexical-binding: t; -*-
 
 (after! lsp-mode
-  (setq lsp-enable-file-watchers nil))
+  (setq lsp-enable-file-watchers nil)
+  (pushnew! lsp-file-watch-ignored-directories (rx "\\/home\\/fra")))
 
 ;; dap
 (defun dap/debug-re ()
@@ -16,7 +17,8 @@
   :config
   (setq
    lsp-auto-configure t
-   lsp-auto-guess-root t
+   ;; NOTE: Can't guess root since $HOME is considered a workspace...
+   lsp-auto-guess-root nil
    ;; doc frames with mouse hover
    lsp-ui-doc-use-childframe t
    lsp-ui-doc-use-webkit t

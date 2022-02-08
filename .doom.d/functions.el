@@ -26,6 +26,8 @@
   (interactive)
   (with-current-buffer (or buffer (current-buffer))
     (let (kill-buffer-hook kill-buffer-query-functions)
+      (if-let ((pid (process-id (get-buffer-process (current-buffer)))))
+          (shell-command (concat "pkill -P " (number-to-string pid))))
       (kill-buffer))))
 
 (defun my/float-to-floor-precision (num prec)

@@ -65,6 +65,7 @@
   ;; make isort compatible with black
   (setq-default py-isort-options '("--profile" "black"))
   (add-to-list '+format-on-save-enabled-modes 'python-mode t)
+  (add-hook 'python-mode-hook #'python-repl-mode)
 
   (setq
    ;; FIXME complains about the python interpreter not supporting completion...
