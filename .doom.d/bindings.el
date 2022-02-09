@@ -278,5 +278,13 @@
         (cl-first (list (weechat--read-channel-name (not current-prefix-arg)))))))
 
 ;; `S-TAB' is bound to `back-to-indentation' but in vterm it is not needed
-(map! :mode vterm-mode
-      "S-TAB" nil)
+(map!
+   (:mode vterm-mode
+    :i "C-j" #'vterm-send-down
+    :i "C-k" #'vterm-send-up)
+  (:mode vterm-mode
+   :map evil-insert-state-map
+   "S-TAB" nil
+   "<backtab>" nil))
+
+(setq evil-collection-vterm-send-escape-to-vterm-p t)

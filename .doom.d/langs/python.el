@@ -47,9 +47,6 @@
            :desc nil
            "C-c C-." #'python-repl-cd)))
 
-
-(defun python-repl-toggle-debug () (error "Not implemented."))
-
 ;; (use-package! ein
 ;;   :config
 ;;   (setq-default
@@ -60,7 +57,7 @@
 ;;   (custom-set-faces
 ;;    '(ein:cell-input-area ((t (:background "#262833"))))))
 
-(after! python-mode
+(after! python
   :config
   ;; make isort compatible with black
   (setq-default py-isort-options '("--profile" "black"))
