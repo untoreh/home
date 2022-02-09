@@ -168,4 +168,4 @@
         emojify-emoji-styles '(github unicode)))
 
 (after! vterm
-  (add-hook 'vterm-mode-hook (hide-mode-line-mode 1)))
+  (add-hook 'vterm-mode-hook (lambda () (hide-mode-line-mode 1))))

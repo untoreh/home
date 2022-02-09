@@ -274,8 +274,8 @@ Valid backends are currently:
     (otherwise
      (error "Unrecognized backend “%s”." backend))))
 
-(defvar python-repl-executable-records
-  '((default "jupyter-console"))
+(defconst python-repl-executable-records
+  `((default ,(file-name-nondirectory (my/select-first #'executable-find '("ptipython" "ptpython" "ipython" "python")))))
   "List of Python executables.
 
 Entries have the form
@@ -757,10 +757,9 @@ name), separated by dots, as a list."
 	(with-current-buffer (python-repl-inferior-buffer) (cd cddir)))
     (warn "buffer not associated with a file")))
 
-(setq pyvenv-default-virtual-env-name ".venv")
+(setq pyvenv-default-virtual-env-name nil
+      python-repl-venv-dir ".venv")
 
-(if-let ((name (locate-dominating-file buffer-file-name ".venv")))
-    t nil)
 (defun python-repl-current-project-dir ()
   (catch 'projdir
     (mapc (lambda (file)
@@ -770,8 +769,8 @@ name), separated by dots, as a list."
                        (file-name-directory (file-truename projfile)))))
           `(".projectile"
             "requirements.txt"
-            ,pyvenv-default-virtual-env-name))
-    nil))
+            ,python-repl-venv-dir)
+    nil)))
 
 (defun python-repl-activate-parent (arg)
   "Look for a project file in the parent directories, if found, activate the project.
@@ -784,13 +783,13 @@ When called with a prefix argument, activate the home project."
         (pyvenv-activate arg)
         (python-repl-cd))
     (progn
-      (if-let* ((venv-dir pyvenv-default-virtual-env-name)
+      (if-let* ((venv-dir python-repl-venv-dir)
                 (projdir (python-repl-current-project-dir))
                 (proj-venv (expand-file-name venv-dir projdir)))
           (progn
             (message "activating %s" proj-venv)
             (cd projdir)
-            (pyvenv-activate proj-venv)
+            (ignore-errors (pyvenv-activate proj-venv))
             (python-repl--send-string
              (concat "import os; os.chdir(\"" projdir "\")")))
         (message "could not find project file")))))

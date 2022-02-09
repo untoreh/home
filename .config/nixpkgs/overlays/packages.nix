@@ -56,7 +56,7 @@ in {
   # inherit (nixgl) nixVulkanIntel;
   # wait for mesa-d3d12
   # python
-  inherit (super.python38Packages) supervisor grip ansible pip black flake8;
+  inherit (super.python38Packages) supervisor grip ansible pip black flake8 ptpython;
   # pandas isort setuptools timeago cython
   # deps for thefuck
   # colorama decorator psutil pyte;

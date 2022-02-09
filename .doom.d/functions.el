@@ -26,7 +26,8 @@
   (interactive)
   (with-current-buffer (or buffer (current-buffer))
     (let (kill-buffer-hook kill-buffer-query-functions)
-      (if-let ((pid (process-id (get-buffer-process (current-buffer)))))
+      (if-let* ((proc (get-buffer-process (current-buffer)))
+                (pid (process-id proc)))
           (shell-command (concat "pkill -P " (number-to-string pid))))
       (kill-buffer))))
 
@@ -94,6 +95,14 @@
 ;(after! find-func
   ;(let ((filepath (cdr (find-function-library #'my/script-dir))))
     ;(native-compile-async filepath t nil)))
+
+(defun my/select-first (f seq)
+  (catch 'found
+    (mapc (lambda (x)
+            (when (funcall f x)
+              (throw 'found x))
+            ) seq)
+    nil))
 
 (provide 'functions)
 (require'functions)
