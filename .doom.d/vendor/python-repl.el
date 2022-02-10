@@ -761,16 +761,16 @@ name), separated by dots, as a list."
       python-repl-venv-dir ".venv")
 
 (defun python-repl-current-project-dir ()
-  (catch 'projdir
+  (catch 'proj-dir
     (mapc (lambda (file)
             (if-let ((bufname (or buffer-file-name default-directory))
                      (projfile (locate-dominating-file bufname file)))
-                (throw 'projdir
+                (throw 'proj-dir
                        (file-name-directory (file-truename projfile)))))
           `(".projectile"
             "requirements.txt"
-            ,python-repl-venv-dir)
-    nil)))
+            ,python-repl-venv-dir))
+    nil))
 
 (defun python-repl-activate-parent (arg)
   "Look for a project file in the parent directories, if found, activate the project.
@@ -784,14 +784,16 @@ When called with a prefix argument, activate the home project."
         (python-repl-cd))
     (progn
       (if-let* ((venv-dir python-repl-venv-dir)
-                (projdir (python-repl-current-project-dir))
-                (proj-venv (expand-file-name venv-dir projdir)))
+                (proj-dir (python-repl-current-project-dir))
+                (proj-venv-dir (expand-file-name venv-dir proj-dir))
+                (src-dir (my/concat-path proj-dir "src")))
           (progn
-            (message "activating %s" proj-venv)
-            (cd projdir)
-            (ignore-errors (pyvenv-activate proj-venv))
+            (message "activating %s" proj-venv-dir)
+            (cd proj-dir)
+            (ignore-errors (pyvenv-activate proj-venv-dir))
             (python-repl--send-string
-             (concat "import os; os.chdir(\"" projdir "\")")))
+             (concat "%cd " (if (file-directory-p src-dir)
+                                src-dir proj-dir))))
         (message "could not find project file")))))
 
 (defun python-repl-set-python-editor (editor)

@@ -4,6 +4,8 @@
   lsp-auto-guess-root nil)
 
 (after! julia-mode
+  (when (featurep! :lang julia +lsp)
+    (add-hook! julia-mode #'lsp))
   (add-hook! 'julia-mode-hook
     (setenv "JULIA_NUM_THREADS" (number-to-string (num-processors)))
     (setq-local lsp-enable-folding t

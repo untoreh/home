@@ -17,7 +17,8 @@
         projectile-enable-caching t
         projectile-git-submodule-command
         "git submodule --quiet foreach 'echo $path' 2>/dev/null | tr '\\n' '\\0'"
-        )
+        ;; Don't consider $HOME as project
+        projectile-project-root-files-bottom-up (remove ".git" projectile-project-root-files-bottom-up))
   (pushnew! projectile-globally-ignored-directories "~/win" ".venv" ".env" ".ipfs" ".archive" ".old" "node_modules")
   ;; allow project based vars
   (put 'projectile-generic-command 'safe-local-variable #'stringp))
@@ -57,12 +58,12 @@
             (when (boundp 'doom-session-timer) (cancel-timer doom-session-timer))
             (setq doom-session-timer
                   (run-with-idle-timer 5 t
-		               (lambda () (let ((inhibit-message t))
-                                       (when (and (> (float-time (time-since
-                                                                  my/last-saved-session-time))
-                                                     300)
-                                                  (doom/save-session session-file))
-                                         (setq my/last-saved-session-time (current-time)))))))))
+		                       (lambda () (let ((inhibit-message t))
+                                                    (when (and (> (float-time (time-since
+                                                                               my/last-saved-session-time))
+                                                                  300)
+                                                               (doom/save-session session-file))
+                                                      (setq my/last-saved-session-time (current-time)))))))))
       (progn
         (when (boundp 'doom-session-timer)
           (cancel-timer doom-session-timer)
@@ -81,6 +82,7 @@
     ;; ensure we disable possible previous session timers before loading a new session
     (add-transient-hook! #'doom/load-session
       (lambda (file) (my/toggle-session-timer (f-base file) t)))
-      ))
+    ))
 
-;(add-hook 'emacs-startup-hook #'my/restore-session)
+
+                                        ;(add-hook 'emacs-startup-hook #'my/restore-session)

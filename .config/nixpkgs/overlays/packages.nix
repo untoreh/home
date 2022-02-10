@@ -32,7 +32,7 @@ in {
 
     # langs
     go-pup nixfmt golangci-lint shfmt libtidy nodejs shellcheck jq enchant2 ispell languagetool
-    chrpath rustup rust-analyzer pipenv
+    chrpath rustup rust-analyzer pipenv jre
 
     # runtimes
     # python3
@@ -56,7 +56,7 @@ in {
   # inherit (nixgl) nixVulkanIntel;
   # wait for mesa-d3d12
   # python
-  inherit (super.python38Packages) supervisor grip ansible pip black flake8 ptpython;
+  inherit (super.python38Packages) supervisor grip ansible black flake8 ptpython;
   # pandas isort setuptools timeago cython
   # deps for thefuck
   # colorama decorator psutil pyte;

@@ -277,14 +277,15 @@
        (weechat-switch-buffer
         (cl-first (list (weechat--read-channel-name (not current-prefix-arg)))))))
 
-;; `S-TAB' is bound to `back-to-indentation' but in vterm it is not needed
-(map!
+;; Override a bunch of keybindings during insert state in vterm to be more term friendly
+(defadvice! vterm-mappings () :after #'vterm-mode
+  (map!
    (:mode vterm-mode
     :i "C-j" #'vterm-send-down
     :i "C-k" #'vterm-send-up)
-  (:mode vterm-mode
-   :map evil-insert-state-map
-   "S-TAB" nil
-   "<backtab>" nil))
+   (:mode vterm-mode
+    :map evil-insert-state-map
+    "S-TAB" nil
+    "<backtab>" nil)))
 
 (setq evil-collection-vterm-send-escape-to-vterm-p t)
