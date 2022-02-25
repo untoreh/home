@@ -827,7 +827,7 @@ When called with a prefix argument, activate the home project."
               (progn
                 (python-repl-cd (projectile-project-root))
                 (when (member (car (alist-get 'default python-repl-executable-records))
-                              '("jupyter" "jupyter-console" "ipython"))
+                              '("ptipython" "jupyter" "jupyter-console" "ipython"))
                   (python-repl--send-string "\n%load_ext autoreload \n%autoreload 2\n"))
                 (ignore-errors
                   (python-repl-activate-parent nil)))

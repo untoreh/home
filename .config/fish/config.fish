@@ -28,3 +28,10 @@ source ~/.config/fish/thefuck.fish
 # theme
 set fish_greeting # disable fish motd
 starship init fish | source
+
+# >>> mamba initialize >>>
+# !! Contents within this block are managed by 'mamba init' !!
+set -gx MAMBA_EXE "/nix/store/xvpy77arjp2sbipv3acddq1zvv9qhp10-micromamba-0.18.1/bin/micromamba"
+set -gx MAMBA_ROOT_PREFIX "/home/fra/micromamba"
+eval "/nix/store/xvpy77arjp2sbipv3acddq1zvv9qhp10-micromamba-0.18.1/bin/micromamba" shell hook --shell fish --prefix "/home/fra/micromamba" | source
+# <<< mamba initialize <<<

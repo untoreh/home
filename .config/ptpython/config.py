@@ -24,7 +24,7 @@ def configure(repl):
     repl.show_signature = True
 
     # Show docstring (bool).
-    repl.show_docstring = False
+    repl.show_docstring = True
 
     # Show the "[Meta+Enter] Execute" message when pressing [Enter] only
     # inserts a newline instead of executing the code.
@@ -38,7 +38,7 @@ def configure(repl):
     repl.completion_menu_scroll_offset = 0
 
     # Show line numbers (when the input contains multiple lines.)
-    repl.show_line_numbers = False
+    repl.show_line_numbers = True
 
     # Show status bar.
     repl.show_status_bar = False
@@ -64,7 +64,7 @@ def configure(repl):
 
     # Fuzzy and dictionary completion.
     repl.enable_fuzzy_completion = False
-    repl.enable_dictionary_completion = False
+    repl.enable_dictionary_completion = True
 
     # Vi mode.
     repl.vi_mode = False

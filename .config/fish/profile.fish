@@ -18,19 +18,22 @@ if [ -z "$FZF_LAUNCHER" ]
     set -x FZF_DEFAULT_OPTS "--color=bw --height 1% --reverse --tiebreak=begin,length,index"
 end
 
-# Path
-set path_fish /tmp/.cache/path_fish
-set path_common /tmp/.cache/path_common
-if [ -e $path_fish ]
-    source $path_fish
-else
-    if [ ! -e $path_common ]
-        ~/bin/dump_path.sh
+# don't replace path if inside emacs
+if [ -z "$INSIDE_EMACS" ]
+    # Path
+    set path_fish /tmp/.cache/path_fish
+    set path_common /tmp/.cache/path_common
+    if [ -e $path_fish ]
+        source $path_fish
+    else
+        if [ ! -e $path_common ]
+            ~/bin/dump_path.sh
+        end
+        # echo "set PATH \""(bash -lc "echo \$PATH")"\"" >$path_fish
+        string replace -r '^\s*([^=]*)=' 'set $1 ' (read -z < $path_common) >$path_fish
+        # echo "set PATH "(string sub -s 6 (read < $path_common)) >$path_fish
+        source $path_fish
     end
-    # echo "set PATH \""(bash -lc "echo \$PATH")"\"" >$path_fish
-    string replace -r '^\s*([^=]*)=' 'set $1 ' (read -z < $path_common) >$path_fish
-    # echo "set PATH "(string sub -s 6 (read < $path_common)) >$path_fish
-    source $path_fish
 end
 
 # browser

@@ -66,3 +66,4 @@ enchant/*.dic
 enchant/*.exc
 calibre/
 vimish-fold/
+inim/history.nim

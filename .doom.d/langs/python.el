@@ -81,3 +81,10 @@
   (python-repl-set-terminal-backend 'vterm))
 
 ;; NOTE: pyvenv-activate needs the path the virtual env directory (usually .venv or .env)
+(after! pyvenv
+  (add-hook! python-mode
+             (require 'python-repl)
+             (require 'f)
+             (if (f-exists-p
+                  (my/concat-path (projectile-project-root) python-repl-venv-dir))
+                 (pyvenv-tracking-mode 1))))
