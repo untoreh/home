@@ -12,13 +12,13 @@
     "Don't break with errors when current major mode lacks tree-sitter support."
     :around #'tree-sitter-mode
     (condition-case e
-        (apply orig-fn args)
+	(apply orig-fn args)
       (error
        (unless (string-match-p (concat "^Cannot find shared library\\|"
-                                       "^No language registered\\|"
-                                       "cannot open shared object file")
-                            (error-message-string e))
-            (signal (car e) (cadr e)))))))
+				       "^No language registered\\|"
+				       "cannot open shared object file")
+			    (error-message-string e))
+	    (signal (car e) (cadr e)))))))
 
 (load! "lisp")
 (load! "spell")
@@ -28,6 +28,8 @@
     (load! "python"))
 (if (featurep! :lang julia)
    (load! "julia"))
+(if (featurep! :lang nim)
+    (load! "nim"))
 (if (featurep! :tools lsp)
     (load! "lsp"))
 

@@ -1,6 +1,6 @@
 ;;; ../../../var/home/fra/.doom.d/langs/lsp.el -*- lexical-binding: t; -*-
 
-(after! lsp-mode
+(after! (lsp-mode rx)
   (setq lsp-enable-file-watchers nil)
   (pushnew! lsp-file-watch-ignored-directories (rx "\\/home\\/fra")))
 
@@ -16,6 +16,7 @@
 	   (not (featurep! :tools lsp +eglot)))
   :config
   (setq
+   lsp-restart 'auto-restart
    lsp-auto-configure t
    ;; NOTE: Can't guess root since $HOME is considered a workspace...
    lsp-auto-guess-root nil
@@ -45,5 +46,6 @@
    ;; text
    )
   (when (featurep! :ui treemacs +lsp)
-	  (lsp-treemacs-sync-mode 1))
+	  (after! treemacs 
+		  (lsp-treemacs-sync-mode 1)))
   )

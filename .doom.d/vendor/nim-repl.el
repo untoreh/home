@@ -693,7 +693,7 @@ If a buffer corresponds to a file and is not saved, the function prompts the use
                 (save-buffer)
               (unless (file-exists-p file)
                 (message "need to save the file first"))))
-          (nim-repl--send-string (concat "Revise.includet(\""
+          (nim-repl--send-string (concat "include(\""
                                            (nim-repl--path-rewrite file nim-repl-path-rewrite-rules)
                                            "\");")))
       (message "buffer does not correspond to a file"))))
@@ -745,15 +745,16 @@ name), separated by dots, as a list."
   (interactive)
   (nim-repl--send-string (concat "methods(" (s-join "." (nim-repl--symbols-at-point)) ")")))
 
-(defun nim-repl-cd ()
+(defun nim-repl-cd (&optional directory)
   "Change directory to the directory of the current buffer (if applicable)."
   (interactive)
-  (if-let ((directory (file-name-directory (buffer-file-name))))
+  (if-let* ((dir (or directory buffer-file-name default-directory))
+            (cddir (file-name-directory dir)))
       (progn
-	(nim-repl--send-string (concat "cd(\""
-                                         (nim-repl--path-rewrite directory nim-repl-path-rewrite-rules)
-                                         "\")"))
-	(with-current-buffer (nim-repl-inferior-buffer) (cd directory)))
+	(nim-repl--send-string (concat "cd \""
+                                          (nim-repl--path-rewrite cddir nim-repl-path-rewrite-rules)
+                                          "\""))
+	(with-current-buffer (nim-repl-inferior-buffer) (cd cddir)))
     (warn "buffer not associated with a file")))
 
 (defun nim-repl-activate-parent (arg)
@@ -764,16 +765,19 @@ When called with a prefix argument, activate the home project."
   (if arg
       (progn
         (message "activating home project")
-        (nim-repl--send-string "import Pkg; Pkg.activate()"))
+        ;; (nim-repl--send-string "import Pkg; Pkg.activate()")
+        )
     (cl-flet ((find-projectfile (filename)
                                 (locate-dominating-file (buffer-file-name) filename)))
-      (if-let ((projectfile (or (find-projectfile "Project.toml")
-                                (find-projectfile "NimProject.toml"))))
+      (if-let ((projectfile (or (find-projectfile "nimble.nim")
+                                (find-projectfile "nbindgen.nim")
+                                (find-projectfile ".projectile"))))
           (progn
             (message "activating %s" projectfile)
-            (nim-repl--send-string
-             (concat "import Pkg; Pkg.activate(\""
-                     (expand-file-name (file-name-directory projectfile)) "\")")))
+            ;; (nim-repl--send-string
+            ;;  (concat "import Pkg; Pkg.activate(\""
+            ;;          (expand-file-name (file-name-directory projectfile)) "\")"))
+            )
         (message "could not find project file")))))
 
 (defun nim-repl-set-nim-editor (editor)
@@ -785,6 +789,37 @@ When called with a prefix argument, activate the home project."
   "Use emacsclient as the NIM_EDITOR."
   (interactive)
   (nim-repl--send-string "ENV[\"NIM_EDITOR\"] = \"emacsclient\";"))
+
+(defun nim-repl-live-buffer ()
+  (let* ((executable-key (nim-repl--get-executable-key))
+         (suffix nim-repl-inferior-buffer-name-suffix)
+         (terminal-backend nim-repl--terminal-backend)
+         (name (nim-repl--inferior-buffer-name executable-key suffix))
+         (live-buffer (nim-repl--locate-live-buffer terminal-backend name)))
+    live-buffer))
+
+(defun nim-repl-switch (&optional no-activate cd)
+  " Enables nim repl, and activates the current project "
+  (if (not (fboundp #'nim-repl-inferior-buffer))
+      (require 'nim-repl))
+  ;; we query for the buffer before checking for skip because we
+  ;; want to switch buffer anyway
+  (let ((startup (not (nim-repl-live-buffer))))
+    (if (nim-repl-inferior-buffer)
+        (progn
+          (if (and startup (not no-activate))
+              (progn
+                (nim-repl-cd (projectile-project-root))
+                (ignore-errors
+                  (nim-repl-activate-parent nil)))
+            (progn
+              (when cd
+                (nim-repl-cd (projectile-project-root)))
+              (nim-repl)))
+          t)
+      nil)))
+
+
 
 ;;;###autoload
 (define-minor-mode nim-repl-mode

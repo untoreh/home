@@ -14,8 +14,7 @@ export EMACS=/usr/bin/emacs
 
 # bin/doom clean
 if [ -z "$1" ]; then
-	bin/doom env
-	bin/doom sync -ep
+	bin/doom sync
 	export XDG_DATA_DIRS="$HOME/.nix-profile/share:$HOME/.local/share:/usr/share"
 fi
 
@@ -25,5 +24,5 @@ fi
 # export GDK_BACKEND=x11 CLUTTER_BACKEND=x11
 export GDK_BACKEND=wayland CLUTTER_BACKEND=wayland
 
-exec bin/doom run
-#exec bin/doom run --fg-daemon=server
+emacs
+#emacs --fg-daemon=server

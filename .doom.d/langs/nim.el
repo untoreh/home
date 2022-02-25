@@ -42,4 +42,17 @@
            :desc nil
            "C-c C-." #'nim-repl-cd)))
 
+(after! nim-mode
+  (if (featurep! :lang nim +lsp)
+      (add-hook! nim-mode #'lsp))
+  (setq nim-indent-offset 4)
+  (setq-hook! 'nim-mode-hook
+    evil-shift-width 4))
+
 (defun nim-repl-toggle-debug () (error "Not implemented."))
+
+(use-package! nim-repl
+  :config
+  (nim-repl-set-terminal-backend 'vterm)
+  (setq nim-repl-switches "--withTools -d:--threads:on")
+  (add-hook! nim-mode #'nim-repl-mode))

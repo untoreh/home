@@ -55,6 +55,7 @@
 (package! mu4e-alert)
 ;(package! gcmh :disable t)
 (package! aio)
+(package! devdocs :recipe (:host github :repo "astoff/devdocs.el"))
 
 ;; langs
 (package! poly-markdown :recipe
