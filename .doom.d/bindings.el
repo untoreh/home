@@ -289,3 +289,8 @@
     "<backtab>" nil)))
 
 (setq evil-collection-vterm-send-escape-to-vterm-p t)
+
+;; FIXME: ?
+(map! :map vterm-mode
+      :leader "C-c"
+      :i "C-c" #'vterm-send-C-c)

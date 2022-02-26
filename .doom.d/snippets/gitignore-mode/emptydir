@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Empty Folder
+# key: ef
+# condition: t
+# --
+*
+*/
+!.gitignore
