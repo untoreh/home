@@ -129,8 +129,8 @@
 (package! hydra-posframe :recipe ( :host nil
                                    :repo "https://github.com/Ladicle/hydra-posframe"))
 ;; chat
-(package! weechat :recipe (:host nil
-                           :repo "https://github.com/untoreh/weechat.el"))
+(package! weechat :recipe (:host github
+                           :repo "bqv/weechat.el"))
 ;; auto hot key mode
 ;; (package! ahk-mode :recipe (:host nil
 ;;                             :repo "https://github.com/untoreh/ahk-mode"))
