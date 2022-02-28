@@ -1,4 +1,4 @@
-alias anp "ansible-playbook"
+alias anp "ansible-playbook --sftp-extra-args='-B 512'"
 alias anc "ansible-console"
 
 function sync-proxies
