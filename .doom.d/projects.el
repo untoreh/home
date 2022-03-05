@@ -12,7 +12,7 @@
 ;; projectile
 (after! projectile
   (setq projectile-ignored-projects
-        '("/tmp" "~/tmp" "~/.local" "~/.cache" ".npm" "~/.emacs.d/.local/straight/repos/" "$HOME")
+        '("/tmp" "~/tmp" "~/.local" "~/.cache" ".npm" "~/.emacs.d/.local/straight/repos/" (getenv "HOME"))
         projectile-project-search-path '("~/dev")
         projectile-enable-caching t
         projectile-git-submodule-command
