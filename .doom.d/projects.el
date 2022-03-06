@@ -21,7 +21,11 @@
         projectile-project-root-files-bottom-up (remove ".git" projectile-project-root-files-bottom-up))
   (pushnew! projectile-globally-ignored-directories "~/win" ".venv" ".env" ".ipfs" ".archive" ".old" "node_modules")
   ;; allow project based vars
-  (put 'projectile-generic-command 'safe-local-variable #'stringp))
+  (put 'projectile-generic-command 'safe-local-variable #'stringp)
+  ;; prefer top-down to bottom up since we VC the home directory
+  (setq projectile-project-root-functions
+        (delete #'projectile-root-bottom-up projectile-project-root-functions))
+  (nconc projectile-project-root-functions '(projectile-root-bottom-up)))
 
 (defun projectile-ignored-project-function (filepath)
   "Return t if FILEPATH is within any of `projectile-ignored-projects'"
