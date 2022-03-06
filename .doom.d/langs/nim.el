@@ -56,3 +56,11 @@
   (nim-repl-set-terminal-backend 'vterm)
   (setq nim-repl-switches "--withTools -d:--threads:on")
   (add-hook! nim-mode #'nim-repl-mode))
+
+(after! format-all
+  (defun nim-mode-format ()
+    (interactive)
+    (call-process "nimpretty" nil nil nil
+                  buffer-file-name
+                  "--indent" (number-to-string  nim-indent-offset)))
+  (set-formatter! 'nimfmt #'nim-mode-format :modes 'nim-mode))
