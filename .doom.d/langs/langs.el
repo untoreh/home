@@ -73,3 +73,7 @@
 
 ;; disable emojify mode on vterm buffers of languages
 (pushnew! emojify-inhibit-in-buffer-functions 'my/repl-vterm-bufferp)
+
+;; make compilation buffers follow
+(add-hook! compilation-mode
+ (set (make-local-variable 'window-point-insertion-type) t))
