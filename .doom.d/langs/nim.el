@@ -57,10 +57,31 @@
   (setq nim-repl-switches "--withTools -d:--threads:on")
   (add-hook! nim-mode #'nim-repl-mode))
 
+(defvar nim-format-line-len "100"
+  "Line length argument for nimpretty.")
+
 (after! format-all
   (defun nim-mode-format ()
     (interactive)
-    (call-process "nimpretty" nil nil nil
-                  buffer-file-name
-                  "--indent" (number-to-string  nim-indent-offset)))
-  (set-formatter! 'nimfmt #'nim-mode-format :modes 'nim-mode))
+    (let ((tmpfile (make-temp-file "nim" nil ".nim")))
+      (unwind-protect
+          (progn
+            (write-file tmpfile)
+            (call-process "nimpretty" nil nil nil
+                          tmpfile
+                          "--indent:" (number-to-string  nim-indent-offset)
+                          "--maxLineLen:" nim-format-line-len)
+            (erase-buffer)
+            (insert-file-contents tmpfile)
+            )
+        (delete-file tmpfile))))
+  (set-formatter! 'nimfmt #'nim-mode-format :modes '(nim-mode)))
+
+(after! nim-compile
+  (require 's)
+  (add-hook! nim-mode
+    (setq-local compile-command
+                (concat nim-compile-command
+                        " c "
+                        (s-join " " (cl-rest (default-value 'nim-compile-default-command)))
+                        " " buffer-file-name))))
