@@ -19,7 +19,7 @@
        :completion
        ;; don't use tng since we prefer TAB+SPC and ENTER for inserting completions
        ;; and don't use childframes because are slow
-       company           ; the ultimate code completion backend
+       (company +childframe)           ; the ultimate code completion backend
        (vertico +icons)
        ;; (ivy +prescient +icons +childframe)               ; a search engine for love and life
 

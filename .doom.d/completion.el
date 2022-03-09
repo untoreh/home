@@ -2,14 +2,15 @@
 
 ;; FIXME: WSL has focus problems, and tooltip is not shown unless the
 ;; mouse is moved a bit everytime completions are shown
-;; (use-package! company-quickhelp
-;;   :after company
-;;   :if (featurep! :completion company +tooltips)
-;;   :init
-;;   (setq-default company-quickhelp-delay 0.33
-;;                 company-quickhelp-use-propertized-text t)
-;;   :config
-;;   (company-quickhelp-mode 1))
+(use-package! company-quickhelp
+  :after company
+  :if (or (featurep! :completion company +tooltips)
+          (featurep! :completion company +childframe))
+  :init
+  (setq-default company-quickhelp-delay 0.33
+                company-quickhelp-use-propertized-text t)
+  :config
+  (company-quickhelp-mode 1))
 
 (add-hook 'doom-first-buffer-hook
           (defun +abbrev-file-name ()
