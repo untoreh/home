@@ -96,16 +96,12 @@
   ;;     '(misc-info minor-modes checker input-method buffer-encoding major-mode process vcs "  "))
   )
 
-;; miniframe
-(use-package! mini-frame
+;; candidates window
+(use-package! vertico-posframe
   :config
-  (setq
-   mini-frame-detach-on-hide nil
-   mini-frame-show-parameters
-        '((bottom . 10)
-          (width . 0.7)
-          (left . 0.5)))
-  (mini-frame-mode t))
+  (setq vertico-posframe-parameters
+      '((left-fringe . 8)
+        (right-fringe . 8))))
 
 ;; frame title
 (setq frame-title-format
