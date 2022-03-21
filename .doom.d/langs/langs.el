@@ -17,8 +17,8 @@
        (unless (string-match-p (concat "^Cannot find shared library\\|"
 				       "^No language registered\\|"
 				       "cannot open shared object file")
-			    (error-message-string e))
-	    (signal (car e) (cadr e)))))))
+			       (error-message-string e))
+	 (signal (car e) (cadr e)))))))
 
 (load! "lisp")
 (load! "spell")
@@ -27,7 +27,7 @@
 (if (featurep! :lang python)
     (load! "python"))
 (if (featurep! :lang julia)
-   (load! "julia"))
+    (load! "julia"))
 (if (featurep! :lang nim)
     (load! "nim"))
 (if (featurep! :tools lsp)
@@ -43,19 +43,19 @@
       markdown-header-scaling-values
       '(1.25 1.15 1.08 1.00 0.90 0.75))
 
-;; dont format snippets (list is negated)
-;; FIXME: this produces a eager macro expansion error on startup
+;; ;; dont format snippets (list is negated)
+;; ;; FIXME: this produces a eager macro expansion error on startup
 (when (featurep! :editor format +onsave)
-  (dolist ((mode '(snippet-mode
-                   web-mode
-                   org-msg-edit-mode
-                   gitignore-mode
-                   lisp-data-mode
-                   conf-space-mode
-                   gfm-mode
-                   shell-mode
-                   python-mode)))
-    (add-to-list '+format-on-save-enabled-modes mode 'append)))
+  (cl-dolist (mode '(snippet-mode
+                     web-mode
+                     org-msg-edit-mode
+                     gitignore-mode
+                     lisp-data-mode
+                     conf-space-mode
+                     gfm-mode
+                     shell-mode
+                     python-mode))
+    (pushnew! +format-on-save-enabled-modes mode)))
 
 
 (defun my/repl-vterm-bufferp (&rest args)
@@ -71,9 +71,9 @@
           enabled-langs)
     nil))
 
-;; disable emojify mode on vterm buffers of languages
+;; ;; disable emojify mode on vterm buffers of languages
 (pushnew! emojify-inhibit-in-buffer-functions 'my/repl-vterm-bufferp)
 
-;; make compilation buffers follow
-(add-hook! compilation-mode
- (set (make-local-variable 'window-point-insertion-type) t))
+;; ;; make compilation buffers follow
+(add-hook! (compilation-mode nim-compile-mode)
+  (set (make-local-variable 'window-point-insertion-type) t))
