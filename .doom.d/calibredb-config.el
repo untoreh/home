@@ -418,3 +418,7 @@
 
 (provide 'calibredb-config)
 ;; calibredb-config ends here
+
+(after! dired-x
+  :config
+  (pushnew! dired-omit-extensions ".sdr"))
