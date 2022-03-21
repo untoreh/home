@@ -77,11 +77,23 @@
         (delete-file tmpfile))))
   (set-formatter! 'nimfmt #'nim-mode-format :modes '(nim-mode)))
 
-(after! nim-compile
-  (require 's)
-  (add-hook! nim-mode
-    (setq-local compile-command
-                (concat nim-compile-command
-                        " c "
-                        (s-join " " (cl-rest (default-value 'nim-compile-default-command)))
-                        " " buffer-file-name))))
+(after! nim-mode
+  (setq-default
+   nim-compile-default-command
+   '("r" "-r" "--verbosity:0" "--hint[Processing]:off" "--excessiveStackTrace:on"))
+
+  ;; (add-hook! nim-mode
+  ;;   (setq-local compile-command
+  ;;               (concat nim-compile-command
+  ;;                       " r --verbosity:0 --hint[Processing]:off --excessiveStackTrace:on"
+  ;;                       " " buffer-file-name)))
+  (map! :mode (nim-mode nimscript-mode)
+        :leader
+        :prefix "c"
+        :nv "c" #'nim-compile))
+
+(add-hook! 'nim-mode-hook :depth 0
+    (setq +lookup-definition-functions
+    (delete #'+nimsuggest-find-definition +lookup-definition-functions)))
+
+(setq nim-mode-hook nil)
