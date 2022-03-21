@@ -118,7 +118,8 @@
 
 ;; ;; completion
 (when (featurep! :completion company)
-  (when (featurep! :completion company +tooltips)
+  (when (or (featurep! :completion company +tooltips)
+            (featurep! :completion company +childframe))
     (package! company-quickhelp)))
 
 ;; (package! corfu)
@@ -153,6 +154,7 @@
 ;;                   (make-symbolic-link script-path link-path t)))))
 
 (package! gif-screencast)
+(package! vertico-posframe)
 ;; VLF
 (package! vlf
   :recipe (:host github :repo "m00natic/vlfi" :files ("*.el"))

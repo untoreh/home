@@ -101,7 +101,8 @@
   :config
   (setq vertico-posframe-parameters
       '((left-fringe . 8)
-        (right-fringe . 8))))
+        (right-fringe . 8)))
+  (vertico-posframe-mode 1))
 
 ;; frame title
 (setq frame-title-format
