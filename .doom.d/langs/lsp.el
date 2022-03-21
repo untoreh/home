@@ -16,36 +16,42 @@
 	   (not (featurep! :tools lsp +eglot)))
   :config
   (setq
-   lsp-restart 'auto-restart
+   lsp-restart 'ignore
    lsp-auto-configure t
    ;; NOTE: Can't guess root since $HOME is considered a workspace...
    lsp-auto-guess-root nil
-   ;; doc frames with mouse hover
-   lsp-ui-doc-use-childframe t
-   lsp-ui-doc-use-webkit t
-   lsp-ui-doc-enable t
-   lsp-ui-doc-max-height 80
-   lsp-ui-doc-max-width 80
-   lsp-ui-doc-show-with-mouse t
-   lsp-ui-doc-show-with-cursor nil
-   ;;
+   lsp-modeline-code-actions-enable t
+   lsp-eldoc-enable-hover t
+   lsp-signature-auto-activate t
+   lsp-signature-render-documentation t
    lsp-lens-enable t
    lsp-headerline-breadcrumb-enable t
-   lsp-ui-sideline-enable t
-   lsp-ui-sideline-show-code-actions t
-   lsp-ui-sideline-show-hover t
-   lsp-modeline-code-actions-enable t
-   lsp-ui-sideline-show-diagnostics t
-   lsp-eldoc-enable-hover t
    lsp-modeline-diagnostics-enable t
-   lsp-signature-render-documentation t
-   lsp-completion-show-detail t
-   lsp-completion-show-kind t
-   ;; lsp-diagnostics-provider
-   ;; lsp-completion-provider
-   ;; text
    )
+  (after! lsp-ui
+    (setq
+     ;; doc frames with mouse hover
+     lsp-ui-doc-use-childframe t
+     lsp-ui-doc-use-webkit t
+     lsp-ui-doc-enable t
+     lsp-ui-doc-max-height 80
+     lsp-ui-doc-max-width 80
+     lsp-ui-doc-show-with-mouse t
+     lsp-ui-doc-show-with-cursor nil
+     ;;
+     lsp-ui-sideline-enable t
+     lsp-ui-sideline-show-code-actions t
+     lsp-ui-sideline-show-hover t
+     lsp-ui-sideline-show-diagnostics t))
+  (after! lsp-completion
+    (setq
+     lsp-completion-show-detail t
+     lsp-completion-show-kind t)
+    ;; lsp-diagnostics-provider
+    ;; lsp-completion-provider
+    ;; text
+    )
   (when (featurep! :ui treemacs +lsp)
-	  (after! treemacs 
-		  (lsp-treemacs-sync-mode 1)))
+    (after! treemacs
+      (lsp-treemacs-sync-mode 1)))
   )
