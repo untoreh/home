@@ -772,6 +772,22 @@ name), separated by dots, as a list."
             ,python-repl-venv-dir))
     nil))
 
+(defun pyvenv-activate-parent (&optional body)
+  (interactive)
+  (if-let* ((venv-dir python-repl-venv-dir)
+            (proj-dir (python-repl-current-project-dir))
+            (proj-venv-dir (expand-file-name venv-dir proj-dir))
+            (src-dir (my/concat-path proj-dir "src")))
+      (progn
+        (message "activating %s" proj-venv-dir)
+        (cd proj-dir)
+        (setq pyvenv-activate nil)
+        (pyvenv-activate proj-venv-dir)
+        (if (not (null body))
+            body)
+        )
+    (message "could not find project file")))
+
 (defun python-repl-activate-parent (arg)
   "Look for a project file in the parent directories, if found, activate the project.
 
@@ -783,18 +799,10 @@ When called with a prefix argument, activate the home project."
         (pyvenv-activate arg)
         (python-repl-cd))
     (progn
-      (if-let* ((venv-dir python-repl-venv-dir)
-                (proj-dir (python-repl-current-project-dir))
-                (proj-venv-dir (expand-file-name venv-dir proj-dir))
-                (src-dir (my/concat-path proj-dir "src")))
-          (progn
-            (message "activating %s" proj-venv-dir)
-            (cd proj-dir)
-            (ignore-errors (pyvenv-activate proj-venv-dir))
-            (python-repl--send-string
-             (concat "%cd " (if (file-directory-p src-dir)
-                                src-dir proj-dir))))
-        (message "could not find project file")))))
+      (pyvenv-activate-parent
+       (python-repl--send-string
+        (concat "%cd " (if (file-directory-p src-dir)
+                           src-dir proj-dir)))))))
 
 (defun python-repl-set-python-editor (editor)
   "Set the PYTHON_EDITOR environment variable."
