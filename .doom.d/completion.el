@@ -61,7 +61,7 @@
   ;;             #'my/company-update-first-common)
   (setq
    company-async-redisplay-delay 0.01
-   company-idle-delay 0.1
+   company-idle-delay (if (featurep! :completion company +childframe) 0.33 0.1)
    company-tooltip-idle-delay 0.1
 
    company-selection-wrap-around t
