@@ -19,7 +19,7 @@
        :completion
        ;; don't use tng since we prefer TAB+SPC and ENTER for inserting completions
        ;; and don't use childframes because are slow
-       (company +childframe)           ; the ultimate code completion backend
+       (company +tooltips)           ; the ultimate code completion backend
        (vertico +icons)
        ;; (ivy +prescient +icons +childframe)               ; a search engine for love and life
 
@@ -139,7 +139,8 @@
        ;;ledger            ; an accounting system in Emacs
        (lua +lsp) ; One-based indices? one-based indices
        (markdown +grip)          ; writing docs for people to ignore
-       (nim +lsp)               ; python + lisp at the speed of c
+       ;; FIXME: nim module is useless because nimsuggest doesn't work, use LSP with `nimlangserver'
+       ;; (nim +lsp)               ; python + lisp at the speed of c
        nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
        (org +dragndrop +pandoc +poly +pretty +gnuplot +noter)               ; organize your plain life in plain text

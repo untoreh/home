@@ -1,3 +1,4 @@
 #!/bin/sh
 
-exec ~/.nimble/bin/nimlsp $@
+#exec ~/.nimble/bin/nimlsp $@
+exec ~/.nimble/bin/nimlangserver $@

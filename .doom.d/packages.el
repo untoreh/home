@@ -138,6 +138,7 @@
 (package! ahk-mode)
 (package! vimrc-mode)
 (package! systemd)
+(package! nim-mode)
 
 ;; we use weechat instead
 ;; (package! matrix-client

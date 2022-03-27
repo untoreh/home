@@ -26,7 +26,7 @@
       (:desc "go to previous window"
        :nev "SPC w TAB" #'nim-toggle-repl-back))
 
-(if (featurep! :lang nim)
+(if (or t (featurep! :lang nim))
     (map! :after nim-repl
           (:prefix ("SPC l n" . "nim")
            :desc "start nim repl"
@@ -42,23 +42,35 @@
            :desc nil
            "C-c C-." #'nim-repl-cd)))
 (use-package! nim-mode
-  :if (featurep! :lang nim)
+  :if (or t (featurep! :lang nim))
   :init
   (put 'nim-compile-default-command 'safe-local-variable #'listp)
   :config
-  (if (featurep! :lang nim +lsp)
+  (if (or t (featurep! :lang nim +lsp))
       (add-hook! nim-mode #'lsp))
+
   (setq nim-indent-offset 4)
   (setq-hook! 'nim-mode-hook
     evil-shift-width 4)
+
   (setq-default
    nim-compile-default-command
    '("r" "-r" "--verbosity:0" "--hint[Processing]:off" "--excessiveStackTrace:on")
    nimsuggest-options '("--refresh" "--maxresults:10"))
+
   (map! :mode (nim-mode nimscript-mode)
         :leader
         :prefix "c"
-        :nv "c" #'nim-compile))
+        :nv "c" #'nim-compile)
+  ;; disable nimsuggest since using LSP
+  ;; (remove-hook! 'nim-mode-hook #'+nim-init-nimsuggest-mode-h)
+  )
+
+(after! lsp
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-stdio-connection "nimlangserver")
+                    :major-modes '(nim-mode)
+                    :server-id 'nimlangserver)))
 
 (defun nim-repl-toggle-debug () (error "Not implemented."))
 

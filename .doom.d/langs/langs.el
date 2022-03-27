@@ -28,7 +28,8 @@
     (load! "python"))
 (if (featurep! :lang julia)
     (load! "julia"))
-(if (featurep! :lang nim)
+;; FIXME: nim module is disabled because useless
+(if (or t (featurep! :lang nim))
     (load! "nim"))
 (if (featurep! :tools lsp)
     (load! "lsp"))
