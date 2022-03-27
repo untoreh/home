@@ -41,13 +41,24 @@
            "C-c ." #'nim-repl-cd
            :desc nil
            "C-c C-." #'nim-repl-cd)))
-
-(after! nim-mode
+(use-package! nim-mode
+  :if (featurep! :lang nim)
+  :init
+  (put 'nim-compile-default-command 'safe-local-variable #'listp)
+  :config
   (if (featurep! :lang nim +lsp)
       (add-hook! nim-mode #'lsp))
   (setq nim-indent-offset 4)
   (setq-hook! 'nim-mode-hook
-    evil-shift-width 4))
+    evil-shift-width 4)
+  (setq-default
+   nim-compile-default-command
+   '("r" "-r" "--verbosity:0" "--hint[Processing]:off" "--excessiveStackTrace:on")
+   nimsuggest-options '("--refresh" "--maxresults:10"))
+  (map! :mode (nim-mode nimscript-mode)
+        :leader
+        :prefix "c"
+        :nv "c" #'nim-compile))
 
 (defun nim-repl-toggle-debug () (error "Not implemented."))
 
@@ -78,22 +89,9 @@
   (set-formatter! 'nimfmt #'nim-mode-format :modes '(nim-mode)))
 
 (after! nim-mode
-  (setq-default
-   nim-compile-default-command
-   '("r" "-r" "--verbosity:0" "--hint[Processing]:off" "--excessiveStackTrace:on"))
-
-  ;; (add-hook! nim-mode
-  ;;   (setq-local compile-command
-  ;;               (concat nim-compile-command
-  ;;                       " r --verbosity:0 --hint[Processing]:off --excessiveStackTrace:on"
-  ;;                       " " buffer-file-name)))
-  (map! :mode (nim-mode nimscript-mode)
-        :leader
-        :prefix "c"
-        :nv "c" #'nim-compile))
+  ;; (put 'nim-compile-default-command 'risky-local-variable nil)
+  )
 
 (add-hook! 'nim-mode-hook :depth 0
-    (setq +lookup-definition-functions
-    (delete #'+nimsuggest-find-definition +lookup-definition-functions)))
-
-(setq nim-mode-hook nil)
+  (setq +lookup-definition-functions
+        (delete #'+nimsuggest-find-definition +lookup-definition-functions)))
