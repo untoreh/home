@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: random string
+# condition: t
+# --
+
+const chars = "abcdefghijklmnopqrstuvwxyz"
+import std/random
+# randomize()
+proc randstr(n=10): string =
+    for _ in 0..n:
+        result.add(sample(chars))
