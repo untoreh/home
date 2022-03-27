@@ -12,7 +12,7 @@ proto=tcp
 fport=8080
 lport=80
 
-forward="live-mil.twitch.tv:1935"
+#forward="live-mil.twitch.tv:1935"
 #forward=178.255.155.138:1935
 #forward="Live-mil.Twitch.TV:80"
 forward=127.0.0.1:6003
