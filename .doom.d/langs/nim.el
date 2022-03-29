@@ -68,10 +68,25 @@
 
 (after! lsp
   (lsp-register-client
+   ;; (make-lsp-client :new-connection (lsp-stdio-connection "nimlangserver")
+   ;;                  :major-modes '(nim-mode)
+   ;;                  :server-id 'nimlangserver)
    (make-lsp-client :new-connection (lsp-stdio-connection "nimlangserver")
                     :major-modes '(nim-mode)
-                    :server-id 'nimlangserver)))
+                    :server-id 'nimlangserver))
 
+  (put 'lsp-nim-nimsuggest-mapping 'safe-local-variable (lambda (&rest args) t))
+  (put #'my/configure-nimlangserver 'safe-local-eval-function (lambda (&rest args) t))
+
+  (defvar nls/id 0)
+  (defun my/configure-nimlangserver (dir value)
+    (require 'cl-lib)
+    (let ((id (intern (format "nls-%s" (cl-incf nls/id)))))
+      (dir-locals-set-class-variables
+       id
+       `((nil . ((lsp-nim-nimsuggest-mapping . ,value)))))
+      (dir-locals-set-directory-class dir id)))
+  )
 (defun nim-repl-toggle-debug () (error "Not implemented."))
 
 (use-package! nim-repl

@@ -138,7 +138,8 @@
 (package! ahk-mode)
 (package! vimrc-mode)
 (package! systemd)
-(package! nim-mode)
+(package! nim-mode :pin "744e076f0bea1c5ddc49f92397d9aa98ffa7eff8")
+(package! flycheck-nim :pin "ddfade51001571c2399f78bcc509e0aa8eb752a4")
 
 ;; we use weechat instead
 ;; (package! matrix-client
