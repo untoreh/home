@@ -12,3 +12,6 @@ load the python environment:
 
 `wheel` can also be installed from `pip`:
 `pip install wheel`
+
+# Force flag
+Don't use the force flag, as that will also force install dependencies, (which we most likely want to avoid and use distro built packages). Instead uninstall the package, and reinstall it.
