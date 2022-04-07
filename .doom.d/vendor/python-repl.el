@@ -793,16 +793,18 @@ name), separated by dots, as a list."
 
 When called with a prefix argument, activate the home project."
   (interactive "P")
-  (if arg
+  (let ((curdir default-directory))
+    (if arg
+        (progn
+          (message "activating home project")
+          (pyvenv-activate arg)
+          (python-repl-cd))
       (progn
-        (message "activating home project")
-        (pyvenv-activate arg)
-        (python-repl-cd))
-    (progn
-      (pyvenv-activate-parent
-       (python-repl--send-string
-        (concat "%cd " (if (file-directory-p src-dir)
-                           src-dir proj-dir)))))))
+        (pyvenv-activate-parent
+         (python-repl--send-string
+          (concat "%cd " (if (file-directory-p src-dir)
+                             src-dir proj-dir))))))
+    (setq default-directory curdir)))
 
 (defun python-repl-set-python-editor (editor)
   "Set the PYTHON_EDITOR environment variable."
