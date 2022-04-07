@@ -55,6 +55,7 @@ fi
 
 ## golang
 export GOPATH=$HOME/dev/go:$HOME/dev/deployer/go
+export GOENV_ROOT="$HOME/.goenv"
 ## nodejs
 export NODE_PATH=$NODE_PATH:$HOME/node_modules:/usr/local/lib/node_modules
 ## python
@@ -101,3 +102,4 @@ export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
 # GUIX
 #GUIX_PROFILE=~/.guix-profile
 #. ${GUIX_PROFILE}/etc/profile
+. "$HOME/.cargo/env"
