@@ -1,4 +1,5 @@
 ;;; ../../../var/home/fra/.doom.d/vars.el -*- lexical-binding: t; -*-
+
 (add-load-path!
  (concat
   (file-name-directory
@@ -16,7 +17,9 @@
  user-mail-address "contact@unto.re"
  auth-sources '("~/.authinfo.gpg")
  auth-source-cache-expiry nil
- password-cache-expiry nil)
+ password-cache-expiry nil
+ shell-file-name "/usr/bin/fish"
+ )
 
 ;; use battery mode when unplugged
 (let ((battery-info (battery)))
