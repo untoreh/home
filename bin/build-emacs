@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+
+EMACS_REPO_DIR=$HOME/tmp/emacs
+MK="$1"
+
+build() {
+  export CC="/usr/bin/clang"
+  export CXX="/usr/bin/clang++"
+  export CPP="/usr/bin/clang -E"
+  export LD="/usr/bin/lld"
+  export AR="/usr/bin/llvm-ar"
+  export AS="/usr/bin/llvm-as"
+  export CFLAGS+=" -g -flto"
+  export CCFLAGS+=" -fuse-ld=lld"
+  export CXXFLAGS+=" -g -flto -fuse-ld=lld"
+  export LIBS+="-lmimalloc-insecure"
+  export MI_SECURE=off
+
+  cd $EMACS_REPO_DIR
+
+  # mimalloc patch
+  if [ "$(realpath /usr/include/malloc.h)" != /usr/include/mimalloc-override.h ]; then
+	  sudo mv /usr/include/malloc.h{,.sys}
+	  sudo ln -s /usr/include/mimalloc{-override.h,.h}
+  fi
+  if [ "$(realpath /usr/lib/libmimalloc.so)" != /usr/lib/libmimalloc-insecure.so -a \
+	  -e /usr/lib/libmimalloc-insecure.so ]; then
+	  sudo rm /usr/lib/libmimalloc.so
+	  sudo ln -s /usr/lib/libmimalloc-insecure.so /usr/lib/libmimalloc.so
+  fi
+
+  [[ -x configure ]] || (./autogen.sh git && ./autogen.sh autoconf)
+
+
+  local _conf=(
+    --prefix=/usr
+    --sysconfdir=/etc
+    --libexecdir=/usr/lib
+    --localstatedir=/var
+    --mandir=/usr/share/man
+    --with-gameuser=:games
+    --with-sound=alsa
+    --with-modules
+    --with-x-toolkit=gtk3
+    --with-cairo
+    --with-xwidgets
+    --with-native-compilation
+    --with-pgtk
+    --without-compress-install
+    --without-gconf
+    --without-gsettings
+    --without-m17n-flt
+    --enable-autodepend
+    --enable-link-time-optimization
+  )
+
+  ./configure "${_conf[@]}"
+  if [ "$MK" != "-n" ]; then
+	make NATIVE_FAST_BOOT=0
+  fi
+}
+
+
+build
