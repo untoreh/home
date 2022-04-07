@@ -65,9 +65,8 @@
 ;; parrot
 (after! parrot-mode
   (map!
-   :after parrot
-   :n "[r" #'parrot-rotate-prev-word-at-point
-   :n "]r" #'parrot-rotate-next-word-at-point))
+   :nve "[r" #'parrot-rotate-prev-word-at-point
+   :nve "]r" #'parrot-rotate-next-word-at-point))
 
 ;; jupyter
 (if (featurep! :lang org +jupyter)
