@@ -32,10 +32,9 @@ in {
 
     # langs
     go-pup nixfmt golangci-lint shfmt libtidy nodejs shellcheck jq enchant2 ispell languagetool
-    chrpath rustup rust-analyzer pipenv jre
+    chrpath pipenv jre
+    # rustup rust-analyzer
 
-    # runtimes
-    # python3
 	;
     # emacsPgtkGcc # wait for mesa-d3d12
     #mu isync goimapnotify gnupg pinentry emacs-all-the-icons-fonts;
@@ -54,10 +53,11 @@ in {
   # gpu, waiting for nixpkgs integration
   # nixGLDefault, disabled because of "unsupported-package" issue
   #inherit (nixgl.auto) nixGLDefault;
-   inherit (nixgl) nixVulkanIntel;
+  inherit (nixgl) nixVulkanIntel;
   # wait for mesa-d3d12
   # python
   inherit (super.python38Packages) supervisor grip ansible black flake8 ptpython;
+  #inherit (super.python38.withPa) supervisor grip ansible black flake8 ptpython;
   # pandas isort setuptools timeago cython
   # deps for thefuck
   # colorama decorator psutil pyte;

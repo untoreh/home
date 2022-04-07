@@ -82,6 +82,7 @@ end
 
 # ## golang
 set -x GOPATH "$HOME/dev/go:$HOME/tmp/deployer/go"
+set -x GOENV_ROOT "$HOME/.goenv"
 # ## nodejs
 set -x NODE_PATH "$NODE_PATH:$HOME/node_modules:/usr/local/lib/node_modules"
 

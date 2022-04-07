@@ -1,3 +1,4 @@
+# misc
 less
 grep
 coreutils
@@ -7,5 +8,33 @@ alpine-sdk
 xclip
 openrc
 openssh
+wget
+curl
+xz
+diffutils
+
+# emacs
+alsa-lib-dev cairo-dev clang-dev binutils-dev gnutls-dev gpm-dev gtk+3.0-dev harfbuzz-dev jansson-dev ttf-freefont libxml2-dev lld-dev llvm-dev webkit2gtk-dev xorgproto
+glib-dev fontconfig-dev libpng-dev
+			librsvg-dev giflib-dev libxpm-dev gtk+3.0-dev alsa-lib-dev
+			libxml2-dev pango-dev tiff-dev libjpeg-turbo-dev libxaw-dev
+			autoconf automake linux-headers gawk ncurses-dev
+	ncurses-libs gnutls-dev gmp-dev jansson-dev harfbuzz-dev
+bc git jq openssh texinfo
+aspell aspell-en
+
+# NOT NEEDED because of glibc-* packages
+# libc6-compat gcompat
+
+# python
+python3-dev py3-numpy py3-curl
+# julia packages
+gnu-libiconv
+libz4-libs
 
 
+openssl-dev
+mimalloc2-dev
+
+# tree sitter
+se apk add (apk search tree-sitter | sed -r 's/-([0-9].*)//')

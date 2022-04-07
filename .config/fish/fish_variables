@@ -1,5 +1,6 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
+SETUVAR ALPINE:1
 SETUVAR CLUTTER_BACKEND:wayland
 SETUVAR EMACS_COMMIT:d86e69bab8ad2db968060c012566a27b1022f6d6
 SETUVAR --export FZF_DEFAULT_OPTS:\x2d\x2dcolor\x3dbw\x20\x2d\x2dheight\x201\x25\x20\x2d\x2dreverse\x20\x2d\x2dtiebreak\x3dbegin\x2clength\x2cindex
@@ -17,7 +18,7 @@ SETUVAR __fish_init_1_50_0:\x1d
 SETUVAR __fish_init_2_39_8:\x1d
 SETUVAR __fish_init_2_3_0:\x1d
 SETUVAR __fish_init_3_x:\x1d
-SETUVAR __fish_initialized:3100
+SETUVAR __fish_initialized:3400
 SETUVAR _fish_abbr_za:zoxide\x20add
 SETUVAR _fish_abbr_zq:zoxide\x20query
 SETUVAR _fish_abbr_zqi:zoxide\x20query\x20\x2di
@@ -58,4 +59,5 @@ SETUVAR fish_pager_color_completion:normal
 SETUVAR fish_pager_color_description:555\x1eyellow
 SETUVAR fish_pager_color_prefix:cyan
 SETUVAR fish_pager_color_progress:cyan
-SETUVAR fish_user_paths:/home/fra/\x2ecargo/bin\x1e/home/fra/\x2ecargo/bin
+SETUVAR fish_pager_color_selected_background:\x2dr
+SETUVAR fish_user_paths:/home/fra/\x2ecargo/bin
