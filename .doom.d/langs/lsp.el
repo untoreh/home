@@ -15,21 +15,26 @@
   :if (and (featurep! :tools lsp)
 	   (not (featurep! :tools lsp +eglot)))
   :config
+  (put 'lsp-restart 'safe-local-variable (lambda (&rest args) t))
   (setq
    lsp-restart 'ignore
    lsp-auto-configure t
    ;; NOTE: Can't guess root since $HOME is considered a workspace...
    lsp-auto-guess-root nil
-   lsp-modeline-code-actions-enable t
    lsp-eldoc-enable-hover t
-   lsp-signature-auto-activate t
-   lsp-signature-render-documentation t
+   lsp-signature-render-documentation nil
    lsp-lens-enable t
    lsp-headerline-breadcrumb-enable t
-   lsp-modeline-diagnostics-enable t
+   lsp-modeline-diagnostics-enable nil
+   lsp-modeline-code-actions-enable nil
+   lsp-semantic-tokens-enable t
+   lsp-enable-folding t
+   lsp-enable-imenu t
+   lsp-enable-snippet t
    )
   (after! lsp-ui
     (setq
+     lsp-ui-imenu-enable t
      ;; doc frames with mouse hover
      lsp-ui-doc-use-childframe t
      lsp-ui-doc-use-webkit t
