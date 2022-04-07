@@ -1,0 +1,30 @@
+#!/bin/bash
+
+[ "$UID" -ne 0 ] && { echo "please run as root"; exit 1; }
+
+apk del --rdepends glibc
+
+if [ ! -e /etc/apk/keys/sgerrand.rsa.pub ]; then
+	wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub
+fi
+V=2.34-r0
+
+DIR=/tmp
+cd $DIR
+wget -q https://github.com/sgerrand/alpine-pkg-glibc/releases/download/$V/glibc-$V.apk
+apk add $DIR/glibc-$V.apk
+rm -f $DIR/glibc-$V.apk
+
+wget -q https://github.com/sgerrand/alpine-pkg-glibc/releases/download/$V/glibc-bin-$V.apk
+apk add $DIR/glibc-bin-$V.apk
+rm -f $DIR/glibc-bin-$V.apk
+
+wget -q https://github.com/sgerrand/alpine-pkg-glibc/releases/download/$V/glibc-dev-$V.apk
+apk add $DIR/glibc-dev-$V.apk
+rm -f $DIR/glibc-dev-$V.apk
+
+wget -q https://github.com/sgerrand/alpine-pkg-glibc/releases/download/$V/glibc-i18n-$V.apk
+apk add $DIR/glibc-i18n-$V.apk
+rm -f $DIR/glibc-i18n-$V.apk
+
+/usr/glibc-compat/bin/localedef -i en_US -f UTF-8 en_US.UTF-8
