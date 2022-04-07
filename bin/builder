@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+. ~/.profile
+
+sudo docker run --name builder \
+	-e INSIDE_DOCKER=1 \
+	-e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+	-e WAYLAND_DISPLAY=$WAYLAND_DISPLAY \
+	-e GDK_BACKEND=wayland \
+	-e EMACS=$EMACS \
+	-e PATH=$PATH \
+	-it \
+	--net=host \
+	--tmpfs /tmp \
+	-v /home:/home \
+	-v /mnt:/mnt \
+	-v /nix:/nix \
+	-v /run/WSL:/run/WSL \
+	--privileged \
+	--user $(id -u):$(id -g) \
+	-w /home/$USER \
+	builder /usr/bin/fish
