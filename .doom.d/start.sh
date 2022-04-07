@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 . ~/.profile
 cd ~/.emacs.d
@@ -10,6 +10,7 @@ mkdir /tmp/__site
 # export EMACS=$(which emacs)
 # export EMACS=~/.nix-profile/bin/emacs
 export EMACS=/usr/bin/emacs
+# export EMACS=~/bin/emacs
 # export EMACS="nixGL emacs"
 
 # bin/doom clean
@@ -24,5 +25,6 @@ fi
 # export GDK_BACKEND=x11 CLUTTER_BACKEND=x11
 export GDK_BACKEND=wayland CLUTTER_BACKEND=wayland
 
-emacs
+#~/bin/emacs
 #emacs --fg-daemon=server
+emacs
