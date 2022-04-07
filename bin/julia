@@ -1,0 +1,11 @@
+#!/bin/bash -li
+
+JULIA_TRUE_PATH=/opt/gjulia
+#export JULIA_BINDIR=$HOME/bin/
+
+export JULIA_BINDIR=$JULIA_TRUE_PATH/bin/
+
+#DLPATH=/usr/glibc-compat/bin/ld.so
+DLPATH=/lib64/ld-linux-x86-64.so.2
+
+exec $DLPATH $JULIA_TRUE_PATH/bin/julia -J $JULIA_TRUE_PATH/lib/julia/sys.so $@
