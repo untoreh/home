@@ -38,6 +38,7 @@ share/backups
 .docker
 .doom.d/mail.el
 .doom.d/vimish-fold
+.doom.d/custom.el
 .dotnet/
 .emacs.d/
 .fonts/
@@ -129,3 +130,4 @@ org/
 remmina/
 share/
 tmp/
+nimsuggest.log
