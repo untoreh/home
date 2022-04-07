@@ -1,13 +1,14 @@
 local wezterm = require 'wezterm';
 local launch_menu = {}
 local default_prog = nil
+local distro = "arch"
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	table.insert(launch_menu, {
                  label = "PowerShell",
                  args = {"powershell.exe", "-NoLogo"},
 	})
-  default_prog = {"wsl.exe", "-d", "Arch", "-e", "bash", "-c",
+  default_prog = {"wsl.exe", "-d", "-u" "fra", distro, "-e", "bash", "-c",
                   "{ [ -f /tmp/.mounted ] || /etc/wsl-mount.sh; } && SHELL=fish exec fish -li"}
 else
   default_prog = {"fish", "-li"}
@@ -74,7 +75,7 @@ return {
     {key="l", mods="SHIFT|ALT", action="ShowLauncher"},
     {key="a", mods="CTRL|SHIFT", action=wezterm.action{
        SpawnCommandInNewTab={
-         args={"wsl.exe", "-d", "Arch", "-e", "bash", "-c",
+         args={"wsl.exe", "-d", distro, "-e", "bash", "-c",
                "{ [ -f /tmp/.mounted ] || /etc/wsl-mount.sh; } && SHELL=fish exec fish -li"}}}},
     {key="p", mods="CTRL|SHIFT", action=wezterm.action{
        SpawnCommandInNewTab={
