@@ -1,3 +1,7 @@
 #!/usr/bin/env bash
 
-sudo docker exec -it builder $(builtin which nim) $@
+exec sudo docker exec \
+    -e PATH=$PATH \
+    -e PYTHONPATH=$PYTHONPATH \
+    -e VIRTUAL_ENV=$VIRTUAL_ENV \
+    -w $PWD -it builder $(which nim) "$@"

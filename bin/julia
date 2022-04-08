@@ -1,5 +1,7 @@
 #!/bin/bash -li
 
+# NOTE: this script should be copied in `/opt/julia/bin` and julia binary renamed `julia.bin`
+
 JULIA_TRUE_PATH=/opt/gjulia
 #export JULIA_BINDIR=$HOME/bin/
 

@@ -37,5 +37,5 @@ echo -e "$NEW_PYTHONPATH" >>$cached_path
 # NEW_LD_LIBRARY_PATH="LD_LIBRARY_PATH=\"$LD_LIBRARY_PATH\""
 # echo "$NEW_LD_LIBRARY_PATH" >$cached_dir/path_std
 
-echo XDG_DATA_DIRS="$HOME/.nix-profile/share:/usr/local/share:/usr/share" >>$cached_path
+echo XDG_DATA_DIRS="$HOME:$HOME/.nix-profile/share:/usr/local/share:/usr/share" >>$cached_path
 echo GUIX_PROFILE="$HOME/.guix-profile" >>$cached_path

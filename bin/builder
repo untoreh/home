@@ -17,6 +17,7 @@ sudo docker run --name builder \
 	-v /nix:/nix \
 	-v /run/WSL:/run/WSL \
 	--privileged \
+	--cap-add=ALL \
 	--user $(id -u):$(id -g) \
 	-w /home/$USER \
-	builder /usr/bin/fish
+	builder catatonit /usr/bin/fish

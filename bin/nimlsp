@@ -1,0 +1,6 @@
+#!/bin/sh
+
+#exec ~/.nimble/bin/nimlsp $@
+exec ~/.nimble/bin/nimlangserver $@
+#sudo docker exec -t builder ~/.nimble/bin/nimlangserver $@
+#sudo docker exec -t builder ~/.nimble/bin/nimlsp $@

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+#
+sudo docker exec -w $PWD -it builder $SHELL -li
