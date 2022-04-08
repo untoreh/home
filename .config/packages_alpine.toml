@@ -23,6 +23,9 @@ glib-dev fontconfig-dev libpng-dev
 bc git jq openssh texinfo
 aspell aspell-en
 
+# themes 
+kvantum
+
 # NOT NEEDED because of glibc-* packages
 # libc6-compat gcompat
 

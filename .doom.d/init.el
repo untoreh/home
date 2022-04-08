@@ -167,7 +167,7 @@
 
        :email
        ;; don't use +gmail since it overrides mu4e del hotkeys
-       (mu4e +org)
+       (mu4e +org +gmail)
        ;;notmuch
        ;;(wanderlust +gmail)
 

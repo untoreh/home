@@ -1,11 +1,11 @@
 ;;; langs/tree-sitter.el -*- lexical-binding: t; -*-
 
 (use-package! tree-sitter
-  :when (and nil bound-and-true-p module-file-suffix)
+  :when (bound-and-true-p module-file-suffix)
   :hook (prog-mode . tree-sitter-mode)
   :hook (tree-sitter-after-on . tree-sitter-hl-mode)
   :init
-  (setq tree-sitter-langs-grammar-dir "/usr/lib/tree-sitter"
+  (setq ;; tree-sitter-langs-grammar-dir "/usr/lib/tree-sitter"
         tsc-dyn-get-from '(:compilation))
   (let ((rflags (getenv "RUSTFLAGS")))
     (defadvice! tree-sitter-set-flags nil :before #'tsc-dyn-get--build
@@ -13,8 +13,8 @@
     (defadvice! tree-sitter-unset-flags nil :after #'tsc-dyn-get--build
       (setenv "RUSTFLAGS" rflags))
     (defadvice! tree-sitter-bin-dir nil :override #'tree-sitter-langs--bin-dir
-      tree-sitter-langs-grammar-dir)
-    (advice-remove 'tree-sitter-bin-dir #'tree-sitter-langs--bin-dir))
+      "/usr/lib/tree-sitter")
+    (defadvice! skip-grammars (&rest args) :override #'tree-sitter-langs-install-grammars nil))
   :config
   (require 'tree-sitter-langs)
   (defadvice! doom-tree-sitter-fail-gracefully-a (orig-fn &rest args)

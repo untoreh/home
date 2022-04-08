@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# cursor
+gsettings set org.gnome.desktop.interface cursor-size 48
+gsettings set  org.gnome.desktop.interface cursor-theme "Sweet-cursors"
+[ ! -s ~/.icons/Sweet-cursors ] && "'Sweet-cursors' needs to be installed"
+# icons
+gsettings set org.gnome.desktop.interface icon-theme "candy-icons"
+[ ! -s ~/.icons/candy-icons ] && "'candy-icons' needs to be installed"
+# Gtk theme
+gsettings set org.gnome.desktop.interface gtk-theme "Dracula"
+gsettings set org.gnome.desktop.wm.preferences theme "Dracula"
+[ ! -s ~/.themes/Dracula ] && "'Dracula' theme needs to be installed"
+

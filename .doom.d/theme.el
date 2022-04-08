@@ -161,8 +161,8 @@
   :init
   ;; don't emojify strings
   (setq emojify-program-contexts '(comments)
-        ;; don't emojify ascii
-        emojify-emoji-styles '(github unicode)))
+	;; don't emojify ascii
+	emojify-emoji-styles '(github unicode)))
 
 (after! vterm
   (add-hook! 'vterm-mode-hook (doom-themes-hide-modeline)))

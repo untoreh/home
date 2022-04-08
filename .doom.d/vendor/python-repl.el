@@ -275,7 +275,8 @@ Valid backends are currently:
      (error "Unrecognized backend “%s”." backend))))
 
 (defconst python-repl-executable-records
-  `((default ,(file-name-nondirectory (my/select-first #'executable-find '("ptipython" "ptpython" "ipython" "python")))))
+  `((default ,(file-name-nondirectory
+               (my/select-first #'executable-find '("ptipython" "ptpython" "ipython" "python")))))
   "List of Python executables.
 
 Entries have the form

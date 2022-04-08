@@ -25,27 +25,19 @@ in {
     noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-emoji-blob-bin font-awesome
     noto-fonts-extra sweet emojione fantasque-sans-mono julia-mono fira fira-code fira-code-symbols hack-font ia-writer-duospace
     powerline-fonts material-design-icons barlow
-    # input-fonts
     # system (don't use fish from nix because of locales)
     man less thefuck glibcLocales tini libqalculate dhcp bandwhich consul
     haproxy rsync sshpass pandoc zip docker cachix msmtp
 
     # langs
     go-pup nixfmt golangci-lint shfmt libtidy nodejs shellcheck jq enchant2 ispell languagetool
-    chrpath pipenv jre
-    # rustup rust-analyzer
-
-	;
-    # emacsPgtkGcc # wait for mesa-d3d12
+    chrpath pipenv jre;
     #mu isync goimapnotify gnupg pinentry emacs-all-the-icons-fonts;
   inherit (unstable) mu isync goimapnotify gnupg pinentry emacs-all-the-icons-fonts gost;
-  # latest langs
-  #inherit (unstable) nim;
   # more fonts
   inherit (self.vimPlugins) vim-devicons;
-  # emacs with cachix support
   # sweet theme dep
-  inherit (self.gnome3) adwaita-icon-theme;
+  inherit (self.gnome) adwaita-icon-theme;
   # dictionary
   inherit (self.aspellDicts) en en-computers en-science it;
   # dependencies
@@ -57,7 +49,6 @@ in {
   # wait for mesa-d3d12
   # python
   inherit (super.python38Packages) supervisor grip ansible black flake8 ptpython;
-  #inherit (super.python38.withPa) supervisor grip ansible black flake8 ptpython;
   # pandas isort setuptools timeago cython
   # deps for thefuck
   # colorama decorator psutil pyte;

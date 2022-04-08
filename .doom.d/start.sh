@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo starting emacs...
+
 . ~/.profile
 cd ~/.emacs.d
 
