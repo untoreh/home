@@ -46,7 +46,7 @@
   :init
   (put 'nim-compile-default-command 'safe-local-variable #'listp)
   :config
-  (if (or t (featurep! :lang nim +lsp))
+  (if (or (featurep! :lang nim +lsp))
       (add-hook! nim-mode #'lsp))
 
   (setq nim-indent-offset 4)
@@ -54,7 +54,7 @@
     evil-shift-width 4)
 
   (setq-default
-   nim-compile-command "nimwrap"
+   nim-compile-command "nim"
    nim-compile-default-command
    '("r" "-r" "--verbosity:0" "--hint[Processing]:off" "--excessiveStackTrace:on")
    nimsuggest-options '("--refresh" "--maxresults:10"))
@@ -67,7 +67,6 @@
   ;; (remove-hook! 'nim-mode-hook #'+nim-init-nimsuggest-mode-h)
   )
 
-(defvar nls/id 0)
 (use-package! lsp-mode
   :init
   :config
@@ -83,6 +82,13 @@
   ;;                   ;; :priority -2
   ;;                   :priority 2
   ;;                   :server-id 'nimlangserver))
+  (setq lsp-nim-project-mapping
+        [(:projectPath "test/all.nim"
+          :fileRegex "tests/.*\\.nim")
+         (:projectPath "main.nim"
+          :fileRegex ".*\\.nim")])
+  (lsp-register-custom-settings
+   '(("nim.rootConfig" lsp-nim-project-mapping nil)))
   )
 
 (defun nim-repl-toggle-debug () (error "Not implemented."))

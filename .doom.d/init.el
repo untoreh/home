@@ -88,7 +88,7 @@
        ;; ein               ; tame jupyter notebooks with emacs
        (eval +overlay)     ; run code, run (also, repls)
        ;; BROKEN gist              ; interacting with github gists
-       (lookup +dictionary +docsets)              ; navigate your code and its documentation
+       (lookup +dictionary +offline +docsets)              ; navigate your code and its documentation
        (lsp +peek)
        magit             ; a git porcelain for Emacs
        ;;make              ; run make tasks from Emacs

@@ -28,7 +28,7 @@
     (let (kill-buffer-hook kill-buffer-query-functions)
       (if-let* ((proc (get-buffer-process (current-buffer)))
                 (pid (process-id proc)))
-          (shell-command (concat "pkill -P " (number-to-string pid))))
+          (shell-command (concat "sudo pkill -P " (number-to-string pid))))
       (kill-buffer))))
 
 (defun my/float-to-floor-precision (num prec)

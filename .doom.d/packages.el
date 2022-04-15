@@ -64,6 +64,8 @@
   (:host github :repo "polymode/poly-org"))
 (package! tree-sitter)
 (package! tree-sitter-langs)
+(message "LSP is manually pinned!")
+(package! lsp-mode :pin "6bc8a39502321a7c663991f7de27e8515ecb7e0b")
 ;; julia
 (if (featurep! :lang julia)
     (progn

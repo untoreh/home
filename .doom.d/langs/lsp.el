@@ -37,7 +37,8 @@
      lsp-ui-imenu-enable t
      ;; doc frames with mouse hover
      lsp-ui-doc-use-childframe t
-     lsp-ui-doc-use-webkit t
+     ;; webkit causes crashes
+     lsp-ui-doc-use-webkit nil
      lsp-ui-doc-enable t
      lsp-ui-doc-max-height 80
      lsp-ui-doc-max-width 80

@@ -773,9 +773,9 @@ name), separated by dots, as a list."
             ,python-repl-venv-dir))
     nil))
 
-(defun pyvenv-activate-parent (&optional body)
+(defmacro pyvenv-activate-parent (&optional body)
   (interactive)
-  (if-let* ((venv-dir python-repl-venv-dir)
+  `(if-let* ((venv-dir python-repl-venv-dir)
             (proj-dir (python-repl-current-project-dir))
             (proj-venv-dir (expand-file-name venv-dir proj-dir))
             (src-dir (my/concat-path proj-dir "src")))
@@ -784,9 +784,8 @@ name), separated by dots, as a list."
         (cd proj-dir)
         (setq pyvenv-activate nil)
         (pyvenv-activate proj-venv-dir)
-        (if (not (null body))
-            body)
-        )
+        (if (not (null ,body))
+            ,body))
     (message "could not find project file")))
 
 (defun python-repl-activate-parent (arg)

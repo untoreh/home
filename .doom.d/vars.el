@@ -42,6 +42,9 @@
   (setq which-key-idle-delay 0.33
         which-key-idle-secondary-delay 0))
 
+;; shut up native comp
+(setq native-comp-async-report-warnings-errors nil)
+
 (after! gcmh
   (setq gcmh-auto-idle-delay-factor 50
         gcmh-idle-delay 'auto)
