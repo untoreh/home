@@ -128,3 +128,8 @@ sudo zypper ar -cfp 90 'https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE
 sudo zypper dup --from packman-essentials --allow-vendor-change
 ```
 
+Disable gui startup on boot
+
+``` sh
+sudo systemctl set-default multi-user
+```
