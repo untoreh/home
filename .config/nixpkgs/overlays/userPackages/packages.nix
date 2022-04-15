@@ -14,7 +14,7 @@ in {
     eternal-terminal browsh zsh git-hub git-lfs delta pet tmux fzf fd bat
     ripgrep zoxide exa nushell starship direnv
     # utils
-    wego translate-shell weechat krita calibre koreader youtube-dl djvulibre unoconv
+    wego translate-shell weechat krita calibre koreader youtube-dl djvulibre unoconv wordnet
     # files and backups
     duplicacy borgbackup rclone syncthing inotify-tools
     # desktop
@@ -27,12 +27,11 @@ in {
     powerline-fonts material-design-icons barlow
     # system (don't use fish from nix because of locales)
     man less thefuck glibcLocales tini libqalculate dhcp bandwhich consul
-    haproxy rsync sshpass pandoc zip docker cachix msmtp
+    haproxy rsync sshpass pandoc zip docker cachix msmtp catatonit
 
     # langs
     go-pup nixfmt golangci-lint shfmt libtidy nodejs shellcheck jq enchant2 ispell languagetool
     chrpath pipenv jre;
-    #mu isync goimapnotify gnupg pinentry emacs-all-the-icons-fonts;
   inherit (unstable) mu isync goimapnotify gnupg pinentry emacs-all-the-icons-fonts gost;
   # more fonts
   inherit (self.vimPlugins) vim-devicons;

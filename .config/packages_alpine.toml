@@ -12,6 +12,7 @@ wget
 curl
 xz
 diffutils
+procps
 
 # emacs
 alsa-lib-dev cairo-dev clang-dev binutils-dev gnutls-dev gpm-dev gtk+3.0-dev harfbuzz-dev jansson-dev ttf-freefont libxml2-dev lld-dev llvm-dev webkit2gtk-dev xorgproto
