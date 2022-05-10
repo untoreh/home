@@ -10,21 +10,31 @@ function check_mount() {
         touch ${mpath}/.alive || {
         timeout 10 $mpath || sudo umount -l $mpath
         timeout 10 sudo mount UUID=$part_uuid $mpath
-	if [ $? -neq 0 ]; then
+	if [ $? != 0 ]; then
 		discord-notify "Mediabox: can't mount storage to $mpath !"
 	fi
         }
     else
         sudo mount UUID=$part_uuid $mpath
-	if [ $? -neq 0 ]; then
+	if [ $? != 0 ]; then
 		discord-notify "Mediabox: can't mount storage to $mpath !"
 	fi
     fi
 }
 
-while true; do
+function check_all() {
     check_mount 77c665cc-a3e3-4fc7-8cdb-5192cfdffc3c ~/mnt/data
-    check_mount 61c9a1cc-c96a-4f94-af3f-864f83167b5d ~/volatile/chains
+    check_mount b9e7b5a4-8ad8-431e-a52e-ca55a4c8b530 ~/volatile/chains
     check_mount 8116c5d9-ea77-451d-8774-5585b130460e ~/volatile/backups
-    sleep 360
-done
+}
+
+if [ "$1" = "-q" ]; then
+	check_all
+elif [ "$1" = "-f" ]; then
+	while true; do
+		check_all
+		sleep 360
+	done
+else
+	echo supported commands are "-q" or "-f"; exit 1;
+fi
