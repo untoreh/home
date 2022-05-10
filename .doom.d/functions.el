@@ -72,29 +72,29 @@
   (let ((orig name)
         (trg (file-truename trg))
         (name (file-truename name)))
-  (cond
-    ((not (file-exists-p name))
-     (progn
-       (and (file-symlink-p name) (delete-file name))
-       (make-directory (file-name-directory name) t)
-       (make-symbolic-link trg name)))
-    ((and (file-symlink-p name)
-          (not (equal (file-truename trg)
-                      (file-truename name))))
-     (progn
-       (delete-file name)
-       (make-symbolic-link trg name)))
-    ((and (file-exists-p name)
-          (not (file-symlink-p orig))) (error "%s is not a symlink" orig))
-    )))
+    (cond
+     ((not (file-exists-p name))
+      (progn
+        (and (file-symlink-p name) (delete-file name))
+        (make-directory (file-name-directory name) t)
+        (make-symbolic-link trg name)))
+     ((and (file-symlink-p name)
+           (not (equal (file-truename trg)
+                       (file-truename name))))
+      (progn
+        (delete-file name)
+        (make-symbolic-link trg name)))
+     ((and (file-exists-p name)
+           (not (file-symlink-p orig))) (error "%s is not a symlink" orig))
+     )))
 
 (defun my/concat-path (&rest parts)
   (-reduce (lambda (a b) (expand-file-name b a)) parts))
 
 ;; FIXME: functions.el file not found error given by `native-compile-async'... `native-compile' works fine...
-;(after! find-func
-  ;(let ((filepath (cdr (find-function-library #'my/script-dir))))
-    ;(native-compile-async filepath t nil)))
+                                        ;(after! find-func
+                                        ;(let ((filepath (cdr (find-function-library #'my/script-dir))))
+                                        ;(native-compile-async filepath t nil)))
 
 (defun my/select-first (f seq)
   (catch 'found
@@ -140,8 +140,55 @@ shell exits, the buffer is killed."
     (vterm-send-string command)
     (vterm-send-return)))
 
+(defun my/mode-print-cmd ()
+  (pcase major-mode
+    ('nim-mode "echo %s")
+    ('emacs-lisp-mode "(prin1 %s)")))
+
+(defvar my/insert-print-incr 0 "Buffer local increment for `my/insert-print'")
+(defvar my/insert-print-list nil "Buffer local list of currently inserted print statements")
+(make-variable-buffer-local 'my/insert-print-list)
+(make-variable-buffer-local 'my/insert-print-incr)
+
+(defun my/insert-print ()
+  "Insert a print statements at point."
+  (interactive)
+  (let* ((cmd (my/mode-print-cmd))
+         (incr my/insert-print-incr)
+         (logstring (format cmd incr)))
+    (evil-open-below 1)
+    (insert logstring)
+    (evil-escape)
+    (setq-local my/insert-print-incr (+ 1 incr))
+    (push logstring my/insert-print-list)))
+
+(defun my/insert-print-clear ()
+  "Delete all lines previously inserted."
+  (interactive)
+  ;; Should delete from from the last inserted to the first one. Since we `push'
+  ;; the order is correct.
+  (let ((cleaned 0)
+        (todo (length my/insert-print-list)))
+    (while my/insert-print-list
+      (catch 'not-found
+        (goto-char (point-max))
+        (let ((logstring (pop my/insert-print-list)))
+          (if-let ((beg (search-backward logstring nil t)))
+              (progn (delete-char (length logstring))
+                     (delete-blank-lines)
+                     )))))))
+
+(map! :leader
+      (:desc "insert log string"
+       :nvi "i l"
+       #'my/insert-print)
+      (:leader
+       :desc "clear log strings"
+       :nvi "d l"
+       #'my/insert-print-clear))
+
 (provide 'functions)
-(require'functions)
+(require 'functions)
 
 ;;; functions.el ends here
 ;;;
