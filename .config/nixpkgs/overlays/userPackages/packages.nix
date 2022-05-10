@@ -12,7 +12,7 @@ in {
   inherit (super)
   # shell
     eternal-terminal browsh zsh git-hub git-lfs delta pet tmux fzf fd bat
-    ripgrep zoxide exa nushell starship direnv
+    ripgrep zoxide exa nushell starship direnv bat pastel
     # utils
     wego translate-shell weechat krita calibre koreader youtube-dl djvulibre unoconv wordnet
     # files and backups
@@ -47,7 +47,7 @@ in {
   inherit (nixgl) nixVulkanIntel;
   # wait for mesa-d3d12
   # python
-  inherit (super.python38Packages) supervisor grip ansible black flake8 ptpython;
+  inherit (super.python39Packages) supervisor grip cffi ansible black flake8 ptpython;
   # pandas isort setuptools timeago cython
   # deps for thefuck
   # colorama decorator psutil pyte;
