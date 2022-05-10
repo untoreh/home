@@ -276,7 +276,10 @@ Valid backends are currently:
 
 (defconst python-repl-executable-records
   `((default ,(file-name-nondirectory
-               (my/select-first #'executable-find '("ptipython" "ptpython" "ipython" "python")))))
+               ;; use a docker wrapped cmd if on alpine, (musl workaround)
+               (if (file-exists-p "/etc/alpine-release")
+                   "wptipython"
+                 (my/select-first #'executable-find '("ptipython" "ptpython" "ipython" "python"))))))
   "List of Python executables.
 
 Entries have the form

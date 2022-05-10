@@ -61,13 +61,14 @@
           (when (file-locked-p session-file)
             (when (boundp 'doom-session-timer) (cancel-timer doom-session-timer))
             (setq doom-session-timer
-                  (run-with-idle-timer 5 t
-		                       (lambda () (let ((inhibit-message t))
-                                                    (when (and (> (float-time (time-since
-                                                                               my/last-saved-session-time))
-                                                                  300)
-                                                               (doom/save-session session-file))
-                                                      (setq my/last-saved-session-time (current-time)))))))))
+                  (run-with-idle-timer
+                   5 t
+		   (lambda () (let ((inhibit-message t))
+                           (when (and (> (float-time (time-since
+                                                      my/last-saved-session-time))
+                                         300)
+                                      (doom/save-session session-file))
+                             (setq my/last-saved-session-time (current-time)))))))))
       (progn
         (when (boundp 'doom-session-timer)
           (cancel-timer doom-session-timer)
@@ -88,5 +89,14 @@
       (lambda (file) (my/toggle-session-timer (f-base file) t)))
     ))
 
+(defvar my/previous-project-root nil "The previously known (projectile) project root.")
+
+(defun my/set-project-dir () (let ((root (projectile-project-root)))
+                               (when (not (eq root my/previous-project-root))
+                                 (setenv "PROJECT_DIR" root)
+                                 (setq my/previous-project-root root))))
+
+;; update `PROJECT_DIR' env var when switching projects
+(add-hook! 'doom-switch-buffer-hook #'my/set-project-dir)
 
                                         ;(add-hook 'emacs-startup-hook #'my/restore-session)
