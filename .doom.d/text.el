@@ -4,14 +4,20 @@
 ;; enable vimish-fold for persistent folds
 (when (featurep! :editor fold)
   (use-package! vimish-fold
+    :defer
     :config
     (vimish-fold-global-mode 1)))
+
+(use-package! aggressive-indent
+  :config
+  (setq aggressive-indent-sit-for-time 0.1))
 
 ;; maybe only use indent guides for prog-mode?
 ;; never enable indent guides by default
 ;; (remove-hook! (prog-mode text-mode conf-mode) highlight-indent-guides-mode)
 (use-package! highlight-indent-guides
   :if (featurep! :ui indent-guides)
+  :defer
   :config
   ;; bitmap seems smoother than character
   (setq highlight-indent-guides-method 'bitmap))

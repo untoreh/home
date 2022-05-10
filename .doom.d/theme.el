@@ -41,16 +41,13 @@
  window-combination-resize t
  x-stretch-cursor t)
 
-(use-package! info-colors
-  :after-call Info-mode
-  :hook '(Info-selection-hook . info-colors-fontify-node))
-
 ;; posframe
-;(use-package! which-key-posframe
-    ;:config
-    ;(which-key-posframe-mode))
+;; (use-package! which-key-posframe
+;;   :config
+;;   (which-key-posframe-mode))
 (use-package! hydra-posframe
-  :config 
+  :config
+  (setq hydra-posframe-poshandler #'posframe-poshandler-frame-bottom-center)
   (hydra-posframe-mode))
 
 ;; buffer size in the modeline
@@ -63,6 +60,7 @@
  )
 
 (use-package! valign
+  :defer
   :init
   (if (boundp #'valign-remove-advice)
       (valign-remove-advice))
@@ -120,6 +118,9 @@
 
 ;; doc colors
 (use-package! info-colors
+  :defer
+  :after-call Info-mode
+  :hook '(Info-selection-hook . info-colors-fontify-node)
   :commands (info-colors-fontify-node))
 (add-hook 'Info-selection-hook 'info-colors-fontify-node)
 
@@ -158,11 +159,16 @@
 
 (use-package! emojify
   :if (featurep! :ui emoji)
+  :defer
   :init
   ;; don't emojify strings
   (setq emojify-program-contexts '(comments)
 	;; don't emojify ascii
-	emojify-emoji-styles '(github unicode)))
+	emojify-emoji-styles '(github unicode))
+  :config
+  ;; disable emojify mode on vterm buffers of languages
+  (pushnew! emojify-inhibit-in-buffer-functions 'my/repl-vterm-bufferp)
+  )
 
 (after! vterm
   (add-hook! 'vterm-mode-hook (doom-themes-hide-modeline)))
