@@ -8,11 +8,23 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
                  label = "PowerShell",
                  args = {"powershell.exe", "-NoLogo"},
 	})
-  default_prog = {"wsl.exe", "-d", "-u" "fra", distro, "-e", "bash", "-c",
+  default_prog = {"wsl.exe", "-d", distro, "-e", "bash", "-c",
                   "{ [ -f /tmp/.mounted ] || /etc/wsl-mount.sh; } && SHELL=fish exec fish -li"}
 else
   default_prog = {"fish", "-li"}
 end
+
+wezterm.on("toggle-autoscroll", function(window, pane)
+  local overrides = window:get_config_overrides() or {}
+  if not overrides.scroll_to_bottom_on_input then
+    -- If we haven't overridden it yet, then override with ligatures disabled
+    overrides.scroll_to_bottom_on_input =  true
+  else
+    -- else we did already, and we should disable out override now
+    overrides.scroll_to_bottom_on_input = false
+  end
+  window:set_config_overrides(overrides)
+end)
 
 return {
 	unix_domains = {
@@ -44,7 +56,6 @@ return {
   enable_scroll_bar = true,
   launch_menu = launch_menu,
   default_prog = default_prog,
-  default_prog = {"fish", "-li"},
   keys = {
     {key="|", mods="CTRL|SHIFT", action=wezterm.action{SplitHorizontal={domain="CurrentPaneDomain"}}},
     {key="\\", mods="CTRL|ALT", action=wezterm.action{SplitHorizontal={domain="CurrentPaneDomain"}}},
@@ -73,6 +84,7 @@ return {
     {key="j", mods="SHIFT|ALT", action=wezterm.action{ScrollByLine=1}},
     {key="k", mods="SHIFT|ALT", action=wezterm.action{ScrollByLine=-1}},
     {key="l", mods="SHIFT|ALT", action="ShowLauncher"},
+    {key="s", mods="CTRL|ALT", action=wezterm.action{EmitEvent="toggle-autoscroll"}},
     {key="a", mods="CTRL|SHIFT", action=wezterm.action{
        SpawnCommandInNewTab={
          args={"wsl.exe", "-d", distro, "-e", "bash", "-c",
