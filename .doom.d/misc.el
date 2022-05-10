@@ -1,6 +1,7 @@
 ;;; ../../../var/home/fra/.doom.d/misc.el -*- lexical-binding: t; -*-
 
 (use-package! emacs-async
+  :defer
   :commands dired-async-mode
   :config
   (dired-async-mode t))
@@ -70,12 +71,15 @@
                                        ((executable-find "firefox"))))
 ;; weechat
 (use-package! weechat
+  :defer
   :commands (weechat-connected-p
              weechat-connect)
   :config
-  (setq weechat-completing-read-function
-        #'completing-read))
+  ;; (setq weechat-completing-read-function
+  ;;       #'completing-read)
+  )
 (map! :desc "Start weechat"
+      :after (:app weechat)
       :leader
       :nev "o c"
       (cmd!
@@ -113,6 +117,7 @@
 (use-package! gcbal
   ;; apply after undo-tree-mode since it ovverrides `post-gc-hook'
   :after-call undo-tree-mode
+  :if t
   :init
   (defun gcmh-mode (&rest args))
   (defun gcmh-set-high-threshold (&rest args))
@@ -121,6 +126,6 @@
     (native-compile-async (locate-library "gcbal") t t))
   (setq
    gcbal-verbose nil
-   gcbal-target-gctime 0.2
+   gcbal-target-gctime 0.1
    gcbal-target-auto t)
   (gcbal-mode 1))

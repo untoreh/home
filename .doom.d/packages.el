@@ -53,9 +53,11 @@
 
 ;; misc
 (package! mu4e-alert)
-;(package! gcmh :disable t)
+                                        ;(package! gcmh :disable t)
 (package! aio)
 (package! devdocs :recipe (:host github :repo "astoff/devdocs.el"))
+;; (package! aggressive-indent)
+(package! gcmh-mode :disable t)
 
 ;; langs
 (package! poly-markdown :recipe
@@ -64,8 +66,9 @@
   (:host github :repo "polymode/poly-org"))
 (package! tree-sitter)
 (package! tree-sitter-langs)
+
 (message "LSP is manually pinned!")
-(package! lsp-mode :pin "6bc8a39502321a7c663991f7de27e8515ecb7e0b")
+(package! lsp-mode :pin "b2a2e1aea502b4d07028606a91b1afd12ec22a8b")
 ;; julia
 (if (featurep! :lang julia)
     (progn
@@ -87,11 +90,11 @@
       (if (featurep! :lang julia +snail)
           (package! julia-snail))
       ;; a featureful ob implementation for julia
-      ;(if (featurep! :lang julia +ob)
-      ;    (package! ob-julia :shadow 'ob-julia
-      ;      :recipe (:host nil
-      ;               :repo "https://git.nixo.xyz/nixo/ob-julia.git"
-      ;               :files ("*.jl" "*.el"))))
+                                        ;(if (featurep! :lang julia +ob)
+                                        ;    (package! ob-julia :shadow 'ob-julia
+                                        ;      :recipe (:host nil
+                                        ;               :repo "https://git.nixo.xyz/nixo/ob-julia.git"
+                                        ;               :files ("*.jl" "*.el"))))
       ))
 ;; shell
 (package! fish-mode)
@@ -141,7 +144,6 @@
 (package! vimrc-mode)
 (package! systemd)
 (package! nim-mode :pin "744e076f0bea1c5ddc49f92397d9aa98ffa7eff8")
-(package! flycheck-nim :pin "ddfade51001571c2399f78bcc509e0aa8eb752a4")
 
 ;; we use weechat instead
 ;; (package! matrix-client

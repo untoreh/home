@@ -33,7 +33,7 @@
 ;; magit
 (when (featurep! :tools magit)
   (map! :desc "amend commit"
-        :after (:tools magit)
+        :after magit
         :leader
         :prefix "g"
         :n "a"
@@ -45,16 +45,16 @@
 
 (map! :leader
       (:desc "Find file at point."
-      :prefix "f"
-      :n "."
-      #'find-file-at-point
-      :desc "Toggle iedit mode."
-      :prefix "t"
-      :nv "e"
-      #'iedit-mode
-      ;; doom kill buffer doesn't seem to kill dead processes buffers
-      :prefix "b" "k"
-      #'my/force-kill-buffer))
+       :prefix "f"
+       :n "."
+       #'find-file-at-point
+       :desc "Toggle iedit mode."
+       :prefix "t"
+       :nv "e"
+       #'iedit-mode
+       ;; doom kill buffer doesn't seem to kill dead processes buffers
+       :prefix "b" "k"
+       #'my/force-kill-buffer))
 
 ;; inserting inside a vterm should reset cursor position
 (map! :mode vterm-mode
@@ -71,7 +71,7 @@
 ;; jupyter
 (if (featurep! :lang org +jupyter)
     (map!
-     :after evil-org
+     :after org
      :when use-jupyter
      :mode org-mode
      :map evil-org-mode-map
@@ -89,7 +89,7 @@
      :desc "Fold results" :n "z" #'org-babel-hide-result-toggle
      :desc "Restart kernels" :n "k"
      #'(λ! () (interactive)
-          (jupyter-org-with-src-block-client (jupyter-repl-restart-kernel)))
+           (jupyter-org-with-src-block-client (jupyter-repl-restart-kernel)))
      :map org-src-mode-map
      :localleader
      :desc "Exit edit" :n "'" #'org-edit-src-exit))
@@ -128,21 +128,30 @@
       (goto-char p)
       (set-marker p nil))))
 
-(map! :after evil-org
+(map! :after org
       :map evil-org-mode-map
       :leader
       :desc "tangle" :n "ct" #'org-babel-tangle
       :desc "hydra org babel" :n "," #'hydra/org-babel/body)
 
 ;; HYDRA
-(after! hydra (load! "hydra"))
+(use-package! hydra
+  :commands (hydra/window-nav/body hydra-macro/body)
+  :config
+  (load! "hydra")
+  (map!
+   :after hydra
+   :leader
+   :desc "hydra windows"
+   :n "w ," #'+hydra/window-nav/body
+   :n "q ," #'hydra-macro/body
+   ))
 
-(map! :after hydra
+
+(map! :after calc
+      :desc "Quick Calc"
       :leader
-      :desc "hydra windows"
-      :n "w ," #'+hydra/window-nav/body
-      :n "q ," #'hydra-macro/body
-      )
+      :nev "o c" #'quick-calc)
 
 (map! :after org
       (:leader
@@ -161,7 +170,8 @@
        :n "i" #'org-babel-insert-header-arg))
 
 ;; JULIA
-(map! :after julia-mode :mode julia-mode
+(map! :after julia
+      :mode julia-mode
       (:prefix ("SPC r" . "Julia REPL")
        :desc "focus and insert"
        :nev "i" #'julia-toggle-repl-and-insert
@@ -188,7 +198,7 @@
        :nev "SPC w TAB" #'julia-toggle-repl-back))
 
 (if (featurep! :lang julia)
-    (map! :after julia-repl
+    (map! :after julia-mode
           (:prefix ("SPC l j" . "julia")
            :desc "start julia repl"
            :nev "r" (cmd! (julia-repl-switch))
@@ -228,6 +238,7 @@
       :n "bR" #'save-close-reopen-file)
 
 (map! :mode org-mode
+      :after org
       :leader
       :desc "font lock ensure on"
       :n "t t" (cmd!
@@ -267,6 +278,7 @@
 
 ;; weechat
 (map! :desc "Start weechat"
+      :after weechat
       :leader
       :nev "o c"
       (cmd!
@@ -287,9 +299,9 @@
     "S-TAB" nil
     "<backtab>" nil)))
 
-(setq evil-collection-vterm-send-escape-to-vterm-p t)
-
-;; FIXME: ?
-(map! :map vterm-mode
-      :leader "C-c"
-      :i "C-c" #'vterm-send-C-c)
+(after! vterm
+  (setq evil-collection-vterm-send-escape-to-vterm-p t)
+  ;; FIXME: ?
+  (map! :map vterm-mode
+        :leader "C-c"
+        :i "C-c" #'vterm-send-C-c))

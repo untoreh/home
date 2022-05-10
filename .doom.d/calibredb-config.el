@@ -349,7 +349,8 @@
 
 
 ;; additional packages
-(use-package! arxiv-mode)
+(use-package! arxiv-mode
+	      :defer)
 (map! :mode arxiv-mode
       :localleader
       :ne "n" #'arxiv-read-new
@@ -362,6 +363,7 @@
   (pdf-tools-install))
 
 (use-package! nov
+  :defer
   :config
   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
 

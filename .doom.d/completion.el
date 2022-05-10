@@ -141,6 +141,7 @@
 
 (use-package! corfu
   :if (featurep! :completion corfu)
+  :defer
   :config
   (setq
    corfu-auto t
