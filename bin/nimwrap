@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
-exec sudo docker exec \
-    -e PATH=$PATH \
-    -e PYTHONPATH=$PYTHONPATH \
-    -e VIRTUAL_ENV=$VIRTUAL_ENV \
-    -w $PWD -it builder $(which nim) "$@"
+export DOCKER_ARGS="-e PATH=$PATH \
+	-e PYTHONPATH=$PYTHONPATH \
+	-e VIRTUAL_ENV=$VIRTUAL_ENV \
+	-e NIM_DEBUG=$NIM_DEBUG \
+    -e PROJECT_DIR=$PROJECT_DIR \
+"
+
+bexec "$(which nim) $*"

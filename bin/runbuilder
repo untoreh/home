@@ -1,15 +1,16 @@
 #!/usr/bin/env bash
 
-. ~/.profile
+cmd=$1
+shift
 
-sudo docker run --name builder \
+exec sudo docker run --rm \
 	-e INSIDE_DOCKER=1 \
 	-e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
 	-e WAYLAND_DISPLAY=$WAYLAND_DISPLAY \
 	-e GDK_BACKEND=wayland \
 	-e EMACS=$EMACS \
 	-e PATH=$PATH \
-	-it \
+	-t \
 	--net=host \
 	--tmpfs /tmp \
 	-v /home:/home \
@@ -20,5 +21,5 @@ sudo docker run --name builder \
 	--privileged \
 	--cap-add=ALL \
 	--user $(id -u):$(id -g) \
-	-w /home/$USER \
-	builder catatonit /usr/bin/fish
+	-w "$PWD" \
+	builder ~/.nimble/bin/nimlsp # "$1" -- "$*"

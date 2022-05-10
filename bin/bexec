@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 
-cmd=$1
+PIDFILE=$(mktemp -p /dev/shm)
+trap "PID=\$(<$PIDFILE); \
+    sudo docker exec -t builder \
+    /bin/sh -c \"/usr/bin/pkill -P \$PID; kill \$PID &>/dev/null \"
+    rm $PIDFILE" EXIT SIGKILL SIGTERM SIGSTOP
+
+cmd="$1"
 shift
 
-exec sudo docker exec -w $PWD -t builder $cmd "$@"
+sudo docker exec -w $PWD -t $DOCKER_ARGS builder \
+    "/usr/bin/bash" -c "echo \$\$ > $PIDFILE; $cmd $@"
+

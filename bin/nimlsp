@@ -1,6 +1,14 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-#exec ~/.nimble/bin/nimlsp $@
-exec ~/.nimble/bin/nimlangserver $@
+. ~/.profile
+exec ~/.nimble/bin/nimlsp "$@"
+#exec ~/.nimble/bin/nimlangserver "$@"
 #sudo docker exec -t builder ~/.nimble/bin/nimlangserver $@
-#sudo docker exec -t builder ~/.nimble/bin/nimlsp $@
+export DOCKER_ARGS="-e PATH=$PATH \
+	-e PYTHONPATH=$PYTHONPATH \
+	-e VIRTUAL_ENV=$VIRTUAL_ENV \
+	-e NIM_DEBUG=$NIM_DEBUG \
+	--privileged -t"
+
+# bexec "~/.nimble/bin/nimlsp $*"
+# bexec "~/.nimble/bin/nimlangserver $*"

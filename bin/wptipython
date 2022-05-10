@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+export DOCKER_ARGS="-e PATH=$PATH \
+        -e PYTHONPATH=$PYTHONPATH \
+        -e VIRTUAL_ENV=$VIRTUAL_ENV \
+        -e NIM_DEBUG=$NIM_DEBUG"
+
+exec sudo docker exec $DOCKER_ARGS -w $PWD -it builder ptipython "$@"

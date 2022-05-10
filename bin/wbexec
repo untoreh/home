@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+
+trap "pkill -P $PID" SIGKILL SIGTERM SIGSTOP
