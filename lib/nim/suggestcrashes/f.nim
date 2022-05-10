@@ -1,0 +1,1 @@
+jobs[] = init[int, pointer]()

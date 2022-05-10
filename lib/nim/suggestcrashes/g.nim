@@ -1,0 +1,2 @@
+when is
+    echo s
