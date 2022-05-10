@@ -30,6 +30,7 @@
 (setq org-directory "~/org/")
 
 (setq
+ load-prefer-newer t
  undo-limit 160000
  evil-want-fine-undo t
  evil-ex-visual-char-range t
@@ -48,22 +49,7 @@
 (after! gcmh
   (setq gcmh-auto-idle-delay-factor 50
         gcmh-idle-delay 'auto)
-  ;; (comp-defun my/gcmh-long-delay ()
-  ;;             (setq gcmh-idle-delay 60))
-  ;; (comp-defun my/gcmh-short-delay ()
-  ;;             (setq gcmh-idle-delay 0.5))
-  ;; (comp-defun
-  ;;  my/gcmh-focus-delay ()
-  ;;  (if (catch 'focus
-  ;;        (mapc (lambda (frame)
-  ;;                (when (frame-focus-state frame)
-  ;;                  (throw 'focus t)))
-  ;;              (frame-list))
-  ;;        nil)
-  ;;      (my/gcmh-long-delay)
-  ;;    (my/gcmh-short-delay)))
-  ;; ;; focus is broken in wslg https://github.com/microsoft/wslg/issues/44
-  ;; (add-function :before after-focus-change-function #'my/gcmh-focus-delay)
+  ;; focus is broken in wslg https://github.com/microsoft/wslg/issues/44
   )
 
 (setq-default docker-tramp-use-names t)
@@ -76,12 +62,6 @@
 
 (setq yas-triggers-in-field t)
 (setq org-plantuml-jar-path "~/.local/bin/plantuml.jar")
-
-;; (setq gc-cons-percentage 1
-;;       gc-cons-threshold 335544320)
-;; (setq gc-cons-percentage 99
-;;       gc-cons-threshold 1073741824)
-
 
 ;; keep our folds close
 (setq vimish-fold-dir (concat doom-private-dir "vimish-fold"))
