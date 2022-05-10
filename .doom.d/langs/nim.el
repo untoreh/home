@@ -33,6 +33,7 @@
            :nev "r" (cmd! (nim-repl-switch))
            :nev "." #'nim-repl-cd
            :nev "d" #'nim-repl-toggle-debug
+           :nev "D" #'nim-debug-env-var
            :nev "v" #'nim-repl-revise
            )
           (:map 'nim-repl-mode-map
@@ -41,12 +42,16 @@
            "C-c ." #'nim-repl-cd
            :desc nil
            "C-c C-." #'nim-repl-cd)))
+
 (use-package! nim-mode
   :if (or t (featurep! :lang nim))
   :init
   (put 'nim-compile-default-command 'safe-local-variable #'listp)
   :config
-  (if (or (featurep! :lang nim +lsp))
+  (defun nim-debug-env-var ()
+    (interactive)
+    (setenv "NIM_DEBUG" "DEBUG"))
+  (if (or t (featurep! :lang nim +lsp))
       (add-hook! nim-mode #'lsp))
 
   (setq nim-indent-offset 4)
@@ -54,10 +59,14 @@
     evil-shift-width 4)
 
   (setq-default
+   ;; nim lsp is chatty
+   flycheck-checker-error-threshold 1000
    nim-compile-command "nim"
-   nim-compile-default-command
-   '("r" "-r" "--verbosity:0" "--hint[Processing]:off" "--excessiveStackTrace:on")
-   nimsuggest-options '("--refresh" "--maxresults:10"))
+   nim-compile-default-args '("r" "-r" "--verbosity:0" "--hint[Processing]:off" "--excessiveStackTrace:on")
+   nim-compile-default-command '("r")
+   nimsuggest-options '("--refresh" "--maxresults:10")
+
+   )
 
   (map! :mode (nim-mode nimscript-mode)
         :leader
@@ -67,29 +76,9 @@
   ;; (remove-hook! 'nim-mode-hook #'+nim-init-nimsuggest-mode-h)
   )
 
-(use-package! lsp-mode
-  :init
-  :config
-  ;; (lsp-register-client
-  ;;  (make-lsp-client :new-connection (lsp-stdio-connection "~/bin/nimls")
-  ;;                     :major-modes '(nim-mode)
-  ;;                     ;; :priority -2
-  ;;                     :priority 2
-  ;;                     :server-id 'nimls))
-  ;; (lsp-register-client
-  ;;  (make-lsp-client :new-connection (lsp-stdio-connection "nimlangserver")
-  ;;                   :major-modes '(nim-mode)
-  ;;                   ;; :priority -2
-  ;;                   :priority 2
-  ;;                   :server-id 'nimlangserver))
-  (setq lsp-nim-project-mapping
-        [(:projectPath "test/all.nim"
-          :fileRegex "tests/.*\\.nim")
-         (:projectPath "main.nim"
-          :fileRegex ".*\\.nim")])
-  (lsp-register-custom-settings
-   '(("nim.rootConfig" lsp-nim-project-mapping nil)))
-  )
+
+(after! lsp-mode
+  (setq lsp-nim-project-mapping [(:projectFile "main.nim" :fileRegex ".*")]))
 
 (defun nim-repl-toggle-debug () (error "Not implemented."))
 
