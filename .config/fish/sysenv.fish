@@ -31,7 +31,9 @@ set MOZ_USE_OMTC 1 ## for firefox off main thread compositing
 function clc
     if set -q DISPLAY
         if set -q WSLENV
+            cd /
             wex clip.exe
+            cd -
         else
             xclip -i -selection clipboard
         end
