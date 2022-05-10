@@ -1,6 +1,3 @@
 [submodule "company-try-hard"]
 	path = .doom.d/vendor/company-try-hard
 	url = https://github.com/Wilfred/company-try-hard/
-[submodule ".nimble/pkgs/nimdbx-0.4.3/vendor/libmdbx"]
-	path = .nimble/pkgs/nimdbx-0.4.3/vendor/libmdbx
-	url = https://abf.io/erthink/libmdbx.git
