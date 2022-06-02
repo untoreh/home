@@ -8,9 +8,9 @@
     :config
     (vimish-fold-global-mode 1)))
 
-(use-package! aggressive-indent
-  :config
-  (setq aggressive-indent-sit-for-time 0.1))
+;(use-package! aggressive-indent
+  ;:config
+  ;(setq aggressive-indent-sit-for-time 0.1))
 
 ;; maybe only use indent guides for prog-mode?
 ;; never enable indent guides by default

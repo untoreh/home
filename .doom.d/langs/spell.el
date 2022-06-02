@@ -30,7 +30,7 @@
   (setq ispell-grep-command rg
         ispell-grep-options "-i"))
 
-(after! company-ispell
+(after! cape
   (let ((words-dict (my/concat-path doom-cache-dir "spell" "aspell-dict.txt")))
     (when (not (file-exists-p words-dict))
       ;; http://app.aspell.net/create?max_size=80&spelling=US&max_variant=2&diacritic=strip&special=hacker&special=roman-numerals&download=wordlist&encoding=utf-8&format=inline

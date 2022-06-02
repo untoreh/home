@@ -19,7 +19,7 @@
        :completion
        ;; don't use tng since we prefer TAB+SPC and ENTER for inserting completions
        ;; and don't use childframes because are slow
-       (company)           ; the ultimate code completion backend
+       ;; (company)           ; the ultimate code completion backend
        (vertico +icons)
        ;; (ivy +prescient +icons +childframe)               ; a search engine for love and life
 
@@ -34,13 +34,14 @@
        indent-guides     ; highlighted indent columns
        (ligatures +fira)         ; ligatures and symbols to make your code pretty again
        ;; minimap
-       (modeline +light)          ; snazzy, Atom-inspired modeline, plus API
+       (modeline)          ; snazzy, Atom-inspired modeline, plus API
        nav-flash         ; blink cursor line after big motions
        ophints           ; highlight the region an operation acts on
+       ;; use `popper' instead of :ui popup
        (popup +defaults +all)   ; tame sudden yet inevitable temporary windows
        ;; tabs
        (treemacs +lsp)          ; a project drawer, like neotree but cooler
-       ; unicode           ; NOTE: we use "Julia Mono" this module overrides doom-unicode-font
+                                        ; unicode           ; NOTE: we use "Julia Mono" this module overrides doom-unicode-font
        vc-gutter         ; vcs diff in the fringe
        vi-tilde-fringe   ; fringe tildes to mark beyond EOB
        (window-select +switch-window +numbers)     ; visually switch windows
@@ -88,8 +89,9 @@
        ;; ein               ; tame jupyter notebooks with emacs
        (eval +overlay)     ; run code, run (also, repls)
        ;; BROKEN gist              ; interacting with github gists
-       (lookup +dictionary +offline +docsets)              ; navigate your code and its documentation
-       (lsp +peek)
+       ;; use `devdocs' package instead of `+docsets'
+       (lookup +dictionary +offline)              ; navigate your code and its documentation
+       (lsp)
        magit             ; a git porcelain for Emacs
        ;;make              ; run make tasks from Emacs
        ;;pass              ; password manager for nerds
@@ -143,7 +145,7 @@
        ;; (nim +lsp)               ; python + lisp at the speed of c
        nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
-       (org +dragndrop +pandoc +poly +pretty +gnuplot +noter)               ; organize your plain life in plain text
+       (org +dragndrop +pandoc +poly +gnuplot +noter) ; organize your plain life in plain text
        php               ; perl's insecure younger brother
        plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
@@ -167,7 +169,7 @@
 
        :email
        ;; don't use +gmail since it overrides mu4e del hotkeys
-       (mu4e +org +gmail)
+       (mu4e +org)
        ;;notmuch
        ;;(wanderlust +gmail)
 

@@ -52,12 +52,19 @@
 ;; (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 
 ;; misc
-(package! mu4e-alert)
-                                        ;(package! gcmh :disable t)
 (package! aio)
 (package! devdocs :recipe (:host github :repo "astoff/devdocs.el"))
+;; aggressive-indent is very slow
 ;; (package! aggressive-indent)
 (package! gcmh-mode :disable t)
+
+;; completion
+(package! corfu :recipe (:includes (corfu-indexed corfu-quick) :files (:defaults "extensions/corfu-*.el")))
+(package! cape :recipe (:host github :repo "minad/cape"))
+(package! tabnine-capf :recipe (:host github :repo "theFool32/tabnine-capf" :files ("*.el" "*.sh" "*.py")))
+(package! corfu-doc :recipe (:host github :repo "galeo/corfu-doc"))
+(package! copilot :recipe (:host github :repo "zerolfx/copilot.el" :files ("dist" "copilot.el")))
+(package! kind-icon)
 
 ;; langs
 (package! poly-markdown :recipe
@@ -67,8 +74,8 @@
 (package! tree-sitter)
 (package! tree-sitter-langs)
 
-(message "LSP is manually pinned!")
-(package! lsp-mode :pin "b2a2e1aea502b4d07028606a91b1afd12ec22a8b")
+(package! lsp-mode :disable nil :pin "1d9ec3f30a6491b58a904b071694a1a8a0faca87")
+(package! lsp-bridge :disable t :recipe (:host github :repo "manateelazycat/lsp-bridge"))
 ;; julia
 (if (featurep! :lang julia)
     (progn
@@ -80,21 +87,21 @@
             (package! lsp-julia
               :recipe (:host github :repo "non-jedi/lsp-julia"))))
       ;; standalone formatter which works as client/server
-      (if (featurep! :lang julia +format)
-          (package! julia-formatter
-            :recipe (:host nil
-                     :repo "https://codeberg.org/FelipeLema/julia-formatter.el"
-                     ;; :repo "https://github.com/ki-chi/julia-formatter"
-                     :files ("*.el" "*.jl" "*.toml"))))
+      ;; (if (featurep! :lang julia +format)
+      ;;     (package! julia-formatter
+      ;;       :recipe (:host nil
+      ;;                :repo "https://codeberg.org/FelipeLema/julia-formatter.el"
+      ;;                ;; :repo "https://github.com/ki-chi/julia-formatter"
+      ;;                :files ("*.el" "*.jl" "*.toml"))))
       ;; snail provides repl/completions and other stuff
       (if (featurep! :lang julia +snail)
           (package! julia-snail))
       ;; a featureful ob implementation for julia
-                                        ;(if (featurep! :lang julia +ob)
-                                        ;    (package! ob-julia :shadow 'ob-julia
-                                        ;      :recipe (:host nil
-                                        ;               :repo "https://git.nixo.xyz/nixo/ob-julia.git"
-                                        ;               :files ("*.jl" "*.el"))))
+      ;; (if (featurep! :lang julia +ob)
+      ;;    (package! ob-julia :shadow 'ob-julia
+      ;;      :recipe (:host nil
+      ;;               :repo "https://git.nixo.xyz/nixo/ob-julia.git"
+      ;;               :files ("*.jl" "*.el"))))
       ))
 ;; shell
 (package! fish-mode)
@@ -107,57 +114,40 @@
 (package! zmq)
 
 ;; graphics
-(package! sweet-theme)
 (package! parrot)
 (package! info-colors)
 ;; (package! nyan-mode)
 
 ;; org
 (package! valign)
-(package! org-pretty-tags)
+;; (package! org-pretty-tags)
 (package! ox-gfm)
-(package! org-ref)
 (package! org-tanglesync :recipe (:host nil
                                   :repo "https://gitlab.com/mtekman/org-tanglesync.el"
                                   :files ("*.el")))
+(package! org-appear :recipe (:host github :repo "awth13/org-appear")
+  :pin "8dd1e564153d8007ebc4bb4e14250bde84e26a34")
+(package! org-pretty-table
+  :recipe (:host github :repo "Fuco1/org-pretty-table") :pin "7bd68b420d3402826fea16ee5099d04aa9879b78")
+(package! org-modern)
+;(package! modus-themes)
 
-;; ;; completion
-(when (featurep! :completion company)
-  (when (or (featurep! :completion company +tooltips)
-            (featurep! :completion company +childframe))
-    (package! company-quickhelp)))
+;; (package! org-ol-tree :recipe (:host github :repo "Townk/org-ol-tree")
+;;   :pin "207c748aa5fea8626be619e8c55bdb1c16118c25")
+;; (package! org-transclusion)
 
-;; (package! corfu)
 (package! emacs-refactor :recipe ( :host nil
                                    :repo "https://github.com/Wilfred/emacs-refactor"))
 ;; which-key-posframe is VERY slow
 ;; (package! which-key-posframe)
 (package! hydra-posframe :recipe ( :host nil
                                    :repo "https://github.com/Ladicle/hydra-posframe"))
-;; chat
-(package! weechat :recipe (:host github
-                           :repo "bqv/weechat.el"))
-;; auto hot key mode
-;; (package! ahk-mode :recipe (:host nil
-;;                             :repo "https://github.com/untoreh/ahk-mode"))
 (package! ahk-mode)
 (package! vimrc-mode)
 (package! systemd)
+;; nim
 (package! nim-mode :pin "744e076f0bea1c5ddc49f92397d9aa98ffa7eff8")
-
-;; we use weechat instead
-;; (package! matrix-client
-;;   :recipe (:host nil
-;;    :repo "https://github.com/alphapapa/matrix-client.el"
-;;    :files ("*.el" "logo.png" "matrix-client-standalone.el.sh")
-;;    :post-build ((require 'f)
-;;                 (let* ((script-name "/matrix-client-standalone.el.sh")
-;;                        (script-path (concat (f-dirname (locate-library "matrix-client")) script-name))
-;;                        (bindir (concat user-emacs-directory "/.local/bin"))
-;;                        (link-path (concat bindir "matrix")))
-;;                   (make-directory bindir t)
-;;                   (delete-file link-path nil)
-;;                   (make-symbolic-link script-path link-path t)))))
+;; (package! flycheck-nim) ;; it is as bad as a perma crashing nimsuggest
 
 (package! gif-screencast)
 (package! vertico-posframe)
@@ -182,9 +172,6 @@
 ;; shows keychords in the modeline :pin "04ba7519f34421c235bac458f0192c130f732f12"
 (package! keycast)
 
-;; pcache needed by gcbal
-(package! pcache)
-
 ;; ebooks
 (package! restclient)
 (package! calibredb :recipe (:host github :repo "chenyanming/calibredb.el" :branch "opds"))
@@ -192,7 +179,7 @@
 (package! nov)
 
 ;; FIXME: vterm workaround
-(package! vterm :recipe
-  (:host github
-   :repo "blahgeek/emacs-libvterm"
-   :branch "fix-visibility"))
+;; (package! vterm :recipe
+;;   (:host github
+;;    :repo "blahgeek/emacs-libvterm"
+;;    :branch "fix-visibility"))

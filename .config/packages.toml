@@ -94,7 +94,7 @@ zstd 7z
 openjdk-9-jre
 
 ## code
-ycmd
+epc # (tabnine server)
 
 ## net
 whois

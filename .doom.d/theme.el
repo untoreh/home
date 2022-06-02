@@ -12,6 +12,8 @@
       doom-dracula-brighter-modeline t
       doom-dracula-colorful-headers t)
 
+;; (setq doom-theme 'modus-operandi-theme )
+
 (setq
  doom-font (font-spec :family "Hack" :size 14 :weight 'normal)
  doom-big-font (font-spec :family "iA Writer Duospace" :size 24 :weight 'bold)
@@ -20,6 +22,7 @@
  doom-serif-font (font-spec :family "Fantasque Sans Mono" :size 16))
 
 (setq-default line-spacing 1)
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;; nyan and parrot only in the "doom" modeline
 (when (not (featurep! :ui modeline +light))
@@ -65,10 +68,6 @@
   (if (boundp #'valign-remove-advice)
       (valign-remove-advice))
   :hook ((org-mode-hook markdown-mode-hook) . valign-mode))
-
-(when (and (featurep! :ui treemacs)
-           (featurep! :tools magit))
-  (setq +treemacs-git-mode 'deferred))
 
 ;;
 ;; https://github.com/hlissner/doom-emacs/issues/2967
@@ -170,5 +169,22 @@
   (pushnew! emojify-inhibit-in-buffer-functions 'my/repl-vterm-bufferp)
   )
 
+;; HACK: hide modeline in vterm buffer
 (after! vterm
-  (add-hook! 'vterm-mode-hook (doom-themes-hide-modeline)))
+  (add-hook! '(vterm-mode-hook helpful-mode special-mode)
+    (run-at-time 0 nil #'doom-themes-hide-modeline)
+    ))
+
+
+
+;; (use-package! emacs
+;;   :init
+;;   ;; Add all your customizations prior to loading the themes
+;;   (setq modus-themes-italic-constructs t
+;;         modus-themes-bold-constructs nil
+;;         modus-themes-region '(bg-only no-extend))
+;;   :config
+;;   ;; Load the theme of your choice:
+;;   (load-theme 'modus-vivendi) ;;
+;;   :bind ("<f5>" . modus-themes-toggle)
+;;   )

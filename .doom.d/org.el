@@ -94,9 +94,8 @@
       (jupyter-org-interaction-mode 1)
       (jupyter-repl-interaction-mode)))
 
-(use-package! org-ref :commands org-ref-ivy-cite)
 (use-package! ox-gfm :commands ox-gfm-export-to-markdown)
-(use-package! org-pretty-tags :commands org-mode :after org)
+;; (use-package! org-pretty-tags :commands org-mode :after org)
 
 (use-package! org-tanglesync
   :after ob
@@ -110,11 +109,11 @@
 (if (featurep! :editor format +onsave)
     (add-to-list '+format-on-save-enabled-modes 'org-mode t))
 ;; enable lsp mode (without formatting) for org-mode if not using poly mode
-(if (not (featurep! :lang org +poly))
-    (add-hook 'org-mode-hook (lambda ()
-                               (setq-local +format-with-lsp nil)
-                               (lsp)
-                               (lsp-org))))
+;; (if (not (featurep! :lang org +poly))
+;;     (add-hook 'org-mode-hook (lambda ()
+;;                                (setq-local +format-with-lsp nil)
+;;                                (lsp)
+;;                                (lsp-org))))
 
 ;; (defun org-get-src-block-end ()
 ;;   (if (org-in-src-block-p)
@@ -142,18 +141,18 @@
   (ignore-errors (apply orig-fn args)))
 
 ;; Theming, all from tecosaur
-(add-hook 'org-mode-hook #'+org-pretty-mode)
-(custom-set-faces!
-  '(outline-1 :weight extra-bold :height 1.5)
-  '(outline-2 :weight bold :height 0.93)
-  '(outline-3 :weight bold :height 0.93)
-  '(outline-4 :weight semi-bold :height 0.93)
-  '(outline-5 :weight semi-bold :height 0.93)
-  '(outline-6 :weight semi-bold :height 0.93)
-  '(outline-8 :weight semi-bold)
-  '(outline-9 :weight semi-bold))
-(custom-set-faces!
-  '(org-document-title :height 1.2))
+;; (add-hook 'org-mode-hook #'+org-pretty-mode)
+;; (custom-set-faces!
+;;   '(outline-1 :weight extra-bold :height 1.5)
+;;   '(outline-2 :weight bold :height 0.93)
+;;   '(outline-3 :weight bold :height 0.93)
+;;   '(outline-4 :weight semi-bold :height 0.93)
+;;   '(outline-5 :weight semi-bold :height 0.93)
+;;   '(outline-6 :weight semi-bold :height 0.93)
+;;   '(outline-8 :weight semi-bold)
+;;   '(outline-9 :weight semi-bold))
+;; (custom-set-faces!
+;;   '(org-document-title :height 1.2))
 
 (setq org-fontify-quote-and-verse-blocks t)
 
@@ -165,20 +164,20 @@
                 jit-lock-stealth-time 1)))
 (add-hook 'org-mode-hook #'locally-defer-font-lock)
 
-(after! org-superstar
-  (setq org-superstar-headline-bullets-list '("◉" "○" "✸" "✿" "✤" "✜" "◆" "▶")
-        org-superstar-prettify-item-bullets t ))
+;; (after! org-superstar
+;;   (setq org-superstar-headline-bullets-list '("◉" "○" "✸" "✿" "✤" "✜" "◆" "▶")
+;;         org-superstar-prettify-item-bullets t ))
 
-(setq org-ellipsis " ▾ "
-      org-hide-leading-stars t
-      org-priority-highest ?A
-      org-priority-lowest ?E
-      org-priority-faces
-      '((?A . 'all-the-icons-red)
-        (?B . 'all-the-icons-orange)
-        (?C . 'all-the-icons-yellow)
-        (?D . 'all-the-icons-green)
-        (?E . 'all-the-icons-blue)))
+;; (setq org-ellipsis " ▾ "
+;;       org-hide-leading-stars t
+;;       org-priority-highest ?A
+;;       org-priority-lowest ?E
+;;       org-priority-faces
+;;       '((?A . 'all-the-icons-red)
+;;         (?B . 'all-the-icons-orange)
+;;         (?C . 'all-the-icons-yellow)
+;;         (?D . 'all-the-icons-green)
+;;         (?E . 'all-the-icons-blue)))
 
 (appendq! +ligatures-extra-symbols
           `(:checkbox      "☐"
@@ -263,7 +262,6 @@
   :priority_e    "[#E]")
 (plist-put +ligatures-extra-symbols :name "⁍")
 
-
 (after! org-plot
   (defun org-plot/generate-theme (_type)
     "Use the current Doom theme colours to generate a GnuPlot preamble."
@@ -339,3 +337,30 @@ set palette defined ( 0 '%s',\
             (doom-color 'bg)))
   (setq org-plot/gnuplot-script-preamble #'org-plot/generate-theme)
   (setq org-plot/gnuplot-term-extra #'org-plot/gnuplot-term-properties))
+
+(use-package! org-modern
+  :config
+  (setq
+   ;; Edit settings
+   org-auto-align-tags nil
+   org-tags-column 0
+   org-catch-invisible-edits 'show-and-error
+   org-special-ctrl-a/e t
+   org-insert-heading-respect-content t
+
+   ;; Org styling, hide markup etc.
+   org-hide-emphasis-markers t
+   org-pretty-entities t
+   org-ellipsis ""
+
+   ;; Agenda styling
+   org-agenda-block-separator ?-
+   org-agenda-time-grid
+   '((daily today require-timed)
+     (800 1000 1200 1400 1600 1800 2000)
+     " ????? " "???????????????")
+   org-agenda-current-time-string
+   "? now -------------------------------------------------")
+
+  (global-org-modern-mode)
+  )

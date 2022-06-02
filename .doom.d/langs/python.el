@@ -38,6 +38,7 @@
            :nev "r" (cmd! (python-repl-switch))
            :nev "." #'python-repl-cd
            :nev "d" #'python-repl-toggle-debug
+           :nev "D" #'python-toggle-debug-envvar
            :nev "v" #'python-repl-revise
            )
           (:map 'python-repl-mode-map
@@ -74,7 +75,14 @@
   ;; use jupyter repl as default python repl
   (setf (alist-get 'python-mode +eval-repls)
         '(+python/open-jupyter-repl :persist t)
-        ))
+        )
+  (defun python-toggle-debug-envvar ()
+    (interactive)
+    (setenv "NIM_DEBUG"
+            (if (equal "DEBUG" (getenv "PYTHON_DEBUG"))
+                ""
+              "DEBUG")))
+  )
 
 (use-package! python-repl
   :config
@@ -83,8 +91,8 @@
 ;; NOTE: pyvenv-activate needs the path the virtual env directory (usually .venv or .env)
 (after! pyvenv
   (add-hook! python-mode
-             (require 'python-repl)
-             (require 'f)
-             (if (f-exists-p
-                  (my/concat-path (projectile-project-root) python-repl-venv-dir))
-                 (pyvenv-tracking-mode 1))))
+    (require 'python-repl)
+    (require 'f)
+    (if (f-exists-p
+         (my/concat-path (projectile-project-root) python-repl-venv-dir))
+        (pyvenv-tracking-mode 1))))

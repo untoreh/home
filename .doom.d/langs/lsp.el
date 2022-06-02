@@ -45,7 +45,7 @@
      lsp-ui-doc-show-with-mouse t
      lsp-ui-doc-show-with-cursor nil
      ;;
-     lsp-ui-sideline-enable t
+     lsp-ui-sideline-enable nil
      lsp-ui-sideline-show-code-actions t
      lsp-ui-sideline-show-hover t
      lsp-ui-sideline-show-diagnostics t))

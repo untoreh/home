@@ -807,7 +807,8 @@ When called with a prefix argument, activate the home project."
          (python-repl--send-string
           (concat "%cd " (if (file-directory-p src-dir)
                              src-dir proj-dir))))))
-    (setq default-directory curdir)))
+    (setq default-directory curdir)
+    (hack-dir-local-variables)))
 
 (defun python-repl-set-python-editor (editor)
   "Set the PYTHON_EDITOR environment variable."

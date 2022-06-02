@@ -51,34 +51,36 @@
   (defun nim-debug-env-var ()
     (interactive)
     (setenv "NIM_DEBUG" "DEBUG"))
-  (if (or t (featurep! :lang nim +lsp))
-      (add-hook! nim-mode #'lsp))
+  ;; (when (featurep! :tools lsp +eglot)
+  ;;   (after! eglot
+  ;;           (add-to-list 'eglot-server-programs '(nim-mode "nimlsp"))))
+  ;; (if (featurep! :lang nim +lsp)
+  ;;     (setq lsp-nim-project-mapping [(:projectFile "main.nim" :fileRegex ".*")])
+  (add-hook! nim-mode #'lsp)
+  (setq-hook! nim-mode
+    lsp-ui-sideline-enable nil
+    lsp-completion-enable nil
+    flycheck-checker-error-threshold 1000
+    ))
+;;
 
-  (setq nim-indent-offset 4)
-  (setq-hook! 'nim-mode-hook
-    evil-shift-width 4)
+(setq nim-indent-offset 4)
+(setq-hook! 'nim-mode-hook
+  evil-shift-width 4)
 
-  (setq-default
-   ;; nim lsp is chatty
-   flycheck-checker-error-threshold 1000
-   nim-compile-command "nim"
-   nim-compile-default-args '("r" "-r" "--verbosity:0" "--hint[Processing]:off" "--excessiveStackTrace:on")
-   nim-compile-default-command '("r")
-   nimsuggest-options '("--refresh" "--maxresults:10")
+(setq-default
+ nim-compile-command "nim"
+ nim-compile-default-args '("r" "-r" "--verbosity:0" "--hint[Processing]:off" "--excessiveStackTrace:on")
+ nim-compile-default-command '("r")
+ nimsuggest-options '("--refresh" "--maxresults:10")
+ )
 
-   )
-
-  (map! :mode (nim-mode nimscript-mode)
-        :leader
-        :prefix "c"
-        :nev "c" #'nim-compile)
-  ;; disable nimsuggest since using LSP
-  ;; (remove-hook! 'nim-mode-hook #'+nim-init-nimsuggest-mode-h)
-  )
-
-
-(after! lsp-mode
-  (setq lsp-nim-project-mapping [(:projectFile "main.nim" :fileRegex ".*")]))
+(map! :mode (nim-mode nimscript-mode)
+      :leader
+      :prefix "c"
+      :nev "c" #'nim-compile)
+;; disable nimsuggest since using LSP
+;; (remove-hook! 'nim-mode-hook #'+nim-init-nimsuggest-mode-h)
 
 (defun nim-repl-toggle-debug () (error "Not implemented."))
 
@@ -115,3 +117,12 @@
 (add-hook! 'nim-mode-hook :depth 0
   (setq +lookup-definition-functions
         (delete #'+nimsuggest-find-definition +lookup-definition-functions)))
+
+(setq-hook! nim-mode
+  devdocs-current-docs '("nim")
+  dumb-jump-default-project "~/.nimble/pkgs")
+
+(set-popup-rules!
+  '(("^\\*nim-compile" :height 25 :quit t :select nil)
+    ("^\\*doom eval" :select t :quit t :ttl 1))
+  )

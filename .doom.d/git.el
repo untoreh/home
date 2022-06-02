@@ -2,6 +2,10 @@
 
 (require 'magit)
 
+(when (and (featurep! :ui treemacs)
+           (featurep! :tools magit))
+  (setq +treemacs-git-mode 'deferred))
+
 (defvar magit-large-repo-num-files 1000 "Repositories that exceed this variable are considered large.")
 (defvar magit-large-repo-p nil "t if current repo is a large repo.")
 (defvar magit-large-repo-set-p nil "t if current repo has been checked for largeness.")
@@ -30,6 +34,7 @@
            (if magit-large-repo-p "Enabled" "Disabled") default-directory))
 
 (defun magit-auto-detect-large-repo (&optional force)
+  "Decide if current repository has more files than `magit-large-repo-num-files'."
   (if (and (or force (not magit-large-repo-set-p))
            (derived-mode-p 'magit-mode))
       (let ((numfiles (string-to-number
@@ -51,6 +56,7 @@
           (add-dir-local-variable nil 'magit-large-repo-set-p t)
           (doom/save-and-kill-buffer)))))
 
+;; Prevent magit functions if the `magit-large-repo-p' is t.
 (add-hook 'magit-pre-refresh-hook #'magit-auto-detect-large-repo)
 (defadvice! magit-skip-diff-large-repo (func) :around #'magit-commit-diff
   (message "is it large? %s" magit-large-repo-p)

@@ -3,6 +3,8 @@
 echo starting emacs...
 
 . ~/.profile
+[ -e ~/.venv ] && source ~/.venv/bin/activate
+
 cd ~/.emacs.d
 
 # this is a quirk with projectile failing to load if a project folder

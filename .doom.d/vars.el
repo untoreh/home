@@ -59,6 +59,7 @@
 
 ;; langs
 (setq use-jupyter nil)
+(setq-default major-mode 'org-mode)
 
 (setq yas-triggers-in-field t)
 (setq org-plantuml-jar-path "~/.local/bin/plantuml.jar")
@@ -83,7 +84,6 @@
  kept-new-versions 7
  kept-old-versions 3
  version-control t)
-
 
 ;; tramp
 ;; (setq-default

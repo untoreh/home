@@ -143,7 +143,9 @@ shell exits, the buffer is killed."
 (defun my/mode-print-cmd ()
   (pcase major-mode
     ('nim-mode "echo %s")
-    ('emacs-lisp-mode "(prin1 %s)")))
+    ('emacs-lisp-mode "(prin1 %s)")
+    ('python-mode "print(%s)")
+    ))
 
 (defvar my/insert-print-incr 0 "Buffer local increment for `my/insert-print'")
 (defvar my/insert-print-list nil "Buffer local list of currently inserted print statements")
@@ -167,16 +169,17 @@ shell exits, the buffer is killed."
   (interactive)
   ;; Should delete from from the last inserted to the first one. Since we `push'
   ;; the order is correct.
-  (let ((cleaned 0)
-        (todo (length my/insert-print-list)))
-    (while my/insert-print-list
-      (catch 'not-found
-        (goto-char (point-max))
-        (let ((logstring (pop my/insert-print-list)))
-          (if-let ((beg (search-backward logstring nil t)))
-              (progn (delete-char (length logstring))
-                     (delete-blank-lines)
-                     )))))))
+  (save-excursion
+    (let ((cleaned 0)
+          (todo (length my/insert-print-list)))
+      (while my/insert-print-list
+        (catch 'not-found
+          (goto-char (point-max))
+          (let ((logstring (pop my/insert-print-list)))
+            (if-let ((beg (search-backward logstring nil t)))
+                (progn (delete-char (length logstring))
+                       (delete-blank-lines)
+                       ))))))))
 
 (map! :leader
       (:desc "insert log string"
