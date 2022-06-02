@@ -1,8 +1,6 @@
 # TERM
 [ -z "$TMUX" ] && set -x TERM xterm-256color || set -x TERM tmux-256color
-## secrets
-set -x k ~/.ssh/id_rsa
-set -x pk ~/.ssh/id_rsa.pub
+
 # shell
 set -x KITTY_PATH ~/.nix-profile/bin/kitty
 if test (string replace -r 'fish$' "" $SHELL) != $SHELL
@@ -35,6 +33,18 @@ if [ -z "$INSIDE_EMACS" ]
         source $path_fish
     end
 end
+
+## secrets
+set -x k ~/.ssh/id_rsa
+set -x pk ~/.ssh/id_rsa.pub
+set -x pkf 92E2ADE26CAF1E28C33C0E0DF1265C4981A85B23
+[ -z "$GPG_TTY" ] && set -x GPG_TTY (tty)
+set path_gpg /tmp/.cache/gpg.env
+if [ ! -e $path_gpg ]
+    mkdir -p /tmp/.cache
+    keychain -q --eval --agents gpg $pkf > $path_gpg
+end
+source $path_gpg
 
 # browser
 if ! set -q BROWSER

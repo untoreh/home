@@ -11,7 +11,7 @@ let
 in {
   inherit (super)
   # shell
-    eternal-terminal browsh zsh git-hub git-lfs delta pet tmux fzf fd bat
+    eternal-terminal browsh zsh git-hub git-lfs delta pet tmux fzf fd
     ripgrep zoxide exa nushell starship direnv bat pastel
     # utils
     wego translate-shell weechat krita calibre koreader youtube-dl djvulibre unoconv wordnet
@@ -32,7 +32,7 @@ in {
     # langs
     go-pup nixfmt golangci-lint shfmt libtidy nodejs shellcheck jq enchant2 ispell languagetool
     chrpath pipenv jre;
-  inherit (unstable) mu isync goimapnotify gnupg pinentry emacs-all-the-icons-fonts gost;
+  inherit (unstable) mu isync goimapnotify gnupg keychain pinentry emacs-all-the-icons-fonts gost;
   # more fonts
   inherit (self.vimPlugins) vim-devicons;
   # sweet theme dep
