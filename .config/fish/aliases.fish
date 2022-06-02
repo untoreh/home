@@ -12,6 +12,7 @@ alias pf "wl-paste"
 alias zj "zellij"
 alias supd "supervisord -c ~/.config/supervisor.conf"
 alias supc "supervisorctl -c ~/.config/supervisor.conf"
+alias supcc "scripts/supc.sh"
 
 ## langs
 #julia
