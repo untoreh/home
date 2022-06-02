@@ -1,3 +1,1 @@
-#!/bin/sh
-
-exec node ~/.tmp/pyright/client/server/server.bundle.js $@
+../.emacs.d/.local/etc/lsp/npm/pyright/lib/node_modules/pyright/index.js
