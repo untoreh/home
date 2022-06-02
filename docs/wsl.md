@@ -85,6 +85,17 @@ If can't ssh into home directory, check permissions of `/home/$USER`
 ``` sh
 sudo chmod 755 $HOME
 ```
+## `browse-url` doesn't work in emacs
+The env var `WSL_INTEROP` might point to a dead socket.
+Find an active socket with `fuser`
+```shell
+se fuser  /run/WSL/* 2>&1  | tail -n 1 | cut -d ':' -f1 | tr -d "\n"
+```
+Update the env var inside emacs
+```elisp
+(setenv "WSL_INTEROP"
+        (shell-command-to-string "se fuser  /run/WSL/* 2>&1  | tail -n 1 | cut -d ':' -f1 | tr -d '\n'"))
+```
 
 # Not WSL related
 
