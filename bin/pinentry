@@ -1,4 +1,0 @@
-#!/bin/sh
-
-#/mnt/c/Users/fra/scoop/apps/win-gpg-agent/current/pinentry.exe "$@"
-/usr/bin/pinentry "$@"

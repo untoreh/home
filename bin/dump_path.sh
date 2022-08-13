@@ -39,3 +39,13 @@ echo -e "$NEW_PYTHONPATH" >>$cached_path
 
 echo XDG_DATA_DIRS="$HOME:$HOME/.nix-profile/share:/usr/local/share:/usr/share" >>$cached_path
 echo GUIX_PROFILE="$HOME/.guix-profile" >>$cached_path
+
+if [ ! -v DBUS_SESSION_BUS_ADDRESS ]; then
+    if which gnome-keyring-daemon &>/dev/null; then
+        killall -q gnome-keyring-daemon
+        gnome-keyring-daemon --daemon &>>$cached_path
+    elif which dbus-launch &>/dev/null; then
+        killall -q dbus-daemon
+        dbus-launch --sh-syntax >>$cached_path
+    fi
+fi
