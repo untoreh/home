@@ -2,7 +2,6 @@ source ~/.config/fish/profile.fish
 if ! set -q WSLENV && ! set -q INSIDE_DOCKER && ! test -e /etc/alpine-release
     source ~/.config/fish/ssh-agent.fish
 end
-# [ "$WSL_DISTRO_NAME" != "Arch"]
 if ! [ -e /tmp/supervisor.sock ] && which supervisord &>/dev/null && [ -z "$INSIDE_DOCKER" ]
     supervisord -c ~/.config/supervisor.conf
 end

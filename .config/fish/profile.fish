@@ -42,7 +42,7 @@ set -x pkf 92E2ADE26CAF1E28C33C0E0DF1265C4981A85B23
 set path_gpg /tmp/.cache/gpg.env
 if [ ! -e $path_gpg ]
     mkdir -p /tmp/.cache
-    keychain -q --eval --agents gpg $pkf > $path_gpg
+    keychain -q --eval --inherit local > $path_gpg
 end
 source $path_gpg
 
@@ -118,6 +118,11 @@ set PERL_MB_OPT "--install_base \"$HOME/perl5\""
 set PERL_MM_OPT "INSTALL_BASE=$HOME/perl5$PERL_MB_OPT"
 
 ## python
+if set -q VIRTUAL_ENV
+    #set pyv (ls "$VIRTUAL_ENV/lib" | grep -Eo '[0-9]+\.[0-9]+')
+    #set PYTHONPATH "$VIRTUAL_ENV/lib/python$pyv/site-packages:$PYTHONPATH"
+    #set -e pyv
+end
 export PYTHONPATH PYTHON_V
 
 ## stardict
