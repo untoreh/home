@@ -1,2 +1,4 @@
 [aws]
 disabled = true
+#[git_status]
+#windows_starship = "wex starship.exe"
