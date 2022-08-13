@@ -14,8 +14,8 @@
   (load! "projects")
   (after! magit
     (load! "git"))
-  ;; (load! "maths.el")
-  ;; (load! "debug")
+  ;(load! "maths.el")
+  ;(load! "debug")
   )
 
 (message "Configuration Loaded Successfully!")

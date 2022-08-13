@@ -1,11 +1,11 @@
 ;;; corfu.el -*- lexical-binding: t; -*-
 
-(use-package corfu
+(use-package! corfu
   :custom
   (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
   (corfu-auto t)                 ;; Enable auto completion
   (corfu-auto-prefix 0)
-  (corfu-auto-delay 0.15)
+  (corfu-auto-delay 0.5)
   (corfu-echo-documentation 0.3)
   (corfu-quit-no-match 'separator)        ;; Automatically quit if there is no match
   (corfu-preselect-first nil)    ;; Disable candidate preselection
@@ -50,7 +50,7 @@
       (corfu-mode 1)))
   (add-hook 'minibuffer-setup-hook #'corfu-enable-always-in-minibuffer 1)
 
-  (use-package corfu-quick
+  (use-package! corfu-quick
     :bind
     (:map corfu-map
      ("C-q" . corfu-quick-insert)))
@@ -113,7 +113,6 @@ An alist.")
         (template . ,(all-the-icons-material "format_align_left" :height 0.8 :v-adjust -0.15))
         (t . ,(all-the-icons-material "find_in_page" :height 0.8 :v-adjust -0.15))))
 
-
     (defsubst kind-all-the-icons--metadata-get (metadata type-name)
       (or
        (plist-get completion-extra-properties (intern (format ":%s" type-name)))
@@ -144,6 +143,11 @@ function to the relevant margin-formatters list."
 	      (kind-all-the-icons-formatted t))))) ;; as a backup
     (add-to-list 'corfu-margin-formatters #'kind-all-the-icons-margin-formatter)
     )
+  ;; FIXME: basic completion style causes infinite recursion
+  ;; (setq-hook! 'evil-insert-state-entry-hook
+  ;;   completion-styles '(basic))
+  ;; (setq-hook! 'evil-insert-state-exit-hook
+  ;;   completion-styles '(orderless))
   )
 
 (use-package! cape
@@ -164,7 +168,6 @@ function to the relevant margin-formatters list."
   :hook (corfu-mode . corfu-doc-mode)
   :bind (:map corfu-map
          ("M-d" . corfu-doc-toggle)))
-
 (use-package copilot
   :after corfu
   :bind ("M-k" . copilot-accept-completion-by-word) ;;  TODO: which :map should be used?
@@ -221,4 +224,7 @@ function to the relevant margin-formatters list."
       (:desc "code" :i "C-SPC c" (my/super-capf-cmd! cape-code-scapf))
       (:desc "complete" :i "C-SPC SPC" (my/super-capf-cmd! cape-default-scapf))
       (:desc "complete" :i "C-SPC C-SPC" (my/super-capf-cmd! cape-default-scapf))
-      )
+      (:mode lsp-mode
+       (:desc "complete" :i "C-SPC SPC" (my/super-capf-cmd! cape-lsp-scapf))
+       (:desc "complete" :i "C-SPC C-SPC" (my/super-capf-cmd! cape-lsp-scapf))
+       ))
