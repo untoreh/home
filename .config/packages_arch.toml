@@ -8,7 +8,6 @@ android-tools
 vulkan-icd-loader
 aura-bin
 emacs-gcc-wayland-devel-bin
-aspell
 neovim
 mesa-d3d12
 libgccjit
@@ -23,10 +22,13 @@ net-tools
 dos2unix
 btrfs-progs
 prettier
+gnome-keyring
+dockerd
+mu
 
-## pip3
-python
-mako PyYAML
+## pip3 python
+mako PyYAML supervisor grip cffi cython ansible black flake8 isort ptpython colorama decorator psutil pyte epc
+# timeago
 
 
 # theme
@@ -40,3 +42,6 @@ xcursor-sweet
 sweet-folders-icons-git
 sweet-theme-git
 sweet-kde-git
+
+# debugging
+debuginfo-find
