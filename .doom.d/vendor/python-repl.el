@@ -769,8 +769,11 @@ name), separated by dots, as a list."
     (mapc (lambda (file)
             (if-let ((bufname (or buffer-file-name default-directory))
                      (projfile (locate-dominating-file bufname file)))
-                (throw 'proj-dir
-                       (file-name-directory (file-truename projfile)))))
+                (progn
+                  (throw 'proj-dir
+                         (if (file-directory-p projfile)
+                             projfile
+                           (file-name-directory (file-truename projfile)))))))
           `(".projectile"
             "requirements.txt"
             ,python-repl-venv-dir))
@@ -779,17 +782,17 @@ name), separated by dots, as a list."
 (defmacro pyvenv-activate-parent (&optional body)
   (interactive)
   `(if-let* ((venv-dir python-repl-venv-dir)
-            (proj-dir (python-repl-current-project-dir))
-            (proj-venv-dir (expand-file-name venv-dir proj-dir))
-            (src-dir (my/concat-path proj-dir "src")))
-      (progn
-        (message "activating %s" proj-venv-dir)
-        (cd proj-dir)
-        (setq pyvenv-activate nil)
-        (pyvenv-activate proj-venv-dir)
-        (if (not (null ,body))
-            ,body))
-    (message "could not find project file")))
+             (proj-dir (python-repl-current-project-dir))
+             (proj-venv-dir (my/concat-path proj-dir venv-dir))
+             (src-dir (my/concat-path proj-dir "src")))
+       (progn
+         (message "activating %s" proj-venv-dir)
+         (cd proj-dir)
+         (setq pyvenv-activate nil)
+         (pyvenv-activate proj-venv-dir)
+         (if (not (null ,body))
+             ,body))
+     (message "could not find project file")))
 
 (defun python-repl-activate-parent (arg)
   "Look for a project file in the parent directories, if found, activate the project.

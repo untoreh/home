@@ -59,6 +59,11 @@ export GOENV_ROOT="$HOME/.goenv"
 ## nodejs
 export NODE_PATH=$NODE_PATH:$HOME/node_modules:/usr/local/lib/node_modules
 ## python
+if [ -v VIRTUAL_ENV ]; then
+	pyv=$(ls "${VIRTUAL_ENV}/lib" | grep -Eo '[0-9]+\.[0-9]+')
+	PYTHONPATH="$VIRTUAL_ENV/lib/python${pyv}/site-packages:$PYTHONPATH"
+	unset pyv
+fi
 export PYTHONPATH PYTHON_V
 
 ## cluster
