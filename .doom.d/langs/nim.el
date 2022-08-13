@@ -33,7 +33,10 @@
            :nev "r" (cmd! (nim-repl-switch))
            :nev "." #'nim-repl-cd
            :nev "d" #'nim-repl-toggle-debug
-           :nev "D" #'nim-debug-env-var
+           :desc "toggle debug"
+           :nev "D" (cmd! (my/toggle-env-var "NIM_DEBUG" "debug"))
+           :desc "toggle local"
+           :nev "l" (cmd! (my/toggle-env-var "NIM_LOCAL" "1"))
            :nev "v" #'nim-repl-revise
            )
           (:map 'nim-repl-mode-map
@@ -48,25 +51,29 @@
   :init
   (put 'nim-compile-default-command 'safe-local-variable #'listp)
   :config
-  (defun nim-debug-env-var ()
+  (defun my/toggle-env-var (name on &optional off)
     (interactive)
-    (setenv "NIM_DEBUG" "DEBUG"))
-  ;; (when (featurep! :tools lsp +eglot)
-  ;;   (after! eglot
-  ;;           (add-to-list 'eglot-server-programs '(nim-mode "nimlsp"))))
-  ;; (if (featurep! :lang nim +lsp)
-  ;;     (setq lsp-nim-project-mapping [(:projectFile "main.nim" :fileRegex ".*")])
-  (add-hook! nim-mode #'lsp)
+    (if (getenv name)
+        (progn
+          (setenv name off)
+          (message "Envvar OFF: %s=%s" name off))
+      (setenv name on)
+      (message "Envvar ON: %s=%s" name on)))
+  )
+;; (when (featurep! :tools lsp +eglot)
+;;   (after! eglot
+;;           (add-to-list 'eglot-server-programs '(nim-mode "nimlsp"))))
+(when (or t featurep! :lang nim +lsp)
+  (setq lsp-nim-project-mapping [(:projectFile "main.nim" :fileRegex ".*")])
+  (add-hook! nim-mode #'lsp (pyvenv-mode 1))
   (setq-hook! nim-mode
     lsp-ui-sideline-enable nil
-    lsp-completion-enable nil
-    flycheck-checker-error-threshold 1000
-    ))
-;;
+    ;; lsp-completion-enable nil
+    flycheck-checker-error-threshold 1000))
 
-(setq nim-indent-offset 4)
+(setq nim-indent-offset 2)
 (setq-hook! 'nim-mode-hook
-  evil-shift-width 4)
+  evil-shift-width 2)
 
 (setq-default
  nim-compile-command "nim"
@@ -84,6 +91,7 @@
 
 (defun nim-repl-toggle-debug () (error "Not implemented."))
 
+
 (use-package! nim-repl
   :config
   (nim-repl-set-terminal-backend 'vterm)
@@ -100,10 +108,13 @@
       (unwind-protect
           (progn
             (write-file tmpfile)
-            (call-process "nimpretty" nil nil nil
-                          tmpfile
-                          "--indent:" (number-to-string  nim-indent-offset)
-                          "--maxLineLen:" nim-format-line-len)
+            (call-process
+             "nimfmt" nil nil nil tmpfile "-i" tmpfile
+             ;; if nimpretty
+             ;; "nimpretty" nil nil nil
+             ;; "--indent:" (number-to-string  nim-indent-offset)
+             ;; "--maxLineLen:" nim-format-line-len
+             )
             (erase-buffer)
             (insert-file-contents tmpfile)
             )
