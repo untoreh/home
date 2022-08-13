@@ -56,7 +56,7 @@
 (package! devdocs :recipe (:host github :repo "astoff/devdocs.el"))
 ;; aggressive-indent is very slow
 ;; (package! aggressive-indent)
-(package! gcmh-mode :disable t)
+;; (package! gcmh-mode :disable nil)
 
 ;; completion
 (package! corfu :recipe (:includes (corfu-indexed corfu-quick) :files (:defaults "extensions/corfu-*.el")))
@@ -142,6 +142,7 @@
 ;; (package! which-key-posframe)
 (package! hydra-posframe :recipe ( :host nil
                                    :repo "https://github.com/Ladicle/hydra-posframe"))
+(package! caddyfile-mode)
 (package! ahk-mode)
 (package! vimrc-mode)
 (package! systemd)

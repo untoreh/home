@@ -117,7 +117,7 @@
 (use-package! gcbal
   ;; apply after undo-tree-mode since it ovverrides `post-gc-hook'
   :after-call undo-tree-mode
-  :if t
+  :if nil
   :init
   (defun gcmh-mode (&rest args))
   (defun gcmh-set-high-threshold (&rest args))
