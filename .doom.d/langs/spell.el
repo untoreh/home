@@ -14,7 +14,8 @@
  ;; spell-fu has troubles highlighting all the words
  ;; currently using flyspell, doesn't seem that slow, gccemacs?
  ispell-dictionary "en-wo_accents"
- ispell-aspell-data-dir "~/.nix-profile/lib/aspell"
+ ispell-aspell-data-dir "/usr/lib/aspell"
+ ispell-aspell-dict-dir (my/concat-path (getenv "HOME") ".nix-profile/lib/aspell")
  flyspell-delay 1)
 
 ;; ensure symlink for data dir for enchant
@@ -35,7 +36,10 @@
     (when (not (file-exists-p words-dict))
       ;; http://app.aspell.net/create?max_size=80&spelling=US&max_variant=2&diacritic=strip&special=hacker&special=roman-numerals&download=wordlist&encoding=utf-8&format=inline
       (warn "words dict file not found, download a copy to %s" words-dict))
-    (setq ispell-alternate-dictionary words-dict)))
+    (setq
+     ispell-alternate-dictionary words-dict
+     ispell-local-dictionary words-dict
+     )))
 
 (after! ispell
   ;; check version again because something is setting aspell instead of 'enchant
