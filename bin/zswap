@@ -1,0 +1,24 @@
+#!/bin/sh
+
+set -x
+set -e
+cmd="$1"
+if [ "$cmd" = on ]; then
+    SWAP_DEVICE=$(swapon --show=name --noheadings | head -1)
+    PARAMS="/usr/bin/sudo tee /sys/module/zswap/parameters"
+    /usr/bin/sudo rmmod zram &>/dev/null || true
+    /usr/bin/sudo swapoff -a
+    /usr/bin/sudo modprobe zswap &>/dev/null
+    echo z3fold | $PARAMS/zpool
+    echo zstd | $PARAMS/compressor
+    echo 95 | $PARAMS/max_pool_percent
+    echo 97 | $PARAMS/accept_threshold_percent
+    echo 3 | /usr/bin/sudo tee /proc/sys/vm/drop_caches
+    /usr/bin/sudo /usr/sbin/swapon $SWAP_DEVICE
+    echo 1 | $PARAMS/enabled
+elif [ "$cmd" = off ]; then
+    echo 0 | $PARAMS/enabled
+    /usr/bin/sudo rmmod zswap
+else
+    echo "Enable zswap with 'on' or 'off' arguments."
+fi
