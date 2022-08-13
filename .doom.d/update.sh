@@ -15,14 +15,14 @@ fi
 
 bin/doom purge
 # upgrade should execute `build
-bin/doom upgrade -f
+bin/doom upgrade
 
 bin/doom sync
 clean_env
 # ensure unicode-fonts cache is removed
 rm -f .local/cache/pcache/unicode-fonts
 
-bin/doom compile
+# bin/doom compile
 
 # fix vterm
 #rm -rf ~/.emacs.d/.local/straight/build*/vterm/build
