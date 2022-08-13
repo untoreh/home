@@ -8,9 +8,11 @@
     (add-hook! julia-mode #'lsp))
   (add-hook! 'julia-mode-hook
     (setenv "JULIA_NUM_THREADS" (number-to-string (num-processors)))
-    (setq-local lsp-enable-folding t
-                lsp-folding-range-limit 100
-                lsp-response-timeout 300)))
+    ;; https://github.com/doomemacs/doomemacs/commit/acae9f9acb328c46f71b4cc975abcdb95c09cee6
+    ;; (setq-local lsp-enable-folding t
+    ;;             lsp-folding-range-limit 100
+    ;;             lsp-response-timeout 300)
+    ))
 
 (use-package! lsp-julia
   :if (and (featurep! :lang julia +lsp)
