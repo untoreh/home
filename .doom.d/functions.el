@@ -104,15 +104,15 @@
             ) seq)
     nil))
 
-;; vterm shell command
-(defun my/run-in-vterm-kill (process event)
-  "A process sentinel. Kills PROCESS's buffer if it is live."
-  (let ((b (process-buffer process)))
-    (and (buffer-live-p b)
-         (kill-buffer b))))
-
-(defun my/run-in-vterm (command)
-  "Execute string COMMAND in a new vterm.
+(after! vterm
+  ;; vterm shell command
+  (defun my/run-in-vterm-kill (process event)
+    "A process sentinel. Kills PROCESS's buffer if it is live."
+    (let ((b (process-buffer process)))
+      (and (buffer-live-p b)
+           (kill-buffer b))))
+  (defun my/run-in-vterm (command)
+    "Execute string COMMAND in a new vterm.
 
 Interactively, prompt for COMMAND with the current buffer's file
 name supplied. When called from Dired, supply the name of the
@@ -125,44 +125,44 @@ command and its arguments in earmuffs.
 
 When the command terminates, the shell remains open, but when the
 shell exits, the buffer is killed."
-  (interactive
-   (list
-    (let* ((f (cond (buffer-file-name)
-                    ((eq major-mode 'dired-mode)
-                     (dired-get-filename nil t))))
-           (filename (concat " " (shell-quote-argument (and f (file-relative-name f))))))
-      (read-shell-command "Terminal command: "
-                          (cons filename 0)
-                          (cons 'shell-command-history 1)
-                          (list filename)))))
-  (with-current-buffer (vterm (concat "*" command "*"))
-    (set-process-sentinel vterm--process #'my/run-in-vterm-kill)
-    (vterm-send-string command)
-    (vterm-send-return)))
+    (interactive
+     (list
+      (let* ((f (cond (buffer-file-name)
+                      ((eq major-mode 'dired-mode)
+                       (dired-get-filename nil t))))
+             (filename (concat " " (shell-quote-argument (and f (file-relative-name f))))))
+        (read-shell-command "Terminal command: "
+                            (cons filename 0)
+                            (cons 'shell-command-history 1)
+                            (list filename)))))
+    (with-current-buffer (vterm (concat "*" command "*"))
+      (set-process-sentinel vterm--process #'my/run-in-vterm-kill)
+      (vterm-send-string command)
+      (vterm-send-return))))
 
 (defun my/mode-print-cmd ()
   (pcase major-mode
     ('nim-mode "echo %s")
     ('emacs-lisp-mode "(prin1 %s)")
     ('python-mode "print(%s)")
+    ('js-mode "console.log(%s)")
+    ('julia-mode "display(%s)")
+    ('sh-mode "echo %s")
     ))
 
-(defvar my/insert-print-incr 0 "Buffer local increment for `my/insert-print'")
 (defvar my/insert-print-list nil "Buffer local list of currently inserted print statements")
 (make-variable-buffer-local 'my/insert-print-list)
-(make-variable-buffer-local 'my/insert-print-incr)
 
 (defun my/insert-print ()
   "Insert a print statements at point."
   (interactive)
   (let* ((cmd (my/mode-print-cmd))
-         (incr my/insert-print-incr)
-         (logstring (format cmd incr)))
+         (logstring (format "\"%s:%d\"" (file-name-nondirectory buffer-file-name) (+ 1 (line-number-at-pos))))
+         (logcmd (format cmd logstring)))
     (evil-open-below 1)
-    (insert logstring)
+    (insert logcmd)
     (evil-escape)
-    (setq-local my/insert-print-incr (+ 1 incr))
-    (push logstring my/insert-print-list)))
+    (push logcmd my/insert-print-list)))
 
 (defun my/insert-print-clear ()
   "Delete all lines previously inserted."
