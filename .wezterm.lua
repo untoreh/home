@@ -9,7 +9,7 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
                  args = {"powershell.exe", "-NoLogo"},
 	})
   default_prog = {"wsl.exe", "-d", distro, "-e", "bash", "-c",
-                  "{ [ -f /tmp/.mounted ] || /etc/wsl-mount.sh; } && SHELL=fish exec fish -li"}
+                  "{ [ -f /tmp/.mounted ] || /etc/wsl-mount.sh; } && SHELL=fish exec fish -li -C cd ~/"}
 else
   default_prog = {"fish", "-li"}
 end
@@ -54,9 +54,10 @@ return {
   color_scheme = "Dracula",
   scrollback_lines = 9000,
   enable_scroll_bar = true,
+  canonicalize_pasted_newlines = "None", -- don't insert double new lines on windows
   launch_menu = launch_menu,
   default_prog = default_prog,
-  keys = {
+  keys =
     {key="|", mods="CTRL|SHIFT", action=wezterm.action{SplitHorizontal={domain="CurrentPaneDomain"}}},
     {key="\\", mods="CTRL|ALT", action=wezterm.action{SplitHorizontal={domain="CurrentPaneDomain"}}},
     {key="q", mods="CTRL|SHIFT",
@@ -68,7 +69,7 @@ return {
     {key="k", mods="CTRL|SHIFT", action=wezterm.action{ActivatePaneDirection="Up"}},
     {key="l", mods="CTRL|SHIFT", action=wezterm.action{ActivatePaneDirection="Right"}},
     {key="n", mods="CTRL|SHIFT", action="ToggleFullScreen"},
-    {key="m", mods="CTRL|SHIFT|ALT", action=wezterm.action{SendString="/etc/local.d/crt.start &>/dev/null &"}},
+    {key="m", mods="CTRL|SHIFT|ALT", action=wezterm.action{SendString="/opt/bin/crt-start &>/dev/null &"}},
     {key="h", mods="CTRL|SHIFT|ALT", action=wezterm.action{AdjustPaneSize={"Left", 1}}},
     {key="j", mods="CTRL|SHIFT|ALT", action=wezterm.action{AdjustPaneSize={"Down", 1}}},
     {key="k", mods="CTRL|SHIFT|ALT", action=wezterm.action{AdjustPaneSize={"Up", 1}}},
@@ -88,7 +89,7 @@ return {
     {key="a", mods="CTRL|SHIFT", action=wezterm.action{
        SpawnCommandInNewTab={
          args={"wsl.exe", "-d", distro, "-e", "bash", "-c",
-               "{ [ -f /tmp/.mounted ] || /etc/wsl-mount.sh; } && SHELL=fish exec fish -li"}}}},
+               "{ [ -f /tmp/.mounted ] || /etc/wsl-mount.sh; } && SHELL=fish exec fish -li -C 'cd ~/'"}}}},
     {key="p", mods="CTRL|SHIFT", action=wezterm.action{
        SpawnCommandInNewTab={
          args={"powershell.exe", "/NoLogo"}}}},
