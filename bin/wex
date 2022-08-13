@@ -1,8 +1,11 @@
 #!/bin/sh
 WINDOWS_PATH_FILE=/tmp/.cache/path_windows
-
-if [ ! -f $WINDOWS_PATH_FILE -o -s $WINDOWS_PATH_FILE ]; then
+if [ ! -f $WINDOWS_PATH_FILE ]; then
     pwsh=/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe
+    for sock in /run/WSL/*; do
+        export WSL_INTEROP="$sock"
+        $pwsh &>/dev/null && break
+    done
     pwsh_cmd='$split_path=($env:path -split ";") ;for ($i=0;$i -le $split_path.length; $i++){ [System.Environment]::ExpandEnvironmentVariables($split_path[$i])}'
     ORIGINAL_PATH=$($pwsh -Command "$pwsh_cmd")
     WINDOWS_PATH=
