@@ -131,3 +131,4 @@ remmina/
 share/
 tmp/
 nimsuggest.log
+/supervisord.pid
