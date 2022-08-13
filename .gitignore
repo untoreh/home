@@ -133,3 +133,5 @@ tmp/
 nimsuggest.log
 /supervisord.pid
 /.bun/
+/.jlassetregistry.json
+/.keychain/
