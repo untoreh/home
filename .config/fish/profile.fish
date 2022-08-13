@@ -42,7 +42,7 @@ set -x pkf 92E2ADE26CAF1E28C33C0E0DF1265C4981A85B23
 set path_gpg /tmp/.cache/gpg.env
 if [ ! -e $path_gpg ]
     mkdir -p /tmp/.cache
-    keychain -q --eval --inherit local > $path_gpg
+    keychain -q --eval --inherit local >$path_gpg
 end
 source $path_gpg
 
@@ -54,6 +54,22 @@ if ! set -q BROWSER
         set --export BROWSER (which firefox)
     end
 end
+
+# WSLG
+if set -q WSLENV
+    if [ ! -L /tmp/.X11-unix ]
+        rm -rf /tmp/.X11-unix
+        if [ -e /run/wslg ]
+            sudo ln -sf /run/wslg/.X11-unix /tmp
+        else if [ -e /mnt/wslg ]
+            sudo ln -sf /mnt/wslg/.X11-unix /tmp
+        end
+    end
+    if [ -e /mnt/wslg/runtime-dir/wayland-0 ]
+        set -x WAYLAND_DISPLAY /mnt/wslg/runtime-dir/wayland-0
+    end
+end
+
 # kodi
 # set -x CRASHLOG_DIR /tmp/kodi
 # must replicate /etc/environment with fish syntax
@@ -133,8 +149,8 @@ set -x CONCURRENCY_LEVEL 14
 # ccache
 set -x CCACHE_DIR ~/.ccache
 if set -q USE_CCACHE
-	set -x CC "ccache gcc"
-	set -x CXX "ccache g++"
+    set -x CC "ccache gcc"
+    set -x CXX "ccache g++"
 end
 # NIX
 set -x NIX_PATH "$HOME/.nix-defexpr/channels:$NIX_PATH"
