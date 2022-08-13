@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 . ~/.profile
-exec ~/.nimble/bin/nimlsp "$@"
-#exec ~/.nimble/bin/nimlangserver "$@"
+#exec ~/.nimble/bin/nimlsp "$@"
+exec ~/.nimble/bin/nimlangserver "$@"
 #sudo docker exec -t builder ~/.nimble/bin/nimlangserver $@
 export DOCKER_ARGS="-e PATH=$PATH \
 	-e PYTHONPATH=$PYTHONPATH \
