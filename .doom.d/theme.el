@@ -166,8 +166,9 @@
 	emojify-emoji-styles '(github unicode))
   :config
   ;; disable emojify mode on vterm buffers of languages
-  (pushnew! emojify-inhibit-in-buffer-functions 'my/repl-vterm-bufferp)
-  )
+  ;(after! functions
+    ;(pushnew! emojify-inhibit-in-buffer-functions #'my/repl-vterm-bufferp))
+    )
 
 ;; HACK: hide modeline in vterm buffer
 (after! vterm

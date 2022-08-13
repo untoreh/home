@@ -20,7 +20,9 @@
   :defer
   :config
   ;; bitmap seems smoother than character
-  (setq highlight-indent-guides-method 'bitmap))
+  (setq
+   highlight-indent-guides-method 'bitmap
+   highlight-indent-guides-responsive 'top))
 
 (when (featurep! :editor word-wrap)
   (add-transient-hook! 'text-mode-hook
