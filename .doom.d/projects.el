@@ -64,11 +64,11 @@
                   (run-with-idle-timer
                    5 t
 		   (lambda () (let ((inhibit-message t))
-                           (when (and (> (float-time (time-since
-                                                      my/last-saved-session-time))
-                                         300)
-                                      (doom/save-session session-file))
-                             (setq my/last-saved-session-time (current-time)))))))))
+                                (when (and (> (float-time (time-since
+                                                           my/last-saved-session-time))
+                                              300)
+                                           (doom/save-session session-file))
+                                  (setq my/last-saved-session-time (current-time)))))))))
       (progn
         (when (boundp 'doom-session-timer)
           (cancel-timer doom-session-timer)
@@ -99,4 +99,13 @@
 ;; update `PROJECT_DIR' env var when switching projects
 (add-hook! 'doom-switch-buffer-hook #'my/set-project-dir)
 
-                                        ;(add-hook 'emacs-startup-hook #'my/restore-session)
+(defun my/set-config-name ()
+  (interactive)
+  ;; General purpose config variable for project
+  (setenv "CONFIG_NAME" (read-string "Set CONFIG_NAME env var: ")))
+
+(map! :leader
+      :desc "Set config name"
+      :nvi "p l c" #'my/set-config-name
+      )
+;; (add-hook 'emacs-startup-hook #'my/restore-session)
