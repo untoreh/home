@@ -1,0 +1,14 @@
+#!/bin/sh
+
+export LOADER_SCRIPT_PATH="/scripts/" \
+	&& export METACALL_PATH="/gnu/store/`ls /gnu/store/ | grep metacall | head -n 1`" \
+	&& export LDLIB_PATH="`find /gnu/store/ -type f -wholename '*-glibc-*/lib/ld-*.so' | head -n 1`" \
+	&& export GLIBC_PATH="`dirname $LDLIB_PATH`" \
+	&& export LOADER_LIBRARY_PATH="${METACALL_PATH}/lib" \
+	&& export SERIAL_LIBRARY_PATH="${METACALL_PATH}/lib" \
+	&& export DETOUR_LIBRARY_PATH="${METACALL_PATH}/lib" \
+	&& export PORT_LIBRARY_PATH="${METACALL_PATH}/lib" \
+	&& export CONFIGURATIONS_PATH="${METACALL_PATH}/configurations/global.json" \
+	&& export LD_LIBRARY_PATH="${GLIBC_PATH}:${METACALL_PATH}/lib:/usr/lib"
+
+$LDLIB_PATH /usr/bin/ld $@
