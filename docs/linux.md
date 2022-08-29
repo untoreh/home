@@ -13,6 +13,14 @@ find /var/cache/pacman/pkg/ -iname "*.part" -exec rm {} \;
 # update keyring first, since outdated signatures can cause problems
 se aura -Su archlinux-keyring
 ```
+### A key gives "marginal trust" during packages update
+
+``` sh
+# find out the key fingerprint by running the pkg manager with `--debug`
+se aura --debug -Su
+# sign it locally
+se pacman-key -lsign-key $KEY
+```
 
 ## Fonts
 Using after installing fonts with nix:
