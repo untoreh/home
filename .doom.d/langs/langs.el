@@ -42,6 +42,11 @@
                      python-mode))
     (pushnew! +format-on-save-enabled-modes mode)))
 
+;; flycheck
+(after! flycheck-posframe
+  (setq flycheck-posframe-border-width 5)
+  (flycheck-posframe-configure-pretty-defaults)
+  )
 
 (defun my/repl-vterm-bufferp (&rest args)
   "Check if the current buffer is a repl vterm buffer of any language in `enabled-langs'."
