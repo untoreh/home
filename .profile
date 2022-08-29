@@ -2,8 +2,6 @@
 [ ! -v TMUX ] && export TERM=xterm-256color || export TERM=tmux-256color
 # secrets
 export k=~/.ssh/id_rsa pk=~/.ssh/id_rsa.pub
-# gpg
-[ ! -v GPG_TTY ] && { GPG_TTY=$(tty) || true; } # ignore non interactive for errors
 # shell
 HISTSIZE='' HISTFILESIZE='' ## for bash compatibility
 # Path
@@ -17,6 +15,12 @@ if [ ! -e $cached_path ]; then
 	~/bin/dump_path.sh
 fi
 . $cached_path
+# cached_gpg=$cached_dir/gpg_tty
+# if [ ! -e $cached_gpg ]; then
+# 	if pgrep gpg-agent;
+# 	   echo "ok"
+# 	fi
+# fi
 
 # browser
 if [ ! -v BROWSER ]; then
