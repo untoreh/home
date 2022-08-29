@@ -18,7 +18,6 @@
   (put 'lsp-restart 'safe-local-variable (lambda (&rest args) t))
   (setq
    ;; for performance
-   lsp-use-plists t
    lsp-restart 'ignore
    lsp-auto-configure t
    ;; NOTE: Can't guess root since $HOME is considered a workspace...
@@ -42,15 +41,18 @@
      ;; webkit causes crashes
      lsp-ui-doc-use-webkit nil
      lsp-ui-doc-enable t
-     lsp-ui-doc-max-height 80
+     lsp-ui-doc-max-height 10
      lsp-ui-doc-max-width 80
      lsp-ui-doc-show-with-mouse t
      lsp-ui-doc-show-with-cursor nil
      ;;
-     lsp-ui-sideline-enable nil
+     lsp-ui-sideline-enable t
      lsp-ui-sideline-show-code-actions t
      lsp-ui-sideline-show-hover t
-     lsp-ui-sideline-show-diagnostics t))
+     lsp-ui-sideline-show-diagnostics t
+     lsp-ui-sideline-diagnostic-max-lines 3
+     lsp-ui-sideline-wait-for-all-symbols nil
+     ))
   (after! lsp-completion
     (setq
      lsp-completion-show-detail t

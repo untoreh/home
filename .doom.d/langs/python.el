@@ -96,3 +96,8 @@
     (if (f-exists-p
          (my/concat-path (projectile-project-root) python-repl-venv-dir))
         (pyvenv-tracking-mode 1))))
+
+(set-popup-rules!
+  '(("^\\*python\\*$" :height 25 :quit t :select nil)
+    )
+  )

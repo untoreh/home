@@ -18,7 +18,9 @@
         projectile-git-submodule-command
         "git submodule --quiet foreach 'echo $path' 2>/dev/null | tr '\\n' '\\0'"
         ;; Don't consider $HOME as project
-        projectile-project-root-files-bottom-up (remove ".git" projectile-project-root-files-bottom-up))
+        projectile-project-root-files-bottom-up (remove ".git" projectile-project-root-files-bottom-up)
+        projectile-compile-use-comint-mode t ;; fixes some scroll issues
+        )
   (pushnew! projectile-globally-ignored-directories "~/win" ".venv" ".env" ".ipfs" ".archive" ".old" "node_modules")
   ;; allow project based vars
   (put 'projectile-generic-command 'safe-local-variable #'stringp)

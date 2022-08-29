@@ -59,7 +59,11 @@
           (message "Envvar OFF: %s=%s" name off))
       (setenv name on)
       (message "Envvar ON: %s=%s" name on)))
+  (setq-hook! 'nim-compile-mode-hook
+     before-change-functions (append before-change-functions '(my/tail-f-window)))
   )
+(setq list-1 '(a b c))
+(append list-1 '(d))
 ;; (when (featurep! :tools lsp +eglot)
 ;;   (after! eglot
 ;;           (add-to-list 'eglot-server-programs '(nim-mode "nimlsp"))))
@@ -67,9 +71,8 @@
   (setq lsp-nim-project-mapping [(:projectFile "main.nim" :fileRegex ".*")])
   (add-hook! nim-mode #'lsp (pyvenv-mode 1))
   (setq-hook! nim-mode
-    lsp-ui-sideline-enable nil
     ;; lsp-completion-enable nil
-    flycheck-checker-error-threshold 1000))
+    flycheck-checker-error-threshold 100000))
 
 (setq nim-indent-offset 2)
 (setq-hook! 'nim-mode-hook

@@ -190,6 +190,12 @@ shell exits, the buffer is killed."
        :nvi "d l"
        #'my/insert-print-clear))
 
+(defun my/tail-f-window (&rest _)
+  "Go to the end of Messages buffer."
+  (let ((window (get-buffer-window (buffer-name))))
+    (with-current-buffer (window-buffer window)
+      (set-window-point window (point-max)))))
+
 (provide 'functions)
 (require 'functions)
 
