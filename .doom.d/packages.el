@@ -63,7 +63,7 @@
 (package! cape :recipe (:host github :repo "minad/cape"))
 (package! tabnine-capf :recipe (:host github :repo "theFool32/tabnine-capf" :files ("*.el" "*.sh" "*.py")))
 (package! corfu-doc :recipe (:host github :repo "galeo/corfu-doc"))
-(package! copilot :recipe (:host github :repo "zerolfx/copilot.el" :files ("dist" "copilot.el")))
+;(package! copilot :recipe (:host github :repo "zerolfx/copilot.el" :files ("dist" "copilot.el")))
 (package! kind-icon)
 
 ;; langs
@@ -74,7 +74,7 @@
 (package! tree-sitter)
 (package! tree-sitter-langs)
 
-(package! lsp-mode :disable nil :pin "1d9ec3f30a6491b58a904b071694a1a8a0faca87")
+(package! lsp-mode :disable nil :pin "a0e1210f626cb7b5db16a9454d3bf61322d299df")
 (package! lsp-bridge :disable t :recipe (:host github :repo "manateelazycat/lsp-bridge"))
 ;; julia
 (if (featurep! :lang julia)

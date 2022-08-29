@@ -169,6 +169,7 @@ function to the relevant margin-formatters list."
   :bind (:map corfu-map
          ("M-d" . corfu-doc-toggle)))
 (use-package copilot
+  :if nil
   :after corfu
   :bind ("M-k" . copilot-accept-completion-by-word) ;;  TODO: which :map should be used?
   :ensure t

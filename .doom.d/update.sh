@@ -13,9 +13,10 @@ if [ "$1" == "-e" ]; then
     exit $?
 fi
 
+bin/doom sync
 bin/doom purge
 # upgrade should execute `build
-bin/doom upgrade
+#bin/doom upgrade
 
 bin/doom sync
 clean_env
