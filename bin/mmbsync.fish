@@ -1,4 +1,4 @@
-#!/usr/bin/fish -li
+#!/usr/bin/fish
 
 # use an interactive shell to source the ssh-agent env through fish ssh-agent plugin
 # since mbsync needs access to it for decrypting mails secrets
