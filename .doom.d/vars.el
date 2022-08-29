@@ -60,8 +60,6 @@
 ;; langs
 (setq use-jupyter nil)
 (setq-default major-mode 'org-mode)
-;; compile lsp-mode with plists support
-(setenv "LSP_USE_PLISTS" "true")
 
 (setq yas-triggers-in-field t)
 (setq org-plantuml-jar-path "~/.local/bin/plantuml.jar")

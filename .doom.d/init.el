@@ -14,6 +14,10 @@
 ;;      Alternatively, press 'gd' (or 'C-c c d') on a module to browse its
 ;;      directory (for easy access to its source code).
 
+;; compile lsp-mode with plists support
+(setenv "LSP_USE_PLISTS" "1")
+(setq lsp-use-plists t)
+
 (doom! :input
        ;;
        :completion
@@ -189,3 +193,4 @@
    comp-async-report-warnings-errors nil
    native-comp-deferred-compilation t
    native-comp-deferred-compilation-black-list '("/mu4e.*\\.el$")))
+
