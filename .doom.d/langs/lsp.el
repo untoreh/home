@@ -50,8 +50,9 @@
      lsp-ui-sideline-show-code-actions t
      lsp-ui-sideline-show-hover t
      lsp-ui-sideline-show-diagnostics t
+     lsp-ui-sideline-show-symbols  nil
      lsp-ui-sideline-diagnostic-max-lines 3
-     lsp-ui-sideline-wait-for-all-symbols nil
+     lsp-ui-sideline-wait-for-all-symbols t
      ))
   (after! lsp-completion
     (setq
