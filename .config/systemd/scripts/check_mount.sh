@@ -1,23 +1,39 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
-
+set -eo pipefail
+function err_str() {
+	iserr=$?
+	msg="Mediabox: can't mount storage to "
+	msg+='`'
+	msg+="$mpath"
+	msg+="!"
+	msg+='`\n ```bash\n'
+	msg+="$err"
+	msg+='``` '
+	msg="$(echo -e $msg)"
+}
 function check_mount() {
     local part_uuid=$1
     local mpath=$2
     [ ! -e $mpath ] && mkdir -p $mpath
     if mountpoint -q $mpath; then
+	set +e
+        sudo chown $(id -u):$(id -g) $mpath
         touch ${mpath}/.alive || {
+        sudo chown $(id -u):$(id -g) $mpath
         timeout 10 $mpath || sudo umount -l $mpath
-        timeout 10 sudo mount UUID=$part_uuid $mpath
-	if [ $? != 0 ]; then
-		discord-notify "Mediabox: can't mount storage to $mpath !"
+	err="$(timeout 10 sudo mount UUID=$part_uuid $mpath 2>&1)"
+	err_str
+	if [ $iserr != 0 ]; then
+		discord-notify "$msg"
 	fi
+	set -e
         }
     else
-        sudo mount UUID=$part_uuid $mpath
-	if [ $? != 0 ]; then
-		discord-notify "Mediabox: can't mount storage to $mpath !"
+        err="$(sudo mount UUID=$part_uuid $mpath 2>&1)"
+	err_str
+	if [ $iserr != 0 ]; then
+		discord-notify "$msg"
 	fi
     fi
 }
