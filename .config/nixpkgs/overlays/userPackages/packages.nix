@@ -26,7 +26,7 @@ in {
     noto-fonts-extra sweet emojione fantasque-sans-mono julia-mono fira fira-code fira-code-symbols hack-font ia-writer-duospace
     powerline-fonts material-design-icons barlow
     # system (don't use fish from nix because of locales)
-    man less thefuck glibcLocales tini libqalculate dhcp bandwhich consul lld
+    man less thefuck glibcLocales tini libqalculate dhcp bandwhich trickle consul lld
     haproxy rsync sshpass pandoc zip cachix msmtp catatonit
 
     # langs
