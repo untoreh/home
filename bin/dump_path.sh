@@ -8,7 +8,7 @@ mkdir -p $cached_dir && touch $cached_path # touch to avoid recursion
 ruby_bin=$(echo -n $HOME/.gem/ruby/\*/bin | tr ' ' ':')
 go_bin=$(echo -n /usr/lib/go-\*/bin | tr ' ' ':')
 goenv_bin="$HOME/.goenv/bin"
-julia_bin=/opt/julia/bin
+julia_bin="$HOME/.julia/juliaup/bin"
 choosenim="$(cat ~/.choosenim/current)/bin"
 nim_bin="$HOME/.nimble/bin:$choosenim"
 defs="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
