@@ -106,6 +106,7 @@
 ;; shell
 (package! fish-mode)
 (package! powershell)
+(package! nushell-mode :recipe (:host github :repo "azzamsa/emacs-nushell"))
 
 ;; jupyter
 (package! jupyter)
@@ -158,7 +159,7 @@
   :disable t)
 
 (package! rotate)
-(when (featurep! :email mu4e)
+(when (modulep! :email mu4e)
   (package! mu4e-views))
 
 ;; TODO: managing services with prodigy is nice especially on WSL
