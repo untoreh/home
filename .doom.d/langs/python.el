@@ -38,7 +38,7 @@
            :nev "r" (cmd! (python-repl-switch))
            :nev "." #'python-repl-cd
            :nev "d" #'python-repl-toggle-debug
-           :nev "D" #'python-toggle-debug-envvar
+           :nev "D" (cmd! (my/toggle-env-var "PYTHON_DEBUG" "debug"))
            :nev "v" #'python-repl-revise
            )
           (:map 'python-repl-mode-map

@@ -68,9 +68,11 @@
 ;;   (after! eglot
 ;;           (add-to-list 'eglot-server-programs '(nim-mode "nimlsp"))))
 (when (or t featurep! :lang nim +lsp)
-  (setq lsp-nim-project-mapping [(:projectFile "main.nim" :fileRegex ".*")])
+  (setq lsp-nim-project-mapping [(:projectFile "main.nim" :fileRegex ".*\\.nim")
+                                 (:projectFile "test.nim" :fileRegex "test.*\\.nim")])
   (add-hook! nim-mode #'lsp (pyvenv-mode 1))
   (setq-hook! nim-mode
+    lsp-auto-guess-root t
     ;; lsp-completion-enable nil
     flycheck-checker-error-threshold 100000))
 

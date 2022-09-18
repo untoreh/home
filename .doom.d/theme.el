@@ -14,11 +14,11 @@
 
 ;; (setq doom-theme 'modus-operandi-theme )
 
-(setq
+(setq-default
  doom-font (font-spec :family "Hack" :size 14 :weight 'normal)
  doom-big-font (font-spec :family "iA Writer Duospace" :size 24 :weight 'bold)
  doom-variable-pitch-font (font-spec :family "Barlow" :size 16)
- doom-unicode-font (font-spec :family "JuliaMono" :size 16)
+ doom-unicode-font (font-spec :family "JuliaMono")
  doom-serif-font (font-spec :family "Fantasque Sans Mono" :size 16))
 
 (setq-default line-spacing 1)
