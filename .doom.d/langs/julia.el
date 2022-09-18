@@ -4,7 +4,7 @@
   lsp-auto-guess-root nil)
 
 (after! julia-mode
-  (when (featurep! :lang julia +lsp)
+  (when (modulep! :lang julia +lsp)
     (add-hook! julia-mode #'lsp))
   (add-hook! 'julia-mode-hook
     (setenv "JULIA_NUM_THREADS" (number-to-string (num-processors)))
@@ -15,8 +15,8 @@
     ))
 
 (use-package! lsp-julia
-  :if (and (featurep! :lang julia +lsp)
-	   (not (featurep! :tools lsp +eglot)))
+  :if (and (modulep! :lang julia +lsp)
+	   (not (modulep! :tools lsp +eglot)))
   ;; must be set before lsp-mode is loaded
   :init
   (setq lsp-julia-response 360
@@ -31,7 +31,7 @@
 (use-package! julia-repl
   :commands julia-repl
   :config
-  (if (featurep! :term vterm)
+  (if (modulep! :term vterm)
       (julia-repl-set-terminal-backend 'vterm)))
 
 ;; use it to override julia-repl julia command
@@ -234,11 +234,11 @@
         (progn (julia-beginning-of-defun) (point))
         (progn (julia-end-of-defun) (point))))))
 
-  (if (featurep! :tools lookup +docsets)
+  (if (modulep! :tools lookup +docsets)
       (set-docsets! 'julia-mode "Julia")))
 
 (use-package! julia-snail
-  :if (featurep! :lang julia +snail)
+  :if (modulep! :lang julia +snail)
   :after julia-mode
   :commands julia-snail-mode
   :hook (julia-mode . julia-snail-mode)
@@ -272,7 +272,7 @@
      "include(ENV[\"HOME\"] * \"/.julia/packages/julia-snail/JuliaSnail.jl\")")))
 
 (use-package! julia-formatter
-  :if (featurep! :lang julia +format)
+  :if (modulep! :lang julia +format)
   :commands julia-mode
   :hook (julia-mode julia-formatter--ensure-server)
   :config

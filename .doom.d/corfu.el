@@ -204,14 +204,14 @@ function to the relevant margin-formatters list."
   (cmd! (let ((completion-at-point-functions (list scapf t)))
           (completion-at-point))))
 
-(when (featurep! :tools lsp +eglot)
+(when (modulep! :tools lsp +eglot)
   (setq cape-eglot-scapf
         (cape-capf-buster (cape-super-capf #'tabnine-completion-at-point #'eglot-completion-at-point)))
   (setq-hook! 'eglot-managed-mode-hook
     completion-at-point-functions (list cape-eglot-scapf t)))
 (setq-hook! nim-mode
   completion-at-point-functions (list #'tabnine-completion-at-point #'lsp-completion-at-point t))
-(when (and (featurep! :tools lsp) (not (featurep! :tools lsp +eglot)))
+(when (and (modulep! :tools lsp) (not (modulep! :tools lsp +eglot)))
   (setq cape-lsp-scapf
         (cape-super-capf #'tabnine-completion-at-point #'lsp-completion-at-point))
   (setq-hook! 'lsp-completion-mode-hook

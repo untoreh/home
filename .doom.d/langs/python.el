@@ -31,7 +31,7 @@
       (:desc "go to previous window"
        :nev "SPC w TAB" #'python-toggle-repl-back))
 
-(if (featurep! :lang python)
+(if (modulep! :lang python)
     (map! :after python-repl
           (:prefix ("SPC l p" . "python")
            :desc "start python repl"

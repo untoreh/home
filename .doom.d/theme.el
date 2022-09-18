@@ -25,7 +25,7 @@
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;; nyan and parrot only in the "doom" modeline
-(when (not (featurep! :ui modeline +light))
+(when (not (modulep! :ui modeline +light))
   (use-package! nyan-mode
     :if (boundp 'nyan-mode)
     :init
@@ -157,7 +157,7 @@
       "<f9>" #'gif-screencast-start-or-stop))
 
 (use-package! emojify
-  :if (featurep! :ui emoji)
+  :if (modulep! :ui emoji)
   :defer
   :init
   ;; don't emojify strings

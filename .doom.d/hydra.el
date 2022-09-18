@@ -1,6 +1,6 @@
 ;;; hydra.el -*- lexical-binding: t; -*-
 
-(when (featurep! :completion ivy) (require 'ivy-hydra))
+(when (modulep! :completion ivy) (require 'ivy-hydra))
 
 (defhydra hydra-macro (:hint nil :color pink :pre
                        (when defining-kbd-macro

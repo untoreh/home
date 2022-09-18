@@ -26,7 +26,7 @@
       (:desc "go to previous window"
        :nev "SPC w TAB" #'nim-toggle-repl-back))
 
-(if (or t (featurep! :lang nim))
+(if (or t (modulep! :lang nim))
     (map! :after nim-repl
           (:prefix ("SPC l n" . "nim")
            :desc "start nim repl"
@@ -47,7 +47,7 @@
            "C-c C-." #'nim-repl-cd)))
 
 (use-package! nim-mode
-  :if (or t (featurep! :lang nim))
+  :if (or t (modulep! :lang nim))
   :init
   (put 'nim-compile-default-command 'safe-local-variable #'listp)
   :config
@@ -64,10 +64,10 @@
   )
 (setq list-1 '(a b c))
 (append list-1 '(d))
-;; (when (featurep! :tools lsp +eglot)
+;; (when (modulep! :tools lsp +eglot)
 ;;   (after! eglot
 ;;           (add-to-list 'eglot-server-programs '(nim-mode "nimlsp"))))
-(when (or t featurep! :lang nim +lsp)
+(when (or t modulep! :lang nim +lsp)
   (setq lsp-nim-project-mapping [(:projectFile "main.nim" :fileRegex ".*\\.nim")
                                  (:projectFile "test.nim" :fileRegex "test.*\\.nim")])
   (add-hook! nim-mode #'lsp (pyvenv-mode 1))

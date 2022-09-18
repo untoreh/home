@@ -2,8 +2,8 @@
 
 (require 'magit)
 
-(when (and (featurep! :ui treemacs)
-           (featurep! :tools magit))
+(when (and (modulep! :ui treemacs)
+           (modulep! :tools magit))
   (setq +treemacs-git-mode 'deferred))
 
 (defvar magit-large-repo-num-files 1000 "Repositories that exceed this variable are considered large.")

@@ -12,8 +12,8 @@
   (dap-debug-last))
 
 (use-package! lsp-mode
-  :if (and (featurep! :tools lsp)
-	   (not (featurep! :tools lsp +eglot)))
+  :if (and (modulep! :tools lsp)
+	   (not (modulep! :tools lsp +eglot)))
   :config
   (put 'lsp-restart 'safe-local-variable (lambda (&rest args) t))
   (setq
@@ -62,7 +62,7 @@
     ;; lsp-completion-provider
     ;; text
     )
-  (when (featurep! :ui treemacs +lsp)
+  (when (modulep! :ui treemacs +lsp)
     (after! treemacs
       (lsp-treemacs-sync-mode 1)))
   )

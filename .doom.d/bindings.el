@@ -31,7 +31,7 @@
 ;; ( "mdp" #'dap-ui-inspect-thing-at-point)
 
 ;; magit
-(when (featurep! :tools magit)
+(when (modulep! :tools magit)
   (map! :desc "amend commit"
         :after magit
         :leader
@@ -69,7 +69,7 @@
    :nve "]r" #'parrot-rotate-next-word-at-point))
 
 ;; jupyter
-(if (featurep! :lang org +jupyter)
+(if (modulep! :lang org +jupyter)
     (map!
      :after org
      :when use-jupyter
@@ -197,7 +197,7 @@
       (:desc "go to previous window"
        :nev "SPC w TAB" #'julia-toggle-repl-back))
 
-(if (featurep! :lang julia)
+(if (modulep! :lang julia)
     (map! :after julia-mode
           (:prefix ("SPC l j" . "julia")
            :desc "start julia repl"
@@ -219,7 +219,7 @@
            "C-c C-." #'julia-repl-cd)))
 
 ;; evil rebindings
-(if (featurep! :editor evil)
+(if (modulep! :editor evil)
     (progn
       (map! (:map 'global
              "C-w" nil

@@ -2,7 +2,7 @@
 
 (setq org-babel-hide-result-overlays nil)
 ;; needed by poly-org-mode to be nil in all buffers
-(setq org-src-fontify-natively (if (featurep! :lang org +poly) nil t))
+(setq org-src-fontify-natively (if (modulep! :lang org +poly) nil t))
 ;; why would I need to indent src blocks?
 (setq org-edit-src-content-indentation 0)
 
@@ -87,7 +87,7 @@
                 (insert " "))))))
   (advice-add #'org-element-src-block-parser :before #'org-ensure-header-trailing-space))
 
-(if (featurep! :lang org +jupyter)
+(if (modulep! :lang org +jupyter)
     (after! ob-jupyter
       (load! "jupyter")
       (require 'jupyter-org-client)
@@ -106,10 +106,10 @@
   (org-tanglesync-watch-mode 1))
 
 ;; don't format org mode buffers on save
-(if (featurep! :editor format +onsave)
+(if (modulep! :editor format +onsave)
     (add-to-list '+format-on-save-enabled-modes 'org-mode t))
 ;; enable lsp mode (without formatting) for org-mode if not using poly mode
-;; (if (not (featurep! :lang org +poly))
+;; (if (not (modulep! :lang org +poly))
 ;;     (add-hook 'org-mode-hook (lambda ()
 ;;                                (setq-local +format-with-lsp nil)
 ;;                                (lsp)

@@ -2,7 +2,7 @@
 ;; TODO: consider emacs-anywhere
 ;;
 ;; enable vimish-fold for persistent folds
-(when (featurep! :editor fold)
+(when (modulep! :editor fold)
   (use-package! vimish-fold
     :defer
     :config
@@ -16,7 +16,7 @@
 ;; never enable indent guides by default
 ;; (remove-hook! (prog-mode text-mode conf-mode) highlight-indent-guides-mode)
 (use-package! highlight-indent-guides
-  :if (featurep! :ui indent-guides)
+  :if (modulep! :ui indent-guides)
   :defer
   :config
   ;; bitmap seems smoother than character
@@ -24,7 +24,7 @@
    highlight-indent-guides-method 'bitmap
    highlight-indent-guides-responsive 'top))
 
-(when (featurep! :editor word-wrap)
+(when (modulep! :editor word-wrap)
   (add-transient-hook! 'text-mode-hook
     (lambda () (+global-word-wrap-mode 1)))
   )

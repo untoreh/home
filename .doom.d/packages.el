@@ -77,27 +77,27 @@
 (package! lsp-mode :disable nil :pin "a0e1210f626cb7b5db16a9454d3bf61322d299df")
 (package! lsp-bridge :disable t :recipe (:host github :repo "manateelazycat/lsp-bridge"))
 ;; julia
-(if (featurep! :lang julia)
+(if (modulep! :lang julia)
     (progn
       (unpin! (:lang julia))
       ;; lsp
-      (if (featurep! :lang julia +lsp)
-          (if (featurep! :tools lsp +eglot)
+      (if (modulep! :lang julia +lsp)
+          (if (modulep! :tools lsp +eglot)
               (package! eglot-jl)
             (package! lsp-julia
               :recipe (:host github :repo "non-jedi/lsp-julia"))))
       ;; standalone formatter which works as client/server
-      ;; (if (featurep! :lang julia +format)
+      ;; (if (modulep! :lang julia +format)
       ;;     (package! julia-formatter
       ;;       :recipe (:host nil
       ;;                :repo "https://codeberg.org/FelipeLema/julia-formatter.el"
       ;;                ;; :repo "https://github.com/ki-chi/julia-formatter"
       ;;                :files ("*.el" "*.jl" "*.toml"))))
       ;; snail provides repl/completions and other stuff
-      (if (featurep! :lang julia +snail)
+      (if (modulep! :lang julia +snail)
           (package! julia-snail))
       ;; a featureful ob implementation for julia
-      ;; (if (featurep! :lang julia +ob)
+      ;; (if (modulep! :lang julia +ob)
       ;;    (package! ob-julia :shadow 'ob-julia
       ;;      :recipe (:host nil
       ;;               :repo "https://git.nixo.xyz/nixo/ob-julia.git"

@@ -91,7 +91,7 @@
         (cl-first (list (weechat--read-channel-name (not current-prefix-arg)))))))
 
 ;; not prompt for vterm compilation
-(when (featurep! :term vterm)
+(when (modulep! :term vterm)
   (setq vterm-always-compile-module t
         ;; make vterm buffer updates a little faster
         vterm-timer-delay 0.033))
@@ -100,7 +100,7 @@
 ;; this doesn't work because problems with lexical scope
 ;; https://github.com/hlissner/doom-emacs/issues/3558
 ;; (after! (persp-mode magit)
-;;   :if (and nil (featurep! :ui workspaces))
+;;   :if (and nil (modulep! :ui workspaces))
 ;;   :config
 ;;   (persp-def-buffer-save/load
 ;;    :mode 'magit-status-mode :tag-symbol 'def-magit-status-buffer

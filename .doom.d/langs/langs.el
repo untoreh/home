@@ -6,16 +6,16 @@
 (load! "tree-sitter")
 (load! "lisp")
 (load! "spell")
-(if (featurep! :lang shell)
+(if (modulep! :lang shell)
     (load! "shell"))
-(if (featurep! :lang python)
+(if (modulep! :lang python)
     (load! "python"))
-(if (featurep! :lang julia)
+(if (modulep! :lang julia)
     (load! "julia"))
 ;; FIXME: nim module is disabled because useless
-(if (or t (featurep! :lang nim))
+(if (or t (modulep! :lang nim))
     (load! "nim"))
-(if (featurep! :tools lsp)
+(if (modulep! :tools lsp)
     (load! "lsp"))
 
 ;; prefer gfm-mode over markdown-mode
@@ -30,7 +30,7 @@
 
 ;; ;; dont format snippets (list is negated)
 ;; ;; FIXME: this produces a eager macro expansion error on startup
-(when (featurep! :editor format +onsave)
+(when (modulep! :editor format +onsave)
   (cl-dolist (mode '(snippet-mode
                      web-mode
                      org-msg-edit-mode
