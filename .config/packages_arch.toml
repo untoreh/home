@@ -17,6 +17,7 @@ gost
 unzip
 imagemagick
 inetutils
+gost
 julia
 net-tools
 dos2unix

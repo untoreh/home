@@ -32,7 +32,7 @@ in {
     # langs
     pup nixfmt golangci-lint shfmt html-tidy nodejs shellcheck jq enchant2 ispell languagetool
     chrpath pipenv jre;
-  inherit (unstable) isync goimapnotify gnupg keychain pinentry emacs-all-the-icons-fonts gost;
+  inherit (unstable) isync goimapnotify gnupg keychain pinentry emacs-all-the-icons-fonts;
   # more fonts
   inherit (self.vimPlugins) vim-devicons;
   # sweet theme dep
