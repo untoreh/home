@@ -10,6 +10,7 @@ go_bin=$(echo -n /usr/lib/go-\*/bin | tr ' ' ':')
 goenv_bin="$HOME/.goenv/bin"
 julia_bin="$HOME/.julia/juliaup/bin"
 choosenim="$(cat ~/.choosenim/current)/bin"
+dotnet_bin="$HOME/.dotnet/tools"
 nim_bin="$HOME/.nimble/bin:$choosenim"
 defs="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
 ccache="/usr/lib/ccache"
@@ -17,7 +18,7 @@ ccache="/usr/lib/ccache"
 windows=$(echo $PATH | sed 's/.*\/usr\/lib\/wsl/\/usr\/lib\/wsl/')
 nixbin=~/.nix-profile/bin
 guixbin=~/.guix-profile/bin
-NEWPATH="PATH=\"$HOME/bin:$HOME/.local/bin:$guixbin:$nixbin:$julia_bin:$nim_bin:$ruby_bin:$goenv_bin:$go_bin:$HOME/dev/go/bin:$HOME/.cargo/bin:$ccache:$defs:$windows\""
+NEWPATH="PATH=\"$HOME/bin:$HOME/.local/bin:$guixbin:$nixbin:$julia_bin:$nim_bin:$dotnet_bin:$ruby_bin:$goenv_bin:$go_bin:$HOME/dev/go/bin:$HOME/.cargo/bin:$ccache:$defs:$windows\""
 
 echo "$NEWPATH" >$cached_path
 eval "$NEWPATH"
