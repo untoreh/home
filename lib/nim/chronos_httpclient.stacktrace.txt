@@ -1,0 +1,8 @@
+#1  0x00005652a6c501a9 in nimDestroyAndDispose (p=0x7f4708188640) at /root/.choosenim/toolchains/nim-1.6.6/lib/system/arc.nim:172
+#2  0x00005652a6d935aa in eqcopy___OOZOOZOOZrootZOnimbleZpkgsZchronos4535masterZchronosZasyncloop_1055 (dest_0=0x7f47033c0ff8, src=0x7ffebef7f010) at /root/.nimble/pkgs/chronos-#master/chronos/ioselects/ioselectors_epoll.nim:146
+#3  0x00005652a6d668d2 in registerHandle__OOZOOZOOZrootZOnimbleZpkgsZchronos4535masterZchronosZasyncloop_964 (s=0x7f5cee4b1e60, fd=0x438, events={}, data_0=0x7ffebef7f010) at /root/.nimble/pkgs/chronos-#master/chronos/ioselects/ioselectors_epoll.nim:146
+#4  0x00005652a6d9370d in register__OOZOOZOOZrootZOnimbleZpkgsZchronos4535masterZchronosZasyncloop_952 (fd=0x438) at /root/.nimble/pkgs/chronos-#master/chronos/asyncloop.nim:558
+#5  0x00005652a6dc6dcf in createAsyncSocket__OOZOOZOOZrootZOnimbleZpkgsZchronos4535masterZchronosZhandles_62 (domain=AF_INET, sockType=SockType(1), protocol=Protocol(6)) at /root/.nimble/pkgs/chronos-#master/chronos/handles.nim:112
+#6  0x00005652a6dd22ed in connect__OOZOOZOOZrootZOnimbleZpkgsZchronos4535masterZchronosZtransportsZstream_1742 (address=0x7f470576a520, bufferSize=0x1000, child=0x0) at /root/.nimble/pkgs/chronos-#master/chronos/transports/stream.nim:1509
+#7  0x00005652a6ff8982 in doConnect__OOZOOZOOZrootZOnimbleZpkgsZchronos4535masterZchronosZappsZhttpZhttpclient_4732 (chronosInternalRetFuture=0x7f4704e774d0, ClE_0=0x7f4707ec4c00) at /root/.nimble/pkgs/chronos-#master/chronos/apps/http/httpclient.nim:737
+#8  0x00005652a6da0697 in futureContinue__OOZOOZOOZrootZOnimbleZpkgsZchronos4535masterZchronosZappsZhttpZhttpclient_4422 (fut=0x7f4704e774d0) at /root/.nimble/pkgs/chronos-#master/chronos/asyncfutures2.nim:365

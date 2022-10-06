@@ -1,4 +1,5 @@
-import std/[asyncdispatch, asyncnet, strutils, httpcore]
+import std/[strutils, httpcore]
+import chronos
 import nimSocks/[client, types]
 import harpoon
 import uri
@@ -6,9 +7,7 @@ import uri
 # let taddr = initAddress
 
 # dial to the socks server
-# var sock = waitFor asyncnet.dial("127.0.0.1", Port 8877)
-let taddr = initTAddress("127.0.0.1", 8877.Port)
-var sock = waitFor taddr.connect()
+var sock = waitFor asyncnet.dial("127.0.0.1", Port 8877)
 assert true == waitFor sock.doSocksHandshake(
   username = "username",
   password = "password",

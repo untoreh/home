@@ -1,0 +1,23 @@
+#0  0x0000563741138348 in eqsink___pureZasyncdispatch_2014 (dest_0=0x7788b5b78bc64778, src=...) at /root/.choosenim/toolchains/nim-1.6.6/lib/system.nim:1002
+#1  0x0000563740de0d8b in reset__pureZasyncdispatch_1999 (obj=0x7788b5b78bc64778) at /root/.choosenim/toolchains/nim-1.6.6/lib/system.nim:1002
+#2  0x0000563740de0e7c in shrink__pureZasyncdispatch_1979 (x_0=Python Exception <class 'gdb.error'>: There is no member named Sup.
+, newLen=0x0) at /root/.choosenim/toolchains/nim-1.6.6/lib/system/seqs_v2.nim:82
+#3  0x0000563740de0efb in setLen__pureZasyncdispatch_1971 (s=Python Exception <class 'gdb.error'>: There is no member named Sup.
+, newlen=0x0) at /root/.choosenim/toolchains/nim-1.6.6/lib/system/seqs_v2.nim:119
+#4  0x00005637411383c9 in eqcopy___pureZasyncdispatch_1956 (dest_0=Python Exception <class 'gdb.error'>: There is no member named Sup.
+, src=...) at /root/.choosenim/toolchains/nim-1.6.6/lib/pure/ioselects/ioselectors_epoll.nim:148
+#5  0x000056374113b1cd in eqcopy___pureZasyncdispatch_1944 (dest_0=0x7fe334910ff8, src=0x7fed4dff9f30) at /root/.choosenim/toolchains/nim-1.6.6/lib/pure/ioselects/ioselectors_epoll.nim:148
+#6  0x0000563741134f4b in registerHandle__pureZasyncdispatch_1847 (s=0x7ff91da65670, fd=0x448, events={}, data_0=0x7fed4dff9f30) at /root/.choosenim/toolchains/nim-1.6.6/lib/pure/ioselects/ioselectors_epoll.nim:148
+#7  0x000056374113bced in register__pureZasyncdispatch_1827 (fd=0x448) at /root/.choosenim/toolchains/nim-1.6.6/lib/pure/asyncdispatch.nim:1190
+#8  0x000056374113bee8 in createAsyncNativeSocket__pureZasyncdispatch_5558 (domain=AF_INET, sockType=SOCK_STREAM, protocol=IPPROTO_TCP, inheritable=0x0) at /root/.choosenim/toolchains/nim-1.6.6/lib/pure/asyncdispatch.nim:1675
+#9  0x000056374113d755 in tryNextAddrInfo__pureZasyncdispatch_5826 (futX60gensym188_=0x0, ClE_0=0x7fe33929b890) at /root/.choosenim/toolchains/nim-1.6.6/lib/pure/asyncdispatch.nim:1808
+#10 0x000056374113e494 in dial__pureZasyncdispatch_5652 (address=..., port=0x1bb, protocol=IPPROTO_TCP) at /root/.choosenim/toolchains/nim-1.6.6/lib/pure/asyncdispatch.nim:1842
+#11 0x0000563741146adb in dialIter__pureZasyncnet_556 (ClE_0=0x7fe334f76870) at /root/.choosenim/toolchains/nim-1.6.6/lib/pure/asyncnet.nim:289
+#12 0x0000563741146e8e in dialNimAsyncContinue__pureZasyncnet_557 (ClE_0=0x7fe334f76640) at /root/.choosenim/toolchains/nim-1.6.6/lib/pure/asyncmacro.nim:28
+#13 0x00005637411478f4 in dial__pureZasyncnet_561 (address=..., port=0x1bb, protocol=IPPROTO_TCP, buffered=0x1) at /root/.choosenim/toolchains/nim-1.6.6/lib/pure/asyncmacro.nim:232
+#14 0x000056374116b6bd in newConnectionIter__pureZhttpclient_2640 (ClE_0=0x7fe3343ee350) at /root/.choosenim/toolchains/nim-1.6.6/lib/pure/httpclient.nim:905
+#15 0x000056374116c39a in newConnectionNimAsyncContinue__pureZhttpclient_2641 (ClE_0=0x7fe338fc7d50) at /root/.choosenim/toolchains/nim-1.6.6/lib/pure/asyncmacro.nim:28
+#16 0x000056374116cc46 in newConnection__pureZhttpclient_2645 (client=0x7fe3352ff3e0, url=0x7fe33efe1060) at /root/.choosenim/toolchains/nim-1.6.6/lib/pure/asyncmacro.nim:232
+#17 0x0000563741172b3e in requestAuxIter__pureZhttpclient_3396 (ClE_0=0x7fe33440a050) at /root/.choosenim/toolchains/nim-1.6.6/lib/pure/httpclient.nim:1011
+#18 0x0000563741174c6a in requestAuxNimAsyncContinue__pureZhttpclient_3397 (ClE_0=0x7fe33efe1050) at /root/.choosenim/toolchains/nim-1.6.6/lib/pure/asyncmacro.nim:28
+#19 0x000056374117562e in requestAux__pureZhttpclient_3401 (client=0x7fe3352ff3e0, url=0x7fe339acbe78, httpMethod=GET, body=..., headers=0x0, multipart=0x0) at /root/.choosenim/toolchains/nim-1.6.6/lib/pure/asyncmacro.nim:232
