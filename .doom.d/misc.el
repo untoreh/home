@@ -114,18 +114,45 @@
       "e B" #'emacs-lisp-native-compile-and-load)
 
 ;; garbage collector mode
-(use-package! gcbal
-  ;; apply after undo-tree-mode since it ovverrides `post-gc-hook'
-  :after-call undo-tree-mode
-  :if nil
-  :init
-  (defun gcmh-mode (&rest args))
-  (defun gcmh-set-high-threshold (&rest args))
-  :config
-  (when (not (subrp (symbol-function #'gcbal-mode)))
-    (native-compile-async (locate-library "gcbal") t t))
-  (setq
-   gcbal-verbose nil
-   gcbal-target-gctime 0.1
-   gcbal-target-auto t)
-  (gcbal-mode 1))
+;; (use-package! gcbal
+;;   ;; apply after undo-tree-mode since it ovverrides `post-gc-hook'
+;;   :after-call undo-tree-mode
+;;   :if nil
+;;   :init
+;;   (defun gcmh-mode (&rest args))
+;;   (defun gcmh-set-high-threshold (&rest args))
+;;   :config
+;;   (when (not (subrp (symbol-function #'gcbal-mode)))
+;;     (native-compile-async (locate-library "gcbal") t t))
+;;   (setq
+;;    gcbal-verbose nil
+;;    gcbal-target-gctime 0.1
+;;    gcbal-target-auto t)
+;;   (gcbal-mode 1))
+
+(when t
+  ;; Pulled from gcbal to use standalone
+  (defvar gcbal--gcfun (symbol-function #'garbage-collect))
+  (defconst gcbal--stub
+    (lambda () '((conses 16 0 0)
+                 (symbols 48 0 0)
+                 (strings 32 0 0)
+                 (string-bytes 1 0)
+                 (vectors 16 0)
+                 (vector-slots 8 0 0)
+                 (floats 8 0 0)
+                 (intervals 56 0 0)
+                 (buffers 0 0))))
+  (defun my/nogc (func &rest args)
+    (unwind-protect
+        (progn
+          (fset #'garbage-collect gcbal--stub)
+          (if (null args)
+              (funcall func)
+            (funcall func args)))
+      (fset #'garbage-collect gcbal--gcfun)))
+  (defadvice! gc-override (func &rest args) :around #'save-buffer
+    (my/nogc func args))
+  (defadvice! gc-override (func &rest args) :around #'+format/region-or-buffer
+    (my/nogc func))
+  )
