@@ -1,0 +1,26 @@
+#0  __pthread_kill_implementation (threadid=<optimized out>, signo=signo@entry=0x6, no_tid=no_tid@entry=0x0) at ./nptl/pthread_kill.c:44
+#1  0x00007f46d23e25df in __pthread_kill_internal (signo=0x6, threadid=<optimized out>) at ./nptl/pthread_kill.c:78
+#2  0x00007f46d2396a02 in __GI_raise (sig=sig@entry=0x6) at ../sysdeps/posix/raise.c:26
+#3  0x00007f46d2381469 in __GI_abort () at ./stdlib/abort.c:79
+#4  0x00007f46d23d6888 in __libc_message (action=action@entry=do_abort, fmt=fmt@entry=0x7f46d250f6fb "%s\n") at ../sysdeps/posix/libc_fatal.c:155
+#5  0x00007f46d23ec1ea in malloc_printerr (str=str@entry=0x7f46d2512360 "double free or corruption (!prev)") at ./malloc/malloc.c:5659
+#6  0x00007f46d23ee16c in _int_free (av=0x7f46d254dc60 <main_arena>, p=0x5570650bf9d0, have_lock=<optimized out>, have_lock@entry=0x0) at ./malloc/malloc.c:4586
+#7  0x00007f46d23f089f in __GI___libc_free (mem=<optimized out>) at ./malloc/malloc.c:3386
+#8  0x0000557061174d45 in deallocImpl__system_1729 (p=0x5570650bf9e0) at /root/.choosenim/toolchains/nim-1.6.6/lib/system/mm/malloc.nim:28
+#9  0x0000557061174d65 in deallocSharedImpl__system_1742 (p=0x5570650bf9e0) at /root/.choosenim/toolchains/nim-1.6.6/lib/system/mm/malloc.nim:45
+#10 0x0000557061174d85 in deallocShared (p=0x5570650bf9e0) at /root/.choosenim/toolchains/nim-1.6.6/lib/system/memalloc.nim:308
+#11 0x0000557061176269 in alignedDealloc (p=0x5570650bf9e0, align=0x8) at /root/.choosenim/toolchains/nim-1.6.6/lib/system/memalloc.nim:367
+#12 0x0000557061176381 in nimRawDispose (p=0x5570650bf9f0, alignment=0x8) at /root/.choosenim/toolchains/nim-1.6.6/lib/system/arc.nim:164
+#13 0x0000557061176cef in free__system_2982 (s=0x5570650bf9e0, desc=0x557061c9e190 <NTIv2__7r4oeIrX2n9aOSLbv8vKLiw_>) at /root/.choosenim/toolchains/nim-1.6.6/lib/system/orc.nim:109
+#14 0x0000557061176b05 in collectCyclesBacon__system_3258 (j=0x7fff53181c58, lowMark=0x0) at /root/.choosenim/toolchains/nim-1.6.6/lib/system/orc.nim:338
+#15 0x0000557061176e86 in collectCycles__system_3375 () at /root/.choosenim/toolchains/nim-1.6.6/lib/system/orc.nim:383
+#16 0x0000557061177222 in registerCycle__system_3400 (s=0x55706582d470, desc=0x557061ca6450 <NTIv2__hQ8UFdFrBwKDOfCkIM5KOQ_>) at /root/.choosenim/toolchains/nim-1.6.6/lib/system/orc.nim:413
+#17 0x00005570611773bf in rememberCycle__system_3440 (isDestroyAction=0x0, s=0x55706582d470, desc=0x557061ca6450 <NTIv2__hQ8UFdFrBwKDOfCkIM5KOQ_>) at /root/.choosenim/toolchains/nim-1.6.6/lib/system/orc.nim:472
+#18 0x00005570612f08fc in nimDecRefIsLastCyclicDyn (p=0x55706582d480) at /root/.choosenim/toolchains/nim-1.6.6/lib/system/orc.nim:483
+#19 0x0000557061302a9c in eqdestroy___OOZOOZOOZrootZOnimbleZpkgsZchronos4535masterZchronosZtransportsZstream_155 (dest_0=0x7fff53181e70) at /root/.nimble/pkgs/chronos-#master/chronos/transports/stream.nim:211
+#20 0x0000557061304d9c in trackStream__OOZOOZOOZrootZOnimbleZpkgsZchronos4535masterZchronosZtransportsZstream_264 (t=0x55706541b660) at /root/.nimble/pkgs/chronos-#master/chronos/transports/stream.nim:211
+#21 0x00005570613048c2 in acceptLoop__OOZOOZOOZrootZOnimbleZpkgsZchronos4535masterZchronosZtransportsZstream_2244 (udata=0x557065de1470) at /root/.nimble/pkgs/chronos-#master/chronos/transports/stream.nim:1615
+#22 0x00005570612ac8ff in poll__OOZOOZOOZrootZOnimbleZpkgsZchronos4535masterZchronosZasyncloop_2414 () at /root/.nimble/pkgs/chronos-#master/chronos/asyncloop.nim:288
+#23 0x00005570612cf758 in waitFor__server_39344 (fut=0x5570649baf60) at /root/.nimble/pkgs/chronos-#master/chronos/asyncloop.nim:1127
+#24 0x000055706178c80d in runScorper__server_39330 (address=..., callback=0x5570617d1ae0 <callback__server_38550>) at src/nim/server.nim:569
+#25 0x00005570617d22c1 in startServer__server_39314 (doclear=0x0, port=0x13bb, loglevel=...) at src/nim/server.nim:609
