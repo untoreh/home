@@ -74,8 +74,6 @@
 (package! tree-sitter)
 (package! tree-sitter-langs)
 
-(package! lsp-mode :disable nil :pin "a0e1210f626cb7b5db16a9454d3bf61322d299df")
-(package! lsp-bridge :disable t :recipe (:host github :repo "manateelazycat/lsp-bridge"))
 ;; julia
 (if (modulep! :lang julia)
     (progn
