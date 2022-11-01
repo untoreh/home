@@ -5,7 +5,7 @@
   (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
   (corfu-auto t)                 ;; Enable auto completion
   (corfu-auto-prefix 0)
-  (corfu-auto-delay 0.5)
+  (corfu-auto-delay 0.3)
   (corfu-echo-documentation 0.3)
   (corfu-quit-no-match 'separator)        ;; Automatically quit if there is no match
   (corfu-preselect-first nil)    ;; Disable candidate preselection
@@ -15,15 +15,15 @@
 
   :bind
   (:map corfu-map
-   ("TAB" . corfu-next)
-   ([tab] . corfu-next)
-   ("C-n" . corfu-next)
-   ("C-j" . corfu-insert)
-   ("S-SPC" . corfu-insert-separator)
-   ("S-TAB" . corfu-previous)
-   ("C-p" . corfu-previous)
-   ([?\r] . newline)
-   ([backtab] . corfu-previous))
+        ("TAB" . corfu-next)
+        ([tab] . corfu-next)
+        ("C-n" . corfu-next)
+        ("C-j" . corfu-insert)
+        ("S-SPC" . corfu-insert-separator)
+        ("S-TAB" . corfu-previous)
+        ("C-p" . corfu-previous)
+        ([?\r] . newline)
+        ([backtab] . corfu-previous))
   :config
   (setq-default orderless-component-separator "[ &+-]")
   (setq-default history-length 1000)
@@ -53,7 +53,7 @@
   (use-package! corfu-quick
     :bind
     (:map corfu-map
-     ("C-q" . corfu-quick-insert)))
+          ("C-q" . corfu-quick-insert)))
   (with-eval-after-load 'all-the-icons
     (defvar kind-all-the-icons--cache nil
       "The cache of styled and padded label (text or icon).
@@ -159,7 +159,7 @@ function to the relevant margin-formatters list."
 
 (use-package! tabnine-capf
   :after cape
-  :commands (tabnine-completion-at-point)
+  :commands (tabnine-capf)
   :hook (kill-emacs . tabnine-capf-kill-process)
   )
 
@@ -167,7 +167,7 @@ function to the relevant margin-formatters list."
   :after corfu
   :hook (corfu-mode . corfu-doc-mode)
   :bind (:map corfu-map
-         ("M-d" . corfu-doc-toggle)))
+              ("M-d" . corfu-doc-toggle)))
 (use-package copilot
   :if nil
   :after corfu
@@ -190,42 +190,48 @@ function to the relevant margin-formatters list."
   )
 
 (setq
- cape-symbol-scapf (cape-super-capf #'cape-keyword #'cape-symbol #'cape-abbrev)
+ cape-symbol-scapf (cape-super-capf #'cape-keyword #'cape-symbol #'cape-abbrev #'cape-dabbrev)
  cape-word-scapf (cape-super-capf #'cape-ispell #'cape-dict)
  cape-expand-scapf (cape-super-capf #'cape-line) ;; snippets/tempel
  cape-file-scapf (cape-capf-buster
                   (cape-super-capf #'cape-dabbrev
                                    #'cape-file
                                    #'cape-history))
- cape-code-scapf (cape-super-capf #'cape-tex #'cape-sgml #'cape-rfc1345)
- cape-default-scapf (cape-capf-buster #'tabnine-completion-at-point)
+ cape-char-scapf (cape-super-capf #'cape-tex #'cape-sgml #'cape-rfc1345)
+ cape-default-scapf (cape-capf-buster #'tabnine-capf)
+ cape-t9-lsp-scapf (cape-super-capf #'lsp-completion-at-point #'tabnine-capf)
  )
-(defun my/super-capf-cmd! (scapf)
-  (cmd! (let ((completion-at-point-functions (list scapf t)))
+(mapc (lambda (v) (defalias (intern (symbol-name v)) (symbol-value v)))
+      '(cape-symbol-scapf cape-word-scapf cape-expand-scapf cape-file-scapf cape-char-scapf cape-t9-lsp-scapf))
+
+(defun my/capf-cmd! (capf)
+  (cmd! (let ((completion-at-point-functions (list capf t)))
           (completion-at-point))))
 
-(when (modulep! :tools lsp +eglot)
-  (setq cape-eglot-scapf
-        (cape-capf-buster (cape-super-capf #'tabnine-completion-at-point #'eglot-completion-at-point)))
-  (setq-hook! 'eglot-managed-mode-hook
-    completion-at-point-functions (list cape-eglot-scapf t)))
-(setq-hook! nim-mode
-  completion-at-point-functions (list #'tabnine-completion-at-point #'lsp-completion-at-point t))
+;; (when (modulep! :tools lsp +eglot)
+;;   (setq cape-eglot-scapf
+;;         (cape-capf-buster (cape-super-capf #'tabnine-capf #'eglot-completion-at-point)))
+;;   (setq-hook! 'eglot-managed-mode-hook
+;;     completion-at-point-functions (list cape-eglot-scapf t)))
+(add-hook! nim-mode :depth -1
+  (setq-local
+   completion-at-point-functions
+   '(cape-symbol-scapf cape-t9-lsp-scapf)))
 (when (and (modulep! :tools lsp) (not (modulep! :tools lsp +eglot)))
-  (setq cape-lsp-scapf
-        (cape-super-capf #'tabnine-completion-at-point #'lsp-completion-at-point))
   (setq-hook! 'lsp-completion-mode-hook
-    completion-at-point-functions (list cape-lsp-scapf t)))
+    completion-at-point-functions '(cape-t9-lsp-scapf)))
+
+(setq-hook! markdown-mode
+  completion-at-point-functions '(blog-tags-capf cape-word-scapf cape-expand-scapf cape-file-scapf))
 
 (map! :after (corfu cape)
-      (:desc "symbol" :i "C-SPC s" (my/super-capf-cmd! cape-symbol-scapf))
-      (:desc "word" :i "C-SPC w" (my/super-capf-cmd! cape-word-scapf))
-      (:desc "expand" :i "C-SPC d" (my/super-capf-cmd! cape-expand-scapf))
-      (:desc "file" :i "C-SPC f" (my/super-capf-cmd! cape-file-scapf))
-      (:desc "code" :i "C-SPC c" (my/super-capf-cmd! cape-code-scapf))
-      (:desc "complete" :i "C-SPC SPC" (my/super-capf-cmd! cape-default-scapf))
-      (:desc "complete" :i "C-SPC C-SPC" (my/super-capf-cmd! cape-default-scapf))
+      (:desc "Symbol" :i "C-SPC l" (my/capf-cmd! cape-symbol-scapf))
+      (:desc "Word" :i "C-SPC w" (my/capf-cmd! cape-word-scapf))
+      (:desc "Expand" :i "C-SPC d" (my/capf-cmd! cape-expand-scapf))
+      (:desc "File" :i "C-SPC f" (my/capf-cmd! cape-file-scapf))
+      (:desc "Code" :i "C-SPC c" (my/capf-cmd! cape-char-scapf))
+      (:desc "T9" :i "C-SPC SPC" (my/capf-cmd! cape-default-scapf))
+      (:desc "Snippet" :i "C-SPC s" (my/capf-cmd! (cape-company-to-capf #'company-yasnippet)))
       (:mode lsp-mode
-       (:desc "complete" :i "C-SPC SPC" (my/super-capf-cmd! cape-lsp-scapf))
-       (:desc "complete" :i "C-SPC C-SPC" (my/super-capf-cmd! cape-lsp-scapf))
-       ))
+             (:desc "lsp" :i "C-SPC SPC" (my/capf-cmd! cape-t9-lsp-scapf))
+             ))
