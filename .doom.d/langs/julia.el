@@ -77,16 +77,16 @@
 
   (require 'aio)
   (aio-defun org-babel-julia--send-string (str)
-             ;; this function must be called within the terminal buffer context
-             ;; because aio doesn't support buffer context switching
-             (if (not vterm--term)
-                 (error "Not in a vterm buffer when executing julia src block"))
-             (while (eq 0 (current-column))
-               (progn
-                 (message "waiting for repl prompt...")
-                 (vterm-reset-cursor-point)
-                 (aio-await (aio-sleep 0.25))))
-             (julia-repl--send-string str))
+    ;; this function must be called within the terminal buffer context
+    ;; because aio doesn't support buffer context switching
+    (if (not vterm--term)
+        (error "Not in a vterm buffer when executing julia src block"))
+    (while (eq 0 (current-column))
+      (progn
+        (message "waiting for repl prompt...")
+        (vterm-reset-cursor-point)
+        (aio-await (aio-sleep 0.25))))
+    (julia-repl--send-string str))
 
   (defun org-babel-julia--execute-src-block (body params)
     (interactive)
@@ -177,8 +177,8 @@
 
 ;; functions to send code to repl
 (after! (julia-mode julia-repl)
-  (require 'a)
-  (setq-default julia-repl--session-hist (a-list))
+  ;; (require 'a)
+  (setq-default julia-repl--session-hist (copy-alist '()))
   (define-minor-mode julia-repl-vterm-mode
     " mode for julia repl vterm buffers "
     :interactive nil)
@@ -286,8 +286,8 @@
                           (list :text
                                 (save-match-data
                                   (thread-first str
-                                    (split-string  "\n" nil)
-                                    (vconcat)))
+                                                (split-string  "\n" nil)
+                                                (vconcat)))
                                 :current_line 1))))
           (insert (mapconcat 'identity response "\n"))
           ;; success
@@ -350,7 +350,7 @@
 (defun julia-repl-cmd (str)
   "Send a string to julia repl switching to its buffer, if it exists."
   (when (julia-repl-switch nil t)
-      (julia-repl--send-string str)))
+    (julia-repl--send-string str)))
 
 (defun julia-franklin ()
   (interactive)
@@ -448,9 +448,9 @@ the SRC folder to the TRG folder"
   (appendq! projectile-project-root-files '("Project.toml" "JuliaProject.toml")))
 
 ;;; add tag completion to blog posts
-(after! company
+(after! corfu
   (defconst
-    company-blog-tags
+    blog-tags-list
     (with-temp-buffer
       (insert-file-contents
        (my/concat-path doom-private-dir
@@ -458,46 +458,49 @@ the SRC folder to the TRG folder"
                        "blog_tags.txt"))
       (split-string (buffer-string)))
     "The list of tags for the blog tags backend.")
-  (defun company-blog-tags-backend (command &optional arg &rest ignored)
+  (defun blog-tags-capf ()
     "Completes based on a list of tags defined in `company-blog-tags'."
-    (interactive (list 'interactive))
-    (cl-case command
-      (interactive (company-begin-backend 'company-sample-backend))
-      (prefix (and (derived-mode-p 'markdown-mode)
-                   (company-grab-symbol)))
-      (candidates (if (not (or (null arg) (eq "" (substring-no-properties arg))))
-                      (cl-remove-if-not
-                       (lambda (c) (string-prefix-p arg c))
-                       company-blog-tags)
-                    company-blog-tags))))
+    (interactive)
+    (let* ((start (line-beginning-position))
+           (beg (buffer-substring-no-properties start (+ start 6)))
+           )
+      (when (equal beg "tags =")
+        (let* ((pos (point))
+              (word (word-at-point))
+              (beg (- pos (length word)))
+              (end pos)
+              )
+          (list beg pos blog-tags-list . nil)
+          ))
+      )
+    )
 
-  (defvar company-blog-tags-prev-backends company-backends "Stores previous company backends in buffer.")
-  (defvar company-blog-tags-prev-prefix-length company-minimum-prefix-length "Stores previous company min prefix length in buffer.")
-  (define-minor-mode company-blog-tags-mode
-    "Minor mode for company blog tags backend."
-    :lighter "blog-tags"
+  (defvar my/prev-capfs nil "Stores previous company backends in buffer.")
+  (define-minor-mode blog-tags-mode
+    "Minor mode for blog tags completion."
+    :lighter "blog-tags-capf"
     :global nil
-    (if company-blog-tags-mode
+    (if blog-tags-mode
         (progn
-          (setq-local company-blog-tags-prev-backends company-backends)
-          (setq company-blog-tags-prev-prefix-length company-minimum-prefix-length)
-          (setq-local company-minimum-prefix-length 0)
-          (setq-local company-backends '(company-blog-tags-backend))
+          (setq-local my/prev-capfs completion-at-point-functions)
+          (setq-local completion-at-point-functions '(blog-tags-capf))
           )
-      (setq-local company-minimum-prefix-length company-blog-tags-prev-prefix-length
-                  company-backends company-blog-tags-prev-backends)
       ))
 
   ;; (add-hook 'gfm-mode-hook (lambda ()
   ;;                            (and (string-match ".*/dev/blog/.*" (buffer-file-name))
-  ;;                                 (company-blog-tags-mode))))
+  ;;                                 (blog-tags-mode))))
 
   (map! :mode gfm-mode
         :localleader
         :desc "Toggle completion of blog tags."
-        :nv "t" (cmd! (company-blog-tags-mode (if company-blog-tags-mode -1 1)))
+        :nv "t" (cmd! (blog-tags-mode (if blog-tags-mode -1 1)))
         )
   )
 
-(set-file-template! ".*/blog/posts/.+\\.md$" :trigger "blog_post" :project t)
-(set-docsets! 'julia-repl-vterm-mode :add "Julia")
+(add-hook! 'doom-after-init-modules-hook
+  (set-file-template! ".*/blog/posts/.+\\.md$" :trigger "blog_post" :project t)
+  (set-docsets! 'julia-repl-vterm-mode :add "Julia")
+  (set-popup-rules!
+    '(("^\\*julia\\*" :height 25 :quit t :select nil)
+      )))
