@@ -20,3 +20,6 @@ This is because by the max recv window is very close to the default value. Effec
 - Remove the `-W` flag from dropbear runtime config
 - compile dropbear with an high enough `RECV_MAX_PAYLOAD_LEN`
 - Use a small enough buffer the `sftp` (like `-B 512`)
+
+## Windows port forwarding (WSL from lan) not working
+- Check that the service `IP helper` is running.
