@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: legible lambda
+# key: lam
+# condition: t
+# --
+@λ($0)
