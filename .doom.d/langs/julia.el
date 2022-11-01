@@ -462,7 +462,7 @@ the SRC folder to the TRG folder"
     "Completes based on a list of tags defined in `company-blog-tags'."
     (interactive)
     (let* ((start (line-beginning-position))
-           (beg (buffer-substring-no-properties start (+ start 6)))
+           (beg (buffer-substring-no-properties start (min (buffer-size) (+ start 6))))
            )
       (when (equal beg "tags =")
         (let* ((pos (point))
