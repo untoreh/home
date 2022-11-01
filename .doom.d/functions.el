@@ -150,14 +150,24 @@ shell exits, the buffer is killed."
     ('sh-mode "echo %s")
     ))
 
+(defun my/prepend-file-name (suffix)
+  (format "\"%s:%d\"" (file-name-nondirectory buffer-file-name) suffix))
+
+(defun my/logstring-kind (kind)
+  (pcase kind
+    ;; last yanked string
+    ('yank (substring-no-properties (car kill-ring-yank-pointer)))
+    ;; line number
+    ('nil (my/prepend-file-name (+ 1 (line-number-at-pos))))))
+
 (defvar my/insert-print-list nil "Buffer local list of currently inserted print statements")
 (make-variable-buffer-local 'my/insert-print-list)
 
-(defun my/insert-print ()
+(defun my/insert-print (&optional kind)
   "Insert a print statements at point."
   (interactive)
   (let* ((cmd (my/mode-print-cmd))
-         (logstring (format "\"%s:%d\"" (file-name-nondirectory buffer-file-name) (+ 1 (line-number-at-pos))))
+         (logstring (my/logstring-kind kind))
          (logcmd (format cmd logstring)))
     (evil-open-below 1)
     (insert logcmd)
@@ -181,10 +191,17 @@ shell exits, the buffer is killed."
                        (delete-blank-lines)
                        ))))))))
 
-(map! :leader
-      (:desc "insert log string"
-       :nvi "i l"
+(map!
+      (
+       :prefix "SPC i l"
+       :desc "insert num log"
+       :nv "l"
        #'my/insert-print)
+      (
+       :prefix "SPC i l"
+       :desc "insert yank log"
+       :nv "y"
+       (cmd! (my/insert-print 'yank)))
       (:leader
        :desc "clear log strings"
        :nvi "d l"
