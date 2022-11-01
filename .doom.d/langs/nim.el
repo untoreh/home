@@ -72,13 +72,14 @@
                                  (:projectFile "test.nim" :fileRegex "test.*\\.nim")])
   (add-hook! nim-mode #'lsp (pyvenv-mode 1))
   (setq-hook! nim-mode
+    ;; corfu-auto-delay 999
     lsp-auto-guess-root t
     ;; lsp-completion-enable nil
     flycheck-checker-error-threshold 100000))
 
 (setq nim-indent-offset 2)
-(setq-hook! 'nim-mode-hook
-  evil-shift-width 2)
+(add-hook! nim-mode :depth 99
+  (setq evil-shift-width 2))
 
 (setq-default
  nim-compile-command "nim"
