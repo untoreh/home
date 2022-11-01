@@ -2,9 +2,6 @@ source ~/.config/fish/profile.fish
 if ! set -q WSLENV && ! set -q INSIDE_DOCKER && ! test -e /etc/alpine-release
     source ~/.config/fish/ssh-agent.fish
 end
-if ! [ -e /tmp/supervisor.sock ] && which supervisord &>/dev/null && [ -z "$INSIDE_DOCKER" ]
-    supervisord -c ~/.config/supervisor.conf
-end
 
 source ~/.config/fish/functions/git.fish
 source ~/.config/fish/functions/go.fish
@@ -37,3 +34,10 @@ set -gx MAMBA_EXE "/nix/store/xvpy77arjp2sbipv3acddq1zvv9qhp10-micromamba-0.18.1
 set -gx MAMBA_ROOT_PREFIX "/home/fra/micromamba"
 eval "/nix/store/xvpy77arjp2sbipv3acddq1zvv9qhp10-micromamba-0.18.1/bin/micromamba" shell hook --shell fish --prefix "/home/fra/micromamba" | source
 # <<< mamba initialize <<<
+
+if [ -z "$VIRTUAL_ENV" ] && [ -e ~/.venv ]
+    . ~/.venv/bin/activate.fish
+end
+if ! [ -e /tmp/supervisor.sock ] && which supervisord &>/dev/null && [ -z "$INSIDE_DOCKER" ]
+    supervisord -c ~/.config/supervisor.conf
+end
