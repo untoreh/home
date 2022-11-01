@@ -6,7 +6,7 @@
    (expand-file-name
     (executable-find "mu")))
   "/../share/emacs/site-lisp/mu4e")
- "vendor/")
+ (concat doom-user-dir "vendor/"))
 
 ;; FIXME: `add-load-path!' doesn't accept lists...
 (let ((default-directory (concat doom-private-dir "vendor/")))
