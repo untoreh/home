@@ -1,0 +1,8 @@
+[main]
+color-tsharks = ['/home/fra/.nix-profile/bin/tshark']
+column-format = ['%Cus:tcp.payload:0:R', 'TCP payload (143 bytes)', 'true']
+column-format-bak = []
+last-used-tshark = '/home/fra/.nix-profile/bin/tshark'
+recent-filters = ['http', 'tls', 'socks']
+validated-tsharks = ['/home/fra/.nix-profile/bin/tshark']
+
