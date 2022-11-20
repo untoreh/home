@@ -145,7 +145,7 @@ shell exits, the buffer is killed."
     ('nim-mode "echo %s")
     ('emacs-lisp-mode "(prin1 %s)")
     ('python-mode "print(%s)")
-    ('js-mode "console.log(%s)")
+    ((or 'js-mode 'rjsx-mode) "console.log(%s)")
     ('julia-mode "display(%s)")
     ('sh-mode "echo %s")
     ))
