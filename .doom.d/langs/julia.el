@@ -336,7 +336,7 @@
                                               (my/script-dir #'julia-franklin)))))
                   (when julia-repl-enable-revise
                     (julia-repl--send-string
-                     (concat include-begin "revise.jl\"")))
+                     (concat include-begin "revise.jl\")" )))
                   (when julia-repl-enable-snoop
                     (julia-repl--send-string (concat include-begin "snoop.jl\"")))))
             (progn
@@ -347,12 +347,13 @@
       nil)))
 
 
-(defun julia-repl-cmd (str)
+(aio-defun julia-repl-cmd (str)
   "Send a string to julia repl switching to its buffer, if it exists."
   (when (julia-repl-switch nil t)
-    (julia-repl--send-string str)))
+    (aio-await (aio-sleep 1)) ;; HACK: allow ohmyrepl.jl to load (this prevents extra "]" being inserted)
+    (julia-repl--send-string str t)))
 
-(defun julia-franklin ()
+(aio-defun julia-franklin ()
   (interactive)
   "Start the franklin live server in the current default-dir"
   (julia-repl-cmd
