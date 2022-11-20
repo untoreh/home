@@ -346,12 +346,12 @@
           t)
       nil)))
 
-
+(require 'aio)
 (aio-defun julia-repl-cmd (str)
   "Send a string to julia repl switching to its buffer, if it exists."
   (when (julia-repl-switch nil t)
     (aio-await (aio-sleep 1)) ;; HACK: allow ohmyrepl.jl to load (this prevents extra "]" being inserted)
-    (julia-repl--send-string str t)))
+    (julia-repl--send-string str)))
 
 (aio-defun julia-franklin ()
   (interactive)
@@ -363,7 +363,6 @@
       (my/script-dir #'julia-franklin)) "franklin.jl")))
   (vterm-send-return))
 
-(require 'aio)
 (aio-defun julia-franklin-maybe-stop ()
   (catch 'stop
     (julia-repl-switch t nil)
