@@ -23,3 +23,6 @@ This is because by the max recv window is very close to the default value. Effec
 
 ## Windows port forwarding (WSL from lan) not working
 - Check that the service `IP helper` is running.
+
+## Wezterm + Tmux spews garbage
+If attaching to a tmux session when using wezterm terminal prints a bunch of characters in the shell, set tmux `escape-time` to 1 (not 0)
