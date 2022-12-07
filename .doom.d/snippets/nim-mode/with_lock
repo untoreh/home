@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: with lock
+# condition: t
+# --
+
+withLock($1):
+  $0

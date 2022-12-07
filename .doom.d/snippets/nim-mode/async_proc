@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: async
+# condition: t
+# --
+proc $1(): Future[$2] {.async.} =
+  $0
