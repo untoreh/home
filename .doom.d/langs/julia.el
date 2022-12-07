@@ -198,6 +198,9 @@
 	  (with-current-buffer (julia-repl-inferior-buffer) (cd directory)))
       (warn "buffer not associated with a file")))
 
+  (defun julia-repl-buffer-p (&rest args) julia-repl-vterm-mode)
+  (after! emojify
+    (pushnew! emojify-inhibit-in-buffer-functions #'julia-repl-buffer-p))
 
   (defun julia-toggle-repl-and-insert ()
     (interactive)
@@ -366,24 +369,31 @@
 (aio-defun julia-franklin-maybe-stop ()
   (catch 'stop
     (julia-repl-switch t nil)
-    (while t
-      (when (progn
-              (goto-char  (point-max))
-              (while (looking-at  "^$")
-                (previous-line)
-                (beginning-of-line))
-              (looking-at ".*Use Pkg.activate() to go back"))
-        (vterm-send-C-c)
-        (throw 'stop t))
-      (when (progn
-              (goto-char  (point-max))
-              (while (looking-at  "^$")
-                (previous-line)
-                (beginning-of-line))
-              (looking-at (concat julia-prompt-regexp "$")))
-        (throw 'stop t))
-      (aio-await (aio-sleep 0.2))
-      )))
+    (let ((buf (current-buffer)))
+      (while t
+        (unwind-protect
+            ;; when (eq (current-buffer) (julia-repl-live-buffer))
+            (progn
+              (switch-to-buffer (julia-repl-live-buffer))
+              (when (progn
+                      (goto-char  (point-max))
+                      (while (looking-at  "^$")
+                        (previous-line)
+                        (beginning-of-line))
+                      (looking-at ".*Use Pkg.activate() to go back"))
+                (vterm-send-C-c)
+                (throw 'stop t))
+              (when (progn
+                      (goto-char  (point-max))
+                      (while (looking-at  "^$")
+                        (previous-line)
+                        (beginning-of-line))
+                      (looking-at (concat julia-prompt-regexp "$")))
+                (throw 'stop t))
+              (switch-to-buffer buf)
+              (aio-await (aio-sleep 0.2)))
+          (switch-to-buffer buf)
+          )))))
 
 (defun julia-franklin-stop ()
   (interactive)
@@ -426,7 +436,7 @@ the SRC folder to the TRG folder"
 (defun julia-franklin-serve()
   (interactive)
   (julia-franklin-stop)
-  (julia-repl-cmd "frank_task = @task serve(is_final_pass=true); schedule(frank_task)")
+  (julia-repl-cmd "frank_task = @task serve(prerender=true, is_final_pass=true); schedule(frank_task)")
   (vterm-send-return))
 
 ;; The `debug!' should be defined in ~/.julia/config/startup.jl
@@ -466,10 +476,10 @@ the SRC folder to the TRG folder"
            )
       (when (equal beg "tags =")
         (let* ((pos (point))
-              (word (word-at-point))
-              (beg (- pos (length word)))
-              (end pos)
-              )
+               (word (word-at-point))
+               (beg (- pos (length word)))
+               (end pos)
+               )
           (list beg pos blog-tags-list . nil)
           ))
       )
@@ -498,9 +508,9 @@ the SRC folder to the TRG folder"
         )
   )
 
-(add-hook! 'doom-after-init-modules-hook
-  (set-file-template! ".*/blog/posts/.+\\.md$" :trigger "blog_post" :project t)
-  (set-docsets! 'julia-repl-vterm-mode :add "Julia")
+(after! (popup julia-repl)
   (set-popup-rules!
-    '(("^\\*julia\\*" :height 25 :quit t :select nil)
-      )))
+    '(("^\\*julia\\*" :height 25 :quit t :select nil)))
+  (set-file-template! ".*/blog/posts/.+\\.md$" :trigger "blog_post" :project t))
+(after! (julia-repl)
+  (set-docsets! 'julia-repl-vterm-mode :add "Julia"))

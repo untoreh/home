@@ -3,7 +3,10 @@ let proj = Pkg.project()
     isnothing(proj.name) ||
         if "Revise" ∈ keys(proj.dependencies)
             @eval using Revise
-            Revise.revise(Symbol(proj.name))
+            mod = Symbol(proj.name)
+            @eval using $mod
+            @eval using Base.Meta
+            eval(Meta.parse("Revise.revise($mod)"))
         else
             @eval using TOML
             projpath = dirname(proj.path)
