@@ -1,4 +1,5 @@
 using Pkg
+
 let proj = Pkg.project()
     isnothing(proj.name) ||
         if "Revise" ∈ keys(proj.dependencies)
@@ -18,9 +19,10 @@ let proj = Pkg.project()
                 Pkg.add("Revise")
                 Pkg.activate(projpath)
             end
-            push!(LOAD_PATH, testpath)
+            testpath ∉ LOAD_PATH && push!(LOAD_PATH, testpath)
             @eval using Revise
             Revise.revise()
-            eval(Meta.parse("using $(proj.name)"))
+            @eval using $(Symbol(proj.name))
+            eval(Meta.parse("Revise.revise($(proj.name))"))
         end
 end
