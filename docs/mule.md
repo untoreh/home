@@ -116,6 +116,7 @@ systemctl start docker
 ``` sh
 systemctl --user enable storage mediabox nervad
 systemctl --user start storage mediabox nervad
+sudo loginctl enable-linger $(id -u) # prevents systemd from stopping services after ssh session ends
 ```
 
 A mediabox backup is present at the mounted backups path `~/volatile/backups/mediabox`
