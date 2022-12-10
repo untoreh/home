@@ -187,7 +187,7 @@
     "Change directory to the specified directory or the current buffer one (if applicable)."
     (interactive)
     (if-let ((directory (if (not directory)
-                            (file-name-directory (buffer-file-name))
+                            (file-name-directory (or (buffer-file-name) dired-directory))
                           directory)))
         (progn
 	  (julia-repl--send-string
@@ -321,6 +321,19 @@
 (defvar julia-repl-enable-revise t "whether to use Revise automatically when repl starts")
 (defvar julia-repl-enable-snoop nil "whether to use SnoopCompile automatically when repl starts")
 
+(defun julia-repl-startup ()
+  (interactive)
+  (julia-repl-cd (projectile-project-root))
+  (ignore-errors (julia-repl-activate-parent nil))
+  (let ((include-begin (concat "include(\""
+                               (file-name-as-directory
+                                (my/script-dir #'julia-franklin)))))
+    (when julia-repl-enable-revise
+      (julia-repl--send-string
+       (concat include-begin "revise.jl\")" )))
+    (when julia-repl-enable-snoop
+      (julia-repl--send-string (concat include-begin "snoop.jl\"")))))
+
 (defun julia-repl-switch (&optional no-activate cd)
   " Enables julia repl, and activates the current project "
   (if (not (fboundp #'julia-repl-inferior-buffer))
@@ -331,17 +344,7 @@
     (if (julia-repl-inferior-buffer)
         (progn
           (if (and startup (not no-activate))
-              (progn
-                (julia-repl-cd (projectile-project-root))
-                (julia-repl-activate-parent nil)
-                (let ((include-begin (concat "include(\""
-                                             (file-name-as-directory
-                                              (my/script-dir #'julia-franklin)))))
-                  (when julia-repl-enable-revise
-                    (julia-repl--send-string
-                     (concat include-begin "revise.jl\")" )))
-                  (when julia-repl-enable-snoop
-                    (julia-repl--send-string (concat include-begin "snoop.jl\"")))))
+              (julia-repl-startup)
             (progn
               (when cd
                 (julia-repl-cd (projectile-project-root)))
@@ -366,6 +369,7 @@
       (my/script-dir #'julia-franklin)) "franklin.jl")))
   (vterm-send-return))
 
+(defvar julia-repl-follow-buffer nil "When enabled, tail the repl buffer until the prompt is shown again.")
 (aio-defun julia-franklin-maybe-stop ()
   (catch 'stop
     (julia-repl-switch t nil)
@@ -375,23 +379,24 @@
             ;; when (eq (current-buffer) (julia-repl-live-buffer))
             (progn
               (switch-to-buffer (julia-repl-live-buffer))
+              (when (or (not julia-repl-follow-buffer)
+                        (progn
+                          (goto-char  (point-max))
+                          (while (looking-at  "^$")
+                            (previous-line)
+                            (beginning-of-line))
+                          (looking-at ".*Use Pkg.activate() to go back"))
+                        (vterm-send-C-c)
+                        (throw 'stop t)))
               (when (progn
                       (goto-char  (point-max))
                       (while (looking-at  "^$")
                         (previous-line)
                         (beginning-of-line))
-                      (looking-at ".*Use Pkg.activate() to go back"))
-                (vterm-send-C-c)
-                (throw 'stop t))
-              (when (progn
-                      (goto-char  (point-max))
-                      (while (looking-at  "^$")
-                        (previous-line)
-                        (beginning-of-line))
-                      (looking-at (concat julia-prompt-regexp "$")))
-                (throw 'stop t))
-              (switch-to-buffer buf)
-              (aio-await (aio-sleep 0.2)))
+                      (looking-at (concat julia-prompt-regexp "$"))))
+              (throw 'stop t))
+          (switch-to-buffer buf)
+          (aio-await (aio-sleep 0.2))
           (switch-to-buffer buf)
           )))))
 
@@ -446,6 +451,7 @@ the SRC folder to the TRG folder"
   (julia-repl-cmd "debug!(2)"))
 
 (defun julia-repl-revise ()
+  "Revise thing at point."
   (interactive)
   (let ((thing (thing-at-point 'symbol t)))
     (julia-repl-cmd
@@ -508,9 +514,9 @@ the SRC folder to the TRG folder"
         )
   )
 
-(after! (popup julia-repl)
+(add-transient-hook! '+popup-mode-hook
   (set-popup-rules!
     '(("^\\*julia\\*" :height 25 :quit t :select nil)))
   (set-file-template! ".*/blog/posts/.+\\.md$" :trigger "blog_post" :project t))
-(after! (julia-repl)
+(after! julia-repl
   (set-docsets! 'julia-repl-vterm-mode :add "Julia"))
