@@ -353,11 +353,20 @@
       nil)))
 
 (require 'aio)
-(aio-defun julia-repl-cmd (str)
+(aio-defun julia-repl-cmd (str &optional wait)
   "Send a string to julia repl switching to its buffer, if it exists."
   (when (julia-repl-switch nil t)
-    (aio-await (aio-sleep 1)) ;; HACK: allow ohmyrepl.jl to load (this prevents extra "]" being inserted)
+    (when (and wait (> wait 0))
+      (aio-await (aio-sleep wait))) ;; HACK: allow ohmyrepl.jl to load (this prevents extra "]" being inserted)
     (julia-repl--send-string str)))
+
+(aio-defun julia-repl-precompile ()
+  "Precompile current active project."
+  (when (julia-repl-switch nil nil)
+    (vterm-send-backspace)
+    (aio-await (aio-sleep 1))
+    (aio-await (julia-repl-cmd "import Pkg; Pkg.precompile()\n"))
+    ))
 
 (aio-defun julia-franklin ()
   (interactive)
@@ -366,7 +375,8 @@
    (f-read-text
     (concat
      (file-name-as-directory
-      (my/script-dir #'julia-franklin)) "franklin.jl")))
+      (my/script-dir #'julia-franklin)) "franklin.jl"))
+   1) ;; wait at startup
   (vterm-send-return))
 
 (defvar julia-repl-follow-buffer nil "When enabled, tail the repl buffer until the prompt is shown again.")
@@ -514,9 +524,7 @@ the SRC folder to the TRG folder"
         )
   )
 
-(add-transient-hook! '+popup-mode-hook
-  (set-popup-rules!
-    '(("^\\*julia\\*" :height 25 :quit t :select nil)))
-  (set-file-template! ".*/blog/posts/.+\\.md$" :trigger "blog_post" :project t))
+(set-popup-rule! "^\\*julia\\*" :height 25 :quit t :select nil)
+(set-file-template! ".*/blog/posts/.+\\.md$" :trigger "blog_post" :project t)
 (after! julia-repl
   (set-docsets! 'julia-repl-vterm-mode :add "Julia"))
