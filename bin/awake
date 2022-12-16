@@ -3,7 +3,7 @@
 AWAKE_EXE="/mnt/c/Program Files/PowerToys/modules/Awake/PowerToys.Awake.exe"
 
 function start(){
-	stop
+	stop 2>/dev/null
 sleep infinity &
 pid=$(jobs -p | head -n1 )
 disown $pid

@@ -1,4 +1,4 @@
 [Service]
 Type=oneshot
-Environment=TARGET=mbx:/volatile/backup/borg
+Environment=TARGET=mbx:%h/mnt/five/borg
 ExecStart=%h/scripts/borgbackup.sh

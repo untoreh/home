@@ -1,4 +1,5 @@
 ##  A List of paths to snapshot without versioning in ~/
+## Ensure that whitespace is quoted
 # .steam
 -.local/share/Steam
 .TabNine
@@ -35,7 +36,7 @@
 .wine32
 .xournalpp
 3dp
-Calibre\ Library/
+"Calibre\ Library/"
 Desktop
 Documents
 Downloads

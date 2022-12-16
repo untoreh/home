@@ -47,6 +47,7 @@ borg break-lock $TARGET
 echo "Starting backup for $DATE"
 # stateful paths are relative to $HOME
 cd ~/
+BORG_PASSPHRASE=$(gpg -q -d ~/.wallets/borg-passphrase.gpg)
 IFS=$'\n'
 STATEFULS=$(<~/docs/statefuls.txt)
 STATEFUL_PATHS=$(echo "$STATEFULS" | grep -Ev '^(#|-)' | tr '\n' ' ')
