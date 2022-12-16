@@ -320,6 +320,19 @@
 
 (defvar julia-repl-enable-revise t "whether to use Revise automatically when repl starts")
 (defvar julia-repl-enable-snoop nil "whether to use SnoopCompile automatically when repl starts")
+(defvar julia-repl-dir nil "The directory that holds the package.")
+
+(defun julia-repl-send-file (filename)
+  (let ((include-begin
+         (or julia-repl-dir
+             (let ((incl (concat
+                          "include(\""
+                          (file-name-as-directory
+                           (my/script-dir #'julia-repl-send-file)))))
+               (setq julia-repl-dir incl)
+               incl))))
+    (julia-repl--send-string
+     (concat include-begin filename "\")" ))))
 
 (defun julia-repl-startup ()
   (interactive)
@@ -329,10 +342,9 @@
                                (file-name-as-directory
                                 (my/script-dir #'julia-franklin)))))
     (when julia-repl-enable-revise
-      (julia-repl--send-string
-       (concat include-begin "revise.jl\")" )))
+      (julia-repl-send-file "revise.jl"))
     (when julia-repl-enable-snoop
-      (julia-repl--send-string (concat include-begin "snoop.jl\"")))))
+      (julia-repl-send-file "snoop.jl"))))
 
 (defun julia-repl-switch (&optional no-activate cd)
   " Enables julia repl, and activates the current project "
@@ -364,9 +376,63 @@
   "Precompile current active project."
   (when (julia-repl-switch nil nil)
     (vterm-send-backspace)
-    (aio-await (aio-sleep 1))
+    (aio-await (aio-sleep 0.1))
     (aio-await (julia-repl-cmd "import Pkg; Pkg.precompile()\n"))
     ))
+
+(defun julia-repl--push-load-path (pkg)
+  (let* ((path (concat "\"" "$(DEPOT_PATH[1])/packages/" pkg "\""))
+         (most-recent ( ))
+         (cmd (concat "!(" path " in LOAD_PATH) && " "push!(LOAD_PATH, " path ")")))
+    (aio-wait-for (julia-repl-cmd cmd))
+    ))
+
+(defun julia-repl-debug-packages ()
+  "Add debug packages to the current LOAD_PATH."
+  (julia-repl-send-file "debug_packages.jl"))
+
+(defconst julia--regexp-struct (rxt-pcre-to-elisp  "^struct\s"))
+(defconst julia--regexp-proto-struct (rxt-pcre-to-elisp  "^@proto struct\s"))
+(defconst julia--regexp-proto-module (rxt-pcre-to-elisp  "^using ProtoStructs\n"))
+(defun julia--proto-p ()
+  (save-excursion
+    (goto-char (point-min))
+    (re-search-forward julia--regexp-proto-module nil t)
+    ))
+(defun julia--protify (&optional flag)
+  (interactive)
+  (if (equal major-mode #'julia-mode)
+      (save-excursion
+        (goto-char (point-min))
+        (if flag
+            (progn
+              (insert "using ProtoStructs\n")
+              (while (re-search-forward  julia--regexp-struct nil t)
+                (replace-match "@proto struct ")))
+          (progn
+            (while (re-search-forward  julia--regexp-proto-module nil t)
+              (replace-match ""))
+            (while (re-search-forward  julia--regexp-proto-struct nil t)
+              (replace-match "struct "))))
+        (save-buffer))
+    (warn "Current buffer is not a julia buffer.")))
+
+(defun julia-toggle-proto-structs ()
+  (if (julia--proto-p)
+      (julia--protify)
+    (julia--protify t)
+      )
+  )
+
+(defun julia-deprotify-structs ()
+  (if (equal major-mode #'julia-mode)
+      (save-excursion
+        (goto-char (point-min))
+        (insert "using ProtoStructs\n")
+        (replace-regexp  julia-regexp-struct "@proto struct ")
+        )
+    (warn "Current buffer is not a julia buffer."))
+  )
 
 (aio-defun julia-franklin ()
   (interactive)
@@ -524,7 +590,8 @@ the SRC folder to the TRG folder"
         )
   )
 
-(set-popup-rule! "^\\*julia\\*" :height 25 :quit t :select nil)
+(add-transient-hook! 'julia-repl-mode-hook
+  (set-popup-rule! "^\\*julia\\*" :height 25 :quit t :select nil))
 (set-file-template! ".*/blog/posts/.+\\.md$" :trigger "blog_post" :project t)
 (after! julia-repl
   (set-docsets! 'julia-repl-vterm-mode :add "Julia"))

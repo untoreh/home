@@ -211,7 +211,14 @@
            :nev "y" #'julia-franklin-sync-blog
            :nev "u" #'julia-franklin-publish
            :nev "s" #'julia-franklin-serve
-           )
+           (:prefix ("p")
+            :desc "Pkg precompile"
+            :nev "p" (cmd! (julia-repl-precompile))
+            :desc "Main env load path"
+            :nev "d" (cmd! (julia-repl-debug-packages))
+            :desc "Toggle proto structures"
+            :nev "s" (cmd! (julia-toggle-proto-structs))
+            ))
           (:map 'julia-repl-mode-map
            "C-c C-p" nil
            "C-c C-v" nil

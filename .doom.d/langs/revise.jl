@@ -1,5 +1,6 @@
 using Pkg
 
+include("debug_packages.jl")
 let proj = Pkg.project()
     isnothing(proj.name) ||
         if "Revise" ∈ keys(proj.dependencies)
