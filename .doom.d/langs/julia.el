@@ -26,13 +26,15 @@
   ;; override doom module preset
   (setq lsp-julia-default-environment
         (concat "~/.julia/environments/v"
-                (shell-command-to-string "julia --version | grep -oE '[0-9]\.[0-9]'"))))
+                (s-chomp (shell-command-to-string "julia --version | grep -oE '[0-9]\.[0-9]'")))))
 
 (use-package! julia-repl
   :commands julia-repl
   :config
   (if (modulep! :term vterm)
-      (julia-repl-set-terminal-backend 'vterm)))
+      (julia-repl-set-terminal-backend 'vterm))
+  (setq julia-repl-switches "--optimize=0 --compile=min")
+  )
 
 ;; use it to override julia-repl julia command
 ;; (setq julia-repl-executable-records '((default "julia")))
@@ -421,7 +423,7 @@
   (if (julia--proto-p)
       (julia--protify)
     (julia--protify t)
-      )
+    )
   )
 
 (defun julia-deprotify-structs ()
@@ -446,31 +448,31 @@
   (vterm-send-return))
 
 (defvar julia-repl-follow-buffer nil "When enabled, tail the repl buffer until the prompt is shown again.")
+(defun vterm-maybe-reset-cursor(match &rest forms)
+  (when (or (not julia-repl-follow-buffer)
+            (progn
+              (goto-char  (point-max))
+              (while (looking-at  "^$")
+                (forward-line -1)
+                (beginning-of-line))
+              (looking-at match)))
+    forms
+    ))
 (aio-defun julia-franklin-maybe-stop ()
   (catch 'stop
     (julia-repl-switch t nil)
     (let ((buf (current-buffer)))
       (while t
         (unwind-protect
-            ;; when (eq (current-buffer) (julia-repl-live-buffer))
             (progn
               (switch-to-buffer (julia-repl-live-buffer))
-              (when (or (not julia-repl-follow-buffer)
-                        (progn
-                          (goto-char  (point-max))
-                          (while (looking-at  "^$")
-                            (previous-line)
-                            (beginning-of-line))
-                          (looking-at ".*Use Pkg.activate() to go back"))
-                        (vterm-send-C-c)
-                        (throw 'stop t)))
-              (when (progn
-                      (goto-char  (point-max))
-                      (while (looking-at  "^$")
-                        (previous-line)
-                        (beginning-of-line))
-                      (looking-at (concat julia-prompt-regexp "$"))))
-              (throw 'stop t))
+              (vterm-maybe-reset-cursor
+               ".*Use Pkg.activate() to go back"
+               (vterm-send-C-c)
+               (throw 'stop t))
+              (vterm--maybe-reset-cursor
+               (concat julia-prompt-regexp "$")
+               (throw 'stop t)))
           (switch-to-buffer buf)
           (aio-await (aio-sleep 0.2))
           (switch-to-buffer buf)
@@ -526,7 +528,7 @@ the SRC folder to the TRG folder"
   ;; remove 2 lines from repl history
   (julia-repl-cmd "debug!(2)"))
 
-(defun julia-repl-revise ()
+(defun julia-repl-revise-at-point ()
   "Revise thing at point."
   (interactive)
   (let ((thing (thing-at-point 'symbol t)))
