@@ -2,7 +2,6 @@
 
 set -x
 set -euo pipefail
-#trap "wex caffeine.exe -appoff" EXIT SIGKILL SIGTERM
 trap "awake stop" EXIT SIGKILL SIGTERM
 
 . ~/.profile
@@ -14,7 +13,6 @@ trap "awake stop" EXIT SIGKILL SIGTERM
 [ -v SLEEP_BEFORE_BACKUP ] && sleep $SLEEP_BEFORE_BACKUP
 
 # Prevent windows from sleep
-[ -v WSLENV ] && wex caffeine.exe -appon
 [ -v WSLENV ] && awake start
 
 # Archive name schema
@@ -47,7 +45,7 @@ borg break-lock $TARGET
 echo "Starting backup for $DATE"
 # stateful paths are relative to $HOME
 cd ~/
-BORG_PASSPHRASE=$(gpg -q -d ~/.wallets/borg-passphrase.gpg)
+export BORG_PASSPHRASE=$(gpg -q -d ~/.wallets/borg-passphrase.gpg)
 IFS=$'\n'
 STATEFULS=$(<~/docs/statefuls.txt)
 STATEFUL_PATHS=$(echo "$STATEFULS" | grep -Ev '^(#|-)' | tr '\n' ' ')
@@ -73,6 +71,5 @@ borg prune -v --list --keep-daily=7 --keep-weekly=4 $TARGET
 sync
 
 # Allow windows to sleep
-#[ -v WSLENV ] && wex caffeine.exe -appoff
 [ -v WSLENV ] && awake stop
 
