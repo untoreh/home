@@ -22,6 +22,8 @@ sudo mkdir -p /mnt/home/.work /mnt/home/.lower /mnt/home/$USER
 
 # mount tmp with overlay, use `exec' because some things expect a temporary directory to be executable...
 sudo mount -t overlay overlay -o exec,lowerdir=/tmp,upperdir=/run/upper,workdir=/run/work /tmp
+# also mount tmpfs on /var/tmp
+findmnt /var/tmp >/dev/null || sudo mount -t tmpfs tmpfs /var/tmp
 # check for X11 socket
 [ ! -s /tmp/.X11-unix ] && rm -rf /tmp/.X11-unix && sudo ln -sf /run/wslg/.X11-unix /tmp
 # mount home with overlay
