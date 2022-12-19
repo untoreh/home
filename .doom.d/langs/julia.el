@@ -1,5 +1,8 @@
 ;;; .../../../var/home/fra/.doom.d/private/langs/julia.el -*- lexical-binding: t; -*-
 
+;; TODO: add to julia-repl major mode hook, to set buffer name suffix, to avoid killing the vterm buffer when switchign projects
+;;
+
 (setq-hook! 'julia-mode-hook
   lsp-auto-guess-root nil)
 
@@ -33,7 +36,8 @@
   :config
   (if (modulep! :term vterm)
       (julia-repl-set-terminal-backend 'vterm))
-  (setq julia-repl-switches "--optimize=0 --compile=min")
+  ;; (setq julia-repl-switches "--optimize=0 --compile=min")
+  (setq julia-repl-switches "--optimize=0")
   )
 
 ;; use it to override julia-repl julia command
@@ -539,7 +543,10 @@ the SRC folder to the TRG folder"
 
 ;; julia projects file
 (after! projectile
-  (appendq! projectile-project-root-files '("Project.toml" "JuliaProject.toml")))
+  (appendq! projectile-project-root-files '("Project.toml" "JuliaProject.toml"))
+  (setq-hook! 'julia-mode-hook projectile-project-test-cmd
+              "julia --startup-file=no --project=test/ test/runtests.jl --test-args '' ")
+  )
 
 ;;; add tag completion to blog posts
 (after! corfu
