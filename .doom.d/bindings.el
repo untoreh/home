@@ -206,7 +206,7 @@
            :nev "k" #'julia-franklin-stop
            :nev "." #'julia-repl-cd
            :nev "d" #'julia-repl-toggle-debug
-           :nev "v" #'julia-repl-revise
+           :nev "v" #'julia-repl-revise-at-point
            :nev "j" #'julia-repl-startup
            :nev "y" #'julia-franklin-sync-blog
            :nev "u" #'julia-franklin-publish

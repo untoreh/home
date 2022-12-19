@@ -1,5 +1,7 @@
 using Pkg
 
+# Don't precompile packages when using revise.
+ENV["JULIA_PKG_PRECOMPILE_AUTO"] = false
 include("debug_packages.jl")
 let proj = Pkg.project()
     isnothing(proj.name) ||

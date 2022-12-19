@@ -11,4 +11,4 @@ let pkgs = ["JuliaInterpreter", "ProtoStructs"]
         end
     end
 end
-using JuliaInterpreter, ProtoStructs
+# using ProtoStructs
