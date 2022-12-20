@@ -397,6 +397,16 @@
   "Add debug packages to the current LOAD_PATH."
   (julia-repl-send-file "debug_packages.jl"))
 
+(defvar julia-repl-test-args "" "Arguments passed to the Pkg `test' command.")
+(make-variable-buffer-local 'julia-repl-test-args)
+(defun julia-repl-run-tests (targets)
+  "Add debug packages to the current LOAD_PATH."
+  (interactive (list (read-string "targets: " julia-repl-test-args)))
+  (let* ((test-args (split-string targets "," t " +"))
+         (quoted-args (mapconcat (lambda! (x) (format "\"%s\"" x)) test-args "")))
+    (julia-repl-cmd (format "import Pkg; Pkg.test(;test_args=[%s])" quoted-args))
+    (setq-local julia-repl-test-args targets)))
+
 (defconst julia--regexp-struct (rxt-pcre-to-elisp  "^struct\s"))
 (defconst julia--regexp-proto-struct (rxt-pcre-to-elisp  "^@proto struct\s"))
 (defconst julia--regexp-proto-module (rxt-pcre-to-elisp  "^using ProtoStructs\n"))

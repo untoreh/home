@@ -218,6 +218,8 @@
             :nev "d" (cmd! (julia-repl-debug-packages))
             :desc "Toggle proto structures"
             :nev "s" (cmd! (julia-toggle-proto-structs))
+            :desc "Run tests"
+            :nev "t" #'julia-repl-run-tests
             ))
           (:map 'julia-repl-mode-map
            "C-c C-p" nil
