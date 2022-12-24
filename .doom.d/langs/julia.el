@@ -31,16 +31,22 @@
         (concat "~/.julia/environments/v"
                 (s-chomp (shell-command-to-string "julia --version | grep -oE '[0-9]\.[0-9]'")))
         lsp-julia-lint-missingrefs nil) ;; julia LS can't find symbols from include modules
-  (setq-hook! 'julia-mode-hook
-    lsp-julia-default-environment (projectile-project-root))
+  ;; for the --project flag to be buffer local
+  (make-variable-buffer-local 'lsp-julia-flags)
+  (add-hook! julia-mode
+    (let ((root (projectile-project-root)))
+      (setq-local lsp-julia-default-environment root)
+      (pushnew! lsp-julia-flags (concat "--project=" root))))
   (after! projectile
     (defadvice! projectile-julia-project-root nil :override
       #'lsp-julia--get-root
       (concat "\"" (projectile-project-root) "\"")))
-  (let* ((syspath  "~/.julia/compiled/languageserver.so")
+  (let* ((syspath  (file-truename "~/.julia/compiled/languageserver.so"))
          (flag (concat "--sysimage=" syspath)))
     (if (file-exists-p syspath)
-        (appendq! lsp-julia-flags )
+        (progn
+          (pushnew! lsp-julia-flags flag)
+          (setq-default lsp-julia-flags lsp-julia-flags))
       (when (yes-or-no-p "Compile julia system image with language server?")
         (async-shell-command
          "julia -e 'using PackageCompiler; create_sysimage(; target_path = \"~/.julia/compiled/languageserver.so\")'")
