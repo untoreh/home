@@ -22,6 +22,7 @@
  )
 
 ;; use battery mode when unplugged
+;; FIXME: the battery makes the modeline outflow
 (let ((battery-info (battery)))
   (when (and (stringp battery-info)
              (string-match-p "^Power N/A" (battery)))
