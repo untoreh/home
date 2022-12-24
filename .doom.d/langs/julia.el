@@ -29,7 +29,23 @@
   ;; override doom module preset
   (setq lsp-julia-default-environment
         (concat "~/.julia/environments/v"
-                (s-chomp (shell-command-to-string "julia --version | grep -oE '[0-9]\.[0-9]'")))))
+                (s-chomp (shell-command-to-string "julia --version | grep -oE '[0-9]\.[0-9]'")))
+        lsp-julia-lint-missingrefs nil) ;; julia LS can't find symbols from include modules
+  (setq-hook! 'julia-mode-hook
+    lsp-julia-default-environment (projectile-project-root))
+  (after! projectile
+    (defadvice! projectile-julia-project-root nil :override
+      #'lsp-julia--get-root
+      (concat "\"" (projectile-project-root) "\"")))
+  (let* ((syspath  "~/.julia/compiled/languageserver.so")
+         (flag (concat "--sysimage=" syspath)))
+    (if (file-exists-p syspath)
+        (appendq! lsp-julia-flags )
+      (when (yes-or-no-p "Compile julia system image with language server?")
+        (async-shell-command
+         "julia -e 'using PackageCompiler; create_sysimage(; target_path = \"~/.julia/compiled/languageserver.so\")'")
+        (message "Started Julia process to compile LanguageServer system image. This may take a while."))
+      )))
 
 (use-package! julia-repl
   :commands julia-repl
@@ -37,7 +53,7 @@
   (if (modulep! :term vterm)
       (julia-repl-set-terminal-backend 'vterm))
   ;; (setq julia-repl-switches "--optimize=0 --compile=min")
-  (setq julia-repl-switches "--optimize=0")
+  (setq julia-repl-switches "")
   )
 
 ;; use it to override julia-repl julia command
@@ -553,7 +569,7 @@ the SRC folder to the TRG folder"
 
 ;; julia projects file
 (after! projectile
-  (appendq! projectile-project-root-files '("Project.toml" "JuliaProject.toml"))
+  ;; (appendq! projectile-project-root-files '("Project.toml" "JuliaProject.toml"))
   (setq-hook! 'julia-mode-hook projectile-project-test-cmd
               "julia --startup-file=no --project=test/ test/runtests.jl --test-args '' ")
   )
