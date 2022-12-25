@@ -26,17 +26,21 @@
 	lsp-julia-timeout 360
 	lsp-julia-package-dir nil)
   :config
-  ;; override doom module preset
-  (setq lsp-julia-default-environment
-        (concat "~/.julia/environments/v"
-                (s-chomp (shell-command-to-string "julia --version | grep -oE '[0-9]\.[0-9]'")))
-        lsp-julia-lint-missingrefs nil) ;; julia LS can't find symbols from include modules
   ;; for the --project flag to be buffer local
-  (make-variable-buffer-local 'lsp-julia-flags)
+  ;; (make-variable-buffer-local 'lsp-julia-flags)
+  (make-variable-buffer-local 'lsp-julia-default-depot)
+  ;; override doom module preset
+  (setq-default lsp-julia-default-environment
+                (file-truename
+                 (concat "~/.julia/environments/v"
+                         (s-chomp (shell-command-to-string "julia --version | grep -oE '[0-9]\.[0-9]'"))))
+                lsp-julia-default-depot (shell-command-to-string "julia -e \"print(join(DEPOT_PATH,\\\":\\\"))\"")
+                lsp-julia-lint-missingrefs "symbols") ;; julia LS can't find symbols from include modules
+  ;; This should not be required
   (add-hook! julia-mode
     (let ((root (projectile-project-root)))
-      (setq-local lsp-julia-default-environment root)
-      (pushnew! lsp-julia-flags (concat "--project=" root))))
+      ;; (setq-local lsp-julia-default-environment root)
+      (my/concatq! lsp-julia-default-depot "\:" root)))
   (after! projectile
     (defadvice! projectile-julia-project-root nil :override
       #'lsp-julia--get-root
