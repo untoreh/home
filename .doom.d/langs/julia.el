@@ -34,28 +34,30 @@
                 (file-truename
                  (concat "~/.julia/environments/v"
                          (s-chomp (shell-command-to-string "julia --version | grep -oE '[0-9]\.[0-9]'"))))
-                lsp-julia-default-depot (shell-command-to-string "julia -e \"print(join(DEPOT_PATH,\\\":\\\"))\"")
+                ;; lsp-julia-default-depot (shell-command-to-string "julia -e \"print(join(DEPOT_PATH,\\\":\\\"))\"")
                 lsp-julia-lint-missingrefs "symbols") ;; julia LS can't find symbols from include modules
+  ;; NOTE: None of these appear to make julia LanguageServer be able to find "missingrefs"
   ;; This should not be required
-  (add-hook! julia-mode
-    (let ((root (projectile-project-root)))
-      ;; (setq-local lsp-julia-default-environment root)
-      (my/concatq! lsp-julia-default-depot "\:" root)))
-  (after! projectile
-    (defadvice! projectile-julia-project-root nil :override
-      #'lsp-julia--get-root
-      (concat "\"" (projectile-project-root) "\"")))
-  (let* ((syspath  (file-truename "~/.julia/compiled/languageserver.so"))
-         (flag (concat "--sysimage=" syspath)))
-    (if (file-exists-p syspath)
-        (progn
-          (pushnew! lsp-julia-flags flag)
-          (setq-default lsp-julia-flags lsp-julia-flags))
-      (when (yes-or-no-p "Compile julia system image with language server?")
-        (async-shell-command
-         "julia -e 'using PackageCompiler; create_sysimage(; target_path = \"~/.julia/compiled/languageserver.so\")'")
-        (message "Started Julia process to compile LanguageServer system image. This may take a while."))
-      )))
+  ;; (add-hook! julia-mode
+  ;;   (let ((root (projectile-project-root)))
+  ;;     ;; (setq-local lsp-julia-default-environment root)
+  ;;     (my/concatq! lsp-julia-default-depot "\:" root)))
+  ;; (after! projectile
+  ;;   (defadvice! projectile-julia-project-root nil :override
+  ;;     #'lsp-julia--get-root
+  ;;     (concat "\"" (projectile-project-root) "\"")))
+  ;; (let* ((syspath  (file-truename "~/.julia/compiled/languageserver.so"))
+  ;;        (flag (concat "--sysimage=" syspath)))
+  ;;   (if (file-exists-p syspath)
+  ;;       (progn
+  ;;         (pushnew! lsp-julia-flags flag)
+  ;;         (setq-default lsp-julia-flags lsp-julia-flags))
+  ;;     (when (yes-or-no-p "Compile julia system image with language server?")
+  ;;       (async-shell-command
+  ;;        "julia -e 'using PackageCompiler; create_sysimage(; target_path = \"~/.julia/compiled/languageserver.so\")'")
+  ;;       (message "Started Julia process to compile LanguageServer system image. This may take a while."))
+  ;;     ))
+  )
 
 (use-package! julia-repl
   :commands julia-repl
