@@ -11,10 +11,10 @@ let
 in {
   inherit (unstable)
   # shell
-    eternal-terminal browsh zsh git-hub git-lfs delta pet tmux fzf fd
+    browsh zsh git-hub git-lfs delta pet tmux fzf fd
     ripgrep zoxide exa nushell starship direnv bat pastel
     # utils
-    wego translate-shell weechat krita calibre koreader youtube-dl djvulibre unoconv wordnet aspell
+    wego translate-shell weechat krita calibre koreader youtube-dl djvulibre unoconv wordnet aspell ghostscript
     # files and backups
     duplicacy borgbackup rclone syncthing inotify-tools
     # desktop
