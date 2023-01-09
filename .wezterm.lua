@@ -9,7 +9,7 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
                  args = {"powershell.exe", "-NoLogo"},
 	})
   default_prog = {"wsl.exe", "-d", distro, "-e", "bash", "-c",
-                  "{ [ -f /tmp/.mounted ] || /etc/wsl-mount.sh; } && SHELL=fish exec fish -li -C cd ~/"}
+                  "{ [ -f /tmp/.mounted ] || /etc/wsl-mount.sh; } && SHELL=fish exec fish -li -C ~/"}
 else
   default_prog = {"fish", "-li"}
 end
@@ -26,23 +26,27 @@ wezterm.on("toggle-autoscroll", function(window, pane)
   window:set_config_overrides(overrides)
 end)
 
+local ssh_domains = {}
+
+for host, config in pairs(wezterm.enumerate_ssh_hosts()) do
+  table.insert(ssh_domains, {
+    name = host,
+    remote_address = host,
+    local_echo_threshold_ms = 100,
+    -- if you know that the remote host has a posix/unix environment,
+    -- setting assume_shell = "Posix" will result in new panes respecting
+    -- the remote current directory when multiplexing = "None".
+    assume_shell = 'Posix',
+  })
+end
+
 return {
 	unix_domains = {
     {
       name = "init",
     },
     },
-	ssh_domains = {
-    {
-      name = "remote",
-      remote_address = "mbx:22",
-      username = "fra",
-    },
-    {
-      name = "mbx",
-      remote_address = "mbx:22",
-      username = "fra",
-	}},
+	ssh_domains = ssh_domains,
 	tls_servers = {
 		{bind_address = "0.0.0.0:2233"}
 	},
@@ -54,10 +58,10 @@ return {
   color_scheme = "Dracula",
   scrollback_lines = 9000,
   enable_scroll_bar = true,
-  canonicalize_pasted_newlines = "None", -- don't insert double new lines on windows
   launch_menu = launch_menu,
   default_prog = default_prog,
-  keys =
+  canonicalize_pasted_newlines = "None", -- prevent double newlines on windows
+  keys = {
     {key="|", mods="CTRL|SHIFT", action=wezterm.action{SplitHorizontal={domain="CurrentPaneDomain"}}},
     {key="\\", mods="CTRL|ALT", action=wezterm.action{SplitHorizontal={domain="CurrentPaneDomain"}}},
     {key="q", mods="CTRL|SHIFT",
@@ -89,7 +93,7 @@ return {
     {key="a", mods="CTRL|SHIFT", action=wezterm.action{
        SpawnCommandInNewTab={
          args={"wsl.exe", "-d", distro, "-e", "bash", "-c",
-               "{ [ -f /tmp/.mounted ] || /etc/wsl-mount.sh; } && SHELL=fish exec fish -li -C 'cd ~/'"}}}},
+               "{ [ -f /tmp/.mounted ] || /etc/wsl-mount.sh; } && SHELL=fish exec fish -li -C ~/"}}}},
     {key="p", mods="CTRL|SHIFT", action=wezterm.action{
        SpawnCommandInNewTab={
          args={"powershell.exe", "/NoLogo"}}}},
