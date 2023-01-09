@@ -1,6 +1,7 @@
-personal_ws-1.1 en 32 
+personal_ws-1.1 en 35 
 Flexget
 OHLCV
+PortfolioRow
 Recurses
 WSL
 accents
@@ -21,9 +22,11 @@ gc
 gcbal
 gccemacs
 homoiconicity
+includer
 jackett
 jellyfin
 julia
+precompile
 programmatically
 scrobbling
 simkl

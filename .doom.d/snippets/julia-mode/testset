@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: testset
+# key: t
+# condition: t
+# --
+$1() = @testset "$2" begin
+     $0
+end

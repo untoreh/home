@@ -22,6 +22,14 @@
 ;;             (evil-paste)
 ;;             )
 
+(defmacro my/delete! (elt list)
+  "`delete' ELT from LIST in-place."
+  `(setq ,list (delete ,elt ,list)))
+
+(defmacro my/concatq! (place &rest forms)
+  "`concat' all FORMS with value in PLACE updating PLACE."
+  `(setq ,place (concat ,place ,@forms)))
+
 (defun my/force-kill-buffer (&optional buffer)
   (interactive)
   (with-current-buffer (or buffer (current-buffer))
@@ -148,6 +156,7 @@ shell exits, the buffer is killed."
     ((or 'js-mode 'rjsx-mode) "console.log(%s)")
     ('julia-mode "display(%s)")
     ('sh-mode "echo %s")
+    ('rustic-mode "println!(\"{}\", %s);")
     ))
 
 (defun my/prepend-file-name (suffix)

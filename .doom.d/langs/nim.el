@@ -79,7 +79,7 @@
 
 (setq nim-indent-offset 2)
 (add-hook! nim-mode :depth 99
-  (setq evil-shift-width 2))
+  (setq-local evil-shift-width 2))
 
 (setq-default
  nim-compile-command "nim"

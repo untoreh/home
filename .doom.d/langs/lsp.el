@@ -48,8 +48,8 @@
      ;;
      lsp-ui-sideline-enable t
      lsp-ui-sideline-show-code-actions t
-     lsp-ui-sideline-show-hover t
      lsp-ui-sideline-show-diagnostics t
+     lsp-ui-sideline-show-hover nil
      lsp-ui-sideline-show-symbol  nil
      lsp-ui-sideline-diagnostic-max-lines 3
      ))
