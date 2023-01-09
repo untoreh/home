@@ -1,0 +1,15 @@
+Stacktrace:
+ [1] convert(#unused#::Type{Union{Missing, Dict}}, x::Nothing)
+   @ Base ./missing.jl:69
+ [2] setproperty!(x::LanguageServerInstance, f::Symbol, v::Nothing)
+   @ Base ./Base.jl:39
+ [3] initialize_request(params::LanguageServer.InitializeParams, server::LanguageServerInstance, conn::JSONRPC.JSONRPCEndpoint{Base.PipeEndpoint, Base.PipeEndpoint})
+   @ LanguageServer ~/.julia/packages/LanguageServer/xVa5M/src/requests/init.jl:179
+ [4] (::LanguageServer.var"#109#110"{typeof(LanguageServer.initialize_request), LanguageServerInstance})(conn::JSONRPC.JSONRPCEndpoint{Base.PipeEndpoint, Base.PipeEndpoint}, params::LanguageServer.InitializeParams)
+   @ LanguageServer ~/.julia/packages/LanguageServer/xVa5M/src/languageserverinstance.jl:267
+ [5] dispatch_msg(x::JSONRPC.JSONRPCEndpoint{Base.PipeEndpoint, Base.PipeEndpoint}, dispatcher::JSONRPC.MsgDispatcher, msg::Dict{String, Any})
+   @ JSONRPC ~/.julia/packages/JSONRPC/P0G1p/src/typed.jl:67
+ [6] run(server::LanguageServerInstance)
+   @ LanguageServer ~/.julia/packages/LanguageServer/xVa5M/src/languageserverinstance.jl:387
+ [7] top-level scope
+   @ none:1
