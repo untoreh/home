@@ -169,6 +169,29 @@ shell exits, the buffer is killed."
     ;; line number
     ('nil (my/prepend-file-name (+ 1 (line-number-at-pos))))))
 
+(defun char-upcase-p (c)
+  (equal c (upcase c)))
+(defun my/split-string-titlecase (s)
+  (let ((i 0)
+        (idx '())
+        (res '())
+        )
+    (mapc
+     (lambda (c)
+       (when (char-upcase-p c)
+         (push i idx))
+       (cl-incf i))
+     (split-string s "" t))
+    (setq idx (reverse idx))
+    (when (equal 0 (first idx))
+      (pop idx))
+    (let ((pos 0))
+      (mapc (lambda (i)
+              (push (substring s pos i) res)
+              (setq pos i)) idx)
+      (push (substring s pos (length s)) res))
+    (reverse res)))
+
 (defvar my/insert-print-list nil "Buffer local list of currently inserted print statements")
 (make-variable-buffer-local 'my/insert-print-list)
 
