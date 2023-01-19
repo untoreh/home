@@ -170,7 +170,7 @@
        :n "i" #'org-babel-insert-header-arg))
 
 ;; JULIA
-(map! :after julia
+(map! :after julia-mode
       :mode julia-mode
       (:prefix ("SPC r" . "Julia REPL")
        :desc "focus and insert"
@@ -202,16 +202,20 @@
           (:prefix ("SPC l j" . "julia")
            :desc "start julia repl"
            :nev "r" (cmd! (julia-repl-switch))
-           :nev "f" #'julia-franklin
-           :nev "k" #'julia-franklin-stop
            :nev "." #'julia-repl-cd
            :nev "d" #'julia-repl-toggle-debug
            :nev "v" #'julia-repl-revise-at-point
            :nev "j" #'julia-repl-startup
-           :nev "y" #'julia-franklin-sync-blog
-           :nev "u" #'julia-franklin-publish
-           :nev "s" #'julia-franklin-serve
-           (:prefix ("p")
+           (:prefix ("f" . "franklin")
+            :nev "f" #'julia-franklin
+            :desc "Setup julia frankling env"
+            :nev "y" #'julia-franklin-sync-blog
+            :desc "Sync __site dir over to tmp dir"
+            :nev "u" #'julia-franklin-publish
+            :nev "s" #'julia-franklin-serve
+            :nev "k" #'julia-franklin-stop
+            )
+           (:prefix ("p" . "packages")
             :desc "Pkg precompile"
             :nev "p" (cmd! (julia-repl-precompile))
             :desc "Main env load path"
@@ -232,11 +236,11 @@
 (if (modulep! :editor evil)
     (progn
       (map! (:map 'global
-             "C-w" nil
-             "C-h" nil)
+                  "C-w" nil
+                  "C-h" nil)
             (:map 'evil-motion-state-map
-             "C-w" nil
-             "C-h" nil))))
+                  "C-w" nil
+                  "C-h" nil))))
 
 ;; still want to escape from terminals
 (after! evil-escape
@@ -314,6 +318,6 @@
   ;; FIXME: ?
   (map! :map vterm-mode
         (
-        :leader "C-c"
-        :i "C-c" #'vterm-send-C-c
-        )))
+         :leader "C-c"
+         :i "C-c" #'vterm-send-C-c
+         )))
