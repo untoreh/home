@@ -32,7 +32,7 @@ for host, config in pairs(wezterm.enumerate_ssh_hosts()) do
   table.insert(ssh_domains, {
     name = host,
     remote_address = host,
-    local_echo_threshold_ms = 100,
+    local_echo_threshold_ms = 300,
     -- if you know that the remote host has a posix/unix environment,
     -- setting assume_shell = "Posix" will result in new panes respecting
     -- the remote current directory when multiplexing = "None".
