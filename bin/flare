@@ -1,0 +1,21 @@
+#!/bin/sh
+
+which flarectl &>/dev/null || {
+	which go || {
+		echo flare ctl not found and could not be installed
+		exit 1
+	}
+	echo flarectl not found, downloading from gh
+	GO111MODULE=on go install github.com/cloudflare/cloudflare-go/cmd/flarectl@latest
+	which flarectl || {
+		echo failed to install flarectl
+		exit 1
+	}
+}
+
+[ ! -e $HOME/.cfscr ] && {
+	echo cloudflare secrets not found at $HOME/.cfscr
+	exit 1
+}
+
+flarectl "$@"
