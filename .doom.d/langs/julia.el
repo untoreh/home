@@ -4,8 +4,9 @@
 ;;
 
 (setq-hook! 'julia-mode-hook
-  lsp-auto-guess-root nil)
-
+  lsp-auto-guess-root nil
+  orderless-component-separator "" ;; Splits on every char. Allows "AbS" to match "AbstractString"
+  )
 (after! julia-mode
   (when (modulep! :lang julia +lsp)
     (add-hook! julia-mode #'lsp))
@@ -48,14 +49,15 @@
   ;;     #'lsp-julia--get-root
   ;;     (concat "\"" (projectile-project-root) "\"")))
   ;; NOTE: Precompilation causes runtime errors of methods not found...
-  ;; (let* ((sysimage (file-truename "~/.julia/JuliaLSP/languageserver.so"))
+  ;; (let* ((sysimage (file-truename "~/.julia/lsp/languageserver.so"))
   ;;        (flag (concat "--sysimage=" sysimage)))
   ;;   (when (or (file-exists-p sysimage)
   ;;             (when (yes-or-no-p "Compile julia system image with language server?")
-  ;;               (async-shell-command "~/.julia/juliaLSP/compile.sh")
+  ;;               (async-shell-command "~/.julia/lsp/compile.sh")
   ;;               (message "Started Julia process to compile LanguageServer system image. This may take a while.")))
   ;;     (pushnew! lsp-julia-flags flag)
   ;;     (setq-default lsp-julia-flags lsp-julia-flags)))
+  (setq lsp-julia-command "~/.julia/lsp/compiled/bin/julia")
   )
 
 (use-package! julia-repl
@@ -69,7 +71,9 @@
   (defadvice! julia-repl-activate-main-proj (orig-fn &rest args)
     :around #'julia-repl-activate-parent
     (letf! ((defun locate-dominating-file (&rest args) (projectile-project-root)))
-      (apply orig-fn args))))
+      (apply orig-fn args)))
+  (setq-hook! 'julia-mode julia-repl-inferior-buffer-name-suffix (projectile-project-root))
+  )
 
 ;; use it to override julia-repl julia command
 ;; (setq julia-repl-executable-records '((default "julia")))
