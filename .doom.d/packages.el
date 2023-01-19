@@ -73,6 +73,7 @@
   (:host github :repo "polymode/poly-org"))
 (package! tree-sitter)
 (package! tree-sitter-langs)
+;; (package! string-inflection :pin "50ad549")
 
 ;; julia
 (if (modulep! :lang julia)

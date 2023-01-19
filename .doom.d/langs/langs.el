@@ -65,3 +65,5 @@
 ;; ;; make compilation buffers follow
 (add-hook! (compilation-mode nim-compile-mode)
   (set (make-local-variable 'window-point-insertion-type) t))
+
+;; (use-package! string-inflection)
