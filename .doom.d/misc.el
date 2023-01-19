@@ -58,8 +58,8 @@
         (setq interprogram-paste-function #'wl-paste)))
   ;; WSL, windows grabs M-SPC so we rebind it to F13 (from windows side)
   ;; and use that as alt leader key
-  (setq doom-leader-alt-key  "<269025153>"
-        doom-localleader-alt-key "<269025153> m")
+  (setq doom-leader-alt-key  "<XF86Tools>"
+        doom-localleader-alt-key "<XF86Tools> m")
   ;; (map! doom-leader-alt-key #'doom-leader)
   ;; (define-localleader-key!)
   ;; use custom temporary directory with WSL since there are permission problems with /tmp
@@ -94,7 +94,17 @@
 (when (modulep! :term vterm)
   (setq vterm-always-compile-module t
         ;; make vterm buffer updates a little faster
-        vterm-timer-delay 0.033))
+        vterm-timer-delay 0.033)
+  ;; this make vterm stop autosrolling after in evil normal state
+  ;; however it stops the vterm process...
+  (after! evil
+    (add-hook! 'vterm-mode-hook
+               (make-variable-buffer-local 'evil-normal-state-entry-hook)
+               (make-variable-buffer-local 'evil-normal-state-exit-hook)
+      (add-hook! 'evil-normal-state-entry-hook (vterm-copy-mode 1))
+      (add-hook! 'evil-normal-state-exit-hook (vterm-copy-mode -1))
+      )
+    ))
 
 ;; save magit buffers
 ;; this doesn't work because problems with lexical scope
