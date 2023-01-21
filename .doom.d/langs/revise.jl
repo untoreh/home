@@ -2,46 +2,26 @@ using Pkg
 
 # Don't precompile packages when using revise.
 ENV["JULIA_PKG_PRECOMPILE_AUTO"] = false
-include("debug_packages.jl")
+include("dev_packages.jl")
+using Suppressor
 let proj = Pkg.project()
-    isnothing(proj.name) ||
-        if "Revise" ∈ keys(proj.dependencies)
-            mod = Symbol(proj.name)
-            @eval using Revise
-            @async begin
-                Pkg.precompile()
-                @eval using $mod
-                @eval using Base.Meta
-                doeval() = eval(Meta.parse("Revise.revise($mod)"))
-                try
-                    doeval()
-                catch
-                    Pkg.precompile()
-                    doeval()
-                end
-                flush(stdout)
-                display("done!")
-                flush(stdout)
-            end
-        else
-            @eval using TOML
-            projpath = dirname(proj.path)
-            testpath = joinpath(projpath, "test")
-            testcfg = joinpath(testpath, "Project.toml")
-            if !ispath(testcfg) || "Revise" ∉ keys(TOML.parsefile(testcfg)["deps"])
-                mkpath(testpath)
-                Pkg.activate(testpath)
-                Pkg.add("Revise")
-                Pkg.activate(projpath)
-            end
-            testpath ∉ LOAD_PATH && push!(LOAD_PATH, testpath)
-            @eval using Revise
-            @async begin
-                Pkg.precompile()
-                Revise.revise()
-                @eval using $(Symbol(proj.name))
-                eval(Meta.parse("Revise.revise($(proj.name))"))
-                display("done!")
-            end
+    if !isnothing(proj.name)
+        @sync begin
+            @async @eval using Revise
+            @async @eval using OhMyREPL
         end
+        mod = Symbol(proj.name)
+        Base.Threads.@spawn begin
+            OhMyREPL.input_prompt!(project_prompt("compiling..."))
+            @suppress begin
+                Pkg.precompile()
+            end
+            @eval using $mod
+            @eval using Base.Meta
+            eval(Meta.parse("Revise.revise($mod)"))
+            OhMyREPL.input_prompt!(project_prompt())
+        end
+    else
+        @warn "No project found, not loading Revise."
+    end
 end
