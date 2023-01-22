@@ -5,5 +5,9 @@ if pgrep -f calibre-server 2>/dev/null; then
 	supc stop calibre-server
 	echo calibre server stopped
 fi
-#QT_QPA_PLATFORM="xcb" CALIBRE_USE_SYSTEM_THEME=1 exec nixGL ~/.nix-profile/bin/calibre --detach $argv
-QT_QPA_PLATFORM="xcb" CALIBRE_USE_SYSTEM_THEME=1 exec ~/.nix-profile/bin/calibre --detach $argv
+export CALIBRE_USE_SYSTEM_THEME=true
+export QT_QPA_PLATFORM="xcb"
+export QT_STYLE_OVERRIDE=kvantum
+#exec nixGLIntel ~/.nix-profile/bin/calibre --detach $@
+exec /usr/bin/calibre $@
+#exec nixVulkanIntel ~/.nix-profile/bin/calibre $@
