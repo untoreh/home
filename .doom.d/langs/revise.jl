@@ -11,17 +11,21 @@ let proj = Pkg.project()
             @async @eval using OhMyREPL
         end
         mod = Symbol(proj.name)
-        Base.Threads.@spawn begin
+        @async begin
             OhMyREPL.input_prompt!(project_prompt("compiling..."))
-            @suppress begin
-                Pkg.precompile()
+            try
+                @suppress begin
+                    Pkg.precompile()
+                end
+                @eval using $mod
+                @eval using Base.Meta
+                eval(Meta.parse("Revise.revise($mod)"))
+                OhMyREPL.input_prompt!(project_prompt())
+            catch
+                OhMyREPL.input_prompt!(project_prompt("error!"))
             end
-            @eval using $mod
-            @eval using Base.Meta
-            eval(Meta.parse("Revise.revise($mod)"))
-            OhMyREPL.input_prompt!(project_prompt())
         end
     else
         @warn "No project found, not loading Revise."
     end
-end
+end;
