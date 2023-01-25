@@ -1,4 +1,5 @@
-let pkgs = ["Revise", "JuliaInterpreter", "ProtoStructs", "BenchmarkTools", "Suppressor", "MacroTools", "Documenter"]
+let pkgs = ["Revise", "JuliaInterpreter", "ProtoStructs", "BenchmarkTools",
+            "Suppressor", "MacroTools", "Documenter", "StaticCompiler"]
     begin
         for p in pkgs
             path = joinpath(DEPOT_PATH[1], "packages", p)

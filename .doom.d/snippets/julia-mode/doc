@@ -1,8 +1,10 @@
 # -*- mode: snippet -*-
-# name: triple quotes
-# key: ""
+# name: doc
+# key: @d
 # condition: t
 # --
-"""
-`%`$0
+
+@doc""" $1
+
+$0
 """

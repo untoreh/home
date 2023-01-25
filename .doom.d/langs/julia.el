@@ -4,6 +4,7 @@
 ;;
 
 (setq-hook! 'julia-mode-hook
+  markdown-spaces-after-code-fence 0 ;; spaces break highlightjs lang inferring (and possibly other stuff)
   lsp-auto-guess-root nil
   orderless-component-separator "" ;; Splits on every char. Allows "AbS" to match "AbstractString"
   )
