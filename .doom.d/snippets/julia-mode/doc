@@ -4,7 +4,7 @@
 # condition: t
 # --
 
-@doc""" $1
+@doc """ $1
 
 $0
 """

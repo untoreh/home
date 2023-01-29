@@ -21,8 +21,10 @@ let proj = Pkg.project()
                 @eval using Base.Meta
                 eval(Meta.parse("Revise.revise($mod)"))
                 OhMyREPL.input_prompt!(project_prompt())
-            catch
+            catch e
                 OhMyREPL.input_prompt!(project_prompt("error!"))
+                global last_error
+                last_error = e
             end
         end
     else

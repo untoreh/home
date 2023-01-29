@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: test_file
+# key: _test
+# condition: t
+# --
+using Test
+
+_test_$1_1() = begin
+    @eval $2
+    $3
+end
+
+test_$1() = @testset "$1" begin
+    @test begin _test_$1_1() end
+end

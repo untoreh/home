@@ -1,17 +1,19 @@
-let pkgs = ["Revise", "JuliaInterpreter", "ProtoStructs", "BenchmarkTools",
-            "Suppressor", "MacroTools", "Documenter", "StaticCompiler"]
-    begin
-        for p in pkgs
-            path = joinpath(DEPOT_PATH[1], "packages", p)
-            recent = pipeline(`ls  -Art $(path)`,
-                `tail -1`) |> x -> read(x, String) |> chomp
-            recent_path = joinpath(path, recent)
-            if recent_path ∉ LOAD_PATH
-                push!(LOAD_PATH, recent_path)
+# This should not be needed since julia 1.9, just add the pkgs to the "main" env in `~/.julia/environments/v1.x
+function hack_load_path(pkgs = [ "Revise", "JuliaInterpreter", "BenchmarkTools", "MacroTools" "ProtoStructs",
+                                 "Suppressor", "Documenter", "StaticCompiler" ])
+    let pkgs =
+        begin
+            for p in pkgs
+                path = joinpath(DEPOT_PATH[1], "packages", p)
+                recent = pipeline(`ls  -Art $(path)`,
+                    `tail -1`) |> x -> read(x, String) |> chomp
+                recent_path = joinpath(path, recent)
+                if recent_path ∉ LOAD_PATH
+                    push!(LOAD_PATH, recent_path)
+                end
             end
         end
     end
-end
 # using ProtoStructs
 @doc "Count how many instructions a compiled function generates."
 macro countinstr(args)
