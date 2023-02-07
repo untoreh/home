@@ -3,7 +3,7 @@ self: super:
 let
   # nixl package
   nixgl = import (builtins.fetchTarball
-    "https://github.com/guibou/nixGL/archive/22f96c15988d51f97110e3e79dbbee02f2a47273.tar.gz") { };
+    "https://github.com/guibou/nixGL/archive/master.tar.gz") { };
   unstable = import <nixpkgs-unstable> {
     inherit (self) config;
     #overlays = [ ]; # no overlays inside overlay (infinite recursion)
@@ -43,8 +43,8 @@ in {
   inherit (self.weechatScripts) weechat-matrix;
   # gpu, waiting for nixpkgs integration
   # nixGLDefault, disabled because of "unsupported-package" issue
-  #inherit (nixgl.auto) nixGLDefault;
-  inherit (nixgl) nixVulkanIntel;
+  inherit (nixgl.auto) nixGLDefault;
+  # inherit (nixgl) nixVulkanIntel;
   # wait for mesa-d3d12
   # pandas isort setuptools timeago cython
   # deps for thefuck
