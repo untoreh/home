@@ -5,6 +5,8 @@ atreplinit() do repl
     # reinstall keybindings to work around https://github.com/KristofferC/OhMyREPL.jl/issues/166
     	sleep(1)
     	OhMyREPL.Prompt.insert_keybindings()
+        # don't use autocomplete, as it clashes with tab-completion
+    	OhMyREPL.enable_autocomplete_brackets(false)
 end
 	@eval colorscheme!("OneDark")
     catch e
@@ -45,4 +47,12 @@ function deletehistory!(n = 1)
         end
     end
     nothing
+end
+
+@doc "Print all keys of a container."
+macro keys(c)
+    quote
+        println.(keys($(esc(c))))
+        nothing
+    end
 end

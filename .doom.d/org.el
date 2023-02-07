@@ -51,7 +51,7 @@
         ;; only when buffer is indirect
         (if (and bb (not (eq b bb))
                  ;; only on poly mode
-                 (buffer-local-value 'pm/polymode bb))
+                 (with-current-buffer bb pm/polymode))
             (progn
               ;; prev buffers
               (if (listp (caar bufs))

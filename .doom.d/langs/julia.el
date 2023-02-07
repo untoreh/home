@@ -28,6 +28,14 @@
 	lsp-julia-timeout 360
 	lsp-julia-package-dir nil)
   :config
+  ;; julia-ts-mode
+  (after! julia-ts-mode
+         (add-to-list 'lsp-language-id-configuration '(julia-ts-mode . "julia"))
+         (lsp-register-client
+          (make-lsp-client :new-connection (lsp-stdio-connection 'lsp-julia--rls-command)
+                           :major-modes '(julia-mode ess-julia-mode julia-ts-mode)
+                           :server-id 'julia-ls
+                           :multi-root t)))
   ;; for the --project flag to be buffer local
   ;; (make-variable-buffer-local 'lsp-julia-flags)
   (make-variable-buffer-local 'lsp-julia-default-depot)
@@ -44,11 +52,12 @@
   ;;   (let ((root (projectile-project-root)))
   ;;     ;; (setq-local lsp-julia-default-environment root)
   ;;     (my/concatq! lsp-julia-default-depot "\:" root)))
-  ;; NOTE: The LS can't figure out recursive dependencies so we can't use only the "main" project
-  ;; (after! projectile
-  ;;   (defadvice! projectile-julia-project-root nil :override
-  ;;     #'lsp-julia--get-root
-  ;;     (concat "\"" (projectile-project-root) "\"")))
+  ;; NOTE: The LS can't figure out recursive dependencies so this is not really helpful, but avoids
+  ;; starting multiple LS instances
+  (after! projectile
+    (defadvice! projectile-julia-project-root nil :override
+      #'lsp-julia--get-root
+      (concat "\"" (projectile-project-root) "\"")))
   ;; NOTE: Precompilation causes runtime errors of methods not found...
   ;; (let* ((sysimage (file-truename "~/.julia/lsp/languageserver.so"))
   ;;        (flag (concat "--sysimage=" sysimage)))

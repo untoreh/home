@@ -191,7 +191,7 @@ When PASTE-P, “bracketed paste” mode will be used. When RET-P, terminate wit
 
   (defun python-repl--has-running-vterm-process (inferior-buffer)
     "Return non-nil if ‘inferior-buffer’ has a running vterm process."
-    (let ((proc (buffer-local-value 'vterm--process inferior-buffer)))
+    (let ((proc (with-current-buffer inferior-buffer vterm--process)))
       (and proc (memq (process-status proc) '(run stop open listen connect)))))
 
   (cl-defstruct python-repl--buffer-vterm
@@ -437,9 +437,8 @@ See ‘python-repl--inferior-buffer-name’."
           (python-repl--matching-inferior-buffers executable-key))
          (suffix-buffer-alist (mapcar
                                (lambda (buffer)
-                                 (cons (buffer-local-value
-                                        'python-repl--inferior-buffer-suffix
-                                        buffer)
+                                 (cons (with-current-buffer buffer
+                                        python-repl--inferior-buffer-suffix)
                                        buffer))
                                matching-inferior-buffers))
          (suffix-buffer-alist (cl-stable-sort suffix-buffer-alist
@@ -536,7 +535,7 @@ Valid keys are the first items in ‘python-repl-executable-records’."
           (when python-repl-compilation-mode
             (python-repl--setup-compilation-mode inferior-buffer basedir))
           (python-repl--run-hooks inferior-buffer)
-          (setf (buffer-local-value 'python-repl--inferior-buffer-suffix inferior-buffer) suffix)
+          (with-current-buffer inferior-buffer (setq-local python-repl--inferior-buffer-suffix suffix))
           inferior-buffer)))))
 
 ;;;###autoload

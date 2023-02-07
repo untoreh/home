@@ -12,7 +12,9 @@
   (corfu-on-exact-match 'quit)
   :init
   (global-corfu-mode)
-
+  :hook (corfu-mode . corfu-popupinfo-mode)
+  :bind (:map corfu-map
+              ("M-d" . corfu-popupinfo-toggle))
   :bind
   (:map corfu-map
         ("TAB" . corfu-next)
@@ -163,12 +165,7 @@ function to the relevant margin-formatters list."
   :hook (kill-emacs . tabnine-capf-kill-process)
   )
 
-(use-package! corfu-doc
-  :after corfu
-  :hook (corfu-mode . corfu-doc-mode)
-  :bind (:map corfu-map
-              ("M-d" . corfu-doc-toggle)))
-(use-package copilot
+(use-package! copilot
   :if nil
   :after corfu
   :bind ("M-k" . copilot-accept-completion-by-word) ;;  TODO: which :map should be used?

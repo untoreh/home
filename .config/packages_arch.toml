@@ -18,7 +18,6 @@ unzip
 imagemagick
 inetutils
 gost
-julia
 net-tools
 dos2unix
 btrfs-progs
@@ -26,6 +25,13 @@ prettier
 gnome-keyring
 dockerd
 mu
+#aur
+emacs-native-comp-git-enhanced
+
+
+# julia
+julia
+tree-sitter-julia-git # aur
 
 ## pip3 python
 mako PyYAML supervisor grip cffi cython ansible black flake8 isort ptpython colorama decorator psutil pyte epc

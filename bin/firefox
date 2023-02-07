@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if [ -v WSLENV ]; then
-	ProgramFiles="$(wslpath "$(cmd.exe /c "<nul set /p=%ProgramFiles%" 2>/dev/null)")"
+	ProgramFiles="$(wslpath "$(wex cmd.exe /c "<nul set /p=%ProgramFiles%" 2>/dev/null)")"
 	PATH="${PATH:+"${PATH}:"}${ProgramFiles}/Mozilla Firefox:${ProgramFiles} (x86)/Mozilla Firefox" firefox.exe "$@"
 elif [ -e "$HOME/.nix-profile/bin/firefox" ]; then
 	~/.nix-profile/bin/firefox "$@"

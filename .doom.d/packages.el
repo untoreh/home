@@ -83,24 +83,19 @@
       (if (modulep! :lang julia +lsp)
           (if (modulep! :tools lsp +eglot)
               (package! eglot-jl)
-            (package! lsp-julia
-              :recipe (:host github :repo "non-jedi/lsp-julia"))))
+            (progn
+              (package! lsp-julia
+                :recipe (:host github :repo "gdkrmr/lsp-julia"))
+              (package! julia-ts-mode))))
       ;; standalone formatter which works as client/server
       ;; (if (modulep! :lang julia +format)
       ;;     (package! julia-formatter
       ;;       :recipe (:host nil
       ;;                :repo "https://codeberg.org/FelipeLema/julia-formatter.el"
-      ;;                ;; :repo "https://github.com/ki-chi/julia-formatter"
       ;;                :files ("*.el" "*.jl" "*.toml"))))
       ;; snail provides repl/completions and other stuff
       (if (modulep! :lang julia +snail)
           (package! julia-snail))
-      ;; a featureful ob implementation for julia
-      ;; (if (modulep! :lang julia +ob)
-      ;;    (package! ob-julia :shadow 'ob-julia
-      ;;      :recipe (:host nil
-      ;;               :repo "https://git.nixo.xyz/nixo/ob-julia.git"
-      ;;               :files ("*.jl" "*.el"))))
       ))
 ;; shell
 (package! fish-mode)

@@ -6,4 +6,5 @@ rm -rf ~/.emacs.d/.local/straight/build-$VERSION/vterm/build
 mkdir ~/.emacs.d/.local/straight/build-$VERSION/vterm/build
 cd ~/.emacs.d/.local/straight/build-$VERSION/vterm/build
 cmake -DUSE_SYSTEM_LIBVTERM=no ..
+make -j14
 

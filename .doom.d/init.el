@@ -45,7 +45,7 @@
        (popup +defaults +all)   ; tame sudden yet inevitable temporary windows
        ;; tabs
        (treemacs +lsp)          ; a project drawer, like neotree but cooler
-                                        ; unicode           ; NOTE: we use "Julia Mono" this module overrides doom-unicode-font
+       unicode           ; NOTE: we use "Julia Mono" this module overrides doom-unicode-font
        vc-gutter         ; vcs diff in the fringe
        vi-tilde-fringe   ; fringe tildes to mark beyond EOB
        (window-select +switch-window +numbers)     ; visually switch windows
