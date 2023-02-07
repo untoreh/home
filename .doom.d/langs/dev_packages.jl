@@ -1,5 +1,5 @@
 # This should not be needed since julia 1.9, just add the pkgs to the "main" env in `~/.julia/environments/v1.x
-function hack_load_path(pkgs = [ "Revise", "JuliaInterpreter", "BenchmarkTools", "MacroTools" "ProtoStructs",
+function hack_load_path(pkgs = [ "Revise", "JuliaInterpreter", "BenchmarkTools", "MacroTools", "ProtoStructs",
                                  "Suppressor", "Documenter", "StaticCompiler" ])
     let pkgs =
         begin
@@ -14,6 +14,7 @@ function hack_load_path(pkgs = [ "Revise", "JuliaInterpreter", "BenchmarkTools",
             end
         end
     end
+end
 # using ProtoStructs
 @doc "Count how many instructions a compiled function generates."
 macro countinstr(args)
