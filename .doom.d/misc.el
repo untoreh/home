@@ -57,9 +57,10 @@
         (setq interprogram-cut-function #'wl-copy)
         (setq interprogram-paste-function #'wl-paste)))
   ;; WSL, windows grabs M-SPC so we rebind it to F13 (from windows side)
-  ;; and use that as alt leader key
-  (setq doom-leader-alt-key  "<XF86Tools>"
-        doom-localleader-alt-key "<XF86Tools> m")
+  ;; and use that as alt leader key NOTE: should be "XF86Tools" with X and "Tools" in PGTK
+  (let ((k (if (boundp 'pgtk-initialized) "<Tools>" "<XF86Tools>")))
+    (setq doom-leader-alt-key  k
+          doom-localleader-alt-key (concat k " m")))
   ;; (map! doom-leader-alt-key #'doom-leader)
   ;; (define-localleader-key!)
   ;; use custom temporary directory with WSL since there are permission problems with /tmp
@@ -99,8 +100,8 @@
   ;; however it stops the vterm process...
   (after! evil
     (add-hook! 'vterm-mode-hook
-               (make-variable-buffer-local 'evil-normal-state-entry-hook)
-               (make-variable-buffer-local 'evil-normal-state-exit-hook)
+      (make-variable-buffer-local 'evil-normal-state-entry-hook)
+      (make-variable-buffer-local 'evil-normal-state-exit-hook)
       (add-hook! 'evil-normal-state-entry-hook (vterm-copy-mode 1))
       (add-hook! 'evil-normal-state-exit-hook (vterm-copy-mode -1))
       )
