@@ -154,9 +154,10 @@ shell exits, the buffer is killed."
     ('emacs-lisp-mode "(prin1 %s)")
     ('python-mode "print(%s)")
     ((or 'js-mode 'rjsx-mode) "console.log(%s)")
-    ('julia-mode "display(%s)")
+    ((or 'julia-mode 'julia-ts-mode) "display(%s)")
     ('sh-mode "echo %s")
     ('rustic-mode "println!(\"{}\", %s);")
+    (m (error "No print command found for major mode %s" m))
     ))
 
 (defun my/prepend-file-name (suffix)
