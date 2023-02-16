@@ -1,14 +1,5 @@
 ;;; corfu.el -*- lexical-binding: t; -*-
-;; (map! :map corfu-map
-;;       :i "TAB" #'corfu-next
-;;       :i [tab] #'corfu-next
-;;       :i "C-n" #'corfu-next
-;;       :i "C-j" #'corfu-insert
-;;       :i "S-SPC" #'corfu-complete
-;;       :i "S-TAB" #'corfu-previous
-;;       :i "C-p" #'corfu-previous
-;;       :i [?\r] #'newline
-;;       :i [backtab] #'corfu-previous)
+
 (use-package! corfu
   :custom
   (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
@@ -22,19 +13,17 @@
   :init
   (global-corfu-mode)
   :hook (corfu-mode . corfu-popupinfo-mode)
-  :bind
-  (:map corfu-map
-        ("M-d" . corfu-popupinfo-toggle)
-        ("TAB" . corfu-next)
-        ([tab] . corfu-next)
-        ("C-n" . corfu-next)
-        ("C-j" . corfu-insert)
-        ("S-SPC" . corfu-complete)
-        ("S-TAB" . corfu-previous)
-        ("C-p" . corfu-previous)
-        ([?\r] . newline)
-        ([backtab] . corfu-previous))
   :config
+  (map! :map corfu-map
+        :i "TAB" #'corfu-next
+        :i [tab] #'corfu-next
+        :i "C-n" #'corfu-next
+        :i "C-j" #'corfu-insert
+        :i "S-SPC" #'corfu-complete
+        :i "S-TAB" #'corfu-previous
+        :i "C-p" #'corfu-previous
+        :i [?\r] #'newline
+        :i [backtab] #'corfu-previous)
   (setq-default orderless-component-separator "[ &+-]")
   (setq-default history-length 1000)
   (setq-default prescient-history-length 1000)
