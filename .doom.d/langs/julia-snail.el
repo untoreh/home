@@ -37,3 +37,35 @@
          (ann (list :annotation-function
                     #'julia-snail--company-annotation)))
     (concatenate 'list comp doc ann)))
+
+(use-package! julia-snail
+  :if (modulep! :lang julia +snail)
+  :after julia-mode
+  :commands julia-snail-mode
+  :hook (julia-mode . julia-snail-mode)
+  :config
+  (set-lookup-handlers! 'julia-snail-mode
+    :documentation #'julia-snail-doc-lookup
+    :xref-backend #'xref-julia-snail)
+  ;; override capf
+  (setq julia-snail-mode-hook nil)
+  (remove-hook 'completion-at-point-functions #'julia-snail-company-capf)
+  (add-hook
+   'julia-snail-mode-hook
+   (lambda ()
+     (remove-hook
+      'completion-at-point-functions
+      #'julia-snail-repl-completion-at-point)
+     (add-hook 'completion-at-point-functions
+               #'julia-snail-company-capf)))
+  ;; don't split buffer
+  (add-to-list
+   'display-buffer-alist
+   '("\\*julia" (display-buffer-reuse-window display-buffer-same-window)))
+  ;; to allow julia-snail to run in a container that binds ~/.julia
+  (shell-command (concat "cp -aL "
+                         (file-name-directory (locate-library "julia-snail")) " ~/.julia/packages/"))
+  (defun julia-snail-load-server ()
+    (interactive)
+    (julia-repl--send-string
+     "include(ENV[\"HOME\"] * \"/.julia/packages/julia-snail/JuliaSnail.jl\")")))

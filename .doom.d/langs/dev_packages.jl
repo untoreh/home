@@ -44,3 +44,14 @@ macro activate(place::String="")
         OhMyREPL.input_prompt!(project_prompt())
     end
 end
+
+function deserialize(v::AbstractVector)
+    buf = IOBuffer(v)
+    try
+        v = Serialization.deserialize(buf)
+        take!(buf)
+        v
+    finally
+        close(buf)
+    end
+end

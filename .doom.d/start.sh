@@ -20,9 +20,9 @@ run_emacs() {
 
 # sed -r '/(WAYLAND_DISPLAY)|(GDK_BACKEND)|(CLUTTER_BACKEND)/d' -i .local/env
 
-# unset WAYLAND_DISPLAY GDK_BACKEND CLUTTER_BACKEND
+#unset WAYLAND_DISPLAY GDK_BACKEND CLUTTER_BACKEND
 #export GDK_BACKEND=x11 CLUTTER_BACKEND=x11
-export GDK_BACKEND=wayland CLUTTER_BACKEND=wayland
+#export GDK_BACKEND=wayland CLUTTER_BACKEND=wayland
 
 # bin/doom clean
 
