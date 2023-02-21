@@ -24,7 +24,7 @@ let proj = Pkg.project()
             catch e
                 OhMyREPL.input_prompt!(project_prompt("error!"))
                 global last_error
-                last_error = e
+                last_error = () -> showerror(stdout, e)
             end
         end
     else
