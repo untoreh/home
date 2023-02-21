@@ -1,10 +1,10 @@
 ;;; langs/julia-repl.el -*- lexical-binding: t; -*-
 
+(add-transient-hook! 'julia-mode-hook
+  (set-popup-rule! "^\\*julia:" :height 25 :quit t :select nil))
 (use-package! julia-repl
   :commands julia-repl
   :init
-  (add-transient-hook! 'julia-repl-mode-hook
-    (set-popup-rule! "^\\*julia\\*" :height 25 :quit t :select nil))
   :config
   (set-docsets! 'julia-repl-vterm-mode :add "Julia")
   (if (modulep! :term vterm)
