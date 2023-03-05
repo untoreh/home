@@ -17,8 +17,10 @@
   :config
   (put 'lsp-restart 'safe-local-variable (lambda (&rest args) t))
   (setq
+   ;; workspace
+   lsp-keep-workspace-alive t
    ;; for performance
-   lsp-restart 'ignore
+   lsp-restart 'interactive
    lsp-auto-configure t
    ;; NOTE: Can't guess root since $HOME is considered a workspace...
    lsp-auto-guess-root nil
