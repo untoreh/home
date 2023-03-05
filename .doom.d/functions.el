@@ -154,7 +154,7 @@ shell exits, the buffer is killed."
     ('emacs-lisp-mode "(prin1 %s)")
     ('python-mode "print(%s)")
     ((or 'js-mode 'rjsx-mode) "console.log(%s)")
-    ((or 'julia-mode 'julia-ts-mode) "display(%s)")
+    ((or 'julia-mode 'julia-ts-mode) "Main.display!(%s)") ;; display! is defined in ~/.julia/config/startup.jl
     ('sh-mode "echo %s")
     ('rustic-mode "println!(\"{}\", %s);")
     (m (error "No print command found for major mode %s" m))

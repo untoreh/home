@@ -9,6 +9,7 @@
   orderless-component-separator "" ;; Splits on every char. Allows "AbS" to match "AbstractString"
   )
 (after! julia-mode
+  (set-popup-rule! "^\\*julia:" :height 25 :quit t :select nil)
   (when (modulep! :lang julia +lsp)
     (add-hook! julia-mode #'lsp))
   (add-hook! 'julia-mode-hook
@@ -71,7 +72,7 @@
   ;;               (message "Started Julia process to compile LanguageServer system image. This may take a while.")))
   ;;     (pushnew! lsp-julia-flags flag)
   ;;     (setq-default lsp-julia-flags lsp-julia-flags)))
-  (setq lsp-julia-command "~/.julia/lsp/compiled/bin/julia")
+  (setq lsp-julia-command "~/.julia/sysimage/compiled/bin/julia")
   )
 
 ;; Not used: julia-ob, julia-snail, julia-proto

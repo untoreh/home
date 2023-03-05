@@ -1,11 +1,13 @@
 ;;; langs/julia-repl.el -*- lexical-binding: t; -*-
 
-(add-transient-hook! 'julia-mode-hook
-  (set-popup-rule! "^\\*julia:" :height 25 :quit t :select nil))
 (use-package! julia-repl
-  :commands julia-repl
   :init
   :config
+  (after! lsp-julia
+    (pushnew! julia-repl-executable-records
+              `(compiled ,lsp-julia-command)
+              `(trickle ,(executable-find "trickle-julia")))
+    (setq julia-repl-executable-key 'trickle))
   (set-docsets! 'julia-repl-vterm-mode :add "Julia")
   (if (modulep! :term vterm)
       (julia-repl-set-terminal-backend 'vterm))

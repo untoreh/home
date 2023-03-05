@@ -57,23 +57,23 @@ macro discard!(k, v)
     end
 end
 
-# function testloop(t::Type, k::Symbol, v=t)
-#     for _ in 1:100000
-#         o = object!(t, k, v)
-#         @discard! k o
-#     end
-# end
+function testloop(t::Type, k::Symbol, v=t)
+    for _ in 1:100000
+        o = object!(t, k, v)
+        @discard! k o
+    end
+end
 
-# function testloop3(t::Type, k::Symbol, v=t)
-#     for _ in 1:100000
-#         @with o t k begin end
-#     end
-# end
+function testloop3(t::Type, k::Symbol, v=t)
+    for _ in 1:100000
+        @with o t k begin end
+    end
+end
 
-# function testloop2(t::Type, k, v=t)
-#     for _ in 1:100000
-#         o::Union{Nothing,t} = v()
-#         o = nothing
-#     end
-# end
+function testloop2(t::Type, k, v=t)
+    for _ in 1:100000
+        o::Union{Nothing,t} = v()
+        o = nothing
+    end
+end
 end
