@@ -5,18 +5,6 @@
 share/backups
 
 # generic
-!*.java/.userPrefs/
-!*.julia/config
-!*.julia/environments
-!*.julia/prefs
-!.clojure/deps.edn
-!.clojure/user.cl
-!.cpan/CPAN/
-!.rustup/settings.toml
-!.vscode-server/argv.json
-!.vscode/argv.json
-!/.ipfs/config
-!Templates/
 .*history*
 .TabNine/
 .Tribler/
@@ -54,6 +42,7 @@ share/backups
 .ipython/
 .java/
 .julia/*
+.julia/environments/**/.CondaPkg*
 .jupyter
 .jupyter/
 .lesshst
@@ -135,3 +124,15 @@ nimsuggest.log
 /.bun/
 /.jlassetregistry.json
 /.keychain/
+!*.java/.userPrefs/
+!*.julia/config
+!*.julia/environments
+!*.julia/prefs
+!.clojure/deps.edn
+!.clojure/user.cl
+!.cpan/CPAN/
+!.rustup/settings.toml
+!.vscode-server/argv.json
+!.vscode/argv.json
+!/.ipfs/config
+!Templates/
