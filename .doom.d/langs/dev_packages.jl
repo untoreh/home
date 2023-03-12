@@ -31,6 +31,7 @@ macro countinstr(args)
     end
 end
 
+
 function project_prompt(status="")
     if !isempty(status)
         "($(Pkg.project().name)) ($status) julia> "
@@ -38,6 +39,8 @@ function project_prompt(status="")
         "($(Pkg.project().name)) julia> "
     end
 end
+
+prompt!(v="") = OhMyREPL.input_prompt!(project_prompt(v))
 macro activate(place::String="")
     quote
         Pkg.activate($place)

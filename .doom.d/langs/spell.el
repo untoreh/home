@@ -1,6 +1,7 @@
 ;;; langs/spell.el -*- lexical-binding: t; -*-
 
 (require 'functions)
+(require 'dash)
 
 ;; NOTE: aspell (for installing dictionaries is installed from distro (not nix-env)
 ;; dictionaries are installed from nix-env and specified with `local-data-dir'

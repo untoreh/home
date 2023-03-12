@@ -5,11 +5,11 @@
 # --
 using Test
 
-_test_$1_1() = begin
-    @eval $2
+function _$1_1()
     $3
 end
 
 test_$1() = @testset "$1" begin
-    @test begin _test_$1_1() end
+    @eval $2
+    @test _$1_1()
 end

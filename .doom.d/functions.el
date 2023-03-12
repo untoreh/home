@@ -146,7 +146,21 @@ shell exits, the buffer is killed."
     (with-current-buffer (vterm (concat "*" command "*"))
       (set-process-sentinel vterm--process #'my/run-in-vterm-kill)
       (vterm-send-string command)
-      (vterm-send-return))))
+      (vterm-send-return)))
+  (defun my/repl-vterm-bufferp (&rest args)
+  "Check if the current buffer is a repl vterm buffer of any language in `enabled-langs'."
+  (catch 'enabled
+    (mapc (lambda (l)
+            (let ((mode (intern (concat
+                                 (symbol-name l)
+                                 "-repl-vterm-mode"))))
+              (when (and (boundp mode)
+                         (symbol-value mode))
+                (throw 'enabled t))))
+          enabled-langs)
+    nil))
+
+  )
 
 (defun my/mode-print-cmd ()
   (pcase major-mode

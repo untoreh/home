@@ -6,7 +6,7 @@ include("dev_packages.jl")
 using Suppressor
 using Term.Progress
 let proj = Pkg.project()
-    pbar = ProgressBar(columns=:minimal, transient=true)
+    pbar = ProgressBar(columns=:default, transient=true)
     prog = addjob!(pbar, description="Compiling...", N=9)
     prog!() = begin
         update!(prog)
@@ -37,8 +37,8 @@ let proj = Pkg.project()
                 eval(Meta.parse("Revise.revise($mod)"))
                 prog!() # 8
             catch e
-                global last_error
-                last_error = () -> showerror(stdout, e)
+                global init_error
+                init_error = () -> (showerror(stdout, e); e;)
                 OhMyREPL.input_prompt!(project_prompt("error!"))
             finally
                 stop!(pbar)

@@ -3,7 +3,7 @@
 (setq enabled-langs '(python rust julia racket raku json markdown org emacs-lisp))
 
 
-(load! "tree-sitter")
+;(load! "tree-sitter")
 (load! "lisp")
 (load! "spell")
 (if (modulep! :lang shell)
@@ -47,20 +47,6 @@
   (setq flycheck-posframe-border-width 5)
   (flycheck-posframe-configure-pretty-defaults)
   )
-
-(defun my/repl-vterm-bufferp (&rest args)
-  "Check if the current buffer is a repl vterm buffer of any language in `enabled-langs'."
-  (catch 'enabled
-    (mapc (lambda (l)
-            (let ((mode (intern (concat
-                                 (symbol-name l)
-                                 "-repl-vterm-mode"))))
-              (when (and (boundp mode)
-                         (symbol-value mode))
-                (throw 'enabled t))))
-          enabled-langs)
-    nil))
-
 
 ;; ;; make compilation buffers follow
 (add-hook! (compilation-mode nim-compile-mode)

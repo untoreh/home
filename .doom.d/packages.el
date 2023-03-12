@@ -58,9 +58,12 @@
 ;; (package! aggressive-indent)
 ;; (package! gcmh-mode :disable nil)
 
+;; HOTFIX
+(package! compat :pin nil)
+(package! evil :pin nil)
+(package! vertico :pin nil)
+
 ;; completion
-;(unpin! compat)
-;(package! compat :pin "df6a4370df454971e9bf39da65256646133a2b6e")
 (package! corfu :recipe (:includes (corfu-indexed corfu-quick) :files (:defaults "extensions/corfu-*.el")))
 (package! cape :recipe (:host github :repo "minad/cape"))
 (package! tabnine-capf :recipe (:host github :repo "theFool32/tabnine-capf" :files ("*.el" "*.sh" "*.py")))

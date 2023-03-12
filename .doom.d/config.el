@@ -1,5 +1,8 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
+(defalias 'compat-string-width 'string-width)
+
+
 (let ((force-load-messages t))
   (load! "vars")
   (load! "functions")
@@ -9,13 +12,13 @@
   (load! "text")
   (load! "org")
   (load! "mail")
-  (load! "completion")
+  (load! "completion/init")
   (load! "langs/langs")
   (load! "projects")
   (after! magit
     (load! "git"))
-  ;(load! "maths.el")
-  ;(load! "debug")
+                                        ;(load! "maths.el")
+                                        ;(load! "debug")
   )
 
 (message "Configuration Loaded Successfully!")
