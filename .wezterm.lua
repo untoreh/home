@@ -99,7 +99,9 @@ return {
          args={"powershell.exe", "/NoLogo"}}}},
     {key="g", mods="CTRL|SHIFT", action=wezterm.action{
        SpawnCommandInNewTab={
-         args={"nu.exe"}}}}
+         args={"nu.exe"}}}},
+	 {key="x", mods="ALT", action=wezterm.action.ActivateCommandPalette,}
+
 
   },
   --	leader = { key="a", mods="CTRL", timeout_milliseconds=1000 },
