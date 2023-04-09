@@ -36,3 +36,6 @@ bindurl www.google.com F hint -Jbc #search div:not(.action-menu) > a
 
 " old reddit
 autocmd DocStart ^http(s?)://www.reddit.com js tri.excmds.urlmodify("-t", "www", "old")
+
+"disable on localhost
+seturl .*localhost:[0-9]{2,5}/browser-display superignore true
