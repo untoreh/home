@@ -10,6 +10,9 @@ revise_logs() = @eval begin
     end
 end
 
+using Suppressor: @suppress
+using Term.Progress
+
 function revise!(dotask=true)
     # # Don't precompile packages when using revise.
     ENV["JULIA_PKG_PRECOMPILE_AUTO"] = false
@@ -38,6 +41,10 @@ function revise!(dotask=true)
         prog!() # 3
         mod = Symbol(proj.name)
         if dotask
+            @eval Main begin
+                const comp_task = Ref{Task}()
+                const init_error = Ref{Any}()
+            end
             comp_task[] = @async begin
                 try
                     prog!() # 4
