@@ -1,0 +1,13 @@
+name = "Startup"
+uuid = "558f9e20-c3d0-4f18-85d6-82eb171e3c87"
+authors = ["untoreh <francesco.giannelli@yahoo.it>"]
+version = "0.1.0"
+
+[deps]
+JLLWrappers = "692b3bcd-3c85-4b1f-b108-f13ce0eb3210"
+OhMyREPL = "5fb14364-9ced-5910-84b2-373655c76a03"
+Pkg = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
+REPL = "3fa0cd96-eef1-5676-8a61-b3b8758bbffb"
+SnoopPrecompile = "66db9d55-30c0-4569-8b51-7e840670fc0c"
+Suppressor = "fd094767-a336-5f1f-9728-57cf17d0bbfb"
+Term = "22787eb5-b846-44ae-b979-8e399b8463ab"
