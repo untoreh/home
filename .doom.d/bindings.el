@@ -54,7 +54,13 @@
        #'iedit-mode
        ;; doom kill buffer doesn't seem to kill dead processes buffers
        :prefix "b" "k"
-       #'my/force-kill-buffer))
+       #'my/force-kill-buffer
+       :desc "Toggle font lock"
+       :prefix "t"
+       :nv "j"
+       #'font-lock-mode
+       )
+      )
 
 ;; inserting inside a vterm should reset cursor position
 (map! :mode vterm-mode
@@ -178,9 +184,9 @@
        :desc "exec region"
        :nev "e" #'julia-repl-send-region-or-line
        :desc "exec wrapped region"
-       :nev "w" #'julia-repl-send-block-string
+       :nev "b" #'julia-repl-send-block-string
        :desc "exec src block"
-       :nev "r" #'julia-repl-reset-and-execute-src-block
+       :nev "r" #'julia-repl-revise
        :desc "list methods"
        :nev "m" #'julia-repl-list-methods
        :desc "list fields"

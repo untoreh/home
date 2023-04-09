@@ -86,6 +86,26 @@
  kept-old-versions 3
  version-control t)
 
+;; git
+(defvar magit-large-repo-num-files 1000 "Repositories that exceed this variable are considered large.")
+(defvar magit-large-repo-p nil "t if current repo is a large repo.")
+(defvar magit-large-repo-set-p nil "t if current repo has been checked for largeness.")
+;; allow local variables
+(let ((safe-var-list '(enable-local-eval
+                       magit-large-repo-p
+                       magit-large-repo-set-p
+                       magit-commit-show-diff
+                       magit-refresh-buffers)))
+  (mapc (lambda (sym)
+          (put sym 'safe-local-variable (lambda (&rest args) t)))
+        safe-var-list))
+(let ((safe-eval-list '(mapc magit-disable-section-inserter)))
+  (mapc (lambda (sym) (put sym 'safe-local-eval-function (lambda (&rest args) t)))
+        safe-eval-list))
+;; allow local eval
+(put 'enable-local-eval 'risky-local-variable nil)
+
+
 ;; tramp
 ;; (setq-default
 ;; tramp-default-host "xnp1"

@@ -140,9 +140,10 @@
       nil)))
 
 (require 'aio)
-(aio-defun julia-repl-cmd (str &optional wait)
+(aio-defun julia-repl-cmd (str &optional wait cd)
   "Send a string to julia repl switching to its buffer, if it exists."
-  (when (julia-repl-switch nil t)
+  (setq julia-toggle-repl--previous-window (selected-window))
+  (when (julia-repl-switch nil cd)
     (when (and wait (> wait 0))
       (aio-await (aio-sleep wait))) ;; HACK: allow ohmyrepl.jl to load (this prevents extra "]" being inserted)
     (julia-repl--send-string str)))
@@ -193,6 +194,12 @@
   (interactive)
   ;; remove 2 lines from repl history
   (julia-repl-cmd "debug!(2)"))
+
+(defun julia-repl-revise ()
+  (interactive)
+  (julia-repl-cmd "Revise.retry()")
+  (evil-insert nil)
+  (julia-toggle-repl-back))
 
 (defun julia-repl-revise-at-point ()
   "Revise thing at point."

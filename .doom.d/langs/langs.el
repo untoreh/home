@@ -3,7 +3,7 @@
 (setq enabled-langs '(python rust julia racket raku json markdown org emacs-lisp))
 
 
-;(load! "tree-sitter")
+(load! "tree-sitter")
 (load! "lisp")
 (load! "spell")
 (if (modulep! :lang shell)
