@@ -135,15 +135,20 @@ using SnoopPrecompile
             using JLLWrappers
             using OhMyREPL.JLFzf
             using OhMyREPL.JLFzf.fzf_jll
-
+            using OhMyREPL.BracketInserter.Pkg.API.Operations.Registry.FileWatching
+            using Revise: Revise
+            using Requires: Requires
+            using JuliaSyntax: JuliaSyntax
         end
         home = ENV["HOME"]
         cd(dirname(dirname(pathof(Startup))))
         Pkg.activate(".")
         include(joinpath(home, ".doom.d", "langs", "revise.jl"))
         revise!(false)
-        include("precompile.jl")
     end
+    include("precompile.jl")
 end
+
+export display!, @show!, @keys, deletehistory!, debug!
 
 end

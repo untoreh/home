@@ -117,7 +117,8 @@
                                (file-name-as-directory
                                 (my/script-dir #'julia-franklin)))))
     (when julia-repl-enable-revise
-      (julia-repl-send-file "revise.jl"))
+      (julia-repl-send-file "revise.jl")
+      (julia-repl-cmd "revise!()"))
     (when julia-repl-enable-snoop
       (julia-repl-send-file "snoop.jl"))))
 

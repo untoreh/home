@@ -72,7 +72,9 @@
 (after! parrot-mode
   (map!
    :nve "[r" #'parrot-rotate-prev-word-at-point
-   :nve "]r" #'parrot-rotate-next-word-at-point))
+   :nve "]r" #'parrot-rotate-next-word-at-point
+   :nve
+   ))
 
 ;; jupyter
 (if (modulep! :lang org +jupyter)

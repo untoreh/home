@@ -148,19 +148,30 @@ shell exits, the buffer is killed."
       (vterm-send-string command)
       (vterm-send-return)))
   (defun my/repl-vterm-bufferp (&rest args)
-  "Check if the current buffer is a repl vterm buffer of any language in `enabled-langs'."
-  (catch 'enabled
-    (mapc (lambda (l)
-            (let ((mode (intern (concat
-                                 (symbol-name l)
-                                 "-repl-vterm-mode"))))
-              (when (and (boundp mode)
-                         (symbol-value mode))
-                (throw 'enabled t))))
-          enabled-langs)
-    nil))
+    "Check if the current buffer is a repl vterm buffer of any language in `enabled-langs'."
+    (catch 'enabled
+      (mapc (lambda (l)
+              (let ((mode (intern (concat
+                                   (symbol-name l)
+                                   "-repl-vterm-mode"))))
+                (when (and (boundp mode)
+                           (symbol-value mode))
+                  (throw 'enabled t))))
+            enabled-langs)
+      nil))
 
   )
+
+(defvar my/print-funcs-julia '("display(%s)" "Main.display!(%s)") "Print functions for julia")
+(defvar my/print-funcs-current-julia "display(%s)" "Current print function for julia")
+
+(after! parrot-mode
+  (dolist (entry '((:rot ("display(%s)" "Main.display!(%s)"))))
+    (add-to-list 'parrot-rotate-dict entry))
+  (defun my/rotate-print-func (lang)
+    (let ((varname (intern (concat "my/print-funcs-current-" (symbol-name lang)))))
+      (set varname (parrot-rotate-next (symbol-value varname)))
+      )))
 
 (defun my/mode-print-cmd ()
   (pcase major-mode
@@ -168,7 +179,7 @@ shell exits, the buffer is killed."
     ('emacs-lisp-mode "(prin1 %s)")
     ('python-mode "print(%s)")
     ((or 'js-mode 'rjsx-mode) "console.log(%s)")
-    ((or 'julia-mode 'julia-ts-mode) "Main.display!(%s)") ;; display! is defined in ~/.julia/config/startup.jl
+    ((or 'julia-mode 'julia-ts-mode) my/print-funcs-current-julia) ;; display! is defined in ~/.julia/config/startup.jl
     ('sh-mode "echo %s")
     ('rustic-mode "println!(\"{}\", %s);")
     (m (error "No print command found for major mode %s" m))
@@ -239,21 +250,27 @@ shell exits, the buffer is killed."
                        (delete-blank-lines)
                        ))))))))
 
+(defun my/major-mode-lang ()
+  (intern (first (split-string (symbol-name major-mode) "-"))))
+
 (map!
-      (
-       :prefix "SPC i l"
-       :desc "insert num log"
-       :nv "l"
-       #'my/insert-print)
-      (
-       :prefix "SPC i l"
-       :desc "insert yank log"
-       :nv "y"
-       (cmd! (my/insert-print 'yank)))
-      (:leader
-       :desc "clear log strings"
-       :nvi "d l"
-       #'my/insert-print-clear))
+ (:prefix "SPC i l"
+  :desc "insert num log"
+  :nv "l"
+  #'my/insert-print)
+ (:prefix "SPC i l"
+  :desc "insert yank log"
+  :nv "y"
+  (cmd! (my/insert-print 'yank)))
+ (:prefix "SPC i l"
+  :desc "rotate print function"
+  :nv "r"
+  (cmd! (my/rotate-print-func (my/major-mode-lang))))
+ (:leader
+  :desc "clear log strings"
+  :nvi "d l"
+  #'my/insert-print-clear)
+ )
 
 (defun my/tail-f-window (&rest _)
   "Go to the end of Messages buffer."

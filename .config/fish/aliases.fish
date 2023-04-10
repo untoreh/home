@@ -18,6 +18,8 @@ alias supcc "scripts/supc.sh"
 #julia
 alias julia-sys-orig "sudo ln -srf /usr/lib/julia/sys.so{.orig,}"
 alias julia-sys-ls "sudo ln -srf /usr/lib/julia/sys.so{.ls,}"
+alias jp "julia --project=."
+alias jpv "julia --project=. -e \"using ProfileView\" -i"
 
 # volatile
 set rocm_tag rocm/pytorch:rocm3.8_ubuntu18.04_py3.6_pytorch
