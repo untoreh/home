@@ -53,7 +53,8 @@ function _dorevise(dotask=true)
                     includestartup()
                 catch e
                     init_error[] = () -> (showerror(stdout, e); e)
-                    OhMyREPL.input_prompt!(project_prompt("error!"))
+                    @error "Failed to load $(mod)!"
+                    # OhMyREPL.input_prompt!(project_prompt("error!"))
                 finally
                     stop!(pbar)
                 end
