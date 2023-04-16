@@ -111,15 +111,17 @@
 
 (defun julia-repl-startup ()
   (interactive)
-  (julia-repl-cd (projectile-project-root))
-  (ignore-errors (julia-repl-activate-parent nil))
-  (let ((include-begin (concat "include(\""
-                               (file-name-as-directory
-                                (my/script-dir #'julia-franklin)))))
-    (when julia-repl-enable-revise
-      (julia-repl-cmd "revise!()"))
-    (when julia-repl-enable-snoop
-      (julia-repl-send-file "snoop.jl"))))
+  (let ((julia-repl-switches (concat julia-repl-switches "--project=\""
+                                     (file-truename (projectile-project-root)) "\"")))
+    (julia-repl-cd (projectile-project-root))
+    (ignore-errors (julia-repl-activate-parent nil))
+    (let ((include-begin (concat "include(\""
+                                 (file-name-as-directory
+                                  (my/script-dir #'julia-franklin)))))
+      (when julia-repl-enable-revise
+        (julia-repl-cmd "revise!()"))
+      (when julia-repl-enable-snoop
+        (julia-repl-send-file "snoop.jl")))))
 
 (defun julia-repl-switch (&optional no-activate cd)
   " Enables julia repl, and activates the current project "

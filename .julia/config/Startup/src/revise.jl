@@ -12,7 +12,7 @@ end
 
 function revise!(dotask=true)
     @eval using Term.Progress: ProgressBar, addjob!, stop!, update!, start!, render
-    @eval Main Startup._dorevise($dotask)
+    Core.eval(Main, :(Startup._dorevise($dotask)))
 end
 
 function _dorevise(dotask=true)
@@ -54,6 +54,7 @@ function _dorevise(dotask=true)
                 catch e
                     init_error[] = () -> (showerror(stdout, e); e)
                     @error "Failed to load $(mod)!"
+                    flush(stdout)
                     # OhMyREPL.input_prompt!(project_prompt("error!"))
                 finally
                     stop!(pbar)
