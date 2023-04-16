@@ -1,5 +1,7 @@
 module Startup
 
+const omr_enabled = Ref(false)
+
 loadpy() = include("$(ENV["HOME"])/.julia/config/python.jl")
 
 function debug!(del=0)
@@ -71,7 +73,7 @@ function display!(args...)
     end
 end
 
-function myreplinit(repl)
+_ohmyrepl() =
     try
         @eval Main begin
             using OhMyREPL
@@ -87,12 +89,21 @@ function myreplinit(repl)
     catch e
         @warn "error while importing OhMyREPL" e
     end
+
+function myreplinit(repl)
+    omr_enabled[] && _ohmyrepl()
+    # double to toggle
     debug!()
     debug!()
 end
 
 __init__() = begin
     atreplinit(myreplinit)
+    atreplinit(customize_keys)
+    if isdefined(Startup, :Revise)
+        push!(Revise.dont_watch_pkgs, :Startup)
+        Revise.silence("Startup")
+    end
 end
 
 const comp_task = Ref{Task}()
@@ -104,21 +115,30 @@ include("dev_packages.jl")
 include("revise.jl")
 
 @precompile_setup let home = ENV["HOME"]
-    @precompile_all_calls begin
-        using Pkg: Pkg as Pkg
-        using REPL
-        using OhMyREPL
-        using JLLWrappers
-        using OhMyREPL: JLFzf
-        using OhMyREPL.JLFzf: fzf_jll
-        using OhMyREPL.BracketInserter.Pkg.API.Operations.Registry: FileWatching
-        using Revise
-        using Requires: Requires
-        using JuliaSyntax: JuliaSyntax
-        include("precompile.jl")
+    _activate() = begin
         cd(dirname(dirname(pathof(Startup))))
         Pkg.activate(".", io=Base.devnull)
-        revise!(false)
+        __init__()
+    end
+    @precompile_all_calls begin
+        using Pkg: Pkg as Pkg
+        using Revise
+        if omr_enabled[]
+            using OhMyREPL: JLFzf
+            using OhMyREPL.JLFzf: fzf_jll
+            using OhMyREPL.BracketInserter.Pkg.API.Operations.Registry: FileWatching
+            using JuliaSyntax: JuliaSyntax
+            include("precompile.jl")
+            using Requires: Requires
+            _activate()
+            # revise!(false)
+        else
+            using JLLWrappers
+            using JLFzf: fzf_jll
+            include("fzf.jl")
+            include("precompile_small.jl")
+            _activate()
+        end
         push!(Revise.dont_watch_pkgs, :Startup)
     end
 end

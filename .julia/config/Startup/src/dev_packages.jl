@@ -40,12 +40,16 @@ function project_prompt(status="")
     end
 end
 
-prompt!(v="") = OhMyREPL.input_prompt!(project_prompt(v))
-macro activate(place::String="")
-    quote
-        Pkg.activate($place)
-        OhMyREPL.input_prompt!(project_prompt())
+if isdefined(Startup, :OhMyRepl)
+    prompt!(v="") = OhMyREPL.input_prompt!(project_prompt(v))
+    macro activate(place::String="")
+        quote
+            Pkg.activate($place)
+            OhMyREPL.input_prompt!(project_prompt())
+        end
     end
+else
+    const prompt! = Returns(nothing)
 end
 
 function deserialize(v::AbstractVector)

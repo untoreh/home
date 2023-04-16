@@ -10,10 +10,12 @@ revise_logs() = @eval begin
     end
 end
 
-using Suppressor: @suppress
-using Term.Progress
-
 function revise!(dotask=true)
+    @eval using Term.Progress: ProgressBar, addjob!, stop!, update!, start!, render
+    @eval _dorevise($dotask)
+end
+
+function _dorevise(dotask=true)
     # # Don't precompile packages when using revise.
     ENV["JULIA_PKG_PRECOMPILE_AUTO"] = false
     isnothing(get(ENV, "JULIA_SKIPINIT", nothing)) || return
@@ -42,9 +44,7 @@ function revise!(dotask=true)
             comp_task[] = @async begin
                 try
                     prog!() # 4
-                    @suppress begin
-                        Pkg.precompile()
-                    end
+                    Pkg.precompile(io=Base.devnull)
                     prog!() # 5
                     @eval Main using $mod
                     prog!() # 6
