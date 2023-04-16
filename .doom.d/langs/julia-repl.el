@@ -109,19 +109,29 @@
     (julia-repl--send-string
      (concat include-begin filename "\")" ))))
 
+;; Ensure that julia always has the `--project' flag. This is important for when
+;; the julia startup file (`~/.julia/config/startup.jl') loads precompiled code
+;; that is project specific.
+(defadvice! julia-repl-ensure-project-arg (orig-fn &rest args)
+  :around #'julia-repl-inferior-buffer
+  (let ((julia-repl-switches (if projflag
+                                 (progn
+                                   (concat julia-repl-switches "--project=\""
+                                           (file-truename (projectile-project-root)) "\""))
+                               julia-repl-switches)))
+    (apply orig-fn args)))
+
 (defun julia-repl-startup ()
   (interactive)
-  (let ((julia-repl-switches (concat julia-repl-switches "--project=\""
-                                     (file-truename (projectile-project-root)) "\"")))
-    (julia-repl-cd (projectile-project-root))
-    (ignore-errors (julia-repl-activate-parent nil))
-    (let ((include-begin (concat "include(\""
-                                 (file-name-as-directory
-                                  (my/script-dir #'julia-franklin)))))
-      (when julia-repl-enable-revise
-        (julia-repl-cmd "revise!()"))
-      (when julia-repl-enable-snoop
-        (julia-repl-send-file "snoop.jl")))))
+  (julia-repl-cd (projectile-project-root))
+  (ignore-errors (julia-repl-activate-parent nil))
+  (let ((include-begin (concat "include(\""
+                               (file-name-as-directory
+                                (my/script-dir #'julia-franklin)))))
+    (when julia-repl-enable-revise
+      (julia-repl-cmd "revise!()"))
+    (when julia-repl-enable-snoop
+      (julia-repl-send-file "snoop.jl"))))
 
 (defun julia-repl-switch (&optional no-activate cd)
   " Enables julia repl, and activates the current project "
@@ -133,7 +143,7 @@
     (if (julia-repl-inferior-buffer)
         (progn
           (if (and startup (not no-activate))
-              (julia-repl-startup)
+              (julia-repl-startup nil)
             (progn
               (when cd
                 (julia-repl-cd (projectile-project-root)))
