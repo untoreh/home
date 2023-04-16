@@ -70,6 +70,9 @@ if set -q WSLENV
     end
 end
 
+# direnv
+direnv hook fish | source
+
 # kodi
 # set -x CRASHLOG_DIR /tmp/kodi
 # must replicate /etc/environment with fish syntax
