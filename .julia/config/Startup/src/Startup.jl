@@ -100,8 +100,7 @@ const init_error = Ref{Any}()
 
 using SnoopPrecompile
 
-@precompile_setup let
-    home = ENV["HOME"]
+@precompile_setup let home = ENV["HOME"]
     @precompile_all_calls begin
         using Suppressor
         using Term.Progress
@@ -123,6 +122,6 @@ using SnoopPrecompile
     end
 end
 
-export display!, @show!, @keys, deletehistory!, debug!
+export display!, @show!, @keys, deletehistory!, debug!, revise!
 
 end
