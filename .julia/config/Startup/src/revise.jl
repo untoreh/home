@@ -16,12 +16,11 @@ using Term.Progress
 function revise!(dotask=true)
     # # Don't precompile packages when using revise.
     ENV["JULIA_PKG_PRECOMPILE_AUTO"] = false
-    include(joinpath(@__DIR__, "dev_packages.jl"))
     isnothing(get(ENV, "JULIA_SKIPINIT", nothing)) || return
     proj = Pkg.project()
     invokelatest(prompt!)
     pbar = ProgressBar(columns=:default, transient=true)
-    prog = addjob!(pbar, description="Compiling...", N=9)
+    prog = addjob!(pbar, description="Compiling...", N=8)
     prog!(i=1) = begin
         update!(prog; i)
         render(pbar)
@@ -36,15 +35,10 @@ function revise!(dotask=true)
                 end
             end
             prog!() # 2
-            @async @eval Main using OhMyREPL
         end
         prog!() # 3
         mod = Symbol(proj.name)
         if dotask
-            @eval Main begin
-                const comp_task = Ref{Task}()
-                const init_error = Ref{Any}()
-            end
             comp_task[] = @async begin
                 try
                     prog!() # 4
@@ -56,8 +50,6 @@ function revise!(dotask=true)
                     prog!() # 6
                     @eval Main using Base.Meta
                     prog!() # 7
-                    eval(Meta.parse("Revise.track($mod)"))
-                    prog!() # 8
                     includestartup()
                 catch e
                     init_error[] = () -> (showerror(stdout, e); e)
@@ -65,12 +57,12 @@ function revise!(dotask=true)
                 finally
                     stop!(pbar)
                 end
-                prog!() # 9
+                prog!() # 8
             end
         else
             showerror(stdout, ErrorException("ops"))
             invokelatest(includestartup)
-            prog!(6)
+            prog!(5)
             stop!(pbar)
         end
     else
@@ -78,3 +70,5 @@ function revise!(dotask=true)
         @warn "No project found, not loading Revise."
     end
 end
+
+export revise!, comp_task, init_error

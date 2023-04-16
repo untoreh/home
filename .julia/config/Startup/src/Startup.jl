@@ -100,10 +100,11 @@ const init_error = Ref{Any}()
 
 using SnoopPrecompile
 
+include("dev_packages.jl")
+include("revise.jl")
+
 @precompile_setup let home = ENV["HOME"]
     @precompile_all_calls begin
-        using Suppressor
-        using Term.Progress
         using Pkg: Pkg as Pkg
         using REPL
         using OhMyREPL
@@ -117,11 +118,12 @@ using SnoopPrecompile
         include("precompile.jl")
         cd(dirname(dirname(pathof(Startup))))
         Pkg.activate(".", io=Base.devnull)
-        include(joinpath(home, ".doom.d", "langs", "revise.jl"))
         revise!(false)
+        push!(Revise.dont_watch_pkgs, :Startup)
     end
 end
 
-export display!, @show!, @keys, deletehistory!, debug!, revise!
+export display!, @show!, @keys, deletehistory!, debug!
+export revise!, comp_task, init_error
 
 end
