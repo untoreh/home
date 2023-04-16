@@ -30,12 +30,12 @@ function _dorevise(dotask=true)
     start!(pbar)
     if !isnothing(proj.name)
         @sync begin
-            @async @eval Main begin
+            @async Core.eval(Main, :(begin
                 using Revise
                 if !isnothing(get(ENV, "REVISE_LOGGING", nothing))
                     rlogger = Revise.debug_logger()
                 end
-            end
+            end))
             prog!() # 2
         end
         prog!() # 3
@@ -46,9 +46,9 @@ function _dorevise(dotask=true)
                     prog!() # 4
                     Pkg.precompile(io=Base.devnull)
                     prog!() # 5
-                    @eval Main using $mod
+                    Core.eval(Main, :(using $mod))
                     prog!() # 6
-                    @eval Main using Base.Meta
+                    Core.eval(Main, :(using Base.Meta))
                     prog!() # 7
                     includestartup()
                 catch e
