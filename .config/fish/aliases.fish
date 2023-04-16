@@ -21,6 +21,7 @@ alias julia-sys-ls "sudo ln -srf /usr/lib/julia/sys.so{.ls,}"
 alias jp "julia --project=."
 alias jpv "julia --project=. -e \"using ProfileView\" -i"
 alias jpn "julia --startup-file=no --project=. -i"
+alias jpr "julia --project=. -i -e \"revise!()\""
 
 # volatile
 set rocm_tag rocm/pytorch:rocm3.8_ubuntu18.04_py3.6_pytorch

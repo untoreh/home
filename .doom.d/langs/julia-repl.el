@@ -117,7 +117,6 @@
                                (file-name-as-directory
                                 (my/script-dir #'julia-franklin)))))
     (when julia-repl-enable-revise
-      (julia-repl-send-file "revise.jl")
       (julia-repl-cmd "revise!()"))
     (when julia-repl-enable-snoop
       (julia-repl-send-file "snoop.jl"))))
@@ -136,7 +135,9 @@
             (progn
               (when cd
                 (julia-repl-cd (projectile-project-root)))
-              (julia-repl)))
+              (julia-repl))
+
+            )
           t)
       nil)))
 
@@ -210,3 +211,7 @@
      (format
       "(isdefined(Main, :%s) && isa(%s, Module)) ? revise(%s) : revise()"
       thing thing thing))))
+
+;; allows subprocesses to inherit the env vars
+(after! envrc
+  (inheritenv-add-advice #'julia-repl-inferior-buffer))
