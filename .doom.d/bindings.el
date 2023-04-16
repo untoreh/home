@@ -209,11 +209,11 @@
     (map! :after julia-mode
           (:prefix ("SPC l j" . "julia")
            :desc "start julia repl"
-           :nev "r" #'julia-repl-startup
+           :nev "r" (cmd! (let ((julia-repl-enable-revise nil)) (julia-repl-switch)))
            :nev "." #'julia-repl-cd
            :nev "d" #'julia-repl-toggle-debug
            :nev "v" #'julia-repl-revise-at-point
-           :nev "j" (cmd! (let ((julia-repl-enable-revise nil)) (julia-repl-switch)))
+           :nev "j" #'julia-repl-startup
            (:prefix ("f" . "franklin")
             :nev "f" #'julia-franklin
             :desc "Setup julia frankling env"
