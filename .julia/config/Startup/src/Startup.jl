@@ -87,21 +87,6 @@ function myreplinit(repl)
     catch e
         @warn "error while importing OhMyREPL" e
     end
-    if isempty(get(ENV, "JULIA_PRECOMP_OVERRIDE", ""))
-        ENV["JULIA_NOPRECOMP"] = (:PingPong,
-            :Scrapers,
-            :Engine,
-            :Backtest,
-            :Strategies,
-            :Instances,
-            :Collections,
-            :Executors,
-            :Live,
-            :Paper,
-            :Watchers,
-            :Plotting,
-            :Stats)
-    end
     debug!()
     debug!()
 end
@@ -110,43 +95,32 @@ __init__() = begin
     atreplinit(myreplinit)
 end
 
+const comp_task = Ref{Task}()
+const init_error = Ref{Any}()
+
 using SnoopPrecompile
 
-@precompile_setup begin
-    using Suppressor
-    using Term.Progress
-    const comp_task = Ref{Task}()
-    const init_error = Ref{Any}()
+@precompile_setup let
+    home = ENV["HOME"]
     @precompile_all_calls begin
-        @eval using Pkg: Pkg as Pkg
-        @eval using Suppressor
-        @eval begin
-            @suppress begin
-                println("Ignore following...")
-                @show!(1)
-                display!("1")
-            end
-        end
-        __init__()
-        @eval begin
-            using REPL
-            using OhMyREPL
-            OhMyREPL.__init__()
-            using JLLWrappers
-            using OhMyREPL.JLFzf
-            using OhMyREPL.JLFzf.fzf_jll
-            using OhMyREPL.BracketInserter.Pkg.API.Operations.Registry.FileWatching
-            using Revise: Revise
-            using Requires: Requires
-            using JuliaSyntax: JuliaSyntax
-        end
-        home = ENV["HOME"]
+        using Suppressor
+        using Term.Progress
+        using Pkg: Pkg as Pkg
+        using REPL
+        using OhMyREPL
+        using JLLWrappers
+        using OhMyREPL: JLFzf
+        using OhMyREPL.JLFzf: fzf_jll
+        using OhMyREPL.BracketInserter.Pkg.API.Operations.Registry: FileWatching
+        using Revise
+        using Requires: Requires
+        using JuliaSyntax: JuliaSyntax
+        include("precompile.jl")
         cd(dirname(dirname(pathof(Startup))))
-        Pkg.activate(".")
+        Pkg.activate(".", io=Base.devnull)
         include(joinpath(home, ".doom.d", "langs", "revise.jl"))
         revise!(false)
     end
-    include("precompile.jl")
 end
 
 export display!, @show!, @keys, deletehistory!, debug!
