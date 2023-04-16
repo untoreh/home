@@ -12,7 +12,7 @@ end
 
 function revise!(dotask=true)
     @eval using Term.Progress: ProgressBar, addjob!, stop!, update!, start!, render
-    @eval _dorevise($dotask)
+    @eval Main Startup._dorevise($dotask)
 end
 
 function _dorevise(dotask=true)
