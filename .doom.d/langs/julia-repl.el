@@ -114,11 +114,8 @@
 ;; that is project specific.
 (defadvice! julia-repl-ensure-project-arg (orig-fn &rest args)
   :around #'julia-repl-inferior-buffer
-  (let ((julia-repl-switches (if projflag
-                                 (progn
-                                   (concat julia-repl-switches "--project=\""
-                                           (file-truename (projectile-project-root)) "\""))
-                               julia-repl-switches)))
+  (let ((julia-repl-switches (concat julia-repl-switches "--project=\""
+                                     (file-truename (projectile-project-root)) "\"")))
     (apply orig-fn args)))
 
 (defun julia-repl-startup ()
@@ -143,7 +140,7 @@
     (if (julia-repl-inferior-buffer)
         (progn
           (if (and startup (not no-activate))
-              (julia-repl-startup nil)
+              (julia-repl-startup)
             (progn
               (when cd
                 (julia-repl-cd (projectile-project-root)))

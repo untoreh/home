@@ -165,7 +165,7 @@ shell exits, the buffer is killed."
 (defvar my/print-funcs-julia '("display(%s)" "Main.display!(%s)") "Print functions for julia")
 (defvar my/print-funcs-current-julia "display(%s)" "Current print function for julia")
 
-(after! parrot-mode
+(after! parrot
   (dolist (entry '((:rot ("display(%s)" "Main.display!(%s)"))))
     (add-to-list 'parrot-rotate-dict entry))
   (defun my/rotate-print-func (lang)
