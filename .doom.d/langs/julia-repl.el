@@ -16,7 +16,7 @@
   ;; instead of looking at the innermost project, activate the one from projectile
   (defadvice! julia-repl-activate-main-proj (orig-fn &rest args)
     :around #'julia-repl-activate-parent
-    (letf! ((defun locate-dominating-file (&rest args) (projectile-project-root)))
+    (letf! ((defun locate-dominating-file (&rest args) (julia-project-root)))
       (apply orig-fn args)))
   (setq-hook! 'julia-mode julia-repl-inferior-buffer-name-suffix (projectile-project-root)))
 
@@ -115,13 +115,13 @@
 (defadvice! julia-repl-ensure-project-arg (orig-fn &rest args)
   :around #'julia-repl-inferior-buffer
   (let ((julia-repl-switches (concat julia-repl-switches "--project=\""
-                                     (file-truename (projectile-project-root)) "\"")))
+                                     (file-truename (julia-project-root)) "\"")))
     (apply orig-fn args)))
 
-(defun julia-repl-startup ()
+(defun julia-repl-startup (&optional activate)
   (interactive)
-  (julia-repl-cd (projectile-project-root))
-  (ignore-errors (julia-repl-activate-parent nil))
+  (julia-repl-cd (julia-project-root))
+  (when activate ignore-errors (julia-repl-activate-parent nil))
   (let ((include-begin (concat "include(\""
                                (file-name-as-directory
                                 (my/script-dir #'julia-franklin)))))
@@ -143,7 +143,7 @@
               (julia-repl-startup)
             (progn
               (when cd
-                (julia-repl-cd (projectile-project-root)))
+                (julia-repl-cd (julia-project-root)))
               (julia-repl))
 
             )
