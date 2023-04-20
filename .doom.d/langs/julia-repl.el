@@ -120,7 +120,7 @@
 
 (defun julia-repl-startup (&optional activate)
   (interactive)
-  (julia-repl-cd (julia-project-root))
+  (julia-repl-cd (projectile-project-root))
   (when activate ignore-errors (julia-repl-activate-parent nil))
   (let ((include-begin (concat "include(\""
                                (file-name-as-directory
@@ -143,7 +143,7 @@
               (julia-repl-startup)
             (progn
               (when cd
-                (julia-repl-cd (julia-project-root)))
+                (julia-repl-cd (projectile-project-root)))
               (julia-repl))
 
             )
