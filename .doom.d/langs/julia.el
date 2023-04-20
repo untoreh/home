@@ -62,7 +62,7 @@
   (after! projectile
     (defadvice! projectile-julia-project-root nil :override
       #'lsp-julia--get-root
-      (concat "\"" (projectile-project-root) "\"")))
+      (concat "\"" (or (getenv "JULIA_PROJECT") (projectile-project-root)) "\"")))
   ;; NOTE: Precompilation causes runtime errors of methods not found...
   ;; (let* ((sysimage (file-truename "~/.julia/lsp/languageserver.so"))
   ;;        (flag (concat "--sysimage=" sysimage)))

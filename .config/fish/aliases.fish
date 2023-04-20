@@ -18,7 +18,7 @@ alias supcc "scripts/supc.sh"
 #julia
 alias julia-sys-orig "sudo ln -srf /usr/lib/julia/sys.so{.orig,}"
 alias julia-sys-ls "sudo ln -srf /usr/lib/julia/sys.so{.ls,}"
-alias jp "julia --project=."
+alias ju "julia --project=@."
 alias jpv "julia --project=. -e \"using ProfileView\" -i"
 alias jpn "julia --startup-file=no --project=. -i"
 alias jpr "julia --project=. -i -e \"revise!()\""
