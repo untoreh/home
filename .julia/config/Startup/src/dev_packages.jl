@@ -19,6 +19,7 @@ end
 @doc "Count how many instructions a compiled function generates."
 macro countinstr(args)
     quote
+        using Suppressor: @capture_out
         let out = @capture_out begin
                 @code_native $args
             end
@@ -92,4 +93,4 @@ function find_imported_modules(m::Module, depth=(nameof(m),), done=Set{Module}()
     return result
 end
 
-export find_imported_modules
+export find_imported_modules, @countinstr

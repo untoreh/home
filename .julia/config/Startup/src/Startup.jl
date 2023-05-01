@@ -144,6 +144,6 @@ include("revise.jl")
 end
 
 export display!, @show!, @keys, deletehistory!, debug!
-export revise!, comp_task, init_error
+export revise!, comp_task, init_error, Revise, includet
 
 end
