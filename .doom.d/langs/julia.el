@@ -18,7 +18,14 @@
     ;; (setq-local lsp-enable-folding t
     ;;             lsp-folding-range-limit 100
     ;;             lsp-response-timeout 300)
-    ))
+    )
+  ;; Ensure lsp is always active if lsp-mode is enabled
+  (add-hook! '(doom-switch-buffer-hook doom-switch-window-hook)
+    (when (and (member major-mode '(julia-ts-mode julia-mode))
+               (eq lsp-mode t)
+               (not lsp-buffer-uri)
+               (doom-visible-buffer-p (current-buffer)))
+      (lsp))))
 
 ;; julia-ts-mode
 (use-package! julia-ts-mode
@@ -60,7 +67,7 @@
   ;; NOTE: The LS can't figure out recursive dependencies so this is not really helpful, but avoids
   ;; starting multiple LS instances
   (defun julia-project-root ()
-    (or (getenv "JULIA_PROJECT") (projectile-project-root)))
+    (or (getenv "JULIA_PROJECT") (projectile-project-root) ""))
   (after! projectile
     (defadvice! projectile-julia-project-root nil :override
       #'lsp-julia--get-root
