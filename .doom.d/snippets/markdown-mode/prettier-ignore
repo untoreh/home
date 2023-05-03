@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: prettier-ignore
+# uuid:
+# key: !ign
+# condition: t
+# --
+<!-- prettier-ignore -->

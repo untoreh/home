@@ -93,4 +93,16 @@ function find_imported_modules(m::Module, depth=(nameof(m),), done=Set{Module}()
     return result
 end
 
-export find_imported_modules, @countinstr
+@doc "Updates the current repl display size, first arg updates LINES, optional second arg COLUMNS."
+function displaysize!(args...)
+    let ctx = Base.active_repl.options.iocontext
+        if length(args) < 1
+            delete!(ctx, :displaysize)
+        else
+            cols = length(args) < 2 ? displaysize()[1] : args[2]
+            ctx[:displaysize] = (args[1], cols)
+        end
+    end
+end
+
+export find_imported_modules, @countinstr, displaysize!
