@@ -19,8 +19,8 @@ end
 @doc "Count how many instructions a compiled function generates."
 macro countinstr(args)
     quote
-        using Suppressor: @capture_out
-        let out = @capture_out begin
+        @eval using Suppressor: @capture_out
+        @eval let out = @capture_out begin
                 @code_native $args
             end
             n = 0

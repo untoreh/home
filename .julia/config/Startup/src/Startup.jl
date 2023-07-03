@@ -1,14 +1,16 @@
 module Startup
 
 const omr_enabled = Ref(false)
+const PREV_DEBUG_PKGS = Ref("")
 
 loadpy() = include("$(ENV["HOME"])/.julia/config/python.jl")
 
-function debug!(del=0)
-    if in("JULIA_DEBUG", keys(ENV))
+function debug!(del=0,)
+    if haskey(ENV, "JULIA_DEBUG")
+        PREV_DEBUG_PKGS[] = ENV["JULIA_DEBUG"]
         delete!(ENV, "JULIA_DEBUG")
     else
-        ENV["JULIA_DEBUG"] = "all"
+        ENV["JULIA_DEBUG"] = PREV_DEBUG_PKGS[]
     end
     deletehistory!(del)
 end
