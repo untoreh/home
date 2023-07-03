@@ -1,11 +1,11 @@
 ;;; completion/bindings.el -*- lexical-binding: t; -*-
 
 (map! :map corfu-map
-        :i "TAB" #'corfu-next
-        :i [tab] #'corfu-next
+        :i "TAB" #'corfu-complete
+        :i [tab] #'corfu-complete
         :i "C-n" #'corfu-next
         :i "C-j" #'corfu-insert
-        :i "S-SPC" #'corfu-complete
+        :i "C-SPC" #'corfu-reset
         :i "S-TAB" #'corfu-previous
         :i "C-p" #'corfu-previous
         :i [?\r] #'newline

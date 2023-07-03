@@ -27,6 +27,8 @@ share/backups
 .doom.d/mail.el
 .doom.d/vimish-fold
 .doom.d/custom.el
+.doom.d/cache/*
+!.doom.d/cache
 .dotnet/
 .emacs.d/
 .fonts/

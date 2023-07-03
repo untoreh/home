@@ -52,8 +52,13 @@
 ;; (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 
 ;; misc
-(package! aio)
+;; (package! aio)
 (package! devdocs :recipe (:host github :repo "astoff/devdocs.el"))
+(package! gptel)
+(package! emacs-websocket :recipe (:host github :repo "ahyatt/emacs-websocket"))
+(package! promise)
+(package! async-await)
+(package! aichat :recipe (:host github :repo "xhcoding/emacs-aichat"))
 ;; aggressive-indent is very slow
 ;; (package! aggressive-indent)
 ;; (package! gcmh-mode :disable nil)

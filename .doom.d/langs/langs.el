@@ -6,6 +6,7 @@
 (load! "tree-sitter")
 (load! "lisp")
 (load! "spell")
+(load! "gpt")
 (if (modulep! :lang shell)
     (load! "shell"))
 (if (modulep! :lang python)
