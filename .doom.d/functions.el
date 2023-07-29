@@ -96,6 +96,7 @@
            (not (file-symlink-p orig))) (error "%s is not a symlink" orig))
      )))
 
+(require 'dash)
 (defun my/concat-path (&rest parts)
   (-reduce (lambda (a b) (expand-file-name b a)) parts))
 
