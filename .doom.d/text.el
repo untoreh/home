@@ -51,5 +51,5 @@
 ;; string inflection
 ;; https://github.com/akicho8/string-inflection
 ;;
-
-(load! "calibredb-config.el")
+; FIXME:
+(load! "calibredb-config.el")           ;
