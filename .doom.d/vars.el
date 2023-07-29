@@ -54,7 +54,9 @@
   )
 
 (setq-default docker-tramp-use-names t)
-
+(use-package! vterm
+  :config
+  (setq vterm-kill-buffer-on-exit nil))
 
 (setq-default display-line-numbers-type t)
 
