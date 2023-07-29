@@ -64,9 +64,7 @@
 ;; (package! gcmh-mode :disable nil)
 
 ;; HOTFIX
-(package! compat :pin nil)
-(package! evil :pin nil)
-(package! vertico :pin nil)
+(unpin! compat evil vertico cape pdf-tools)
 
 ;; completion
 (package! corfu :recipe (:includes (corfu-indexed corfu-quick) :files (:defaults "extensions/corfu-*.el")))
