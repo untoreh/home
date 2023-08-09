@@ -98,14 +98,14 @@
         vterm-timer-delay 0.033)
   ;; this make vterm stop autosrolling after in evil normal state
   ;; however it stops the vterm process...
-  (after! evil
-    (add-hook! 'vterm-mode-hook
-      (make-variable-buffer-local 'evil-normal-state-entry-hook)
-      (make-variable-buffer-local 'evil-normal-state-exit-hook)
-      (add-hook! 'evil-normal-state-entry-hook (vterm-copy-mode 1))
-      (add-hook! 'evil-normal-state-exit-hook (vterm-copy-mode -1))
-      )
-    ))
+  ;; (after! evil
+  ;;   (add-hook! 'vterm-mode-hook
+  ;;     (make-variable-buffer-local 'evil-normal-state-entry-hook)
+  ;;     (make-variable-buffer-local 'evil-normal-state-exit-hook)
+  ;;     (add-hook! 'evil-normal-state-entry-hook (vterm-copy-mode 1))
+  ;;     (add-hook! 'evil-normal-state-exit-hook (vterm-copy-mode -1))
+  ;;     ))
+  )
 
 ;; save magit buffers
 ;; this doesn't work because problems with lexical scope

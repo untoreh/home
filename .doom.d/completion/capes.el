@@ -20,20 +20,19 @@
                                      #'cape-file
                                      #'cape-history))
    cape-char-scapf (cape-super-capf #'cape-tex #'cape-sgml #'cape-rfc1345)
-   cape-default-scapf (cape-capf-buster #'tabnine-capf)
-   cape-t9-lsp-scapf (cape-super-capf #'lsp-completion-at-point #'tabnine-capf)
+   cape-default-scapf (cape-capf-buster #'cape-symbol-scapf)
    )
   (mapc (lambda (v) (defalias (intern (symbol-name v)) (symbol-value v)))
-        '(cape-symbol-scapf cape-word-scapf cape-expand-scapf cape-file-scapf cape-char-scapf cape-t9-lsp-scapf))
+        '(cape-symbol-scapf cape-word-scapf cape-expand-scapf cape-file-scapf cape-char-scapf))
 
 
   (add-hook! nim-mode :depth -1
     (setq-local
      completion-at-point-functions
-     '(cape-symbol-scapf cape-t9-lsp-scapf)))
+     '(cape-symbol-scapf cape-word-scapf)))
   (when (and (modulep! :tools lsp) (not (modulep! :tools lsp +eglot)))
     (setq-hook! 'lsp-completion-mode-hook
-      completion-at-point-functions '(cape-t9-lsp-scapf)))
+      completion-at-point-functions '(lsp-completion-at-point)))
 
   (setq-hook! markdown-mode
     completion-at-point-functions '(blog-tags-capf cape-word-scapf cape-expand-scapf cape-file-scapf))

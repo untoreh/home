@@ -1,7 +1,7 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-;; HOTFIX
-(defalias 'compat-string-width 'string-width)
+;; ;; HOTFIX
+;; (defalias 'compat-string-width 'string-width)
 
 
 (let ((force-load-messages t))

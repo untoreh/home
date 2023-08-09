@@ -1,9 +1,4 @@
 ;;; completion/copilot.el -*- lexical-binding: t; -*-
-(use-package! tabnine-capf
-  :after cape
-  :commands (tabnine-capf)
-  :hook (kill-emacs . tabnine-capf-kill-process)
-  )
 
 (use-package! copilot
   :if nil

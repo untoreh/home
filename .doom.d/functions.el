@@ -211,7 +211,7 @@ shell exits, the buffer is killed."
 ;;        (cl-incf i))
 ;;      (split-string s "" t))
 ;;     (setq idx (reverse idx))
-;;     (when (equal 0 (first idx))
+;;     (when (equal 0 (cl-first idx))
 ;;       (pop idx))
 ;;     (let ((pos 0))
 ;;       (mapc (lambda (i)
@@ -252,7 +252,7 @@ shell exits, the buffer is killed."
                        ))))))))
 
 (defun my/major-mode-lang ()
-  (intern (first (split-string (symbol-name major-mode) "-"))))
+  (intern (cl-first (split-string (symbol-name major-mode) "-"))))
 
 (map!
  (:prefix "SPC i l"

@@ -64,12 +64,11 @@
 ;; (package! gcmh-mode :disable nil)
 
 ;; HOTFIX
-(unpin! compat evil vertico cape pdf-tools)
+;; (unpin! compat evil vertico cape pdf-tools)
 
 ;; completion
 (package! corfu :recipe (:includes (corfu-indexed corfu-quick) :files (:defaults "extensions/corfu-*.el")))
 (package! cape :recipe (:host github :repo "minad/cape"))
-(package! tabnine-capf :recipe (:host github :repo "theFool32/tabnine-capf" :files ("*.el" "*.sh" "*.py")))
 (package! corfu-doc :recipe (:host github :repo "galeo/corfu-doc"))
 ;(package! copilot :recipe (:host github :repo "zerolfx/copilot.el" :files ("dist" "copilot.el")))
 (package! kind-icon)

@@ -14,7 +14,7 @@
        (cl-incf i))
      (split-string s "" t))
     (setq idx (reverse idx))
-    (when (equal 0 (first idx))
+    (when (equal 0 (cl-first idx))
       (pop idx))
     (let ((pos 0))
       (mapc (lambda (i)
