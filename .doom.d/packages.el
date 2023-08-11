@@ -65,12 +65,17 @@
 
 ;; HOTFIX
 ;; (unpin! compat evil vertico cape pdf-tools)
+;; HOTFIX (mu4e)
+(unpin! evil-collection link-hint)
+(after! popup
+  (set-popup-rule! "^\\*mu4e-\\(main\\|headers\\)\\*" :ignore t))
+
 
 ;; completion
 (package! corfu :recipe (:includes (corfu-indexed corfu-quick) :files (:defaults "extensions/corfu-*.el")))
 (package! cape :recipe (:host github :repo "minad/cape"))
 (package! corfu-doc :recipe (:host github :repo "galeo/corfu-doc"))
-;(package! copilot :recipe (:host github :repo "zerolfx/copilot.el" :files ("dist" "copilot.el")))
+                                        ;(package! copilot :recipe (:host github :repo "zerolfx/copilot.el" :files ("dist" "copilot.el")))
 (package! kind-icon)
 
 ;; langs
@@ -133,18 +138,18 @@
 (package! org-pretty-table
   :recipe (:host github :repo "Fuco1/org-pretty-table") :pin "7bd68b420d3402826fea16ee5099d04aa9879b78")
 (package! org-modern)
-;(package! modus-themes)
+                                        ;(package! modus-themes)
 
 ;; (package! org-ol-tree :recipe (:host github :repo "Townk/org-ol-tree")
 ;;   :pin "207c748aa5fea8626be619e8c55bdb1c16118c25")
 ;; (package! org-transclusion)
 
 (package! emacs-refactor :recipe ( :host nil
-                                   :repo "https://github.com/Wilfred/emacs-refactor"))
+                                         :repo "https://github.com/Wilfred/emacs-refactor"))
 ;; which-key-posframe is VERY slow
 ;; (package! which-key-posframe)
 (package! hydra-posframe :recipe ( :host nil
-                                   :repo "https://github.com/Ladicle/hydra-posframe"))
+                                         :repo "https://github.com/Ladicle/hydra-posframe"))
 (package! caddyfile-mode)
 (package! ahk-mode)
 (package! vimrc-mode)

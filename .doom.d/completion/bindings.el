@@ -18,6 +18,7 @@
       (:desc "Code" :i "C-SPC c" (my/capf-cmd! cape-char-scapf))
       (:desc "T9" :i "C-SPC SPC" (my/capf-cmd! cape-default-scapf))
       (:desc "Snippet" :i "C-SPC s" (my/capf-cmd! (cape-company-to-capf #'company-yasnippet)))
-      (:mode lsp-mode
-             (:desc "lsp" :i "C-SPC SPC" (my/capf-cmd! cape-t9-lsp-scapf))
-             ))
+      ;(:mode lsp-mode
+             ;(:desc "lsp" :i "C-SPC SPC" (my/capf-cmd! cape-t9-lsp-scapf))
+             ;)
+	     )
