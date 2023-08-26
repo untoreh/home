@@ -2,7 +2,7 @@
 
 julia_version = "1.9.2"
 manifest_format = "2.0"
-project_hash = "50fb8828ba401f9fccfb37b2877b53dc4d151106"
+project_hash = "25f33a6827dc2c208d3b538e6d94e4d96bdbeabe"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -1077,6 +1077,11 @@ version = "2.36.0+0"
 [[deps.LinearAlgebra]]
 deps = ["Libdl", "OpenBLAS_jll", "libblastrampoline_jll"]
 uuid = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+
+[[deps.LinkedLists]]
+git-tree-sha1 = "3f4f687f69bc7cd1e34115618b79ef4753d4d340"
+uuid = "70f5e60a-1556-5f34-a19e-a48b3e4aaee9"
+version = "0.1.1"
 
 [[deps.LiveServer]]
 deps = ["HTTP", "MIMEs", "Pkg", "Sockets"]

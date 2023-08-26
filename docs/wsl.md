@@ -58,7 +58,7 @@ make
 ```
 
 ## clipboard
-With neovim, set `clipboard=unnamedplus`, and make sure to **not** have `wl-clipboard` or `xcip` installed, as neovim will prefer those over `w32yank` and won't work correctly.
+With neovim, set `clipboard=unnamedplus`, and make sure to **not** have `wl-clipboard` or `xclip` installed, as neovim will prefer those over `w32yank` and won't work correctly.
 
 ## Networking
 To allow seamless access to services listening on IPv4 from within WSL without tunneling, change the Hyper-V virtual switch for WSL to be external (the actual hardware, e.g. RealTek), and shared with the HOST machine.
