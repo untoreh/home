@@ -21,7 +21,7 @@
   :config
   ;; bitmap seems smoother than character
   (setq
-   highlight-indent-guides-method 'bitmap
+   highlight-indent-guides-method 'character
    highlight-indent-guides-responsive 'top))
 
 (when (modulep! :editor word-wrap)
