@@ -50,7 +50,6 @@ function _dorevise(dotask=true)
                     prog!() # 6
                     Core.eval(Main, :(using Base.Meta))
                     prog!() # 7
-                    includestartup()
                 catch e
                     init_error[] = () -> (showerror(stdout, e); e)
                     @error "Failed to load $(mod)!"
@@ -63,7 +62,6 @@ function _dorevise(dotask=true)
             end
         else
             showerror(stdout, ErrorException("ops"))
-            invokelatest(includestartup)
             prog!(5)
             stop!(pbar)
         end
