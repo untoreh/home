@@ -65,8 +65,11 @@ function deserialize(v::AbstractVector)
 end
 
 function includestartup()
-    path = joinpath(pwd(), ".startup.jl")
-    isfile(path) && @eval Main include($path)
+    paths = (joinpath(pwd(), ".startup.jl"),
+        joinpath(get(ENV, "PROJECT_DIR", ""), ".startup.jl"),
+        joinpath(dirname(Base.active_project()), ".startup.jl"))
+    this_path = paths[findfirst(isfile, paths)]
+    @eval Main include($this_path)
 end
 
 @doc "Builds a flat list of all modules imported by the input module, preserving the full module path."
