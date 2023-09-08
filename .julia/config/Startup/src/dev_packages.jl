@@ -69,6 +69,7 @@ function includestartup()
         joinpath(get(ENV, "PROJECT_DIR", ""), ".startup.jl"),
         joinpath(dirname(Base.active_project()), ".startup.jl"))
     this_path = paths[findfirst(isfile, paths)]
+    cd(dirname(this_path))
     @eval Main include($this_path)
 end
 
