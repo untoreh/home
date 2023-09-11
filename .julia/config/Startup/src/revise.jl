@@ -71,4 +71,6 @@ function _dorevise(dotask=true)
     end
 end
 
-export revise!, comp_task, init_error
+mbrevise(mod) = (isdefined(Main, Symbol(mod)) && isa(mod, Module)) ? revise(mod) : revise()
+
+export revise!, comp_task, init_error, mbrevise

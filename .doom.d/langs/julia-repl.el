@@ -204,11 +204,11 @@
 (defun julia-repl-toggle-debug ()
   (interactive)
   ;; remove 2 lines from repl history
-  (julia-repl-cmd "debug!(2)"))
+  (aio-wait-for (julia-repl-cmd "debug!(2)")))
 
 (defun julia-repl-revise ()
   (interactive)
-  (julia-repl-cmd "Revise.retry()")
+  (aio-wait-for (julia-repl-cmd "Revise.retry()"))
   (evil-insert nil)
   (julia-toggle-repl-back))
 
@@ -216,10 +216,13 @@
   "Revise thing at point."
   (interactive)
   (let ((thing (thing-at-point 'symbol t)))
-    (julia-repl-cmd
-     (format
-      "(isdefined(Main, :%s) && isa(%s, Module)) ? revise(%s) : revise()"
-      thing thing thing))))
+    (aio-wait-for (julia-repl-cmd (format "mbrevise(%s)" thing)))))
+
+(defun julia-repl-revise-project ()
+  "Revise the top level module of the julia project of the current file."
+  (interactive)
+  (let ((thing (f-base (locate-dominating-file (buffer-file-name) "Project.toml"))))
+    (aio-wait-for (julia-repl-cmd (format "mbrevise(%s)" thing)))))
 
 ;; allows subprocesses to inherit the env vars
 (after! envrc

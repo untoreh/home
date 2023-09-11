@@ -163,11 +163,11 @@ shell exits, the buffer is killed."
 
   )
 
-(defvar my/print-funcs-julia '("display(%s)" "Main.display!(%s)") "Print functions for julia")
+(defconst my/print-funcs-julia '("display(%s)" "Main.display!(%s)" "@info %s") "Print functions for julia")
 (defvar my/print-funcs-current-julia "display(%s)" "Current print function for julia")
 
 (after! parrot
-  (dolist (entry '((:rot ("display(%s)" "Main.display!(%s)"))))
+  (dolist (entry `((:rot ,my/print-funcs-julia)))
     (add-to-list 'parrot-rotate-dict entry))
   (defun my/rotate-print-func (lang)
     (let ((varname (intern (concat "my/print-funcs-current-" (symbol-name lang)))))
