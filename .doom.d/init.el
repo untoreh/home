@@ -35,7 +35,7 @@
        (emoji +ascii +unicode +github)  ; 🙂
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        hydra
-       indent-guides     ; highlighted indent columns
+       ;; indent-guides     ; highlighted indent columns
        (ligatures +fira)         ; ligatures and symbols to make your code pretty again
        ;; minimap
        (modeline)          ; snazzy, Atom-inspired modeline, plus API

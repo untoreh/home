@@ -124,7 +124,9 @@
 ;; graphics
 (package! parrot)
 (package! info-colors)
+(package! indent-guides :recipe (:host github :repo "jdtsmith/indent-bars"))
 ;; (package! nyan-mode)
+;;
 
 ;; org
 (package! valign)

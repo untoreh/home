@@ -97,8 +97,8 @@
 (use-package! vertico-posframe
   :config
   (setq vertico-posframe-parameters
-      '((left-fringe . 8)
-        (right-fringe . 8)))
+        '((left-fringe . 8)
+          (right-fringe . 8)))
   (vertico-posframe-mode 1))
 
 ;; frame title
@@ -142,10 +142,10 @@
       (setq global-mode-string (remove '("" mode-line-keycast " ") global-mode-string))))
   (custom-set-faces!
     '(keycast-command :inherit doom-modeline-debug
-                      :height 0.9)
+      :height 0.9)
     '(keycast-key :inherit custom-modified
-                  :height 1.1
-                  :weight bold)))
+      :height 1.1
+      :weight bold)))
 
 ;; NOTE: gif-screencast needs support for WSL, as a windows-side binary
 ;; has to be used for screen recording
@@ -153,8 +153,8 @@
   :commands gif-screencast-mode
   :config
   (map! :mode gif-screencast-mode
-      :desc "start recording"
-      "<f9>" #'gif-screencast-start-or-stop))
+        :desc "start recording"
+        "<f9>" #'gif-screencast-start-or-stop))
 
 (use-package! emojify
   :if (modulep! :ui emoji)
@@ -176,6 +176,24 @@
     (run-at-time 0 nil #'doom-themes-hide-modeline)
     ))
 
+(use-package! indent-bars
+  :hook ((prog-mode text-mode conf-mode) . indent-bars-mode)
+  :config
+  (setq
+   indent-bars-color '(highlight :face-bg t :blend 0.15)
+   indent-bars-pattern "."
+   indent-bars-width-frac 0.1
+   indent-bars-pad-frac 0.1
+   indent-bars-zigzag nil
+   indent-bars-color-by-depth '(:regexp "outline-\\([0-9]+\\)" :blend 1) ; blend=1: blend with BG only
+   indent-bars-highlight-current-depth '(:blend 0.5) ; pump up the BG blend on current
+   indent-bars-display-on-blank-lines t)
+  ;; just in case
+  (add-hook! 'org-mode-local-vars-hook
+    (defun +indent-guides-disable-maybe-h ()
+      (and highlight-indent-guides-mode
+           (bound-and-true-p org-indent-mode)
+           (indent-bars-mode -1)))))
 
 
 ;; (use-package! emacs
