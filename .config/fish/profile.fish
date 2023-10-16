@@ -2,7 +2,6 @@
 [ -z "$TMUX" ] && set -x TERM xterm-256color || set -x TERM tmux-256color
 
 # shell
-set -x KITTY_PATH ~/.nix-profile/bin/kitty
 if test (string replace -r 'fish$' "" $SHELL) != $SHELL
     set is_fish 1
 else

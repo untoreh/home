@@ -1,0 +1,5 @@
+alias enter "toolbox enter"
+alias run "toolbox run"
+alias dnf "run sudo dnf"
+alias htop "run htop"
+alias wezterm "flatpak run org.wezfurlong.wezterm"
