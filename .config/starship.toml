@@ -2,3 +2,5 @@
 disabled = true
 #[git_status]
 #windows_starship = "wex starship.exe"
+[container]
+format = '[$symbol]($style) '
