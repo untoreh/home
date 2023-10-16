@@ -14,7 +14,7 @@
 
 (setq
  user-full-name "untoreh"
- user-mail-address "contact@unto.re"
+ user-mail-address (or (getenv "EMAIL_ADDRESS") "n/a")
  auth-sources '("~/.authinfo.gpg")
  auth-source-cache-expiry nil
  password-cache-expiry nil
