@@ -50,7 +50,7 @@ function! StatusLine(...)
         \ . crystalline#left_sep('', 'Fill') . ' %{&ft}[%{&fenc!=#""?&fenc:&enc}][%{&ff}] %l/%L %c%V %P '
 endfunction
 let g:crystalline_enable_sep = 1
-let g:crystalline_statusline_fn = 'StatusLine'
+let g:crystallinestatuslinefn = 'StatusLine'
 let g:crystalline_theme = 'default'
 set laststatus=2
 
