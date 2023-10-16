@@ -140,7 +140,6 @@
 (package! org-pretty-table
   :recipe (:host github :repo "Fuco1/org-pretty-table") :pin "7bd68b420d3402826fea16ee5099d04aa9879b78")
 (package! org-modern)
-                                        ;(package! modus-themes)
 
 ;; (package! org-ol-tree :recipe (:host github :repo "Townk/org-ol-tree")
 ;;   :pin "207c748aa5fea8626be619e8c55bdb1c16118c25")
