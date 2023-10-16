@@ -279,7 +279,9 @@ Valid backends are currently:
                ;; use a docker wrapped cmd if on alpine, (musl workaround)
                (if (file-exists-p "/etc/alpine-release")
                    "wptipython"
-                 (my/select-first #'executable-find '("ptipython" "ptpython" "ipython" "python"))))))
+                 (or (my/select-first #'executable-find '("ptipython" "ptpython" "ipython" "python" "python3"))
+                     (error "python-repl: python not found")
+                     )))))
   "List of Python executables.
 
 Entries have the form
