@@ -12,14 +12,13 @@
       doom-dracula-brighter-modeline t
       doom-dracula-colorful-headers t)
 
-;; (setq doom-theme 'modus-operandi-theme )
-
 (setq-default
- doom-font (font-spec :family "Hack" :size 14 :weight 'normal)
- doom-big-font (font-spec :family "iA Writer Duospace" :size 24 :weight 'bold)
+ doom-font (font-spec :family "Hack" :size 14 :weight 'regular)
+ doom-big-font (font-spec :family "iA Writer Duo S" :size 24 :weight 'bold)
  doom-variable-pitch-font (font-spec :family "Barlow" :size 16)
  doom-unicode-font (font-spec :family "JuliaMono")
- doom-serif-font (font-spec :family "Fantasque Sans Mono" :size 16))
+ doom-serif-font (font-spec :family "Fantasque Sans Mono" :size 14)
+ )
 
 (setq-default line-spacing 1)
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
@@ -191,8 +190,8 @@
   ;; just in case
   (add-hook! 'org-mode-local-vars-hook
     (defun +indent-guides-disable-maybe-h ()
-      (and highlight-indent-guides-mode
-           (bound-and-true-p org-indent-mode)
+      (and (bound-and-true-p highlight-indent-guides-mode)
+           (org-indent-mode)
            (indent-bars-mode -1)))))
 
 
