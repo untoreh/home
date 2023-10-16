@@ -7,10 +7,8 @@ lm_sensors
 android-tools
 vulkan-icd-loader
 aura-bin
-emacs-gcc-wayland-devel-bin
 neovim
-mesa-d3d12
-libgccjit
+mesa-d3d12 #wsl
 mpv
 wget
 gost
@@ -26,7 +24,6 @@ gnome-keyring
 dockerd
 mu
 #aur
-emacs-native-comp-git-enhanced
 
 
 # julia

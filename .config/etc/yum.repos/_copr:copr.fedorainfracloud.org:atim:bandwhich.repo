@@ -1,0 +1,10 @@
+[copr:copr.fedorainfracloud.org:atim:bandwhich]
+name=Copr repo for bandwhich owned by atim
+baseurl=https://download.copr.fedorainfracloud.org/results/atim/bandwhich/fedora-$releasever-$basearch/
+type=rpm-md
+skip_if_unavailable=True
+gpgcheck=1
+gpgkey=https://download.copr.fedorainfracloud.org/results/atim/bandwhich/pubkey.gpg
+repo_gpgcheck=0
+enabled=1
+enabled_metadata=1

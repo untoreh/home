@@ -1,0 +1,10 @@
+[global]
+target = "~/bin"
+["ginuerzh/gost"]
+#["Martchus/syncthingtray"]
+#file = "syncthingtray-x*"
+#asset_filters = [ "syncthingtray", "^sig", "pc", "^qt5" ]
+#target = "~/.local/bin/syncthingtray"
+#file = "syncthingctl-x*"
+#asset_filters = [ "syncthingctl", "^sig", "pc", "^qt5" ]
+#target = "~/.local/bin/syncthingctl"

@@ -1,0 +1,17 @@
+# flatpaks
+calibre koreader krita
+
+# not found
+duplicacy consul pup html-tidy languagetool 
+goimapnotify
+
+## NOT USED
+# cli
+delta pet pastel weechat-matrix
+# fonts
+fantasque iawriter-duospace barlow 
+# utils
+pywal djvulibre
+# dev
+glibcLocales
+

@@ -93,8 +93,8 @@ share/backups
 .vcpkg
 .viminfo
 .visidata
-.vscode-server/*
-.vscode/*
+.vscode-server/
+.vscode/
 .weechat/
 .wegorc
 .wget-hsts
@@ -139,3 +139,10 @@ nimsuggest.log
 !.vscode/argv.json
 !/.ipfs/config
 !Templates/
+
+# links
+.racket
+
+# eget
+bin/gost
+bin/eget
