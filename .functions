@@ -476,42 +476,6 @@ winst() {
 }
 
 
-## remotes
-
-qgh_on() {
-	accept-line()
-	{
-		if [ "$BUFFER" != qgh_off ]; then
-			if [ -z "$(echo "$BUFFER" | grep -E "^~/.bin/qgh")" ]; then
-				BUFFER="~/.bin/qgh $BUFFER"
-				zle .accept-line
-			else
-				zle .accept-line
-			fi
-		else
-			accept-line(){
-			zle .accept-line
-		}
-		zle .reset-prompt
-		zle .kill-buffer
-	fi
-}
-zle -N accept-line
-}
-
-qgh_shootback() {
-	~/.bin/qgh 'Start-Process python -ArgumentList \"C:\local\Temp\git\shootback/slaver.py -m 212.237.6.194:10000 -t 127.0.0.1:12346\" -RedirectStandardOutput python.out -RedirectStandardError python.err'
-
-}
-qgh_ssh2() {
-	~/.bin/qgh 'chdir .\ssh2; Start-Process node -ArgumentList run.js.bak -RedirectStandardOutput node.out -RedirectStandardError node.err'
-
-}
-
-qgh_sshd() {
-	~/.bin/qgh 'powershell Start-Process C:\local\Temp\cygwin\sshd.bat'
-}
-
 ## shuffling
 shuffle() {
     local IFS=$'\n' tail=
@@ -573,6 +537,7 @@ gos() {
     fi
     mosh --server=/usr/bin/mosh-server --ssh='ssh -p 12322 -i ~/.ssh/ext/settler_openssh' bassomails@10.244.36.179
 }
+
 chisel_launch(){
     if [ -z "$(pgrep -f "$chisel_cmd")" ]; then
         eval "$chisel_cmd"  &>/dev/null &
@@ -591,34 +556,4 @@ chisel_kill(){
         done
         ssh $chisel_user@127.0.0.1 -p $chisel_port
     fi
-}
-cns() {
-    c9port=${c9port:-12333}
-    c9user=${c9user:-ubuntu}
-    chisel_cmd="chisel client https://test-untoreh.c9users.io/ ${c9port}:12322"
-    pkill -f "$chisel_cmd"
-    chisel_user=ubuntu
-    if [ -z "$(pgrep -f "$chisel_cmd")" ]; then
-        eval "$chisel_cmd" &>/dev/null &
-        while ! netcat -w1 127.0.0.1 ${c9port} | grep SSH &>/dev/null; do
-            sleep 0.3
-        done
-    fi
-    sshpass -p${c9pass:=root123} ssh ${c9user}@127.0.0.1 -p ${c9port}
-    # if [ -z "$?" ]; then
-    #     pkill -f "$chisel_cmd"
-    #     eval "$chisel_cmd" &>/dev/null &
-    #     while ! netcat -z 127.0.0.1 ${c9port}; do
-    #         sleep 0.3
-    #     done
-    #     ssh ${c9user}@127.0.0.1 -p ${c9port}
-    # fi
-}
-cas() {
-    chisel_user=cabox
-    chisel_port=12323
-    chisel_cmd="chisel client coa.zome.ga $chisel_port:22"
-    chisel_launch
-    ssh cabox@127.0.0.1 -p $chisel_port -i ~/.ssh/ext/coa
-    chisel_kill
 }
