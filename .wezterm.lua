@@ -11,7 +11,7 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
   default_prog = {"wsl.exe", "-d", distro, "-e", "bash", "-c",
                   "{ [ -f /tmp/.mounted ] || /etc/wsl-mount.sh; } && SHELL=fish exec fish -li -C ~/"}
 else
-  default_prog = {"fish", "-li"}
+  default_prog = {"/usr/bin/toolbox", "run", "fish", "-li"}
 end
 
 wezterm.on("toggle-autoscroll", function(window, pane)
@@ -53,7 +53,7 @@ return {
 	audible_bell = "Disabled",
   -- don't linger terminated process unconditionally
 	exit_behavior = "Close",
-  window_decorations = "TITLE",
+	window_decorations = "RESIZE|INTEGRATED_BUTTONS",
   font = wezterm.font("Hack"),
   color_scheme = "Dracula",
   scrollback_lines = 9000,
@@ -72,8 +72,7 @@ return {
     {key="j", mods="CTRL|SHIFT", action=wezterm.action{ActivatePaneDirection="Down"}},
     {key="k", mods="CTRL|SHIFT", action=wezterm.action{ActivatePaneDirection="Up"}},
     {key="l", mods="CTRL|SHIFT", action=wezterm.action{ActivatePaneDirection="Right"}},
-    {key="n", mods="CTRL|SHIFT", action="ToggleFullScreen"},
-    {key="m", mods="CTRL|SHIFT|ALT", action=wezterm.action{SendString="/opt/bin/crt-start &>/dev/null &"}},
+    {key="f", mods="CTRL|SHIFT|ALT", action="ToggleFullScreen"},
     {key="h", mods="CTRL|SHIFT|ALT", action=wezterm.action{AdjustPaneSize={"Left", 1}}},
     {key="j", mods="CTRL|SHIFT|ALT", action=wezterm.action{AdjustPaneSize={"Down", 1}}},
     {key="k", mods="CTRL|SHIFT|ALT", action=wezterm.action{AdjustPaneSize={"Up", 1}}},
@@ -81,25 +80,24 @@ return {
     {key="{", mods="SHIFT|ALT", action=wezterm.action{ActivateTabRelative=-1}},
     {key="n", mods="CTRL|ALT", action=wezterm.action{ActivateTabRelative=1}},
     {key="}", mods="SHIFT|ALT", action=wezterm.action{ActivateTabRelative=1}},
+
     {key="p", mods="CTRL|ALT", action=wezterm.action{ActivateTabRelative=-1}},
     {key="p", mods="SHIFT|ALT", action=wezterm.action{ScrollToPrompt=-1}},
     {key="n", mods="SHIFT|ALT", action=wezterm.action{ScrollToPrompt=1}},
-    {key="u", mods="CTRL|SHIFT", action=wezterm.action{ScrollByPage=-1}},
-    {key="d", mods="CTRL|SHIFT", action=wezterm.action{ScrollByPage=1}},
+    {key="k", mods="CTRL|ALT", action=wezterm.action{ScrollByPage=-1}},
+    {key="j", mods="CTRL|ALT", action=wezterm.action{ScrollByPage=1}},
     {key="j", mods="SHIFT|ALT", action=wezterm.action{ScrollByLine=1}},
     {key="k", mods="SHIFT|ALT", action=wezterm.action{ScrollByLine=-1}},
+
     {key="l", mods="SHIFT|ALT", action="ShowLauncher"},
     {key="s", mods="CTRL|ALT", action=wezterm.action{EmitEvent="toggle-autoscroll"}},
     {key="a", mods="CTRL|SHIFT", action=wezterm.action{
        SpawnCommandInNewTab={
-         args={"wsl.exe", "-d", distro, "-e", "bash", "-c",
-               "{ [ -f /tmp/.mounted ] || /etc/wsl-mount.sh; } && SHELL=fish exec fish -li -C ~/"}}}},
-    {key="p", mods="CTRL|SHIFT", action=wezterm.action{
+         args={"/usr/bin/toolbox", "run", "/usr/bin/fish", "-li"}}}},
+    -- host shell
+    {key="t", mods="CTRL|SHIFT", action=wezterm.action{
        SpawnCommandInNewTab={
-         args={"powershell.exe", "/NoLogo"}}}},
-    {key="g", mods="CTRL|SHIFT", action=wezterm.action{
-       SpawnCommandInNewTab={
-         args={"nu.exe"}}}},
+         args={"/usr/bin/fish"}}}},
 	 {key="x", mods="ALT", action=wezterm.action.ActivateCommandPalette,}
 
 
