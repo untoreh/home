@@ -1,1 +1,0 @@
-/var/home/fra/shell/key-bindings.fish

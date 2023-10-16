@@ -26,6 +26,7 @@ case "$1" in
 	fi
 	;;
 "clean")
+	[ -z "$PASSWORD" ] && { echo "PASSWORD NOT SET"; exit 1; }
 	openssl $CIPHER -iter 10000 -kfile <(echo $PASSWORD) -in /dev/stdin -out -
 	;;
 *)
