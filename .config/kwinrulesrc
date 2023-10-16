@@ -1,10 +1,10 @@
 [$Version]
-update_info=kwinrules.upd:replace-placement-string-to-enum
+update_info=kwinrules.upd:replace-placement-string-to-enum,kwinrules.upd:use-virtual-desktop-ids
 
 [1]
 Description=Application settings for firefox
-desktop=1
-desktoprule=3
+desktops=4807e3ef-a147-4c49-aad8-d32d734562a3
+desktopsrule=3
 maxsize=1920,1044
 maxsizerule=1
 wmclass=navigator firefox
@@ -13,3 +13,4 @@ wmclassmatch=1
 
 [General]
 count=1
+rules=1

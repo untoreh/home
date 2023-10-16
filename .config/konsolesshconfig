@@ -1,0 +1,192 @@
+[Global plugin config]
+manageProfile=false
+
+[SSH Config][127.0.0.1]
+hostname=23.95.225.164
+identifier=127.0.0.1
+importedFromSshConfig=true
+port=2468
+profileName=Built-in
+sshkey=~/.cluster/.ssh/id_rsa
+useSshConfig=true
+username=root
+
+[SSH Config][144.76.97.102]
+hostname=88.198.69.215
+identifier=144.76.97.102
+importedFromSshConfig=true
+port=19021
+profileName=Built-in
+sshkey=
+useSshConfig=true
+username=root
+
+[SSH Config][198.12.101.192]
+hostname=45.62.213.209
+identifier=198.12.101.192
+importedFromSshConfig=true
+port=2468
+profileName=Built-in
+sshkey=~/.cluster/.ssh/id_rsa
+useSshConfig=true
+username=root
+
+[SSH Config][23.94.152.184]
+hostname=192.3.11.120
+identifier=23.94.152.184
+importedFromSshConfig=true
+port=2468
+profileName=Built-in
+sshkey=~/.cluster/.ssh/id_rsa
+useSshConfig=true
+username=root
+
+[SSH Config][45.62.225.212]
+hostname=162.248.163.137
+identifier=45.62.225.212
+importedFromSshConfig=true
+port=2468
+profileName=Built-in
+sshkey=~/.cluster/.ssh/id_rsa
+useSshConfig=true
+username=root
+
+[SSH Config][clac2]
+hostname=162.248.163.185
+identifier=clac2
+importedFromSshConfig=true
+port=2468
+profileName=Built-in
+sshkey=~/.cluster/.ssh/id_rsa
+useSshConfig=true
+username=root
+
+[SSH Config][natgullbg104]
+hostname=82.118.234.154
+identifier=natgullbg104
+importedFromSshConfig=true
+port=10450
+profileName=Built-in
+sshkey=
+useSshConfig=true
+username=root
+
+[SSH Config][natgullca131]
+hostname=149.56.16.103
+identifier=natgullca131
+importedFromSshConfig=true
+port=13150
+profileName=Built-in
+sshkey=
+useSshConfig=true
+username=root
+
+[SSH Config][natgullchi149]
+hostname=185.172.165.210
+identifier=natgullchi149
+importedFromSshConfig=true
+port=14920
+profileName=Built-in
+sshkey=~/.cluster/.ssh/id_rsa
+useSshConfig=true
+username=root
+
+[SSH Config][natgullde194]
+hostname=144.76.97.102
+identifier=natgullde194
+importedFromSshConfig=true
+port=19450
+profileName=Built-in
+sshkey=~/.cluster/.ssh/id_rsa
+useSshConfig=true
+username=root
+
+[SSH Config][natgullfi54]
+hostname=95.216.20.84
+identifier=natgullfi54
+importedFromSshConfig=true
+port=5450
+profileName=Built-in
+sshkey=~/.cluster/.ssh/id_rsa
+useSshConfig=true
+username=root
+
+[SSH Config][natmrvmbg177]
+hostname=82.118.227.155
+identifier=natmrvmbg177
+importedFromSshConfig=true
+port=17721
+profileName=Built-in
+sshkey=
+useSshConfig=true
+username=root
+
+[SSH Config][natmrvmfr182]
+hostname=213.246.58.161
+identifier=natmrvmfr182
+importedFromSshConfig=true
+port=18221
+profileName=Built-in
+sshkey=
+useSshConfig=true
+username=root
+
+[SSH Config][natmrvmno183]
+hostname=185.125.171.200
+identifier=natmrvmno183
+importedFromSshConfig=true
+port=18321
+profileName=Built-in
+sshkey=
+useSshConfig=true
+username=root
+
+[SSH Config][natmrvmus174]
+hostname=198.204.227.235
+identifier=natmrvmus174
+importedFromSshConfig=true
+port=17421
+profileName=Built-in
+sshkey=
+useSshConfig=true
+username=root
+
+[SSH Config][sent1]
+hostname=63.223.91.196
+identifier=sent1
+importedFromSshConfig=true
+port=2468
+profileName=
+sshkey=/home/fra/.cluster/.ssh/id_rsa
+useSshConfig=true
+username=root
+
+[SSH Config][ttcs]
+hostname=192.168.42.129
+identifier=ttcs
+importedFromSshConfig=true
+port=6000
+profileName=Built-in
+sshkey=
+useSshConfig=true
+username=root
+
+[SSH Config][vrmc2]
+hostname=107.175.69.147
+identifier=vrmc2
+importedFromSshConfig=true
+port=2468
+profileName=Built-in
+sshkey=~/.cluster/.ssh/id_rsa
+useSshConfig=true
+username=root
+
+[SSH Config][vrmc5]
+hostname=107.174.145.191
+identifier=vrmc5
+importedFromSshConfig=true
+port=2468
+profileName=Built-in
+sshkey=~/.cluster/.ssh/id_rsa
+useSshConfig=true
+username=root

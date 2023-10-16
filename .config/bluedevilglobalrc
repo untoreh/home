@@ -2,7 +2,4 @@
 00:1A:7D:DA:71:13_powered=true
 
 [Devices]
-connectedDevices=
-
-[Global]
-bluetoothBlocked=false
+connectedDevices=B0:F1:A3:00:A9:91

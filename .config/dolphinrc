@@ -1,22 +1,22 @@
-[CompactMode]
-FontWeight=50
+[$Version]
+update_info=dolphin_detailsmodesettings.upd:rename-leading-padding,dolphin_detailsmodesettings.upd:move-content-display
 
 [Desktop Entry]
 DefaultProfile=
-
-[DetailsMode]
-FontWeight=50
 
 [Favorite Profiles]
 Favorites=
 
 [General]
-Version=200
+Version=202
 ViewPropsTimestamp=2016,8,24,12,54,53
 
 [IconsMode]
-FontWeight=50
 IconSize=48
+
+[KFileDialog Settings]
+Places Icons Auto-resize=false
+Places Icons Static Size=22
 
 [KPropertiesDialog]
 DVI-D-0 Height 1080=466
@@ -36,7 +36,6 @@ DVI-D-1 Width 1920=996
 Height 1080=1242
 MenuBar=Disabled
 RestorePositionForNextInstance=false
-State=AAAA/wAAAAD9AAAAAwAAAAAAAADoAAADwvwCAAAAAvsAAAAWAGYAbwBsAGQAZQByAHMARABvAGMAawAAAAAA/////wAAAAIA////+wAAABQAcABsAGEAYwBlAHMARABvAGMAawEAAAAqAAADwgAAAAIA////AAAAAQAAAAAAAAAA/AIAAAAB+wAAABAAaQBuAGYAbwBEAG8AYwBrAAAAAAD/////AAAAAgD///8AAAADAAAAAAAAAAD8AQAAAAH7AAAAGAB0AGUAcgBtAGkAbgBhAGwARABvAGMAawAAAAAA/////wAAAAIA////AAACZwAAA8IAAAAEAAAABAAAAAgAAAAI/AAAAAEAAAACAAAAAQAAABYAbQBhAGkAbgBUAG8AbwBsAEIAYQByAQAAAAD/////AAAAAAAAAAA=
 ToolBarsMovable=Disabled
 Width 1920=996
 XWAYLAND0 Height 1920x1080=1242

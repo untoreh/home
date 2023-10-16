@@ -1,13 +1,13 @@
 [$Version]
-update_info=kwin.upd:replace-scalein-with-scale,kwin.upd:port-minimizeanimation-effect-to-js,kwin.upd:port-scale-effect-to-js,kwin.upd:port-dimscreen-effect-to-js,kwin.upd:auto-bordersize,kwin.upd:animation-speed
+update_info=kwin.upd:replace-scalein-with-scale,kwin.upd:port-minimizeanimation-effect-to-js,kwin.upd:port-scale-effect-to-js,kwin.upd:port-dimscreen-effect-to-js,kwin.upd:auto-bordersize,kwin.upd:animation-speed,kwin.upd:desktop-grid-click-behavior,kwin.upd:no-swap-encourage,kwin.upd:make-translucency-effect-disabled-by-default,kwin.upd:remove-flip-switch-effect,kwin.upd:remove-cover-switch-effect,kwin.upd:remove-cubeslide-effect,kwin.upd:remove-xrender-backend,kwin.upd:enable-scale-effect-by-default,kwin.upd:overview-group-plugin-id,kwin.upd:animation-speed-cleanup,kwin.upd:replace-cascaded-zerocornered,bismuth_new_logger.upd:bismuth-new-logger
 
 [Compositing]
 Backend=OpenGL
 Enabled=true
 GLCore=true
-GLPreferBufferSwap=n
 GLTextureFilter=0
 HiddenPreviews=5
+LatencyPolicy=ExtremelyLow
 OpenGLIsUnsafe=false
 WindowsBlockCompositing=true
 XRenderSmoothScale=false
@@ -37,12 +37,16 @@ Number=10
 Rows=2
 
 [DrmOutputs][7c6193d68b][7c6193d68b]
+Outline=true
 Scale=1
 
 [Effect-Resize]
 Outline=true
 
 [Effect-Slide]
+Duration=50
+
+[Effect-slide]
 Duration=50
 
 [MouseBindings]
@@ -64,11 +68,11 @@ CommandWindow3=Activate and pass click
 CommandWindowWheel=Scroll
 
 [Plugins]
+bismuthEnabled=true
 blurEnabled=false
 contrastEnabled=false
 desktopchangeosdEnabled=false
 grid-tilingEnabled=false
-krohnkiteEnabled=true
 kwin-script-tilingEnabled=false
 kwin4_effect_dialogparentEnabled=false
 kwin4_effect_fadingpopupsEnabled=false
@@ -87,22 +91,24 @@ trackmouseEnabled=true
 videowallEnabled=false
 windowgeometryEnabled=false
 
+[Script-bismuth]
+screenGapBottom=5
+screenGapLeft=5
+screenGapRight=5
+screenGapTop=5
+
 [Script-grid-tiling]
 gap=4
-
-[Script-krohnkite]
-enableFloatingLayout=true
-keepFloatAbove=false
-screenGapBottom=4
-screenGapLeft=4
-screenGapRight=4
-screenGapTop=4
-tileLayoutGap=2
 
 [TabBox]
 DesktopLayout=org.kde.breeze.desktop
 DesktopListLayout=org.kde.breeze.desktop
-LayoutName=org.kde.breeze.desktop
+
+[Tiling]
+padding=4
+
+[Tiling][1099650f-9707-5d1a-98b8-f9d7f8ef52d5]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Windows]
 ActiveMouseScreen=false
@@ -128,6 +134,5 @@ SnapOnlyWhenOverlapping=false
 TitlebarDoubleClickCommand=Maximize
 WindowSnapZone=10
 
-[org.kde.kdecoration2]
-library=org.kde.kwin.aurorae
-theme=__aurorae__svg__Dracula
+[Xwayland]
+Scale=1

@@ -12,9 +12,9 @@ lidAction=1
 powerButtonAction=16
 
 [AC][SuspendSession]
-idleTime=600000
+idleTime=900000
 suspendThenHibernate=false
-suspendType=32
+suspendType=1
 
 [Battery]
 icon=battery-060

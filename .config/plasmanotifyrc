@@ -1,13 +1,23 @@
+[Applications][com.github.zocker_160.SyncThingy]
+Seen=true
+
 [Applications][firefox]
 Seen=true
 
 [Applications][org.kde.neochat]
 Seen=true
 
+[Applications][org.wezfurlong.wezterm]
+Seen=true
+
 [DoNotDisturb]
 WhenScreensMirrored=false
+
+[Jobs]
+PermanentPopups=false
 
 [Notifications]
 CriticalAlwaysOnTop=false
 CriticalInDndMode=false
 LowPriorityPopups=false
+PopupTimeout=1000

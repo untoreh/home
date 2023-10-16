@@ -40,7 +40,6 @@ URxvt.saveLines: 3000
 urxvt.visualBell: false
 
 ! font
-URxvt.font: xft:Monoid:size=12
 URxvt.letterSpace: 0
 xft.lcdfilter: lcddefault
 xft.hintstyle: hintfull
@@ -78,10 +77,5 @@ URxvt.keysym.Control-Shift-Left:    \033[1;6D
 URxvt.keysym.Control-Shift-Right:   \033[1;6C
 URxvt.keysym.Shift-PageUp:          \033[5;2~
 URxvt.keysym.Shift-PageDown:        \033[6;2~
-
-
-Xcursor.size: 18
-
-Xcursor.theme: Sweet-cursors
 
 Xcursor.size: 48

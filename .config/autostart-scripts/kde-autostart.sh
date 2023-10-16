@@ -1,1 +1,0 @@
-/home/fra/.config/systemd/scripts/kde-autostart.sh

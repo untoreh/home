@@ -1,0 +1,12 @@
+[Event/remotedesktopstarted]
+Action=
+Execute=
+Logfile=
+Sound=
+TTS=
+
+[Event/screencastfailure]
+Execute=
+Logfile=
+Sound=
+TTS=

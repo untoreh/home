@@ -1,12 +1,146 @@
 [$Version]
-update_info=spectacle_shortcuts.upd:spectacle-migrate-shortcuts
+update_info=spectacle_shortcuts.upd:spectacle-migrate-shortcuts,konsole.upd:konsole_globalaccel
+
+[ColorEffects:Disabled]
+ChangeSelectionColor[$d]
+Color[$d]
+ColorAmount[$d]
+ColorEffect[$d]
+ContrastAmount[$d]
+ContrastEffect[$d]
+Enable[$d]
+IntensityAmount[$d]
+IntensityEffect[$d]
+
+[ColorEffects:Inactive]
+ChangeSelectionColor[$d]
+Color[$d]
+ColorAmount[$d]
+ColorEffect[$d]
+ContrastAmount[$d]
+ContrastEffect[$d]
+Enable[$d]
+IntensityAmount[$d]
+IntensityEffect[$d]
+
+[Colors:Button]
+BackgroundAlternate[$d]
+BackgroundNormal[$d]
+DecorationFocus[$d]
+DecorationHover[$d]
+ForegroundActive[$d]
+ForegroundInactive[$d]
+ForegroundLink[$d]
+ForegroundNegative[$d]
+ForegroundNeutral[$d]
+ForegroundNormal[$d]
+ForegroundPositive[$d]
+ForegroundVisited[$d]
+
+[Colors:Complementary]
+BackgroundAlternate[$d]
+BackgroundNormal[$d]
+DecorationFocus[$d]
+DecorationHover[$d]
+ForegroundActive[$d]
+ForegroundInactive[$d]
+ForegroundLink[$d]
+ForegroundNegative[$d]
+ForegroundNeutral[$d]
+ForegroundNormal[$d]
+ForegroundPositive[$d]
+ForegroundVisited[$d]
+
+[Colors:Header]
+BackgroundAlternate[$d]
+BackgroundNormal[$d]
+DecorationFocus[$d]
+DecorationHover[$d]
+ForegroundActive[$d]
+ForegroundInactive[$d]
+ForegroundLink[$d]
+ForegroundNegative[$d]
+ForegroundNeutral[$d]
+ForegroundNormal[$d]
+ForegroundPositive[$d]
+ForegroundVisited[$d]
+
+[Colors:Header][Inactive]
+BackgroundAlternate[$d]
+BackgroundNormal[$d]
+DecorationFocus[$d]
+DecorationHover[$d]
+ForegroundActive[$d]
+ForegroundInactive[$d]
+ForegroundLink[$d]
+ForegroundNegative[$d]
+ForegroundNeutral[$d]
+ForegroundNormal[$d]
+ForegroundPositive[$d]
+ForegroundVisited[$d]
+
+[Colors:Selection]
+BackgroundAlternate[$d]
+BackgroundNormal[$d]
+DecorationFocus[$d]
+DecorationHover[$d]
+ForegroundActive[$d]
+ForegroundInactive[$d]
+ForegroundLink[$d]
+ForegroundNegative[$d]
+ForegroundNeutral[$d]
+ForegroundNormal[$d]
+ForegroundPositive[$d]
+ForegroundVisited[$d]
+
+[Colors:Tooltip]
+BackgroundAlternate[$d]
+BackgroundNormal[$d]
+DecorationFocus[$d]
+DecorationHover[$d]
+ForegroundActive[$d]
+ForegroundInactive[$d]
+ForegroundLink[$d]
+ForegroundNegative[$d]
+ForegroundNeutral[$d]
+ForegroundNormal[$d]
+ForegroundPositive[$d]
+ForegroundVisited[$d]
+
+[Colors:View]
+BackgroundAlternate[$d]
+BackgroundNormal[$d]
+DecorationFocus[$d]
+DecorationHover[$d]
+ForegroundActive[$d]
+ForegroundInactive[$d]
+ForegroundLink[$d]
+ForegroundNegative[$d]
+ForegroundNeutral[$d]
+ForegroundNormal[$d]
+ForegroundPositive[$d]
+ForegroundVisited[$d]
+
+[Colors:Window]
+BackgroundAlternate[$d]
+BackgroundNormal[$d]
+DecorationFocus[$d]
+DecorationHover[$d]
+ForegroundActive[$d]
+ForegroundInactive[$d]
+ForegroundLink[$d]
+ForegroundNegative[$d]
+ForegroundNeutral[$d]
+ForegroundNormal[$d]
+ForegroundPositive[$d]
+ForegroundVisited[$d]
 
 [Data]
 DataCount=4
 
 [Data_1]
 Comment=KMenuEdit Global Shortcuts
-DataCount=2
+DataCount=1
 Enabled=true
 Name=KMenuEdit
 SystemGroup=1
@@ -41,32 +175,6 @@ TriggersCount=1
 Key=Search
 Type=SHORTCUT
 Uuid={d03619b6-9b3c-48cc-9d9c-a2aadb485550}
-
-[Data_1_2]
-Comment=Global keyboard shortcut to launch Konsole
-Enabled=false
-Name=Launch Konsole
-Type=MENUENTRY_SHORTCUT_ACTION_DATA
-
-[Data_1_2Actions]
-ActionsCount=1
-
-[Data_1_2Actions0]
-CommandURL=org.kde.konsole.desktop
-Type=MENUENTRY
-
-[Data_1_2Conditions]
-Comment=
-ConditionsCount=0
-
-[Data_1_2Triggers]
-Comment=Simple_action
-TriggersCount=1
-
-[Data_1_2Triggers0]
-Key=Ctrl+Alt+T
-Type=SHORTCUT
-Uuid={ff839eb3-c48c-472c-b90d-2aa05f1ee1da}
 
 [Data_2]
 Comment=This group contains various examples demonstrating most of the features of KHotkeys. (Note that this group and all its actions are disabled by default.)
@@ -945,7 +1053,7 @@ Comment=Simple_action
 TriggersCount=1
 
 [Data_4_2Triggers0]
-Key=Meta+T
+Key=
 Type=SHORTCUT
 Uuid={e59af215-e004-41ef-8cf2-b4d66aea413a}
 
@@ -1001,6 +1109,28 @@ Key=Meta+D
 Type=SHORTCUT
 Uuid={78f90c9f-6711-4ac3-853e-ac147cb4614d}
 
+[DirSelect Dialog]
+DirSelectDialog Size[$d]
+History Items[$d]
+
+[General]
+BrowserApplication[$d]
+ColorScheme[$d]
+ColorSchemeHash[$d]
+Name[$d]
+TerminalApplication[$d]
+TerminalService[$d]
+XftHintStyle[$d]
+XftSubPixel[$d]
+dbfile[$d]
+fixed[$d]
+font[$d]
+menuFont[$d]
+shadeSortColumn[$d]
+smallestReadableFont[$d]
+toolBarFont[$d]
+widgetStyle[$d]
+
 [Gestures]
 Disabled=true
 MouseButton=2
@@ -1010,10 +1140,69 @@ Timeout=300
 Comment=
 WindowsCount=0
 
+[Icons]
+Theme[$d]
+
+[KDE]
+AnimationDurationFactor[$d]
+ColorScheme[$d]
+LookAndFeelPackage[$d]
+ShowDeleteCommand[$d]
+SingleClick[$d]
+contrast[$d]
+widgetStyle[$d]
+
+[KDE Action Restrictions]
+action/start_new_session[$d]
+action/switch_user[$d]
+
+[KFileDialog Settings]
+Allow Expansion[$d]
+Automatically select filename extension[$d]
+Breadcrumb Navigation[$d]
+Decoration position[$d]
+LocationCombo Completionmode[$d]
+PathCombo Completionmode[$d]
+Show Bookmarks[$d]
+Show Full Path[$d]
+Show Inline Previews[$d]
+Show Preview[$d]
+Show Speedbar[$d]
+Show hidden files[$d]
+Sort by[$d]
+Sort directories first[$d]
+Sort hidden files last[$d]
+Sort reversed[$d]
+Speedbar Width[$d]
+View Style[$d]
+listViewIconSize[$d]
+
+[KShortcutsDialog Settings]
+Dialog Size[$d]
+
 [Main]
 AlreadyImported=defaults,spectacle,kde32b1,konqueror_gestures_kde321,konsole
 Disabled=false
 Version=2
 
+[PreviewSettings]
+MaximumRemoteSize[$d]
+
+[Shortcuts]
+Deselect[$d]
+FullScreen[$d]
+Paste Selection[$d]
+Preferences[$d]
+Redo[$d]
+SaveAs[$d]
+
 [Voice]
 Shortcut=
+
+[WM]
+activeBackground[$d]
+activeBlend[$d]
+activeForeground[$d]
+inactiveBackground[$d]
+inactiveBlend[$d]
+inactiveForeground[$d]

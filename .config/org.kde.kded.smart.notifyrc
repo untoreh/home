@@ -1,0 +1,6 @@
+[Event/imminentDeviceFailure]
+Action=
+Execute=
+Logfile=
+Sound=
+TTS=

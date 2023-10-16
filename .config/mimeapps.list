@@ -40,8 +40,10 @@ video/webm=smplayer.desktop;
 video/x-matroska=/home/fra/.local/share/applications/mpv.desktop;smartcode-stremio.desktop;svp-manager4.desktop;tribler.desktop;emacs.desktop;
 x-scheme-handler/chrome=userapp-Firefox-E7W6F0.desktop;firefox.desktop;userapp-Firefox-QLFPY0.desktop;userapp-Firefox-F2JS20.desktop;
 x-scheme-handler/ftp=userapp-Firefox-E7W6F0.desktop;firefox.desktop;userapp-Firefox-QLFPY0.desktop;
-x-scheme-handler/http=userapp-Firefox-E7W6F0.desktop;firefox.desktop;userapp-Firefox-QLFPY0.desktop;userapp-Firefox-F2JS20.desktop;
-x-scheme-handler/https=userapp-Firefox-E7W6F0.desktop;firefox.desktop;userapp-Firefox-QLFPY0.desktop;userapp-Firefox-F2JS20.desktop;
+x-scheme-handler/geo=google-maps-geo-handler.desktop;
+x-scheme-handler/http=firefox.desktop;userapp-Firefox-E7W6F0.desktop;userapp-Firefox-QLFPY0.desktop;userapp-Firefox-F2JS20.desktop;
+x-scheme-handler/https=firefox.desktop;userapp-Firefox-E7W6F0.desktop;userapp-Firefox-QLFPY0.desktop;userapp-Firefox-F2JS20.desktop;
+x-scheme-handler/tel=org.kde.kdeconnect.handler.desktop;
 
 [Default Applications]
 application/javascript=wrp-vcs-usercreated-1.desktop;
@@ -60,6 +62,7 @@ application/xml=wrp-atm-usercreated-0.desktop;
 application/zip=xarchiver.desktop;
 image/jpeg=feh.desktop;
 image/x-xcursor=gimp.desktop;feh.desktop;
+inode/directory=org.kde.dolphin.desktop;
 text/csv=kde4-sheets.desktop;
 text/html=firefox.desktop
 text/plain=org.kde.kate.desktop;
@@ -70,11 +73,13 @@ video/x-matroska=/home/fra/.local/share/applications/mpv.desktop;
 x-scheme-handler/chrome=userapp-Firefox-F2JS20.desktop
 x-scheme-handler/element=element-desktop.desktop
 x-scheme-handler/ftp=userapp-Firefox-QLFPY0.desktop
-x-scheme-handler/http=userapp-Firefox-F2JS20.desktop
-x-scheme-handler/https=userapp-Firefox-F2JS20.desktop
+x-scheme-handler/geo=google-maps-geo-handler.desktop;
+x-scheme-handler/http=firefox.desktop;
+x-scheme-handler/https=firefox.desktop;
 x-scheme-handler/safe=maidsafenet-ltd-safe-browser.desktop
 x-scheme-handler/safe-auth=maidsafenet-ltd-safe-browser-authenticator.desktop
 x-scheme-handler/safe-bmv0lm1hawrzywzllnnhzmutynjvd3nlcg=maidsafenet-ltd-safe-browser.desktop
+x-scheme-handler/tel=org.kde.kdeconnect.handler.desktop;
 x-scheme-handler/wire=appimagekit-wire-desktop.desktop
 
 [Removed Associations]

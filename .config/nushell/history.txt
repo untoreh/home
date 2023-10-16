@@ -1,1 +1,0 @@
-../../.secrets/files/.config/nushell/history.txt

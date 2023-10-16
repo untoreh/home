@@ -7,25 +7,16 @@ LaunchCounts=1 services_qt5ct.desktop,1 services_kcmsmserver.desktop,1 services_
 pluginWhiteList=desktopsessions,services,places,PowerDevil,calculator,unitconverter,shell,bookmarks,recentdocuments,locations,baloosearch
 
 [PlasmaTransientsConfig]
-PreloadWeight=0
+PreloadWeight=42
 
 [PlasmaViews][Panel 2]
 alignment=1
 panelVisibility=3
 
 [PlasmaViews][Panel 2][Defaults]
-thickness=40
-
-[PlasmaViews][Panel 2][Horizontal1920]
-thickness=40
-
-[PlasmaViews][Panel 2][Vertical1080]
 thickness=30
 
 [PlasmaViews][Panel 21][Defaults]
-thickness=27
-
-[PlasmaViews][Panel 21][Horizontal1920]
 thickness=27
 
 [PlasmaViews][Panel 25][Defaults]
@@ -34,12 +25,8 @@ thickness=27
 [PlasmaViews][Panel 25][Horizontal1920]
 maxLength=1761
 minLength=1761
-thickness=27
 
 [PlasmaViews][Panel 31][Defaults]
-thickness=36
-
-[PlasmaViews][Panel 31][Horizontal1920]
 thickness=36
 
 [PlasmaViews][Panel 47]
@@ -48,29 +35,17 @@ alignment=1
 [PlasmaViews][Panel 47][Defaults]
 thickness=36
 
-[PlasmaViews][Panel 47][Horizontal1920]
-thickness=36
-
 [PlasmaViews][Panel 63][Defaults]
-thickness=36
-
-[PlasmaViews][Panel 63][Horizontal1920]
 thickness=36
 
 [PlasmaViews][Panel 64][Defaults]
 thickness=27
 
-[PlasmaViews][Panel 64][Horizontal1920]
-thickness=27
-
 [PlasmaViews][Panel 97][Defaults]
-thickness=36
-
-[PlasmaViews][Panel 97][Horizontal1920]
 thickness=36
 
 [ScreenConnectors]
 0=DVI-D-0
 
 [Updates]
-performed=/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/obsolete_kickoffrc.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/desktop-base.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/unlock_widgets.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/move_desktop_layout_config.js
+performed=/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/obsolete_kickoffrc.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/desktop-base.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/unlock_widgets.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/move_desktop_layout_config.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/00-start-here-2.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/containmentactions_middlebutton.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/digitalclock_migrate_font_settings.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/digitalclock_rename_timezonedisplay_key.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/keyboardlayout_migrateiconsetting.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/keyboardlayout_remove_shortcut.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/klipper_clear_config.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/maintain_existing_desktop_icon_sizes.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/mediaframe_migrate_useBackground_setting.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/no_middle_click_paste_on_panels.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/systemloadviewer_systemmonitor.js

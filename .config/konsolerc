@@ -8,11 +8,17 @@ DVI-D-0 Width 1920=700
 [Favorite Profiles]
 Favorites=
 
+[General]
+ConfigVersion=1
+
 [KonsoleWindow]
 ShowMenuBarByDefault=false
 UseSingleInstance=true
 
 [MainWindow]
+1920x1080 screen: Height=552
+1920x1080 screen: Width=911
+1920x1080 screen: Window-Maximized=true
 DVI-D-0 Height 1080=668
 DVI-D-0 Width 1920=1114
 DVI-D-0 XPosition=331
@@ -21,7 +27,7 @@ DVI-D-1 Height 1080=434
 DVI-D-1 Width 1920=792
 Height 1080=1080
 MenuBar=Disabled
-State=AAAA/wAAAAD9AAAAAAAAB4AAAAP8AAAABAAAAAQAAAAIAAAACPwAAAAA
+State=AAAA/wAAAAD9AAAAAQAAAAAAAAAAAAAAAPwCAAAAAvsAAAAiAFEAdQBpAGMAawBDAG8AbQBtAGEAbgBkAHMARABvAGMAawAAAAAA/////wAAAXwBAAAD+wAAABwAUwBTAEgATQBhAG4AYQBnAGUAcgBEAG8AYwBrAAAAAAD/////AAABFQEAAAMAAAeAAAADygAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAACAAAAFgBtAGEAaQBuAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAAAAAAAAAABwAcwBlAHMAcwBpAG8AbgBUAG8AbwBsAGIAYQByAQAAAOL/////AAAAAAAAAAA=
 ToolBarsMovable=Disabled
 Width 1920=1920
 XWAYLAND0 Height 1080=421
@@ -34,3 +40,6 @@ CloseAllTabs=true
 
 [TabBar]
 TabBarVisibility=AlwaysHideTabBar
+
+[UiSettings]
+ColorScheme=
