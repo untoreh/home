@@ -24,7 +24,7 @@ echo "$NEWPATH" >$cached_path
 eval "$NEWPATH"
 
 # echo -e "PATH set to: \n $NEWPATH"
-PYTHON_BIN=$(which python || which python3)
+PYTHON_BIN=$(which python 2>/dev/null || which python3)
 PYTHON_V=$($PYTHON_BIN -c 'import sys; print(str(sys.version_info[0])+"."+str(sys.version_info[1]))')
 #PYTHONPATH=$(find -L ~/.local/lib -path "*/python*/site-packages" -type d | tr '\n' ':')$(find -L ~/.nix-profile -path "*/python*/site-packages" -type d | tr '\n' ':')${PYTHONPATH:-""}
 PYTHONPATH="$HOME/.local/lib/python${PYTHON_V}/site-packages:$HOME/.nix-profile/lib/python${PYTHON_V}/site-packages:/usr/lib/python${PYTHON_V}/site-packages:"${PYTHONPATH:-""}
@@ -32,14 +32,18 @@ NEW_PYTHONPATH="PYTHONPATH=\"$PYTHONPATH\" \n PYTHON_V=\"$PYTHON_V\" \n"
 echo -e "$NEW_PYTHONPATH" >>$cached_path
 
 # on WSL set the TMPDIR env var to /run/upper
-[ -n "$WSLENV" ] && echo "TMPDIR=/run/upper" >>$cached_path
+[ -v WSLENV ] && echo "TMPDIR=/run/upper" >>$cached_path
 
 # LD_LIBRARY_PATH=$(${nixbin}/nix eval --raw nixpkgs.stdenv.cc.cc.lib)/lib:${LD_LIBRARY_PATH:-""}
 # NEW_LD_LIBRARY_PATH="LD_LIBRARY_PATH=\"$LD_LIBRARY_PATH\""
 # echo "$NEW_LD_LIBRARY_PATH" >$cached_dir/path_std
 
-echo XDG_DATA_DIRS="$HOME:$HOME/.nix-profile/share:/usr/local/share:/usr/share" >>$cached_path
+echo XDG_DATA_DIRS="$HOME:$HOME/.nix-profile/share:/usr/local/share:/usr/share:$XDG_DATA_DIRS" >>$cached_path
 echo GUIX_PROFILE="$HOME/.guix-profile" >>$cached_path
+
+if [ ! -v XDG_CONFIG_HOME ]; then
+	echo XDG_CONFIG_HOME="$HOME/.config">>$cached_path
+fi
 
 if [ ! -v DBUS_SESSION_BUS_ADDRESS ]; then
     if which gnome-keyring-daemon &>/dev/null; then
