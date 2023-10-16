@@ -4,15 +4,13 @@ Documentation=info:emacs man:emacs(1) https://gnu.org/software/emacs/
 
 [Service]
 Environment=EMACS_SOCKET=/tmp/emacs%U/server
-Environment=SSH_AUTH_SOCK=%t/keyring/ssh
-Environment=GPG_TTY=$GPG_TTY
-Environment=GDK_BACKEND=x11
-Environment=CLUTTER_BACKEND=x11
-WorkingDirectory=%h/.emacs.d/
+;Environment=SSH_AUTH_SOCK=%t/keyring/ssh
+;Environment=GPG_TTY=$GPG_TTY
+WorkingDirectory=%h/
 #ExecStartPre=%h/.emacs.d/bin/doom env
 #ExecStartPre=sed -r '/(TERM|TMUX|KITTY|COLOR|X|QT|KDE|XDG|DISPLAY|SCREEN|WINDOW|AUTO|REPO|SSH|SESSION|PID|_ID|ID_).*/d' -i %h/.emacs.d/.local/env
 #ExecStartPre=%h/.emacs.d/bin/doom sync -e
-ExecStart=%h/.emacs.d/bin/doom run --fg-daemon=server
+ExecStart=%h/.doom.d/start.sh
 ExecStop=%h/bin/kill-emacs.sh /run/user/%U/emacs/server
 Restart=on-failure
 TimeoutStopSec=10

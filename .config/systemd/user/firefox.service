@@ -4,8 +4,9 @@ BindsTo=graphical-session.target
 
 [Service]
 ExecStartPre=/bin/sleep 5
-ExecStart=%h/bin/ffox
+;ExecStart=%h/bin/ffox
+ExecStart=/usr/bin/flatpak run firefox
 ExecStop=killall -9 firefox
 
-#[Install]
-#WantedBy=graphical-session.target
+[Install]
+WantedBy=graphical-session.target

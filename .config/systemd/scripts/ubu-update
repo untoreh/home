@@ -1,16 +1,8 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-if [ "$USER" = root -o "$UID" = 0 ]; then
-    echo should not be run as root
-    exit 1
-fi
-export DEBIAN_FRONTEND=noninteractive
-rm -rf $HOME/.cache/pip
-sd=`echo "sudo -H -i -u fra"`
-. /etc/profile
-
-if [ -z "$1" ]; then
 # packages
+export DEBIAN_FRONTEND=noninteractive
+if [ -z "$1" ]; then
 ~/bin/fix-apt-sources
 sudo apt-get update
 sudo apt-get full-upgrade -y -q
@@ -23,31 +15,3 @@ sudo apt-get clean
 sudo apt-get autoremove -y
 fi
 
-# python
-iu=""
-lp="list --user --outdated"
-excluded_packages="python-apt|librtmp|distro-info"
-ct="cut -d' ' -f1 "
-z="/dev/null"
-# 2
-pip2 install --user --upgrade pip
-hash -d pip2
-pip2 list --user --outdated |
-    tail +3 |
-    awk '{print $1}' |
-    xargs pip2 install --user --upgrade
-# 3
-pip3 install --user --upgrade pip
-hash -d pip3
-pip3 list --user --outdated |
-    tail +3 |
-    awk '{print $1}' |
-    xargs pip3 install --user --upgrade
-
-/usr/bin/emacsclient --eval "(configuration-layer/update-packages t)"
-cd ~/.emacs.d
-git pull --rebase
-
-zsh -lic "echo q | zpl self-update --quiet; zpl update --all --reset -p $(nproc)"
-fisher self-update; fisher
-rm /tmp/.cache/path_* -f

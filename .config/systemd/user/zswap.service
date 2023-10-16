@@ -3,11 +3,12 @@ Description=Swap with zswap
 After=default.target
 
 [Service]
-Environment=SWAP_DEVICE=/dev/zvol/rpool/swap
+;Environment=SWAP_DEVICE=/dev/zvol/rpool/swap
 #Environment=SWAP_UUID=61af6833-0083-4095-823c-e7c54fd6db86
 Environment=PARAMS="/usr/bin/sudo tee /sys/module/zswap/parameters"
 Type=oneshot
 RemainAfterExit=true
+User=%u
 ExecStartPre=-/usr/bin/sudo rmmod zram
 ExecStartPre=-/usr/bin/sudo swapoff -a
 ExecStartPre=/usr/bin/sudo modprobe zswap
@@ -23,4 +24,4 @@ ExecStop=/bin/bash -c "echo 0 | $PARAMS/enabled"
 ExecStopPost=/usr/bin/sudo rmmod zswap
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=sysinit.target

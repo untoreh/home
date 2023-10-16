@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+if [ "$USER" = root -o "$UID" = 0 ]; then
+    echo should not be run as root
+    exit 1
+fi
+. /etc/profile
+# python
+. ~/.venv/bin/activate
+rm -rf $HOME/.cache/pip
+pip install --upgrade pip
+hash -d pip
+pip install --upgrade
+#pip3 list --user --outdated |
+    #tail +3 |
+    #awk '{print $1}' |
+    #xargs pip3 install --user --upgrade
+
+cd ~/.emacs.d
+./bin/doom upgrade -y
+systemctl --user restart emacs
+
+/usr/bin/fish -lic "fisher update"
+rm /tmp/.cache/path_* -f

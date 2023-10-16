@@ -1,6 +1,0 @@
-[Unit]
-Description=restart kwin
-
-[Service]
-Type=oneshot
-ExecStart=/bin/systemctl --user restart kwin

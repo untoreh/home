@@ -1,9 +1,0 @@
-[Unit]
-Description=Configure XDG env vars
-PartOf=graphical-session.target
-
-[Service]
-Type=simple
-ExecStart=xsettingsd
-[Install]
-WantedBy=sway-session.target

@@ -1,9 +1,0 @@
-[Unit]
-Description=Switch audio output
-PartOf=graphical-session.target
-
-[Service]
-Type=simple
-ExecStart=%h/bin/audioswitch bt
-[Install]
-WantedBy=sway-session.target

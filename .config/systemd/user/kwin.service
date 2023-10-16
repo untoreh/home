@@ -1,9 +1,0 @@
-[Unit]
-Description=Restart kwin
-
-[Service]
-Type=simple
-ExecStart=%h/.config/systemd/scripts/kde-kwin.sh
-
-[Install]
-WantedBy=default.target
