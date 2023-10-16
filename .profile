@@ -23,7 +23,7 @@ fi
 # fi
 
 # browser
-if [ ! -v BROWSER ]; then
+if [ ! -v BROWSER -a ! -v TOOLBOX_PATH ]; then
 	if [ -v WSLENV ]; then
 		export BROWSER=$(which wslview)
 	else
@@ -56,6 +56,10 @@ if [ -v PS1 -a -n "$__shell" -a -v EMACS_VTERM_PATH ]; then
 	__vterm_src=~/.emacs.d/.local/straight/repos/emacs-libvterm/etc/emacs-vterm-${__shell}.sh
 	[ -e $__vterm_src ] && . $__vterm_src
 fi
+
+# THEME
+[ -v GTK@_RC_FILES ] || GTK2_RC_FILES="$HOME/.gtkrc-2.0"
+[ -v QT_QPA_PLATFORMTHEME ] || QT_QPA_PLATFORMTHEME=qt5ct
 
 ## golang
 export GOPATH=$HOME/dev/go:$HOME/dev/deployer/go
@@ -93,6 +97,8 @@ export PERL_MB_OPT='--install_base "$HOME/perl5"'
 PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"
 export PERL_MM_OPT
 
+. "$HOME/.cargo/env"
+
 ## stardict
 export STARDICT_DATA_DIR=~/.local/stardict
 ## speedup builds
@@ -105,10 +111,3 @@ if [ -v USE_CCACHE ]; then
 	export CXX="ccache g++"
 fi
 
-# NIX
-if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then . ~/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
-export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
-# GUIX
-#GUIX_PROFILE=~/.guix-profile
-#. ${GUIX_PROFILE}/etc/profile
-. "$HOME/.cargo/env"
