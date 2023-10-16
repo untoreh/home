@@ -8,8 +8,8 @@
 ;; because spell-fu doesn't allow specifying `data-dir' so it always look for dicts
 ;; in system directories
 
-(setq ispell-enchant-aspell-dir
-      "~/.config/enchant/aspell")
+;; (setq ispell-enchant-aspell-dir
+;;       "~/.config/enchant/aspell")
 
 (setq
  ;; spell-fu has troubles highlighting all the words
@@ -20,8 +20,8 @@
  flyspell-delay 1)
 
 ;; ensure symlink for data dir for enchant
-(my/ensure-symlink ispell-aspell-data-dir
-                   ispell-enchant-aspell-dir)
+;; (my/ensure-symlink ispell-aspell-data-dir
+;;                    ispell-enchant-aspell-dir)
 
 (setq
  ispell-personal-dictionary
