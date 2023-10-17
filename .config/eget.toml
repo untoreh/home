@@ -1,3 +1,7 @@
 [global]
 target = "~/bin"
 ["ginuerzh/gost"]
+["ericchiang/pup"]
+["gilbertchen/duplicacy"]
+target ="~/bin/dup"
+

@@ -8,7 +8,7 @@ install perl thefuck maildir-utils isync msmtp man less pandoc chrpath
 install tini
 install lld
 install haproxy bandwhich tor
-install shfmt shellcheck jq aspell
+install shfmt shellcheck jq aspell tidy
 install enchant2 aspell aspell-en aspell-it
 install pipenv
 install jre

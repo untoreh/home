@@ -2,10 +2,11 @@
 calibre koreader krita
 
 # not found
-duplicacy consul pup html-tidy languagetool 
-goimapnotify
+duplicacy
 
 ## NOT USED
+# ??
+goimapnotify(copr) languagetool(copr)
 # cli
 delta pet pastel weechat-matrix
 # fonts

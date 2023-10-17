@@ -146,3 +146,5 @@ nimsuggest.log
 # eget
 bin/gost
 bin/eget
+bin/dup
+bin/pup
