@@ -2,8 +2,7 @@
 
 # use an interactive shell to source the ssh-agent env through fish ssh-agent plugin
 # since mbsync needs access to it for decrypting mails secrets
-# echo $SWAYSOCK
-set MailDir ~/.mail
+set MailDir ~/.mail/
 set MailsList (find $MailDir -maxdepth 1 -name '*@*' -printf '%f\n')
 set MailsCount (string split " " "$MailsList" | wc -l)
 
