@@ -110,6 +110,9 @@ padding=4
 [Tiling][1099650f-9707-5d1a-98b8-f9d7f8ef52d5]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
+[Tiling][85225019-4fe1-58ff-b102-18193c51873e]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
 [Windows]
 ActiveMouseScreen=false
 AutoRaise=false

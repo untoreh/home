@@ -8,14 +8,11 @@ RepeatDelay=600
 RepeatRate=25
 
 [Libinput][14648][4449][Acrox AGM700 Gaming mouse]
-PointerAcceleration=-0.800
-PointerAccelerationProfile=1
-
-[Libinput][7805][11711][ROCCAT ROCCAT Kone Pure Military Mouse]
 PointerAcceleration=0.000
 PointerAccelerationProfile=1
 
 [Mouse]
+X11LibInputXAccelProfileFlat=true
 XLbInptAccelProfileFlat=true
 cursorSize=48
 

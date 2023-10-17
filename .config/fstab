@@ -1,6 +1,0 @@
-# root
-defaults,noatime,space_cache=v2,compress=zstd:2
-
-# boot
-defaults,ssd,space_cache
-

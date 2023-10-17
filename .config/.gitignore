@@ -71,5 +71,14 @@ wslu/triggered_time
 TabNine/
 github-copilot/
 nushell/history.txt
+# KDE
 plasma-org.kde.plasma.desktop-appletsrc
 libaccounts-glib/
+bluedevilglobalrc
+partitionmanagerrc
+baloofileinformationrc
+gwenviewrc
+trashrc
+kde.org/UserFeedback*
+ksmserverrc
+systemsettingsrc
