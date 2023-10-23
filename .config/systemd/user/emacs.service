@@ -17,4 +17,4 @@ TimeoutStopSec=10
 Type=simple
 
 [Install]
-WantedBy=default.target
+WantedBy=graphical-session.target
