@@ -81,6 +81,7 @@ x-scheme-handler/safe-auth=maidsafenet-ltd-safe-browser-authenticator.desktop
 x-scheme-handler/safe-bmv0lm1hawrzywzllnnhzmutynjvd3nlcg=maidsafenet-ltd-safe-browser.desktop
 x-scheme-handler/tel=org.kde.kdeconnect.handler.desktop;
 x-scheme-handler/wire=appimagekit-wire-desktop.desktop
+sourcegraph=cody-handler.desktop
 
 [Removed Associations]
 application/x-yaml=wrp-atm-usercreated-0.desktop;wrp-atm-usercreated-1.desktop;wrp-atm-usercreated-4.desktop;wrp-atm-usercreated-2.desktop;atm-usercreated-0.desktop;
