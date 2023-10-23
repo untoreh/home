@@ -75,6 +75,7 @@ desktopchangeosdEnabled=false
 grid-tilingEnabled=false
 kwin-script-tilingEnabled=false
 kwin4_effect_dialogparentEnabled=false
+kwin4_effect_fadedesktopEnabled=true
 kwin4_effect_fadingpopupsEnabled=false
 kwin4_effect_frozenappEnabled=false
 kwin4_effect_loginEnabled=false
@@ -85,6 +86,7 @@ kwin4_effect_translucencyEnabled=false
 minimizeallEnabled=false
 resizeEnabled=true
 screenedgeEnabled=false
+slideEnabled=false
 slidingpopupsEnabled=false
 synchronizeskipswitcherEnabled=false
 trackmouseEnabled=true
@@ -92,10 +94,16 @@ videowallEnabled=false
 windowgeometryEnabled=false
 
 [Script-bismuth]
+ignoreClass=yakuake,spectacle,Conky,zoom,wezterm-gui
+keepFloatAbove=false
 screenGapBottom=5
 screenGapLeft=5
 screenGapRight=5
 screenGapTop=5
+
+[Script-desktopchangeosd]
+PopupHideDelay=300
+TextOnly=true
 
 [Script-grid-tiling]
 gap=4
@@ -108,6 +116,9 @@ DesktopListLayout=org.kde.breeze.desktop
 padding=4
 
 [Tiling][1099650f-9707-5d1a-98b8-f9d7f8ef52d5]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][7fb8c463-c102-5440-8fb7-5253b26b5d9c]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][85225019-4fe1-58ff-b102-18193c51873e]
@@ -139,3 +150,7 @@ WindowSnapZone=10
 
 [Xwayland]
 Scale=1
+
+[org.kde.kdecoration2]
+library=org.kde.breeze
+theme=Breeze

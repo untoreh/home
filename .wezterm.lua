@@ -82,12 +82,12 @@ return {
     {key="}", mods="SHIFT|ALT", action=wezterm.action{ActivateTabRelative=1}},
 
     {key="p", mods="CTRL|ALT", action=wezterm.action{ActivateTabRelative=-1}},
-    {key="p", mods="SHIFT|ALT", action=wezterm.action{ScrollToPrompt=-1}},
-    {key="n", mods="SHIFT|ALT", action=wezterm.action{ScrollToPrompt=1}},
-    {key="k", mods="CTRL|ALT", action=wezterm.action{ScrollByPage=-1}},
-    {key="j", mods="CTRL|ALT", action=wezterm.action{ScrollByPage=1}},
-    {key="j", mods="SHIFT|ALT", action=wezterm.action{ScrollByLine=1}},
-    {key="k", mods="SHIFT|ALT", action=wezterm.action{ScrollByLine=-1}},
+    {key="h", mods="CTRL|ALT", action=wezterm.action{ScrollToPrompt=-1}},
+    {key="l", mods="CTRL|ALT", action=wezterm.action{ScrollToPrompt=1}},
+    {key="u", mods="CTRL|ALT", action=wezterm.action{ScrollByPage=-1}},
+    {key="d", mods="CTRL|ALT", action=wezterm.action{ScrollByPage=1}},
+    {key="j", mods="CTRL|ALT", action=wezterm.action{ScrollByLine=1}},
+    {key="k", mods="CTRL|ALT", action=wezterm.action{ScrollByLine=-1}},
 
     {key="l", mods="SHIFT|ALT", action="ShowLauncher"},
     {key="s", mods="CTRL|ALT", action=wezterm.action{EmitEvent="toggle-autoscroll"}},
