@@ -1,0 +1,5 @@
+[Desktop Entry]
+Exec=flatpak run --command=jamesdsp me.timschneeberger.jdsp4linux --tray
+Name=me.timschneeberger.jdsp4linux
+Type=Application
+X-Flatpak=me.timschneeberger.jdsp4linux
