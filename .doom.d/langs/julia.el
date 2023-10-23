@@ -29,7 +29,7 @@
 
 ;; julia-ts-mode
 (use-package! julia-ts-mode
-  :after julia-mode
+  :if (featurep! :lang julia)
   :mode "\\.jl$"
   :config
   (add-hook! (julia-mode julia-ts-mode) #'lsp)
@@ -81,7 +81,7 @@
   ;;               (message "Started Julia process to compile LanguageServer system image. This may take a while.")))
   ;;     (pushnew! lsp-julia-flags flag)
   ;;     (setq-default lsp-julia-flags lsp-julia-flags)))
-  (setq lsp-julia-command "~/.julia/sysimage/compiled/bin/julia")
+  ;; (setq lsp-julia-command "~/.julia/sysimage/compiled/bin/julia")
   )
 
 ;; Not used: julia-ob, julia-snail, julia-proto
