@@ -171,38 +171,26 @@
 
 ;; HACK: hide modeline in vterm buffer
 (after! vterm
-  (add-hook! '(vterm-mode-hook helpful-mode special-mode)
-    (run-at-time 0 nil #'doom-themes-hide-modeline)
-    ))
+  ;; (add-hook! '(vterm-mode-hook helpful-mode special-mode)
+  ;;   (run-at-time 0 nil #'doom-themes-hide-modeline)
+  ;;   )
+  )
 
-(use-package! indent-bars
-  :hook ((prog-mode text-mode conf-mode) . indent-bars-mode)
-  :config
-  (setq
-   indent-bars-color '(highlight :face-bg t :blend 0.15)
-   indent-bars-pattern "."
-   indent-bars-width-frac 0.1
-   indent-bars-pad-frac 0.1
-   indent-bars-zigzag nil
-   indent-bars-color-by-depth '(:regexp "outline-\\([0-9]+\\)" :blend 1) ; blend=1: blend with BG only
-   indent-bars-highlight-current-depth '(:blend 0.5) ; pump up the BG blend on current
-   indent-bars-display-on-blank-lines t)
-  ;; just in case
-  (add-hook! 'org-mode-local-vars-hook
-    (defun +indent-guides-disable-maybe-h ()
-      (and (bound-and-true-p highlight-indent-guides-mode)
-           (org-indent-mode)
-           (indent-bars-mode -1)))))
-
-
-;; (use-package! emacs
-;;   :init
-;;   ;; Add all your customizations prior to loading the themes
-;;   (setq modus-themes-italic-constructs t
-;;         modus-themes-bold-constructs nil
-;;         modus-themes-region '(bg-only no-extend))
+;; (use-package! indent-bars
+;;   :hook ((prog-mode text-mode conf-mode) . indent-bars-mode)
 ;;   :config
-;;   ;; Load the theme of your choice:
-;;   (load-theme 'modus-vivendi) ;;
-;;   :bind ("<f5>" . modus-themes-toggle)
-;;   )
+;;   (setq
+;;    indent-bars-color '(highlight :face-bg t :blend 0.15)
+;;    indent-bars-pattern "."
+;;    indent-bars-width-frac 0.1
+;;    indent-bars-pad-frac 0.1
+;;    indent-bars-zigzag nil
+;;    indent-bars-color-by-depth '(:regexp "outline-\\([0-9]+\\)" :blend 1) ; blend=1: blend with BG only
+;;    indent-bars-highlight-current-depth '(:blend 0.5) ; pump up the BG blend on current
+;;    indent-bars-display-on-blank-lines t)
+;;   ;; just in case
+;;   (add-hook! 'org-mode-local-vars-hook
+;;     (defun +indent-guides-disable-maybe-h ()
+;;       (and (bound-and-true-p highlight-indent-guides-mode)
+;;            (org-indent-mode)
+;;            (indent-bars-mode -1)))))
