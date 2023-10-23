@@ -1,14 +1,1 @@
-[MainWindow]
-1920x1080 screen: Height=590
-1920x1080 screen: Width=512
-DVI-D-0 Height 1080=568
-DVI-D-0 Width 1920=611
-DVI-D-0 XPosition=1042
-DVI-D-0 YPosition=141
-RestorePositionForNextInstance=false
-State=AAAA/wAAAAD9AAAAAAAAAgAAAAIwAAAABAAAAAQAAAAIAAAACPwAAAAA
-ToolBarsMovable=Disabled
-
-[WalletEditor]
-AlwaysShowContents=false
-SplitterSize=249,306
+../.secrets/files/.config/kwalletmanager5rc

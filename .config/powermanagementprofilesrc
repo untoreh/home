@@ -12,7 +12,7 @@ lidAction=1
 powerButtonAction=16
 
 [AC][SuspendSession]
-idleTime=900000
+idleTime=1200000
 suspendThenHibernate=false
 suspendType=1
 

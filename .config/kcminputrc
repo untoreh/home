@@ -8,13 +8,14 @@ RepeatDelay=600
 RepeatRate=25
 
 [Libinput][14648][4449][Acrox AGM700 Gaming mouse]
-PointerAcceleration=0.000
+PointerAcceleration=-0.800
 PointerAccelerationProfile=1
 
 [Mouse]
 X11LibInputXAccelProfileFlat=true
 XLbInptAccelProfileFlat=true
 cursorSize=48
+cursorTheme=breeze_cursors
 
 [Tmp]
 update_info=delete_cursor_old_default_size.upd:DeleteCursorOldDefaultSize

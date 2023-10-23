@@ -7,7 +7,7 @@ LaunchCounts=1 services_qt5ct.desktop,1 services_kcmsmserver.desktop,1 services_
 pluginWhiteList=desktopsessions,services,places,PowerDevil,calculator,unitconverter,shell,bookmarks,recentdocuments,locations,baloosearch
 
 [PlasmaTransientsConfig]
-PreloadWeight=42
+PreloadWeight=34
 
 [PlasmaViews][Panel 2]
 alignment=1
