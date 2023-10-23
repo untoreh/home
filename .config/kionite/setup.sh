@@ -10,7 +10,8 @@ sudo rpm-ostree install --idempotent zsh fish nushell neovim \
 	texlive-noto texlive-noto-emoji texlive-fontawesome \
 	eosrei-emojione-fonts texlive-fira texlive-firamath \
 	source-foundry-hack-fonts cormullion-juliamono-fonts \
-	powerline-fonts material-icons-fonts	
+	powerline-fonts material-icons-fonts \
+	ffmpeg-free libavcodec-freeworld mesa-va-drivers-freeworld
 ## change shell
 # lchsh $USER
 ## set same hostname to host and toolbox
