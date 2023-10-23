@@ -107,6 +107,8 @@
 ;; allow local eval
 (put 'enable-local-eval 'risky-local-variable nil)
 
+;; FIXME:
+(setq dired-omit-files "")
 
 ;; tramp
 ;; (setq-default
