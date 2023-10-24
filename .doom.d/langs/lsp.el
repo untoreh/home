@@ -18,7 +18,7 @@
   (setq
    ;; workspace
    +lsp-defer-shutdown 300
-   lsp-keep-workspace-alive t
+   lsp-keep-workspace-alive nil
    ;; for performance
    lsp-restart 'interactive
    lsp-auto-configure t
