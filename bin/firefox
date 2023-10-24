@@ -7,8 +7,6 @@ elif [ -e "$HOME/.nix-profile/bin/firefox" ]; then
 	~/.nix-profile/bin/firefox "$@"
 elif [ -e "/usr/bin/firefox" ]; then
 	/usr/bin/firefox "$@"
-elif which wslview &>/dev/null; then
-	wslview "$@"
 elif [ "$(which firefox)" != "$0" ]; then
 	firefox "$@"
 else
