@@ -1,0 +1,3 @@
+#!/bin/sh
+
+exec wezterm start --class wezterm-dropdown "$@"

@@ -53,7 +53,7 @@ return {
 	audible_bell = "Disabled",
   -- don't linger terminated process unconditionally
 	exit_behavior = "Close",
-	window_decorations = "RESIZE|INTEGRATED_BUTTONS",
+	window_decorations = "NONE",
   font = wezterm.font("Hack"),
   color_scheme = "Dracula",
   scrollback_lines = 9000,
