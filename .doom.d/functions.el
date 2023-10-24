@@ -254,6 +254,12 @@ shell exits, the buffer is killed."
 (defun my/major-mode-lang ()
   (intern (cl-first (split-string (symbol-name major-mode) "-"))))
 
+(defun my/lang-major-mode (lang)
+  (cond lang
+    (((symbolp lang) (intern (concat (symbol-name lang) "-mode"))))
+    (((stringp lang) (intern (concat lang "-mode"))))
+    ))
+
 (map!
  (:prefix "SPC i l"
   :desc "insert num log"
@@ -278,6 +284,19 @@ shell exits, the buffer is killed."
   (let ((window (get-buffer-window (buffer-name))))
     (with-current-buffer (window-buffer window)
       (set-window-point window (point-max)))))
+
+(defun my/ts-major-mode-p (mode-symbol)
+  "Check if MODE-SYMBOL has a defined tree sitter major mode."
+  (let* ((name (symbol-name mode-symbol))
+         (major-mode-symbol (intern
+                             (substring
+                              name 0
+                              (if (string-suffix-p "-ts-mode" name) 8 (if (> (length name) 5) 5 (length name)))))))
+    (and (symbolp major-mode-symbol)
+         (let ((ts-mode-symbol (intern (concat (symbol-name major-mode-symbol) "-ts-mode"))))
+           (if (fboundp ts-mode-symbol)
+               ts-mode-symbol
+             nil)))))
 
 (provide 'functions)
 (require 'functions)
