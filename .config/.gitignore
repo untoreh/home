@@ -87,3 +87,5 @@ xdg-desktop-portal-kderc
 PlasmaDiscoverUpdates
 kwallet*
 spectaclerc
+gtkrc
+gtkrc-2.0

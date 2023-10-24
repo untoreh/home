@@ -11,19 +11,6 @@ wmclass=navigator firefox
 wmclasscomplete=true
 wmclassmatch=1
 
-[2]
-Description=Wezterm drop down
-maximizehoriz=true
-maximizehorizrule=2
-minimizerule=3
-noborder=true
-noborderrule=2
-position=0,0
-positionrule=2
-wmclass=wezterm-gui org.wezfurlong.wezterm
-wmclasscomplete=true
-wmclassmatch=2
-
 [7185d541-2c99-491f-bad3-c4db18568f78]
 Description=Wezterm drop down
 desktops=\\0
@@ -38,5 +25,5 @@ wmclass=org.wezfurlong.wezterm
 wmclassmatch=1
 
 [General]
-count=2
-rules=1,2
+count=1
+rules=1
