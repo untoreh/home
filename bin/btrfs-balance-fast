@@ -1,0 +1,8 @@
+#!/bin/sh
+
+block=${1:-\/}
+exec btrfs balance start \
+	-dusage=50 \
+	-dlimit=4 \
+	-musage=50 \
+	-mlimit=16 $block
