@@ -18,7 +18,6 @@
   (load! "icons")
   (load! "capes")
   (load! "bindings")
-  (load! "copilot")
   ;; FIXME: basic completion style causes infinite recursion
   ;; (setq-hook! 'evil-insert-state-entry-hook
   ;;   completion-styles '(basic))

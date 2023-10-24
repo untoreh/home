@@ -26,7 +26,7 @@
 (let ((battery-info (battery)))
   (when (and (stringp battery-info)
              (string-match-p "^Power N/A" (battery)))
-    (display-battery-mode 1)))
+    (display-battery-mode -1)))
 
 (setq org-directory "~/org/")
 
@@ -54,9 +54,6 @@
   )
 
 (setq-default docker-tramp-use-names t)
-(use-package! vterm
-  :config
-  (setq vterm-kill-buffer-on-exit nil))
 
 (setq-default display-line-numbers-type t)
 
@@ -108,7 +105,7 @@
 (put 'enable-local-eval 'risky-local-variable nil)
 
 ;; FIXME:
-(setq dired-omit-files "")
+;; (setq dired-omit-files "")
 
 ;; tramp
 ;; (setq-default

@@ -1,9 +1,5 @@
 ;;; ../../../var/home/fra/.doom.d/langs/lsp.el -*- lexical-binding: t; -*-
 
-(after! (lsp-mode rx)
-  (setq lsp-enable-file-watchers nil)
-  (pushnew! lsp-file-watch-ignored-directories (rx "\\/home\\/fra")))
-
 ;; dap
 (defun dap/debug-re ()
   (interactive)
@@ -15,9 +11,13 @@
   :if (and (modulep! :tools lsp)
 	   (not (modulep! :tools lsp +eglot)))
   :config
+  (after! rx
+    (setq lsp-enable-file-watchers nil)
+    (pushnew! lsp-file-watch-ignored-directories (rx "\\/home\\/fra")))
   (put 'lsp-restart 'safe-local-variable (lambda (&rest args) t))
   (setq
    ;; workspace
+   +lsp-defer-shutdown 300
    lsp-keep-workspace-alive t
    ;; for performance
    lsp-restart 'interactive
@@ -65,5 +65,5 @@
     )
   (when (modulep! :ui treemacs +lsp)
     (after! treemacs
-      (lsp-treemacs-sync-mode 1)))
+      (lsp-treemacs-sync-mode +1)))
   )

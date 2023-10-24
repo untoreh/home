@@ -54,38 +54,46 @@
 ;; misc
 ;; (package! aio)
 (package! devdocs :recipe (:host github :repo "astoff/devdocs.el"))
-(package! gptel)
+
+;; aichat
 (package! emacs-websocket :recipe (:host github :repo "ahyatt/emacs-websocket"))
 (package! promise)
 (package! async-await)
 (package! aichat :recipe (:host github :repo "xhcoding/emacs-aichat"))
-;; aggressive-indent is very slow
-;; (package! aggressive-indent)
-;; (package! gcmh-mode :disable nil)
+;; codeium
+(package! codeium :recipe (:host github :repo "Exafunction/codeium.el"))
 
 ;; HOTFIX
 ;; (unpin! compat evil vertico cape pdf-tools)
 ;; HOTFIX (mu4e)
-(unpin! evil-collection link-hint)
-(after! popup
-  (set-popup-rule! "^\\*mu4e-\\(main\\|headers\\)\\*" :ignore t))
-
+;; (unpin! evil-collection link-hint dirvish)
+;; (after! popup
+;;   (set-popup-rule! "^\\*mu4e-\\(main\\|headers\\)\\*" :ignore t))
 
 ;; completion
 (package! corfu :recipe (:includes (corfu-indexed corfu-quick) :files (:defaults "extensions/corfu-*.el")))
 (package! cape :recipe (:host github :repo "minad/cape"))
 (package! corfu-doc :recipe (:host github :repo "galeo/corfu-doc"))
-                                        ;(package! copilot :recipe (:host github :repo "zerolfx/copilot.el" :files ("dist" "copilot.el")))
 (package! kind-icon)
+(package! hydra-posframe :recipe
+  (:host nil
+   :repo "https://github.com/Ladicle/hydra-posframe"))
+(package! vertico-posframe)
+(package! aas :recipe (:host github :repo "ymarco/auto-activating-snippets"))
 
 ;; langs
-(package! poly-markdown :recipe
-  (:host github :repo "polymode/poly-markdown"))
-(package! poly-org :recipe
-  (:host github :repo "polymode/poly-org"))
-(package! tree-sitter)
-(package! tree-sitter-langs)
-;; (package! string-inflection :pin "50ad549")
+(when (modulep! :tools org +poly)
+  (package! poly-markdown
+    :recipe
+    (:host github :repo "polymode/poly-markdown"))
+  (package! poly-org
+    :recipe
+    (:host github :repo "polymode/poly-org")))
+(package! emacs-refactor :recipe (:host nil
+                                  :repo "https://github.com/Wilfred/emacs-refactor"))
+
+;; nim
+(package! nim-mode :pin "2cdbdf10d504d8ff4db7a655276e3c554043ac14")
 
 ;; julia
 (if (modulep! :lang julia)
@@ -110,9 +118,11 @@
       (if (modulep! :lang julia +snail)
           (package! julia-snail))
       ))
+
 ;; shell
 (package! fish-mode)
-(package! powershell)
+(package! powershell
+  :ignore wslp)
 (package! nushell-mode :recipe (:host github :repo "azzamsa/emacs-nushell"))
 
 ;; jupyter
@@ -122,53 +132,28 @@
 (package! zmq)
 
 ;; graphics
+;; (package! nyan-mode)
 (package! parrot)
 (package! info-colors)
-(package! indent-guides :recipe (:host github :repo "jdtsmith/indent-bars"))
-;; (package! nyan-mode)
-;;
-
-;; org
-(package! valign)
-;; (package! org-pretty-tags)
-(package! ox-gfm)
-(package! org-tanglesync :recipe (:host nil
-                                  :repo "https://gitlab.com/mtekman/org-tanglesync.el"
-                                  :files ("*.el")))
-(package! org-appear :recipe (:host github :repo "awth13/org-appear")
-  :pin "8dd1e564153d8007ebc4bb4e14250bde84e26a34")
-(package! org-pretty-table
-  :recipe (:host github :repo "Fuco1/org-pretty-table") :pin "7bd68b420d3402826fea16ee5099d04aa9879b78")
-(package! org-modern)
-
-;; (package! org-ol-tree :recipe (:host github :repo "Townk/org-ol-tree")
-;;   :pin "207c748aa5fea8626be619e8c55bdb1c16118c25")
-;; (package! org-transclusion)
-
-(package! emacs-refactor :recipe ( :host nil
-                                         :repo "https://github.com/Wilfred/emacs-refactor"))
-;; which-key-posframe is VERY slow
-;; (package! which-key-posframe)
-(package! hydra-posframe :recipe ( :host nil
-                                         :repo "https://github.com/Ladicle/hydra-posframe"))
-(package! caddyfile-mode)
-(package! ahk-mode)
-(package! vimrc-mode)
-(package! systemd)
-;; nim
-(package! nim-mode :pin "744e076f0bea1c5ddc49f92397d9aa98ffa7eff8")
-;; (package! flycheck-nim) ;; it is as bad as a perma crashing nimsuggest
-
-(package! gif-screencast)
-(package! vertico-posframe)
-;; VLF
-(package! vlf
-  :recipe (:host github :repo "m00natic/vlfi" :files ("*.el"))
-  :disable t)
-
-(package! rotate)
+;; TODO: check back on newer emacs versions (>29.1)
+;; (package! indent-guides :recipe (:host github :repo "jdtsmith/indent-bars"))
 (when (modulep! :email mu4e)
   (package! mu4e-views))
+
+
+;; org
+(package! ox-gfm)
+(package! org-appear :recipe (:host github :repo "awth13/org-appear")
+  :pin "8dd1e564153d8007ebc4bb4e14250bde84e26a34")
+(package! org-transclusion)
+(package! org-modern)
+
+;; misc
+(package! caddyfile-mode)
+(package! vimrc-mode)
+(package! systemd)
+(when wslp
+  (package! ahk-mode))
 
 ;; TODO: managing services with prodigy is nice especially on WSL
 ;; but I would prefer if the `init' would be a separate emacs instance with only
@@ -176,20 +161,11 @@
 ;; interact with processes
 ;; (package! prodigy)
 
-;; adds colors to info docs buffers :pin "47ee73cc19b1049eef32c9f3e264ea7ef2aaf8a5"
-(package! info-colors)
-
-;; shows keychords in the modeline :pin "04ba7519f34421c235bac458f0192c130f732f12"
 (package! keycast)
+(package! gif-screencast)
 
 ;; ebooks
 (package! restclient)
 (package! calibredb :recipe (:host github :repo "chenyanming/calibredb.el" :branch "opds"))
 (package! arxiv-mode :recipe (:host github :repo "fizban007/arxiv-mode"))
 (package! nov)
-
-;; FIXME: vterm workaround
-;; (package! vterm :recipe
-;;   (:host github
-;;    :repo "blahgeek/emacs-libvterm"
-;;    :branch "fix-visibility"))

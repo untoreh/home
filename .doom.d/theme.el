@@ -6,7 +6,6 @@
 
 
 (load! "missing-fonts")
-(load! "ligatures")
 
 (setq doom-theme 'doom-dracula
       doom-dracula-brighter-modeline t
@@ -44,9 +43,6 @@
  x-stretch-cursor t)
 
 ;; posframe
-;; (use-package! which-key-posframe
-;;   :config
-;;   (which-key-posframe-mode))
 (use-package! hydra-posframe
   :config
   (setq hydra-posframe-poshandler #'posframe-poshandler-frame-bottom-center)
@@ -56,24 +52,17 @@
 (size-indication-mode t)
 ;; use tooltips
 (tooltip-mode t)
-(setq
- ;; don't use gtk tooltips because of no face attrs
- x-gtk-use-system-tooltips nil
- )
-
-(use-package! valign
-  :defer
-  :init
-  (if (boundp #'valign-remove-advice)
-      (valign-remove-advice))
-  :hook ((org-mode-hook markdown-mode-hook) . valign-mode))
+;; (setq
+;;  ;; don't use gtk tooltips because of no face attrs
+;;  x-gtk-use-system-tooltips nil
+;;  )
 
 ;;
 ;; https://github.com/hlissner/doom-emacs/issues/2967
-(after! doom-dracula-theme
-  (custom-set-faces!
-    '(mode-line :family "Input Mono Condensed" :height 0.99)
-    '(mode-line-inactive :family "Input Mono Condensed" :height 0.99))
+;; (after! doom-dracula-theme
+;;   (custom-set-faces!
+;;     '(mode-line :family "Input Mono Condensed" :height 0.99)
+;;     '(mode-line-inactive :family "Input Mono Condensed" :height 0.99))
   ;; (add-hook! 'doom-modeline-mode-hook
   ;;   (let ((char-table char-width-table))
   ;;     (while (setq char-table (char-table-parent char-table)))
@@ -90,7 +79,7 @@
   ;; (doom-modeline-def-modeline 'main
   ;;     '(bar matches buffer-info remote-host buffer-position parrot selection-info)
   ;;     '(misc-info minor-modes checker input-method buffer-encoding major-mode process vcs "  "))
-  )
+  ;; )
 
 ;; candidates window
 (use-package! vertico-posframe
@@ -116,9 +105,6 @@
 
 ;; doc colors
 (use-package! info-colors
-  :defer
-  :after-call Info-mode
-  :hook '(Info-selection-hook . info-colors-fontify-node)
   :commands (info-colors-fontify-node))
 (add-hook 'Info-selection-hook 'info-colors-fontify-node)
 
@@ -141,10 +127,10 @@
       (setq global-mode-string (remove '("" mode-line-keycast " ") global-mode-string))))
   (custom-set-faces!
     '(keycast-command :inherit doom-modeline-debug
-      :height 0.9)
+                      :height 0.9)
     '(keycast-key :inherit custom-modified
-      :height 1.1
-      :weight bold)))
+                  :height 1.1
+                  :weight bold)))
 
 ;; NOTE: gif-screencast needs support for WSL, as a windows-side binary
 ;; has to be used for screen recording
@@ -168,13 +154,6 @@
   (after! (vterm functions)
     (pushnew! emojify-inhibit-in-buffer-functions #'my/repl-vterm-bufferp)
     (pushnew! emojify-inhibit-major-modes #'vterm-mode)))
-
-;; HACK: hide modeline in vterm buffer
-(after! vterm
-  ;; (add-hook! '(vterm-mode-hook helpful-mode special-mode)
-  ;;   (run-at-time 0 nil #'doom-themes-hide-modeline)
-  ;;   )
-  )
 
 ;; (use-package! indent-bars
 ;;   :hook ((prog-mode text-mode conf-mode) . indent-bars-mode)

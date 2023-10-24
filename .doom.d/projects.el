@@ -91,6 +91,19 @@
       (lambda (file) (my/toggle-session-timer (f-base file) t)))
     ))
 
+;; save magit buffers
+;; this doesn't work because problems with lexical scope
+;; https://github.com/hlissner/doom-emacs/issues/3558
+;; (after! (persp-mode magit)
+;;   :if (and nil (modulep! :ui workspaces))
+;;   :config
+;;   (persp-def-buffer-save/load
+;;    :mode 'magit-status-mode :tag-symbol 'def-magit-status-buffer
+;;    :save-vars '(major-mode default-directory)
+;;    :after-load-function (lambda (b &rest _)
+;;                           (with-current-buffer b (magit-refresh)))))
+
+
 (defvar my/previous-project-root nil "The previously known (projectile) project root.")
 
 (defun my/set-project-dir () (let ((root (projectile-project-root)))

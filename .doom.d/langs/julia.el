@@ -8,8 +8,8 @@
   lsp-auto-guess-root nil
   orderless-component-separator "" ;; Splits on every char. Allows "AbS" to match "AbstractString"
   )
-(after! julia-mode
-  (set-popup-rule! "^\\*julia:" :height 25 :quit t :select nil)
+(use-package! julia-mode
+  :init
   (when (modulep! :lang julia +lsp)
     (add-hook! julia-mode #'lsp))
   (add-hook! 'julia-mode-hook
@@ -19,17 +19,28 @@
     ;;             lsp-folding-range-limit 100
     ;;             lsp-response-timeout 300)
     )
+  :config
+  (set-popup-rule! "^\\*julia:" :height 25 :quit t :select nil)
   ;; Ensure lsp is always active if lsp-mode is enabled
   (add-hook! '(doom-switch-buffer-hook doom-switch-window-hook)
     (when (and (member major-mode '(julia-ts-mode julia-mode))
                (eq lsp-mode t)
                (not lsp-buffer-uri)
                (doom-visible-buffer-p (current-buffer)))
-      (lsp))))
+      (lsp)))
+  ;; Not used: julia-ob, julia-snail, julia-proto
+  (load! "julia-repl")
+  (load! "julia-franklin")
+  ;; julia projects file
+  (after! projectile
+    ;; (appendq! projectile-project-root-files '("Project.toml" "JuliaProject.toml"))
+    (setq-hook! 'julia-mode-hook projectile-project-test-cmd
+                "julia --startup-file=no --project=test/ test/runtests.jl --test-args '' ")
+    ))
 
 ;; julia-ts-mode
 (use-package! julia-ts-mode
-  :if (featurep! :lang julia)
+  :if (modulep! :lang julia)
   :mode "\\.jl$"
   :config
   (add-hook! (julia-mode julia-ts-mode) #'lsp)
@@ -82,15 +93,4 @@
   ;;     (pushnew! lsp-julia-flags flag)
   ;;     (setq-default lsp-julia-flags lsp-julia-flags)))
   ;; (setq lsp-julia-command "~/.julia/sysimage/compiled/bin/julia")
-  )
-
-;; Not used: julia-ob, julia-snail, julia-proto
-(load! "julia-repl")
-(load! "julia-franklin")
-
-;; julia projects file
-(after! projectile
-  ;; (appendq! projectile-project-root-files '("Project.toml" "JuliaProject.toml"))
-  (setq-hook! 'julia-mode-hook projectile-project-test-cmd
-              "julia --startup-file=no --project=test/ test/runtests.jl --test-args '' ")
   )

@@ -6,6 +6,11 @@
   :config
   (dired-async-mode t))
 
+(map! :mode emacs-lisp-mode
+      :localleader
+      :desc "compile and load buffer"
+      "e B" #'emacs-lisp-native-compile-and-load)
+
 ;; Quickly close and reopen a file
 (defun save-close-reopen-file ()
   (interactive)
@@ -18,28 +23,18 @@
           (kill-buffer (buffer-base-buffer (current-buffer)))
           (find-file tmp)))))
 
-;; ranger doesn't show hidden files by default
-(setq ranger-show-hidden t)
-
-
-;; spell
-(after! spell-fu
-  ;; disable by default
-  (global-spell-fu-mode -1)
-  ;; default is 0.25
-  (setq spell-fu-idle-delay 1.0))
 ;; wayland clipboard support
 ;; this makes sense only if we check on each frame creation
 ;; (if (and (display-graphic-p) (equal (pgtk-backend-display-class) "GdkWaylandDisplay"))
 ;; just check for env vars and run once per server start
-(when (getenv "WSLENV")
+(when wslp
   ;; shouldn't be needed since wslg 1.0.0.26
   (if (and nil (getenv "WAYLAND_DISPLAY"))
       (progn
         (setq wl-copy-process nil)
         (comp-defun wl-copy (text)
-                    (setq wl-copy-process (make-process :name "wl-copy"
-                                                        :buffer nil
+            (setq wl-copy-process (make-process :name "wl-copy"
+                                                :buffer nil
                                                         ;; :command '("wl-copy" "-f" "-n")
                                                         :command '("wex" "clip.exe")
                                                         :connection-type 'pipe))
@@ -65,37 +60,23 @@
   ;; (define-localleader-key!)
   ;; use custom temporary directory with WSL since there are permission problems with /tmp
   ;; NOTE: ensure trailing slash /
-  (setq temporary-file-directory "/run/upper/"))
+  (setq temporary-file-directory "/run/upper/")sl)
 
 ;; use wslview as program (TODO: check wslu utils is installed in wsl doom PR)
-(setq browse-url-generic-program (cond ((executable-find "wslview"))
-                                       ((executable-find "firefox"))))
-;; weechat
-(use-package! weechat
-  :defer
-  :commands (weechat-connected-p
-             weechat-connect)
-  :config
-  ;; (setq weechat-completing-read-function
-  ;;       #'completing-read)
-  )
-(map! :desc "Start weechat"
-      :after (:app weechat)
-      :leader
-      :nev "o c"
-      (cmd!
-       (when (not (weechat-connected-p))
-         (weechat-connect "localhost" 9000 nil 'plain t)
-         (weechat-auto-monitor))
-       (weechat-switch-buffer
-        ;; NOTE: universal arg to list also un-monitored buffers ("SPC u SPC o c")
-        (cl-first (list (weechat--read-channel-name (not current-prefix-arg)))))))
+(setq browse-url-generic-program
+      (cond ((and wslp (executable-find "wslview")))
+            ((executable-find "firefox"))))
 
 ;; not prompt for vterm compilation
-(when (modulep! :term vterm)
+(use-package! vterm
+  :if (modulep! :term vterm)
+  :config
   (setq vterm-always-compile-module t
+        vterm-kill-buffer-on-exit nil
         ;; make vterm buffer updates a little faster
-        vterm-timer-delay 0.033)
+        vterm-timer-delay 0.033
+        evil-collection-vterm-send-escape-to-vterm-p t
+        )
   ;; this make vterm stop autosrolling after in evil normal state
   ;; however it stops the vterm process...
   ;; (after! evil
@@ -105,65 +86,24 @@
   ;;     (add-hook! 'evil-normal-state-entry-hook (vterm-copy-mode 1))
   ;;     (add-hook! 'evil-normal-state-exit-hook (vterm-copy-mode -1))
   ;;     ))
+  ;; inserting inside a vterm should reset cursor position
+  (map! :mode vterm-mode
+        :n "o" (cmd!
+                (vterm-reset-cursor-point)
+                (evil-collection-vterm-insert)))
+  ;; Override a bunch of keybindings during insert state in vterm to be more term friendly
+  (defadvice! vterm-mappings () :after #'vterm-mode
+    (map!
+     (:mode vterm-mode
+      :i "C-j" #'vterm-send-down
+      :i "C-k" #'vterm-send-up)
+     (:mode vterm-mode
+      :map evil-insert-state-map
+      "S-TAB" nil
+      "<backtab>" nil)))
+  ;; FIXME: ?
+  (map! :map vterm-mode
+        (:leader "C-c"
+         :i "C-c" #'vterm-send-C-c))
   )
 
-;; save magit buffers
-;; this doesn't work because problems with lexical scope
-;; https://github.com/hlissner/doom-emacs/issues/3558
-;; (after! (persp-mode magit)
-;;   :if (and nil (modulep! :ui workspaces))
-;;   :config
-;;   (persp-def-buffer-save/load
-;;    :mode 'magit-status-mode :tag-symbol 'def-magit-status-buffer
-;;    :save-vars '(major-mode default-directory)
-;;    :after-load-function (lambda (b &rest _)
-;;                           (with-current-buffer b (magit-refresh)))))
-
-(map! :mode emacs-lisp-mode
-      :localleader
-      :desc "compile and load buffer"
-      "e B" #'emacs-lisp-native-compile-and-load)
-
-;; garbage collector mode
-;; (use-package! gcbal
-;;   ;; apply after undo-tree-mode since it ovverrides `post-gc-hook'
-;;   :after-call undo-tree-mode
-;;   :if nil
-;;   :init
-;;   (defun gcmh-mode (&rest args))
-;;   (defun gcmh-set-high-threshold (&rest args))
-;;   :config
-;;   (when (not (subrp (symbol-function #'gcbal-mode)))
-;;     (native-compile-async (locate-library "gcbal") t t))
-;;   (setq
-;;    gcbal-verbose nil
-;;    gcbal-target-gctime 0.1
-;;    gcbal-target-auto t)
-;;   (gcbal-mode 1))
-
-(when t
-  ;; Pulled from gcbal to use standalone
-  (defvar gcbal--gcfun (symbol-function #'garbage-collect))
-  (defconst gcbal--stub
-    (lambda () '((conses 16 0 0)
-                 (symbols 48 0 0)
-                 (strings 32 0 0)
-                 (string-bytes 1 0)
-                 (vectors 16 0)
-                 (vector-slots 8 0 0)
-                 (floats 8 0 0)
-                 (intervals 56 0 0)
-                 (buffers 0 0))))
-  (defun my/nogc (func &rest args)
-    (unwind-protect
-        (progn
-          (fset #'garbage-collect gcbal--stub)
-          (if (null args)
-              (funcall func)
-            (funcall func args)))
-      (fset #'garbage-collect gcbal--gcfun)))
-  (defadvice! gc-override (func &rest args) :around #'save-buffer
-    (my/nogc func args))
-  (defadvice! gc-override (func &rest args) :around #'+format/region-or-buffer
-    (my/nogc func))
-  )

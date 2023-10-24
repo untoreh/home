@@ -1,6 +1,6 @@
 ;;; completion/icons.el -*- lexical-binding: t; -*-
 
-(with-eval-after-load 'all-the-icons
+(after! all-the-icons
     (defvar kind-all-the-icons--cache nil
       "The cache of styled and padded label (text or icon).
 An alist.")

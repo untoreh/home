@@ -2,6 +2,7 @@
 
 (set-file-template! ".*/blog/posts/.+\\.md$" :trigger "blog_post" :project t)
 
+(require 'aio)
 (aio-defun julia-franklin ()
   (interactive)
   "Start the franklin live server in the current default-dir"

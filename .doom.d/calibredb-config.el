@@ -253,9 +253,6 @@
                     (calibredb-getattr cand :id) `(("title" . ,new-title)))
                    (calibredb-search-refresh-or-resume)))))))
 
-;; calibredb
-(map! :desc "calibredb" :leader "o l" #'calibredb)
-
 (map! :map calibredb-search-mode-map
       ;; :ne "C" #'calibredb-set-custom-at-point
       :ne "M-r" (cmd! (calibredb-toggle-tag-at-point "read"))

@@ -62,12 +62,6 @@
        )
       )
 
-;; inserting inside a vterm should reset cursor position
-(map! :mode vterm-mode
-      :n "o" (cmd!
-              (vterm-reset-cursor-point)
-              (evil-collection-vterm-insert)))
-
 ;; parrot
 (after! parrot-mode
   (map!
@@ -102,46 +96,6 @@
      :localleader
      :desc "Exit edit" :n "'" #'org-edit-src-exit))
 
-;; evil align lines
-(map!
- :after evil-lion
- :n "g a" #'evil-lion-left
- :n "g A" #'evil-lion-right
- :n "g l" nil
- :n "g L" nil)
-
-;; evil bindings in the minibuffer
-;; (setq evil-collection-setup-minibuffer t)
-
-;; org
-(after! evil-org
-  (defun org-babel-exec-next-block ()
-    (interactive)
-    (org-babel-execute-src-block)
-    (org-babel-next-src-block))
-  (defun org-babel-exec-previous-block ()
-    (interactive)
-    (org-babel-execute-src-block)
-    (org-babel-previous-src-block))
-  (defun org-babel-exec-to-point ()
-    (interactive)
-    (let ((p (point-marker)))
-      (set-marker-insertion-type p t)
-      (catch 'done
-        (org-babel-map-src-blocks nil
-          (progn
-            (when (> (point) p)
-              (throw 'done t))
-            (org-babel-execute-src-block))))
-      (goto-char p)
-      (set-marker p nil))))
-
-(map! :after org
-      :map evil-org-mode-map
-      :leader
-      :desc "tangle" :n "ct" #'org-babel-tangle
-      :desc "hydra org babel" :n "," #'hydra/org-babel/body)
-
 ;; HYDRA
 (use-package! hydra
   :commands (hydra/window-nav/body hydra-macro/body)
@@ -160,22 +114,6 @@
       :desc "Quick Calc"
       :leader
       :nev "o c" #'quick-calc)
-
-(map! :after org
-      (:leader
-       :prefix ("io" . "org")
-       :mode org-mode
-       :desc "src block name"
-       :n "n" (cmd!
-               (if (org-in-src-block-p)
-                   (progn
-                     (org-babel-goto-src-block-head)
-                     (previous-line)
-                     (newline)))
-               (insert "#+NAME: ")
-               (evil-insert nil))
-       :desc "src block header arg"
-       :n "i" #'org-babel-insert-header-arg))
 
 ;; JULIA
 (map! :after julia-mode
@@ -252,6 +190,17 @@
                   "C-w" nil
                   "C-h" nil))))
 
+;; evil align lines
+(map!
+ :after evil-lion
+ :n "g a" #'evil-lion-left
+ :n "g A" #'evil-lion-right
+ :n "g l" nil
+ :n "g L" nil)
+
+;; evil bindings in the minibuffer
+;; (setq evil-collection-setup-minibuffer t)
+
 ;; still want to escape from terminals
 (after! evil-escape
   (setq evil-escape-excluded-major-modes
@@ -260,15 +209,6 @@
 (map! :leader
       :desc "Re-open the current file"
       :n "bR" #'save-close-reopen-file)
-
-(map! :mode org-mode
-      :after org
-      :leader
-      :desc "font lock ensure on"
-      :n "t t" (cmd!
-                (font-lock-mode 1)
-                (font-lock-ensure)
-                (font-lock-mode 1)))
 
 ;; smartparens toggle motion beginning and end of current bracket enclosing;
 ;; we don't want to move within quotes so delete them from smartparens pairs
@@ -300,34 +240,3 @@
   (map! :desc "Back and forth between current paren enclosing"
         :n "g \\" #'my/move-to-current-parent-toggle))
 
-;; weechat
-(map! :desc "Start weechat"
-      :after weechat
-      :leader
-      :nev "o c"
-      (cmd!
-       (when (not (weechat-connected-p))
-         (weechat-connect "localhost" 9000 nil 'plain t)
-         (weechat-auto-monitor))
-       (weechat-switch-buffer
-        (cl-first (list (weechat--read-channel-name (not current-prefix-arg)))))))
-
-;; Override a bunch of keybindings during insert state in vterm to be more term friendly
-(defadvice! vterm-mappings () :after #'vterm-mode
-  (map!
-   (:mode vterm-mode
-    :i "C-j" #'vterm-send-down
-    :i "C-k" #'vterm-send-up)
-   (:mode vterm-mode
-    :map evil-insert-state-map
-    "S-TAB" nil
-    "<backtab>" nil)))
-
-(after! vterm
-  (setq evil-collection-vterm-send-escape-to-vterm-p t)
-  ;; FIXME: ?
-  (map! :map vterm-mode
-        (
-         :leader "C-c"
-         :i "C-c" #'vterm-send-C-c
-         )))

@@ -11,7 +11,7 @@
   (load! "bindings")
   (load! "theme")
   (load! "text")
-  (load! "org")
+  (load! "org/org")
   (load! "mail")
   (load! "completion/init")
   (load! "langs/langs")

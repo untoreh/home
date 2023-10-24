@@ -2,10 +2,9 @@
 
 (setq enabled-langs '(python rust julia racket raku json markdown org emacs-lisp))
 
-
-(load! "tree-sitter")
 (load! "lisp")
-(load! "spell")
+(add-transient-hook! 'text-mode
+  (load! "spell"))
 (load! "gpt")
 (if (modulep! :lang shell)
     (load! "shell"))
@@ -43,14 +42,15 @@
                      python-mode))
     (pushnew! +format-on-save-enabled-modes mode)))
 
-;; flycheck
-(after! flycheck-posframe
-  (setq flycheck-posframe-border-width 5)
-  (flycheck-posframe-configure-pretty-defaults)
-  )
-
 ;; ;; make compilation buffers follow
 (add-hook! (compilation-mode nim-compile-mode)
   (set (make-local-variable 'window-point-insertion-type) t))
 
-;; (use-package! string-inflection)
+(use-package! aas
+  :config
+  (when (modulep! :lang julia)
+    (add-hook! julia-mode #'aas-activate-for-major-mode)
+    (aas-set-snippets 'julia-mode
+                      ;; expand unconditionally
+                      "^@d" "@doc \"\"\"\n\"\"\""
+                      )))

@@ -17,6 +17,7 @@
 ;; compile lsp-mode with plists support
 (setenv "LSP_USE_PLISTS" "1")
 (setq lsp-use-plists t)
+(setq wslp (getenv "WSLENV"))
 
 (doom! :input
        ;;
@@ -36,7 +37,7 @@
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        hydra
        indent-guides     ; highlighted indent columns
-       (ligatures +fira)         ; ligatures and symbols to make your code pretty again
+       (ligatures +fira +extra)         ; ligatures and symbols to make your code pretty again
        ;; minimap
        (modeline)          ; snazzy, Atom-inspired modeline, plus API
        nav-flash         ; blink cursor line after big motions
