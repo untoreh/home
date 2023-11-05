@@ -1,0 +1,11 @@
+[Unit]
+Description=Tor
+
+[Service]
+ExecStart=/usr/bin/toolbox run /usr/bin/tor -f %h/.config/torrc
+Restart=on-failure
+TimeoutStopSec=10
+Type=simple
+
+[Install]
+WantedBy=default.target

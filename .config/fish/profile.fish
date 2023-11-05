@@ -1,5 +1,5 @@
 # TERM
-[ -z "$TMUX" ] && set -x TERM xterm-256color || set -x TERM tmux-256color
+# [ -z "$TMUX" ] && set -x TERM xterm-256color || set -x TERM tmux-256color
 
 # shell
 if test (string replace -r 'fish$' "" $SHELL) != $SHELL
@@ -31,6 +31,14 @@ if [ -z "$INSIDE_EMACS" ]
         # echo "set PATH "(string sub -s 6 (read < $path_common)) >$path_fish
         source $path_fish
     end
+end
+
+# wezterm
+if which wezterm &>/dev/null;
+	if [ ! -e /tmp/.cache/wezterm ]
+		wezterm shell-completion --shell fish > /tmp/.cache/wezterm
+	end
+	source /tmp/.cache/wezterm
 end
 
 ## secrets

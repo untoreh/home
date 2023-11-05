@@ -1,9 +1,9 @@
 local wezterm = require 'wezterm';
 local launch_menu = {}
 local default_prog = nil
-local distro = "arch"
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
+  local distro = "arch"
 	table.insert(launch_menu, {
                  label = "PowerShell",
                  args = {"powershell.exe", "-NoLogo"},
@@ -11,6 +11,7 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
   default_prog = {"wsl.exe", "-d", distro, "-e", "bash", "-c",
                   "{ [ -f /tmp/.mounted ] || /etc/wsl-mount.sh; } && SHELL=fish exec fish -li -C ~/"}
 else
+  local distro = "fedora"
   default_prog = {"/usr/bin/toolbox", "run", "fish", "-li"}
 end
 
