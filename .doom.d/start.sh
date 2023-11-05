@@ -19,12 +19,12 @@ run_emacs() {
 	if [ -v TOOLBOX_PATH ]; then
 		if [ -v SYSTEMD_EXEC_PID ]; then
 			systemdvars
-			/usr/bin/toolbox run /usr/bin/emacs $@
+			exec /usr/bin/toolbox run /usr/bin/emacs $@
 		else
-			/usr/bin/emacs $@
+			exec /usr/bin/emacs $@
 		fi
 	else
-		/usr/bin/toolbox run /usr/bin/emacs $@
+		exec /usr/bin/toolbox run /usr/bin/emacs $@
 	fi
 }
 
