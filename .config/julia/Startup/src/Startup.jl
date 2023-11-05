@@ -99,6 +99,26 @@ function myreplinit(repl)
     debug!()
 end
 
+compilepkg(sym::Symbol, compile_file="compile.jl", precompiles_dir="precomp" ) = begin
+    @eval Main using CompileBot
+    @eval Main begin
+        name = string($(QuoteNode(sym)))
+        this_path = Base.active_project() |> dirname |> dirname
+        pkg_path = joinpath(this_path, name)
+        botconfig = BotConfig(
+            name;                            # package name (the one this configuration lives in)
+            precompiles_rootpath=joinpath(pkg_path, $precompiles_dir),
+            os=["linux"],
+            exclusions = [],        # exclude functions (by name) that would be problematic if precompiled
+            tmin=0.0
+        )
+        snoop_bot(
+            botconfig,
+            joinpath(pkg_path, $compile_file),
+        )
+    end
+end
+
 __init__() = begin
     atreplinit(myreplinit)
     atreplinit(customize_keys)
@@ -111,18 +131,18 @@ end
 const comp_task = Ref{Task}()
 const init_error = Ref{Any}()
 
-using SnoopPrecompile
+using PrecompileTools
 
 include("dev_packages.jl")
 include("revise.jl")
 
-@precompile_setup let home = ENV["HOME"]
+@setup_workload let home = ENV["HOME"]
     _activate() = begin
         cd(dirname(dirname(pathof(Startup))))
         Pkg.activate(".", io=Base.devnull)
         __init__()
     end
-    @precompile_all_calls begin
+    @compile_workload begin
         using Pkg: Pkg as Pkg
         using Revise
         if omr_enabled[]
@@ -131,7 +151,6 @@ include("revise.jl")
             using OhMyREPL.BracketInserter.Pkg.API.Operations.Registry: FileWatching
             using JuliaSyntax: JuliaSyntax
             include("precompile.jl")
-            using Requires: Requires
             _activate()
             # revise!(false)
         else
@@ -145,7 +164,7 @@ include("revise.jl")
     end
 end
 
-export display!, @show!, @keys, deletehistory!, debug!
+export display!, @show!, @keys, deletehistory!, debug!, compilepkg
 export revise!, comp_task, init_error, Revise, includet
 
 end

@@ -73,4 +73,27 @@ end
 
 mbrevise(mod) = (isdefined(Main, Symbol(mod)) && isa(mod, Module)) ? revise(mod) : revise()
 
-export revise!, comp_task, init_error, mbrevise
+function recursive_revise(path)
+    for (mod, file) in Revise.included_files
+        if occursin(path, file)
+            Revise.track(mod, file)
+        end
+    end
+end
+
+const REVISE_TASK = Ref{Task}()
+
+function recursive_revise(mod::Module)
+    @eval using Suppressor: @suppress
+    recursive_revise(dirname(pathof(mod)))
+    if isassigned(REVISE_TASK) && !istaskdone(REVISE_TASK[])
+        Base.throwto(REVISE_TASK[], InterruptException())
+    end
+    @eval REVISE_TASK[] = @async Revise.entr(String[], [$mod]) do
+        @suppress Revise.revise($mod)
+    end
+end
+
+const rrevise = recursive_revise
+
+export revise!, comp_task, init_error, mbrevise, rrevise
