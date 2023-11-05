@@ -4,6 +4,10 @@
 (require 's)
 (require 'request)
 
+(or (executable-find "calibredb") (message "ERROR: calibredb executable not found"))
+(or (my/port-openp "localhost" 8099) (message "ERROR: calibre server not listening on localhost:8099"))
+(or (executable-find "sqlite") (message "ERROR: calibredb requires sqlite, if sqlite is already installed, ensure a proper link exists (e.g. `/usr/bin/sqlite3` -> `~/bin/sqlite`)"))
+
 (defun calibredb-args (&key quotes &rest args)
   (apply #'format `(,(s-repeat (length args) (if quotes "'%s' " "%s "))
                     ,@args)))
@@ -46,13 +50,13 @@
 
 (defun calibredb-add-read-column ()
   (if-let* ((columns (calibredb-command
-                   :command "custom_columns"
-                   :library (calibredb-arg-library 'local)))
-         (cols (if (stringp columns) (split-string columns "\n") nil)))
-    (unless (stringp (catch 'match
-                       (mapc (lambda (x) (and (string-prefix-p "read_status" x)
-                                         (throw 'match x))) cols)))
-      (calibredb-add-column "read_status" "Read Status" "bool"))))
+                      :command "custom_columns"
+                      :library (calibredb-arg-library 'local)))
+            (cols (if (stringp columns) (split-string columns "\n") nil)))
+      (unless (stringp (catch 'match
+                         (mapc (lambda (x) (and (string-prefix-p "read_status" x)
+                                                (throw 'match x))) cols)))
+        (calibredb-add-column "read_status" "Read Status" "bool"))))
 
 
 (defun calibredb-set-custom (column id value)
@@ -111,7 +115,7 @@
 ;;                                          (read-string (if (> num 0)
 ;;                                    (concat "Set " field " for " (number-to-string num) " items: ")
 ;;                                  (concat prompt id " " title ": ") ) init))
-    ;; )
+;; )
 ;; (cond ((equal major-mode 'calibredb-show-mode)
 ;;              (calibredb-show-refresh))
 ;;             ((eq major-mode 'calibredb-search-mode)
@@ -174,8 +178,8 @@
   (require 'org-ref-arxiv)
   ;; override mapc to avoid using `calibredb-command' to set metadata
   (let* ((cand (car (calibredb-find-candidate-at-point)))
-        (id (calibredb-getattr cand :id))
-        (title (calibredb-getattr cand :book-title)))
+         (id (calibredb-getattr cand :id))
+         (title (calibredb-getattr cand :book-title)))
     (cond
      ((calibredb-arxiv-id-p title)
       (let ((metadata (cdar (calibredb-arxiv-metadata title))))
@@ -201,7 +205,7 @@
   (let ((file (read-file-name "Add a file to Calibre: " calibredb-download-dir)))
     (calibredb-counsel-add-file-action arg file)
     (delete-directory (my/concat-path calibredb-download-dir
-                              (file-name-base file) ".sdr") t))
+                                      (file-name-base file) ".sdr") t))
   (if (equal major-mode 'calibredb-search-mode)
       (calibredb-search-refresh-or-resume)))
 
@@ -347,7 +351,7 @@
 
 ;; additional packages
 (use-package! arxiv-mode
-	      :defer)
+  :defer)
 (map! :mode arxiv-mode
       :localleader
       :ne "n" #'arxiv-read-new
@@ -412,8 +416,6 @@
 ;;               (:lang_code ,(seq-elt (alist-get 'languages book-data) 0))))
 ;;           candidates))
 ;;   candidates)
-
-
 
 (provide 'calibredb-config)
 ;; calibredb-config ends here

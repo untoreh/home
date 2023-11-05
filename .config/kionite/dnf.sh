@@ -13,5 +13,6 @@ install enchant2 aspell aspell-en aspell-it
 install pipenv
 install jre
 install autoconf automake gcc libpng-devel make poppler-devel poppler-glib-devel zlib-devel pkgconf
-run
+install sqlite nc
 install npm
+run

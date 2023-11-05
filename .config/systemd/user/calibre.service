@@ -1,0 +1,11 @@
+[Unit]
+Description=Calibre Content Server
+
+[Service]
+ExecStart=/usr/bin/flatpak run --command=/app/lib/calibre/calibre-server com.calibre_ebook.calibre %h/Documents/books --port 8099 --enable-local-write
+Restart=on-failure
+TimeoutStopSec=10
+Type=simple
+
+[Install]
+WantedBy=default.target

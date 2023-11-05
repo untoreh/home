@@ -298,6 +298,16 @@ shell exits, the buffer is killed."
                ts-mode-symbol
              nil)))))
 
+(defun my/port-openp (host port)
+  "Test if PORT is open on HOST."
+  (condition-case nil
+      (progn
+        (delete-process (open-network-stream "test" nil host port))
+        t)
+    (file-error
+     nil)))
+
+
 (provide 'functions)
 (require 'functions)
 

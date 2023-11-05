@@ -1,13 +1,6 @@
-#!/usr/bin/bash -l
+#!/bin/sh
 
-. ~/.venv/bin/activate
-if pgrep -f calibre-server 2>/dev/null; then
-	supc stop calibre-server
-	echo calibre server stopped
-fi
-export CALIBRE_USE_SYSTEM_THEME=true
-export QT_QPA_PLATFORM="xcb"
-export QT_STYLE_OVERRIDE=kvantum
-#exec nixGLIntel ~/.nix-profile/bin/calibre --detach $@
-exec /usr/bin/calibre $@
-#exec nixVulkanIntel ~/.nix-profile/bin/calibre $@
+cmd=$1
+shift
+ssh -t localhost flatpak enter com.calibre_ebook.calibre /app/lib/calibre/$cmd $@
+
