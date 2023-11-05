@@ -6,8 +6,13 @@
 (setq-hook! 'julia-mode-hook
   markdown-spaces-after-code-fence 0 ;; spaces break highlightjs lang inferring (and possibly other stuff)
   lsp-auto-guess-root nil
-  orderless-component-separator "" ;; Splits on every char. Allows "AbS" to match "AbstractString"
+  ;; NOTE: causes high load (would require async json emacs fork)
+  ;; orderless-component-separator "" ;; Splits on every char. Allows "AbS" to match "AbstractString"
   )
+(add-hook! 'doom-init-ui-hook :append
+  (add-transient-hook! #'julia-repl-live-buffer
+    (set-popup-rule! "^\\*julia:" :height 25 :quit t :select nil)))
+
 (use-package! julia-mode
   :init
   (when (modulep! :lang julia +lsp)
@@ -20,7 +25,6 @@
     ;;             lsp-response-timeout 300)
     )
   :config
-  (set-popup-rule! "^\\*julia:" :height 25 :quit t :select nil)
   ;; Ensure lsp is always active if lsp-mode is enabled
   (add-hook! '(doom-switch-buffer-hook doom-switch-window-hook)
     (when (and (member major-mode '(julia-ts-mode julia-mode))
