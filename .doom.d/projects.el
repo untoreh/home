@@ -124,3 +124,12 @@
       :nvi "p l c" #'my/set-config-name
       )
 ;; (add-hook 'emacs-startup-hook #'my/restore-session)
+
+(after! envrc
+  (defvar envrc-auto-reload-paths '())
+  (add-hook! envrc-file-mode
+    (if (member (file-truename buffer-file-name) envrc-auto-reload-paths)
+        (progn
+          (add-hook! 'after-save-hook :local
+            (envrc-allow)
+            (envrc-reload-all))))))
