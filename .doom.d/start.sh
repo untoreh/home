@@ -28,4 +28,4 @@ run_emacs() {
 	fi
 }
 
-run_emacs -ib 0 -bw 0 $@
+run_emacs -mm -ib 0 -bw 0 $@
