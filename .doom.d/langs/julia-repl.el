@@ -224,6 +224,8 @@
     (let ((thing (f-base (locate-dominating-file (buffer-file-name) "Project.toml"))))
       (aio-wait-for (julia-repl-cmd (format "mbrevise(%s)" thing)))))
 
+  (set-popup-rule! "^\\*julia:" :height 25 :quit t :select nil)
+
   ;; allows subprocesses to inherit the env vars
   (after! envrc
     (inheritenv-add-advice #'julia-repl-inferior-buffer))

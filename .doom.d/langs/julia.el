@@ -9,9 +9,6 @@
   ;; NOTE: causes high load (would require async json emacs fork)
   ;; orderless-component-separator "" ;; Splits on every char. Allows "AbS" to match "AbstractString"
   )
-(add-hook! 'doom-init-ui-hook :append
-  (add-transient-hook! #'julia-repl-live-buffer
-    (set-popup-rule! "^\\*julia:" :height 25 :quit t :select nil)))
 
 (use-package! julia-mode
   :init
