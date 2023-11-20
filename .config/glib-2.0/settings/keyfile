@@ -1,5 +1,5 @@
 [org/gtk/settings/file-chooser]
-window-position=(358, 93)
+window-position=(358, 53)
 window-size=(1203, 902)
 date-format='regular'
 location-mode='path-bar'
@@ -20,14 +20,4 @@ default-folder-viewer='icon-view'
 initial-size=(890, 550)
 maximized=false
 
-[org/gnome/desktop/interface]
-gtk-theme='Dracula'
-
-icon-theme='candy-icons'
-
 cursor-size=48
-
-cursor-theme='Sweet-cursors'
-
-[org/gnome/desktop/wm/preferences]
-theme='Dracula'
