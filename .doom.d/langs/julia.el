@@ -17,9 +17,12 @@
   (add-hook! 'julia-mode-hook
     (setenv "JULIA_NUM_THREADS" (number-to-string (num-processors)))
     ;; https://github.com/doomemacs/doomemacs/commit/acae9f9acb328c46f71b4cc975abcdb95c09cee6
-    ;; (setq-local lsp-enable-folding t
-    ;;             lsp-folding-range-limit 100
-    ;;             lsp-response-timeout 300)
+    )
+  (setq-hook! julia-mode
+    lsp-enable-folding t
+    lsp-folding-range-limit 100
+    lsp-response-timeout 300
+    corfu-auto-prefix 2
     )
   :config
   ;; Ensure lsp is always active if lsp-mode is enabled
