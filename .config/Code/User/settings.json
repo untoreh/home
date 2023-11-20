@@ -5,7 +5,6 @@
         "editor.fontFamily": "'Input Mono Compressed', 'Courier New', monospace, 'Droid Sans Fallback'",
         "editor.fontSize": 15,
         "editor.lineHeight": 16,
-        "editor.renderIndentGuides": 0,
         "vscode_custom_css.imports": [
             "file:///home/fra/.config/vsc/colors.css"
         ],
@@ -100,5 +99,6 @@
             "**/CVS": true,
             "**/.DS_Store": true,
             ".tmp-projections/": true
-        }
+        },
+        "editor.guides.indentation": false
     }
