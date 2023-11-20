@@ -5,7 +5,7 @@
   (setq
    aichat-bingai-cookies-file (my/concat-path doom-user-dir "cache" "bing.json")
    aichat-bingai-assistant-buffer "*bingai*"
-   aichat-bingai-conversation-style 'creative
+   aichat-bingai-conversation-style 'precise
    aichat-bingai-chat-file (my/concat-path temporary-file-directory "chatbot-history")
    )
   (aichat-bingai-prompt-create "tests-generator"
@@ -30,10 +30,12 @@ The following is the code that should be documented:
 %s
 ```" (my/major-mode-lang) "%s"))
     (aichat-bingai-prompt-create "docs-generator"
-                                 :input-prompt "Please document this code: "
+                                 :input-prompt "Code to document:"
                                  :text-format docsgen-local-prompt
                                  :chat t
-                                 :assistant t))
+                                 :assistant t
+                                 :replace-or-insert t
+                                 ))
   (my/local-docsgen-prompt)
   (map! (:prefix ("SPC i c" . "ChatBot")
          :desc "chat"
@@ -65,6 +67,7 @@ The following is the code that should be documented:
 
   ;; if you want multiple completion backends, use cape (https://github.com/minad/cape):
   (defun my/set-codemium-capfs ()
+    (interactive)
     (setq-local completion-at-point-functions
                 (list (cape-super-capf #'codeium-completion-at-point #'lsp-completion-at-point))))
   ;; an async company-backend is coming soon!
@@ -77,22 +80,22 @@ The following is the code that should be documented:
 
   ;; :defer t ;; lazy loading, if you want
   :config
-  (setq use-dialog-box nil) ;; do not use popup boxes
+  ;; (setq use-dialog-box nil) ;; do not use popup boxes
 
   ;; if you don't want to use customize to save the api-key
   ;; (setq codeium/metadata/api_key "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx")
 
   ;; get codeium status in the modeline
-  (setq codeium-mode-line-enable
-        (lambda (api) (not (memq api '(CancelRequest Heartbeat AcceptCompletion)))))
-  (add-to-list 'mode-line-format '(:eval (car-safe codeium-mode-line)) t)
+  ;; (setq codeium-mode-line-enable
+  ;;       (lambda (api) (not (memq api '(CancelRequest Heartbeat AcceptCompletion)))))
+  ;; (add-to-list 'mode-line-format '(:eval (car-safe codeium-mode-line)) t)
   ;; alternatively for a more extensive mode-line
   ;; (add-to-list 'mode-line-format '(-50 "" codeium-mode-line) t)
 
   ;; use M-x codeium-diagnose to see apis/fields that would be sent to the local language server
-  (setq codeium-api-enabled
-        (lambda (api)
-          (memq api '(GetCompletions Heartbeat CancelRequest GetAuthToken RegisterUser auth-redirect AcceptCompletion))))
+  ;; (setq codeium-api-enabled
+  ;;       (lambda (api)
+  ;;         (memq api '(GetCompletions Heartbeat CancelRequest GetAuthToken RegisterUser auth-redirect AcceptCompletion))))
   ;; you can also set a config for a single buffer like this:
   ;; (add-hook 'python-mode-hook
   ;;     (lambda ()
@@ -100,13 +103,13 @@ The following is the code that should be documented:
 
   ;; You can overwrite all the codeium configs!
   ;; for example, we recommend limiting the string sent to codeium for better performance
-  (defun my-codeium/document/text ()
-    (buffer-substring-no-properties (max (- (point) 3000) (point-min)) (min (+ (point) 1000) (point-max))))
+  ;; (defun my-codeium/document/text ()
+  ;;   (buffer-substring-no-properties (max (- (point) 3000) (point-min)) (min (+ (point) 1000) (point-max))))
   ;; if you change the text, you should also change the cursor_offset
   ;; warning: this is measured by UTF-8 encoded bytes
-  (defun my-codeium/document/cursor_offset ()
-    (codeium-utf8-byte-length
-     (buffer-substring-no-properties (max (- (point) 3000) (point-min)) (point))))
-  (setq codeium/document/text 'my-codeium/document/text)
-  (setq codeium/document/cursor_offset 'my-codeium/document/cursor_offset)
+  ;; (defun my-codeium/document/cursor_offset ()
+  ;;   (codeium-utf8-byte-length
+  ;;    (buffer-substring-no-properties (max (- (point) 3000) (point-min)) (point))))
+  ;; (setq codeium/document/text 'my-codeium/document/text)
+  ;; (setq codeium/document/cursor_offset 'my-codeium/document/cursor_offset)
   )
