@@ -72,6 +72,9 @@
 
 ;; completion
 (package! corfu :recipe (:includes (corfu-indexed corfu-quick) :files (:defaults "extensions/corfu-*.el")))
+(package! corfu-candidate-overlay :recipe (:repo "https://code.bsdgeek.org/adam/corfu-candidate-overlay"
+                                           :includes (corfu-indexed corfu-quick)))
+
 (package! cape :recipe (:host github :repo "minad/cape"))
 (package! corfu-doc :recipe (:host github :repo "galeo/corfu-doc"))
 (package! kind-icon)
