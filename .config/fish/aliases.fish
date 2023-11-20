@@ -10,6 +10,7 @@ alias vi "nvim "
 alias pf "wl-paste"
 alias zj "zellij"
 if set -q TOOLBOX_PATH 
+	alias podman="ssh -t localhost podman"
 else
 	source ~/.config/fish/aliases-host.fish
 end

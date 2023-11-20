@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ "$(hostname)" = "toolbox" ]; then
+    cmd=$1
+    shift
+    exec ssh -t localhost "cd $PWD; exec /usr/bin/podman $cmd "$*
+else
+    exec /usr/bin/podman "$@"
+fi
