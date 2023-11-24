@@ -44,6 +44,7 @@
 
 ;; posframe
 (use-package! hydra-posframe
+  :if (display-graphic-p)
   :config
   (setq hydra-posframe-poshandler #'posframe-poshandler-frame-bottom-center)
   (hydra-posframe-mode))
@@ -63,31 +64,45 @@
 ;;   (custom-set-faces!
 ;;     '(mode-line :family "Input Mono Condensed" :height 0.99)
 ;;     '(mode-line-inactive :family "Input Mono Condensed" :height 0.99))
-  ;; (add-hook! 'doom-modeline-mode-hook
-  ;;   (let ((char-table char-width-table))
-  ;;     (while (setq char-table (char-table-parent char-table)))
-  ;;     (dolist (pair doom-modeline-rhs-icons-alist)
-  ;;       (let ((width 2)  ; <-- tweak this
-  ;;             (chars (cdr pair))
-  ;;             (table (make-char-table nil)))
-  ;;         (dolist (char chars)
-  ;;           (set-char-table-range table char width))
-  ;;         (optimize-char-table table)
-  ;;         (set-char-table-parent table char-table)
-  ;;         (setq char-width-table table))))
-  ;;   )
-  ;; (doom-modeline-def-modeline 'main
-  ;;     '(bar matches buffer-info remote-host buffer-position parrot selection-info)
-  ;;     '(misc-info minor-modes checker input-method buffer-encoding major-mode process vcs "  "))
-  ;; )
+;; (add-hook! 'doom-modeline-mode-hook
+;;   (let ((char-table char-width-table))
+;;     (while (setq char-table (char-table-parent char-table)))
+;;     (dolist (pair doom-modeline-rhs-icons-alist)
+;;       (let ((width 2)  ; <-- tweak this
+;;             (chars (cdr pair))
+;;             (table (make-char-table nil)))
+;;         (dolist (char chars)
+;;           (set-char-table-range table char width))
+;;         (optimize-char-table table)
+;;         (set-char-table-parent table char-table)
+;;         (setq char-width-table table))))
+;;   )
+;; (doom-modeline-def-modeline 'main
+;;     '(bar matches buffer-info remote-host buffer-position parrot selection-info)
+;;     '(misc-info minor-modes checker input-method buffer-encoding major-mode process vcs "  "))
+;; )
 
 ;; candidates window
 (use-package! vertico-posframe
+  :if (display-graphic-p)
   :config
   (setq vertico-posframe-parameters
         '((left-fringe . 8)
           (right-fringe . 8)))
-  (vertico-posframe-mode 1))
+  (after! vertico
+    (setq vertico-multiform-commands
+          '((consult-line
+             posframe
+             (vertico-posframe-poshandler . posframe-poshandler-frame-top-center)
+             (vertico-posframe-border-width . 10)
+             ;; NOTE: This is useful when emacs is used in both in X and
+             ;; terminal, for posframe do not work well in terminal, so
+             ;; vertico-buffer-mode will be used as fallback at the
+             ;; moment.
+             (vertico-posframe-fallback-mode . vertico-buffer-mode))
+            (t posframe)))
+    (vertico-multiform-mode 1)
+    ))
 
 ;; frame title
 (setq frame-title-format
@@ -127,10 +142,10 @@
       (setq global-mode-string (remove '("" mode-line-keycast " ") global-mode-string))))
   (custom-set-faces!
     '(keycast-command :inherit doom-modeline-debug
-                      :height 0.9)
+      :height 0.9)
     '(keycast-key :inherit custom-modified
-                  :height 1.1
-                  :weight bold)))
+      :height 1.1
+      :weight bold)))
 
 ;; NOTE: gif-screencast needs support for WSL, as a windows-side binary
 ;; has to be used for screen recording
