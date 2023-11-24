@@ -1,7 +1,5 @@
 ;;; ../../../var/home/fra/.doom.d/langs/langs.el -*- lexical-binding: t; -*-
 
-(setq enabled-langs '(python rust julia racket raku json markdown org emacs-lisp))
-
 (load! "lisp")
 (add-transient-hook! 'text-mode
   (load! "spell"))
