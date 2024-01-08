@@ -4,6 +4,7 @@ Documentation=info:emacs man:emacs(1) https://gnu.org/software/emacs/
 
 [Service]
 Environment=EMACS_SOCKET=/tmp/emacs%U/server
+Environment=WEBKIT_FORCE_SANDBOX=0
 ;Environment=SSH_AUTH_SOCK=%t/keyring/ssh
 ;Environment=GPG_TTY=$GPG_TTY
 WorkingDirectory=%h/
