@@ -8,7 +8,7 @@
 sudo rpm-ostree install --idempotent zsh fish nushell neovim \
 	starship zoxide fzf direnv bismuth \
 	texlive-noto texlive-noto-emoji texlive-fontawesome \
-	eosrei-emojione-fonts texlive-fira texlive-firamath \
+	texlive-fira texlive-firamath \
 	source-foundry-hack-fonts cormullion-juliamono-fonts \
 	powerline-fonts material-icons-fonts \
 	ffmpeg-free libavcodec-freeworld mesa-va-drivers-freeworld
