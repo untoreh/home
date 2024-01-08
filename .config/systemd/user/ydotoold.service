@@ -1,0 +1,11 @@
+[Unit]
+Description=ydotoold
+
+[Service]
+ExecStart=/bin/sh -c "exec sudo ydotoold"
+Restart=on-failure
+TimeoutStopSec=10
+Type=simple
+
+[Install]
+WantedBy=graphical-session.target
