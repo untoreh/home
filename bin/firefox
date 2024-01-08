@@ -9,6 +9,8 @@ elif [ -e "/usr/bin/firefox" ]; then
 	/usr/bin/firefox "$@"
 elif [ "$(which firefox)" != "$0" ]; then
 	firefox "$@"
+elif [ -v TOOLBOX_PATH ]; then
+	ssh localhost /usr/bin/firefox $@
 else
 	echo "firefox not installed";
 	exit 1;
