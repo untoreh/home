@@ -13,10 +13,28 @@
                                :text-format "Please identify the programming language in the input. Your answer must only contain the unit tests that test the input code. The following is the code I want you to write tests for:\n%s"
                                :assistant t)
 
+  (when (modulep! :lang julia)
+    (setq julia-docsgen-single-function-prompt "Comment the following function, output only the documentation comment and nothing else. DO NOT wrap the output in markdown quotes. Use the format:
+```
+@doc \"\"\" [A short description].
+
+$(TYPEDSIGNATURES)
+
+[A detailed description (optional)]
+\"\"\"
+```
+Only use the detailed description for long functions. Use max 50 words in the documentation comment. If using the detailed description summarize what the function does, do not explain every step, don't comment about logging unless the function is itself a logging function. Don't return the result markdown quoted.
+%s"
+          )
+    (aichat-bingai-prompt-create "julia-func-docs"
+                                 :input-prompt "Function to document:"
+                                 :text-format julia-docsgen-single-function-prompt
+                                 :chat nil
+                                 :assistant nil
+                                 :replace-or-insert t
+                                 )
+    )
   (defvar-local docsgen-local-prompt "")
-  ;; (setq aichat-bingai-convert-to-org-default (symbol-function #'aichat-bingai--chat-convert-to-org))
-  ;; (setf aichat-bingai--chat-convert-to-org (lambda (&rest args)))
-  ;; (setf aichat-bingai--chat-convert-to-org aichat-bingai-convert-to-org-default))
   (defun my/local-docsgen-prompt ()
     (interactive)
     (setq docsgen-local-prompt (format "
@@ -70,8 +88,6 @@ The following is the code that should be documented:
     (interactive)
     (setq-local completion-at-point-functions
                 (list (cape-super-capf #'codeium-completion-at-point #'lsp-completion-at-point))))
-  ;; an async company-backend is coming soon!
-
   ;; codeium-completion-at-point is autoloaded, but you can
   ;; optionally set a timer, which might speed up things as the
   ;; codeium local language server takes ~0.2s to start up

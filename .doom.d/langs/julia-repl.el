@@ -152,20 +152,20 @@
 
   (require 'aio)
   (aio-defun julia-repl-cmd (str &optional wait cd)
-             "Send a string to julia repl switching to its buffer, if it exists."
-             (setq julia-toggle-repl--previous-window (selected-window))
-             (when (julia-repl-switch nil cd)
-               (when (and wait (> wait 0))
-                 (aio-await (aio-sleep wait))) ;; HACK: allow ohmyrepl.jl to load (this prevents extra "]" being inserted)
-               (julia-repl--send-string str)))
+    "Send a string to julia repl switching to its buffer, if it exists."
+    (setq julia-toggle-repl--previous-window (selected-window))
+    (when (julia-repl-switch nil cd)
+      (when (and wait (> wait 0))
+        (aio-await (aio-sleep wait))) ;; HACK: allow ohmyrepl.jl to load (this prevents extra "]" being inserted)
+      (julia-repl--send-string str)))
 
   (aio-defun julia-repl-precompile ()
-             "Precompile current active project."
-             (when (julia-repl-switch nil nil)
-               (vterm-send-backspace)
-               (aio-await (aio-sleep 0.1))
-               (aio-await (julia-repl-cmd "import Pkg; Pkg.precompile()\n"))
-               ))
+    "Precompile current active project."
+    (when (julia-repl-switch nil nil)
+      (vterm-send-backspace)
+      (aio-await (aio-sleep 0.1))
+      (aio-await (julia-repl-cmd "import Pkg; Pkg.precompile()\n"))
+      ))
 
   (defun julia-repl--push-load-path (pkg)
     (let* ((path (concat "\"" "$(DEPOT_PATH[1])/packages/" pkg "\""))
@@ -184,7 +184,9 @@
     "Add debug packages to the current LOAD_PATH."
     (interactive (list (read-string "targets: " julia-repl-test-args)))
     (let* ((test-args (split-string targets "," t " +"))
-           (quoted-args (mapconcat (lambda! (x) (format "\"%s\"" x)) test-args "")))
+           (quoted-args-tmp (mapconcat (lambda! (x) (format ",\"%s\"" x)) test-args ""))
+           (quoted-args (substring quoted-args-tmp 1 (length quoted-args-tmp)))
+           )
       (julia-repl-cmd (format "import Pkg; Pkg.test(;test_args=[%s])" quoted-args))
       (setq-local julia-repl-test-args targets)))
 
