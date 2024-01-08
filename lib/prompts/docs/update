@@ -1,0 +1,1 @@
+Make sure this documentation is up to date. If it lists fields of a struct make sure the list includes all the public fields. If the function does not exist remove the sentence that contains it. Fix spelling, grammar and syntax errors. The output should only contain the updated documentation.
