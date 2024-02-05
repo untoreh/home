@@ -12,10 +12,10 @@
 (advice-add #'keyboard-quit :before #'corfu-quit)
 (add-to-list 'corfu-auto-commands 'end-of-visual-line)
 
-;; https://github.com/minad/corfu/issues/12#issuecomment-869037519
-(advice-add 'corfu--setup :after 'evil-normalize-keymaps)
-(advice-add 'corfu--teardown :after 'evil-normalize-keymaps)
-(evil-make-overriding-map corfu-map)
+;; https://github.com/minad/corfu/issues/403
+(after! evil-collection-corfu
+  (advice-remove 'corfu--setup #'evil-normalize-keymaps)
+  (advice-add 'corfu--setup :after (lambda (&rest _) (evil-normalize-keymaps))))
 
 (defun corfu-enable-always-in-minibuffer ()
   "Enable Corfu in the minibuffer if Vertico/Mct are not active."

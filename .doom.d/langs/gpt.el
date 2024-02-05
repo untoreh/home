@@ -87,7 +87,7 @@ The following is the code that should be documented:
   (defun my/set-codemium-capfs ()
     (interactive)
     (setq-local completion-at-point-functions
-                (list (cape-super-capf #'codeium-completion-at-point #'lsp-completion-at-point))))
+                (list (cape-capf-super #'codeium-completion-at-point #'lsp-completion-at-point))))
   ;; codeium-completion-at-point is autoloaded, but you can
   ;; optionally set a timer, which might speed up things as the
   ;; codeium local language server takes ~0.2s to start up

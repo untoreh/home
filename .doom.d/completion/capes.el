@@ -12,14 +12,14 @@
   (setq case-fold-search nil)
 
   (setq
-   cape-symbol-scapf (cape-super-capf #'cape-keyword #'cape-symbol #'cape-abbrev #'cape-dabbrev)
-   cape-word-scapf (cape-super-capf #'cape-ispell #'cape-dict)
-   cape-expand-scapf (cape-super-capf #'cape-line) ;; snippets/tempel
+   cape-symbol-scapf (cape-capf-super #'cape-keyword #'cape-symbol #'cape-abbrev #'cape-dabbrev)
+   cape-word-scapf (cape-capf-super #'cape-ispell #'cape-dict)
+   cape-expand-scapf (cape-capf-super #'cape-line) ;; snippets/tempel
    cape-file-scapf (cape-capf-buster
-                    (cape-super-capf #'cape-dabbrev
+                    (cape-capf-super #'cape-dabbrev
                                      #'cape-file
                                      #'cape-history))
-   cape-char-scapf (cape-super-capf #'cape-tex #'cape-sgml #'cape-rfc1345)
+   cape-char-scapf (cape-capf-super #'cape-tex #'cape-sgml #'cape-rfc1345)
    cape-default-scapf (cape-capf-buster #'cape-symbol-scapf)
    )
   (mapc (lambda (v) (defalias (intern (symbol-name v)) (symbol-value v)))
@@ -40,6 +40,6 @@
 
 ;; (when (modulep! :tools lsp +eglot)
 ;;   (setq cape-eglot-scapf
-;;         (cape-capf-buster (cape-super-capf #'tabnine-capf #'eglot-completion-at-point)))
+;;         (cape-capf-buster (cape-capf-super #'tabnine-capf #'eglot-completion-at-point)))
 ;;   (setq-hook! 'eglot-managed-mode-hook
 ;;     completion-at-point-functions (list cape-eglot-scapf t)))

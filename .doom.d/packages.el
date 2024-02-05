@@ -65,15 +65,15 @@
 
 ;; HOTFIX
 ;; (unpin! compat evil vertico cape pdf-tools)
-;; HOTFIX (mu4e)
-;; (unpin! evil-collection link-hint dirvish)
+;; HOTFIX (corfu)
+(unpin! evil-collection)
 ;; (after! popup
 ;;   (set-popup-rule! "^\\*mu4e-\\(main\\|headers\\)\\*" :ignore t))
 
 ;; completion
 (package! corfu :recipe (:includes (corfu-indexed corfu-quick) :files (:defaults "extensions/corfu-*.el")))
-(package! corfu-candidate-overlay :recipe (:repo "https://code.bsdgeek.org/adam/corfu-candidate-overlay"
-                                           :includes (corfu-indexed corfu-quick)))
+;; (package! corfu-candidate-overlay :recipe (:repo "https://code.bsdgeek.org/adam/corfu-candidate-overlay"
+;;                                            :includes (corfu-indexed corfu-quick)))
 
 (package! cape :recipe (:host github :repo "minad/cape"))
 (package! corfu-doc :recipe (:host github :repo "galeo/corfu-doc"))
