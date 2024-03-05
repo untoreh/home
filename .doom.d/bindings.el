@@ -143,6 +143,14 @@
       (:desc "go to previous window"
        :nev "SPC w TAB" #'julia-toggle-repl-back))
 
+(if (modulep! :checkers syntax +flymake)
+    (map! :after flymake
+          :desc "flymake goto-next-error"
+          :nev "SPC l ]" #'flymake-goto-next-error
+          :desc "flymake goto-prev-error"
+          :nev "SPC l [" #'flymake-goto-prev-error
+          ))
+
 (if (modulep! :lang julia)
     (map! :after julia-mode
           (:prefix ("SPC l j" . "julia")
