@@ -10,8 +10,8 @@ elif [ -e "/usr/bin/firefox" ]; then
 elif [ "$(which firefox)" != "$0" ]; then
 	firefox "$@"
 elif [ -v TOOLBOX_PATH ]; then
-	ssh localhost /usr/bin/firefox $@
+	ssh localhost DISPLAY=$DISPLAY WAYLAND_DISPLAY=$WAYLAND_DISPLAY firefox $@
 else
-	echo "firefox not installed";
+	echo "firefox not installed or not found";
 	exit 1;
 fi

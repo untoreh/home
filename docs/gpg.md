@@ -15,5 +15,5 @@ se gpg --edit-key $FINGERPRINT
 Make sure devices are synchronized.
 
 ## Inappropriate ioctl...
-when calling a command like `gpg -d ...` the user agent daemon might be started automatically, but it will be started with the environment from where the command was spawned from. This starts the agent with the wrong config. Instead ensure that the `gpg-user-agent` systemd unit is started before issuing any command to ensure that it is started with the (correct) systemd environment.
+when calling a command like `gpg -d ...` the user agent daemon might be started automatically, but it will be started with the environment from where the command was spawned from. This starts the agent with the wrong config. Instead ensure that the `gpg-agent.service` systemd unit is started before issuing any command to ensure that it is started with the (correct) systemd environment.
 

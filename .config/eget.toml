@@ -2,6 +2,7 @@
 target = "~/bin"
 ["ginuerzh/gost"]
 ["ericchiang/pup"]
+["ClementTsang/bottom"]
 ["gilbertchen/duplicacy"]
 target ="~/bin/dup"
 
