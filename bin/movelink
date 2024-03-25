@@ -1,0 +1,16 @@
+#!/bin/sh
+
+src=$1
+if [ -z "$src" -o ! -e "$src" ]; then
+    { echo "no source (or wrong source)"; exit 1; }
+fi
+dst=$2
+dst_dir=$(dirname "$dst")
+echo $dst_dir
+if [ -z "$dst" -o ! -d "$dst_dir" ]; then
+    { echo "no destination (or wrong destination)"; exit 1; }
+else
+    mkdir -p $dst_dir
+    mv "$src" "$dst"
+    ln -sr "$(dirname $dst)/$(basename $src)" "$src"
+fi
