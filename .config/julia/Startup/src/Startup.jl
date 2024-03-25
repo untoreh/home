@@ -126,6 +126,7 @@ __init__() = begin
         push!(Revise.dont_watch_pkgs, :Startup)
         Revise.silence("Startup")
     end
+    alert_REPL!()
 end
 
 const comp_task = Ref{Task}()
@@ -145,6 +146,7 @@ include("revise.jl")
     @compile_workload begin
         using Pkg: Pkg as Pkg
         using Revise
+        using Alert
         if omr_enabled[]
             using OhMyREPL: JLFzf
             using OhMyREPL.JLFzf: fzf_jll
@@ -166,5 +168,6 @@ end
 
 export display!, @show!, @keys, deletehistory!, debug!, compilepkg
 export revise!, comp_task, init_error, Revise, includet
+export @alert
 
 end

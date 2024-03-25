@@ -4,6 +4,7 @@ authors = ["untoreh <francesco.giannelli@yahoo.it>"]
 version = "0.1.0"
 
 [deps]
+Alert = "28312eec-4d86-447d-83ad-bc2b262de792"
 JLFzf = "1019f520-868f-41f5-a6de-eb00f4b6a39c"
 JLLWrappers = "692b3bcd-3c85-4b1f-b108-f13ce0eb3210"
 JuliaSyntax = "70703baa-626e-46a2-a12c-08ffd08c73b4"
