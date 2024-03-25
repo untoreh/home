@@ -148,3 +148,4 @@ bin/gost
 bin/eget
 bin/dup
 bin/pup
+bin/emacs-lsp-booster

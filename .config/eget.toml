@@ -3,6 +3,7 @@ target = "~/bin"
 ["ginuerzh/gost"]
 ["ericchiang/pup"]
 ["ClementTsang/bottom"]
+["blahgeek/emacs-lsp-booster"]
 ["gilbertchen/duplicacy"]
 target ="~/bin/dup"
 
