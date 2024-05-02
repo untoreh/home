@@ -41,6 +41,7 @@ Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdcommenter'
 Plug 'easymotion/vim-easymotion'
 Plug 'chaoren/vim-wordmotion'
+Plug 'xiyaowong/fast-cursor-move.nvim'
 
 " ui
 Plug 'rbong/vim-crystalline'

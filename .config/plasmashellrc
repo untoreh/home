@@ -2,6 +2,11 @@
 DVI-D-0 Height 1080=454
 DVI-D-0 Width 1920=700
 
+[KFileDialog Settings]
+Recent Files[$e]=energy.monitor.plasmoid,file:$HOME/energy.monitor.plasmoid
+Recent URLs[$e]=file:$HOME/
+listViewIconSize=16
+
 [PlasmaRunnerManager]
 LaunchCounts=1 services_qt5ct.desktop,1 services_kcmsmserver.desktop,1 services_org.kde.dolphin.desktop,1 services_org.kde.konsole.desktop,1 services_wayland.desktop,1 services_org.gnu.emacs.desktop,2 services_terminator.desktop,1 services_com.github.themix_project.Oomox.desktop,1 services_kcm_desktoptheme.desktop,1 services_qtquicksettings.desktop,1 services_firefox.desktop,1 services_com.alacritty.Alacritty.desktop,3 services_kcm_lookandfeel.desktop,2 desktopsessions_1,1 services_bluedevildevices.desktop,1 services_emacs.desktop,1 services_roccatkonepureopticalconfig.desktop
 pluginWhiteList=desktopsessions,services,places,PowerDevil,calculator,unitconverter,shell,bookmarks,recentdocuments,locations,baloosearch

@@ -10,6 +10,9 @@ Seen=true
 [Applications][org.kde.neochat]
 Seen=true
 
+[Applications][org.strawberrymusicplayer.strawberry]
+Seen=true
+
 [Applications][org.wezfurlong.wezterm]
 Seen=true
 

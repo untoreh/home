@@ -1,3 +1,5 @@
 #!/bin/sh
 
-exec wezterm start --class wezterm-dropdown "$@"
+VERSION=${FGC:-39}
+podman exec -it fedora-toolbox-${VERSION//f/} wmctrl -i -x wezterm
+exec wezterm start --new-tab --class wezterm-dropdown "$@"
