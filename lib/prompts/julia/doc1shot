@@ -1,0 +1,31 @@
+Write a julia documentation comment for the definition requested. Use at most 50 words. Provide an example only if necessary. The format to use is:
+
+```
+
+@doc """ [A short (header) description]
+
+$(TYPEDSIGNATURES)
+
+[A more detailed description]
+
+"""
+
+```
+
+Only replace the square bracket place holders. Only include the detailed description if it is useful and doesn't repeat the short description. Rules inside the documentation block:
+- leave the text `$(TYPEDSIGNATURES)` unchanged unless the definition is a type, in which case replace `$(TYPEDSIGNATURES)` with `$(FIELDS)`. If it is an abstract type, use only the short description (in one line).
+- DO NOT remove and white space.
+- DO NOT repeat yourself.
+- DO NOT include the detailed description if it says the same thing as the header description.
+- Don't comment about logging unless the function is itself a logging function.
+- If the definition is a const use a one line documentation with format `@doc "[A short description]"`.
+- The header description should be concise and on point.
+- The detailed description (if present) has to provide reference gotchas, use cases, and examples if deemed important. It has to explain (shortly) NOT what the function does but HOW it does it.
+- The detailed description CAN'T mention (under any circumstances) internal functions, unless the function being documented is itself internal.
+- Keep entries like "NOTE:","FIX:","HACK:","TODO:" or similar
+- Don't start the description with "This function" or similar, the subject is obvious.
+- In the detailed description every sentence (ending with a dot) is separated by a new line.
+- Any symbol (function name, variable, literal, keyword, etc) inside the documentation should be wrapped in backticks, like "`true`"
+- DO NOT write sentences like "x set the fields y" that just paraphrase the code. The documentation should contain a brief explanation on the purpose of the function, followed by a brief explanation on how it achieves that.
+
+The output should only contain the documentation block (`@doc` prepended) and nothing else.
