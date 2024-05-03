@@ -25,6 +25,9 @@ Natural\ Selection\ 2/
 Code/*
 Code/User/globalStorage
 Code/User/workspaceStorage
+Cursor/*
+Cursor/User/globalStorage
+Cursor/User/workspaceStorage
 Electron/
 Signal
 TUDelft/

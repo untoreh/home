@@ -163,7 +163,7 @@ shell exits, the buffer is killed."
 
   )
 
-(defconst my/print-funcs-julia '("display(%s)" "Main.display!(%s)" "@info %s") "Print functions for julia")
+(defconst my/print-funcs-julia '("display(%s)" "Main.display!(%s)" "@info %s" "@linfo %s") "Print functions for julia")
 (defvar my/print-funcs-current-julia "display(%s)" "Current print function for julia")
 
 (after! parrot
@@ -256,9 +256,9 @@ shell exits, the buffer is killed."
 
 (defun my/lang-major-mode (lang)
   (cond lang
-    (((symbolp lang) (intern (concat (symbol-name lang) "-mode"))))
-    (((stringp lang) (intern (concat lang "-mode"))))
-    ))
+        (((symbolp lang) (intern (concat (symbol-name lang) "-mode"))))
+        (((stringp lang) (intern (concat lang "-mode"))))
+        ))
 
 (map!
  (:prefix "SPC i l"
