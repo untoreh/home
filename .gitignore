@@ -149,3 +149,9 @@ bin/eget
 bin/dup
 bin/pup
 bin/emacs-lsp-booster
+/.config/kwinoutputconfig.json
+/.config/nomic.ai/
+/.codeium/
+/.cursor-tutor/
+/.cursor/
+/.shared-ringdb/
