@@ -280,6 +280,16 @@
         "when": "editorTextFocus && vim.active && vim.use<C-o> && !inDebugRepl"
     },
     {
+        "key": "ctrl+o",
+        "command": "workbench.action.navigateBack",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+i",
+        "command": "workbench.action.navigateForward",
+        "when": "editorTextFocus"
+    },
+    {
         "key": "ctrl+alt+n",
         "command": "cursorMove",
         "args": {
