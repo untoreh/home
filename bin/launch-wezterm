@@ -1,5 +1,6 @@
 #!/bin/sh
 
-VERSION=${FGC:-39}
+VERSION=${FGC:-40}
 podman exec -it fedora-toolbox-${VERSION//f/} wmctrl -i -x wezterm
+mkdir /run/user/$(uid -n)/wezterm
 exec wezterm start --new-tab --class wezterm-dropdown "$@"

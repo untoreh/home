@@ -57,7 +57,7 @@ return {
 	window_decorations = "NONE",
   font = wezterm.font("Hack"),
   color_scheme = "Dracula",
-  scrollback_lines = 9000,
+  scrollback_lines = 9000000,
   enable_scroll_bar = true,
   launch_menu = launch_menu,
   default_prog = default_prog,
