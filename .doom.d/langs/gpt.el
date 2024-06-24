@@ -1,4 +1,6 @@
 ;;; langs/gpt.el -*- lexical-binding: t; -*-
+:PROPERTIES:
+:END:
 
 (use-package! aichat
   :config
@@ -129,3 +131,35 @@ The following is the code that should be documented:
   ;; (setq codeium/document/text 'my-codeium/document/text)
   ;; (setq codeium/document/cursor_offset 'my-codeium/document/cursor_offset)
   )
+
+;; (defcustom gemini-api-key "" "api key for accessing google gemini models")
+;; (gptel-make-gemini "Gemini" :key gemini-api-key :stream t)
+;;
+(use-package! gptel
+  :config
+  (defcustom openrouter-api-key "" "api key for accessing open router models")
+  (gptel-make-openai "OpenRouter"
+    :host "openrouter.ai"
+    :endpoint "/api/v1/chat/completions"
+    :stream t
+    :key openrouter-api-key
+    :models '("google/gemma-7b-it:free"
+              "microsoft/phi-3-medium-128k-instruct:free"
+              "microsoft/phi-3-mini-128k-instruct:free"
+              "meta-llama/llama-3-8b-instruct:free"
+              "mistralai/mistral-7b-instruct:free"
+              ))
+  (map! :after julia-mode
+        (:prefix ("SPC l l" . "gptel")
+         :desc "menu"
+         :nev "s" #'gptel-send
+         :nev "o" #'gptel-menu
+         :nev "m" #'gptel-mode
+         :nev "a" #'gptel-add
+         :nev "k" #'gptel-abort
+         :nev "f" #'gptel-add-file
+         :nev "r" #'gptel-rewrite-menu
+         :nev "p" #'gptel-system-prompt
+         :nev "g" #'gptel-beginning-of-response
+         :nev "G" #'gptel-end-of-response
+         )))

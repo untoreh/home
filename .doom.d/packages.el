@@ -62,6 +62,8 @@
 (package! aichat :recipe (:host github :repo "xhcoding/emacs-aichat"))
 ;; codeium
 (package! codeium :recipe (:host github :repo "Exafunction/codeium.el"))
+;; gptel
+(package! gptel)
 
 ;; HOTFIX
 ;; (unpin! compat evil vertico cape pdf-tools)
