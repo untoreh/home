@@ -6,15 +6,15 @@
 
 ## minimal host shell setup plus fonts
 sudo rpm-ostree install --idempotent zsh fish nushell neovim \
-	starship zoxide fzf direnv bismuth \
+	starship zoxide fzf direnv \
 	podman-compose \
 	nut nut-client \
 	texlive-noto texlive-noto-emoji texlive-fontawesome \
 	texlive-fira texlive-firamath \
 	source-foundry-hack-fonts cormullion-juliamono-fonts \
 	powerline-fonts material-icons-fonts \
-	ffmpeg ffmpeg-libs libavcodec-freeworld mesa-va-drivers-freeworld \
-	gstreamer1-plugin-openh264 mozilla-openh264
+	libavcodec-freeworld mesa-va-drivers-freeworld
+	# ffmpeg ffmpeg-libs gstreamer1-plugin-openh264 mozilla-openh264
 ## change shell
 # lchsh $USER
 ## set same hostname to host and toolbox

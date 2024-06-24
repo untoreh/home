@@ -36,5 +36,8 @@ idleTime=60000
 lidAction=1
 powerButtonAction=16
 
+[Migration]
+MigratedProfilesToPlasma6=powerdevilrc
+
 [migration]
 kdedShortcutMigration=true

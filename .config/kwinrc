@@ -68,6 +68,11 @@ CommandWindow2=Activate and pass click
 CommandWindow3=Activate and pass click
 CommandWindowWheel=Scroll
 
+[NightColor]
+LatitudeFixed=40.46833504466151
+LongitudeFixed=18.16
+Mode=Location
+
 [Plugins]
 blurEnabled=false
 contrastEnabled=false
@@ -131,8 +136,10 @@ tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"wi
 [Tiling][92e842d7-5928-5c43-884a-4912e7cc82ed]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
+[Tiling][b078d034-7a4a-5ea1-96e4-797423b72f1c]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
 [Windows]
-ActiveMouseScreen=false
 AutoRaise=false
 AutoRaiseInterval=750
 BorderSnapZone=10

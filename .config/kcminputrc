@@ -14,6 +14,7 @@ PointerAccelerationProfile=1
 [Mouse]
 X11LibInputXAccelProfileFlat=true
 XLbInptAccelProfileFlat=true
+XLbInptPointerAcceleration=-0.8
 cursorSize=48
 cursorTheme=breeze_cursors
 

@@ -1,7 +1,7 @@
 #!/bin/sh -l
 set -e
 
-supc stop emacs
+systemctl --user stop emacs
 cd ~/.emacs.d
 
 function clean_env {
