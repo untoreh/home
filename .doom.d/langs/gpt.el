@@ -5,7 +5,8 @@
 (use-package! aichat
   :config
   (setq
-   aichat-bingai-cookies-file (my/concat-path doom-user-dir "cache" "bing.json")
+   ;; aichat-bingai-cookies-file (my/concat-path doom-user-dir "cache" "bing.json")
+   aichat-bingai-cookies-file ""
    aichat-bingai-assistant-buffer "*bingai*"
    aichat-bingai-conversation-style 'precise
    aichat-bingai-chat-file (my/concat-path temporary-file-directory "chatbot-history")
@@ -137,21 +138,42 @@ The following is the code that should be documented:
 ;;
 (use-package! gptel
   :config
-  (defcustom openrouter-api-key "" "api key for accessing open router models")
+  ;; (defcustom deepseek-api-key "" "`gptel' deep seek token")
+  (defcustom openrouter-api-key "" "`gptel' openrouter token")
+  (defcustom mistral-api-key "" "`gptel' mistral token")
+  (defcustom cohere-api-key "" "`gptel' cohere token")
   (gptel-make-openai "OpenRouter"
     :host "openrouter.ai"
     :endpoint "/api/v1/chat/completions"
     :stream t
     :key openrouter-api-key
-    :models '("google/gemma-7b-it:free"
+    :models '("google/gemma-2-9b-it:free"
               "microsoft/phi-3-medium-128k-instruct:free"
               "microsoft/phi-3-mini-128k-instruct:free"
               "meta-llama/llama-3-8b-instruct:free"
               "mistralai/mistral-7b-instruct:free"
               ))
+  ;; (gptel-make-openai "Cohere"
+  ;;   :host "api.cohere.com"
+  ;;   :endpoint "/v1/chat"
+  ;;   :stream t
+  ;;   :key cohere-api-key
+  ;;   :models '("command-r" "command-r-plus"))
+  ;; (gptel-make-openai "DeepSeek"
+  ;;   :stream t
+  ;;   :key deepseek-api-key
+  ;;   :host "api.deepseek.com"
+  ;;   :endpoint "/chat/completions"
+  ;;   :models '("deepseek-chat" "deepseek-coder"))
+  (gptel-make-openai "Mistral"
+    :host "codestral.mistral.ai"
+    :key mistral-api-key
+    :stream t
+    :models '("codestral-latest"))
+
+  (setq gptel-model "meta-llama/llama-3-8b-instruct:free")
   (map! :after julia-mode
         (:prefix ("SPC l l" . "gptel")
-         :desc "menu"
          :nev "s" #'gptel-send
          :nev "o" #'gptel-menu
          :nev "m" #'gptel-mode
