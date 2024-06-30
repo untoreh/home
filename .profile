@@ -27,7 +27,7 @@ if [ ! -v BROWSER -a ! -v TOOLBOX_PATH ]; then
 	if [ -v WSLENV ]; then
 		export BROWSER=$(which wslview)
 	else
-		export BROWSER=$(which firefox)
+		export BROWSER=$(which librewolf)
 	fi
 fi
 # Load env, prevent PATH override

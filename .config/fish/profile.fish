@@ -58,7 +58,7 @@ if ! set -q BROWSER
     if set -q WSLENV
         set --export BROWSER (which wslview)
     else
-        set --export BROWSER (which firefox)
+        set --export BROWSER (which librewolf)
     end
 end
 

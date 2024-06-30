@@ -7,6 +7,9 @@ Seen=true
 [Applications][firefox]
 Seen=true
 
+[Applications][io.gitlab.librewolf-community]
+Seen=true
+
 [Applications][org.kde.neochat]
 Seen=true
 

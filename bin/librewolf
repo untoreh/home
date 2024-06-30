@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ -e /usr/bin/librewolf ]; then
+        exec /usr/bin/librewolf "$@"
+elif [ "$(which librewolf 2>/dev/null)" != "$0" ]; then
+        librewolf "$@"
+elif [ -v TOOLBOX_PATH ]; then
+	ssh localhost DISPLAY=$DISPLAY WAYLAND_DISPLAY=$WAYLAND_DISPLAY flatpak run io.gitlab.librewolf-community $@
+else
+        echo "librewolf not installed or not found";
+        exit 1;
+fi
