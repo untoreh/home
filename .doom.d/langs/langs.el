@@ -38,7 +38,7 @@
                      gfm-mode
                      shell-mode
                      python-mode))
-    (pushnew! +format-on-save-enabled-modes mode)))
+    (pushnew! +format-on-save-disabled-modes mode)))
 
 ;; ;; make compilation buffers follow
 (add-hook! (compilation-mode nim-compile-mode)

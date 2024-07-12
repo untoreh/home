@@ -125,9 +125,8 @@
       ))
 
 ;; shell
-(package! fish-mode)
-(package! powershell
-  :ignore wslp)
+;; (package! powershell
+;;   :ignore wslp)
 (package! nushell-mode :recipe (:host github :repo "azzamsa/emacs-nushell"))
 
 ;; jupyter
@@ -143,7 +142,8 @@
 ;; TODO: check back on newer emacs versions (>29.1)
 ;; (package! indent-guides :recipe (:host github :repo "jdtsmith/indent-bars"))
 (when (modulep! :email mu4e)
-  (package! mu4e-views))
+  (package! mu4e-views)
+  (package! mu4e-alert :disable t))
 
 
 ;; org

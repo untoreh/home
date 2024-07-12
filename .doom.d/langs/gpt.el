@@ -138,7 +138,7 @@ The following is the code that should be documented:
 ;;
 (use-package! gptel
   :config
-  ;; (defcustom deepseek-api-key "" "`gptel' deep seek token")
+  (defcustom deepseek-api-key "" "`gptel' deep seek token")
   (defcustom openrouter-api-key "" "`gptel' openrouter token")
   (defcustom mistral-api-key "" "`gptel' mistral token")
   (defcustom cohere-api-key "" "`gptel' cohere token")
@@ -153,18 +153,26 @@ The following is the code that should be documented:
               "meta-llama/llama-3-8b-instruct:free"
               "mistralai/mistral-7b-instruct:free"
               ))
+  (gptel-make-openai "Local-Deepseek"
+    :host "localhost:8000"
+    :endpoint "/api/v1/chat/completions"
+    :stream t
+    :key "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzc29faWQiOiJlNTRkMDExNy01MzdjLTQyZDItYjM0Ny00NzUzODhlNTI2NTIiLCJpc19vYXV0aCI6MSwib2F1dGhfcHJvdmlkZXIiOiJnb29nbGUiLCJ0b2tlbl90eXBlIjoiQmVhcmVyIiwiYWNjZXNzX3Rva2VuIjoieWEyOS5hMEFYb29DZ3NYcmwwVXFhMW1hSFNTWkVQRG95RlQwY1dHSjdiQV9nc2lteU4zUkg0N0NsRF8tSkFvQUpmLTRzWG94Y1hBMEI5ZE5Tc3Qxa191bUljcFkxZG5mZFcwNEJPYU0tOFBGdXFLdDRobVh3YU8xdGZTNzJjalJLdUVpVldkd1JUc2IwTnZYRzA5VjBmbjBDWHE2UXJQN0lvNkpjTEI1X0c1YndhQ2dZS0FaUVNBUklTRlFIR1gyTWk0SGtIaVlSMVQxZTJ3cE9Ya0VQNTNnMDE3MyIsImV4cGlyYXRpb25fZGF0ZSI6MTcxOTczMTMzMi4xNDI0MzEzLCJyZWZyZXNoX3Rva2VuIjoiMS8vMGdheHlCUmc1eU1nV0NnWUlBUkFBR0JBU053Ri1MOUlyVWhCNjlsMXI0M0dOWVVvSUdzRmNwSTRJb1NJRmpqdXJQWDFRVmV1V3RKeWlSZVlLN0FXMk1fbjVIaldFeUdTNXMtRSIsImlkX3Byb2ZpbGUiOnsicHJvdmlkZXIiOiJHT09HTEUiLCJpZCI6IjExNTU4MTcwMjI5NTY3MDM2MDE4NiIsIm5hbWUiOiJmcmEgZ2lhIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0xhc1piXzA4Y3hBNEEtZ2h4ang3aVFVREJtbFU4MXJDdjhucGV6VDJub2hkSTl6dz1zOTYtYyIsImxvY2FsZSI6ImVuX1VTIiwiZW1haWwiOiJjcmlwdGFmcmFAZ21haWwuY29tIn0sImVtYWlsIjoiIiwibW9iaWxlX251bWJlciI6IiIsImFyZWFfY29kZSI6IiIsIm1vYmlsZSI6IiIsImV4cCI6MTcyMDM2MTM3OCwiYXVkIjoiNjUyOGFkMzk2ZmFhMTM2N2ZlZTZkMTZjIn0.SJKzOEikB6ZZKJJ9MYr7lUN-WYFlP8z5RfRHE9LzXUg"
+    :models '("deepseek-coder"
+              "deepseek-chat"
+              ))
   ;; (gptel-make-openai "Cohere"
   ;;   :host "api.cohere.com"
   ;;   :endpoint "/v1/chat"
   ;;   :stream t
   ;;   :key cohere-api-key
   ;;   :models '("command-r" "command-r-plus"))
-  ;; (gptel-make-openai "DeepSeek"
-  ;;   :stream t
-  ;;   :key deepseek-api-key
-  ;;   :host "api.deepseek.com"
-  ;;   :endpoint "/chat/completions"
-  ;;   :models '("deepseek-chat" "deepseek-coder"))
+  (gptel-make-openai "DeepSeek"
+    :stream t
+    :key deepseek-api-key
+    :host "api.deepseek.com"
+    :endpoint "/chat/completions"
+    :models '("deepseek-chat" "deepseek-coder"))
   (gptel-make-openai "Mistral"
     :host "codestral.mistral.ai"
     :key mistral-api-key
