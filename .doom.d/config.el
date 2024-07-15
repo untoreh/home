@@ -14,7 +14,7 @@
   (load! "text")
   (load! "org/org")
   (load! "mail")
-  ;; (load! "completion/init")
+  (load! "completion/init")
   (load! "langs/langs")
   (load! "projects")
   (after! magit

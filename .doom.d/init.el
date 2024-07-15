@@ -26,7 +26,7 @@
        ;; and don't use childframes because are slow
        ;; (company)           ; the ultimate code completion backend
        (vertico +icons)
-       (corfu +orderless)
+       (corfu +orderless +icons +dabbrev)
        ;; (ivy +prescient +icons +childframe)               ; a search engine for love and life
 
        :ui
