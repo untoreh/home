@@ -5,6 +5,7 @@ sudo dnf shell <<HERE
 install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-${FEDORA_V}.noarch.rpm 
 install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-${FEDORA_V}.noarch.rpm
 install -y https://github.com/rpmsphere/noarch/raw/master/r/rpmsphere-release-${FEDORA_V}-1.noarch.rpm
+install -y --repofrompath terra,https://repos.fyralabs.com/terra${FEDORA_V} --setopt terra.gpgkey=https://repos.fyralabs.com/terra${FEDORA_V}/key.asc terra-release
 run
 HERE
 
