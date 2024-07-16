@@ -14,7 +14,7 @@
   ;; (corfu-on-exact-match 'quit)
 
   ;; no delay
-  (corfu-auto-delay 0.0)
+  (corfu-auto-delay 0.18)
   :init
   ;; these should already be set by doom
   ;; :hook (corfu-mode . corfu-popupinfo-mode)

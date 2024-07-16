@@ -137,6 +137,8 @@ The following is the code that should be documented:
 ;; (gptel-make-gemini "Gemini" :key gemini-api-key :stream t)
 ;;
 (use-package! gptel
+  :custom
+  (gptel-backend "DeepSeekLocal")
   :config
   (defcustom deepseek-api-key "" "`gptel' deep seek token")
   (defcustom deepseek-local-api-key "" "`gptel' deep seek token")
@@ -154,14 +156,14 @@ The following is the code that should be documented:
               "meta-llama/llama-3-8b-instruct:free"
               "mistralai/mistral-7b-instruct:free"
               ))
-  (gptel-make-openai "DeepSeekLocal"
-    :host "localhost:8000"
-    :protocol "http"
-    :stream t
-    :key deepseek-local-api-key
-    :models '("deepseek-coder"
-              "deepseek-chat"
-              ))
+  (setq deepseek-backend (gptel-make-openai "DeepSeekLocal"
+                           :host "localhost:8000"
+                           :protocol "http"
+                           :stream t
+                           :key deepseek-local-api-key
+                           :models '("deepseek-coder"
+                                     "deepseek-chat"
+                                     )))
   ;; (gptel-make-openai "Cohere"
   ;;   :host "api.cohere.com"
   ;;   :endpoint "/v1/chat"
@@ -175,11 +177,10 @@ The following is the code that should be documented:
     :models '("codestral-latest"))
 
   (setq gptel-model "meta-llama/llama-3-8b-instruct:free")
-  (map! :after julia-mode
-        (:prefix ("SPC l l" . "gptel")
+  (map! (:prefix ("SPC l l" . "gptel")
          :nev "s" #'gptel-send
          :nev "o" #'gptel-menu
-         :nev "m" #'gptel-mode
+         :nev "m" #'gptel
          :nev "a" #'gptel-add
          :nev "k" #'gptel-abort
          :nev "f" #'gptel-add-file
