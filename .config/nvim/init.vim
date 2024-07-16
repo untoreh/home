@@ -65,7 +65,17 @@ Plug 'vim-scripts/haproxy'
 au BufRead,BufNewFile haproxy* set ft=haproxy
 Plug 'JuliaEditorSupport/julia-vim'
 
+"kitty
+Plug 'mikesmithgh/kitty-scrollback.nvim'
+
 call plug#end()
 
 set shortmess+=A
 set clipboard+=unnamedplus
+
+lua << EOF
+local kitty_scrollback = require('kitty-scrollback')
+kitty_scrollback.setup({
+  -- Your configuration options here
+})
+EOF
