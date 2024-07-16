@@ -182,38 +182,38 @@
         "command": "file-browser.stepIn",
         "when": "inFileBrowser"
     },
-    {
-        "key": "ctrl+d",
-        "command": "runCommands",
-        "args": {
-            "commands": [
-                "scrollPageDown",
-                {
-                    "command": "cursorMove",
-                    "args": {
-                        "to": "viewPortCenter"
-                    }
-                }
-            ]
-        },
-        "when": "editorTextFocus && vim.active && vim.mode in ('Normal', 'Visual') && !inDebugRepl"
-    },
-    {
-        "key": "ctrl+u",
-        "command": "runCommands",
-        "args": {
-            "commands": [
-                "scrollPageUp",
-                {
-                    "command": "cursorMove",
-                    "args": {
-                        "to": "viewPortCenter"
-                    }
-                }
-            ]
-        },
-        "when": "editorTextFocus && vim.active && vim.mode in ('Normal', 'Visual') && !inDebugRepl"
-    },
+    // {
+    //     "key": "ctrl+d",
+    //     "command": "runCommands",
+    //     "args": {
+    //         "commands": [
+    //             "scrollPageDown",
+    //             {
+    //                 "command": "cursorMove",
+    //                 "args": {
+    //                     "to": "viewPortCenter"
+    //                 }
+    //             }
+    //         ]
+    //     },
+    //     "when": "editorTextFocus && vim.active && vim.mode in ('Normal', 'Visual') && !inDebugRepl"
+    // },
+    // {
+    //     "key": "ctrl+u",
+    //     "command": "runCommands",
+    //     "args": {
+    //         "commands": [
+    //             "scrollPageUp",
+    //             {
+    //                 "command": "cursorMove",
+    //                 "args": {
+    //                     "to": "viewPortCenter"
+    //                 }
+    //             }
+    //         ]
+    //     },
+    //     "when": "editorTextFocus && vim.active && vim.mode in ('Normal', 'Visual') && !inDebugRepl"
+    // },
     {
         "key": "alt+shift+I",
         "command": "runCommands",
@@ -269,26 +269,26 @@
         "command": "workbench.action.closeSidebar",
         "when": "!editorTextFocus && !inputFocus",
     },
-   {
+    {
         "key": "ctrl+tab",
         "command": "workbench.action.focusActiveEditorGroup",
         "when": "!editorTextFocus && !inputFocus && !inQuickOpen",
     },
-    {
-        "key": "ctrl+o",
-        "command": "-extension.vim_ctrl+o",
-        "when": "editorTextFocus && vim.active && vim.use<C-o> && !inDebugRepl"
-    },
-    {
-        "key": "ctrl+o",
-        "command": "workbench.action.navigateBack",
-        "when": "editorTextFocus"
-    },
-    {
-        "key": "ctrl+i",
-        "command": "workbench.action.navigateForward",
-        "when": "editorTextFocus"
-    },
+    // {
+    //     "key": "ctrl+o",
+    //     "command": "-extension.vim_ctrl+o",
+    //     "when": "editorTextFocus && vim.active && vim.use<C-o> && !inDebugRepl"
+    // },
+    // {
+    //     "key": "ctrl+o",
+    //     "command": "workbench.action.navigateBack",
+    //     "when": "editorTextFocus"
+    // },
+    // {
+    //     "key": "ctrl+i",
+    //     "command": "workbench.action.navigateForward",
+    //     "when": "editorTextFocus"
+    // },
     {
         "key": "ctrl+alt+n",
         "command": "cursorMove",
@@ -392,5 +392,149 @@
         "key": "alt+/",
         "command": "-cody.chat.panel.new",
         "when": "cody.activated"
+    },
+    {
+        "key": "F4",
+        "command": "settings.cycle",
+        "when": "editorTextFocus",
+        "args": {
+            "id": "cycle", // must be unique
+            "overrideWorkspaceSettings": true,
+            "values": [ // Note: use the same settings in each values object
+                {
+                    "supermaven.enable": {
+                        "*": true
+                    },
+                    "continue.enableTabAutocomplete": false,
+                    "codeium.enableConfig": {
+                        "*": false
+                    },
+                    "cody.autocomplete.enabled": false,
+                },
+                {
+                    "supermaven.enable": {
+                        "*": false
+                    },
+                    "continue.enableTabAutocomplete": true,
+                    "codeium.enableConfig": {
+                        "*": false
+                    },
+                    "cody.autocomplete.enabled": false,
+                },
+                {
+                    "supermaven.enable": {
+                        "*": false
+                    },
+                    "continue.enableTabAutocomplete": false,
+                    "codeium.enableConfig": {
+                        "*": true
+                    },
+                    "cody.autocomplete.enabled": false,
+                },
+                {
+                    "supermaven.enable": {
+                        "*": false
+                    },
+                    "continue.enableTabAutocomplete": false,
+                    "codeium.enableConfig": {
+                        "*": false
+                    },
+                    "cody.autocomplete.enabled": true,
+                },
+            ]
+        }
+    },
+    {
+        "key": "alt+l",
+        "command": "-cody.chat.panel.new",
+        "when": "cody.activated"
+    },
+    {
+        "key": "alt+c alt+n",
+        "command": "continue.newSession"
+    },
+    {
+        "key": "alt+c alt+i",
+        "command": "continue.quickEdit"
+    },
+    {
+        "key": "ctrl+i",
+        "command": "-continue.quickEdit"
+    },
+    {
+        "key": "alt+c alt+l",
+        "command": "continue.focusContinueInput"
+    },
+    {
+        "key": "ctrl+l",
+        "command": "-continue.focusContinueInput"
+    },
+    {
+        "key": "alt+c alt+f",
+        "command": "continue.fixCode"
+    },
+    {
+        "key": "alt+c alt+c",
+        "command": "continue.continueGUIView.focus"
+    },
+    {
+        "key": "alt+c alt+o",
+        "command": "continue.openConfigJson"
+    },
+    {
+        "key": "alt+c alt+p",
+        "command": "continue.optimizeCode"
+    },
+    {
+        "key": "alt+c alt+h",
+        "command": "continue.viewHistory"
+    },
+    {
+        "key": "alt+c alt+w",
+        "command": "continue.writeCommentsForCode"
+    },
+    {
+        "key": "alt+c alt+d",
+        "command": "continue.writeDocstringForCode"
+    },
+    {
+        "key": "alt+c alt+g",
+        "command": "continue.fixGrammar"
+    },
+    {
+        "key": "alt+c alt+m",
+        "command": "continue.toggleFullScreen",
+        "when": "!terminalFocus"
+    },
+    {
+        "key": "ctrl+k ctrl+m",
+        "command": "-continue.toggleFullScreen",
+        "when": "!terminalFocus"
+    },
+    {
+        "key": "alt+c alt+a",
+        "command": "continue.toggleTabAutocompleteEnabled",
+        "when": "!terminalFocus"
+    },
+    {
+        "key": "ctrl+k ctrl+a",
+        "command": "-continue.toggleTabAutocompleteEnabled",
+        "when": "!terminalFocus"
+    },
+    {
+        "key": "alt+c alt+r",
+        "command": "continue.debugTerminal"
+    },
+    {
+        "key": "ctrl+shift+r",
+        "command": "-continue.debugTerminal"
+    },
+    {
+        "key": "alt+c shift+alt+c",
+        "command": "continue.focusContinueInputWithoutClear"
+    },
+    {
+        "key": "ctrl+shift+l",
+        "command": "-continue.focusContinueInputWithoutClear"
     }
 ]
