@@ -1,0 +1,17 @@
+#!/bin/bash
+
+kitty_args="--detach -1 --start-as maximized"
+
+kitty_path="$(which kitty 2>/dev/null)" 
+if [ -n "$kitty_path" ]; then
+    exec "$kitty_path" $kitty_args $@
+elif [ -e /usr/bin/kitty ]; then
+    exec /usr/bin/kitty $kitty_args $@
+elif [ -v TOOLBOX_PATH ]; then
+    ssh localhost DISPLAY=${DISPLAY:-:0} WAYLAND_DISPLAY=${WAYLAND_DISPLAY:-wayland-0} ~/bin/launch-kitty "$@"
+elif [ -n "$(which toolbox 2>/dev/null)" ]; then
+        toolbox run launch-kitty "$@"
+else
+    echo "kitty not installed or not found"
+    exit 1
+fi

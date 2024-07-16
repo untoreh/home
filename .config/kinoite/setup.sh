@@ -6,7 +6,7 @@
 
 ## minimal host shell setup plus fonts
 sudo rpm-ostree install --idempotent zsh fish nushell neovim \
-	starship zoxide fzf direnv \
+	kitty et starship zoxide fzf direnv \
 	podman-compose \
 	nut nut-client \
 	texlive-noto texlive-noto-emoji texlive-fontawesome \
