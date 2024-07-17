@@ -21,11 +21,13 @@ set -q QT_QPA_PLATFORMTHEME || set QT_QPA_PLATFORMTHEME qt5ct
 
 # clipboard
 function clc
-	if set -q WSLENV
-            cd /
-            wex clip.exe
-            cd -
-	else 
-    	wl-copy
-        end
+    if set -q WSLENV
+        cd /
+        wex clip.exe
+        cd -
+        elseif set -q WAYLAND_DISPLAY
+        wl-copy
+    else
+        xsel --clipboard --input
+    end
 end
