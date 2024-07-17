@@ -8,8 +8,8 @@ if exists('g:vscode')
 	xmap <M-;>  <Plug>VSCodeCommentary
 	nmap <M-;>  <Plug>VSCodeCommentary
 	omap <M-;>  <Plug>VSCodeCommentary
-	" wait for vscode-neovim extension v > 0.0.82
- 	autocmd CursorMoved * :call VSCodeNotifyVisual('editor.action.selectFromAnchorToCursor', 1)
+	wait for vscode-neovim extension v > 0.0.82
+         autocmd CursorMoved * :call VSCodeNotifyVisual('editor.action.selectFromAnchorToCursor', 1)
 else
 	xmap <M-;>  <Plug>NERDCommenterToggle
 	nmap <M-;>  <Plug>NERDCommenterToggle
@@ -34,7 +34,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'neomake/neomake'
 
-" editing
+"" editing
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
@@ -43,7 +43,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'chaoren/vim-wordmotion'
 Plug 'xiyaowong/fast-cursor-move.nvim'
 
-" ui
+"" ui
 Plug 'rbong/vim-crystalline'
 function! StatusLine(...)
   return crystalline#mode() . crystalline#right_mode_sep('')
@@ -60,7 +60,7 @@ Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 set termguicolors
 Plug 'norcalli/nvim-colorizer.lua'
 
-"langs
+""langs
 Plug 'vim-scripts/haproxy'
 au BufRead,BufNewFile haproxy* set ft=haproxy
 Plug 'JuliaEditorSupport/julia-vim'
@@ -76,6 +76,5 @@ set clipboard+=unnamedplus
 lua << EOF
 local kitty_scrollback = require('kitty-scrollback')
 kitty_scrollback.setup({
-  -- Your configuration options here
 })
 EOF
