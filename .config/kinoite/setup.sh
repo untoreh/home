@@ -6,13 +6,13 @@
 
 ## minimal host shell setup plus fonts
 sudo rpm-ostree install --idempotent zsh fish nushell neovim \
-	kitty et starship zoxide fzf direnv \
+	kitty kitty-terminfo starship zoxide fzf direnv \
 	podman-compose \
 	nut nut-client \
 	texlive-noto texlive-noto-emoji texlive-fontawesome \
 	texlive-fira texlive-firamath \
 	source-foundry-hack-fonts cormullion-juliamono-fonts \
-	powerline-fonts material-icons-fonts \
+	powerline-fonts material-icons-fonts nerdfontssymbolsonly-nerd-fonts \
 	libavcodec-freeworld mesa-va-drivers-freeworld
 	# ffmpeg ffmpeg-libs gstreamer1-plugin-openh264 mozilla-openh264
 ## change shell

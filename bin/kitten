@@ -1,6 +1,0 @@
-#!/bin/sh
-
-kitty_path=/usr/bin/kitty
-# kitty_path=~/.nix-profile/bin/kitty
-
-exec $kitty_path +kitten ${@}

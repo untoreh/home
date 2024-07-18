@@ -15,5 +15,5 @@ install jre
 install autoconf automake gcc libpng-devel make poppler-devel poppler-glib-devel zlib-devel pkgconf
 install sqlite nc
 install npm
-install zoxide starship neovim
+install kitty-terminfo pueue zoxide starship neovim
 run
