@@ -3,7 +3,7 @@
 (load! "lisp")
 (add-transient-hook! 'text-mode
   (load! "spell"))
-(load! "gpt")
+(load! "aiml")
 (if (modulep! :lang shell)
     (load! "shell"))
 (if (modulep! :lang python)
@@ -49,6 +49,6 @@
   (when (modulep! :lang julia)
     (add-hook! julia-mode #'aas-activate-for-major-mode)
     (aas-set-snippets 'julia-mode
-                      ;; expand unconditionally
-                      "^@d" "@doc \"\"\"\n\"\"\""
-                      )))
+      ;; expand unconditionally
+      "^@d" "@doc \"\"\"\n\"\"\""
+      )))

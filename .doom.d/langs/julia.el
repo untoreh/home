@@ -10,17 +10,31 @@
   ;; orderless-component-separator "" ;; Splits on every char. Allows "AbS" to match "AbstractString"
   )
 
+;; julia-ts-mode
+(use-package! julia-ts-mode
+  :if (modulep! :lang julia)
+  :mode "\\.jl$"
+  :config
+  (when (modulep! :lang julia +lsp)
+    (add-to-list 'lsp-language-id-configuration '(julia-ts-mode . "julia"))
+    (add-hook! (julia-mode julia-ts-mode) #'lsp)
+    (lsp-register-client
+     (make-lsp-client :new-connection (lsp-stdio-connection 'lsp-julia--rls-command)
+                      :major-modes '(julia-mode ess-julia-mode julia-ts-mode)
+                      :server-id 'julia-ls
+                      :multi-root t))))
+
 (use-package! julia-mode
   :init
   (when (modulep! :lang julia +lsp)
-    (add-hook! julia-mode #'lsp))
+    (add-hook! julia-mode #'lsp)
+    (setq-hook! julia-mode
+      lsp-enable-folding t
+      lsp-folding-range-limit 100))
   (add-hook! 'julia-mode-hook
     (setenv "JULIA_NUM_THREADS" (number-to-string (num-processors)))
     ;; https://github.com/doomemacs/doomemacs/commit/acae9f9acb328c46f71b4cc975abcdb95c09cee6
     )
-  (setq-hook! julia-mode
-    lsp-enable-folding t
-    lsp-folding-range-limit 100)
   :config
   ;; Ensure lsp is always active if lsp-mode is enabled
   (add-hook! '(doom-switch-buffer-hook doom-switch-window-hook)

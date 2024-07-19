@@ -55,11 +55,6 @@
 ;; (package! aio)
 (package! devdocs :recipe (:host github :repo "astoff/devdocs.el"))
 
-;; aichat
-(package! emacs-websocket :recipe (:host github :repo "ahyatt/emacs-websocket"))
-(package! promise)
-(package! async-await)
-(package! aichat :recipe (:host github :repo "xhcoding/emacs-aichat"))
 ;; codeium
 (package! codeium :recipe (:host github :repo "Exafunction/codeium.el"))
 ;; gptel
@@ -111,8 +106,9 @@
             (progn
               (package! lsp-julia
                 :recipe (:host github :repo "gdkrmr/lsp-julia"))
-	      (package! julia-ts-mode)
+
               )))
+      (package! julia-ts-mode)
       ;; standalone formatter which works as client/server
       ;; (if (modulep! :lang julia +format)
       ;;     (package! julia-formatter
