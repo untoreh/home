@@ -65,6 +65,9 @@
 ;; (gptel-make-gemini "Gemini" :key gemini-api-key :stream t)
 ;;
 (use-package! gptel
+  :custom
+  (gptel-backend deepseek-backend)
+  (gptel-model "deepseek-coder")
   :config
   (defcustom deepseek-api-key "" "`gptel' deep seek token")
   (defcustom deepseek-local-api-key "" "`gptel' deep seek token")
@@ -103,9 +106,6 @@
                             :key mistral-api-key
                             :stream t
                             :models '("codestral-latest")))
-  :custom
-  (setq gptel-backend deepseek-backend
-        gptel-model "deepseek-coder")
   (map! (:prefix ("SPC l l" . "gptel")
          :nev "s" #'gptel-send
          :nev "o" #'gptel-menu
@@ -117,4 +117,5 @@
          :nev "p" #'gptel-system-prompt
          :nev "g" #'gptel-beginning-of-response
          :nev "G" #'gptel-end-of-response
-         )))
+         ))
+  )
