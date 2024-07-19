@@ -1,7 +1,9 @@
 ## Remote
 
 # ## network
-alias ssh "kitten ssh"
+if command -v kitten >/dev/null 2>&1
+    alias ssh "kitten ssh"
+end
 alias rtn "ssh -t root@192.168.1.1 SHELL=/bin/bash exec /bin/bash -li"
 alias rft "ssh root@192.168.1.1 COLUMNS=\$COLUMNS LINES=\$LINES TERM=linux iftop -i br-lan -m 20m"
 alias ift " _ iftop -i enp33s0 -m 20m"
