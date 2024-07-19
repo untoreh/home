@@ -1,8 +1,11 @@
 ;;; langs/julia-repl.el -*- lexical-binding: t; -*-
 
-(after! (:and julia-mode lsp-julia julia-repl)
+
+;; (after! (:and julia-mode lsp-julia julia-repl)
+;;   (pushnew! julia-repl-executable-records
+;;             `(compiled ,lsp-julia-command)
+(after! (:and julia-mode julia-repl)
   (pushnew! julia-repl-executable-records
-            `(compiled ,lsp-julia-command)
             `(trickle ,(executable-find "trickle-julia")))
   (setq julia-repl-executable-key 'trickle)
   (set-docsets! 'julia-repl-vterm-mode :add "Julia")

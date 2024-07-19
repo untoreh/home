@@ -137,8 +137,6 @@ The following is the code that should be documented:
 ;; (gptel-make-gemini "Gemini" :key gemini-api-key :stream t)
 ;;
 (use-package! gptel
-  :custom
-  (gptel-backend "DeepSeekLocal")
   :config
   (defcustom deepseek-api-key "" "`gptel' deep seek token")
   (defcustom deepseek-local-api-key "" "`gptel' deep seek token")
@@ -177,8 +175,9 @@ The following is the code that should be documented:
                             :key mistral-api-key
                             :stream t
                             :models '("codestral-latest")))
-
-  (setq gptel-model "meta-llama/llama-3-8b-instruct:free")
+  :custom
+  (setq gptel-backend deepseek-backend
+        gptel-model "deepseek-coder")
   (map! (:prefix ("SPC l l" . "gptel")
          :nev "s" #'gptel-send
          :nev "o" #'gptel-menu

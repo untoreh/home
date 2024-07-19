@@ -20,10 +20,7 @@
     )
   (setq-hook! julia-mode
     lsp-enable-folding t
-    lsp-folding-range-limit 100
-    lsp-response-timeout 300
-    corfu-auto-prefix 2
-    )
+    lsp-folding-range-limit 100)
   :config
   ;; Ensure lsp is always active if lsp-mode is enabled
   (add-hook! '(doom-switch-buffer-hook doom-switch-window-hook)
@@ -36,32 +33,23 @@
   (load! "julia-repl")
   (load! "julia-franklin")
   ;; julia projects file
+  (defun julia-project-root ()
+    (or (getenv "JULIA_PROJECT") (projectile-project-root) ""))
   (after! projectile
     ;; (appendq! projectile-project-root-files '("Project.toml" "JuliaProject.toml"))
     (setq-hook! 'julia-mode-hook projectile-project-test-cmd
                 "julia --startup-file=no --project=test/ test/runtests.jl --test-args '' ")
     ))
 
-;; julia-ts-mode
-(use-package! julia-ts-mode
-  :if (modulep! :lang julia)
-  :mode "\\.jl$"
-  :config
-  (add-hook! (julia-mode julia-ts-mode) #'lsp)
-  (add-to-list 'lsp-language-id-configuration '(julia-ts-mode . "julia"))
-  (lsp-register-client
-   (make-lsp-client :new-connection (lsp-stdio-connection 'lsp-julia--rls-command)
-                    :major-modes '(julia-mode ess-julia-mode julia-ts-mode)
-                    :server-id 'julia-ls
-                    :multi-root t)))
 (use-package! lsp-julia
   :if (and (modulep! :lang julia +lsp)
 	   (not (modulep! :tools lsp +eglot)))
   ;; must be set before lsp-mode is loaded
   :init
-  (setq lsp-julia-response 360
-	lsp-julia-timeout 360
-	lsp-julia-package-dir nil)
+  (setq
+   ;; lsp-julia-response 360
+   ;; lsp-julia-timeout 360
+   lsp-julia-package-dir nil)
   :config
   ;; for the --project flag to be buffer local
   ;; (make-variable-buffer-local 'lsp-julia-flags)
@@ -73,28 +61,10 @@
                          (s-chomp (shell-command-to-string "julia --version | grep -oE '[0-9]\.[0-9]'"))))
                 lsp-julia-default-depot (shell-command-to-string "julia -e \"print(join(DEPOT_PATH,\\\":\\\"))\"")
                 lsp-julia-lint-missingrefs "all") ;; julia LS can't find symbols from include modules
-  ;; These are basically all useless
-  ;; NOTE: This does not seem to make any difference
-  ;; (add-hook! julia-mode
-  ;;   (let ((root (projectile-project-root)))
-  ;;     ;; (setq-local lsp-julia-default-environment root)
-  ;;     (my/concatq! lsp-julia-default-depot "\:" root)))
   ;; NOTE: The LS can't figure out recursive dependencies so this is not really helpful, but avoids
   ;; starting multiple LS instances
-  (defun julia-project-root ()
-    (or (getenv "JULIA_PROJECT") (projectile-project-root) ""))
   (after! projectile
     (defadvice! projectile-julia-project-root nil :override
       #'lsp-julia--get-root
       (concat "\"" (julia-project-root) "\"")))
-  ;; NOTE: Precompilation causes runtime errors of methods not found...
-  ;; (let* ((sysimage (file-truename "~/.julia/lsp/languageserver.so"))
-  ;;        (flag (concat "--sysimage=" sysimage)))
-  ;;   (when (or (file-exists-p sysimage)
-  ;;             (when (yes-or-no-p "Compile julia system image with language server?")
-  ;;               (async-shell-command "~/.julia/lsp/compile.sh")
-  ;;               (message "Started Julia process to compile LanguageServer system image. This may take a while.")))
-  ;;     (pushnew! lsp-julia-flags flag)
-  ;;     (setq-default lsp-julia-flags lsp-julia-flags)))
-  ;; (setq lsp-julia-command "~/.julia/sysimage/compiled/bin/julia")
   )
