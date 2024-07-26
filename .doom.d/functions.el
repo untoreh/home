@@ -164,7 +164,7 @@ shell exits, the buffer is killed."
   )
 
 (defconst my/print-funcs-julia '("display(%s)" "Main.display!(%s)" "@info %s" "@linfo %s") "Print functions for julia")
-(defvar my/print-funcs-current-julia "display(%s)" "Current print function for julia")
+(defvar my/print-funcs-current-julia "@info %s" "Current print function for julia")
 
 (after! parrot
   (dolist (entry `((:rot ,my/print-funcs-julia)))
