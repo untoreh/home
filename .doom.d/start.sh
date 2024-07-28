@@ -12,7 +12,7 @@ systemdvar(){
 	systemctl --user import-environment WAYLAND_DISPLAY,XAUTHORITY,XDG_CURRENT,XDG_SEAT,XDG_SESSION_CLASS,XDG_SESSION_TYPE,XDG_VTNR,USER,VIRTUAL_ENV,PYTHONPATH,PYTHON_V
 }
 
-export EMACS=/usr/bin/emacs-gtk+x11
+export EMACS=/usr/bin/emacs
 run_emacs() {
 	# $EMACS --fg-daemon=server
 	if [ -v TOOLBOX_PATH ]; then
