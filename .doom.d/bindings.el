@@ -55,6 +55,9 @@
        ;; doom kill buffer doesn't seem to kill dead processes buffers
        :prefix "b" "k"
        #'my/force-kill-buffer
+       :desc "sha1 of current buffer"
+       :prefix "b" "h"
+       (cmd! (message (sha1 (current-buffer))))
        :desc "Toggle font lock"
        :prefix "t"
        :nv "j"
