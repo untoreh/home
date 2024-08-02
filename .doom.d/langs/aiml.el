@@ -106,7 +106,10 @@
 
         gptel-backend deepseek-backend
         gptel-model "deepseek-coder")
-  
+
+  (defun my/gptel-clear-context ()
+    (interactive)
+    (mapc (lambda (ctx) (with-current-buffer (car ctx) (gptel-context-remove)) ) gptel-context--alist))
   (map! (:prefix ("SPC l l" . "gptel")
          :nev "s" #'gptel-send
          :nev "o" #'gptel-menu
@@ -118,5 +121,6 @@
          :nev "p" #'gptel-system-prompt
          :nev "g" #'gptel-beginning-of-response
          :nev "G" #'gptel-end-of-response
+         :nev "R" #'my/gptel-clear-context
          ))
   )
