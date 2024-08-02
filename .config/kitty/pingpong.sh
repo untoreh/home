@@ -9,6 +9,9 @@ else
 fi
 # this_id=$(echo "$tabs" | jq -r '.[] | .tabs | select(.[].is_focused) | .[-1].id')
 # last_window_id=$(echo "$tabs" | jq -r '.[] | .tabs | select(.[].is_focused) | .[-1].id')
+#
+kitty @ kitten ssh vrmc6 -t 'pkill -9 -P $(/opt/alp/bin/ps -o ppid= -p $$)'
+sleep 0.35
 
 # Create a new tab named "pingpong"
 kitty @ launch --type=tab --tab-title "pingpong" \
