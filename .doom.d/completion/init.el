@@ -1,7 +1,7 @@
 ;;; corfu.el -*- lexical-binding: t; -*-
 
 (use-package! corfu
-  :custom
+  ;; :custom
   ;; these should already be set by doom
   ;; (corfu-auto t)                
   ;; (corfu-cycle t)
@@ -14,12 +14,19 @@
   ;; (corfu-on-exact-match 'quit)
 
   ;; no delay
-  (corfu-auto-delay 0.18)
   :init
   ;; these should already be set by doom
   ;; :hook (corfu-mode . corfu-popupinfo-mode)
 
   :config
+  ;; (add-hook! emacs-elisp-mode (add-hook 'completion-at-point-functions #'codeium-completion-at-point -99 t))
+  ;; (when (modulep! :lang julia)
+  ;;   (add-hook! julia-mode (add-hook 'completion-at-point-functions #'codeium-completion-at-point -99 t)))
+  (setq
+   corfu-auto-delay 0.05
+   corfu-auto-prefix 0
+   corfu-preview-current 'insert
+   )
   ;; (load! "capes")
   )
 

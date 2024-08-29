@@ -68,17 +68,12 @@
 ;;   (set-popup-rule! "^\\*mu4e-\\(main\\|headers\\)\\*" :ignore t))
 
 ;; completion
-(package! corfu :recipe (:includes (corfu-indexed corfu-quick) :files (:defaults "extensions/corfu-*.el")))
-;; (package! corfu-candidate-overlay :recipe (:repo "https://code.bsdgeek.org/adam/corfu-candidate-overlay"
-;;                                            :includes (corfu-indexed corfu-quick)))
-
-(package! cape :recipe (:host github :repo "minad/cape"))
+(package! corfu-candidate-overlay :recipe (:host github :repo "emacsmirror/corfu-candidate-overlay"))
 (package! corfu-doc :recipe (:host github :repo "galeo/corfu-doc"))
-(package! kind-icon)
-(package! hydra-posframe :recipe
-  (:host nil
-   :repo "https://github.com/Ladicle/hydra-posframe"))
-(package! vertico-posframe)
+
+;; (package! hydra-posframe :recipe
+;;   (:host nil
+;;    :repo "https://github.com/Ladicle/hydra-posframe"))
 (package! aas :recipe (:host github :repo "ymarco/auto-activating-snippets"))
 
 ;; langs

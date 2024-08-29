@@ -43,11 +43,11 @@
  x-stretch-cursor t)
 
 ;; posframe
-(use-package! hydra-posframe
-  :if (display-graphic-p)
-  :config
-  (setq hydra-posframe-poshandler #'posframe-poshandler-frame-bottom-center)
-  (hydra-posframe-mode))
+                                        ;(use-package! hydra-posframe
+                                        ;:if (display-graphic-p)
+                                        ;:config
+                                        ;(setq hydra-posframe-poshandler #'posframe-poshandler-frame-bottom-center)
+                                        ;(hydra-posframe-mode))
 
 ;; buffer size in the modeline
 (size-indication-mode t)
@@ -84,7 +84,7 @@
 
 ;; candidates window
 (use-package! vertico-posframe
-  :if (display-graphic-p)
+  :if (and (display-graphic-p) (modulep! :completion vertico +childframe))
   :config
   (setq vertico-posframe-parameters
         '((left-fringe . 8)

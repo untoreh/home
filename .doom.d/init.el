@@ -25,7 +25,7 @@
        ;; don't use tng since we prefer TAB+SPC and ENTER for inserting completions
        ;; and don't use childframes because are slow
        ;; (company)           ; the ultimate code completion backend
-       (vertico +icons)
+       (vertico +icons +childframe)
        (corfu +orderless +icons +dabbrev)
        ;; (ivy +prescient +icons +childframe)               ; a search engine for love and life
 
@@ -37,7 +37,7 @@
        (emoji +ascii +unicode +github)  ; 🙂
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
 
-       indent-guides     ; highlighted indent columns
+       ;; indent-guides     ; highlighted indent columns
        (ligatures +fira +extra)         ; ligatures and symbols to make your code pretty again
        ;; minimap
        modeline          ; snazzy, Atom-inspired modeline, plus API
@@ -58,7 +58,7 @@
        (evil +everywhere); come to the dark side, we have cookies
        file-templates    ; auto-snippets for empty files
        fold              ; (nigh) universal code folding
-       (format +onsave)  ; automated prettiness
+       (format +lsp)  ; automated prettiness
        ;;god               ; run Emacs commands without modifier keys
        ;; lispy             ; vim for lisp, for people who don't like vim
        multiple-cursors
@@ -151,7 +151,7 @@
        ;; (nim +lsp)               ; python + lisp at the speed of c
        nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
-       (org +dragndrop +pandoc +poly +gnuplot +noter) ; organize your plain life in plain text
+       (org +dragndrop +pandoc +poly +gnuplot +noter +pretty) ; organize your plain life in plain text
        ;; php               ; perl's insecure younger brother
        plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
@@ -191,8 +191,9 @@
        (default +bindings +smartparens))
 
 (when (fboundp 'native-compile-async)
-  (setq
-   comp-async-report-warnings-errors nil
-   native-comp-deferred-compilation t
-   native-comp-deferred-compilation-black-list '("/mu4e.*\\.el$")))
-
+   (setq
+    comp-async-report-warnings-errors nil
+    native-comp-deferred-compilation t
+    native-comp-deferred-compilation-deny-list '("/mu4e.*\\.el$")
+    )
+  )

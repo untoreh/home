@@ -52,3 +52,7 @@
       ;; expand unconditionally
       "^@d" "@doc \"\"\"\n\"\"\""
       )))
+
+(when (modulep! :tools tree-sitter)
+  (setq treesit-extra-load-path (list (my/concat-path tree-sitter-langs-grammar-dir "bin")))
+  )

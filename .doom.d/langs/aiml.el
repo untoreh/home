@@ -65,47 +65,53 @@
 ;; (gptel-make-gemini "Gemini" :key gemini-api-key :stream t)
 ;;
 (use-package! gptel
+  :custom
+  gptel-default-mode #'org-mode
   :config
   (defcustom deepseek-api-key "" "`gptel' deep seek token")
   (defcustom deepseek-local-api-key "" "`gptel' deep seek token")
   (defcustom openrouter-api-key "" "`gptel' openrouter token")
   (defcustom mistral-api-key "" "`gptel' mistral token")
   (defcustom cohere-api-key "" "`gptel' cohere token")
-  (setq openrouter-backend
-        (gptel-make-openai "OpenRouter"
-          :host "openrouter.ai"
-          :endpoint "/api/v1/chat/completions"
-          :stream t
-          :key openrouter-api-key
-          :models '("google/gemma-2-9b-it:free"
-                    "qwen/qwen-2-7b-instruct:free"
-                    "microsoft/phi-3-medium-128k-instruct:free"
-                    "microsoft/phi-3-mini-128k-instruct:free"
-                    "meta-llama/llama-3-8b-instruct:free"
-                    "mistralai/mistral-7b-instruct:free"
-                    ))
-        deepseek-backend (gptel-make-openai "DeepSeekLocal"
-                           :host "localhost:8000"
-                           :protocol "http"
-                           :stream t
-                           :key deepseek-local-api-key
-                           :models '("deepseek-coder"
-                                     "deepseek-chat"
-                                     ))
-        ;; (gptel-make-openai "Cohere"
-        ;;   :host "api.cohere.com"
-        ;;   :endpoint "/v1/chat"
-        ;;   :stream t
-        ;;   :key cohere-api-key
-        ;;   :models '("command-r" "command-r-plus"))
-        codestral-backend (gptel-make-openai "Mistral"
-                            :host "codestral.mistral.ai"
-                            :key mistral-api-key
-                            :stream t
-                            :models '("codestral-latest"))
+  (defun my/gptel-backends! ()
+    (interactive)
+    (setq openrouter-backend
+          (gptel-make-openai "OpenRouter"
+            :host "openrouter.ai"
+            :endpoint "/api/v1/chat/completions"
+            :stream t
+            :key openrouter-api-key
+            :models '("google/gemma-2-9b-it:free"
+                      "qwen/qwen-2-7b-instruct:free"
+                      "microsoft/phi-3-medium-128k-instruct:free"
+                      "microsoft/phi-3-mini-128k-instruct:free"
+                      "meta-llama/llama-3-8b-instruct:free"
+                      "mistralai/mistral-7b-instruct:free"
+                      ))
+          deepseek-backend (gptel-make-openai "DeepSeekLocal"
+                             :host "localhost:8000"
+                             :protocol "http"
+                             :stream t
+                             :key deepseek-local-api-key
+                             :models '("deepseek-coder"
+                                       "deepseek-chat"
+                                       ))
+          ;; (gptel-make-openai "Cohere"
+          ;;   :host "api.cohere.com"
+          ;;   :endpoint "/v1/chat"
+          ;;   :stream t
+          ;;   :key cohere-api-key
+          ;;   :models '("command-r" "command-r-plus"))
+          codestral-backend (gptel-make-openai "Mistral"
+                              :host "codestral.mistral.ai"
+                              :key mistral-api-key
+                              :stream t
+                              :models '("codestral-latest"))
 
-        gptel-backend deepseek-backend
-        gptel-model "deepseek-coder")
+          gptel-backend deepseek-backend
+          gptel-model "deepseek-coder")
+    )
+  (my/gptel-backends!)
 
   (defun my/gptel-clear-context ()
     (interactive)
