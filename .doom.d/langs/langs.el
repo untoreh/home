@@ -53,6 +53,7 @@
       "^@d" "@doc \"\"\"\n\"\"\""
       )))
 
-(when (modulep! :tools tree-sitter)
+(use-package! tree-sitter
+  :config
   (setq treesit-extra-load-path (list (my/concat-path tree-sitter-langs-grammar-dir "bin")))
   )

@@ -128,7 +128,6 @@
 
 ;; graphics
 ;; (package! nyan-mode)
-(package! parrot)
 (package! info-colors)
 ;; TODO: check back on newer emacs versions (>29.1)
 ;; (package! indent-guides :recipe (:host github :repo "jdtsmith/indent-bars"))

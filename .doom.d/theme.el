@@ -22,22 +22,6 @@
 (setq-default line-spacing 1)
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
-;; nyan and parrot only in the "doom" modeline
-(when (not (modulep! :ui modeline +light))
-  (use-package! nyan-mode
-    :if (boundp 'nyan-mode)
-    :init
-    (progn
-      (setq
-       nyan-animate-nyancat nil
-       nyan-wavy-trail nil
-       nyan-minimum-window-width 1024)
-      (nyan-mode)))
-  (use-package! parrot
-    :if (boundp 'parrot-mode)
-    :config
-    (parrot-mode)))
-
 (setq-default
  window-combination-resize t
  x-stretch-cursor t)
