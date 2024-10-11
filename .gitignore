@@ -155,3 +155,9 @@ bin/emacs-lsp-booster
 /.cursor-tutor/
 /.cursor/
 /.shared-ringdb/
+/.terminfo/
+/.mamba/
+/.librewolf/
+/.config/zed/
+/.continue/*
+/Screenshots/

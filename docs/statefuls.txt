@@ -20,6 +20,7 @@
 .lokinet
 .mail
 .mozilla
+.librewolf
 .mu
 .npm
 .pyenv
@@ -41,11 +42,13 @@ Desktop
 Documents
 Downloads
 Pictures
+Screenshots
 dev
 go
 org
 share
 tmp
+zed
 
 ## windows
 win
