@@ -536,5 +536,31 @@
     {
         "key": "ctrl+shift+l",
         "command": "-continue.focusContinueInputWithoutClear"
+    },
+    {
+        "key": "ctrl+i",
+        "command": "-editor.action.triggerSuggest",
+        "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly && !suggestWidgetVisible"
+    },
+    {
+        "key": "ctrl+i",
+        "command": "-composer.startComposerPrompt",
+        "when": "composerIsEnabled"
+    },
+    {
+        "key": "alt+u alt+i",
+        "command": "composer.startComposerPrompt"
+    },
+    {
+        "key": "ctrl+i",
+        "command": "-supermaven.editWithSupermaven"
+    },
+    {
+        "key": "alt+j",
+        "command": "-supermaven.newConversationTab"
+    },
+    {
+        "key": "ctrl+shift+i",
+        "command": "-supermaven.addToChat"
     }
 ]

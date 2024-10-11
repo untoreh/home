@@ -11,6 +11,14 @@ wmclass=navigator firefox
 wmclasscomplete=true
 wmclassmatch=1
 
+[16567e39-fe60-4753-ae75-9e5239dc0372]
+Description=cursor
+desktops=116e3940-a07a-40fb-86c0-8092c056a5d6
+desktopsrule=2
+wmclass=Cursor
+wmclasscomplete=true
+wmclassmatch=1
+
 [7185d541-2c99-491f-bad3-c4db18568f78]
 Description=Wezterm drop down
 desktops=\\0
@@ -25,5 +33,12 @@ wmclass=org.wezfurlong.wezterm
 wmclassmatch=1
 
 [General]
-count=1
-rules=1
+count=3
+rules=1,ea41b63c-ed27-4e67-8ad6-c651a9dfdc4a,16567e39-fe60-4753-ae75-9e5239dc0372
+
+[ea41b63c-ed27-4e67-8ad6-c651a9dfdc4a]
+Description=emacs
+desktops=116e3940-a07a-40fb-86c0-8092c056a5d6
+desktopsrule=2
+wmclass=emacs
+wmclassmatch=2
