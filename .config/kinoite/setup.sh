@@ -15,6 +15,8 @@ sudo rpm-ostree install --idempotent zsh fish nushell neovim \
 	powerline-fonts material-icons-fonts nerdfontssymbolsonly-nerd-fonts \
 	libavcodec-freeworld mesa-va-drivers-freeworld
 	# ffmpeg ffmpeg-libs gstreamer1-plugin-openh264 mozilla-openh264
+## kernel parameters for r9290 support
+se rpm-ostree kargs --append='amdgpu.cik_support=1 radeon.cik_support=0'
 ## change shell
 # lchsh $USER
 ## set same hostname to host and toolbox

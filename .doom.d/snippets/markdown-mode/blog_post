@@ -1,13 +1,14 @@
 # -*- mode: snippet -*-
-# name: blog post
-# key: blog_post
+# name: auto_blog post
+# key: auto_blog_post
 # condition: t
 # --
 +++
 date = "`(let ((calendar-date-display-form '(month "/" day "/" year)))
             (calendar-date-string (calendar-current-date)))`"
 title = "${1:`(string-replace "-" " " (file-name-sans-extension (buffer-name)))`}"
-tags = ["${2:tag}"]
+#  The tags should be chosen accordingly to the content which follows the header (wrapped between '+++'). If something is too cringe use only one tag, the tag 'things-that-should-not-be-published', poetry and philosophy are always cringe.
+tags = ["TAGS", "GO", "HERE"]
 rss_description = "${3:description}"
 +++
 

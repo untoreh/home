@@ -68,6 +68,7 @@
   :custom
   gptel-default-mode #'org-mode
   :config
+  (defconst gptel--default-system-message gptel--system-message)
   (defcustom deepseek-api-key "" "`gptel' deep seek token")
   (defcustom deepseek-local-api-key "" "`gptel' deep seek token")
   (defcustom openrouter-api-key "" "`gptel' openrouter token")
@@ -87,6 +88,7 @@
                       "microsoft/phi-3-mini-128k-instruct:free"
                       "meta-llama/llama-3-8b-instruct:free"
                       "mistralai/mistral-7b-instruct:free"
+                      "nousresearch/hermes-3-llama-3.1-405b:free"
                       ))
           deepseek-backend (gptel-make-openai "DeepSeekLocal"
                              :host "localhost:8000"
@@ -107,7 +109,6 @@
                               :key mistral-api-key
                               :stream t
                               :models '("codestral-latest"))
-
           gptel-backend deepseek-backend
           gptel-model "deepseek-coder")
     )

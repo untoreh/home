@@ -40,7 +40,7 @@
        ;; indent-guides     ; highlighted indent columns
        (ligatures +fira +extra)         ; ligatures and symbols to make your code pretty again
        ;; minimap
-       modeline          ; snazzy, Atom-inspired modeline, plus API
+       (modeline)          ; snazzy, Atom-inspired modeline, plus API
        nav-flash         ; blink cursor line after big motions
        ophints           ; highlight the region an operation acts on
        ;; use `popper' instead of :ui popup

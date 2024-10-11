@@ -86,6 +86,7 @@
     (:host github :repo "polymode/poly-org")))
 (package! emacs-refactor :recipe (:host nil
                                   :repo "https://github.com/Wilfred/emacs-refactor"))
+(package! treesit-auto :recipe (:host github :repo "renzmann/treesit-auto"))
 
 ;; nim
 (package! nim-mode :pin "2cdbdf10d504d8ff4db7a655276e3c554043ac14")
@@ -119,6 +120,7 @@
 ;; (package! powershell
 ;;   :ignore wslp)
 (package! nushell-mode :recipe (:host github :repo "azzamsa/emacs-nushell"))
+(package! eat)
 
 ;; jupyter
 (package! jupyter)
@@ -130,7 +132,7 @@
 ;; (package! nyan-mode)
 (package! info-colors)
 ;; TODO: check back on newer emacs versions (>29.1)
-;; (package! indent-guides :recipe (:host github :repo "jdtsmith/indent-bars"))
+(package! indent-bars :recipe (:host github :repo "jdtsmith/indent-bars"))
 (when (modulep! :email mu4e)
   (package! mu4e-views)
   (package! mu4e-alert :disable t))

@@ -154,21 +154,29 @@
     (pushnew! emojify-inhibit-in-buffer-functions #'my/repl-vterm-bufferp)
     (pushnew! emojify-inhibit-major-modes #'vterm-mode)))
 
-;; (use-package! indent-bars
-;;   :hook ((prog-mode text-mode conf-mode) . indent-bars-mode)
-;;   :config
-;;   (setq
-;;    indent-bars-color '(highlight :face-bg t :blend 0.15)
-;;    indent-bars-pattern "."
-;;    indent-bars-width-frac 0.1
-;;    indent-bars-pad-frac 0.1
-;;    indent-bars-zigzag nil
-;;    indent-bars-color-by-depth '(:regexp "outline-\\([0-9]+\\)" :blend 1) ; blend=1: blend with BG only
-;;    indent-bars-highlight-current-depth '(:blend 0.5) ; pump up the BG blend on current
-;;    indent-bars-display-on-blank-lines t)
-;;   ;; just in case
-;;   (add-hook! 'org-mode-local-vars-hook
-;;     (defun +indent-guides-disable-maybe-h ()
-;;       (and (bound-and-true-p highlight-indent-guides-mode)
-;;            (org-indent-mode)
-;;            (indent-bars-mode -1)))))
+(use-package! indent-bars
+  :hook ((prog-mode text-mode conf-mode) . indent-bars-mode)
+  :config
+  (require 'indent-bars-ts)
+  (setq
+   indent-bars-color '(highlight :face-bg t :blend 0.15)
+   indent-bars-pattern "."
+   indent-bars-width-frac 0.1
+   indent-bars-pad-frac 0.1
+   indent-bars-zigzag nil
+   indent-bars-color-by-depth '(:regexp "outline-\\([0-9]+\\)" :blend 1) ; blend=1: blend with BG only
+   indent-bars-highlight-current-depth '(:blend 0.5) ; pump up the BG blend on current
+   indent-bars-display-on-blank-lines t)
+  ;; just in case
+  (add-hook! 'org-mode-local-vars-hook
+    (defun +indent-guides-disable-maybe-h ()
+      (and (bound-and-true-p highlight-indent-guides-mode)
+           (org-indent-mode)
+           (indent-bars-mode -1))))
+  :custom
+  (indent-bars-treesit-support t)
+  (indent-bars-treesit-ignore-blank-lines-types '("module"))
+  ;; Add other languages as needed
+  (indent-bars-treesit-scope '((python function_definition class_definition for_statement
+                                if_statement with_statement while_statement)))
+  )

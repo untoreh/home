@@ -1,6 +1,6 @@
 ;;; langs/julia-franklin.el -*- lexical-binding: t; -*-
 
-(set-file-template! ".*/blog/posts/.+\\.md$" :trigger "blog_post" :project t)
+(set-file-template! ".*/blog/posts/.+\\.md$" :trigger "auto_blog_post" :project t)
 
 (require 'aio)
 (aio-defun julia-franklin ()

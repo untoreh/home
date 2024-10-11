@@ -13,7 +13,7 @@
 ;; julia-ts-mode
 (use-package! julia-ts-mode
   :if (modulep! :lang julia)
-  :mode "\\.jl$"
+  ;:mode "\\.jl$"
   :config
   (when (modulep! :lang julia +lsp)
     (add-to-list 'lsp-language-id-configuration '(julia-ts-mode . "julia"))
